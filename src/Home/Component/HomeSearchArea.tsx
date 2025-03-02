@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
+import { useHomeSearchArea } from "../Hook/useHomeSearchArea";
 
 const Parent = styled.div`
   width: 100%;
@@ -21,12 +22,16 @@ const TextArea = styled.div`
  */
 export function HomeSearchArea() {
 
+    const { keyword, setKeyword } = useHomeSearchArea();
+
     return (
         <Parent>
             <TextArea>
                 <BaseTextbox
                     textWidth="47%"
                     placeholder="キーワード"
+                    value={keyword}
+                    onChange={setKeyword}
                 />
             </TextArea>
         </Parent>
