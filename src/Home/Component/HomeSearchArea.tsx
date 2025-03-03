@@ -22,7 +22,10 @@ const TextArea = styled.div`
  */
 export function HomeSearchArea() {
 
-    const { keyword, setKeyword } = useHomeSearchArea();
+    const {
+        keyword,
+        setKeyword,
+        clickSearchBtn, } = useHomeSearchArea();
 
     return (
         <Parent>
