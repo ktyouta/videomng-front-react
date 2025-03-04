@@ -20,6 +20,8 @@ const VideoUl = styled.ul`
 
 export function HomeVideoArea() {
 
+  console.log("HomeVideoArea render");
+
   const {
     videoListItem,
     isLoading } = useHomeVideoArea();

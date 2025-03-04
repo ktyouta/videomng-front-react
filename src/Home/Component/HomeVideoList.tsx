@@ -4,6 +4,8 @@ import { HomeVideoArea } from "./HomeVideoArea";
 
 export function HomeVideoList() {
 
+    console.log("HomeVideoList render");
+
     return (
         <React.Fragment>
             {/* 検索条件エリア */}

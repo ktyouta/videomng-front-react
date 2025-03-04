@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 //エラーレスポンスの型
-export type errResType = {
+export type ErrResType = {
     response: { data: { errMessage: string } }
 }
 

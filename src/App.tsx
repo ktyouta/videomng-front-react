@@ -4,6 +4,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
 
+  console.log("App render");
+
   //React-Query用
   const queryClient = new QueryClient({
     defaultOptions: {

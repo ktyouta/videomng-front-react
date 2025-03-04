@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { CSSProperties, forwardRef, useEffect, useState } from 'react';
 import styled from "styled-components";
 
 //引数の型
@@ -14,6 +14,7 @@ type propsType = {
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void,
     placeholder?: string,
     autoComplete?: boolean,
+    style?: CSSProperties,
 }
 
 //参照の型
@@ -78,6 +79,7 @@ const BaseTextbox = forwardRef<refType, propsType>((props, ref) => {
             onKeyDown={inputEnterKey}
             placeholder={props.placeholder}
             autoComplete={props.autoComplete ? "on" : "off"}
+            style={props.style}
         />
     );
 })

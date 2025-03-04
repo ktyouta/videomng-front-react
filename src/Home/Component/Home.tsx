@@ -6,6 +6,8 @@ import { HOME_ROOT_PATH } from "../Const/HomeConst";
 
 export function Home() {
 
+    console.log("Home render");
+
     return (
         <React.Fragment>
             <Routes>
@@ -15,7 +17,6 @@ export function Home() {
                         <HomeVideoList />
                     }
                 >
-                    <HomeVideoList />
                 </Route>
             </Routes>
         </React.Fragment>

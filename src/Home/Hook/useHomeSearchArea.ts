@@ -20,7 +20,8 @@ export function useHomeSearchArea() {
         }
 
         const videoApiUrlModel = new VideoApiUrlModel(keyword);
-        setVideoApiUrl(`${videoApiUrlModel.videoMngApiPath}`);
+        const videoApiUrl = videoApiUrlModel.videoMngApiPath;
+        setVideoApiUrl(`${videoApiUrl}`);
     }
 
     return {

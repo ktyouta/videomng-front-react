@@ -17,6 +17,8 @@ type propsType = {
 
 export function HomeVideoContent(props: propsType) {
 
+    console.log("HomeVideoContent render");
+
     const snipet = props.data.snippet;
     // 動画タイトル
     const title = snipet.title;

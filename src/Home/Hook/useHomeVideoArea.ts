@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
+import useQueryWrapper, { ErrResType } from "../../Common/Hook/useQueryWrapper";
 import { VideoListResponseType } from "../Type/VideoListResponseType";
 import { videoApiUrlAtom, videoListItemAtom } from "../Atom/HomeAtom";
 
@@ -15,6 +15,9 @@ export function useHomeVideoArea() {
             url: videoApiUrl,
             afSuccessFn: (response: VideoListResponseType) => {
                 setVideoListItemAtom(response.data.items);
+            },
+            afErrorFn: (res) => {
+                const errRes = res as ErrResType;
             }
         }
     );
