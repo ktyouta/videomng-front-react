@@ -3,12 +3,22 @@ import styled from "styled-components";
 import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 
 const VideoArticle = styled.article`
+    witdh:30%;
+    height:55%;
 `;
 
 const VideoSection = styled.section`
+    witdh:100%;
+    height:100%;
 `;
 
 const VideoImg = styled.img`
+    witdh:30%;
+    height:55%;
+`;
+
+const VideoTitleDiv = styled.div`
+    color:white;
 `;
 
 type propsType = {
@@ -30,12 +40,10 @@ export function HomeVideoContent(props: propsType) {
             <VideoSection>
                 <VideoImg
                     src={imgUrl}
-                // width="30%"
-                // height="55%"
                 />
-                <div>
+                <VideoTitleDiv>
                     {title}
-                </div>
+                </VideoTitleDiv>
             </VideoSection>
         </VideoArticle>
     );

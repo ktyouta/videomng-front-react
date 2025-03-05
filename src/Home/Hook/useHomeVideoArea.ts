@@ -18,6 +18,7 @@ export function useHomeVideoArea() {
             },
             afErrorFn: (res) => {
                 const errRes = res as ErrResType;
+                alert(errRes.response.data.errMessage);
             }
         }
     );
