@@ -18,6 +18,16 @@ export type YouTubeDataApiVideoListItemType = {
                 readonly url: string;
                 readonly width: number;
                 readonly height: number;
+            },
+            readonly medium: {
+                readonly url: string;
+                readonly width: number;
+                readonly height: number;
+            },
+            readonly high: {
+                readonly url: string;
+                readonly width: number;
+                readonly height: number;
             };
         };
         readonly channelTitle: string;

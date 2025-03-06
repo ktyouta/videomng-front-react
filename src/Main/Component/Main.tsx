@@ -6,7 +6,7 @@ import { Home } from "../../Home/Component/Home";
 const AppDiv = styled.div`
   width: 100vw;
   height: 1300px;
-  background-color:#333333;
+  background-color:#00050d;
 `;
 
 

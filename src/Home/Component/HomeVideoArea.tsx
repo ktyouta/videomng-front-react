@@ -12,12 +12,18 @@ const Parent = styled.div`
 
 const VideoUl = styled.ul`
   display: grid;
+  grid-template-columns: repeat(var(--grid-container-columns), minmax(0, 1fr));
+  gap: 4%; 
   margin-bottom: 0;
   color: #fff;
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 90%;
+  box-sizing: border-box;
+  padding-left:5%;
+  padding-right:5%;
+  padding-top: 2%;
+  --grid-container-columns: 5;
 `;
 
 export function HomeVideoArea() {
@@ -41,6 +47,7 @@ export function HomeVideoArea() {
     );
   }
 
+
   return (
     <Parent>
       <VideoUl>
@@ -49,6 +56,7 @@ export function HomeVideoArea() {
             return (
               <HomeVideoContent
                 data={e}
+                key={crypto.randomUUID()}
               />
             )
           })

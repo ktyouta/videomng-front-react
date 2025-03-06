@@ -7,3 +7,5 @@ export const videoListItemAtom = atom<YouTubeDataApiVideoListItemType[] | undefi
 export const keywordAtom = atom<string>(``);
 // 動画取得用URL
 export const videoApiUrlAtom = atom<string>(``);
+// 動画ID
+export const videoIdAtom = atom<string>(``);
