@@ -10,6 +10,7 @@ export function useHomeVideoArea() {
     // 動画リスト
     const [videoListItem, setVideoListItemAtom] = useAtom(videoListItemAtom);
 
+    // 動画一覧を取得
     const { isLoading } = useQueryWrapper<VideoListResponseType>(
         {
             url: videoApiUrl,

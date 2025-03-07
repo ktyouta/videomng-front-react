@@ -1,6 +1,6 @@
 import { useAtom, useSetAtom } from "jotai";
 import { keywordAtom, videoApiUrlAtom } from "../Atom/HomeAtom";
-import { VideoApiUrlModel } from "../Model/VideoApiUrlModel";
+import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 
 export function useHomeSearchArea() {
 
@@ -19,8 +19,8 @@ export function useHomeSearchArea() {
             return;
         }
 
-        const videoApiUrlModel = new VideoApiUrlModel(keyword);
-        const videoApiUrl = videoApiUrlModel.videoMngApiPath;
+        const videoListApiUrlModel = new VideoListApiUrlModel(keyword);
+        const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
         setVideoApiUrl(`${videoApiUrl}`);
     }
 

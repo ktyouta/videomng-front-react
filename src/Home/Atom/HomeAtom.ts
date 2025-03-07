@@ -1,3 +1,4 @@
+import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 import { atom } from "jotai";
 
@@ -9,3 +10,5 @@ export const keywordAtom = atom<string>(``);
 export const videoApiUrlAtom = atom<string>(``);
 // 動画ID
 export const videoIdAtom = atom<string>(``);
+// APIから取得した動画詳細
+export const videoDetailItemAtom = atom<YouTubeDataApiVideoDetailItemType>();
