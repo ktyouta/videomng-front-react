@@ -8,9 +8,8 @@ import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 
 const Parent = styled.div`
   width: 100%;
-  height: 100%;
   box-sizing:border-box;
-  padding-top:2%;
+  padding-top:1%;
 `;
 
 const VideoContentDiv = styled.div`
@@ -48,7 +47,7 @@ const ChennelTitleDiv = styled.div`
 
 const MenuParentDiv = styled.div`
   width: 34%;
-  height: 100%;
+  height: 675px;
   margin-left: 3%;
   margin-top: 5%;
   box-sizing:border-box;
@@ -70,65 +69,65 @@ const MenuButtonDiv = styled.div`
 
 export function HomeVideoDetail() {
 
-    console.log("HomeVideoDetail render");
+  console.log("HomeVideoDetail render");
 
-    const {
-        videoId,
-        isLoading,
-        videoDetail } = useHomeVideoDetail();
+  const {
+    videoId,
+    isLoading,
+    videoDetail } = useHomeVideoDetail();
 
-    // ローディング
-    if (isLoading) {
-        return <LoadingBase />;
-    }
+  // ローディング
+  if (isLoading) {
+    return <LoadingBase />;
+  }
 
-    const snippet = videoDetail?.snippet;
-    // サムネイルURL
-    const imgUrl = snippet?.thumbnails.high?.url;
-    // タイトル
-    const title = snippet?.title;
-    // チャンネル名
-    const channelTitle = snippet?.channelTitle;
-    // 動画URL
-    const videoUrlModel = new VideoUrlModel(videoId);
+  const snippet = videoDetail?.snippet;
+  // サムネイルURL
+  const imgUrl = snippet?.thumbnails.high?.url;
+  // タイトル
+  const title = snippet?.title;
+  // チャンネル名
+  const channelTitle = snippet?.channelTitle;
+  // 動画URL
+  const videoUrlModel = new VideoUrlModel(videoId);
 
-    return (
-        <Parent>
-            <VideoContentDiv>
-                {/* 動画情報 */}
-                <VideoInfoDiv>
-                    <VideoImg
-                        src={imgUrl}
-                    />
-                    <VideoDescriptionDiv>
-                        <VideoTitle>
-                            {title}
-                        </VideoTitle>
-                        <ChennelTitleDiv>
-                            {channelTitle}
-                        </ChennelTitleDiv>
-                    </VideoDescriptionDiv>
-                </VideoInfoDiv>
-                {/* メニュー */}
-                <MenuParentDiv>
-                    <MenuListDiv>
-                        <MenuButtonDiv>
-                            <ButtonComponent
-                                styleTypeNumber="GRAD_GRAY"
-                                title={"動画を視聴する"}
-                                onclick={() => {
-                                    window.open(`${videoUrlModel.videoUrl}`, `_blank`);
-                                }}
-                                style={{
-                                    "fontSize": "0.9rem",
-                                    "height": "7%",
-                                    "width": "90%",
-                                }}
-                            />
-                        </MenuButtonDiv>
-                    </MenuListDiv>
-                </MenuParentDiv>
-            </VideoContentDiv>
-        </Parent>
-    );
+  return (
+    <Parent>
+      <VideoContentDiv>
+        {/* 動画情報 */}
+        <VideoInfoDiv>
+          <VideoImg
+            src={imgUrl}
+          />
+          <VideoDescriptionDiv>
+            <VideoTitle>
+              {title}
+            </VideoTitle>
+            <ChennelTitleDiv>
+              {channelTitle}
+            </ChennelTitleDiv>
+          </VideoDescriptionDiv>
+        </VideoInfoDiv>
+        {/* メニュー */}
+        <MenuParentDiv>
+          <MenuListDiv>
+            <MenuButtonDiv>
+              <ButtonComponent
+                styleTypeNumber="GRAD_GRAY"
+                title={"動画を視聴する"}
+                onclick={() => {
+                  window.open(`${videoUrlModel.videoUrl}`, `_blank`);
+                }}
+                style={{
+                  "fontSize": "0.9rem",
+                  "height": "7%",
+                  "width": "100%",
+                }}
+              />
+            </MenuButtonDiv>
+          </MenuListDiv>
+        </MenuParentDiv>
+      </VideoContentDiv>
+    </Parent>
+  );
 }

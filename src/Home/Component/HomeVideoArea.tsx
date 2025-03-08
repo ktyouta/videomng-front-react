@@ -22,7 +22,7 @@ const VideoUl = styled.ul`
   box-sizing: border-box;
   padding-left:5%;
   padding-right:5%;
-  padding-top: 2%;
+  padding-top: 4%;
   --grid-container-columns: 5;
 `;
 

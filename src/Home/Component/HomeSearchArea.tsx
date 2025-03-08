@@ -22,7 +22,7 @@ const TextBoxAreaDiv = styled.div`
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
   width: 3%;
-  height: 29%;
+  height: 37px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 15%;
