@@ -26,6 +26,14 @@ const VideoUl = styled.ul`
   --grid-container-columns: 5;
 `;
 
+const MessageDiv = styled.div`
+  color:white;
+  position: absolute;
+  top: 32%;
+  left: 42%;
+`;
+
+
 export function HomeVideoArea() {
 
   console.log("HomeVideoArea render");
@@ -39,14 +47,21 @@ export function HomeVideoArea() {
     return <LoadingBase />;
   }
 
-  if (videoListItem?.length === 0) {
+  if (!videoListItem) {
     return (
-      <React.Fragment>
-        検索結果が存在しません。
-      </React.Fragment>
+      <MessageDiv>
+        キーワードを入力して動画を検索
+      </MessageDiv>
     );
   }
 
+  if (videoListItem?.length === 0) {
+    return (
+      <MessageDiv>
+        検索結果が存在しません。
+      </MessageDiv>
+    );
+  }
 
   return (
     <Parent>

@@ -11,6 +11,7 @@ const AppDiv = styled.div`
   min-height:100vh;
   background-color:#00050d;
   padding-top: 100px;
+  box-sizing: border-box;
 `;
 
 
