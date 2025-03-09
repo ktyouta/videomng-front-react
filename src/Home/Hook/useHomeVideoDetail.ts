@@ -1,10 +1,11 @@
 import { useAtom, useAtomValue } from "jotai";
-import useQueryWrapper, { ErrResType } from "../../Common/Hook/useQueryWrapper";
+import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../Type/VideoDetailResponseType";
 import { videoDetailItemAtom, videoIdAtom } from "../Atom/HomeAtom";
 import { VideoDetailApiUrlModel } from "../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
+import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 
 export function useHomeVideoDetail() {
 
@@ -31,8 +32,8 @@ export function useHomeVideoDetail() {
                 setVideoDetail(items[0]);
             },
             afErrorFn: (res) => {
-                const errRes = res as ErrResType;
-                alert(errRes.response.data.errMessage);
+                const errRes = res as errResType;
+                alert(errRes.response.data.message);
             }
         }
     );

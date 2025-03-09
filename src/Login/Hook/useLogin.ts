@@ -24,6 +24,8 @@ export function useLogin() {
     const navigate = useNavigate();
     // ログインフラグ
     const setIsLogin = useSetAtom(isLoginAtom);
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
 
     /**
      * ログインリクエスト
@@ -45,7 +47,7 @@ export function useLogin() {
                 removeCookie(key, { path: '/' });
             });
             //エラーメッセージを表示
-            alert(res.response.data.errMessage);
+            setErrMessage(res.response.data.message);
             userPasswordRef.current?.clearValue();
         },
     });
@@ -98,5 +100,6 @@ export function useLogin() {
         clickLoginBtn,
         clickClearBtn,
         handleKeyPress,
+        errMessage,
     }
 }

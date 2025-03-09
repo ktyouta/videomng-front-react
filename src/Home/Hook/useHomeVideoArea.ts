@@ -1,7 +1,8 @@
 import { useAtom, useAtomValue } from "jotai";
-import useQueryWrapper, { ErrResType } from "../../Common/Hook/useQueryWrapper";
+import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoListResponseType } from "../Type/VideoListResponseType";
 import { videoApiUrlAtom, videoListItemAtom } from "../Atom/HomeAtom";
+import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 
 export function useHomeVideoArea() {
 
@@ -18,8 +19,8 @@ export function useHomeVideoArea() {
                 setVideoListItemAtom(response.data.items);
             },
             afErrorFn: (res) => {
-                const errRes = res as ErrResType;
-                alert(errRes.response.data.errMessage);
+                const errRes = res as errResType;
+                alert(errRes.response.data.message);
             }
         }
     );

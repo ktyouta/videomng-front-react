@@ -12,7 +12,12 @@ export type resType = {
 
 //エラーレスポンスの型
 export type errResType = {
-    response: { data: { errMessage: string } }
+    response: {
+        data: {
+            message: string,
+            status: number,
+        }
+    }
 }
 
 //引数の型

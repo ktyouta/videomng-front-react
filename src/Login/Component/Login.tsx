@@ -30,6 +30,13 @@ const TitleDiv = styled.div`
     margin-bottom: 6%;
 `;
 
+const ErrMessageDiv = styled.div`
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 6%;
+    color: red;
+`;
+
 
 export function Login() {
 
@@ -39,7 +46,8 @@ export function Login() {
     userIdRef,
     userPasswordRef,
     clickLoginBtn,
-    handleKeyPress, } = useLogin();
+    handleKeyPress,
+    errMessage } = useLogin();
 
   return (
     <Parent>
@@ -47,6 +55,12 @@ export function Login() {
         <TitleDiv>
           ログイン
         </TitleDiv>
+        {
+          errMessage &&
+          <ErrMessageDiv>
+            {errMessage}
+          </ErrMessageDiv>
+        }
         <BaseTextbox
           value={""}
           length={100}

@@ -2,11 +2,6 @@ import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
 import axios from "axios";
 
 
-//エラーレスポンスの型
-export type ErrResType = {
-    response: { data: { errMessage: string } }
-}
-
 
 //引数の型
 type propsType<TData, RData, PData> = {
