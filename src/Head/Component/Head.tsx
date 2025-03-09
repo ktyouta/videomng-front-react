@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { inherits } from "util";
 import { useHead } from "../Hook/useHead";
+import ButtonComponent from "../../Common/Component/ButtonComponent";
 
 
 const Parent = styled.div`
@@ -21,6 +22,8 @@ const MenuNav = styled.nav`
   box-sizing: border-box;
   padding-left: 9%;
   padding-top: 3%;
+  padding-right: 5%;
+  display:flex;
 `;
 
 const NavUl = styled.ul`
@@ -29,6 +32,7 @@ const NavUl = styled.ul`
   padding: 0;
   margin: 0;
   height: 100%;
+  width: 70%;
 `;
 
 const NavLi = styled.li<{ isActive: boolean }>`
@@ -49,30 +53,47 @@ const NavLi = styled.li<{ isActive: boolean }>`
   font-weight:400;
 `;
 
+//メニューとコンテンツの間隔
+const SpaceDiv = styled.div`
+    flex:1;
+`;
 
 
 export function Head() {
 
-    console.log(`Head render`);
+  console.log(`Head render`);
 
-    const { path } = useHead();
+  const {
+    nowPath,
+    clickLogin } = useHead();
 
-    return (
-        <Parent>
-            <MenuNav>
-                <NavUl>
-                    <NavLi
-                        isActive={path === HOME_ROOT_PATH}
-                    >
-                        <Link
-                            to={HOME_ROOT_PATH}
-                            style={{ color: "inherit", fontWeight: "inherit" }}
-                        >
-                            ホーム
-                        </Link>
-                    </NavLi>
-                </NavUl>
-            </MenuNav>
-        </Parent>
-    );
+  return (
+    <Parent>
+      <MenuNav>
+        <NavUl>
+          <NavLi
+            isActive={nowPath === HOME_ROOT_PATH}
+          >
+            <Link
+              to={HOME_ROOT_PATH}
+              style={{ color: "inherit", fontWeight: "inherit" }}
+            >
+              ホーム
+            </Link>
+          </NavLi>
+        </NavUl>
+        <SpaceDiv />
+        <ButtonComponent
+          styleTypeNumber="GRAD_RED"
+          title={"ログイン"}
+          onclick={clickLogin}
+          style={{
+            fontSize: "0.9rem",
+            width: "7%",
+            height: "100%",
+          }}
+        />
+      </MenuNav>
+    </Parent>
+  );
 }

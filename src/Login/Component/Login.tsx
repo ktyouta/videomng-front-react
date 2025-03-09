@@ -6,8 +6,9 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 
 
 const Parent = styled.div`
-  width: 100%;
+  width: 100vw;
   background-color: #dcdcdc;
+  height: 100vh;
 `;
 
 const LoginFormDiv = styled.div`
@@ -20,6 +21,13 @@ const LoginFormDiv = styled.div`
 const LoginButtonDiv = styled.div`
     text-align: center;
     margin-top: 9%;
+`;
+
+const TitleDiv = styled.div`
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 6%;
 `;
 
 
@@ -36,6 +44,9 @@ export function Login() {
   return (
     <Parent>
       <LoginFormDiv>
+        <TitleDiv>
+          ログイン
+        </TitleDiv>
         <BaseTextbox
           value={""}
           length={100}
@@ -45,6 +56,7 @@ export function Login() {
           onKeyDown={handleKeyPress}
           placeholder='UserID'
           autoComplete={true}
+          style={{ marginBottom: "8%" }}
         />
         <BaseTextbox
           type={"password"}
@@ -59,7 +71,7 @@ export function Login() {
         <LoginButtonDiv>
           <ButtonComponent
             styleTypeNumber="RUN"
-            title={"Login"}
+            title={"ログイン"}
             onclick={clickLoginBtn}
             style={{
               "borderRadius": "23px",

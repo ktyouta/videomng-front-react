@@ -8,7 +8,7 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { LoginRequestType } from '../Type/LoginRequestType';
 import { useSetAtom } from 'jotai';
-import { loginFlgAtom } from '../../Common/Atom/CommonAtom';
+import { isLoginAtom } from '../../Common/Atom/CommonAtom';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 
 
@@ -23,7 +23,7 @@ export function useLogin() {
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const setLoginFlg = useSetAtom(loginFlgAtom);
+    const setIsLogin = useSetAtom(isLoginAtom);
 
     /**
      * ログインリクエスト
@@ -35,7 +35,7 @@ export function useLogin() {
         afSuccessFn: (res: resType) => {
             //トークンをクッキーにセット
             setCookie(ENV.AUTHENTICATION.cookie, res.token, { path: '/' });
-            setLoginFlg(true);
+            setIsLogin(true);
             navigate(HOME_ROOT_PATH);
         },
         // 失敗後の処理
