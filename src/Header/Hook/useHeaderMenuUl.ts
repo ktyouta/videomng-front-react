@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
-import { LOGIN_PATH } from "../../Login/Const/LoginConst";
 
-export function useHead() {
+export function useHeaderMenuUl() {
 
     const location = useLocation();
     // 現在のパス
     const [nowPath, setNowPath] = useState<string>();
-    //ルーティング用
-    const navigate = useNavigate();
 
     /**
      * URL切り替え時のイベント
@@ -26,15 +23,7 @@ export function useHead() {
         setNowPath(mainPath);
     }, [location]);
 
-    /**
-     * ログインボタン押下イベント
-     */
-    function clickLogin() {
-        navigate(LOGIN_PATH);
-    }
-
     return {
-        nowPath,
-        clickLogin
+        nowPath
     }
 }

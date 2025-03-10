@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Home } from "../../Home/Component/Home";
-import { Head } from "../../Head/Component/Head";
 import { Content } from "../../Content/Component/Content";
 import { Footer } from "../../Footer/Component/Footer";
+import { Header } from "../../Header/Component/Header";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`
@@ -22,7 +22,7 @@ export function Main() {
     return (
         <AppDiv>
             {/* ヘッダ */}
-            <Head />
+            <Header />
             {/* コンテンツ */}
             <Content />
             {/* フッター */}
