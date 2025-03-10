@@ -6,6 +6,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
+import { useHomeVideoDetailMenu } from "../Hook/useHomeVideoDetailMenu";
 
 
 const MenuParentDiv = styled.div`
@@ -27,6 +28,9 @@ const MenuListDiv = styled.div`
 const MenuButtonDiv = styled.div`
   box-sizing:border-box;
   padding:3%;
+  button {
+    margin-bottom: 3%;
+  }
 `;
 
 type propsType = {
@@ -39,9 +43,15 @@ export function HomeVideoDetailMenu(props: propsType) {
 
     console.log("HomeVideoDetailMenu render");
 
+    const {
+        isLogin,
+        addToFavorite } = useHomeVideoDetailMenu();
+
     const videoDetail = props.videoDetail;
+    // 動画ID
+    const videoId = props.videoId;
     // 動画URL
-    const videoUrlModel = new VideoUrlModel(props.videoId);
+    const videoUrlModel = new VideoUrlModel(videoId);
 
     return (
         <MenuParentDiv>
@@ -59,6 +69,21 @@ export function HomeVideoDetailMenu(props: propsType) {
                             "width": "100%",
                         }}
                     />
+                    {
+                        isLogin &&
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"お気に入りに登録する"}
+                            onclick={() => {
+                                addToFavorite(videoId);
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
+                    }
                 </MenuButtonDiv>
             </MenuListDiv>
         </MenuParentDiv>

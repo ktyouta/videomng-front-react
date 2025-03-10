@@ -4,10 +4,10 @@ import { useMemo } from 'react';
 
 
 //レスポンスの型
-export type resType = {
+export type resType<T> = {
     status: number,
-    errMessage: string,
-    token: string,
+    message: string,
+    data: T,
 }
 
 //エラーレスポンスの型
@@ -21,14 +21,14 @@ export type errResType = {
 }
 
 //引数の型
-type propsType = {
+type propsType<T> = {
     url: string,
     method: methodType,
     queryKey?: [string, (Record<string, unknown> | string)?],
     //処理待ち中の処理
     waitingFn?: () => void,
     //処理成功後の処理
-    afSuccessFn?: (res: resType) => void,
+    afSuccessFn?: (res: resType<T>) => void,
     //失敗後の処理
     afErrorFn?: (res: errResType) => void,
     finaliryFn?: () => void,
@@ -40,7 +40,7 @@ type methodType = "POST" | "PUT" | "DELETE" | undefined;
 
 const useMutationWrapperBase = <
     T,
->(props: propsType) => {
+>(props: propsType<T>) => {
 
     const queryClient = useQueryClient();
 

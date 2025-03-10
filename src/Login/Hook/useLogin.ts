@@ -10,6 +10,7 @@ import { LoginRequestType } from '../Type/LoginRequestType';
 import { useSetAtom } from 'jotai';
 import { isLoginAtom } from '../../Common/Atom/CommonAtom';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
+import { LoginResponseType } from '../Type/LoginResponseType';
 
 
 export function useLogin() {
@@ -34,9 +35,16 @@ export function useLogin() {
         url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_LOGIN}`,
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType) => {
+        afSuccessFn: (res: resType<LoginResponseType>) => {
+
+            const token = res.data.token;
+
+            if (!token) {
+                setErrMessage(`ログインに失敗しました。`);
+            }
+
             //トークンをクッキーにセット
-            setCookie(ENV.AUTHENTICATION.cookie, res.token, { path: '/' });
+            setCookie(ENV.AUTHENTICATION.cookie, token, { path: '/' });
             setIsLogin(true);
             navigate(HOME_ROOT_PATH);
         },
@@ -68,19 +76,22 @@ export function useLogin() {
 
         // ユーザーID未入力
         if (!userIdRef.current?.refValue) {
-            alert("ユーザーIDが未入力です。");
+            setErrMessage(`ユーザーIDが未入力です。`);
             return;
         }
 
         // パスワード未入力
         if (!userPasswordRef.current?.refValue) {
-            alert("パスワードが未入力です。");
+            setErrMessage(`パスワードが未入力です。`);
             return;
         }
 
         const userId = userIdRef.current?.refValue as string;
         const password = userPasswordRef.current?.refValue as string;
-        const body: LoginRequestType = { userId, password }
+        const body: LoginRequestType = {
+            userId,
+            password
+        };
 
         //認証API呼び出し
         postMutation.mutate(body);

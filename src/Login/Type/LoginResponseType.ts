@@ -1,5 +1,4 @@
 //ログインレスポンス
 export type LoginResponseType = {
-    userId: string,
-    password: string,
+    token: string,
 }
