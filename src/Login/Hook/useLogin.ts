@@ -19,8 +19,6 @@ export function useLogin() {
     const userIdRef: RefObject<refType> = useRef(null);
     // パスワード参照用
     const userPasswordRef: RefObject<refType> = useRef(null);
-    // 認証クッキー
-    const [cookie, setCookie, removeCookie] = useCookies();
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
@@ -37,23 +35,12 @@ export function useLogin() {
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginResponseType>) => {
 
-            const token = res.data.token;
-
-            if (!token) {
-                setErrMessage(`ログインに失敗しました。`);
-            }
-
-            //トークンをクッキーにセット
-            setCookie(ENV.AUTHENTICATION.cookie, token, { path: '/' });
             setIsLogin(true);
             navigate(HOME_ROOT_PATH);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            // クッキーを削除
-            Object.keys(cookie).forEach((key) => {
-                removeCookie(key, { path: '/' });
-            });
+
             //エラーメッセージを表示
             setErrMessage(res.response.data.message);
             userPasswordRef.current?.clearValue();

@@ -6,6 +6,10 @@ import { useAtom, useAtomValue } from "jotai";
 import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useCookies } from "react-cookie";
+import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
+import ENV from '../../env.json';
+import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
+
 
 export function useHeaderUserMenu() {
 
@@ -18,8 +22,25 @@ export function useHeaderUserMenu() {
         flag: isOpenUserMenu,
         onFlag: oepnUserMenu,
         offFlag: closeUserMenu } = useSwitch();
-    //認証クッキー
-    const [cookie, , removeCookie] = useCookies();
+
+
+    /**
+     * ログアウトリクエスト
+     */
+    const postMutation = useMutationWrapper({
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_LOGOUT}`,
+        method: "POST",
+        // 正常終了後の処理
+        afSuccessFn: () => {
+
+            setIsLogin(false);
+            navigate(HOME_ROOT_PATH);
+        },
+        // 失敗後の処理
+        afErrorFn: (res: errResType) => {
+            alert(`ログアウトに失敗しました。再度お試しください。`);
+        },
+    });
 
 
     /**
@@ -33,14 +54,7 @@ export function useHeaderUserMenu() {
      * ログアウト
      */
     const clickLogout = () => {
-
-        // クッキーを削除
-        Object.keys(cookie).forEach((key) => {
-            removeCookie(key, { path: '/' });
-        });
-
-        setIsLogin(false);
-        navigate(HOME_ROOT_PATH);
+        postMutation.mutate();
     }
 
     return {
