@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { useHeaderMenuUl } from "../Hook/useHeaderMenuUl";
+import { FAVORITE_ROOT_PATH } from "../../Favorite/Const/FavoriteConst";
 
 
 const NavUl = styled.ul`
@@ -35,7 +36,9 @@ export function HeaderMenuUl() {
 
     console.log(`HeaderMenuUl render`);
 
-    const { nowPath } = useHeaderMenuUl();
+    const {
+        nowPath,
+        isLogin } = useHeaderMenuUl();
 
     return (
         <NavUl>
@@ -49,6 +52,19 @@ export function HeaderMenuUl() {
                     ホーム
                 </Link>
             </NavLi>
+            {
+                isLogin &&
+                <NavLi
+                    isActive={nowPath === FAVORITE_ROOT_PATH}
+                >
+                    <Link
+                        to={FAVORITE_ROOT_PATH}
+                        style={{ color: "inherit", fontWeight: "inherit" }}
+                    >
+                        お気に入り
+                    </Link>
+                </NavLi>
+            }
         </NavUl>
     );
 }

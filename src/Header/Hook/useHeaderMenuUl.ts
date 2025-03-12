@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
+import { useAtomValue } from "jotai";
+import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 
 export function useHeaderMenuUl() {
 
     const location = useLocation();
     // 現在のパス
     const [nowPath, setNowPath] = useState<string>();
+    // ログインフラグ
+    const isLogin = useAtomValue(isLoginAtom);
 
     /**
      * URL切り替え時のイベント
@@ -19,11 +23,12 @@ export function useHeaderMenuUl() {
             return;
         }
 
-        const mainPath = pathArray[1] ? pathArray[1] : HOME_ROOT_PATH;
+        const mainPath = pathArray[1] ? `/${pathArray[1]}` : HOME_ROOT_PATH;
         setNowPath(mainPath);
     }, [location]);
 
     return {
-        nowPath
+        nowPath,
+        isLogin
     }
 }
