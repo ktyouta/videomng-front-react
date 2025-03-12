@@ -5,12 +5,16 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../env.json';
 import { AddToFavoriteRequestType } from "../Type/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
+import { HOME_ROOT_PATH } from "../Const/HomeConst";
+import { useNavigate } from "react-router-dom";
 
 
 export function useHomeVideoDetailMenu() {
 
     // ログインフラグ
     const isLogin = useAtomValue(isLoginAtom);
+    // ルーティング用
+    const navigate = useNavigate();
 
 
     /**
@@ -26,6 +30,8 @@ export function useHomeVideoDetailMenu() {
             if (message) {
                 alert(message);
             }
+
+            navigate(HOME_ROOT_PATH);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -44,6 +50,11 @@ export function useHomeVideoDetailMenu() {
     function addToFavorite(videoId: string) {
 
         if (!window.confirm(`動画をお気に入りに登録しますか？`)) {
+            return;
+        }
+
+        if (!videoId) {
+            alert(`お気に入りに登録できませんでした。`);
             return;
         }
 
