@@ -43,10 +43,6 @@ export function FavoriteVideoDetailMenu(props: propsType) {
 
     console.log("FavoriteVideoDetailMenu render");
 
-    const {
-        isLogin,
-        addToFavorite } = useFavoriteVideoDetailMenu();
-
     const videoDetail = props.videoDetail;
     // 動画ID
     const videoId = props.videoId;
@@ -69,21 +65,6 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                             "width": "100%",
                         }}
                     />
-                    {
-                        isLogin &&
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
-                            title={"お気に入りに登録する"}
-                            onclick={() => {
-                                addToFavorite(videoId);
-                            }}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                    }
                 </MenuButtonDiv>
             </MenuListDiv>
         </MenuParentDiv>

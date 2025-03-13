@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useFavoriteVideoArea } from "../Hook/useFavoriteVideoArea";
 import LoadingBase from "../../Common/Component/LoadingBase";
-import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 import { FavoriteVideoContent } from "./FavoriteVideoContent";
+import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
+import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 
 const Parent = styled.div`
   width: 100%;
@@ -59,7 +60,7 @@ export function FavoriteVideoArea() {
     <Parent>
       <VideoUl>
         {
-          videoListItem?.map((e: YouTubeDataApiVideoListItemType) => {
+          videoListItem?.map((e: FavoriteVideoListMergedType) => {
             return (
               <FavoriteVideoContent
                 data={e}

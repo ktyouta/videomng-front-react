@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 import { useFavoriteVideoContent } from "../Hook/useFavoriteVideoContent";
+import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 
 const VideoArticle = styled.article`
     width:100%;
@@ -32,7 +32,7 @@ const ChennelTitleDiv = styled.div`
 
 
 type propsType = {
-    data: YouTubeDataApiVideoListItemType,
+    data: FavoriteVideoListMergedType,
 }
 
 export function FavoriteVideoContent(props: propsType) {
@@ -46,11 +46,11 @@ export function FavoriteVideoContent(props: propsType) {
     // 動画タイトル
     const title = snipet.title;
     // サムネイルURL
-    const imgUrl = snipet.thumbnails.high.url;
+    const imgUrl = snipet.thumbnails.high?.url;
     // チャンネル名
     const channelTitle = snipet.channelTitle;
     // 動画ID
-    const videoId = data.id.videoId ?? ``;
+    const videoId = data.id ?? ``;
 
     return (
         <VideoArticle>

@@ -1,16 +1,6 @@
-import { YouTubeDataApiVideoListItemType } from "./YouTubeDataApiVideoListItemType";
+import { FavoriteVideoListMergedType } from "./FavoriteVideoListMergedType";
 
-// 動画リストapiのレスポンス
-export type VideoListResponseType = {
-    data: {
-        readonly kind: string;
-        readonly etag: string;
-        readonly nextPageToken?: string;
-        readonly regionCode?: string;
-        readonly pageInfo: {
-            totalResults: number;
-            resultsPerPage: number;
-        };
-        readonly items: YouTubeDataApiVideoListItemType[];
-    }
+// お気に入り動画リストapiのレスポンス
+export type FavoriteVideoListResponseType = {
+    data: FavoriteVideoListMergedType[],
 }
