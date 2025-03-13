@@ -2,8 +2,8 @@ import { FavoriteVideoCommentType } from "./FavoriteVideoCommentType";
 import { FavoriteVideoDetailType } from "./FavoriteVideoDetailType";
 import { YouTubeDataApiVideoDetailItemType } from "./YouTubeDataApiVideoDetailItemType";
 
-//YouTube Data Api(動画詳細)のレスポンス
-export type VideoDetailResponseType = {
+export type FavoriteVideoDetailResponseType = {
+
     readonly detail: FavoriteVideoDetailType;
     readonly comments: FavoriteVideoCommentType[];
     readonly item: YouTubeDataApiVideoDetailItemType;

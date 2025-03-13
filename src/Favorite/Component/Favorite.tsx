@@ -26,7 +26,8 @@ export function Favorite() {
                     path={videoId}
                     element={
                         <FavoriteVideoDetail />
-                    } />
+                    } >
+                </Route>
             </Routes>
         </React.Fragment>
     );

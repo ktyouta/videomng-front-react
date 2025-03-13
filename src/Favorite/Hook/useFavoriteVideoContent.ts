@@ -22,7 +22,7 @@ export function useFavoriteVideoContent() {
         }
 
         setVideoId(id);
-        navigate(`${FAVORITE_ROOT_PATH}${id}`);
+        navigate(`${FAVORITE_ROOT_PATH}/${id}`);
     }
 
     return {
