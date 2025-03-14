@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
-import { FavoriteVideoListResponseType } from "../Type/VideoListResponseType";
+import { FavoriteVideoListResponseType } from "../Type/FavoriteVideoListResponseType";
 import { favoriteVideoListAtom } from "../Atom/FavoriteAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";

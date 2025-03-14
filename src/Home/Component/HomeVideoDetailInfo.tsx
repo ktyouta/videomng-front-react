@@ -30,6 +30,12 @@ const ChennelTitleDiv = styled.div`
   margin-bottom:8%;
 `;
 
+const DescriptionDiv = styled.div`
+  box-sizing:border-box;
+  padding-right:8%;
+`;
+
+
 
 type propsType = {
     videoDetail: YouTubeDataApiVideoDetailItemType | undefined
@@ -63,17 +69,19 @@ export function HomeVideoDetailInfo(props: propsType) {
                 <ChennelTitleDiv>
                     {channelTitle}
                 </ChennelTitleDiv>
-                <AccordionComponent
-                    defaultHeight={'70px'}
-                    outerStyle={{
-                        border: "solid 1px",
-                        boxSizing: "border-box",
-                        padding: "1%",
-                        borderRadius: "6px"
-                    }}
-                >
-                    {description}
-                </AccordionComponent>
+                <DescriptionDiv>
+                    <AccordionComponent
+                        defaultHeight={'70px'}
+                        outerStyle={{
+                            border: "solid 1px",
+                            boxSizing: "border-box",
+                            padding: "1%",
+                            borderRadius: "6px"
+                        }}
+                    >
+                        {description}
+                    </AccordionComponent>
+                </DescriptionDiv>
             </VideoMetaDiv>
         </VideoInfoDiv >
     );
