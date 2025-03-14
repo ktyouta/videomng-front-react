@@ -50,12 +50,11 @@ const ContentDiv = styled.div`
 
 //アイコンクリック時の背景のスタイル
 const OverlayDiv = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; 
-  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  opacity: 0.9;
+  width: 100vw;
+  height: 100vh;
+  top: 0; 
   z-index: ${Z_INDEX_PARAM.HEADOVERLAY}; 
 `;
 

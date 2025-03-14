@@ -23,8 +23,8 @@ const ShowMoreButton = styled.button`
 //テキスト表示エリアのスタイル
 const AccordionTextAreaDiv = styled.div<{ isShowMore: boolean, defaultHeight: string, }>`
     height: ${({ isShowMore, defaultHeight }) => (isShowMore ? "100%" : defaultHeight)};
-    overflow: hidden; /* 超過分を非表示 */
-    transition: max-height 0.1s ease; /* アニメーションを追加 */
+    overflow: hidden;
+    transition: max-height 0.1s ease;
 `;
 
 /**

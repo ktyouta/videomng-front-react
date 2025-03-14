@@ -8,6 +8,11 @@ import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { useFavoriteVideoDetailMenu } from "../Hook/useFavoriteVideoDetailMenu";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
+import ModalComponent from "../../Common/Component/ModalComponent";
+import { IconComponent } from "../../Common/Component/IconComponent";
+import { RxCross1 } from 'react-icons/rx';
+import { FavoriteMemo } from "./FavoriteMemo";
+import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
 
 
 const MenuParentDiv = styled.div`
@@ -34,6 +39,17 @@ const MenuButtonDiv = styled.div`
   }
 `;
 
+// モーダルオープン時の背景のスタイル
+const OverlayDiv = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.9;
+`;
+
 type propsType = {
     videoDetail: FavoriteVideoDetailDataType | undefined,
     videoId: string
@@ -44,6 +60,12 @@ export function FavoriteVideoDetailMenu(props: propsType) {
 
     console.log("FavoriteVideoDetailMenu render");
 
+    const {
+        isModalOpen,
+        onFlag,
+        offFlag
+    } = useFavoriteVideoDetailMenu();
+
     const videoDetail = props.videoDetail;
     // 動画ID
     const videoId = props.videoId;
@@ -51,23 +73,86 @@ export function FavoriteVideoDetailMenu(props: propsType) {
     const videoUrlModel = new VideoUrlModel(videoId);
 
     return (
-        <MenuParentDiv>
-            <MenuListDiv>
-                <MenuButtonDiv>
-                    <ButtonComponent
-                        styleTypeNumber="GRAD_GRAY"
-                        title={"再生"}
-                        onclick={() => {
-                            window.open(`${videoUrlModel.videoUrl}`, `_blank`);
-                        }}
-                        style={{
-                            "fontSize": "0.9rem",
-                            "height": "7%",
-                            "width": "100%",
-                        }}
-                    />
-                </MenuButtonDiv>
-            </MenuListDiv>
-        </MenuParentDiv>
+        <React.Fragment>
+            <MenuParentDiv>
+                <MenuListDiv>
+                    <MenuButtonDiv>
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"再生"}
+                            onclick={() => {
+                                window.open(`${videoUrlModel.videoUrl}`, `_blank`);
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"メモ"}
+                            onclick={() => {
+                                onFlag();
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"キーワード検索(字幕)"}
+                            onclick={() => {
+                                alert(`実装中です。`);
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"キーワード検索(コメント)"}
+                            onclick={() => {
+                                alert(`実装中です。`);
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"公開コメント"}
+                            onclick={() => {
+                                alert(`実装中です。`);
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
+                    </MenuButtonDiv>
+                </MenuListDiv>
+            </MenuParentDiv>
+            <ModalComponent
+                modalIsOpen={isModalOpen}
+                closeModal={offFlag}
+                style={{ backgroundColor: "#00050d", zIndex: `${Z_INDEX_PARAM.MODAL}` }}
+            >
+                <FavoriteMemo
+                    closeModal={offFlag}
+                />
+            </ModalComponent>
+            {
+                isModalOpen &&
+                <OverlayDiv />
+            }
+        </React.Fragment>
     );
 }

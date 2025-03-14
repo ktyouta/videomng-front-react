@@ -16,8 +16,8 @@ const NavUl = styled.ul`
 
 const NavLi = styled.li<{ isActive: boolean }>`
   display: flex;
-  align-items: center; /* 縦方向中央揃え */
-  justify-content: center; /* 横方向中央揃え（必要なら） */
+  align-items: center;
+  justify-content: center;
   padding: 10px 1%;
   box-sizing: border-box;
   background: ${({ isActive }) => (isActive ? "radial-gradient(50% 50% at 50% 0, rgba(var(--action-background-color,255,255,255),.8) 0, transparent 100%), hsla(0, 0%, 100%, .2);" : "")};
@@ -27,6 +27,11 @@ const NavLi = styled.li<{ isActive: boolean }>`
   font-size: 19px;
   color:white;
   margin-right:3%;
+  cursor:pointer;
+  &:hover {
+     color: black;
+     background-color: white;
+  }
 `;
 
 export function HeaderMenuUl() {

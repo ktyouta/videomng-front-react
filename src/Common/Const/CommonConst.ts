@@ -7,4 +7,5 @@ export const Z_INDEX_PARAM = {
     WAITLOADING: 1000,
     HEADOVERLAY: 2000,
     HEADNAV: 2001,
+    MODAL: 2002,
 }

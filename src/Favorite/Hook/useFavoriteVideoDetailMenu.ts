@@ -5,8 +5,17 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../env.json';
 import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 import { useNavigate } from "react-router-dom";
+import useSwitch from "../../Common/Hook/useSwitch";
 
 
 export function useFavoriteVideoDetailMenu() {
 
+    //モーダルの開閉用フラグ
+    const { flag: isModalOpen, onFlag, offFlag } = useSwitch();
+
+    return {
+        isModalOpen,
+        onFlag,
+        offFlag,
+    }
 }
