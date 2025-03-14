@@ -1,4 +1,5 @@
 import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
+import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { atom } from "jotai";
@@ -8,4 +9,4 @@ export const favoriteVideoListAtom = atom<FavoriteVideoListMergedType[] | undefi
 // 動画ID
 export const videoIdAtom = atom<string>(``);
 // APIから取得した動画詳細
-export const videoDetailItemAtom = atom<YouTubeDataApiVideoDetailItemType>();
+export const videoDetailItemAtom = atom<FavoriteVideoDetailDataType>();

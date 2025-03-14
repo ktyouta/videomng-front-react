@@ -7,6 +7,7 @@ import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { useFavoriteVideoDetailMenu } from "../Hook/useFavoriteVideoDetailMenu";
+import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 
 
 const MenuParentDiv = styled.div`
@@ -34,7 +35,7 @@ const MenuButtonDiv = styled.div`
 `;
 
 type propsType = {
-    videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
+    videoDetail: FavoriteVideoDetailDataType | undefined,
     videoId: string
 }
 

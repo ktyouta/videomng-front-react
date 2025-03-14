@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
+import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 
 
 const VideoInfoDiv = styled.div`
@@ -33,7 +34,7 @@ const VideoDescription = styled.h3`
 `;
 
 type propsType = {
-    videoDetail: YouTubeDataApiVideoDetailItemType | undefined
+    videoDetail: FavoriteVideoDetailDataType | undefined
 }
 
 
@@ -42,7 +43,8 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     console.log("FavoriteVideoDetailInfo render");
 
     const videoDetail = props.videoDetail;
-    const snippet = videoDetail?.snippet;
+    const item = videoDetail?.item;
+    const snippet = item?.snippet;
     // サムネイルURL
     const imgUrl = snippet?.thumbnails.high?.url;
     // タイトル

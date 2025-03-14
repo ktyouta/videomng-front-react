@@ -23,6 +23,13 @@ const VideoContentDiv = styled.div`
   padding-right:5%;
 `;
 
+const MessageDiv = styled.div`
+  color:white;
+  position: absolute;
+  top: 32%;
+  left: 42%;
+`;
+
 
 export function FavoriteVideoDetail() {
 
@@ -31,11 +38,23 @@ export function FavoriteVideoDetail() {
   const {
     videoId,
     isLoading,
-    videoDetail } = useFavoriteVideoDetail();
+    videoDetail,
+    errMessage } = useFavoriteVideoDetail();
 
   // ローディング
   if (isLoading) {
     return <LoadingBase />;
+  }
+
+  // 詳細取得エラー
+  if (errMessage) {
+    return (
+      <Parent>
+        <MessageDiv>
+          {errMessage}
+        </MessageDiv>
+      </Parent>
+    );
   }
 
   return (

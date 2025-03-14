@@ -1,10 +1,11 @@
 import { FavoriteVideoCommentType } from "./FavoriteVideoCommentType";
+import { FavoriteVideoDetailDataType } from "./FavoriteVideoDetailDataType";
 import { FavoriteVideoDetailType } from "./FavoriteVideoDetailType";
 import { YouTubeDataApiVideoDetailItemType } from "./YouTubeDataApiVideoDetailItemType";
 
 export type FavoriteVideoDetailResponseType = {
 
-    readonly detail: FavoriteVideoDetailType;
-    readonly comments: FavoriteVideoCommentType[];
-    readonly item: YouTubeDataApiVideoDetailItemType;
+    readonly status: number,
+    readonly message: string,
+    readonly data: FavoriteVideoDetailDataType,
 }
