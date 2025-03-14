@@ -56,7 +56,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                 <MenuButtonDiv>
                     <ButtonComponent
                         styleTypeNumber="GRAD_GRAY"
-                        title={"動画を視聴する"}
+                        title={"再生"}
                         onclick={() => {
                             window.open(`${videoUrlModel.videoUrl}`, `_blank`);
                         }}

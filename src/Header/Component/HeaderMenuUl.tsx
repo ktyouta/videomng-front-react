@@ -15,21 +15,18 @@ const NavUl = styled.ul`
 `;
 
 const NavLi = styled.li<{ isActive: boolean }>`
-  height:100%;
-  margin-right: 20px;
-  color:white;
-  font-size: 22px;
-  cursor:pointer;
-  &:hover {
-    color: black;
-    background-color: white;
-  }
+  display: flex;
+  align-items: center; /* 縦方向中央揃え */
+  justify-content: center; /* 横方向中央揃え（必要なら） */
+  padding: 10px 1%;
+  box-sizing: border-box;
   background: ${({ isActive }) => (isActive ? "radial-gradient(50% 50% at 50% 0, rgba(var(--action-background-color,255,255,255),.8) 0, transparent 100%), hsla(0, 0%, 100%, .2);" : "")};
   box-shadow: ${({ isActive }) => (isActive ? "0 -4px 16px 0 rgba(var(--action-background-color,255,255,255),.2)" : "")};
-  padding-left: 1%;
-  padding-right: 1%;
   border-radius: 7%;
   font-weight:400;
+  font-size: 19px;
+  color:white;
+  margin-right:3%;
 `;
 
 export function HeaderMenuUl() {

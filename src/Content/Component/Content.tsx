@@ -23,7 +23,7 @@ export function Content() {
         <Parent>
             <Routes>
                 <Route
-                    path={HOME_ROOT_PATH}
+                    path={`${HOME_ROOT_PATH}*`}
                     element={<Home />}
                 />
                 {

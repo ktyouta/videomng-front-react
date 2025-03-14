@@ -6,6 +6,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
+import AccordionComponent from "../../Common/Component/AccordionComponent";
 
 
 const VideoInfoDiv = styled.div`
@@ -27,10 +28,12 @@ const VideoTitle = styled.h3`
 
 const ChennelTitleDiv = styled.div`
   font-size: 17px;
+  margin-bottom:2%;
 `;
 
-const VideoDescription = styled.h3`
-
+const DescriptionDiv = styled.div`
+  box-sizing:border-box;
+  padding-right:8%;
 `;
 
 type propsType = {
@@ -66,9 +69,19 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                 <ChennelTitleDiv>
                     {channelTitle}
                 </ChennelTitleDiv>
-                <VideoDescription>
-                    {description}
-                </VideoDescription>
+                <DescriptionDiv>
+                    <AccordionComponent
+                        defaultHeight={'70px'}
+                        outerStyle={{
+                            border: "solid 1px",
+                            boxSizing: "border-box",
+                            padding: "1%",
+                            borderRadius: "6px"
+                        }}
+                    >
+                        {description}
+                    </AccordionComponent>
+                </DescriptionDiv>
             </VideoMetaDiv>
         </VideoInfoDiv>
     );

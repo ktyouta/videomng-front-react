@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
+import AccordionComponent from "../../Common/Component/AccordionComponent";
 
 
 const VideoInfoDiv = styled.div`
@@ -26,11 +27,9 @@ const VideoTitle = styled.h3`
 
 const ChennelTitleDiv = styled.div`
   font-size: 17px;
+  margin-bottom:8%;
 `;
 
-const VideoDescription = styled.h3`
-
-`;
 
 type propsType = {
     videoDetail: YouTubeDataApiVideoDetailItemType | undefined
@@ -64,10 +63,18 @@ export function HomeVideoDetailInfo(props: propsType) {
                 <ChennelTitleDiv>
                     {channelTitle}
                 </ChennelTitleDiv>
-                <VideoDescription>
+                <AccordionComponent
+                    defaultHeight={'70px'}
+                    outerStyle={{
+                        border: "solid 1px",
+                        boxSizing: "border-box",
+                        padding: "1%",
+                        borderRadius: "6px"
+                    }}
+                >
                     {description}
-                </VideoDescription>
+                </AccordionComponent>
             </VideoMetaDiv>
-        </VideoInfoDiv>
+        </VideoInfoDiv >
     );
 }
