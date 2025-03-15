@@ -1,11 +1,11 @@
 import { useAtomValue } from "jotai";
-import { videoIdAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoIdAtom } from "../Atom/FavoriteAtom";
 
 export function useFavorite() {
 
-    const videoId = useAtomValue(videoIdAtom);
+    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
 
     return {
-        videoId
+        favoriteVideoId
     }
 }

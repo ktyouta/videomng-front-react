@@ -1,5 +1,5 @@
 import { useSetAtom } from "jotai";
-import { videoIdAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoIdAtom } from "../Atom/FavoriteAtom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 
@@ -7,7 +7,7 @@ import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 export function useFavoriteVideoContent() {
 
     // 動画ID
-    const setVideoId = useSetAtom(videoIdAtom);
+    const setVideoId = useSetAtom(favoriteVideoIdAtom);
     //ルーティング用
     const navigate = useNavigate();
 

@@ -10,7 +10,7 @@ export function Favorite() {
 
     console.log("Favorite render");
 
-    const { videoId } = useFavorite();
+    const { favoriteVideoId } = useFavorite();
 
     return (
         <React.Fragment>
@@ -23,7 +23,7 @@ export function Favorite() {
                 >
                 </Route>
                 <Route
-                    path={videoId}
+                    path={favoriteVideoId}
                     element={
                         <FavoriteVideoDetail />
                     } >

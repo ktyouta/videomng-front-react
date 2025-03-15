@@ -137,13 +137,27 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                                 "width": "100%",
                             }}
                         />
+                        <ButtonComponent
+                            styleTypeNumber="GRAD_GRAY"
+                            title={"お気に入りから外す"}
+                            onclick={() => {
+                                alert(`実装中です。`);
+                            }}
+                            style={{
+                                "fontSize": "0.9rem",
+                                "height": "7%",
+                                "width": "100%",
+                            }}
+                        />
                     </MenuButtonDiv>
                 </MenuListDiv>
             </MenuParentDiv>
             <ModalComponent
                 modalIsOpen={isModalOpen}
                 closeModal={offFlag}
-                style={{ backgroundColor: "#00050d", zIndex: `${Z_INDEX_PARAM.MODAL}` }}
+                style={{
+                    backgroundColor: "#00050d", zIndex: `${Z_INDEX_PARAM.MODAL}`,
+                }}
             >
                 <FavoriteMemo
                     closeModal={offFlag}
