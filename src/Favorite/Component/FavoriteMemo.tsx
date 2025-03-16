@@ -19,44 +19,28 @@ const Parent = styled.div`
   height: 87%;
 `;
 
-const ContentAreaDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  padding-left: 2%;
-  padding-top: 2%;
-  padding-right: 2%;
-`;
-
-const MemoListAreaDiv = styled.div`
-  width: 97%;
-  height: 90%;
-  overflow: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  padding: 2% 1% 1% 1%;
-`;
-
-
 
 type propsType = {
-    closeModal: () => void
+  closeModal: () => void,
+  videoId: string,
 }
 
 export function FavoriteMemo(props: propsType) {
 
-    console.log("FavoriteMemo render");
+  console.log("FavoriteMemo render");
 
-    return (
-        <Parent>
-            {/* ヘッダ */}
-            <FavoriteMemoHeader
-                closeModal={props.closeModal}
-            />
-            {/* メモリスト */}
-            <FavoriteMemoList />
-            {/* 入力欄 */}
-            <FavoriteMemoInput />
-        </Parent>
-    );
+  return (
+    <Parent>
+      {/* ヘッダ */}
+      <FavoriteMemoHeader
+        closeModal={props.closeModal}
+      />
+      {/* メモリスト */}
+      <FavoriteMemoList />
+      {/* 入力欄 */}
+      <FavoriteMemoInput
+        videoId={props.videoId}
+      />
+    </Parent>
+  );
 }

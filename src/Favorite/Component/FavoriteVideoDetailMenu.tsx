@@ -161,6 +161,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
             >
                 <FavoriteMemo
                     closeModal={offFlag}
+                    videoId={videoId}
                 />
             </ModalComponent>
             {

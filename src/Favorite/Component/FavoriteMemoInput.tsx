@@ -26,13 +26,19 @@ const SearchIconAreaDiv = styled.div`
   color:#213547;
 `;
 
-export function FavoriteMemoInput() {
+type propsType = {
+    videoId: string,
+}
+
+
+export function FavoriteMemoInput(props: propsType) {
 
     console.log("FavoriteMemoInput render");
 
     const {
         inputMemo,
-        setInputMemo
+        setInputMemo,
+        addToMemo
     } = useFavoriteMemoInput();
 
     return (
@@ -52,7 +58,7 @@ export function FavoriteMemoInput() {
             <SearchIconAreaDiv>
                 <IconComponent
                     icon={FaArrowUp}
-                    onclick={() => { alert(`実装中です。`) }}
+                    onclick={() => { addToMemo(props.videoId) }}
                     size="90%"
                 />
             </SearchIconAreaDiv>
