@@ -36,7 +36,9 @@ export function FavoriteMemo(props: propsType) {
         closeModal={props.closeModal}
       />
       {/* メモリスト */}
-      <FavoriteMemoList />
+      <FavoriteMemoList
+        videoId={props.videoId}
+      />
       {/* 入力欄 */}
       <FavoriteMemoInput
         videoId={props.videoId}

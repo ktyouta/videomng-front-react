@@ -23,8 +23,11 @@ const MemoListAreaDiv = styled.div`
   padding: 2% 1% 1% 1%;
 `;
 
+type propsType = {
+    videoId: string,
+}
 
-export function FavoriteMemoList() {
+export function FavoriteMemoList(props: propsType) {
 
     console.log("FavoriteMemoList render");
 
@@ -58,6 +61,7 @@ export function FavoriteMemoList() {
                                 return (
                                     <FavoriteMemoContent
                                         favoriteVideoMemo={e}
+                                        videoId={props.videoId}
                                     />
                                 )
                             })

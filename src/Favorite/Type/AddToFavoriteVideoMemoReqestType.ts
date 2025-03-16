@@ -1,4 +1,4 @@
-// お気に入り登録動画メモリクエスト
+// メモ登録リクエスト
 export type AddToFavoriteVideoMemoReqestType = {
     videoId: string,
     memo: string,
