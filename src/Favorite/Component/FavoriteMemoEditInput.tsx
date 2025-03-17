@@ -6,6 +6,8 @@ import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
 import { useFavoriteMemoUpdateInput } from "../Hook/useFavoriteMemoUpdateInput";
 import { RxCross1 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa6";
+import { FavoriteMemoUpdateIconArea } from "./FavoriteMemoUpdateIconArea";
+import { FavoriteMemoCancelIconArea } from "./FavoriteMemoCancelIconArea";
 
 
 const MemoInputAreaDiv = styled.div`
@@ -17,14 +19,16 @@ const MemoInputAreaDiv = styled.div`
   display:flex;
 `;
 
-const SearchIconAreaDiv = styled.div`
+const EditIconAreaDiv = styled.div`
   width: 7%;
   height: 38px;
   color:white;
   display: flex;
   align-items: center;
   justify-content: center;
+  position:relative;
 `;
+
 
 type propsType = {
     videoId: string,
@@ -55,18 +59,16 @@ export function FavoriteMemoEditInput(props: propsType) {
                     height: "34px",
                 }}
             />
-            <SearchIconAreaDiv>
-                <IconComponent
-                    icon={RxCross1}
-                    onclick={() => { props.closeEdit(); }}
-                    size="50%"
+            <EditIconAreaDiv>
+                {/* キャンセル */}
+                <FavoriteMemoCancelIconArea
+                    closeEdit={props.closeEdit}
                 />
-                <IconComponent
-                    icon={FaCheck}
-                    onclick={() => { updateMemo(props.videoId, props.videoMemoSeq) }}
-                    size="50%"
+                {/* 更新 */}
+                <FavoriteMemoUpdateIconArea
+                    updateMemo={() => { updateMemo(props.videoId, props.videoMemoSeq); }}
                 />
-            </SearchIconAreaDiv>
+            </EditIconAreaDiv>
         </MemoInputAreaDiv>
     );
 }

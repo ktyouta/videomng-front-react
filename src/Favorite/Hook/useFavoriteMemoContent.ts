@@ -17,7 +17,6 @@ export function useFavoriteMemoContent() {
     // メモ編集エリアの切り替えフラグ
     const { flag: isOpenEdit, on: openEdit, off: closeEdit } = useSwitch();
 
-
     /**
      * メモ削除リクエスト
      */

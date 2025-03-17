@@ -20,8 +20,8 @@ export function useHeaderUserMenu() {
     //ナビゲーション表示フラグ
     const {
         flag: isOpenUserMenu,
-        onFlag: oepnUserMenu,
-        offFlag: closeUserMenu } = useSwitch();
+        on: oepnUserMenu,
+        off: closeUserMenu } = useSwitch();
 
 
     /**

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { format } from "date-fns";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { IconComponent } from "../../Common/Component/IconComponent";
 import { useFavoriteMemoContent } from "../Hook/useFavoriteMemoContent";
-import { MdEdit } from "react-icons/md";
 import React from "react";
 import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
+import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
+import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 
 
 const Parent = styled.div`
@@ -35,6 +34,7 @@ const IconDiv = styled.div`
     align-items: center;
     justify-content: end;
     padding-right: 1%;
+    position:relative;
 `;
 
 const MetaDiv = styled.div`
@@ -43,6 +43,7 @@ const MetaDiv = styled.div`
     display: flex;
     align-items: center;
 `;
+
 
 type propsType = {
     favoriteVideoMemo: FavoriteVideoMemoType,
@@ -57,7 +58,8 @@ export function FavoriteMemoContent(props: propsType) {
         deleteMemo,
         isOpenEdit,
         openEdit,
-        closeEdit, } = useFavoriteMemoContent();
+        closeEdit,
+    } = useFavoriteMemoContent();
 
     const data = props.favoriteVideoMemo;
     const memo = data.videoMemo;
@@ -69,6 +71,7 @@ export function FavoriteMemoContent(props: propsType) {
             {
                 isOpenEdit ?
                     <React.Fragment>
+                        {/* 編集中 */}
                         <FavoriteMemoEditInput
                             videoId={props.videoId}
                             videoMemoSeq={memoSeq}
@@ -78,6 +81,7 @@ export function FavoriteMemoContent(props: propsType) {
                     </React.Fragment>
                     :
                     <React.Fragment>
+                        {/* 閲覧 */}
                         <MemoDiv>
                             {memo}
                         </MemoDiv>
@@ -86,17 +90,13 @@ export function FavoriteMemoContent(props: propsType) {
                                 {updateDate}
                             </MetaDiv>
                             <IconDiv>
-                                <IconComponent
-                                    icon={MdEdit}
-                                    onclick={() => { openEdit() }}
-                                    size="45%"
-                                    style={{ color: "white" }}
+                                {/* 編集 */}
+                                <FavoriteMemoEditIconArea
+                                    openEdit={openEdit}
                                 />
-                                <IconComponent
-                                    icon={FaRegTrashAlt}
-                                    onclick={() => { deleteMemo(props.videoId, memoSeq) }}
-                                    size="45%"
-                                    style={{ color: "white" }}
+                                {/* 削除 */}
+                                <FavoriteMemoDeleteIconArea
+                                    deleteMemo={() => { deleteMemo(props.videoId, memoSeq) }}
                                 />
                             </IconDiv>
                         </LowerDiv>

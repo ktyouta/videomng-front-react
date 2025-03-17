@@ -8,6 +8,7 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { UpdateToFavoriteVideoMemoReqestType } from "../Type/UpdateToFavoriteVideoMemoReqestType";
+import useSwitch from "../../Common/Hook/useSwitch";
 
 
 type propsType = {
@@ -68,6 +69,10 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      */
     function updateMemo(videoId: string, videoMemoSeq: number) {
 
+        if (!window.confirm(`メモを更新しますか？`)) {
+            return;
+        }
+
         if (!inputMemo) {
             alert(`メモが入力されていません。`);
             return;
@@ -91,6 +96,6 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
     return {
         inputMemo,
         setInputMemo,
-        updateMemo
+        updateMemo,
     }
 }
