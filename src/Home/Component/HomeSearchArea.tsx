@@ -5,23 +5,33 @@ import { useHomeSearchArea } from "../Hook/useHomeSearchArea";
 import { IoSearch } from "react-icons/io5";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { IconBaseProps } from "react-icons";
+import ComboComponent from "../../Common/Component/ComboComponent";
+import { VIDEO_TYPE_LIST } from "../Const/HomeConst";
 
 const Parent = styled.div`
   width: 100%;
   height: 10%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 22%;
 `;
 
 const TextBoxAreaDiv = styled.div`
-  width: 100%;
+  width: 83%;
   height: 100%;
-  display:flex;
+  display: flex;
+  -webkit-box-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
   align-items: center;
 `;
 
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
-  width: 3%;
+  width: 6%;
   height: 37px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -29,6 +39,9 @@ const SearchIconAreaDiv = styled.div`
   border-bottom-right-radius: 15%;
 `;
 
+const SpaceDiv = styled.div`
+    flex:1;
+`;
 
 /**
  * 検索条件エリア
@@ -40,13 +53,14 @@ export function HomeSearchArea() {
     const {
         keyword,
         setKeyword,
-        clickSearchBtn, } = useHomeSearchArea();
+        clickSearchBtn,
+        setVideoTypeSelectValue } = useHomeSearchArea();
 
     return (
         <Parent>
             <TextBoxAreaDiv>
                 <BaseTextbox
-                    textWidth="47%"
+                    textWidth="100%"
                     placeholder="キーワード"
                     value={keyword}
                     onChange={setKeyword}
@@ -64,6 +78,15 @@ export function HomeSearchArea() {
                     />
                 </SearchIconAreaDiv>
             </TextBoxAreaDiv>
+            <SpaceDiv />
+            <ComboComponent
+                combo={VIDEO_TYPE_LIST}
+                initValue={VIDEO_TYPE_LIST[0].value}
+                onChange={setVideoTypeSelectValue}
+                width="10%"
+                minWidth="8%"
+                height="39px"
+            />
         </Parent>
     );
 }
