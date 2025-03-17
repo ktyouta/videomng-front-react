@@ -7,7 +7,7 @@ import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteMemoContent } from "./FavoriteMemoContent";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
 import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoInput } from "./FavoriteMemoInput";
+import { FavoriteMemoCreateInput } from "./FavoriteMemoCreateInput";
 import { FavoriteMemoHeader } from "./FavoriteMemoHeader";
 import { FavoriteMemoList } from "./FavoriteMemoList";
 
@@ -40,7 +40,7 @@ export function FavoriteMemo(props: propsType) {
         videoId={props.videoId}
       />
       {/* 入力欄 */}
-      <FavoriteMemoInput
+      <FavoriteMemoCreateInput
         videoId={props.videoId}
       />
     </Parent>

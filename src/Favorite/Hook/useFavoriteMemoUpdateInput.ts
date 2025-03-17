@@ -7,42 +7,66 @@ import { AddToFavoriteVideoMemoResponseType } from "../Type/AddToFavoriteVideoMe
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
+import { UpdateToFavoriteVideoMemoReqestType } from "../Type/UpdateToFavoriteVideoMemoReqestType";
 
 
-export function useFavoriteMemoInput() {
+type propsType = {
+    inputMemo: string,
+    closeEdit: () => void,
+}
+
+export function useFavoriteMemoUpdateInput(props: propsType) {
 
     // メモ入力情報
-    const [inputMemo, setInputMemo] = useState(``);
+    const [inputMemo, setInputMemo] = useState(props.inputMemo);
     // メモ情報
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
 
 
     /**
-     * お気に入り動画メモ登録リクエスト
+     * お気に入り動画メモ更新リクエスト
      */
     const postMutation = useMutationWrapper({
         url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
-        method: "POST",
+        method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
             setVideoListItemAtom((e) => {
                 if (e) {
-                    e = [...e, res.data];
+                    const resMemo = res.data;
+                    const videoId = resMemo.videoId;
+                    const userId = resMemo.userId;
+                    const memoSeq = resMemo.videoMemoSeq;
+                    const memo = resMemo.videoMemo;
+
+                    // 対象のメモを更新
+                    const updateMemo = e.find((e1) => {
+                        return e1.userId === userId &&
+                            e1.videoId === videoId &&
+                            e1.videoMemoSeq === memoSeq;
+                    });
+
+                    if (updateMemo) {
+                        updateMemo.videoMemo = memo;
+                        updateMemo.updateDate = resMemo.updateDate;
+                    }
                 }
                 return e;
             });
+
+            props.closeEdit();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`メモの登録に失敗しました。`);
+            alert(`メモの更新に失敗しました。`);
         },
     });
 
     /**
-     * メモを登録する
+     * メモを更新する
      * @param videoId 
      */
-    function addToMemo(videoId: string) {
+    function updateMemo(videoId: string, videoMemoSeq: number) {
 
         if (!inputMemo) {
             alert(`メモが入力されていません。`);
@@ -50,12 +74,13 @@ export function useFavoriteMemoInput() {
         }
 
         if (!videoId) {
-            alert(`メモを登録できませんでした。`);
+            alert(`メモを更新できませんでした。`);
             return;
         }
 
-        const body: AddToFavoriteVideoMemoReqestType = {
+        const body: UpdateToFavoriteVideoMemoReqestType = {
             videoId,
+            videoMemoSeq,
             memo: inputMemo
         }
 
@@ -66,6 +91,6 @@ export function useFavoriteMemoInput() {
     return {
         inputMemo,
         setInputMemo,
-        addToMemo
+        updateMemo
     }
 }

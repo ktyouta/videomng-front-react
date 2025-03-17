@@ -5,5 +5,5 @@ export type FavoriteVideoMemoType = {
     videoMemoSeq: number,
     videoMemo: string,
     readonly createDate: Date,
-    readonly updateDate: Date,
+    updateDate: Date,
 }

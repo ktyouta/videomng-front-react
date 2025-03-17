@@ -62,8 +62,8 @@ export function FavoriteVideoDetailMenu(props: propsType) {
 
     const {
         isModalOpen,
-        onFlag,
-        offFlag
+        openModel,
+        closeModal,
     } = useFavoriteVideoDetailMenu();
 
     const videoDetail = props.videoDetail;
@@ -93,7 +93,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                             styleTypeNumber="GRAD_GRAY"
                             title={"メモ"}
                             onclick={() => {
-                                onFlag();
+                                openModel();
                             }}
                             style={{
                                 "fontSize": "0.9rem",
@@ -154,13 +154,13 @@ export function FavoriteVideoDetailMenu(props: propsType) {
             </MenuParentDiv>
             <ModalComponent
                 modalIsOpen={isModalOpen}
-                closeModal={offFlag}
+                closeModal={closeModal}
                 style={{
                     backgroundColor: "#00050d", zIndex: `${Z_INDEX_PARAM.MODAL}`,
                 }}
             >
                 <FavoriteMemo
-                    closeModal={offFlag}
+                    closeModal={closeModal}
                     videoId={videoId}
                 />
             </ModalComponent>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { FaArrowUp } from "react-icons/fa";
-import { useFavoriteMemoInput } from "../Hook/useFavoriteMemoInput";
+import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
 
 
 const MemoInputAreaDiv = styled.div`
@@ -24,6 +24,9 @@ const SearchIconAreaDiv = styled.div`
   border-top-right-radius: 15%;
   border-bottom-right-radius: 15%;
   color:#213547;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 type propsType = {
@@ -31,18 +34,17 @@ type propsType = {
 }
 
 
-export function FavoriteMemoInput(props: propsType) {
+export function FavoriteMemoCreateInput(props: propsType) {
 
-    console.log("FavoriteMemoInput render");
+    console.log("FavoriteMemoCreateInput render");
 
     const {
         inputMemo,
         setInputMemo,
         addToMemo
-    } = useFavoriteMemoInput();
+    } = useFavoriteMemoCreateInput();
 
     return (
-
         <MemoInputAreaDiv>
             <BaseTextbox
                 textWidth="92%"
@@ -59,10 +61,9 @@ export function FavoriteMemoInput(props: propsType) {
                 <IconComponent
                     icon={FaArrowUp}
                     onclick={() => { addToMemo(props.videoId) }}
-                    size="90%"
+                    size="70%"
                 />
             </SearchIconAreaDiv>
-
         </MemoInputAreaDiv>
     );
 }

@@ -6,16 +6,16 @@ function useSwitch() {
     const [flag, setFlag] = useState(false);
 
     //フラグオン
-    function onFlag() {
+    function on() {
         setFlag(true);
     }
 
     //フラグオフ
-    function offFlag() {
+    function off() {
         setFlag(false);
     }
 
-    return { flag, onFlag, offFlag }
+    return { flag, on, off }
 }
 
 export default useSwitch;

@@ -3,74 +3,69 @@ import { favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from "../../env.json";
+import { AddToFavoriteVideoMemoResponseType } from "../Type/AddToFavoriteVideoMemoResponseType";
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
-import { DeleteToFavoriteVideoMemoReqestType } from "../Type/DeleteToFavoriteVideoMemoReqestType";
+import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
-import useSwitch from "../../Common/Hook/useSwitch";
 
 
+export function useFavoriteMemoCreateInput() {
 
-export function useFavoriteMemoContent() {
-
+    // メモ入力情報
+    const [inputMemo, setInputMemo] = useState(``);
     // メモ情報
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
-    // メモ編集エリアの切り替えフラグ
-    const { flag: isOpenEdit, on: openEdit, off: closeEdit } = useSwitch();
 
 
     /**
-     * メモ削除リクエスト
+     * お気に入り動画メモ登録リクエスト
      */
     const postMutation = useMutationWrapper({
         url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
-        method: "DELETE",
+        method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
             setVideoListItemAtom((e) => {
                 if (e) {
-                    e = e.filter((e1) => {
-                        return e1.videoMemoSeq !== res.data.videoMemoSeq;
-                    });
+                    e = [...e, res.data];
                 }
                 return e;
             });
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`メモの削除に失敗しました。`);
+            alert(`メモの登録に失敗しました。`);
         },
     });
 
-
     /**
-     * メモを削除する
+     * メモを登録する
      * @param videoId 
      */
-    function deleteMemo(videoId: string, videoMemoSeq: number) {
+    function addToMemo(videoId: string) {
 
-        if (!window.confirm(`メモを削除しますか？`)) {
+        if (!inputMemo) {
+            alert(`メモが入力されていません。`);
             return;
         }
 
         if (!videoId) {
-            alert(`メモを削除できませんでした。`);
+            alert(`メモを登録できませんでした。`);
             return;
         }
 
-        const body: DeleteToFavoriteVideoMemoReqestType = {
+        const body: AddToFavoriteVideoMemoReqestType = {
             videoId,
-            videoMemoSeq
+            memo: inputMemo
         }
 
         // リクエスト送信
         postMutation.mutate(body);
     }
 
-
     return {
-        deleteMemo,
-        isOpenEdit,
-        openEdit,
-        closeEdit,
+        inputMemo,
+        setInputMemo,
+        addToMemo
     }
 }

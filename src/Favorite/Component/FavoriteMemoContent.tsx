@@ -4,6 +4,9 @@ import { format } from "date-fns";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { useFavoriteMemoContent } from "../Hook/useFavoriteMemoContent";
+import { MdEdit } from "react-icons/md";
+import React from "react";
+import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
 
 
 const Parent = styled.div`
@@ -27,7 +30,7 @@ const LowerDiv = styled.div`
 
 const IconDiv = styled.div`
     box-sizing: border-box;
-    width:5%;
+    width:8%;
     display:flex;
     align-items: center;
     justify-content: end;
@@ -37,6 +40,8 @@ const IconDiv = styled.div`
 const MetaDiv = styled.div`
     font-size:13px;
     width:95%;
+    display: flex;
+    align-items: center;
 `;
 
 type propsType = {
@@ -48,7 +53,11 @@ export function FavoriteMemoContent(props: propsType) {
 
     console.log("FavoriteMemoContent render");
 
-    const { deleteMemo } = useFavoriteMemoContent();
+    const {
+        deleteMemo,
+        isOpenEdit,
+        openEdit,
+        closeEdit, } = useFavoriteMemoContent();
 
     const data = props.favoriteVideoMemo;
     const memo = data.videoMemo;
@@ -57,22 +66,42 @@ export function FavoriteMemoContent(props: propsType) {
 
     return (
         <Parent>
-            <MemoDiv>
-                {memo}
-            </MemoDiv>
-            <LowerDiv>
-                <MetaDiv>
-                    {updateDate}
-                </MetaDiv>
-                <IconDiv>
-                    <IconComponent
-                        icon={FaRegTrashAlt}
-                        onclick={() => { deleteMemo(props.videoId, memoSeq) }}
-                        size="55%"
-                        style={{ color: "white" }}
-                    />
-                </IconDiv>
-            </LowerDiv>
+            {
+                isOpenEdit ?
+                    <React.Fragment>
+                        <FavoriteMemoEditInput
+                            videoId={props.videoId}
+                            videoMemoSeq={memoSeq}
+                            closeEdit={closeEdit}
+                            inputMemo={memo}
+                        />
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                        <MemoDiv>
+                            {memo}
+                        </MemoDiv>
+                        <LowerDiv>
+                            <MetaDiv>
+                                {updateDate}
+                            </MetaDiv>
+                            <IconDiv>
+                                <IconComponent
+                                    icon={MdEdit}
+                                    onclick={() => { openEdit() }}
+                                    size="45%"
+                                    style={{ color: "white" }}
+                                />
+                                <IconComponent
+                                    icon={FaRegTrashAlt}
+                                    onclick={() => { deleteMemo(props.videoId, memoSeq) }}
+                                    size="45%"
+                                    style={{ color: "white" }}
+                                />
+                            </IconDiv>
+                        </LowerDiv>
+                    </React.Fragment>
+            }
         </Parent>
     );
 }

@@ -11,11 +11,11 @@ import useSwitch from "../../Common/Hook/useSwitch";
 export function useFavoriteVideoDetailMenu() {
 
     //モーダルの開閉用フラグ
-    const { flag: isModalOpen, onFlag, offFlag } = useSwitch();
+    const { flag: isModalOpen, on: openModel, off: closeModal } = useSwitch();
 
     return {
         isModalOpen,
-        onFlag,
-        offFlag,
+        openModel,
+        closeModal,
     }
 }
