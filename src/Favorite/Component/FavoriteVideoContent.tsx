@@ -26,6 +26,10 @@ const VideoTitleDiv = styled.div`
     font-size: 16px;
 `;
 
+const DateDiv = styled.div`
+    font-size: 11px;
+`;
+
 const ChennelTitleDiv = styled.div`
     font-size: 11px;
 `;
@@ -51,6 +55,9 @@ export function FavoriteVideoContent(props: propsType) {
     const channelTitle = snipet.channelTitle;
     // 動画ID
     const videoId = data.id ?? ``;
+    // 日付
+    const dateList = snipet.publishedAt.split("T");
+    const publishedDate = dateList.length > 0 ? dateList[0] : ``;
 
     return (
         <VideoArticle>
@@ -68,6 +75,9 @@ export function FavoriteVideoContent(props: propsType) {
                 >
                     {title}
                 </VideoTitleDiv>
+                <DateDiv>
+                    {publishedDate}
+                </DateDiv>
                 <ChennelTitleDiv>
                     {channelTitle}
                 </ChennelTitleDiv>
