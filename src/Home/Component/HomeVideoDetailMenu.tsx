@@ -11,7 +11,6 @@ import { useHomeVideoDetailMenu } from "../Hook/useHomeVideoDetailMenu";
 
 const MenuParentDiv = styled.div`
   width: 34%;
-  height: 675px;
   margin-left: 2%;
   margin-top: 1%;
   box-sizing:border-box;
@@ -19,7 +18,7 @@ const MenuParentDiv = styled.div`
 
 const MenuListDiv = styled.div`
   box-sizing:border-box;
-  height: 70%;
+  min-height: 472px;
   background-color: #181a1e;
   border-radius: 2%;
   border: solid 1px;

@@ -1,4 +1,4 @@
-import { FavoriteVideoCommentThreadSnipetType } from "./FavoriteVideoCommentThreadSnipetType";
+import { FavoriteVideoCommentThreadSnippetType } from "./FavoriteVideoCommentThreadSnippetType";
 import { FavoriteVideoCommentThreadReplyType } from "./FavoriteVideoCommentThreadReplyType";
 
 export type FavoriteVideoCommentThreadItemType = {
@@ -9,7 +9,7 @@ export type FavoriteVideoCommentThreadItemType = {
     // コメントスレッドの一意のID
     readonly id: string;
     // コメントスレッドの詳細情報
-    readonly snippet: FavoriteVideoCommentThreadSnipetType;
+    readonly snippet: FavoriteVideoCommentThreadSnippetType;
     // 返信コメントのリスト（返信がある場合のみ存在）
     readonly replies?: FavoriteVideoCommentThreadReplyType;
 }

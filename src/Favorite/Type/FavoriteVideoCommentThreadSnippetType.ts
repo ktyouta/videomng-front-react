@@ -1,4 +1,4 @@
-export type FavoriteVideoCommentThreadSnipetType = {
+export type FavoriteVideoCommentThreadSnippetType = {
     // このコメントが関連する動画のID
     readonly videoId: string;
     // 最上位コメント（親コメント）の詳細情報

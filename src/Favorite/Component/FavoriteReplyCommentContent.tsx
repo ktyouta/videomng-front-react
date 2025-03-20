@@ -7,15 +7,13 @@ import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
 import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
-import { FavoriteReplyCommentContent } from "./FavoriteReplyCommentContent";
-import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
+import { FavoriteVideoCommentThreadReplySnippetType } from "../Type/FavoriteVideoCommentThreadReplySnippetType";
 
 
 const Parent = styled.div`
     height: auto;
     box-sizing: border-box;
-    margin-bottom: 5%;
-    border-bottom: solid 1px;
+    margin-bottom: 2%;
 `;
 
 const AuthorNameDiv = styled.div`
@@ -51,36 +49,25 @@ const MetaDiv = styled.div`
 `;
 
 
-
 type propsType = {
-    favoriteVideoComment: FavoriteVideoCommentThreadItemType,
-    videoId: string,
+    commentThreadReplySnippet: FavoriteVideoCommentThreadReplySnippetType,
 }
 
-export function FavoriteCommentContent(props: propsType) {
+export function FavoriteReplyCommentContent(props: propsType) {
 
-    console.log("FavoriteCommentContent render");
+    console.log("FavoriteReplyCommentContent render");
 
-    const favoriteVideoComment = props.favoriteVideoComment;
-    // コメントスレッドの詳細情報
-    const snippet = favoriteVideoComment.snippet;
-    // 最上位コメント（親コメント）の詳細情報
-    const parentComment = snippet.topLevelComment;
-    const parentCommentSnippet = parentComment.snippet;
+    const commentThreadReplySnippet = props.commentThreadReplySnippet;
     // コメント本文
-    const parentCommentText = parentCommentSnippet.textOriginal;
+    const parentCommentText = commentThreadReplySnippet.textOriginal;
     // 投稿日
-    const publishedDate = format(new Date(parentCommentSnippet.publishedAt), "yyyy/MM/dd  HH:mm");
+    const publishedDate = format(new Date(commentThreadReplySnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
-    const authorDisplayName = parentCommentSnippet.authorDisplayName;
-    // 返信コメントのリスト
-    const replys = favoriteVideoComment.replies;
-    // 返信コメントの詳細情報
-    const replyCommentList = replys?.comments;
+    const authorDisplayName = commentThreadReplySnippet.authorDisplayName;
+
 
     return (
         <Parent>
-            {/* 親コメント */}
             <AuthorNameDiv>
                 {authorDisplayName}
             </AuthorNameDiv>
@@ -92,14 +79,6 @@ export function FavoriteCommentContent(props: propsType) {
                     {publishedDate}
                 </MetaDiv>
             </LowerDiv>
-            {
-                // 返信コメント
-                replyCommentList && replyCommentList.length > 0 &&
-                <FavoriteReplyCommentList
-                    replyCommentList={replyCommentList}
-                    videoId={props.videoId}
-                />
-            }
         </Parent>
     );
 }

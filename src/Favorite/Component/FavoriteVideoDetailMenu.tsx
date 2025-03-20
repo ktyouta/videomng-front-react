@@ -14,11 +14,11 @@ import { RxCross1 } from 'react-icons/rx';
 import { FavoriteMemo } from "./FavoriteMemo";
 import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
 import { MENU_NO } from "../Const/FavoriteConst";
+import { FavoriteComment } from "./FavoriteComment";
 
 
 const MenuParentDiv = styled.div`
   width: 34%;
-  height: 675px;
   margin-left: 2%;
   margin-top: 1%;
   box-sizing:border-box;
@@ -26,7 +26,7 @@ const MenuParentDiv = styled.div`
 
 const MenuListDiv = styled.div`
   box-sizing:border-box;
-  height: 70%;
+  min-height: 472px;
   background-color: #181a1e;
   border-radius: 2%;
   border: solid 1px;
@@ -131,7 +131,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                             styleTypeNumber="GRAD_GRAY"
                             title={"公開コメント"}
                             onclick={() => {
-                                alert(`実装中です。`);
+                                openMenuModal(MENU_NO.COMMENT);
                             }}
                             style={{
                                 "fontSize": "0.9rem",
@@ -165,6 +165,14 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     // メモ
                     openMenuNo === MENU_NO.MEMO &&
                     <FavoriteMemo
+                        closeModal={closeMenuModal}
+                        videoId={videoId}
+                    />
+                }
+                {
+                    // 公開コメント
+                    openMenuNo === MENU_NO.COMMENT &&
+                    <FavoriteComment
                         closeModal={closeMenuModal}
                         videoId={videoId}
                     />

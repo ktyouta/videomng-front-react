@@ -1,4 +1,5 @@
 import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
+import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
@@ -13,3 +14,5 @@ export const favoriteVideoIdAtom = atom<string>(``);
 export const favoriteVideoDetailItemAtom = atom<FavoriteVideoDetailDataType>();
 // メモ情報
 export const favoriteVideoMemoListAtom = atom<FavoriteVideoMemoType[]>();
+// コメント情報
+export const favoriteVideoCommentListAtom = atom<FavoriteVideoCommentThreadItemType[]>();

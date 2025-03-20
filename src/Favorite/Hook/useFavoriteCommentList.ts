@@ -1,19 +1,20 @@
 import { useAtom, useAtomValue } from "jotai";
-import { favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoCommentListAtom, favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoResponseType } from "../Type/FavoriteVideoMemoResponseType";
+import { FavoriteVideoCommentThreadResponseType } from "../Type/FavoriteVideoCommentThreadResponseType";
+import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
+import { FavoriteVideoCommentThreadType } from "../Type/FavoriteVideoCommentThreadType";
 
 
 export function useFavoriteCommentList() {
 
-    // メモ情報
-    const [favoriteVideoMemoList, setVideoListItemAtom] = useAtom(favoriteVideoMemoListAtom);
     // コメント情報
-    const [favoriteVideoCommentList, setFavoriteVideoCommentList] = useState();
+    const [favoriteVideoCommentList, setFavoriteVideoCommentList] = useAtom(favoriteVideoCommentListAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID
@@ -21,21 +22,23 @@ export function useFavoriteCommentList() {
 
 
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<FavoriteVideoMemoResponseType>(
+    const { isLoading } = useQueryWrapper<FavoriteVideoCommentThreadResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}/${favoriteVideoId}`,
-            afSuccessFn: (response: FavoriteVideoMemoResponseType) => {
-                setVideoListItemAtom(response.data);
+            url: `${VIDEO_MNG_PATH}${ENV.VIDEO_COMMENT_ID}/${favoriteVideoId}`,
+            afSuccessFn: (response: FavoriteVideoCommentThreadResponseType) => {
+
+                const items = response.data.items;
+                setFavoriteVideoCommentList(items);
             },
             afErrorFn: (res) => {
-                setErrMessage(`メモの取得に失敗しました。`);
+                setErrMessage(`コメントの取得に失敗しました。`);
             }
         }
     );
 
     return {
         isLoading,
-        favoriteVideoMemoList,
         errMessage,
+        favoriteVideoCommentList,
     }
 }

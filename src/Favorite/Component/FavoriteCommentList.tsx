@@ -4,6 +4,8 @@ import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteMemoContent } from "./FavoriteMemoContent";
 import LoadingBase from "../../Common/Component/LoadingBase";
 import { useFavoriteCommentList } from "../Hook/useFavoriteCommentList";
+import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
+import { FavoriteCommentContent } from "./FavoriteCommentContent";
 
 
 const Parent = styled.div`
@@ -11,11 +13,10 @@ const Parent = styled.div`
   height: 100%;
   box-sizing: border-box;
   padding-left: 2%;
-  padding-top: 2%;
-  padding-right: 2%;
+  padding-top: 4%;
 `;
 
-const MemoListAreaDiv = styled.div`
+const CommentListAreaDiv = styled.div`
   width: 97%;
   height: 90%;
   overflow: auto;
@@ -34,8 +35,8 @@ export function FavoriteCommentList(props: propsType) {
 
     const {
         isLoading,
-        favoriteVideoMemoList,
-        errMessage, } = useFavoriteCommentList();
+        errMessage,
+        favoriteVideoCommentList, } = useFavoriteCommentList();
 
     if (isLoading) {
         return (
@@ -56,19 +57,19 @@ export function FavoriteCommentList(props: propsType) {
     return (
         <Parent>
             {
-                favoriteVideoMemoList && favoriteVideoMemoList.length > 0 ?
-                    <MemoListAreaDiv>
+                favoriteVideoCommentList && favoriteVideoCommentList.length > 0 ?
+                    <CommentListAreaDiv>
                         {
-                            favoriteVideoMemoList.map((e: FavoriteVideoMemoType) => {
+                            favoriteVideoCommentList.map((e: FavoriteVideoCommentThreadItemType) => {
                                 return (
-                                    <FavoriteMemoContent
-                                        favoriteVideoMemo={e}
+                                    <FavoriteCommentContent
+                                        favoriteVideoComment={e}
                                         videoId={props.videoId}
                                     />
                                 )
                             })
                         }
-                    </MemoListAreaDiv>
+                    </CommentListAreaDiv>
                     :
                     `コメントが存在しません。`
             }

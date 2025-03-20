@@ -17,8 +17,7 @@ import { FavoriteCommentList } from "./FavoriteCommentList";
 const Parent = styled.div`
   color:white;
   position: relative;
-  padding-bottom: 70px;
-  height: 87%;
+  height: 97%;
 `;
 
 

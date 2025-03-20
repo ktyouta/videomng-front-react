@@ -18,7 +18,7 @@ const MemoInputAreaDiv = styled.div`
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
   width: 4%;
-  height: 38px;
+  height: 37px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 15%;
@@ -54,7 +54,7 @@ export function FavoriteMemoCreateInput(props: propsType) {
                 style={{
                     borderTopRightRadius: 0,
                     borderBottomRightRadius: 0,
-                    height: "34px",
+                    height: "33px",
                 }}
             />
             <SearchIconAreaDiv>
