@@ -3,6 +3,7 @@ import { useFavoriteMemoList } from "../Hook/useFavoriteMemoList";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteMemoContent } from "./FavoriteMemoContent";
 import LoadingBase from "../../Common/Component/LoadingBase";
+import { useFavoriteCommentList } from "../Hook/useFavoriteCommentList";
 
 
 const Parent = styled.div`
@@ -27,14 +28,14 @@ type propsType = {
     videoId: string,
 }
 
-export function FavoriteMemoList(props: propsType) {
+export function FavoriteCommentList(props: propsType) {
 
-    console.log("FavoriteMemoList render");
+    console.log("FavoriteCommentList render");
 
     const {
         isLoading,
         favoriteVideoMemoList,
-        errMessage, } = useFavoriteMemoList();
+        errMessage, } = useFavoriteCommentList();
 
     if (isLoading) {
         return (
@@ -69,7 +70,7 @@ export function FavoriteMemoList(props: propsType) {
                         }
                     </MemoListAreaDiv>
                     :
-                    `メモが登録されていません。`
+                    `コメントが存在しません。`
             }
         </Parent>
     );

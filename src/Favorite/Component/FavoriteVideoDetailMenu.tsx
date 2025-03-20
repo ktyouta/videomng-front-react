@@ -13,6 +13,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import { FavoriteMemo } from "./FavoriteMemo";
 import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
+import { MENU_NO } from "../Const/FavoriteConst";
 
 
 const MenuParentDiv = styled.div`
@@ -61,9 +62,10 @@ export function FavoriteVideoDetailMenu(props: propsType) {
     console.log("FavoriteVideoDetailMenu render");
 
     const {
-        isModalOpen,
-        openModel,
-        closeModal,
+        openMenuNo,
+        openMenuModal,
+        closeMenuModal,
+        isOpenModal,
     } = useFavoriteVideoDetailMenu();
 
     const videoDetail = props.videoDetail;
@@ -93,7 +95,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                             styleTypeNumber="GRAD_GRAY"
                             title={"メモ"}
                             onclick={() => {
-                                openModel();
+                                openMenuModal(MENU_NO.MEMO);
                             }}
                             style={{
                                 "fontSize": "0.9rem",
@@ -153,19 +155,23 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                 </MenuListDiv>
             </MenuParentDiv>
             <ModalComponent
-                modalIsOpen={isModalOpen}
-                closeModal={closeModal}
+                modalIsOpen={isOpenModal()}
+                closeModal={closeMenuModal}
                 style={{
                     backgroundColor: "#00050d", zIndex: `${Z_INDEX_PARAM.MODAL}`,
                 }}
             >
-                <FavoriteMemo
-                    closeModal={closeModal}
-                    videoId={videoId}
-                />
+                {
+                    // メモ
+                    openMenuNo === MENU_NO.MEMO &&
+                    <FavoriteMemo
+                        closeModal={closeMenuModal}
+                        videoId={videoId}
+                    />
+                }
             </ModalComponent>
             {
-                isModalOpen &&
+                isOpenModal() &&
                 <OverlayDiv />
             }
         </React.Fragment>

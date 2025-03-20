@@ -1,0 +1,41 @@
+import { useAtom, useAtomValue } from "jotai";
+import { favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { useState } from "react";
+import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import ENV from "../../env.json";
+import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { FavoriteVideoMemoResponseType } from "../Type/FavoriteVideoMemoResponseType";
+
+
+export function useFavoriteCommentList() {
+
+    // メモ情報
+    const [favoriteVideoMemoList, setVideoListItemAtom] = useAtom(favoriteVideoMemoListAtom);
+    // コメント情報
+    const [favoriteVideoCommentList, setFavoriteVideoCommentList] = useState();
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
+    // お気に入り動画ID
+    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
+
+
+    // コメント情報を取得
+    const { isLoading } = useQueryWrapper<FavoriteVideoMemoResponseType>(
+        {
+            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}/${favoriteVideoId}`,
+            afSuccessFn: (response: FavoriteVideoMemoResponseType) => {
+                setVideoListItemAtom(response.data);
+            },
+            afErrorFn: (res) => {
+                setErrMessage(`メモの取得に失敗しました。`);
+            }
+        }
+    );
+
+    return {
+        isLoading,
+        favoriteVideoMemoList,
+        errMessage,
+    }
+}
