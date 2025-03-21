@@ -14,7 +14,6 @@ const Parent = styled.div`
 const VideoUl = styled.ul`
   display: grid;
   grid-template-columns: repeat(var(--grid-container-columns), minmax(0, 1fr));
-  gap: 4%; 
   margin-bottom: 0;
   color: #fff;
   margin: 0;
@@ -25,6 +24,8 @@ const VideoUl = styled.ul`
   padding-right:5%;
   padding-top: 4%;
   --grid-container-columns: 5;
+  grid-column-gap: 4%;
+  grid-row-gap: 30px;
 `;
 
 const MessageDiv = styled.div`

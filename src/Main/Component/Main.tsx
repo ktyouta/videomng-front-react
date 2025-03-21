@@ -8,9 +8,8 @@ import { useMain } from "../Hook/useMain";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`
-  width: 100vw;
+  width: 99vw;
   min-height:100vh;
-  background-color:#00050d;
   padding-top: 100px;
   box-sizing: border-box;
 `;
