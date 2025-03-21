@@ -9,6 +9,9 @@ import { FaArrowUp } from "react-icons/fa";
 import { FavoriteMemoCreateInput } from "./FavoriteMemoCreateInput";
 import { FavoriteMemoHeader } from "./FavoriteMemoHeader";
 import { FavoriteMemoList } from "./FavoriteMemoList";
+import { FavoriteSearchKeywordCommentHeader } from "./FavoriteSearchKeywordCommentHeader";
+import { FavoriteSearchKeywordCommentInput } from "./FavoriteSearchKeywordCommentInput";
+import { FavoriteSearchKeywordCommentList } from "./FavoriteSearchKeywordCommentList";
 
 
 const Parent = styled.div`
@@ -24,22 +27,22 @@ type propsType = {
   videoId: string,
 }
 
-export function FavoriteMemo(props: propsType) {
+export function FavoriteSearchKeywordComment(props: propsType) {
 
-  console.log("FavoriteMemo render");
+  console.log("FavoriteSearchKeywordComment render");
 
   return (
     <Parent>
       {/* ヘッダ */}
-      <FavoriteMemoHeader
+      <FavoriteSearchKeywordCommentHeader
         closeModal={props.closeModal}
       />
-      {/* メモリスト */}
-      <FavoriteMemoList
+      {/* コメントリスト */}
+      <FavoriteSearchKeywordCommentList
         videoId={props.videoId}
       />
       {/* 入力欄 */}
-      <FavoriteMemoCreateInput
+      <FavoriteSearchKeywordCommentInput
         videoId={props.videoId}
       />
     </Parent>

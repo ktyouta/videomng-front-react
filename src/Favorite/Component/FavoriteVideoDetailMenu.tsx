@@ -15,6 +15,7 @@ import { FavoriteMemo } from "./FavoriteMemo";
 import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
 import { MENU_NO } from "../Const/FavoriteConst";
 import { FavoriteComment } from "./FavoriteComment";
+import { FavoriteSearchKeywordComment } from "./FavoriteSearchKeywordComment";
 
 
 const MenuParentDiv = styled.div`
@@ -120,7 +121,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                             styleTypeNumber="GRAD_GRAY"
                             title={"キーワード検索(コメント)"}
                             onclick={() => {
-                                alert(`実装中です。`);
+                                openMenuModal(MENU_NO.KEYWORD_SEARCH_COMMENT);
                             }}
                             style={{
                                 "fontSize": "0.9rem",
@@ -172,6 +173,14 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     // 公開コメント
                     openMenuNo === MENU_NO.COMMENT &&
                     <FavoriteComment
+                        closeModal={closeMenuModal}
+                        videoId={videoId}
+                    />
+                }
+                {
+                    // キーワード検索(コメント)
+                    openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
+                    <FavoriteSearchKeywordComment
                         closeModal={closeMenuModal}
                         videoId={videoId}
                     />
