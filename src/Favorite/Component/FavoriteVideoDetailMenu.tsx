@@ -66,7 +66,8 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         openMenuModal,
         closeMenuModal,
         isOpenModal,
-    } = useFavoriteVideoDetailMenu();
+        deleteFavoriteVide,
+    } = useFavoriteVideoDetailMenu({ ...props });
 
     const videoDetail = props.videoDetail;
     // 動画ID
@@ -142,9 +143,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                         <ButtonComponent
                             styleTypeNumber="GRAD_GRAY"
                             title={"お気に入りから外す"}
-                            onclick={() => {
-                                alert(`実装中です。`);
-                            }}
+                            onclick={deleteFavoriteVide}
                             style={{
                                 "fontSize": "0.9rem",
                                 "height": "7%",

@@ -29,6 +29,7 @@ export function useFavoriteMemoCreateInput() {
                 if (e) {
                     e = [...e, res.data];
                 }
+                setInputMemo(``);
                 return e;
             });
         },
