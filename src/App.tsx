@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import QueryApp from './QueryApp'
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ErrorBoundary } from 'react-error-boundary';
+import { Exception } from './Exception/Component/Exception';
 
 function App() {
 
@@ -17,11 +19,15 @@ function App() {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <QueryApp />
-      {/* React-query devtool */}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <ErrorBoundary
+      FallbackComponent={Exception}
+    >
+      <QueryClientProvider client={queryClient}>
+        <QueryApp />
+        {/* React-query devtool */}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ErrorBoundary>
   )
 }
 
