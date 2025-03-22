@@ -1,8 +1,11 @@
 import { useAtom, useSetAtom } from "jotai";
-import { keywordAtom, videoApiUrlAtom, videoTypeSelectValueAtom } from "../Atom/HomeAtom";
+import { keywordAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom, videoTypeSelectValueAtom } from "../Atom/HomeAtom";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { Label } from "recharts";
+import { ShowMoreDataType } from "../Type/ShowMoreDataType";
+import { isEqual } from "lodash";
+
 
 export function useHomeSearchArea() {
 
@@ -26,6 +29,7 @@ export function useHomeSearchArea() {
         const videoListApiUrlModel = new VideoListApiUrlModel(keyword, videoTypeSelectValue);
         const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
         setVideoApiUrl(`${videoApiUrl}`);
+
     }
 
     return {

@@ -4,6 +4,7 @@ import { useHomeVideoArea } from "../Hook/useHomeVideoArea";
 import LoadingBase from "../../Common/Component/LoadingBase";
 import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 import { HomeVideoContent } from "./HomeVideoContent";
+import ButtonComponent from "../../Common/Component/ButtonComponent";
 
 const Parent = styled.div`
   width: 100%;
@@ -34,21 +35,30 @@ const MessageDiv = styled.div`
   left: 42%;
 `;
 
+const NextGetBtnAreaDiv = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  box-sizing: border-box;
+  margin-top: 3%;
+`;
 
 export function HomeVideoArea() {
 
   console.log("HomeVideoArea render");
 
   const {
-    videoListItem,
-    isLoading } = useHomeVideoArea();
+    videoListData,
+    isLoading,
+    clickShowMore } = useHomeVideoArea();
 
   // ローディング
-  if (isLoading) {
-    return <LoadingBase />;
-  }
+  // if (isLoading) {
+  //   return <LoadingBase />;
+  // }
 
-  if (!videoListItem) {
+  if (!videoListData) {
     return (
       <MessageDiv>
         キーワードを入力して動画を検索
@@ -56,7 +66,12 @@ export function HomeVideoArea() {
     );
   }
 
-  if (videoListItem?.length === 0) {
+  // 動画リスト
+  const videoListItems = videoListData.items;
+  // 次データ取得用トークン
+  const nextPageToken = videoListData.nextPageToken;
+
+  if (videoListItems.length === 0) {
     return (
       <MessageDiv>
         検索結果が存在しません。
@@ -66,9 +81,13 @@ export function HomeVideoArea() {
 
   return (
     <Parent>
+      {
+        isLoading &&
+        <LoadingBase />
+      }
       <VideoUl>
         {
-          videoListItem?.map((e: YouTubeDataApiVideoListItemType) => {
+          videoListItems?.map((e: YouTubeDataApiVideoListItemType) => {
             return (
               <HomeVideoContent
                 data={e}
@@ -78,6 +97,22 @@ export function HomeVideoArea() {
           })
         }
       </VideoUl>
+      {
+        nextPageToken &&
+        <NextGetBtnAreaDiv>
+          <ButtonComponent
+            styleTypeNumber="GRAD_GRAY"
+            title={"もっと見る"}
+            onclick={() => {
+              clickShowMore(nextPageToken);
+            }}
+            style={{
+              "fontSize": "0.9rem",
+              "height": "7%",
+            }}
+          />
+        </NextGetBtnAreaDiv>
+      }
     </Parent>
   );
 }

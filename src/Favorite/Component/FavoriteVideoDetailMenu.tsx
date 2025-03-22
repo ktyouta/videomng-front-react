@@ -107,18 +107,6 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                         />
                         <ButtonComponent
                             styleTypeNumber="GRAD_GRAY"
-                            title={"キーワード検索(字幕)"}
-                            onclick={() => {
-                                alert(`実装中です。`);
-                            }}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
                             title={"キーワード検索(コメント)"}
                             onclick={() => {
                                 openMenuModal(MENU_NO.KEYWORD_SEARCH_COMMENT);

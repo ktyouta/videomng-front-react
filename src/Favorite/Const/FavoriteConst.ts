@@ -7,7 +7,6 @@ export const FAVORITE_ROOT_PATH = "/favorite";
 export enum MENU_NO {
     NONE,
     MEMO,
-    KEYWORD_SEARCH_SUBTILE,
     KEYWORD_SEARCH_COMMENT,
     COMMENT,
 }

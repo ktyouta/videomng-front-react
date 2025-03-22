@@ -9,12 +9,22 @@ export class VideoListApiUrlModel {
     private static readonly QUERY_KEY_KEYWORD = `q`;
     // クエリパラメータのキー(動画種別)
     private static readonly QUERY_KEY_TYPE = `videotype`;
+    // クエリパラメータのキー(次データ取得用)
+    private static readonly QUERY_KEY_NEXT_PAGE_TOKEN = `nextpagetoken`;
     // 動画一覧取得パス
     private readonly _videoMngApiPath: string;
 
-    constructor(keyword: string, videoTypeSelectValue: string) {
+    constructor(keyword: string,
+        videoTypeSelectValue: string,
+        nextPageToken: string = ``) {
 
-        this._videoMngApiPath = `${VideoListApiUrlModel.VIDEO_INFO_PATH}?${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${keyword}&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${videoTypeSelectValue}`;
+        let queryParam = `${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${keyword}&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${videoTypeSelectValue}`
+
+        if (nextPageToken) {
+            queryParam += `&${VideoListApiUrlModel.QUERY_KEY_NEXT_PAGE_TOKEN}=${nextPageToken}`;
+        }
+
+        this._videoMngApiPath = `${VideoListApiUrlModel.VIDEO_INFO_PATH}?${queryParam}`;
     }
 
     get videoMngApiPath() {
