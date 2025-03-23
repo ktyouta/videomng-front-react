@@ -1,20 +1,21 @@
 import React from "react";
-import { useHomeVideoDetail } from "../Hook/useHomeVideoDetail";
 import LoadingBase from "../../Common/Component/LoadingBase";
 import styled from "styled-components";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import AccordionComponent from "../../Common/Component/AccordionComponent";
-
+import { MdPlayArrow } from 'react-icons/md';
+import { IconComponent } from "../../Common/Component/IconComponent";
+import { useHomeVideoDetailInfo } from "../Hook/useHomeVideoDetailInfo";
 
 const VideoInfoDiv = styled.div`
-  width: 60%;
+  width: 25%;
 `;
 
 const VideoImg = styled.img`
-    width: 88%;
-    height: 488px;
+    width: 92%;
+    height: 325px;
     border-radius: 6%;
 `;
 
@@ -25,20 +26,16 @@ const VideoMetaDiv = styled.div`
 const VideoTitle = styled.h3`
 `;
 
-const ChennelTitleDiv = styled.div`
-  font-size: 17px;
-  margin-bottom:8%;
+const BtnDiv = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: center;
 `;
-
-const DescriptionDiv = styled.div`
-  box-sizing:border-box;
-  padding-right:8%;
-`;
-
 
 
 type propsType = {
-    videoDetail: YouTubeDataApiVideoDetailItemType | undefined
+    videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
+    videoId: string
 }
 
 
@@ -46,16 +43,18 @@ export function HomeVideoDetailInfo(props: propsType) {
 
     console.log("HomeVideoDetailInfo render");
 
+    const {
+        addToFavorite,
+        play,
+    } = useHomeVideoDetailInfo({ ...props });
+
     const videoDetail = props.videoDetail;
-    const snippet = videoDetail?.snippet;
+    const item = videoDetail;
+    const snippet = item?.snippet;
     // サムネイルURL
     const imgUrl = snippet?.thumbnails.high?.url;
     // タイトル
     const title = snippet?.title;
-    // チャンネル名
-    const channelTitle = snippet?.channelTitle;
-    // 動画説明
-    const description = snippet?.description;
 
     return (
         <VideoInfoDiv>
@@ -66,23 +65,42 @@ export function HomeVideoDetailInfo(props: propsType) {
                 <VideoTitle>
                     {title}
                 </VideoTitle>
-                <ChennelTitleDiv>
-                    {channelTitle}
-                </ChennelTitleDiv>
-                <DescriptionDiv>
-                    <AccordionComponent
-                        defaultHeight={'70px'}
-                        outerStyle={{
-                            border: "solid 1px",
-                            boxSizing: "border-box",
-                            padding: "1%",
-                            borderRadius: "6px"
-                        }}
-                    >
-                        {description}
-                    </AccordionComponent>
-                </DescriptionDiv>
+                <ButtonComponent
+                    styleTypeNumber="BASE"
+                    title={
+                        <BtnDiv>
+                            <IconComponent
+                                icon={MdPlayArrow}
+                                size="10%"
+                            />
+                            再生
+                        </BtnDiv>
+                    }
+                    onclick={play}
+                    style={{
+                        "fontSize": "0.9rem",
+                        "height": "50px",
+                        "width": "90%",
+                        "background": "rgb(34, 139, 84)",
+                        "color": "white",
+                        "borderRadius": "0",
+                        "marginBottom": "10%",
+                    }}
+                />
+                <ButtonComponent
+                    styleTypeNumber="BASE"
+                    title={"お気に入りに登録する"}
+                    onclick={addToFavorite}
+                    style={{
+                        "fontSize": "0.9rem",
+                        "height": "50px",
+                        "width": "90%",
+                        "background": "#ff9f00",
+                        "color": "white",
+                        "borderRadius": "0",
+                    }}
+                />
             </VideoMetaDiv>
-        </VideoInfoDiv >
+        </VideoInfoDiv>
     );
 }

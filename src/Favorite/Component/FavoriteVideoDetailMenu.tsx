@@ -73,6 +73,10 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                         width="50%"
                         minWidth="8%"
                         height="39px"
+                        selectStyle={{
+                            "backgroundColor": "rgb(24, 26, 30)",
+                            "color": "white",
+                        }}
                     />
                 </ComboAreaDiv>
                 {

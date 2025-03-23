@@ -2,17 +2,8 @@ import React from "react";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "./FavoriteMemoContent";
-import BaseTextbox from "../../Common/Component/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "./FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "./FavoriteMemoHeader";
-import { FavoriteMemoList } from "./FavoriteMemoList";
-import { FavoriteCommentHeader } from "./FavoriteCommentHeader";
-import { FavoriteCommentList } from "./FavoriteCommentList";
-import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import AccordionComponent from "../../Common/Component/AccordionComponent";
+import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 
 
 const Parent = styled.div`
@@ -41,15 +32,15 @@ const MetaDiv = styled.div`
 
 type propsType = {
     videoId: string,
-    videoDetail: FavoriteVideoDetailDataType | undefined,
+    videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
 }
 
-export function FavoriteMetaInfo(props: propsType) {
+export function HomeMetaInfo(props: propsType) {
 
-    console.log("FavoriteMetaInfo render");
+    console.log("HomeMetaInfo render");
 
     const videoDetail = props.videoDetail;
-    const item = videoDetail?.item;
+    const item = videoDetail;
     // 動画基本情報
     const snippet = item?.snippet;
     // タイトル
