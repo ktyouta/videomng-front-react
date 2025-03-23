@@ -21,6 +21,8 @@ export function useHomeVideoDetailInfo(props: propsType) {
 
     // ルーティング用
     const navigate = useNavigate();
+    // ログインフラグ
+    const isLogin = useAtomValue(isLoginAtom);
 
 
     /**
@@ -86,5 +88,6 @@ export function useHomeVideoDetailInfo(props: propsType) {
     return {
         addToFavorite,
         play,
+        isLogin,
     }
 }

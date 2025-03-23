@@ -46,6 +46,7 @@ export function HomeVideoDetailInfo(props: propsType) {
     const {
         addToFavorite,
         play,
+        isLogin,
     } = useHomeVideoDetailInfo({ ...props });
 
     const videoDetail = props.videoDetail;
@@ -87,19 +88,22 @@ export function HomeVideoDetailInfo(props: propsType) {
                         "marginBottom": "10%",
                     }}
                 />
-                <ButtonComponent
-                    styleTypeNumber="BASE"
-                    title={"お気に入りに登録する"}
-                    onclick={addToFavorite}
-                    style={{
-                        "fontSize": "0.9rem",
-                        "height": "50px",
-                        "width": "90%",
-                        "background": "#ff9f00",
-                        "color": "white",
-                        "borderRadius": "0",
-                    }}
-                />
+                {
+                    isLogin &&
+                    <ButtonComponent
+                        styleTypeNumber="BASE"
+                        title={"お気に入りに登録する"}
+                        onclick={addToFavorite}
+                        style={{
+                            "fontSize": "0.9rem",
+                            "height": "50px",
+                            "width": "90%",
+                            "background": "#ff9f00",
+                            "color": "white",
+                            "borderRadius": "0",
+                        }}
+                    />
+                }
             </VideoMetaDiv>
         </VideoInfoDiv>
     );
