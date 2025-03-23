@@ -18,11 +18,8 @@ const HeaderTitleSpan = styled.span`
   font-size:19px;
 `;
 
-type propsType = {
-    closeModal: () => void
-}
 
-export function FavoriteMemoHeader(props: propsType) {
+export function FavoriteMemoHeader() {
 
     console.log("FavoriteMemoHeader render");
 
@@ -31,15 +28,6 @@ export function FavoriteMemoHeader(props: propsType) {
             <HeaderTitleSpan>
                 メモ
             </HeaderTitleSpan>
-            <IconComponent
-                icon={RxCross1}
-                onclick={props.closeModal}
-                style={{
-                    "text-align": "right",
-                    "position": "absolute",
-                    "right": "2%",
-                }}
-            />
         </HeaderDiv>
     );
 }

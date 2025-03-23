@@ -15,15 +15,15 @@ import { FavoriteSearchKeywordCommentList } from "./FavoriteSearchKeywordComment
 
 
 const Parent = styled.div`
-  color:white;
-  position: relative;
-  padding-bottom: 70px;
-  height: 87%;
+  box-sizing:border-box;
+  height: 502px;
+  background-color: #181a1e;
+  border-radius: 1%;
+  border: solid 1px;
 `;
 
 
 type propsType = {
-  closeModal: () => void,
   videoId: string,
 }
 
@@ -33,10 +33,6 @@ export function FavoriteSearchKeywordComment(props: propsType) {
 
   return (
     <Parent>
-      {/* ヘッダ */}
-      <FavoriteSearchKeywordCommentHeader
-        closeModal={props.closeModal}
-      />
       {/* コメントリスト */}
       <FavoriteSearchKeywordCommentList
         videoId={props.videoId}

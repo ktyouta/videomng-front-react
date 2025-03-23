@@ -12,15 +12,15 @@ import { FavoriteMemoList } from "./FavoriteMemoList";
 
 
 const Parent = styled.div`
-  color:white;
-  position: relative;
-  padding-bottom: 70px;
-  height: 87%;
+  box-sizing:border-box;
+  height: 502px;
+  background-color: #181a1e;
+  border-radius: 1%;
+  border: solid 1px;
 `;
 
 
 type propsType = {
-  closeModal: () => void,
   videoId: string,
 }
 
@@ -30,10 +30,6 @@ export function FavoriteMemo(props: propsType) {
 
   return (
     <Parent>
-      {/* ヘッダ */}
-      <FavoriteMemoHeader
-        closeModal={props.closeModal}
-      />
       {/* メモリスト */}
       <FavoriteMemoList
         videoId={props.videoId}

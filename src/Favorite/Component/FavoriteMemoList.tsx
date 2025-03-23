@@ -7,11 +7,12 @@ import LoadingBase from "../../Common/Component/LoadingBase";
 
 const Parent = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
   box-sizing: border-box;
   padding-left: 2%;
   padding-top: 2%;
   padding-right: 2%;
+  color:white;
 `;
 
 const MemoListAreaDiv = styled.div`

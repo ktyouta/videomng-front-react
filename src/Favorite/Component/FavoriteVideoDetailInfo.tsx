@@ -7,15 +7,17 @@ import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import AccordionComponent from "../../Common/Component/AccordionComponent";
-
+import { useFavoriteVideoDetailInfo } from "../Hook/useFavoriteVideoDetailInfo";
+import { MdPlayArrow } from 'react-icons/md';
+import { IconComponent } from "../../Common/Component/IconComponent";
 
 const VideoInfoDiv = styled.div`
-  width: 60%;
+  width: 25%;
 `;
 
 const VideoImg = styled.img`
-    width: 88%;
-    height: 488px;
+    width: 92%;
+    height: 325px;
     border-radius: 6%;
 `;
 
@@ -26,24 +28,27 @@ const VideoMetaDiv = styled.div`
 const VideoTitle = styled.h3`
 `;
 
-const ChennelTitleDiv = styled.div`
-  font-size: 17px;
-  margin-bottom:2%;
+const BtnDiv = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const DescriptionDiv = styled.div`
-  box-sizing:border-box;
-  padding-right:8%;
-`;
 
 type propsType = {
-    videoDetail: FavoriteVideoDetailDataType | undefined
+    videoDetail: FavoriteVideoDetailDataType | undefined,
+    videoId: string
 }
 
 
 export function FavoriteVideoDetailInfo(props: propsType) {
 
     console.log("FavoriteVideoDetailInfo render");
+
+    const {
+        deleteFavoriteVide,
+        play,
+    } = useFavoriteVideoDetailInfo({ ...props });
 
     const videoDetail = props.videoDetail;
     const item = videoDetail?.item;
@@ -52,10 +57,6 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     const imgUrl = snippet?.thumbnails.high?.url;
     // タイトル
     const title = snippet?.title;
-    // チャンネル名
-    const channelTitle = snippet?.channelTitle;
-    // 動画説明
-    const description = snippet?.description;
 
     return (
         <VideoInfoDiv>
@@ -66,22 +67,41 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                 <VideoTitle>
                     {title}
                 </VideoTitle>
-                <ChennelTitleDiv>
-                    {channelTitle}
-                </ChennelTitleDiv>
-                <DescriptionDiv>
-                    <AccordionComponent
-                        defaultHeight={'70px'}
-                        outerStyle={{
-                            border: "solid 1px",
-                            boxSizing: "border-box",
-                            padding: "1%",
-                            borderRadius: "6px"
-                        }}
-                    >
-                        {description}
-                    </AccordionComponent>
-                </DescriptionDiv>
+                <ButtonComponent
+                    styleTypeNumber="BASE"
+                    title={
+                        <BtnDiv>
+                            <IconComponent
+                                icon={MdPlayArrow}
+                                size="10%"
+                            />
+                            再生
+                        </BtnDiv>
+                    }
+                    onclick={play}
+                    style={{
+                        "fontSize": "0.9rem",
+                        "height": "50px",
+                        "width": "90%",
+                        "background": "rgb(34, 139, 84)",
+                        "color": "white",
+                        "borderRadius": "0",
+                        "marginBottom": "10%",
+                    }}
+                />
+                <ButtonComponent
+                    styleTypeNumber="BASE"
+                    title={"お気に入りから外す"}
+                    onclick={deleteFavoriteVide}
+                    style={{
+                        "fontSize": "0.9rem",
+                        "height": "50px",
+                        "width": "90%",
+                        "background": "rgb(175, 55, 42)",
+                        "color": "white",
+                        "borderRadius": "0",
+                    }}
+                />
             </VideoMetaDiv>
         </VideoInfoDiv>
     );

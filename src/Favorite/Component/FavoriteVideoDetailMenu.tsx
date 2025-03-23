@@ -13,43 +13,31 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import { FavoriteMemo } from "./FavoriteMemo";
 import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
-import { MENU_NO } from "../Const/FavoriteConst";
+import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../Const/FavoriteConst";
 import { FavoriteComment } from "./FavoriteComment";
 import { FavoriteSearchKeywordComment } from "./FavoriteSearchKeywordComment";
+import ComboComponent from "../../Common/Component/ComboComponent";
+import { FavoriteMetaInfo } from "./FavoriteMetaInfo";
 
 
 const MenuParentDiv = styled.div`
-  width: 34%;
+  width: 75%;
   margin-left: 2%;
-  margin-top: 1%;
   box-sizing:border-box;
+  padding-top: 1%;
+  padding-left: 3%;
 `;
 
-const MenuListDiv = styled.div`
-  box-sizing:border-box;
-  min-height: 472px;
-  background-color: #181a1e;
-  border-radius: 2%;
-  border: solid 1px;
+const ComboAreaDiv = styled.div`
+  display:flex;
+  align-items: center;
+  margin-bottom: 3%;
 `;
 
-const MenuButtonDiv = styled.div`
-  box-sizing:border-box;
-  padding:3%;
-  button {
-    margin-bottom: 3%;
-  }
-`;
-
-// モーダルオープン時の背景のスタイル
-const OverlayDiv = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
-  opacity: 0.9;
+const ComboTitleSpan = styled.span`
+  margin-right:2%;
+  color: white;
+  font-size: 18px;
 `;
 
 type propsType = {
@@ -64,96 +52,41 @@ export function FavoriteVideoDetailMenu(props: propsType) {
 
     const {
         openMenuNo,
-        openMenuModal,
-        closeMenuModal,
-        isOpenModal,
-        deleteFavoriteVide,
-    } = useFavoriteVideoDetailMenu({ ...props });
+        setOpenMenuNo } = useFavoriteVideoDetailMenu();
 
     const videoDetail = props.videoDetail;
     // 動画ID
     const videoId = props.videoId;
-    // 動画URL
-    const videoUrlModel = new VideoUrlModel(videoId);
+
 
     return (
         <React.Fragment>
             <MenuParentDiv>
-                <MenuListDiv>
-                    <MenuButtonDiv>
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
-                            title={"再生"}
-                            onclick={() => {
-                                window.open(`${videoUrlModel.videoUrl}`, `_blank`);
-                            }}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
-                            title={"メモ"}
-                            onclick={() => {
-                                openMenuModal(MENU_NO.MEMO);
-                            }}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
-                            title={"キーワード検索(コメント)"}
-                            onclick={() => {
-                                openMenuModal(MENU_NO.KEYWORD_SEARCH_COMMENT);
-                            }}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
-                            title={"公開コメント"}
-                            onclick={() => {
-                                openMenuModal(MENU_NO.COMMENT);
-                            }}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                        <ButtonComponent
-                            styleTypeNumber="GRAD_GRAY"
-                            title={"お気に入りから外す"}
-                            onclick={deleteFavoriteVide}
-                            style={{
-                                "fontSize": "0.9rem",
-                                "height": "7%",
-                                "width": "100%",
-                            }}
-                        />
-                    </MenuButtonDiv>
-                </MenuListDiv>
-            </MenuParentDiv>
-            <ModalComponent
-                modalIsOpen={isOpenModal()}
-                closeModal={closeMenuModal}
-                style={{
-                    backgroundColor: "#00050d", zIndex: `${Z_INDEX_PARAM.MODAL}`,
-                }}
-            >
+                <ComboAreaDiv>
+                    <ComboTitleSpan>
+                        メニュー：
+                    </ComboTitleSpan>
+                    <ComboComponent
+                        combo={VIDEO_DETIAL_MENU_LIST}
+                        initValue={VIDEO_DETIAL_MENU_LIST[0].value}
+                        onChange={setOpenMenuNo}
+                        width="50%"
+                        minWidth="8%"
+                        height="39px"
+                    />
+                </ComboAreaDiv>
+                {
+                    // 動画情報
+                    openMenuNo === MENU_NO.INFO &&
+                    <FavoriteMetaInfo
+                        videoId={videoId}
+                        videoDetail={videoDetail}
+                    />
+                }
                 {
                     // メモ
                     openMenuNo === MENU_NO.MEMO &&
                     <FavoriteMemo
-                        closeModal={closeMenuModal}
                         videoId={videoId}
                     />
                 }
@@ -161,7 +94,6 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     // 公開コメント
                     openMenuNo === MENU_NO.COMMENT &&
                     <FavoriteComment
-                        closeModal={closeMenuModal}
                         videoId={videoId}
                     />
                 }
@@ -169,15 +101,10 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     // キーワード検索(コメント)
                     openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
                     <FavoriteSearchKeywordComment
-                        closeModal={closeMenuModal}
                         videoId={videoId}
                     />
                 }
-            </ModalComponent>
-            {
-                isOpenModal() &&
-                <OverlayDiv />
-            }
+            </MenuParentDiv>
         </React.Fragment>
     );
 }

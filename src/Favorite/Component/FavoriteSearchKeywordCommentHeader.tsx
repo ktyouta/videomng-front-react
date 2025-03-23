@@ -19,11 +19,8 @@ const HeaderTitleSpan = styled.span`
   font-size:19px;
 `;
 
-type propsType = {
-    closeModal: () => void
-}
 
-export function FavoriteSearchKeywordCommentHeader(props: propsType) {
+export function FavoriteSearchKeywordCommentHeader() {
 
     console.log("FavoriteSearchKeywordCommentHeader render");
 
@@ -34,18 +31,6 @@ export function FavoriteSearchKeywordCommentHeader(props: propsType) {
             <HeaderTitleSpan>
                 キーワード検索(コメント)
             </HeaderTitleSpan>
-            <IconComponent
-                icon={RxCross1}
-                onclick={() => {
-                    resetSearchKeywordCommentInfo();
-                    props.closeModal();
-                }}
-                style={{
-                    "text-align": "right",
-                    "position": "absolute",
-                    "right": "2%",
-                }}
-            />
         </HeaderDiv>
     );
 }

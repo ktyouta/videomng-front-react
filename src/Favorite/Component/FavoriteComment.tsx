@@ -2,7 +2,6 @@ import React from "react";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { useFavoriteMemo } from "../Hook/useFavoriteMemo";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteMemoContent } from "./FavoriteMemoContent";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
@@ -15,14 +14,15 @@ import { FavoriteCommentList } from "./FavoriteCommentList";
 
 
 const Parent = styled.div`
-  color:white;
-  position: relative;
-  height: 97%;
+  box-sizing:border-box;
+  height: 502px;
+  background-color: #181a1e;
+  border-radius: 1%;
+  border: solid 1px;
 `;
 
 
 type propsType = {
-    closeModal: () => void,
     videoId: string,
 }
 
@@ -32,10 +32,6 @@ export function FavoriteComment(props: propsType) {
 
     return (
         <Parent>
-            {/* ヘッダ */}
-            <FavoriteCommentHeader
-                closeModal={props.closeModal}
-            />
             {/* コメントリスト */}
             <FavoriteCommentList
                 videoId={props.videoId}

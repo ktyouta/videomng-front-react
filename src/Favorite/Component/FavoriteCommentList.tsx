@@ -14,6 +14,7 @@ const Parent = styled.div`
   box-sizing: border-box;
   padding-left: 2%;
   padding-top: 4%;
+  color:white;
 `;
 
 const CommentListAreaDiv = styled.div`
