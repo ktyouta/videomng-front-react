@@ -1,14 +1,9 @@
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { format } from "date-fns";
-import { useFavoriteMemoContent } from "../Hook/useFavoriteMemoContent";
-import React from "react";
-import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
-import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
-import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
-import { FavoriteReplyCommentContent } from "./FavoriteReplyCommentContent";
 import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
+import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
+import { useFavoriteCommentContent } from "../Hook/useFavoriteCommentContent";
 
 
 const Parent = styled.div`
@@ -61,12 +56,16 @@ export function FavoriteCommentContent(props: propsType) {
 
     console.log("FavoriteCommentContent render");
 
+    const { blockComment } = useFavoriteCommentContent();
+
     const favoriteVideoComment = props.favoriteVideoComment;
     // コメントスレッドの詳細情報
     const snippet = favoriteVideoComment.snippet;
     // 最上位コメント（親コメント）の詳細情報
     const parentComment = snippet.topLevelComment;
     const parentCommentSnippet = parentComment.snippet;
+    // コメントID
+    const commentId = parentComment.id;
     // コメント本文
     const parentCommentText = parentCommentSnippet.textOriginal;
     // 投稿日
@@ -91,6 +90,12 @@ export function FavoriteCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
+                <IconDiv>
+                    {/* ブロック */}
+                    <FavoriteCommentBlockIconArea
+                        blockComment={() => { blockComment(commentId) }}
+                    />
+                </IconDiv>
             </LowerDiv>
             {
                 // 返信コメント

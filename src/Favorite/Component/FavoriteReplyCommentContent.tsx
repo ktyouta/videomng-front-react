@@ -8,6 +8,9 @@ import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoCommentThreadReplySnippetType } from "../Type/FavoriteVideoCommentThreadReplySnippetType";
+import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
+import { useFavoriteReplyCommentContent } from "../Hook/useFavoriteReplyCommentContent";
+import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
 
 
 const Parent = styled.div`
@@ -50,14 +53,19 @@ const MetaDiv = styled.div`
 
 
 type propsType = {
-    commentThreadReplySnippet: FavoriteVideoCommentThreadReplySnippetType,
+    commentThreadReply: FavoriteVideoCommentThreadReplyCommentType,
 }
 
 export function FavoriteReplyCommentContent(props: propsType) {
 
     console.log("FavoriteReplyCommentContent render");
 
-    const commentThreadReplySnippet = props.commentThreadReplySnippet;
+    const { blockComment } = useFavoriteReplyCommentContent();
+
+    const commentThreadReply = props.commentThreadReply;
+    // コメントID
+    const commentId = commentThreadReply.id;
+    const commentThreadReplySnippet = commentThreadReply.snippet;
     // コメント本文
     const parentCommentText = commentThreadReplySnippet.textOriginal;
     // 投稿日
@@ -78,6 +86,12 @@ export function FavoriteReplyCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
+                <IconDiv>
+                    {/* ブロック */}
+                    <FavoriteCommentBlockIconArea
+                        blockComment={() => { blockComment(commentId) }}
+                    />
+                </IconDiv>
             </LowerDiv>
         </Parent>
     );

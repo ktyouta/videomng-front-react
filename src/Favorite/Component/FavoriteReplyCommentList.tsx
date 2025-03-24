@@ -74,7 +74,7 @@ export function FavoriteReplyCommentList(props: propsType) {
                         props.replyCommentList.map((e) => {
                             return (
                                 <FavoriteReplyCommentContent
-                                    commentThreadReplySnippet={e.snippet}
+                                    commentThreadReply={e}
                                 />
                             )
                         })
