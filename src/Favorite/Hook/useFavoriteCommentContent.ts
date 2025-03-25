@@ -22,14 +22,20 @@ export function useFavoriteCommentContent() {
      * コメントブロックリクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
-        method: "DELETE",
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}`,
+        method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
             setFavoriteVideoCommentList((e) => {
+
+                const commentId = res.data.commentId;
+
                 if (e) {
+                    // ブロックコメントをフィルターする
                     e = e.filter((e1: FavoriteVideoCommentThreadItemType) => {
 
+                        const topLevelComment = e1.snippet.topLevelComment;
+                        return topLevelComment.id !== commentId;
                     });
                 }
                 return e;

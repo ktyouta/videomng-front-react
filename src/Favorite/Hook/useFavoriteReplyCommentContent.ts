@@ -9,6 +9,8 @@ import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../Type/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../Type/FavoriteVideoBlockCommentType";
+import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
+import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
 
 
 
@@ -21,13 +23,23 @@ export function useFavoriteReplyCommentContent() {
      * コメントブロックリクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
-        method: "DELETE",
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}`,
+        method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
             setFavoriteVideoCommentList((e) => {
-                if (e) {
+                const commentId = res.data.commentId;
 
+                if (e) {
+                    // ブロックコメントをフィルターする
+                    e.forEach((e1: FavoriteVideoCommentThreadItemType) => {
+
+                        let replys = e1.replies?.comments;
+
+                        replys = replys?.filter((e2: FavoriteVideoCommentThreadReplyCommentType) => {
+                            return e2.id !== commentId;
+                        });
+                    });
                 }
                 return e;
             });
