@@ -54,7 +54,7 @@ export function useFavoriteCommentContent() {
      */
     function blockComment(commentId: string) {
 
-        if (!window.confirm(`コメントをブロックしますか？`)) {
+        if (!window.confirm(`コメントを非表示にしますか？`)) {
             return;
         }
 

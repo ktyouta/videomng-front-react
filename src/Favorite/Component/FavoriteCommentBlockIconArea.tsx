@@ -8,16 +8,16 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { useFavoriteCommentBlockIconArea } from "../Hook/useFavoriteCommentBlockIconArea";
 import { MdVisibilityOff } from "react-icons/md";
 
-const DeleteNavDiv = styled.div<{ isDisplay: boolean }>`
+const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
-    width: 40px;
+    width: 70px;
     height: 25px;
     top: 39px;
     font-size: 10px;
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: 32px;
+    left: 0px;
     box-sizing: border-box;
     color: black;
     justify-content: center;
@@ -47,11 +47,11 @@ export function FavoriteCommentBlockIconArea(props: propsType) {
                 onMouseEnter={openBlockNav}
                 onMouseLeave={closeBlockNav}
             />
-            <DeleteNavDiv
+            <BlockNavDiv
                 isDisplay={isOpenBlockNav}
             >
-                ブロック
-            </DeleteNavDiv>
+                非表示にする
+            </BlockNavDiv>
         </React.Fragment>
     );
 }

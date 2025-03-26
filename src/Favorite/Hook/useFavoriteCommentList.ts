@@ -24,7 +24,7 @@ export function useFavoriteCommentList() {
     // コメント情報を取得
     const { isLoading } = useQueryWrapper<FavoriteVideoCommentThreadResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.VIDEO_COMMENT_ID}/${favoriteVideoId}`,
+            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_COMMENT_ID}/${favoriteVideoId}`,
             afSuccessFn: (response: FavoriteVideoCommentThreadResponseType) => {
 
                 const items = response.data.items;
