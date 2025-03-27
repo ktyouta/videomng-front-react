@@ -19,6 +19,7 @@ const Parent = styled.div`
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
+  padding-top:2%;
 `;
 
 
@@ -32,6 +33,8 @@ export function FavoriteComment(props: propsType) {
 
     return (
         <Parent>
+            {/* コメントヘッダ */}
+            <FavoriteCommentHeader />
             {/* コメントリスト */}
             <FavoriteCommentList
                 videoId={props.videoId}

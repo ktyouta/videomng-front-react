@@ -10,20 +10,21 @@ import { FavoriteCommentContent } from "./FavoriteCommentContent";
 
 const Parent = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
   box-sizing: border-box;
   padding-left: 2%;
-  padding-top: 4%;
   color:white;
+  padding-top: 1%;
 `;
 
 const CommentListAreaDiv = styled.div`
   width: 97%;
-  height: 90%;
+  height: 100%;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 2% 1% 1% 1%;
+  padding-left: 1%;
+  padding-right: 1%;
 `;
 
 type propsType = {
