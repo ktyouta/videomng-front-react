@@ -1,0 +1,43 @@
+import { useAtom, useAtomValue } from "jotai";
+import { favoriteVideoCommentListAtom, favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { useState } from "react";
+import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import ENV from "../../env.json";
+import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { FavoriteVideoMemoResponseType } from "../Type/FavoriteVideoMemoResponseType";
+import { FavoriteVideoCommentThreadResponseType } from "../Type/FavoriteVideoCommentThreadResponseType";
+import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
+import { FavoriteVideoCommentThreadType } from "../Type/FavoriteVideoCommentThreadType";
+import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
+import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
+
+
+export function useFavoriteBlockCommentList() {
+
+    // ブロックコメントリスト
+    const [blockCommentData, setBlockCommentData] = useState<YouTubeDataApiCommentDetailResponseType>();
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
+
+    // コメント情報を取得
+    const { isLoading } = useQueryWrapper<FavoriteVideoBlockCommentListResponseType>(
+        {
+            url: `${VIDEO_MNG_PATH}${ENV.BLOCK_COMMENT}`,
+            afSuccessFn: (response: FavoriteVideoBlockCommentListResponseType) => {
+
+                const data = response.data;
+                setBlockCommentData(data);
+            },
+            afErrorFn: (res) => {
+                setErrMessage(`非表示コメントの取得に失敗しました。`);
+            }
+        }
+    );
+
+    return {
+        isLoading,
+        errMessage,
+        blockCommentData,
+    }
+}

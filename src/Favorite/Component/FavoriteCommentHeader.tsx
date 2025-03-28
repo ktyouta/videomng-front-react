@@ -3,6 +3,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { HiOutlineInbox } from 'react-icons/hi';
 import { useFavoriteCommentHeader } from "../Hook/useFavoriteCommentHeader";
 import ModalComponent from "../../Common/Component/ModalComponent";
+import { FavoriteBlockComment } from "./FavoriteBlockComment";
 
 
 //ヘッダータイトルのスタイル
@@ -41,6 +42,19 @@ const BlockIconDiv = styled.div`
   position:relative;
 `;
 
+// モーダルオープン時の背景のスタイル
+const OverlayDiv = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-color: black;
+opacity: 0.9;
+const ComboTitleSpan = styled.span;
+`;
+
+
 export function FavoriteCommentHeader() {
 
   console.log("FavoriteCommentHeader render");
@@ -71,13 +85,25 @@ export function FavoriteCommentHeader() {
         </BlockNavDiv>
       </BlockIconDiv>
       {
+        // 非表示コメントリスト
         isOpenBlockListModal &&
         <ModalComponent
           modalIsOpen={isOpenBlockListModal}
           closeModal={closeBlockListModal}
+          style={{
+            backgroundColor: "#181a1e",
+            borderRadius: "1%",
+            border: "solid 1px",
+          }}
         >
-          実装中
+          <FavoriteBlockComment
+            close={closeBlockListModal}
+          />
         </ModalComponent>
+      }
+      {
+        isOpenBlockListModal &&
+        <OverlayDiv />
       }
     </HeaderDiv>
   );
