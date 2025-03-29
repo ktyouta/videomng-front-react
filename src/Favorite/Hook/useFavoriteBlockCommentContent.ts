@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoCommentListAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { blockCommentDataAtom, favoriteVideoCommentListAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from "../../env.json";
@@ -10,56 +10,63 @@ import useSwitch from "../../Common/Hook/useSwitch";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../Type/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../Type/FavoriteVideoBlockCommentType";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
+import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiCommentDetailItemType";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
 
 
+type propsType = {
+    commentDetailItem: YouTubeDataApiCommentDetailItemType,
+}
 
-export function useFavoriteCommentContent() {
+export function useFavoriteBlockCommentContent(props: propsType) {
 
-    // コメント情報
-    const setFavoriteVideoCommentList = useSetAtom(favoriteVideoCommentListAtom);
+    // ブロックコメントリスト
+    const setBlockCommentData = useSetAtom(blockCommentDataAtom);
 
     /**
      * コメントブロックリクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}`,
-        method: "POST",
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}/${props.commentDetailItem.id}`,
+        method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
-            setFavoriteVideoCommentList((e) => {
-
+            setBlockCommentData((e) => {
                 const commentId = res.data.commentId;
 
-                if (e) {
-                    // ブロックコメントをフィルターする
-                    e = e.filter((e1: FavoriteVideoCommentThreadItemType) => {
-
-                        const topLevelComment = e1.snippet.topLevelComment;
-                        return topLevelComment.id !== commentId;
-                    });
+                if (!e) {
+                    return e;
                 }
-                return e;
+
+                return {
+                    ...e,
+                    // 再表示コメントをフィルターする
+                    items: e.items.filter((e1: YouTubeDataApiCommentDetailItemType) => {
+                        return e1.id !== commentId;
+                    })
+                };
             });
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`コメントの非表示に失敗しました。`);
+            alert(`再表示に失敗しました。`);
         },
     });
 
 
     /**
-     * コメントをブロックする
+     * コメントを再表示する
      * @param videoId 
      */
-    function blockComment(commentId: string) {
+    function restoreComment(commentId: string) {
 
-        if (!window.confirm(`コメントを非表示にしますか？`)) {
+        if (!window.confirm(`コメント再表示しますか？`)) {
             return;
         }
 
         if (!commentId) {
-            alert(`ブロックできませんでした。`);
+            alert(`再表示できませんでした。`);
             return;
         }
 
@@ -73,6 +80,6 @@ export function useFavoriteCommentContent() {
 
 
     return {
-        blockComment,
+        restoreComment,
     }
 }

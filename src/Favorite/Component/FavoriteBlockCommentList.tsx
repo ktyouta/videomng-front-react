@@ -18,7 +18,7 @@ const Parent = styled.div`
   box-sizing: border-box;
   padding-left: 2%;
   color:white;
-  padding-top: 1%;
+  padding-top: 2%;
 `;
 
 const CommentListAreaDiv = styled.div`
@@ -57,28 +57,23 @@ export function FavoriteBlockCommentList() {
         );
     }
 
-    const blockCommentList = blockCommentData?.items;
-
     return (
         <Parent>
             {
-                blockCommentList ?
-                    blockCommentList.length > 0 ?
-                        <CommentListAreaDiv>
-                            {
-                                blockCommentList.map((e: YouTubeDataApiCommentDetailItemType) => {
-                                    return (
-                                        <FavoriteBlockCommentContent
-                                            commentDetailItem={e}
-                                        />
-                                    )
-                                })
-                            }
-                        </CommentListAreaDiv>
-                        :
-                        `コメントが存在しません。`
+                blockCommentData && blockCommentData.items.length > 0 ?
+                    <CommentListAreaDiv>
+                        {
+                            blockCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
+                                return (
+                                    <FavoriteBlockCommentContent
+                                        commentDetailItem={e}
+                                    />
+                                )
+                            })
+                        }
+                    </CommentListAreaDiv>
                     :
-                    <React.Fragment />
+                    `コメントが存在しません。`
             }
         </Parent>
     );

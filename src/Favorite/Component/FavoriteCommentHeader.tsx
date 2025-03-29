@@ -4,6 +4,7 @@ import { HiOutlineInbox } from 'react-icons/hi';
 import { useFavoriteCommentHeader } from "../Hook/useFavoriteCommentHeader";
 import ModalComponent from "../../Common/Component/ModalComponent";
 import { FavoriteBlockComment } from "./FavoriteBlockComment";
+import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 
 
 //ヘッダータイトルのスタイル
@@ -42,17 +43,6 @@ const BlockIconDiv = styled.div`
   position:relative;
 `;
 
-// モーダルオープン時の背景のスタイル
-const OverlayDiv = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-background-color: black;
-opacity: 0.9;
-const ComboTitleSpan = styled.span;
-`;
 
 
 export function FavoriteCommentHeader() {

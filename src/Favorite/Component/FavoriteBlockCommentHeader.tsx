@@ -16,7 +16,6 @@ const HeaderDiv = styled.div`
   color: white;
   padding-left: 1%;
   height:4%;
-  justify-content: end;
 `;
 
 const BlockIconDiv = styled.div`
@@ -25,6 +24,13 @@ const BlockIconDiv = styled.div`
   position:relative;
 `;
 
+const TitleSpan = styled.div`
+  font-size:18px;
+`;
+
+const FlexSpaceDiv = styled.div`
+  flex:1;
+`;
 
 type propsType = {
   close: () => void;
@@ -37,6 +43,10 @@ export function FavoriteBlockCommentHeader(props: propsType) {
 
   return (
     <HeaderDiv>
+      <TitleSpan>
+        非表示コメント
+      </TitleSpan>
+      <FlexSpaceDiv />
       <BlockIconDiv>
         <IconComponent
           icon={RxCross1}

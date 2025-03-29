@@ -4,6 +4,7 @@ import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
+import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { atom } from "jotai";
 
@@ -21,3 +22,5 @@ export const favoriteVideoCommentListAtom = atom<FavoriteVideoCommentThreadItemT
 export const searchKeywordCommentAtom = atom<SearchKeywordCommentType[]>();
 // キーワード検索(コメント)用URL
 export const searchKeywordCommentUrlAtom = atom<string>(``);
+// ブロックコメントリスト
+export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();

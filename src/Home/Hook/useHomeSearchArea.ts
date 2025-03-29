@@ -29,7 +29,6 @@ export function useHomeSearchArea() {
         const videoListApiUrlModel = new VideoListApiUrlModel(keyword, videoTypeSelectValue);
         const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
         setVideoApiUrl(`${videoApiUrl}`);
-
     }
 
     return {

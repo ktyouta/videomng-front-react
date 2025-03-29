@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { favoriteVideoCommentListAtom, favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { blockCommentDataAtom, favoriteVideoCommentListAtom, favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
@@ -16,7 +16,7 @@ import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiC
 export function useFavoriteBlockCommentList() {
 
     // ブロックコメントリスト
-    const [blockCommentData, setBlockCommentData] = useState<YouTubeDataApiCommentDetailResponseType>();
+    const [blockCommentData, setBlockCommentData] = useAtom(blockCommentDataAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
 

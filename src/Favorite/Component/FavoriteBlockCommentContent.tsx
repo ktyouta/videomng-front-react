@@ -5,6 +5,10 @@ import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import { useFavoriteCommentContent } from "../Hook/useFavoriteCommentContent";
 import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiCommentDetailItemType";
+import { FavoriteCommentRestoreIconArea } from "./FavoriteCommentRestoreIconArea";
+import { useFavoriteBlockCommentContent } from "../Hook/useFavoriteBlockCommentContent";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
 
 
 const Parent = styled.div`
@@ -56,6 +60,8 @@ export function FavoriteBlockCommentContent(props: propsType) {
 
     console.log("FavoriteBlockCommentContent render");
 
+    const { restoreComment } = useFavoriteBlockCommentContent({ ...props });
+
     const favoriteVideoComment = props.commentDetailItem;
     // コメントID
     const commentId = favoriteVideoComment.id;
@@ -81,6 +87,12 @@ export function FavoriteBlockCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
+                <IconDiv>
+                    {/* ブロック */}
+                    <FavoriteCommentRestoreIconArea
+                        restoreComment={() => { restoreComment(commentId) }}
+                    />
+                </IconDiv>
             </LowerDiv>
         </Parent>
     );
