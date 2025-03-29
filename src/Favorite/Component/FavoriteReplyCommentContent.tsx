@@ -11,6 +11,7 @@ import { FavoriteVideoCommentThreadReplySnippetType } from "../Type/FavoriteVide
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import { useFavoriteReplyCommentContent } from "../Hook/useFavoriteReplyCommentContent";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
+import parse from "html-react-parser";
 
 
 const Parent = styled.div`
@@ -67,7 +68,7 @@ export function FavoriteReplyCommentContent(props: propsType) {
     const commentId = commentThreadReply.id;
     const commentThreadReplySnippet = commentThreadReply.snippet;
     // コメント本文
-    const parentCommentText = commentThreadReplySnippet.textOriginal;
+    const parentCommentText = parse(commentThreadReplySnippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(commentThreadReplySnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者

@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { CSSProperties } from 'styled-components';
 
 //引数の型
 type propsType = {
@@ -6,7 +7,7 @@ type propsType = {
     onclick?: () => void,
     bgColor?: string,
     size?: string,
-    style?: { [key: string]: string },
+    style?: CSSProperties,
     onMouseEnter?: () => void,
     onMouseLeave?: () => void,
 }

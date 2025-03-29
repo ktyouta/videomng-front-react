@@ -9,6 +9,7 @@ import { FavoriteCommentRestoreIconArea } from "./FavoriteCommentRestoreIconArea
 import { useFavoriteBlockCommentContent } from "../Hook/useFavoriteBlockCommentContent";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
+import parse from "html-react-parser";
 
 
 const Parent = styled.div`
@@ -68,7 +69,7 @@ export function FavoriteBlockCommentContent(props: propsType) {
     // コメントスレッドの詳細情報
     const snippet = favoriteVideoComment.snippet;
     // コメント本文
-    const parentCommentText = snippet.textOriginal;
+    const parentCommentText = parse(snippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(snippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
@@ -88,7 +89,7 @@ export function FavoriteBlockCommentContent(props: propsType) {
                     {publishedDate}
                 </MetaDiv>
                 <IconDiv>
-                    {/* ブロック */}
+                    {/* 再表示 */}
                     <FavoriteCommentRestoreIconArea
                         restoreComment={() => { restoreComment(commentId) }}
                     />

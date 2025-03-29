@@ -32,3 +32,9 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
         value: `4`,
     }
 ];
+
+// コメントお気に入りステータス
+export const COMMENT_FAVORITE_STATUS = {
+    NONE: "0",
+    FAVORITE: "1",
+}

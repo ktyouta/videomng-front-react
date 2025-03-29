@@ -4,6 +4,8 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import { useFavoriteCommentContent } from "../Hook/useFavoriteCommentContent";
+import parse from "html-react-parser";
+import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconArea";
 
 
 const Parent = styled.div`
@@ -67,7 +69,7 @@ export function FavoriteCommentContent(props: propsType) {
     // コメントID
     const commentId = parentComment.id;
     // コメント本文
-    const parentCommentText = parentCommentSnippet.textOriginal;
+    const parentCommentText = parse(parentCommentSnippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(parentCommentSnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
@@ -91,6 +93,10 @@ export function FavoriteCommentContent(props: propsType) {
                     {publishedDate}
                 </MetaDiv>
                 <IconDiv>
+                    {/* お気に入り */}
+                    <FavoriteCommentFavoriteIconArea
+                        commentId={commentId}
+                    />
                     {/* ブロック */}
                     <FavoriteCommentBlockIconArea
                         blockComment={() => { blockComment(commentId) }}

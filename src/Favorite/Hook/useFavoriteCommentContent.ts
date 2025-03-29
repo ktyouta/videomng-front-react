@@ -10,7 +10,9 @@ import useSwitch from "../../Common/Hook/useSwitch";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../Type/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../Type/FavoriteVideoBlockCommentType";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
-
+import { AddToFavoriteVideoFavoriteCommentReqestType } from "../Type/AddToFavoriteVideoFavoriteCommentReqestType";
+import { FavoriteVideoFavoriteCommentType } from "../Type/FavoriteVideoFavoriteCommentType";
+import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
 
 
 export function useFavoriteCommentContent() {
@@ -21,7 +23,7 @@ export function useFavoriteCommentContent() {
     /**
      * コメントブロックリクエスト
      */
-    const postMutation = useMutationWrapper({
+    const postBlockMutation = useMutationWrapper({
         url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}`,
         method: "POST",
         // 正常終了後の処理
@@ -68,7 +70,7 @@ export function useFavoriteCommentContent() {
         }
 
         // リクエスト送信
-        postMutation.mutate(body);
+        postBlockMutation.mutate(body);
     }
 
 

@@ -53,7 +53,7 @@ export function FavoriteCommentRestoreIconArea(props: propsType) {
             <BlockNavDiv
                 isDisplay={isOpenBlockNav}
             >
-                表示する
+                再表示
             </BlockNavDiv>
         </React.Fragment>
     );
