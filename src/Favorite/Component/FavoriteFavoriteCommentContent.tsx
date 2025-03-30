@@ -93,7 +93,10 @@ export function FavoriteFavoriteCommentContent(props: propsType) {
                 <IconDiv>
                     {/* 削除 */}
                     <FavoriteFavoriteCommentDeleteIconArea
-                        deleteComment={() => { deleteComment(commentId) }}
+                        deleteComment={() => {
+                            alert(`実装中`);
+                            // deleteComment(commentId);
+                        }}
                     />
                 </IconDiv>
             </LowerDiv>

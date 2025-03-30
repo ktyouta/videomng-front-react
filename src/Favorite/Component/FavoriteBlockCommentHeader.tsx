@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { IconComponent } from "../../Common/Component/IconComponent";
-import { HiOutlineInbox } from 'react-icons/hi';
-import { useFavoriteCommentHeader } from "../Hook/useFavoriteCommentHeader";
-import ModalComponent from "../../Common/Component/ModalComponent";
-import { FavoriteBlockComment } from "./FavoriteBlockComment";
 import { RxCross1 } from "react-icons/rx";
+import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 
 //ヘッダータイトルのスタイル
@@ -26,10 +23,6 @@ const BlockIconDiv = styled.div`
 
 const TitleSpan = styled.div`
   font-size:18px;
-`;
-
-const FlexSpaceDiv = styled.div`
-  flex:1;
 `;
 
 type propsType = {

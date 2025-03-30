@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import { IconComponent } from "../../Common/Component/IconComponent";
-import { HiOutlineInbox } from 'react-icons/hi';
-import { useFavoriteCommentHeader } from "../Hook/useFavoriteCommentHeader";
-import ModalComponent from "../../Common/Component/ModalComponent";
-import { FavoriteBlockComment } from "./FavoriteBlockComment";
-import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
-import { IoNewspaperOutline } from "react-icons/io5";
-import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
+import { FavoriteFavoriteCommentModalIcon } from "./FavoriteFavoriteCommentModalIcon";
+import { FavoriteBlockCommentModalIcon } from "./FavoriteBlockCommentModalIcon";
+import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 
 //ヘッダータイトルのスタイル
@@ -18,123 +13,30 @@ const HeaderDiv = styled.div`
   color: white;
   padding-left: 1%;
   height:4%;
-  justify-content: end;
-`;
-
-const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
-    display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
-    width: 70px;
-    height: 20px;
-    top: 33px;
-    font-size: 10px;
-    background-color: white;
-    z-index: 10;
-    position: absolute;
-    left: -17px;
-    box-sizing: border-box;
-    color: black;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
+  padding-right: 2%;
 `;
 
 const BlockIconDiv = styled.div`
   width: 10%;
   box-sizing: border-box;
   position:relative;
+  display: flex;
+  grid-column-gap: 10px;
 `;
-
-
 
 export function FavoriteCommentHeader() {
 
   console.log("FavoriteCommentHeader render");
 
-  const {
-    isOpenBlockListNav,
-    openBlockListNav,
-    closeBlockListNav,
-    isOpenBlockListModal,
-    openBlockListModal,
-    closeBlockListModal,
-    isOpenFavoriteListNav,
-    openFavoriteListNav,
-    closeFavoriteListNav,
-    isOpenFavoriteListModal,
-    openFavoriteListModal,
-    closeFavoriteListModal, } = useFavoriteCommentHeader();
-
   return (
     <HeaderDiv>
+      <FlexSpaceDiv />
       <BlockIconDiv>
-        <IconComponent
-          icon={IoNewspaperOutline}
-          onclick={openFavoriteListModal}
-          size="25%"
-          style={{ color: "white" }}
-          onMouseEnter={openFavoriteListNav}
-          onMouseLeave={closeFavoriteListNav}
-        />
-        <BlockNavDiv
-          isDisplay={isOpenFavoriteListNav}
-        >
-          お気に入りリスト
-        </BlockNavDiv>
+        {/* お気に入りコメントリスト */}
+        <FavoriteFavoriteCommentModalIcon />
+        {/* 非表示コメントリスト */}
+        <FavoriteBlockCommentModalIcon />
       </BlockIconDiv>
-      <BlockIconDiv>
-        <IconComponent
-          icon={HiOutlineInbox}
-          onclick={openBlockListModal}
-          size="25%"
-          style={{ color: "white" }}
-          onMouseEnter={openBlockListNav}
-          onMouseLeave={closeBlockListNav}
-        />
-        <BlockNavDiv
-          isDisplay={isOpenBlockListNav}
-        >
-          非表示リスト
-        </BlockNavDiv>
-      </BlockIconDiv>
-      {
-        // お気に入りコメントリスト
-        isOpenFavoriteListModal &&
-        <ModalComponent
-          modalIsOpen={isOpenFavoriteListModal}
-          closeModal={closeFavoriteListModal}
-          style={{
-            backgroundColor: "#181a1e",
-            borderRadius: "1%",
-            border: "solid 1px",
-          }}
-        >
-          <FavoriteFavoriteComment
-            close={closeFavoriteListModal}
-          />
-        </ModalComponent>
-      }
-      {
-        // 非表示コメントリスト
-        isOpenBlockListModal &&
-        <ModalComponent
-          modalIsOpen={isOpenBlockListModal}
-          closeModal={closeBlockListModal}
-          style={{
-            backgroundColor: "#181a1e",
-            borderRadius: "1%",
-            border: "solid 1px",
-          }}
-        >
-          <FavoriteBlockComment
-            close={closeBlockListModal}
-          />
-        </ModalComponent>
-      }
-      {
-        (isOpenBlockListModal || isOpenFavoriteListModal) &&
-        <OverlayDiv />
-      }
     </HeaderDiv>
   );
 }
