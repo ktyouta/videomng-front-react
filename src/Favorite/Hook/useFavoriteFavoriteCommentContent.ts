@@ -20,7 +20,7 @@ type propsType = {
 
 export function useFavoriteFavoriteCommentContent(props: propsType) {
 
-    // ブロックコメントリスト
+    // お気に入りコメントリスト
     const setFavoriteCommentData = useSetAtom(favoriteCommentDataAtom);
 
     /**
@@ -58,7 +58,7 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
      * お気に入りコメントを削除する
      * @param videoId 
      */
-    function deleteComment(commentId: string) {
+    function deleteFavoriteComment(commentId: string) {
 
         if (!window.confirm(`お気に入りから外しますか？`)) {
             return;
@@ -79,6 +79,6 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
 
 
     return {
-        deleteComment,
+        deleteFavoriteComment,
     }
 }

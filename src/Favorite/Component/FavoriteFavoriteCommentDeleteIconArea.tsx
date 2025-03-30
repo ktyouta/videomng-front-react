@@ -13,14 +13,14 @@ import { useFavoriteFavoriteCommentDeleteIconArea } from "../Hook/useFavoriteFav
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
-    width: 58px;
+    width: 92px;
     height: 25px;
     top: 35px;
     font-size: 10px;
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: 14px;
+    left: -10px;
     box-sizing: border-box;
     color: black;
     -webkit-box-pack: center;
@@ -55,7 +55,7 @@ export function FavoriteFavoriteCommentDeleteIconArea(props: propsType) {
             <BlockNavDiv
                 isDisplay={isOpenDeleteNav}
             >
-                削除
+                お気に入りから外す
             </BlockNavDiv>
         </React.Fragment>
     );

@@ -63,7 +63,7 @@ export function FavoriteFavoriteCommentContent(props: propsType) {
 
     console.log("FavoriteFavoriteCommentContent render");
 
-    const { deleteComment } = useFavoriteFavoriteCommentContent({ ...props });
+    const { deleteFavoriteComment } = useFavoriteFavoriteCommentContent({ ...props });
 
     const favoriteVideoComment = props.commentDetailItem;
     // コメントID
@@ -94,8 +94,7 @@ export function FavoriteFavoriteCommentContent(props: propsType) {
                     {/* 削除 */}
                     <FavoriteFavoriteCommentDeleteIconArea
                         deleteComment={() => {
-                            alert(`実装中`);
-                            // deleteComment(commentId);
+                            deleteFavoriteComment(commentId);
                         }}
                     />
                 </IconDiv>
