@@ -69,10 +69,6 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      */
     function updateMemo(videoId: string, videoMemoSeq: number) {
 
-        if (!window.confirm(`メモを更新しますか？`)) {
-            return;
-        }
-
         if (!inputMemo) {
             alert(`メモが入力されていません。`);
             return;

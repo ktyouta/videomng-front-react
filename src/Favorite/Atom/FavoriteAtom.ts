@@ -24,3 +24,5 @@ export const searchKeywordCommentAtom = atom<SearchKeywordCommentType[]>();
 export const searchKeywordCommentUrlAtom = atom<string>(``);
 // ブロックコメントリスト
 export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
+// お気に入りコメントリスト
+export const favoriteCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();

@@ -9,6 +9,8 @@ import { useFavoriteCommentBlockIconArea } from "../Hook/useFavoriteCommentBlock
 import { MdVisibilityOff } from "react-icons/md";
 import { useFavoriteCommentFavoriteIconArea } from "../Hook/useFavoriteCommentFavoriteIconArea";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
+import { FaStar } from "react-icons/fa";
+
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -49,7 +51,7 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
     return (
         <React.Fragment>
             <IconComponent
-                icon={FaRegStar}
+                icon={FaStar}
                 onclick={() => { favoriteComment(props.commentId); }}
                 size="45%"
                 style={{

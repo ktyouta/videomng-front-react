@@ -5,6 +5,8 @@ import { useFavoriteCommentHeader } from "../Hook/useFavoriteCommentHeader";
 import ModalComponent from "../../Common/Component/ModalComponent";
 import { FavoriteBlockComment } from "./FavoriteBlockComment";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
 
 
 //ヘッダータイトルのスタイル
@@ -55,10 +57,31 @@ export function FavoriteCommentHeader() {
     closeBlockListNav,
     isOpenBlockListModal,
     openBlockListModal,
-    closeBlockListModal } = useFavoriteCommentHeader();
+    closeBlockListModal,
+    isOpenFavoriteListNav,
+    openFavoriteListNav,
+    closeFavoriteListNav,
+    isOpenFavoriteListModal,
+    openFavoriteListModal,
+    closeFavoriteListModal, } = useFavoriteCommentHeader();
 
   return (
     <HeaderDiv>
+      <BlockIconDiv>
+        <IconComponent
+          icon={IoNewspaperOutline}
+          onclick={openFavoriteListModal}
+          size="25%"
+          style={{ color: "white" }}
+          onMouseEnter={openFavoriteListNav}
+          onMouseLeave={closeFavoriteListNav}
+        />
+        <BlockNavDiv
+          isDisplay={isOpenFavoriteListNav}
+        >
+          お気に入りリスト
+        </BlockNavDiv>
+      </BlockIconDiv>
       <BlockIconDiv>
         <IconComponent
           icon={HiOutlineInbox}
@@ -74,6 +97,23 @@ export function FavoriteCommentHeader() {
           非表示リスト
         </BlockNavDiv>
       </BlockIconDiv>
+      {
+        // お気に入りコメントリスト
+        isOpenFavoriteListModal &&
+        <ModalComponent
+          modalIsOpen={isOpenFavoriteListModal}
+          closeModal={closeFavoriteListModal}
+          style={{
+            backgroundColor: "#181a1e",
+            borderRadius: "1%",
+            border: "solid 1px",
+          }}
+        >
+          <FavoriteFavoriteComment
+            close={closeFavoriteListModal}
+          />
+        </ModalComponent>
+      }
       {
         // 非表示コメントリスト
         isOpenBlockListModal &&
@@ -92,7 +132,7 @@ export function FavoriteCommentHeader() {
         </ModalComponent>
       }
       {
-        isOpenBlockListModal &&
+        (isOpenBlockListModal || isOpenFavoriteListModal) &&
         <OverlayDiv />
       }
     </HeaderDiv>
