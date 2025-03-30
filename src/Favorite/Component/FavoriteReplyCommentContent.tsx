@@ -9,9 +9,10 @@ import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoCommentThreadReplySnippetType } from "../Type/FavoriteVideoCommentThreadReplySnippetType";
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
-import { useFavoriteReplyCommentContent } from "../Hook/useFavoriteReplyCommentContent";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
 import parse from "html-react-parser";
+import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconArea";
+import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 
 
 const Parent = styled.div`
@@ -61,8 +62,6 @@ export function FavoriteReplyCommentContent(props: propsType) {
 
     console.log("FavoriteReplyCommentContent render");
 
-    const { blockComment } = useFavoriteReplyCommentContent();
-
     const commentThreadReply = props.commentThreadReply;
     // コメントID
     const commentId = commentThreadReply.id;
@@ -73,6 +72,8 @@ export function FavoriteReplyCommentContent(props: propsType) {
     const publishedDate = format(new Date(commentThreadReplySnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
     const authorDisplayName = commentThreadReplySnippet.authorDisplayName;
+    // お気に入りステータス
+    const favoriteStatus = commentThreadReply.favoriteStatus;
 
 
     return (
@@ -88,9 +89,10 @@ export function FavoriteReplyCommentContent(props: propsType) {
                     {publishedDate}
                 </MetaDiv>
                 <IconDiv>
-                    {/* ブロック */}
-                    <FavoriteCommentBlockIconArea
-                        blockComment={() => { blockComment(commentId) }}
+                    {/* アイコンエリア */}
+                    <FavoriteCommentContentIconArea
+                        commentId={commentId}
+                        favoriteStatus={favoriteStatus}
                     />
                 </IconDiv>
             </LowerDiv>

@@ -1,6 +1,8 @@
 export type FavoriteVideoCommentThreadSnippetType = {
     // このコメントが関連する動画のID
     readonly videoId: string;
+    // お気に入りステータス
+    readonly favoriteStatus: string
     // 最上位コメント（親コメント）の詳細情報
     readonly topLevelComment: {
         // APIレスポンスの種類

@@ -6,6 +6,8 @@ import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import { useFavoriteCommentContent } from "../Hook/useFavoriteCommentContent";
 import parse from "html-react-parser";
 import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconArea";
+import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
+import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 
 
 const Parent = styled.div`
@@ -58,11 +60,11 @@ export function FavoriteCommentContent(props: propsType) {
 
     console.log("FavoriteCommentContent render");
 
-    const { blockComment } = useFavoriteCommentContent();
-
     const favoriteVideoComment = props.favoriteVideoComment;
     // コメントスレッドの詳細情報
     const snippet = favoriteVideoComment.snippet;
+    // お気に入りステータス
+    const favoriteStatus = snippet.favoriteStatus;
     // 最上位コメント（親コメント）の詳細情報
     const parentComment = snippet.topLevelComment;
     const parentCommentSnippet = parentComment.snippet;
@@ -93,13 +95,10 @@ export function FavoriteCommentContent(props: propsType) {
                     {publishedDate}
                 </MetaDiv>
                 <IconDiv>
-                    {/* お気に入り */}
-                    <FavoriteCommentFavoriteIconArea
+                    {/* アイコンエリア */}
+                    <FavoriteCommentContentIconArea
                         commentId={commentId}
-                    />
-                    {/* ブロック */}
-                    <FavoriteCommentBlockIconArea
-                        blockComment={() => { blockComment(commentId) }}
+                        favoriteStatus={favoriteStatus}
                     />
                 </IconDiv>
             </LowerDiv>

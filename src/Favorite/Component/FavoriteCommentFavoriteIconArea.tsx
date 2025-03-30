@@ -31,7 +31,10 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
 `;
 
 type propsType = {
-    commentId: string
+    commentId: string,
+    favoriteStatus: string,
+    favoriteComment: (commentId: string) => void,
+    deleteFavoriteComment: (commentId: string) => void,
 }
 
 export function FavoriteCommentFavoriteIconArea(props: propsType) {
@@ -42,17 +45,20 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
         isOpenFavoriteNav,
         openFavoriteNav,
         closeFavoriteNav,
-        favoriteComment,
-        isFavorite, } = useFavoriteCommentFavoriteIconArea();
+        isFavorite, } = useFavoriteCommentFavoriteIconArea({ ...props });
 
     // アイコンカラー
     const iconColor = isFavorite() ? `yellow` : `white`;
+    // ナビゲーションメッセージ
+    const navMessage = isFavorite() ? `お気に入りから外す` : `お気に入りに登録`;
+    // アイコンクリックイベント
+    const iconClick = isFavorite() ? props.deleteFavoriteComment : props.favoriteComment;
 
     return (
         <React.Fragment>
             <IconComponent
                 icon={FaStar}
-                onclick={() => { favoriteComment(props.commentId); }}
+                onclick={() => { iconClick(props.commentId); }}
                 size="45%"
                 style={{
                     color: iconColor,
@@ -63,7 +69,7 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
             <BlockNavDiv
                 isDisplay={isOpenFavoriteNav}
             >
-                お気に入りに登録
+                {navMessage}
             </BlockNavDiv>
         </React.Fragment>
     );

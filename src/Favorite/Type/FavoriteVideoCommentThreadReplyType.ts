@@ -2,5 +2,5 @@ import { FavoriteVideoCommentThreadReplyCommentType } from "./FavoriteVideoComme
 import { FavoriteVideoCommentThreadReplySnippetType } from "./FavoriteVideoCommentThreadReplySnippetType";
 
 export type FavoriteVideoCommentThreadReplyType = {
-    readonly comments: FavoriteVideoCommentThreadReplyCommentType[];
+    comments: FavoriteVideoCommentThreadReplyCommentType[];
 };
