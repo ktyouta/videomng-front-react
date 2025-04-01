@@ -7,6 +7,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { IconBaseProps } from "react-icons";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { VIDEO_TYPE_LIST } from "../Const/HomeConst";
+import ButtonComponent from "../../Common/Component/ButtonComponent";
 
 const Parent = styled.div`
   width: 100%;
@@ -87,6 +88,19 @@ export function HomeSearchArea() {
                 minWidth="8%"
                 height="39px"
             />
+            {/* <ButtonComponent
+                styleTypeNumber="BASE"
+                title={"フィルター"}
+                onclick={() => { }}
+                style={{
+                    "fontSize": "0.9rem",
+                    "height": "41px",
+                    "width": "13%",
+                    "background": "#66696e",
+                    "color": "white",
+                    "borderRadius": "5",
+                }}
+            /> */}
         </Parent>
     );
 }
