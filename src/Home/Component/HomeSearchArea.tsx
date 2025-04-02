@@ -8,6 +8,9 @@ import { IconBaseProps } from "react-icons";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { VIDEO_TYPE_LIST } from "../Const/HomeConst";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
+import ModalComponent from "../../Common/Component/ModalComponent";
+import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { HomeSearchCondition } from "./HomeSearchCondition";
 
 const Parent = styled.div`
   width: 100%;
@@ -55,7 +58,9 @@ export function HomeSearchArea() {
         keyword,
         setKeyword,
         clickSearchBtn,
-        setVideoTypeSelectValue } = useHomeSearchArea();
+        isOpenFilterModal,
+        openFilterModal,
+        closeFilterModal, } = useHomeSearchArea();
 
     return (
         <Parent>
@@ -80,27 +85,45 @@ export function HomeSearchArea() {
                 </SearchIconAreaDiv>
             </TextBoxAreaDiv>
             <SpaceDiv />
-            <ComboComponent
-                combo={VIDEO_TYPE_LIST}
-                initValue={VIDEO_TYPE_LIST[0].value}
-                onChange={setVideoTypeSelectValue}
-                width="10%"
-                minWidth="8%"
-                height="39px"
-            />
-            {/* <ButtonComponent
+            <ButtonComponent
                 styleTypeNumber="BASE"
-                title={"フィルター"}
-                onclick={() => { }}
+                title={"条件を指定"}
+                onclick={openFilterModal}
                 style={{
                     "fontSize": "0.9rem",
                     "height": "41px",
                     "width": "13%",
-                    "background": "#66696e",
+                    "background": "#29323c",
                     "color": "white",
                     "borderRadius": "5",
                 }}
-            /> */}
+            />
+            {
+                // 検索条件指定モーダル
+                isOpenFilterModal &&
+                <ModalComponent
+                    modalIsOpen={isOpenFilterModal}
+                    closeModal={closeFilterModal}
+                    style={{
+                        backgroundColor: "#181a1e",
+                        borderRadius: "1%",
+                        border: "solid 1px",
+                        color: "white"
+                    }}
+                    width="26%"
+                    height="50%"
+                    positionTop="22%"
+                    positionLeft="35%"
+                >
+                    <HomeSearchCondition
+                        close={closeFilterModal}
+                    />
+                </ModalComponent>
+            }
+            {
+                isOpenFilterModal &&
+                <OverlayDiv />
+            }
         </Parent>
     );
 }

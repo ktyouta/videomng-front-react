@@ -6,6 +6,7 @@ import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 import { videoCategoryAtom } from "../Atom/MainAtom";
 import { VideoCategoryResponseType } from "../Type/VideoCategoryResponseType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { VideoCategoryItemType } from "../Type/VideoCategoryItemType";
 
 
 export function useMain() {
@@ -20,6 +21,20 @@ export function useMain() {
         {
             url: `${VIDEO_MNG_PATH}${ENV.VIDEO_CATEGORY}`,
             afSuccessFn: (response: VideoCategoryResponseType) => {
+
+                // カテゴリの先頭に「すべて」の選択肢を追加
+                const selectAllItem: VideoCategoryItemType = {
+                    kind: "",
+                    etag: "",
+                    id: "",
+                    snippet: {
+                        title: "すべて",
+                        assignable: false
+                    }
+                };
+
+                response.data.items.unshift(selectAllItem);
+
                 setVideoCategory(response.data);
             },
             afErrorFn: (res) => {

@@ -16,9 +16,11 @@ export const videoApiUrlAtom = atom<string>(``);
 export const videoIdAtom = atom<string>(``);
 // APIから取得した動画詳細
 export const videoDetailItemAtom = atom<YouTubeDataApiVideoDetailItemType>();
-// 動画種別選択値
-export const videoTypeSelectValueAtom = atom<string>(VIDEO_TYPE_LIST[0].value);
 // 動画リスト追加読み込み用
 export const showMoreDataAtom = atom<ShowMoreDataType>();
 // コメント情報
 export const homeVideoCommentListAtom = atom<HomeVideoCommentThreadItemType[]>();
+// 動画一覧検索条件選択値(種別)
+export const selectedVideoTypeAtom = atom<string>();
+// 動画一覧検索条件選択値(カテゴリ)
+export const selectedVideoCategoryAtom = atom<string>();

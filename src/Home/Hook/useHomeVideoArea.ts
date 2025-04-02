@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoListResponseType } from "../Type/VideoListResponseType";
-import { keywordAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom, videoTypeSelectValueAtom } from "../Atom/HomeAtom";
+import { keywordAtom, selectedVideoTypeAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom } from "../Atom/HomeAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoListDataType } from "../Type/VideoListDataType";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
@@ -19,8 +19,8 @@ export function useHomeVideoArea() {
     const [showMoreData, setShowMoreData] = useAtom(showMoreDataAtom);
     // 検索キーワード
     const keyword = useAtomValue(keywordAtom);
-    // 動画種別選択値
-    const videoTypeSelectValue = useAtomValue(videoTypeSelectValueAtom);
+    // 動画一覧検索条件選択値(種別)
+    const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
 
 
     // 動画一覧を取得
@@ -32,7 +32,7 @@ export function useHomeVideoArea() {
                 // 動画リスト追加読み込み情報変更チェック
                 const isChangeShowMoreData = isEqual(showMoreData, {
                     keyword,
-                    videoTyep: videoTypeSelectValue
+                    videoTyep: selectedVideoType
                 });
 
                 setVideoListData((e) => {
@@ -55,7 +55,7 @@ export function useHomeVideoArea() {
 
                 const latestShowMoreData: ShowMoreDataType = {
                     keyword: keyword,
-                    videoType: videoTypeSelectValue
+                    videoType: selectedVideoType ?? ``
                 }
 
                 // 動画リスト追加読み込み用データが更新されている場合

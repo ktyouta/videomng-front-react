@@ -1,10 +1,11 @@
-import { useAtom, useSetAtom } from "jotai";
-import { keywordAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom, videoTypeSelectValueAtom } from "../Atom/HomeAtom";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom } from "../Atom/HomeAtom";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { Label } from "recharts";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
 import { isEqual } from "lodash";
+import useSwitch from "../../Common/Hook/useSwitch";
 
 
 export function useHomeSearchArea() {
@@ -13,8 +14,13 @@ export function useHomeSearchArea() {
     const [keyword, setKeyword] = useAtom(keywordAtom);
     // 動画取得用URL
     const setVideoApiUrl = useSetAtom(videoApiUrlAtom);
-    // 動画種別選択値
-    const [videoTypeSelectValue, setVideoTypeSelectValue] = useAtom(videoTypeSelectValueAtom);
+    // 条件指定モーダルの表示フラグ
+    const { flag: isOpenFilterModal, on: openFilterModal, off: closeFilterModal } = useSwitch();
+    // 動画一覧検索条件選択値(種別)
+    const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
+    // 動画一覧検索条件選択値(カテゴリ)
+    const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
+
 
     /**
      * 検索ボタン押下イベント
@@ -26,7 +32,9 @@ export function useHomeSearchArea() {
             return;
         }
 
-        const videoListApiUrlModel = new VideoListApiUrlModel(keyword, videoTypeSelectValue);
+        const videoTypeValue = selectedVideoType ?? ``;
+
+        const videoListApiUrlModel = new VideoListApiUrlModel(keyword, videoTypeValue);
         const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
         setVideoApiUrl(`${videoApiUrl}`);
     }
@@ -35,6 +43,8 @@ export function useHomeSearchArea() {
         keyword,
         setKeyword,
         clickSearchBtn,
-        setVideoTypeSelectValue,
+        isOpenFilterModal,
+        openFilterModal,
+        closeFilterModal,
     }
 }
