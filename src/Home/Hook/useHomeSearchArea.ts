@@ -32,9 +32,10 @@ export function useHomeSearchArea() {
             return;
         }
 
-        const videoTypeValue = selectedVideoType ?? ``;
+        const videoType = selectedVideoType ?? ``;
+        const videoCategory = selectedVideoCategory ?? ``;
 
-        const videoListApiUrlModel = new VideoListApiUrlModel(keyword, videoTypeValue);
+        const videoListApiUrlModel = new VideoListApiUrlModel({ keyword, videoType, videoCategory });
         const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
         setVideoApiUrl(`${videoApiUrl}`);
     }

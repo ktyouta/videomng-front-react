@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoListResponseType } from "../Type/VideoListResponseType";
-import { keywordAtom, selectedVideoTypeAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom } from "../Atom/HomeAtom";
+import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom } from "../Atom/HomeAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoListDataType } from "../Type/VideoListDataType";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
@@ -21,6 +21,8 @@ export function useHomeVideoArea() {
     const keyword = useAtomValue(keywordAtom);
     // 動画一覧検索条件選択値(種別)
     const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
+    // 動画一覧検索条件選択値(カテゴリ)
+    const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
 
 
     // 動画一覧を取得
@@ -32,7 +34,8 @@ export function useHomeVideoArea() {
                 // 動画リスト追加読み込み情報変更チェック
                 const isChangeShowMoreData = isEqual(showMoreData, {
                     keyword,
-                    videoTyep: selectedVideoType
+                    videoTyep: selectedVideoType,
+                    videoCateogry: selectedVideoCategory,
                 });
 
                 setVideoListData((e) => {
@@ -55,7 +58,8 @@ export function useHomeVideoArea() {
 
                 const latestShowMoreData: ShowMoreDataType = {
                     keyword: keyword,
-                    videoType: selectedVideoType ?? ``
+                    videoType: selectedVideoType ?? ``,
+                    videoCategory: selectedVideoCategory ?? ``
                 }
 
                 // 動画リスト追加読み込み用データが更新されている場合
@@ -81,13 +85,14 @@ export function useHomeVideoArea() {
 
         const keyword = showMoreData?.keyword;
         const videoType = showMoreData?.videoType;
+        const videoCategory = showMoreData?.videoCategory ?? ``;
 
         if (!keyword || !videoType) {
             alert(`動画を取得できません`);
             return;
         }
 
-        const videoListApiUrlModel = new VideoListApiUrlModel(keyword, videoType, nextPageToken);
+        const videoListApiUrlModel = new VideoListApiUrlModel({ keyword, videoType, nextPageToken, videoCategory });
         const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
         setVideoApiUrl(`${videoApiUrl}`);
     }

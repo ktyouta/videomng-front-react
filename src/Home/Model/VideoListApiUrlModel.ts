@@ -1,6 +1,14 @@
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
 
+
+type porpsType = {
+    keyword: string,
+    videoType: string,
+    nextPageToken?: string,
+    videoCategory: string,
+}
+
 export class VideoListApiUrlModel {
 
     // 動画一覧取得エンドポイント
@@ -11,17 +19,21 @@ export class VideoListApiUrlModel {
     private static readonly QUERY_KEY_TYPE = `videotype`;
     // クエリパラメータのキー(次データ取得用)
     private static readonly QUERY_KEY_NEXT_PAGE_TOKEN = `nextpagetoken`;
+    // クエリパラメータのキー(カテゴリ)
+    private static readonly QUERY_KEY_VIDEO_CATEOGRY = `videocategory`;
     // 動画一覧取得パス
     private readonly _videoMngApiPath: string;
 
-    constructor(keyword: string,
-        videoTypeSelectValue: string,
-        nextPageToken: string = ``) {
+    constructor(props: porpsType) {
 
-        let queryParam = `${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${keyword}&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${videoTypeSelectValue}`
+        let queryParam = `${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${props.videoType}`
 
-        if (nextPageToken) {
-            queryParam += `&${VideoListApiUrlModel.QUERY_KEY_NEXT_PAGE_TOKEN}=${nextPageToken}`;
+        if (props.nextPageToken) {
+            queryParam += `&${VideoListApiUrlModel.QUERY_KEY_NEXT_PAGE_TOKEN}=${props.nextPageToken}`;
+        }
+
+        if (props.videoCategory) {
+            queryParam += `&${VideoListApiUrlModel.QUERY_KEY_VIDEO_CATEOGRY}=${props.videoCategory}`;
         }
 
         this._videoMngApiPath = `${VideoListApiUrlModel.VIDEO_INFO_PATH}?${queryParam}`;
