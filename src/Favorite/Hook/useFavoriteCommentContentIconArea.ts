@@ -84,12 +84,8 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      */
     function blockComment(commentId: string) {
 
-        if (!window.confirm(`コメントを非表示にしますか？`)) {
-            return;
-        }
-
         if (!commentId) {
-            alert(`ブロックできませんでした。`);
+            alert(`非表示にできませんでした。`);
             return;
         }
 

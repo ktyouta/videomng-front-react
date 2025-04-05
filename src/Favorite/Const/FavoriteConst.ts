@@ -11,6 +11,7 @@ export enum MENU_NO {
     MEMO = `2`,
     KEYWORD_SEARCH_COMMENT = `3`,
     COMMENT = `4`,
+    VIDEO_DETAIL_SETTING = `5`,
 }
 
 // お気に入り動画詳細画面メニューリスト
@@ -30,6 +31,10 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
     {
         label: `公開コメント`,
         value: `4`,
+    },
+    {
+        label: `動画詳細設定`,
+        value: `5`,
     }
 ];
 
@@ -37,4 +42,10 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
 export const COMMENT_FAVORITE_STATUS = {
     NONE: "0",
     FAVORITE: "1",
+}
+
+// 動画詳細画面編集モード
+export enum EDIT_MODE {
+    VIEW = `1`,
+    EDIT = `2`,
 }

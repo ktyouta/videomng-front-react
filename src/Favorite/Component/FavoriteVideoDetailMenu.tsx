@@ -16,8 +16,9 @@ import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
 import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../Const/FavoriteConst";
 import { FavoriteComment } from "./FavoriteComment";
 import { FavoriteSearchKeywordComment } from "./FavoriteSearchKeywordComment";
-import ComboComponent from "../../Common/Component/ComboComponent";
+import ComboComponent, { comboType } from "../../Common/Component/ComboComponent";
 import { FavoriteMetaInfo } from "./FavoriteMetaInfo";
+import { FavoriteDetailSetting } from "./FavoriteDetailSetting";
 
 
 const MenuParentDiv = styled.div`
@@ -106,6 +107,14 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
                     <FavoriteSearchKeywordComment
                         videoId={videoId}
+                    />
+                }
+                {
+                    // 動画詳細設定
+                    openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
+                    <FavoriteDetailSetting
+                        videoId={videoId}
+                        videoDetail={videoDetail}
                     />
                 }
             </MenuParentDiv>
