@@ -16,6 +16,7 @@ import AccordionComponent from "../../Common/Component/AccordionComponent";
 import { useFavoriteDetailSetting } from "../Hook/useFavoriteDetailSetting";
 import { EDIT_MODE } from "../Const/FavoriteConst";
 import { FavoriteDetailSettingView } from "./FavoriteDetailSettingView";
+import { FavoriteDetailSettingEdit } from "./FavoriteDetailSettingEdit";
 
 
 const Parent = styled.div`
@@ -61,6 +62,20 @@ export function FavoriteDetailSetting(props: propsType) {
                     summary={summary}
                     categorys={categorys}
                     viewStatus={viewStatus}
+                />
+            }
+            {
+                // 編集
+                editMode === EDIT_MODE.EDIT &&
+                <FavoriteDetailSettingEdit
+                    categoryList={categoryList}
+                    summary={summary}
+                    categorys={categorys}
+                    viewStatus={viewStatus}
+                    changeView={changeView}
+                    setSummary={setSummary}
+                    setCategorys={setCategorys}
+                    setViewStatus={setViewStatus}
                 />
             }
         </Parent>
