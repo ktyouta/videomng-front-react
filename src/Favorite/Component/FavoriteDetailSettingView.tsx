@@ -15,6 +15,7 @@ import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType
 import AccordionComponent from "../../Common/Component/AccordionComponent";
 import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
 import { comboType } from "../../Common/Component/ComboComponent";
+import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHeader";
 
 
 const Parent = styled.div`
@@ -42,62 +43,61 @@ const MetaDiv = styled.div`
 
 
 type propsType = {
-    videoId: string,
-    videoDetail: FavoriteVideoDetailDataType | undefined,
     categoryList: comboType[] | undefined,
+    changeEdit: () => void,
+    summary: string,
+    categorys: FavoriteVideoDetailCategoryType[],
+    viewStatus: string,
 }
 
 export function FavoriteDetailSettingView(props: propsType) {
 
     console.log("FavoriteDetailSettingView render");
 
-    const videoDetail = props.videoDetail;
-    // 要約
-    const summary = videoDetail?.detail.summary;
-    // 視聴状況
-    const viewStatus = videoDetail?.detail.viewStatus;
-    // カテゴリ
-    const categorys = videoDetail?.categorys;
-
     return (
-        <ContentDiv>
-            <TitleDiv>
-                【要約】
-            </TitleDiv>
-            <MetaDiv>
-                {summary ?? `なし`}
-            </MetaDiv>
-            <TitleDiv>
-                【カテゴリ】
-            </TitleDiv>
-            <MetaDiv>
-                {categorys && categorys.length ?
-                    categorys.map((e: FavoriteVideoDetailCategoryType) => {
-                        return (
-                            <React.Fragment>
-                                {e.categoryName}
-                            </React.Fragment>
-                        )
-                    })
-                    :
-                    `未設定`
+        <React.Fragment>
+            <FavoriteDetailSettingViewHeader
+                changeEdit={props.changeEdit}
+            />
+            <ContentDiv>
+                <TitleDiv>
+                    【要約】
+                </TitleDiv>
+                <MetaDiv>
+                    {props.summary ?? `なし`}
+                </MetaDiv>
+                <TitleDiv>
+                    【カテゴリ】
+                </TitleDiv>
+                <MetaDiv>
+                    {props.categorys && props.categorys.length ?
+                        props.categorys.map((e: FavoriteVideoDetailCategoryType) => {
+                            return (
+                                <React.Fragment>
+                                    {e.categoryName}
+                                </React.Fragment>
+                            )
+                        })
+                        :
+                        `未設定`
+                    }
+                </MetaDiv>
+                {
+                    props.categoryList &&
+                    <React.Fragment>
+                        <TitleDiv>
+                            【視聴状況】
+                        </TitleDiv>
+                        <MetaDiv>
+                            {props.viewStatus ?
+                                props.categoryList.find((e) => {
+                                    return e.value === props.viewStatus
+                                })?.label
+                                : `未設定`}
+                        </MetaDiv>
+                    </React.Fragment>
                 }
-            </MetaDiv>
-            {
-                props.categoryList &&
-                <React.Fragment>
-                    <TitleDiv>
-                        【視聴状況】
-                    </TitleDiv>
-                    <MetaDiv>
-                        {viewStatus ?
-                            props.categoryList.find((e) => {
-                                return e.value === viewStatus
-                            })?.label
-                            : `未設定`}
-                    </MetaDiv>
-                </React.Fragment>
-            }
-        </ContentDiv>
+            </ContentDiv>
+        </React.Fragment>
     );
 }

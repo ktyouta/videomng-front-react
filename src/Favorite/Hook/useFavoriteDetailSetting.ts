@@ -2,13 +2,27 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
 import { useMemo, useState } from "react";
 import { EDIT_MODE } from "../Const/FavoriteConst";
+import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 
-export function useFavoriteDetailSetting() {
 
+type propsType = {
+    videoDetail: FavoriteVideoDetailDataType,
+}
+
+export function useFavoriteDetailSetting(props: propsType) {
+
+    // 動画詳細情報
+    const videDetail = props.videoDetail;
     // 動画カテゴリ
     const videoCategory = useAtomValue(videoCategoryAtom);
     // 編集モード
     const [editMode, setEditMode] = useState(EDIT_MODE.VIEW);
+    // 要約
+    const [summary, setSummary] = useState(videDetail.detail.summary);
+    // カテゴリ
+    const [categorys, setCategorys] = useState(videDetail.categorys);
+    // 視聴状況
+    const [viewStatus, setViewStatus] = useState(videDetail.detail.viewStatus);
 
     // カテゴリリスト
     const categoryList = useMemo(() => {
@@ -31,9 +45,31 @@ export function useFavoriteDetailSetting() {
 
     }, [videoCategory]);
 
+
+    /**
+     * 編集画面遷移
+     */
+    function changeEdit() {
+        setEditMode(EDIT_MODE.EDIT);
+    }
+
+    /**
+     * 閲覧画面遷移
+     */
+    function changeView() {
+        setEditMode(EDIT_MODE.VIEW);
+    }
+
     return {
         categoryList,
         editMode,
-        setEditMode
+        changeEdit,
+        changeView,
+        summary,
+        setSummary,
+        categorys,
+        setCategorys,
+        viewStatus,
+        setViewStatus,
     };
 }

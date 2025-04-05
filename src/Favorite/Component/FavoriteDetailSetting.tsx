@@ -27,24 +27,10 @@ const Parent = styled.div`
   padding:2%;
 `;
 
-const ContentDiv = styled.div`
-    color:white;
-`;
-
-const TitleDiv = styled.div`
-  box-sizing:border-box;
-  margin-bottom:1%;
-`;
-
-const MetaDiv = styled.div`
-  box-sizing:border-box;
-  margin-bottom:4%;
-`;
-
 
 type propsType = {
     videoId: string,
-    videoDetail: FavoriteVideoDetailDataType | undefined,
+    videoDetail: FavoriteVideoDetailDataType,
 }
 
 export function FavoriteDetailSetting(props: propsType) {
@@ -54,7 +40,15 @@ export function FavoriteDetailSetting(props: propsType) {
     const {
         categoryList,
         editMode,
-        setEditMode } = useFavoriteDetailSetting();
+        changeEdit,
+        changeView,
+        summary,
+        setSummary,
+        categorys,
+        setCategorys,
+        viewStatus,
+        setViewStatus,
+    } = useFavoriteDetailSetting({ ...props });
 
     return (
         <Parent>
@@ -62,9 +56,11 @@ export function FavoriteDetailSetting(props: propsType) {
                 // 閲覧
                 editMode === EDIT_MODE.VIEW &&
                 <FavoriteDetailSettingView
-                    videoId={props.videoId}
-                    videoDetail={props.videoDetail}
                     categoryList={categoryList}
+                    changeEdit={changeEdit}
+                    summary={summary}
+                    categorys={categorys}
+                    viewStatus={viewStatus}
                 />
             }
         </Parent>
