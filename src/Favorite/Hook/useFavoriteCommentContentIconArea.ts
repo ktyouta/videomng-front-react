@@ -19,6 +19,7 @@ import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVide
 type propsType = {
     commentId: string,
     favoriteStatus: string,
+    videoId: string,
 }
 
 
@@ -90,7 +91,8 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         }
 
         const body: AddToFavoriteVideoBlockCommentReqestType = {
-            commentId
+            commentId,
+            videoId: props.videoId
         }
 
         // リクエスト送信
@@ -127,7 +129,8 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         }
 
         const body: AddToFavoriteVideoFavoriteCommentReqestType = {
-            commentId
+            commentId,
+            videoId: props.videoId
         }
 
         // リクエスト送信
@@ -164,7 +167,8 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         }
 
         const body: AddToFavoriteVideoFavoriteCommentReqestType = {
-            commentId
+            commentId,
+            videoId: props.videoId,
         }
 
         // リクエスト送信

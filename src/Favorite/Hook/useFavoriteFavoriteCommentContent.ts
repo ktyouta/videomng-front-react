@@ -12,6 +12,7 @@ import { FavoriteVideoFavoriteCommentType } from "../Type/FavoriteVideoFavoriteC
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiCommentDetailItemType";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import { DeleteToFavoriteVideoFavoriteCommentReqestType } from "../Type/DeleteToFavoriteVideoFavoriteCommentReqestType";
 
 
 type propsType = {
@@ -60,16 +61,12 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
      */
     function deleteFavoriteComment(commentId: string) {
 
-        if (!window.confirm(`お気に入りから外しますか？`)) {
-            return;
-        }
-
         if (!commentId) {
             alert(`お気に入りから外せません。`);
             return;
         }
 
-        const body: AddToFavoriteVideoFavoriteCommentReqestType = {
+        const body: DeleteToFavoriteVideoFavoriteCommentReqestType = {
             commentId
         }
 

@@ -99,6 +99,7 @@ export function FavoriteCommentContent(props: propsType) {
                     <FavoriteCommentContentIconArea
                         commentId={commentId}
                         favoriteStatus={favoriteStatus}
+                        videoId={props.videoId}
                     />
                 </IconDiv>
             </LowerDiv>

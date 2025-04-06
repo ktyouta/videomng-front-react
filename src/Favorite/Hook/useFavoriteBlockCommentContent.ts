@@ -13,6 +13,7 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiCommentDetailItemType";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
+import { DeleteToFavoriteVideoBlockCommentReqestType } from "../Type/DeleteToFavoriteVideoBlockCommentReqestType";
 
 
 type propsType = {
@@ -61,16 +62,12 @@ export function useFavoriteBlockCommentContent(props: propsType) {
      */
     function restoreComment(commentId: string) {
 
-        if (!window.confirm(`コメント再表示しますか？`)) {
-            return;
-        }
-
         if (!commentId) {
             alert(`再表示できませんでした。`);
             return;
         }
 
-        const body: AddToFavoriteVideoBlockCommentReqestType = {
+        const body: DeleteToFavoriteVideoBlockCommentReqestType = {
             commentId
         }
 

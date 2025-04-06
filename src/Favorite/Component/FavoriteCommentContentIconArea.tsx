@@ -7,6 +7,7 @@ import { useFavoriteCommentContentIconArea } from "../Hook/useFavoriteCommentCon
 type propsType = {
     commentId: string,
     favoriteStatus: string,
+    videoId: string,
 }
 
 
