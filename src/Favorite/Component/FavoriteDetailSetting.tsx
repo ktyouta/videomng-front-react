@@ -76,6 +76,7 @@ export function FavoriteDetailSetting(props: propsType) {
                     setSummary={setSummary}
                     setCategorys={setCategorys}
                     setViewStatus={setViewStatus}
+                    videoId={props.videoId}
                 />
             }
         </Parent>

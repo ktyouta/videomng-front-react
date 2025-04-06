@@ -5,6 +5,7 @@ import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 import { FavoriteDetailSettingEditIcon } from "./FavoriteDetailSettingEditIcon";
 import { EDIT_MODE } from "../Const/FavoriteConst";
 import { FavoriteDetailSettingCloseIcon } from "./FavoriteDetailSettingCloseIcon";
+import { FavoriteDetailSettingUpdateIcon } from "./FavoriteDetailSettingUpdateIcon";
 
 
 //ヘッダータイトルのスタイル
@@ -20,7 +21,7 @@ const HeaderDiv = styled.div`
 `;
 
 const BlockIconDiv = styled.div`
-  width: 3%;
+  width: 5%;
   box-sizing: border-box;
   position:relative;
   display: flex;
@@ -29,6 +30,7 @@ const BlockIconDiv = styled.div`
 
 type propsType = {
   changeView: () => void,
+  updateFavoriteVideo: () => void,
 }
 
 export function FavoriteDetailSettingEditHeader(props: propsType) {
@@ -39,9 +41,13 @@ export function FavoriteDetailSettingEditHeader(props: propsType) {
     <HeaderDiv>
       <FlexSpaceDiv />
       <BlockIconDiv>
-        {/* 編集アイコン */}
+        {/* 閉じるアイコン */}
         <FavoriteDetailSettingCloseIcon
           changeView={props.changeView}
+        />
+        {/* 更新アイコン */}
+        <FavoriteDetailSettingUpdateIcon
+          updateFavoriteVideo={props.updateFavoriteVideo}
         />
       </BlockIconDiv>
     </HeaderDiv>

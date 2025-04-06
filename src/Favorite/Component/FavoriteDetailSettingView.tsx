@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
@@ -16,16 +16,8 @@ import AccordionComponent from "../../Common/Component/AccordionComponent";
 import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHeader";
+import { useFavoriteDetailSettingView } from "../Hook/useFavoriteDetailSettingView";
 
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  min-height: 502px;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  padding:2%;
-`;
 
 const ContentDiv = styled.div`
     color:white;
@@ -41,6 +33,21 @@ const MetaDiv = styled.div`
   margin-bottom:4%;
 `;
 
+const CategoryAreaDiv = styled.div`
+  box-sizing:border-box;
+  align-items: center;
+  display:flex;
+  flex-wrap: wrap;
+  grid-column-gap: 2%;
+`;
+
+const CategoryDiv = styled.div`
+  display: flex;
+  text-align: center;
+  width: auto;
+  align-items: center;
+`;
+
 
 type propsType = {
     categoryList: comboType[] | undefined,
@@ -53,6 +60,8 @@ type propsType = {
 export function FavoriteDetailSettingView(props: propsType) {
 
     console.log("FavoriteDetailSettingView render");
+
+    const { viewStatusList } = useFavoriteDetailSettingView();
 
     return (
         <React.Fragment>
@@ -70,27 +79,42 @@ export function FavoriteDetailSettingView(props: propsType) {
                     【カテゴリ】
                 </TitleDiv>
                 <MetaDiv>
-                    {props.categorys && props.categorys.length ?
-                        props.categorys.map((e: FavoriteVideoDetailCategoryType) => {
-                            return (
-                                <React.Fragment>
-                                    {e.categoryName}
-                                </React.Fragment>
-                            )
-                        })
-                        :
-                        `未設定`
+                    {
+                        props.categorys && props.categorys.length > 0 ?
+                            <CategoryAreaDiv>
+                                {
+                                    props.categorys && props.categorys.reduce((prev: ReactNode[], current: FavoriteVideoDetailCategoryType) => {
+
+                                        const category = props.categoryList?.find((e1: comboType) => {
+                                            return e1.value === current.categoryId;
+                                        });
+
+                                        if (!category) {
+                                            return prev;
+                                        }
+
+                                        prev.push(
+                                            <CategoryDiv>
+                                                {category.label}
+                                            </CategoryDiv>
+                                        );
+                                        return prev;
+                                    }, [])
+                                }
+                            </CategoryAreaDiv>
+                            :
+                            `未設定`
                     }
                 </MetaDiv>
                 {
-                    props.categoryList &&
+                    viewStatusList &&
                     <React.Fragment>
                         <TitleDiv>
                             【視聴状況】
                         </TitleDiv>
                         <MetaDiv>
                             {props.viewStatus ?
-                                props.categoryList.find((e) => {
+                                viewStatusList.find((e) => {
                                     return e.value === props.viewStatus
                                 })?.label
                                 : `未設定`}

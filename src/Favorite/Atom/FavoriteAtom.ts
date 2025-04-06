@@ -1,9 +1,11 @@
+import { comboType } from "../../Common/Component/ComboComponent";
 import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
+import { ViewStatusType } from "../Type/ViewStatusType";
 import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { atom } from "jotai";
@@ -26,3 +28,5 @@ export const searchKeywordCommentUrlAtom = atom<string>(``);
 export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
 // お気に入りコメントリスト
 export const favoriteCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
+// 視聴状況リスト
+export const viewStatusListAtom = atom<comboType[]>();

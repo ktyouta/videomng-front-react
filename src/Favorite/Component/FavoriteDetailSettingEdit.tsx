@@ -19,6 +19,8 @@ import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHead
 import { FavoriteDetailSettingEditHeader } from "./FavoriteDetailSettingEditHeader";
 import { useFavoriteDetailSettingEdit } from "../Hook/useFavoriteDetailSettingEdit";
 import BaseTextAreaComponent from "../../Common/Component/BaseTextAreaComponent";
+import LabelCheckBoxListComponent from "../../Common/Component/LabelCheckBoxListComponent";
+import CheckBoxComponent from "../../Common/Component/CheckBoxComponent";
 
 
 
@@ -36,6 +38,25 @@ const MetaDiv = styled.div`
   margin-bottom:4%;
 `;
 
+const CategoryAreaDiv = styled.div`
+  box-sizing:border-box;
+  align-items: center;
+  display:flex;
+  flex-wrap: wrap;
+  grid-column-gap: 2%;
+`;
+
+const CategoryDiv = styled.div`
+  display: flex;
+  text-align: center;
+  width: auto;
+  align-items: center;
+`;
+
+const CategoryLabel = styled.label`
+  width:auto;
+`;
+
 
 type propsType = {
     categoryList: comboType[] | undefined,
@@ -46,6 +67,7 @@ type propsType = {
     setSummary: React.Dispatch<React.SetStateAction<string>>,
     setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
     setViewStatus: React.Dispatch<React.SetStateAction<string>>,
+    videoId: string,
 }
 
 export function FavoriteDetailSettingEdit(props: propsType) {
@@ -56,15 +78,20 @@ export function FavoriteDetailSettingEdit(props: propsType) {
         summary,
         setSummary,
         categorys,
-        setCategorys,
         viewStatus,
         setViewStatus,
+        viewStatusList,
+        selectCategory,
+        updateFavoriteVideo,
     } = useFavoriteDetailSettingEdit({ ...props });
+
+    const cateogryList = props.categoryList;
 
     return (
         <React.Fragment>
             <FavoriteDetailSettingEditHeader
                 changeView={props.changeView}
+                updateFavoriteVideo={updateFavoriteVideo}
             />
             <ContentDiv>
                 <TitleDiv>
@@ -75,37 +102,64 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                         value={summary}
                         onChange={setSummary}
                         textWidth="90%"
+                        style={{
+                            "backgroundColor": "rgb(44, 47, 54)",
+                            "color": "white",
+                        }}
                     />
                 </MetaDiv>
                 <TitleDiv>
                     【カテゴリ】
                 </TitleDiv>
                 <MetaDiv>
-                    {categorys && categorys.length ?
-                        categorys.map((e: FavoriteVideoDetailCategoryType) => {
-                            return (
-                                <React.Fragment>
-                                    {e.categoryName}
-                                </React.Fragment>
-                            )
-                        })
-                        :
-                        `未設定`
+                    {
+                        cateogryList && cateogryList.length > 0 &&
+                        <CategoryAreaDiv>
+                            {
+                                cateogryList.map((e) => {
+
+                                    const htmlId = crypto.randomUUID();
+                                    const checked = !!categorys.find((e1) => {
+                                        return e1 === e.value;
+                                    });
+
+                                    return (
+                                        <CategoryDiv>
+                                            <CategoryLabel
+                                                htmlFor={htmlId}
+                                            >
+                                                {e.label}
+                                            </CategoryLabel>
+                                            <CheckBoxComponent
+                                                value={e.value}
+                                                htmlForId={htmlId}
+                                                initValue={checked}
+                                                onChange={selectCategory}
+                                            />
+                                        </CategoryDiv>
+                                    )
+                                })
+                            }
+                        </CategoryAreaDiv>
                     }
                 </MetaDiv>
                 {
-                    props.categoryList &&
+                    viewStatusList &&
                     <React.Fragment>
                         <TitleDiv>
                             【視聴状況】
                         </TitleDiv>
                         <MetaDiv>
                             <ComboComponent
-                                combo={props.categoryList}
+                                combo={viewStatusList}
                                 initValue={viewStatus}
                                 onChange={setViewStatus}
                                 width="25%"
                                 height="39px"
+                                selectStyle={{
+                                    "backgroundColor": "rgb(44, 47, 54)",
+                                    "color": "white",
+                                }}
                             />
                         </MetaDiv>
                     </React.Fragment>

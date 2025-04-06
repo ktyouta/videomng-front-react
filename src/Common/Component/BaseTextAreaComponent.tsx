@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react';
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 
 //引数の型
 type propsType = {
@@ -12,7 +12,8 @@ type propsType = {
     isNotResize?: boolean,
     onChange?: (e: string) => void,
     placeholder?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    style?: CSSProperties,
 }
 
 //参照の型
@@ -70,6 +71,7 @@ const BaseTextAreaComponent = forwardRef<refType, propsType>((props, ref) => {
             isNotResize={props.isNotResize}
             placeholder={props.placeholder}
             disabled={props.disabled}
+            style={props.style}
         />
     );
 })

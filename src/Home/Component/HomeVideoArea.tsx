@@ -53,11 +53,6 @@ export function HomeVideoArea() {
     isLoading,
     clickShowMore } = useHomeVideoArea();
 
-  // ローディング
-  // if (isLoading) {
-  //   return <LoadingBase />;
-  // }
-
   if (!videoListData) {
     return (
       <MessageDiv>
