@@ -32,12 +32,12 @@ export function useHomeSearchArea() {
             return;
         }
 
-        const videoType = selectedVideoType ?? ``;
-        const videoCategory = selectedVideoCategory ?? ``;
-
-        const videoListApiUrlModel = new VideoListApiUrlModel({ keyword, videoType, videoCategory });
-        const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
-        setVideoApiUrl(`${videoApiUrl}`);
+        const videoListApiUrlModel = new VideoListApiUrlModel({
+            keyword,
+            videoType: selectedVideoType,
+            videoCategory: selectedVideoCategory,
+        });
+        setVideoApiUrl(`${videoListApiUrlModel.videoMngApiPath}`);
     }
 
     return {

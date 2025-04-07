@@ -7,6 +7,7 @@ import { VideoListDataType } from "../Type/VideoListDataType";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { isEqual } from "lodash";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
+import { useState } from "react";
 
 
 export function useHomeVideoArea() {
@@ -23,6 +24,8 @@ export function useHomeVideoArea() {
     const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
     // 動画一覧検索条件選択値(カテゴリ)
     const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
 
 
     // 動画一覧を取得
@@ -32,11 +35,12 @@ export function useHomeVideoArea() {
             afSuccessFn: (response: VideoListResponseType) => {
 
                 // 動画リスト追加読み込み情報変更チェック
-                const isChangeShowMoreData = isEqual(showMoreData, {
-                    keyword,
-                    videoTyep: selectedVideoType,
-                    videoCateogry: selectedVideoCategory,
-                });
+                const latestShowMoreData: ShowMoreDataType = {
+                    keyword: keyword,
+                    videoType: selectedVideoType,
+                    videoCategory: selectedVideoCategory,
+                }
+                const isEqualShowMoreData = isEqual(showMoreData, latestShowMoreData);
 
                 setVideoListData((e) => {
 
@@ -46,7 +50,7 @@ export function useHomeVideoArea() {
                     // 新たに取得した動画リスト
                     const newVideoItems = videoListData.items;
                     // 次に画面に表示する動画リスト
-                    const latestVideoItems = !isChangeShowMoreData ? newVideoItems : [...nowVideoItems, ...newVideoItems];
+                    const latestVideoItems = isEqualShowMoreData ? [...nowVideoItems, ...newVideoItems] : newVideoItems;
 
                     const latestResponse: VideoListDataType = {
                         ...videoListData,
@@ -56,22 +60,12 @@ export function useHomeVideoArea() {
                     return latestResponse;
                 });
 
-                const latestShowMoreData: ShowMoreDataType = {
-                    keyword: keyword,
-                    videoType: selectedVideoType ?? ``,
-                    videoCategory: selectedVideoCategory ?? ``
-                }
-
-                // 動画リスト追加読み込み用データが更新されている場合
-                if (!isChangeShowMoreData) {
-                    setShowMoreData(latestShowMoreData);
-                }
-
+                setShowMoreData(latestShowMoreData);
                 setVideoApiUrl(``);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
-                alert(errRes.response.data.message);
+                setErrMessage(`動画情報の取得に失敗しました`);
                 setVideoApiUrl(``);
                 setShowMoreData(undefined);
             }
@@ -84,10 +78,10 @@ export function useHomeVideoArea() {
     function clickShowMore(nextPageToken: string) {
 
         const keyword = showMoreData?.keyword;
-        const videoType = showMoreData?.videoType;
+        const videoType = showMoreData?.videoType ?? ``;
         const videoCategory = showMoreData?.videoCategory ?? ``;
 
-        if (!keyword || !videoType) {
+        if (!keyword) {
             alert(`動画を取得できません`);
             return;
         }
@@ -101,5 +95,6 @@ export function useHomeVideoArea() {
         videoListData,
         isLoading,
         clickShowMore,
+        errMessage,
     }
 }

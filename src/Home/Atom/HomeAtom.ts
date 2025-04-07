@@ -21,6 +21,6 @@ export const showMoreDataAtom = atom<ShowMoreDataType>();
 // コメント情報
 export const homeVideoCommentListAtom = atom<HomeVideoCommentThreadItemType[]>();
 // 動画一覧検索条件選択値(種別)
-export const selectedVideoTypeAtom = atom<string>();
+export const selectedVideoTypeAtom = atom<string>(VIDEO_TYPE_LIST[0].value);
 // 動画一覧検索条件選択値(カテゴリ)
-export const selectedVideoCategoryAtom = atom<string>();
+export const selectedVideoCategoryAtom = atom<string>(``);

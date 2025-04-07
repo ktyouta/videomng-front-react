@@ -51,12 +51,21 @@ export function HomeVideoArea() {
   const {
     videoListData,
     isLoading,
-    clickShowMore } = useHomeVideoArea();
+    clickShowMore,
+    errMessage, } = useHomeVideoArea();
 
   if (!videoListData) {
     return (
       <MessageDiv>
         キーワードを入力して動画を検索
+      </MessageDiv>
+    );
+  }
+
+  if (errMessage) {
+    return (
+      <MessageDiv>
+        {errMessage}
       </MessageDiv>
     );
   }

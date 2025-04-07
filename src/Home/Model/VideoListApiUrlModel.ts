@@ -26,7 +26,11 @@ export class VideoListApiUrlModel {
 
     constructor(props: porpsType) {
 
-        let queryParam = `${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${props.videoType}`
+        let queryParam = `${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}`;
+
+        if (props.videoType) {
+            queryParam += `&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${props.videoType}`;
+        }
 
         if (props.nextPageToken) {
             queryParam += `&${VideoListApiUrlModel.QUERY_KEY_NEXT_PAGE_TOKEN}=${props.nextPageToken}`;

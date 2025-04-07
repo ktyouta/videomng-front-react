@@ -5,12 +5,15 @@ import { favoriteVideoListAtom } from "../Atom/FavoriteAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json"
+import { useState } from "react";
 
 
 export function useFavoriteVideoArea() {
 
     // 動画リスト
     const [videoListItem, setVideoListItemAtom] = useAtom(favoriteVideoListAtom);
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
 
 
     // 動画一覧を取得
@@ -22,7 +25,7 @@ export function useFavoriteVideoArea() {
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
-                alert(errRes.response.data.message);
+                setErrMessage(`動画情報の取得に失敗しました`);
             }
         }
     );
@@ -30,5 +33,6 @@ export function useFavoriteVideoArea() {
     return {
         videoListItem,
         isLoading,
+        errMessage,
     }
 }
