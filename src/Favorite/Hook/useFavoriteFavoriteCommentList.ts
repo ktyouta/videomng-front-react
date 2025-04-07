@@ -19,11 +19,14 @@ export function useFavoriteFavoriteCommentList() {
     const [favoriteCommentData, setFavoriteCommentData] = useAtom(favoriteCommentDataAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // お気に入り動画ID
+    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
+
 
     // コメント情報を取得
     const { isLoading } = useQueryWrapper<FavoriteVideoBlockCommentListResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}`,
+            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}/${favoriteVideoId}`,
             afSuccessFn: (response: FavoriteVideoBlockCommentListResponseType) => {
 
                 const data = response.data;
