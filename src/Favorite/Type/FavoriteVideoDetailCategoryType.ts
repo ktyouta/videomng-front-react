@@ -6,5 +6,4 @@ export type FavoriteVideoDetailCategoryType = {
     updateDate: Date;
     deleteFlg: string;
     categoryId: string;
-    categoryName: string,
 }

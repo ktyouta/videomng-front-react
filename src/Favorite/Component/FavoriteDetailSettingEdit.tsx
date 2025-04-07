@@ -118,7 +118,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                             {
                                 cateogryList.map((e) => {
 
-                                    const htmlId = crypto.randomUUID();
+                                    const htmlId = e.value;
                                     const checked = !!categorys.find((e1) => {
                                         return e1 === e.value;
                                     });

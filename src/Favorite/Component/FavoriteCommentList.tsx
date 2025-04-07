@@ -63,10 +63,13 @@ export function FavoriteCommentList(props: propsType) {
                     <CommentListAreaDiv>
                         {
                             favoriteVideoCommentList.map((e: FavoriteVideoCommentThreadItemType) => {
+
+                                const key = e.id;
                                 return (
                                     <FavoriteCommentContent
                                         favoriteVideoComment={e}
                                         videoId={props.videoId}
+                                        key={key}
                                     />
                                 )
                             })

@@ -65,7 +65,7 @@ export function FavoriteVideoArea() {
             return (
               <FavoriteVideoContent
                 data={e}
-                key={crypto.randomUUID()}
+                key={e.videoId}
               />
             )
           })

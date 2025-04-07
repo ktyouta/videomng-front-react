@@ -86,7 +86,7 @@ export function HomeVideoArea() {
             return (
               <HomeVideoContent
                 data={e}
-                key={crypto.randomUUID()}
+                key={e.id.videoId}
               />
             )
           })
