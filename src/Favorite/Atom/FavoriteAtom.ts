@@ -30,3 +30,9 @@ export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType
 export const favoriteCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
 // 視聴状況リスト
 export const viewStatusListAtom = atom<comboType[]>();
+// 動画一覧検索条件選択値(カテゴリ)
+export const selectedFavoriteVideoCategoryAtom = atom<string>(``);
+// 動画一覧検索条件選択値(視聴状況)
+export const selectedFavoriteVideoviewStatusAtom = atom<string>(``);
+// 動画取得用URL
+export const favoriteVideoApiUrlAtom = atom<string>(``);
