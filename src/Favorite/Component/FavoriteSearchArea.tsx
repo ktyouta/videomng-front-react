@@ -60,10 +60,10 @@ export function FavoriteSearchArea() {
             border: "solid 1px",
             color: "white"
           }}
-          width="26%"
+          width="32%"
           height="50%"
           positionTop="22%"
-          positionLeft="35%"
+          positionLeft="33%"
         >
           <FavoriteSearchCondition
             close={closeFilterModal}

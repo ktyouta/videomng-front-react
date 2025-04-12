@@ -27,7 +27,9 @@ export function FavoriteSearchCondition(props: propsType) {
                 close={props.close}
             />
             {/* 検索条件指定コンテンツ */}
-            <FavoriteSearchConditionMain />
+            <FavoriteSearchConditionMain
+                close={props.close}
+            />
         </Parent>
     );
 }

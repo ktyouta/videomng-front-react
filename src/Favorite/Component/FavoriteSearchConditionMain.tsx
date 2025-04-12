@@ -33,24 +33,27 @@ const InputDiv = styled.div`
 
 const InputLabel = styled.label`
   display: inline-block;
-  width: 55px;
+  width: 65px;
   margin-right: 10px;
   white-space: normal;
   word-wrap: break-word;
 `;
 
+type propsType = {
+    close: () => void;
+}
 
-export function FavoriteSearchConditionMain() {
+export function FavoriteSearchConditionMain(props: propsType) {
 
     console.log("FavoriteSearchConditionMain render");
 
     const {
         videoCategory,
         selectedFavoriteVideoCategory,
-        setSelectedFavoriteVideoCategory,
-        viewStatusList,
+        viewStatusSelectList,
         selectedFavoriteVideoviewStatus,
-        setSelectedFavoriteVideoviewStatus, } = useFavoriteSearchConditionMain();
+        changeVideoCategory,
+        changeViewStatus, } = useFavoriteSearchConditionMain({ ...props });
 
     // カテゴリリスト
     const categoryComboList: comboType[] | undefined = videoCategory?.items.map((e: VideoCategoryItemType) => {
@@ -76,7 +79,7 @@ export function FavoriteSearchConditionMain() {
                         <ComboComponent
                             combo={categoryComboList}
                             initValue={selectedFavoriteVideoCategory ?? categoryComboList[0].value}
-                            onChange={setSelectedFavoriteVideoCategory}
+                            onChange={changeVideoCategory}
                             width="68%"
                             minWidth="8%"
                             height="39px"
@@ -84,15 +87,15 @@ export function FavoriteSearchConditionMain() {
                     </InputDiv>
                 }
                 {
-                    viewStatusList && viewStatusList.length > 0 &&
+                    viewStatusSelectList && viewStatusSelectList.length > 0 &&
                     <InputDiv>
                         <InputLabel>
                             視聴状況
                         </InputLabel>
                         <ComboComponent
-                            combo={viewStatusList}
-                            initValue={selectedFavoriteVideoviewStatus ?? viewStatusList[0].value}
-                            onChange={setSelectedFavoriteVideoviewStatus}
+                            combo={viewStatusSelectList}
+                            initValue={selectedFavoriteVideoviewStatus ?? viewStatusSelectList[0].value}
+                            onChange={changeViewStatus}
                             width="68%"
                             minWidth="8%"
                             height="39px"

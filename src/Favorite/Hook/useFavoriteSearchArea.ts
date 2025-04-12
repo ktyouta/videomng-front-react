@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom } from "../Atom/FavoriteAtom";
 
