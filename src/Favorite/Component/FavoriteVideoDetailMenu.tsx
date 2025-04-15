@@ -19,6 +19,7 @@ import { FavoriteSearchKeywordComment } from "./FavoriteSearchKeywordComment";
 import ComboComponent, { comboType } from "../../Common/Component/ComboComponent";
 import { FavoriteMetaInfo } from "./FavoriteMetaInfo";
 import { FavoriteDetailSetting } from "./FavoriteDetailSetting";
+import { FavoriteTag } from "./FavoriteTag";
 
 
 const MenuParentDiv = styled.div`
@@ -116,6 +117,13 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     <FavoriteDetailSetting
                         videoId={videoId}
                         videoDetail={videoDetail}
+                    />
+                }
+                {
+                    // タグ
+                    openMenuNo === MENU_NO.TAG &&
+                    <FavoriteTag
+                        videoId={videoId}
                     />
                 }
             </MenuParentDiv>

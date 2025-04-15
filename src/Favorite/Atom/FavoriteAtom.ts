@@ -4,6 +4,7 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
+import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
 import { ViewStatusType } from "../Type/ViewStatusType";
 import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
@@ -36,3 +37,5 @@ export const selectedFavoriteVideoCategoryAtom = atom<string>(``);
 export const selectedFavoriteVideoviewStatusAtom = atom<string>(``);
 // 動画取得用URL
 export const favoriteVideoApiUrlAtom = atom<string>(``);
+// タグリスト
+export const favoriteVideoTagListAtom = atom<FavoriteVideoTagType[]>();

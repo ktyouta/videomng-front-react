@@ -12,6 +12,7 @@ export enum MENU_NO {
     KEYWORD_SEARCH_COMMENT = `3`,
     COMMENT = `4`,
     VIDEO_DETAIL_SETTING = `5`,
+    TAG = `6`,
 }
 
 // お気に入り動画詳細画面メニューリスト
@@ -35,6 +36,10 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
     {
         label: `動画詳細設定`,
         value: `5`,
+    },
+    {
+        label: `タグ`,
+        value: `6`,
     }
 ];
 
@@ -46,6 +51,12 @@ export const COMMENT_FAVORITE_STATUS = {
 
 // 動画詳細画面編集モード
 export enum EDIT_MODE {
+    VIEW = `1`,
+    EDIT = `2`,
+}
+
+// タグ画面編集モード
+export enum TAG_EDIT_MODE {
     VIEW = `1`,
     EDIT = `2`,
 }
