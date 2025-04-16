@@ -5,39 +5,32 @@ import { FaArrowUp } from "react-icons/fa";
 import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
 import { useFavoriteTagCreateInput } from "../Hook/useFavoriteTagCreateInput";
 import TagsComponent, { tagType } from "../../Common/Component/TagsComponent";
-
+import { FaPlusSquare } from 'react-icons/fa';
 
 const TagInputAreaDiv = styled.div`
-  position: sticky;
-  left: 0;
-  width: 100%;
-  box-sizing: border-box;
-  padding-left: 3%;
-  display:flex;
-  padding-top: 17px;
-  padding-right: 10%;
+    position: sticky;
+    left: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 3%;
+    display: flex;
+    padding-top: 22px;
+    padding-right: 7%;
+    align-items: center;
 `;
 
-const SearchIconAreaDiv = styled.div`
-  background-color:#FF9900;
+const AddIconAreaDiv = styled.div`
   width: 4%;
   height: 37px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 15%;
-  border-bottom-right-radius: 15%;
-  color:#213547;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 1%;
+  color: white;
 `;
 
-type propsType = {
-    videoId: string,
-}
 
-
-export function FavoriteTagCreateInput(props: propsType) {
+export function FavoriteTagCreateInput() {
 
     console.log("FavoriteTagCreateInput render");
 
@@ -46,23 +39,26 @@ export function FavoriteTagCreateInput(props: propsType) {
         addTagList,
         addTag,
         deleteTag,
+        addTagEditList,
     } = useFavoriteTagCreateInput();
 
     return (
         <TagInputAreaDiv>
+            {/* タグ入力欄 */}
             <TagsComponent
                 tagList={addTagList}
                 suggestions={suggestTagList}
                 addTag={addTag}
                 deleteTag={deleteTag}
             />
-            {/* <SearchIconAreaDiv>
+            {/* 編集リスト追加ボタン */}
+            <AddIconAreaDiv>
                 <IconComponent
-                    icon={FaArrowUp}
-                    onclick={() => { addToMemo(props.videoId) }}
-                    size="70%"
+                    icon={FaPlusSquare}
+                    onclick={addTagEditList}
+                    size="90%"
                 />
-            </SearchIconAreaDiv> */}
+            </AddIconAreaDiv>
         </TagInputAreaDiv>
     );
 }

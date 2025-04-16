@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
 
 //引数の型
@@ -7,8 +7,8 @@ type propsType = {
     onclick?: () => void,
     onMouseEnter?: () => void,
     onMouseLeave?: () => void,
-    btnStyle?: { [key: string]: string },
-    spanStyle?: { [key: string]: string },
+    btnStyle?: CSSProperties,
+    spanStyle?: CSSProperties,
     width?: string,
     heght?: string,
     isDispCross?: boolean,
@@ -40,6 +40,7 @@ const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?:
         color: #fff;
         background-color: #4f46e5;
     }
+    text-align: left;
 `;
 
 //spanの基本スタイル

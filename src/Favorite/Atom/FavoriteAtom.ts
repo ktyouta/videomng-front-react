@@ -1,4 +1,5 @@
 import { comboType } from "../../Common/Component/ComboComponent";
+import { tagType } from "../../Common/Component/TagsComponent";
 import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
@@ -39,3 +40,5 @@ export const selectedFavoriteVideoviewStatusAtom = atom<string>(``);
 export const favoriteVideoApiUrlAtom = atom<string>(``);
 // タグリスト
 export const favoriteVideoTagListAtom = atom<FavoriteVideoTagType[]>();
+// タグ編集リスト
+export const favoriteVideoTagEditListAtom = atom<tagType[]>([]);

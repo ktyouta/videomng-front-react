@@ -11,6 +11,7 @@ import { FavoriteMemoHeader } from "./FavoriteMemoHeader";
 import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagEditFooter } from "./FavoriteTagEditFooter";
+import { FavoriteTagEditList } from "./FavoriteTagEditList";
 
 
 const Parent = styled.div`
@@ -34,11 +35,9 @@ export function FavoriteTagEdit(props: propsType) {
   return (
     <Parent>
       {/* 入力欄 */}
-      <FavoriteTagCreateInput
-        videoId={props.videoId}
-      />
+      <FavoriteTagCreateInput />
       {/* タグリスト */}
-      <FavoriteTagList />
+      <FavoriteTagEditList />
       {/* タグフッター */}
       <FavoriteTagEditFooter
         changeView={props.changeView}

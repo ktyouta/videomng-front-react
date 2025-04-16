@@ -36,9 +36,8 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     align-items: center;
 `;
 
-
 type propsType = {
-    updateFavoriteVideo: () => void,
+    changeView: () => void,
 }
 
 
@@ -48,13 +47,14 @@ export function FavoriteTagEditUpdateIcon(props: propsType) {
         isOpenUpdateNav,
         openUpdateNav,
         closeUpdateNav,
-    } = useFavoriteTagEditUpdateIcon();
+        udpateTag,
+    } = useFavoriteTagEditUpdateIcon({ ...props });
 
     return (
         <React.Fragment>
             <IconComponent
                 icon={FaCheck}
-                onclick={props.updateFavoriteVideo}
+                onclick={udpateTag}
                 size="75%"
                 style={{ color: "white" }}
                 onMouseEnter={openUpdateNav}

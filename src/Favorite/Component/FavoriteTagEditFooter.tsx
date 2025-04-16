@@ -48,7 +48,7 @@ export function FavoriteTagEditFooter(props: propsType) {
                 />
                 {/* 更新アイコン */}
                 <FavoriteTagEditUpdateIcon
-                    updateFavoriteVideo={() => { }}
+                    changeView={props.changeView}
                 />
             </BlockIconDiv>
         </MemoInputAreaDiv>

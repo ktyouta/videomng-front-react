@@ -7,13 +7,16 @@ import { useFavoriteTagList } from "../Hook/useFavoriteTagList";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import React from "react";
 import TagButtonComponent from "../../Common/Component/TagButtonComponent";
+import { useFavoriteTagEditList } from "../Hook/useFavoriteTagEditList";
+import { tagType } from "../../Common/Component/TagsComponent";
 
 
 const Parent = styled.div`
   width: 100%;
-  height: 90%;
+  height: 81%;
   box-sizing: border-box;
   padding-left: 2%;
+  padding-top: 2%;
   padding-right: 2%;
   color:white;
 `;
@@ -24,35 +27,34 @@ const TagListAreaDiv = styled.div`
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 0% 1% 1% 1%;
+  padding: 2% 1% 1% 1%;
 `;
 
-const TagListAreaTitleDiv = styled.div`
-  box-sizing: border-box;
-  margin-bottom: 2%;
-`;
 
-export function FavoriteTagList() {
+export function FavoriteTagEditList() {
 
-    console.log("FavoriteTagList render");
+    console.log("FavoriteTagEditList render");
 
-    const { favoriteVideoTagList } = useFavoriteTagList();
+    const {
+        favoriteVideoTagEditList,
+        deleteTag } = useFavoriteTagEditList();
 
     return (
         <Parent>
             {
-                favoriteVideoTagList && favoriteVideoTagList.length > 0 ?
+                favoriteVideoTagEditList && favoriteVideoTagEditList.length > 0 ?
                     <TagListAreaDiv>
-                        <TagListAreaTitleDiv>
-                            設定タグ
-                        </TagListAreaTitleDiv>
                         {
-                            favoriteVideoTagList.map((e: FavoriteVideoTagType) => {
+                            favoriteVideoTagEditList.map((e: tagType, index: number) => {
                                 return (
                                     <TagButtonComponent
-                                        title={e.tagName}
+                                        title={e.label}
                                         btnStyle={{
                                             marginRight: "15px"
+                                        }}
+                                        isDispCross={true}
+                                        onclick={() => {
+                                            deleteTag(index);
                                         }}
                                     />
                                 )
