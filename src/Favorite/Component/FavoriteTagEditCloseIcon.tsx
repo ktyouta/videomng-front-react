@@ -13,9 +13,7 @@ import { useFavoriteDetailSettingEditIcon } from "../Hook/useFavoriteDetailSetti
 import { MdEdit } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { useFavoriteDetailSettingCloseIcon } from "../Hook/useFavoriteDetailSettingCloseIcon";
-import { FaCheck } from "react-icons/fa6";
-import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
-import { useFavoriteDetailSettingUpdateIcon } from "../Hook/useFavoriteDetailSettingUpdateIcon";
+import { useFavoriteTagEditCloseIcon } from "../Hook/useFavoriteTagEditCloseIcon";
 
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
@@ -27,7 +25,7 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: 20px;
+    left: -17px;
     box-sizing: border-box;
     color: black;
     -webkit-box-pack: center;
@@ -38,32 +36,32 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
 
 
 type propsType = {
-    updateFavoriteVideo: () => void,
+    changeView: () => void,
 }
 
 
-export function FavoriteDetailSettingUpdateIcon(props: propsType) {
+export function FavoriteTagEditCloseIcon(props: propsType) {
 
     const {
-        isOpenUpdateNav,
-        openUpdateNav,
-        closeUpdateNav,
-    } = useFavoriteDetailSettingUpdateIcon();
+        isOpenCloseNav,
+        openCloseNav,
+        closeCloseNav,
+    } = useFavoriteTagEditCloseIcon();
 
     return (
         <React.Fragment>
             <IconComponent
-                icon={FaCheck}
-                onclick={props.updateFavoriteVideo}
+                icon={RxCross1}
+                onclick={props.changeView}
                 size="75%"
                 style={{ color: "white" }}
-                onMouseEnter={openUpdateNav}
-                onMouseLeave={closeUpdateNav}
+                onMouseEnter={openCloseNav}
+                onMouseLeave={closeCloseNav}
             />
             <BlockNavDiv
-                isDisplay={isOpenUpdateNav}
+                isDisplay={isOpenCloseNav}
             >
-                更新
+                閉じる
             </BlockNavDiv>
         </React.Fragment>
 

@@ -6,11 +6,12 @@ import LoadingBase from "../../Common/Component/LoadingBase";
 import { useFavoriteTagList } from "../Hook/useFavoriteTagList";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import React from "react";
+import TagButtonComponent from "../../Common/Component/TagButtonComponent";
 
 
 const Parent = styled.div`
   width: 100%;
-  height: 90%;
+  height: 81%;
   box-sizing: border-box;
   padding-left: 2%;
   padding-top: 2%;
@@ -43,7 +44,9 @@ export function FavoriteTagList() {
                             favoriteVideoTagList.map((e: FavoriteVideoTagType) => {
                                 return (
                                     <React.Fragment>
-
+                                        <TagButtonComponent
+                                            title={e.tagName}
+                                        />
                                     </React.Fragment>
                                 )
                             })

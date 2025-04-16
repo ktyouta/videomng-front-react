@@ -10,6 +10,7 @@ import { FavoriteMemoCreateInput } from "./FavoriteMemoCreateInput";
 import { FavoriteMemoHeader } from "./FavoriteMemoHeader";
 import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
+import { FavoriteTagEditFooter } from "./FavoriteTagEditFooter";
 
 
 const Parent = styled.div`
@@ -23,6 +24,7 @@ const Parent = styled.div`
 
 type propsType = {
   videoId: string,
+  changeView: () => void,
 }
 
 export function FavoriteTagEdit(props: propsType) {
@@ -37,6 +39,10 @@ export function FavoriteTagEdit(props: propsType) {
       />
       {/* タグリスト */}
       <FavoriteTagList />
+      {/* タグフッター */}
+      <FavoriteTagEditFooter
+        changeView={props.changeView}
+      />
     </Parent>
   );
 }

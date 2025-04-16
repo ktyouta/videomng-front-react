@@ -3,9 +3,11 @@ import BaseTextbox from "../../Common/Component/BaseTextbox";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { FaArrowUp } from "react-icons/fa";
 import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
+import { useFavoriteTagCreateInput } from "../Hook/useFavoriteTagCreateInput";
+import TagsComponent, { tagType } from "../../Common/Component/TagsComponent";
 
 
-const MemoInputAreaDiv = styled.div`
+const TagInputAreaDiv = styled.div`
   position: sticky;
   left: 0;
   width: 100%;
@@ -13,6 +15,7 @@ const MemoInputAreaDiv = styled.div`
   padding-left: 3%;
   display:flex;
   padding-top: 17px;
+  padding-right: 10%;
 `;
 
 const SearchIconAreaDiv = styled.div`
@@ -39,31 +42,27 @@ export function FavoriteTagCreateInput(props: propsType) {
     console.log("FavoriteTagCreateInput render");
 
     const {
-        inputMemo,
-        setInputMemo,
-        addToMemo
-    } = useFavoriteMemoCreateInput();
+        suggestTagList,
+        addTagList,
+        addTag,
+        deleteTag,
+    } = useFavoriteTagCreateInput();
 
     return (
-        <MemoInputAreaDiv>
-            <BaseTextbox
-                textWidth="92%"
-                placeholder="メモ"
-                value={inputMemo}
-                onChange={setInputMemo}
-                style={{
-                    borderTopRightRadius: 0,
-                    borderBottomRightRadius: 0,
-                    height: "33px",
-                }}
+        <TagInputAreaDiv>
+            <TagsComponent
+                tagList={addTagList}
+                suggestions={suggestTagList}
+                addTag={addTag}
+                deleteTag={deleteTag}
             />
-            <SearchIconAreaDiv>
+            {/* <SearchIconAreaDiv>
                 <IconComponent
                     icon={FaArrowUp}
                     onclick={() => { addToMemo(props.videoId) }}
                     size="70%"
                 />
-            </SearchIconAreaDiv>
-        </MemoInputAreaDiv>
+            </SearchIconAreaDiv> */}
+        </TagInputAreaDiv>
     );
 }

@@ -15,7 +15,7 @@ import { RxCross1 } from "react-icons/rx";
 import { useFavoriteDetailSettingCloseIcon } from "../Hook/useFavoriteDetailSettingCloseIcon";
 import { FaCheck } from "react-icons/fa6";
 import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
-import { useFavoriteDetailSettingUpdateIcon } from "../Hook/useFavoriteDetailSettingUpdateIcon";
+import { useFavoriteTagEditUpdateIcon } from "../Hook/useFavoriteTagEditUpdateIcon";
 
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
@@ -42,13 +42,13 @@ type propsType = {
 }
 
 
-export function FavoriteDetailSettingUpdateIcon(props: propsType) {
+export function FavoriteTagEditUpdateIcon(props: propsType) {
 
     const {
         isOpenUpdateNav,
         openUpdateNav,
         closeUpdateNav,
-    } = useFavoriteDetailSettingUpdateIcon();
+    } = useFavoriteTagEditUpdateIcon();
 
     return (
         <React.Fragment>

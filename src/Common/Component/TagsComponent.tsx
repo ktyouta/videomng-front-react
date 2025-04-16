@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { ReactTags } from 'react-tag-autocomplete'
-import './css/TagsComponent.css';
+import '../css/TagsComponent.css';
 
 //タグの型
 export type tagType = {

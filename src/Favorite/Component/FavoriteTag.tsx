@@ -55,6 +55,7 @@ export function FavoriteTag(props: propsType) {
         editMode === TAG_EDIT_MODE.EDIT &&
         <FavoriteTagEdit
           videoId={props.videoId}
+          changeView={changeView}
         />
       }
 
