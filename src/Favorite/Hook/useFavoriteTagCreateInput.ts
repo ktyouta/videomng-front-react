@@ -24,7 +24,7 @@ export function useFavoriteTagCreateInput() {
     // サジェスト用タグリストを取得
     useQueryWrapper<FavoriteVideoTagResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_TAG}`,
+            url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
             afSuccessFn: (response: FavoriteVideoTagResponseType) => {
                 setSuggestTagList(response.data.map((e: FavoriteVideoTagType) => {
                     return {

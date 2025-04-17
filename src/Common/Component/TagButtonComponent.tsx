@@ -26,16 +26,6 @@ const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?:
     font-size: inherit;
     line-height: inherit;
     cursor:pointer;
-    &:after {
-        content: "";
-        display: inline-block;
-        width: ${({ isDispCross }) => (isDispCross ? ".65rem" : "")};
-        height: ${({ isDispCross }) => (isDispCross ? ".65rem" : "")};
-        clip-path: ${({ isDispCross }) => (isDispCross ? "polygon(10% 0, 0 10%, 40% 50%, 0 90%, 10% 100%, 50% 60%, 90% 100%, 100% 90%, 60% 50%, 100% 10%, 90% 0, 50% 40%)" : "")};
-        margin-left: .5rem;
-        font-size: .875rem;
-        background-color: ${({ isDispCross }) => (isDispCross ? "#7c7d86" : "")};
-    };
     &:hover {
         color: #fff;
         background-color: #4f46e5;
@@ -47,6 +37,19 @@ const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?:
 const TitleSpan = styled.span`
     margin: 0 .25rem .25rem 0;
     background-color: inherit;
+`;
+
+const CrossButtonSpan = styled.span`
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #7c7d86;
+    padding: 0;
+    &:hover {
+        color: #fff;
+    }
+    outline: none;
+    line-height: 1;
 `;
 
 
@@ -64,6 +67,11 @@ const TagButtonComponent = (props: propsType) => {
             >
                 {props.title}
             </TitleSpan>
+            {props.isDispCross && (
+                <CrossButtonSpan >
+                    ×
+                </CrossButtonSpan>
+            )}
         </BaseButton>
     )
 };
