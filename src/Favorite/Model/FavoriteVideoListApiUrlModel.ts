@@ -4,6 +4,7 @@ import ENV from "../../env.json";
 type porpsType = {
     viewStatus?: string,
     videoCategory?: string,
+    videoTag?: string,
 }
 
 export class FavoriteVideoListApiUrlModel {
@@ -14,6 +15,8 @@ export class FavoriteVideoListApiUrlModel {
     private static readonly QUERY_KEY_VIEW_STATUS = `viewstatus`;
     // クエリパラメータのキー(カテゴリ)
     private static readonly QUERY_KEY_CATEGORY = `videocategory`;
+    // クエリパラメータのキー(タグ)
+    private static readonly QUERY_KEY_TAG = `videotag`;
     // 動画一覧取得パス
     private readonly _apiPath: string;
 
@@ -27,6 +30,10 @@ export class FavoriteVideoListApiUrlModel {
 
         if (props.videoCategory) {
             queryParam += `${FavoriteVideoListApiUrlModel.QUERY_KEY_CATEGORY}=${props.videoCategory}`;
+        }
+
+        if (props.videoTag) {
+            queryParam += `${FavoriteVideoListApiUrlModel.QUERY_KEY_TAG}=${props.videoTag}`;
         }
 
         this._apiPath = `${FavoriteVideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam ? `?${queryParam}` : ``}`;

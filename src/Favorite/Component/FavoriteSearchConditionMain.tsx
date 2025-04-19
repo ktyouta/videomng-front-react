@@ -53,7 +53,10 @@ export function FavoriteSearchConditionMain(props: propsType) {
         viewStatusSelectList,
         selectedFavoriteVideoviewStatus,
         changeVideoCategory,
-        changeViewStatus, } = useFavoriteSearchConditionMain({ ...props });
+        changeViewStatus,
+        tagMasterList,
+        changeVideoTag,
+        selectedFavoriteVideoTag, } = useFavoriteSearchConditionMain({ ...props });
 
     // カテゴリリスト
     const categoryComboList: comboType[] | undefined = videoCategory?.items.map((e: VideoCategoryItemType) => {
@@ -96,6 +99,22 @@ export function FavoriteSearchConditionMain(props: propsType) {
                             combo={viewStatusSelectList}
                             initValue={selectedFavoriteVideoviewStatus ?? viewStatusSelectList[0].value}
                             onChange={changeViewStatus}
+                            width="68%"
+                            minWidth="8%"
+                            height="39px"
+                        />
+                    </InputDiv>
+                }
+                {
+                    tagMasterList && tagMasterList.length > 0 &&
+                    <InputDiv>
+                        <InputLabel>
+                            タグ
+                        </InputLabel>
+                        <ComboComponent
+                            combo={tagMasterList}
+                            initValue={selectedFavoriteVideoTag ?? tagMasterList[0].value}
+                            onChange={changeVideoTag}
                             width="68%"
                             minWidth="8%"
                             height="39px"

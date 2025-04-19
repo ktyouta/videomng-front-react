@@ -42,3 +42,5 @@ export const favoriteVideoApiUrlAtom = atom<string>(``);
 export const favoriteVideoTagListAtom = atom<FavoriteVideoTagType[]>();
 // タグ編集リスト
 export const favoriteVideoTagEditListAtom = atom<tagType[]>([]);
+// 動画一覧検索条件選択値(タグ)
+export const selectedFavoriteVideoTagAtom = atom<string>(``);

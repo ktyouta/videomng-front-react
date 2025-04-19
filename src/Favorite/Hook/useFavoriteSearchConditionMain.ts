@@ -1,9 +1,16 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
-import { selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoviewStatusAtom, viewStatusListAtom } from "../Atom/FavoriteAtom";
+import { selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom, viewStatusListAtom } from "../Atom/FavoriteAtom";
 import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { objectDeepCopy } from "../../Common/Function/CommonFunction";
+import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
+import { FavoriteVideoTagResponseType } from "../Type/FavoriteVideoTagResponseType";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { tagType } from "../../Common/Component/TagsComponent";
+import ENV from "../../env.json";
+import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
+import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 
 
 type propsType = {
@@ -16,12 +23,16 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const videoCategory = useAtomValue(videoCategoryAtom);
     // 動画一覧検索条件選択値(カテゴリ)
     const [selectedFavoriteVideoCategory, setSelectedFavoriteVideoCategory] = useAtom(selectedFavoriteVideoCategoryAtom);
-    // 視聴状況
+    // 動画一覧検索条件選択値(視聴状況)
     const [selectedFavoriteVideoviewStatus, setSelectedFavoriteVideoviewStatus] = useAtom(selectedFavoriteVideoviewStatusAtom);
     // 視聴状況リスト
     const viewStatusList = useAtomValue(viewStatusListAtom);
     // 視聴状況選択リスト
     const [viewStatusSelectList, setViewStatusSelectList] = useState<comboType[]>();
+    // 動画一覧検索条件選択値(タグ)
+    const [selectedFavoriteVideoTag, setSelectedFavoriteVideoTag] = useAtom(selectedFavoriteVideoTagAtom);
+    // タグマスタリスト
+    const [tagMasterList, setTagMasterList] = useState<comboType[]>([]);
 
 
     /**
@@ -49,6 +60,30 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     }, viewStatusList);
 
 
+    // タグマスタリストを取得
+    useQueryWrapper<FavoriteVideoTagResponseType>(
+        {
+            url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
+            afSuccessFn: (response: FavoriteVideoTagResponseType) => {
+
+                const tagComboList = response.data.map((e: FavoriteVideoTagType) => {
+                    return {
+                        value: e.tagName,
+                        label: e.tagName,
+                    }
+                });
+
+                setTagMasterList([{
+                    value: ``,
+                    label: `すべて`,
+                }, ...tagComboList]);
+            },
+            afErrorFn: (res) => {
+                const errRes = res as errResType;
+            }
+        }
+    );
+
     /**
      * カテゴリ選択イベント
      * @param selectedcCategory 
@@ -67,6 +102,15 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         props.close();
     }
 
+    /**
+     * タグ選択イベント
+     * @param selectedcCategory 
+     */
+    function changeVideoTag(selectedVideoTag: string,) {
+        setSelectedFavoriteVideoTag(selectedVideoTag);
+        props.close();
+    }
+
     return {
         videoCategory,
         selectedFavoriteVideoCategory,
@@ -74,5 +118,8 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         selectedFavoriteVideoviewStatus,
         changeVideoCategory,
         changeViewStatus,
+        selectedFavoriteVideoTag,
+        tagMasterList,
+        changeVideoTag,
     };
 }
