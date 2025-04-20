@@ -15,7 +15,7 @@ export function useMain() {
     // ログインフラグ
     const setIsLogin = useSetGlobalAtom(isLoginAtom);
     // 動画カテゴリ
-    const setVideoCategory = useSetAtom(videoCategoryAtom);
+    const setVideoCategory = useSetGlobalAtom(videoCategoryAtom);
 
     // 動画カテゴリを取得
     useQueryWrapper<VideoCategoryResponseType>(

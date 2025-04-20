@@ -17,6 +17,7 @@ function QueryApp() {
     return (
         <React.Fragment>
             <Routes>
+                <Route path="/" element={<Navigate to={`${HOME_ROOT_PATH}`} />} />
                 <Route
                     path={LOGIN_PATH}
                     element={isLogin ? <Navigate to={HOME_ROOT_PATH} /> : <Login />}

@@ -3,6 +3,7 @@ import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
 import { useMemo, useState } from "react";
 import { EDIT_MODE } from "../Const/FavoriteConst";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
+import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 
 
 type propsType = {
@@ -14,7 +15,7 @@ export function useFavoriteDetailSetting(props: propsType) {
     // 動画詳細情報
     const videDetail = props.videoDetail;
     // 動画カテゴリ
-    const videoCategory = useAtomValue(videoCategoryAtom);
+    const videoCategory = useGlobalAtomValue(videoCategoryAtom);
     // 編集モード
     const [editMode, setEditMode] = useState(EDIT_MODE.VIEW);
     // 要約

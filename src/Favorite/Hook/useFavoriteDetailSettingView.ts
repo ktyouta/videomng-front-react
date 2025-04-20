@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
 import { useMemo, useState } from "react";
 import { EDIT_MODE } from "../Const/FavoriteConst";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";

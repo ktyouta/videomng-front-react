@@ -16,14 +16,14 @@ export function Home() {
         <React.Fragment>
             <Routes>
                 <Route
-                    path={HOME_ROOT_PATH}
+                    path={`/`}
                     element={
                         <HomeVideoList />
                     }
                 >
                 </Route>
                 <Route
-                    path={videoId}
+                    path={`${videoId}`}
                     element={
                         <HomeVideoDetail />
                     }></Route>

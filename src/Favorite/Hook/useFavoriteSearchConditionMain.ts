@@ -11,6 +11,7 @@ import { tagType } from "../../Common/Component/TagsComponent";
 import ENV from "../../env.json";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 
 
 type propsType = {
@@ -20,7 +21,7 @@ type propsType = {
 export function useFavoriteSearchConditionMain(props: propsType) {
 
     // 動画カテゴリ
-    const videoCategory = useAtomValue(videoCategoryAtom);
+    const videoCategory = useGlobalAtomValue(videoCategoryAtom);
     // 動画一覧検索条件選択値(カテゴリ)
     const [selectedFavoriteVideoCategory, setSelectedFavoriteVideoCategory] = useAtom(selectedFavoriteVideoCategoryAtom);
     // 動画一覧検索条件選択値(視聴状況)

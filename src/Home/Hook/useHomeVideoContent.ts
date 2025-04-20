@@ -22,7 +22,7 @@ export function useHomeVideoContent() {
         }
 
         setVideoId(id);
-        navigate(`${HOME_ROOT_PATH}${id}`);
+        navigate(`${HOME_ROOT_PATH}/${id}`);
     }
 
     return {

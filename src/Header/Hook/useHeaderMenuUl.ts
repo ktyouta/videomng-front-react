@@ -24,8 +24,7 @@ export function useHeaderMenuUl() {
             return;
         }
 
-        const mainPath = pathArray[1] ? `/${pathArray[1]}` : HOME_ROOT_PATH;
-        setNowPath(mainPath);
+        setNowPath(`/${pathArray[1]}`);
     }, [location]);
 
     return {
