@@ -11,6 +11,7 @@ import { useSetAtom } from 'jotai';
 import { isLoginAtom } from '../../Common/Atom/CommonAtom';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { LoginResponseType } from '../Type/LoginResponseType';
+import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 
 
 export function useLogin() {
@@ -22,7 +23,7 @@ export function useLogin() {
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const setIsLogin = useSetAtom(isLoginAtom);
+    const setIsLogin = useSetGlobalAtom(isLoginAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
 

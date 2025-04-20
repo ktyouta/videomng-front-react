@@ -6,6 +6,7 @@ import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { FAVORITE_ROOT_PATH } from "../../Favorite/Const/FavoriteConst";
 import { Favorite } from "../../Favorite/Component/Favorite";
 import { useContent } from "../Hook/useContent";
+import { Provider } from "jotai";
 
 const Parent = styled.div`
   width: 100%;
@@ -24,13 +25,13 @@ export function Content() {
             <Routes>
                 <Route
                     path={`${HOME_ROOT_PATH}*`}
-                    element={<Home />}
+                    element={<Provider><Home /></Provider>}
                 />
                 {
                     isLogin &&
                     <Route
                         path={`${FAVORITE_ROOT_PATH}/*`}
-                        element={<Favorite />}
+                        element={<Provider><Favorite /></Provider>}
                     />
                 }
             </Routes>

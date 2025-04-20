@@ -7,12 +7,13 @@ import { videoCategoryAtom } from "../Atom/MainAtom";
 import { VideoCategoryResponseType } from "../Type/VideoCategoryResponseType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoCategoryItemType } from "../Type/VideoCategoryItemType";
+import { useSetGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 
 
 export function useMain() {
 
     // ログインフラグ
-    const setIsLogin = useSetAtom(isLoginAtom);
+    const setIsLogin = useSetGlobalAtom(isLoginAtom);
     // 動画カテゴリ
     const setVideoCategory = useSetAtom(videoCategoryAtom);
 

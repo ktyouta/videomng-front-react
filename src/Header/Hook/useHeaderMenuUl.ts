@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { useAtomValue } from "jotai";
 import { isLoginAtom } from "../../Common/Atom/CommonAtom";
+import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 
 export function useHeaderMenuUl() {
 
@@ -10,7 +11,7 @@ export function useHeaderMenuUl() {
     // 現在のパス
     const [nowPath, setNowPath] = useState<string>();
     // ログインフラグ
-    const isLogin = useAtomValue(isLoginAtom);
+    const isLogin = useGlobalAtomValue(isLoginAtom);
 
     /**
      * URL切り替え時のイベント

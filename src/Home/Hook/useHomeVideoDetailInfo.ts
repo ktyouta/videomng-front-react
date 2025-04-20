@@ -10,6 +10,7 @@ import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { AddToFavoriteRequestType } from "../Type/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
+import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 
 
 type propsType = {
@@ -22,7 +23,7 @@ export function useHomeVideoDetailInfo(props: propsType) {
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const isLogin = useAtomValue(isLoginAtom);
+    const isLogin = useGlobalAtomValue(isLoginAtom);
 
 
     /**

@@ -22,11 +22,11 @@ const MemoInputAreaDiv = styled.div`
 `;
 
 const BlockIconDiv = styled.div`
-  width: 5%;
+  width: 6%;
   box-sizing: border-box;
   position:relative;
   display: flex;
-  grid-column-gap: 10px;
+  grid-column-gap: 20px;
 `;
 
 type propsType = {

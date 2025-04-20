@@ -9,6 +9,7 @@ import { useCookies } from "react-cookie";
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
+import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 
 
 export function useHeaderUserMenu() {
@@ -16,7 +17,7 @@ export function useHeaderUserMenu() {
     //ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const [isLogin, setIsLogin] = useAtom(isLoginAtom);
+    const [isLogin, setIsLogin] = useGlobalAtom(isLoginAtom);
     //ナビゲーション表示フラグ
     const {
         flag: isOpenUserMenu,
