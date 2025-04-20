@@ -43,10 +43,11 @@ export function FavoriteVideoArea() {
   const {
     videoListItem,
     isLoading,
-    errMessage, } = useFavoriteVideoArea();
+    errMessage,
+    isFetching, } = useFavoriteVideoArea();
 
   // ローディング
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <LoadingBase />;
   }
 

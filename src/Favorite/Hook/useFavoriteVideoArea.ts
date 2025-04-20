@@ -24,7 +24,7 @@ export function useFavoriteVideoArea() {
 
 
     // 動画一覧を取得
-    const { isLoading } = useQueryWrapper<FavoriteVideoListResponseType>(
+    const { isLoading, isFetching } = useQueryWrapper<FavoriteVideoListResponseType>(
         {
             url: `${new FavoriteVideoListApiUrlModel({
                 videoCategory: selectedFavoriteVideoCategory,
@@ -45,5 +45,6 @@ export function useFavoriteVideoArea() {
         videoListItem,
         isLoading,
         errMessage,
+        isFetching,
     }
 }

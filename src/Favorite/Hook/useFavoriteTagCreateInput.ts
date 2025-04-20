@@ -41,6 +41,7 @@ export function useFavoriteTagCreateInput() {
 
     useEffect(() => {
         if (!favoriteVideoTagList) {
+            setFavoriteVideoTagEditList([]);
             return;
         }
 

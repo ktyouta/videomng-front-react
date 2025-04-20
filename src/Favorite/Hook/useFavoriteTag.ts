@@ -26,7 +26,7 @@ export function useFavoriteTag() {
         {
             url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_TAG}/${favoriteVideoId}`,
             afSuccessFn: (response: FavoriteVideoTagResponseType) => {
-                setFavoriteVideoTagList(response.data);
+                setFavoriteVideoTagList(response.data ?? undefined);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
