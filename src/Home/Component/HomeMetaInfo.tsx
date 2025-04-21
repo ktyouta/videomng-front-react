@@ -87,17 +87,20 @@ export function HomeMetaInfo(props: propsType) {
                     【動画説明】
                 </TitleDiv>
                 <MetaDiv>
-                    <AccordionComponent
-                        defaultHeight={'70px'}
-                        outerStyle={{
-                            border: "solid 1px",
-                            boxSizing: "border-box",
-                            padding: "1%",
-                            borderRadius: "6px"
-                        }}
-                    >
-                        {description}
-                    </AccordionComponent>
+                    {
+                        description &&
+                        <AccordionComponent
+                            defaultHeight={'70px'}
+                            outerStyle={{
+                                border: "solid 1px",
+                                boxSizing: "border-box",
+                                padding: "1%",
+                                borderRadius: "6px"
+                            }}
+                        >
+                            {description}
+                        </AccordionComponent>
+                    }
                 </MetaDiv>
             </ContentDiv>
         </Parent>
