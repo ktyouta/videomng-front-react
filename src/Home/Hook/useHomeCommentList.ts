@@ -4,7 +4,8 @@ import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
 import { HomeVideoCommentThreadResponseType } from "../Type/HomeVideoCommentThreadResponseType";
-import { homeVideoCommentListAtom, videoIdAtom } from "../Atom/HomeAtom";
+import { homeVideoCommentListAtom, } from "../Atom/HomeAtom";
+import { VideoIdContext } from "../Component/Home";
 
 
 export function useHomeCommentList() {
@@ -14,7 +15,7 @@ export function useHomeCommentList() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID
-    const videoId = useAtomValue(videoIdAtom);
+    const videoId = VideoIdContext.useCtx();
 
 
     // コメント情報を取得

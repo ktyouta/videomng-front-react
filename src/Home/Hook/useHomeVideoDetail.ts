@@ -1,16 +1,17 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../Type/VideoDetailResponseType";
-import { videoDetailItemAtom, videoIdAtom } from "../Atom/HomeAtom";
+import { videoDetailItemAtom } from "../Atom/HomeAtom";
 import { VideoDetailApiUrlModel } from "../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { VideoIdContext } from "../Component/Home";
 
 export function useHomeVideoDetail() {
 
-    // 動画ID
-    const videoId = useAtomValue(videoIdAtom);
+    // お気に入り動画ID
+    const videoId = VideoIdContext.useCtx();
     // 動画詳細
     const [videoDetail, setVideoDetail] = useAtom(videoDetailItemAtom);
     //ルーティング用

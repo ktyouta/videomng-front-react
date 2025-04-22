@@ -1,11 +1,13 @@
 import { useAtomValue } from "jotai";
-import { videoIdAtom } from "../Atom/HomeAtom";
+import { useState } from "react";
 
 export function useHome() {
 
-    const videoId = useAtomValue(videoIdAtom);
+    // 動画ID
+    const [videoId, setVideoId] = useState(``);
 
     return {
-        videoId
+        videoId,
+        setVideoId,
     }
 }

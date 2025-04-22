@@ -12,8 +12,6 @@ export const videoListDataAtom = atom<VideoListDataType | undefined>();
 export const keywordAtom = atom<string>(``);
 // 動画取得用URL
 export const videoApiUrlAtom = atom<string>(``);
-// 動画ID
-export const videoIdAtom = atom<string>(``);
 // APIから取得した動画詳細
 export const videoDetailItemAtom = atom<YouTubeDataApiVideoDetailItemType>();
 // 動画リスト追加読み込み用

@@ -1,15 +1,15 @@
-import { useSetAtom } from "jotai";
-import { videoIdAtom } from "../Atom/HomeAtom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
+import { useContext } from "react";
+import { SetVideoIdContext } from "../Component/Home";
 
 
 export function useHomeVideoContent() {
 
-    // 動画ID
-    const setVideoId = useSetAtom(videoIdAtom);
     //ルーティング用
     const navigate = useNavigate();
+    // 動画ID(setter)
+    const setVideoId = SetVideoIdContext.useCtx();
 
     /**
      * 動画サムネイル、タイトルのクリックイベント
