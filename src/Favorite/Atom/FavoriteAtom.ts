@@ -28,8 +28,6 @@ export const searchKeywordCommentUrlAtom = atom<string>(``);
 export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
 // お気に入りコメントリスト
 export const favoriteCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
-// 視聴状況リスト
-export const viewStatusListAtom = atom<comboType[]>();
 // 動画一覧検索条件選択値(カテゴリ)
 export const selectedFavoriteVideoCategoryAtom = atom<string>(``);
 // 動画一覧検索条件選択値(視聴状況)

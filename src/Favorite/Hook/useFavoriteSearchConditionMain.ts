@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
-import { selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom, viewStatusListAtom } from "../Atom/FavoriteAtom";
+import { selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { objectDeepCopy } from "../../Common/Function/CommonFunction";
@@ -12,6 +12,7 @@ import ENV from "../../env.json";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
+import { ViewStatusListContext } from "../Component/Favorite";
 
 
 type propsType = {
@@ -27,7 +28,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     // 動画一覧検索条件選択値(視聴状況)
     const [selectedFavoriteVideoviewStatus, setSelectedFavoriteVideoviewStatus] = useAtom(selectedFavoriteVideoviewStatusAtom);
     // 視聴状況リスト
-    const viewStatusList = useAtomValue(viewStatusListAtom);
+    const viewStatusList = ViewStatusListContext.useCtx();
     // 視聴状況選択リスト
     const [viewStatusSelectList, setViewStatusSelectList] = useState<comboType[]>();
     // 動画一覧検索条件選択値(タグ)

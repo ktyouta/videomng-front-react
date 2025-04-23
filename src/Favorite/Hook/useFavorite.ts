@@ -1,18 +1,17 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { viewStatusListAtom } from "../Atom/FavoriteAtom";
 import { ViewStatusResponseType } from "../Type/ViewStatusResponseType";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useState } from "react";
+import { comboType } from "../../Common/Component/ComboComponent";
 
 
 export function useFavorite() {
 
     // 視聴状況リスト
-    const setViewStatusList = useSetAtom(viewStatusListAtom);
-
+    const [viewStatusList, setViewStatusList] = useState<comboType[]>([]);
     // お気に入り動画ID
     const [favoriteVideoId, setFavoriteVideoId] = useState(``);
 
@@ -37,5 +36,6 @@ export function useFavorite() {
     return {
         favoriteVideoId,
         setFavoriteVideoId,
+        viewStatusList,
     }
 }

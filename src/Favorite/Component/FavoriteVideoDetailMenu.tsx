@@ -20,6 +20,7 @@ import ComboComponent, { comboType } from "../../Common/Component/ComboComponent
 import { FavoriteMetaInfo } from "./FavoriteMetaInfo";
 import { FavoriteDetailSetting } from "./FavoriteDetailSetting";
 import { FavoriteTag } from "./FavoriteTag";
+import { Provider } from "jotai";
 
 
 const MenuParentDiv = styled.div`
@@ -80,19 +81,25 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                 {
                     // 動画情報
                     openMenuNo === MENU_NO.INFO &&
-                    <FavoriteMetaInfo
-                        videoDetail={videoDetail}
-                    />
+                    <Provider>
+                        <FavoriteMetaInfo
+                            videoDetail={videoDetail}
+                        />
+                    </Provider>
                 }
                 {
                     // メモ
                     openMenuNo === MENU_NO.MEMO &&
-                    <FavoriteMemo />
+                    <Provider>
+                        <FavoriteMemo />
+                    </Provider>
                 }
                 {
                     // 公開コメント
                     openMenuNo === MENU_NO.COMMENT &&
-                    <FavoriteComment />
+                    <Provider>
+                        <FavoriteComment />
+                    </Provider>
                 }
                 {
                     // キーワード検索(コメント)
