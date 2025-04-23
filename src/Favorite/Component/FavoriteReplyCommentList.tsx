@@ -37,7 +37,6 @@ const ReplyDiv = styled.div`
 
 type propsType = {
     replyCommentList: FavoriteVideoCommentThreadReplyCommentType[],
-    videoId: string,
 }
 
 export function FavoriteReplyCommentList(props: propsType) {

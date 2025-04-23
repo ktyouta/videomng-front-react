@@ -9,6 +9,7 @@ import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemo
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { UpdateToFavoriteVideoMemoReqestType } from "../Type/UpdateToFavoriteVideoMemoReqestType";
 import useSwitch from "../../Common/Hook/useSwitch";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 type propsType = {
@@ -22,6 +23,8 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
     const [inputMemo, setInputMemo] = useState(props.inputMemo);
     // メモ情報
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     /**
@@ -67,20 +70,20 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      * メモを更新する
      * @param videoId 
      */
-    function updateMemo(videoId: string, videoMemoSeq: number) {
+    function updateMemo(videoMemoSeq: number) {
 
         if (!inputMemo) {
             alert(`メモが入力されていません。`);
             return;
         }
 
-        if (!videoId) {
-            alert(`メモを更新できませんでした。`);
+        if (!favoriteVideoId) {
+            alert(`メモを更新できません。`);
             return;
         }
 
         const body: UpdateToFavoriteVideoMemoReqestType = {
-            videoId,
+            videoId: favoriteVideoId,
             videoMemoSeq,
             memo: inputMemo
         }

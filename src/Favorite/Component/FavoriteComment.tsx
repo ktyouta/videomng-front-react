@@ -23,11 +23,7 @@ const Parent = styled.div`
 `;
 
 
-type propsType = {
-    videoId: string,
-}
-
-export function FavoriteComment(props: propsType) {
+export function FavoriteComment() {
 
     console.log("FavoriteComment render");
 
@@ -36,9 +32,7 @@ export function FavoriteComment(props: propsType) {
             {/* コメントヘッダ */}
             <FavoriteCommentHeader />
             {/* コメントリスト */}
-            <FavoriteCommentList
-                videoId={props.videoId}
-            />
+            <FavoriteCommentList />
         </Parent>
     );
 }

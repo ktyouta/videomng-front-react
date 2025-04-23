@@ -37,7 +37,6 @@ const BtnDiv = styled.div`
 
 type propsType = {
     videoDetail: FavoriteVideoDetailDataType | undefined,
-    videoId: string
 }
 
 
@@ -48,7 +47,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     const {
         deleteFavoriteVide,
         play,
-    } = useFavoriteVideoDetailInfo({ ...props });
+    } = useFavoriteVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
     const item = videoDetail?.item;

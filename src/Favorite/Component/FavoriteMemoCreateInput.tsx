@@ -29,12 +29,8 @@ const SearchIconAreaDiv = styled.div`
   justify-content: center;
 `;
 
-type propsType = {
-    videoId: string,
-}
 
-
-export function FavoriteMemoCreateInput(props: propsType) {
+export function FavoriteMemoCreateInput() {
 
     console.log("FavoriteMemoCreateInput render");
 
@@ -60,7 +56,7 @@ export function FavoriteMemoCreateInput(props: propsType) {
             <SearchIconAreaDiv>
                 <IconComponent
                     icon={FaArrowUp}
-                    onclick={() => { addToMemo(props.videoId) }}
+                    onclick={() => { addToMemo() }}
                     size="70%"
                 />
             </SearchIconAreaDiv>

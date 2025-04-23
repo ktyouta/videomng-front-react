@@ -40,7 +40,6 @@ const MetaDiv = styled.div`
 
 
 type propsType = {
-    videoId: string,
     videoDetail: FavoriteVideoDetailDataType | undefined,
 }
 

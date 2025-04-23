@@ -3,10 +3,11 @@ import { TAG_EDIT_MODE } from "../Const/FavoriteConst";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
-import { favoriteVideoIdAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
 import { useAtomValue, useSetAtom } from "jotai";
 import { FavoriteVideoTagResponseType } from "../Type/FavoriteVideoTagResponseType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 export function useFavoriteTag() {
@@ -14,7 +15,7 @@ export function useFavoriteTag() {
     // 編集フラグ
     const [editMode, setEditMode] = useState(TAG_EDIT_MODE.VIEW);
     // お気に入り動画ID
-    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // タグリスト

@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { blockCommentDataAtom, favoriteVideoCommentListAtom, favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { blockCommentDataAtom, favoriteVideoCommentListAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
@@ -11,6 +11,7 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { FavoriteVideoCommentThreadType } from "../Type/FavoriteVideoCommentThreadType";
 import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
 import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 export function useFavoriteBlockCommentList() {
@@ -20,7 +21,7 @@ export function useFavoriteBlockCommentList() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID
-    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     // コメント情報を取得

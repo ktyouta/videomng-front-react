@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { favoriteVideoIdAtom, favoriteVideoMemoListAtom, favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoMemoListAtom, favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";

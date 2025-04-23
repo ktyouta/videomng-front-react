@@ -10,6 +10,7 @@ import { UpdateFavoriteVideoResponseDataType } from "../Type/UpdateFavoriteVideo
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from "../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../Type/UpdateToFavoriteVideoReqestType";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 type propsType = {
@@ -21,7 +22,6 @@ type propsType = {
     setSummary: React.Dispatch<React.SetStateAction<string>>,
     setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
     setViewStatus: React.Dispatch<React.SetStateAction<string>>,
-    videoId: string,
 }
 
 
@@ -37,13 +37,15 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const [viewStatus, setViewStatus] = useState(props.viewStatus);
     // 視聴状況リスト
     const viewStatusList = useAtomValue(viewStatusListAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     /**
      * お気に入り動画更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}/${props.videoId}`,
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<UpdateFavoriteVideoResponseDataType>) => {

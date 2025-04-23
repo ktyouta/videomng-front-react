@@ -14,8 +14,6 @@ import { atom } from "jotai";
 
 // APIから取得した動画リスト
 export const favoriteVideoListAtom = atom<FavoriteVideoListMergedType[] | undefined>();
-// 動画ID
-export const favoriteVideoIdAtom = atom<string>(``);
 // APIから取得した動画詳細
 export const favoriteVideoDetailItemAtom = atom<FavoriteVideoDetailDataType>();
 // メモ情報

@@ -20,24 +20,16 @@ const Parent = styled.div`
 `;
 
 
-type propsType = {
-  videoId: string,
-}
-
-export function FavoriteMemo(props: propsType) {
+export function FavoriteMemo() {
 
   console.log("FavoriteMemo render");
 
   return (
     <Parent>
       {/* メモリスト */}
-      <FavoriteMemoList
-        videoId={props.videoId}
-      />
+      <FavoriteMemoList />
       {/* 入力欄 */}
-      <FavoriteMemoCreateInput
-        videoId={props.videoId}
-      />
+      <FavoriteMemoCreateInput />
     </Parent>
   );
 }

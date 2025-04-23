@@ -31,7 +31,6 @@ const EditIconAreaDiv = styled.div`
 
 
 type propsType = {
-    videoId: string,
     videoMemoSeq: number,
     closeEdit: () => void,
     inputMemo: string,
@@ -66,7 +65,7 @@ export function FavoriteMemoEditInput(props: propsType) {
                 />
                 {/* 更新 */}
                 <FavoriteMemoUpdateIconArea
-                    updateMemo={() => { updateMemo(props.videoId, props.videoMemoSeq); }}
+                    updateMemo={() => { updateMemo(props.videoMemoSeq); }}
                 />
             </EditIconAreaDiv>
         </MemoInputAreaDiv>

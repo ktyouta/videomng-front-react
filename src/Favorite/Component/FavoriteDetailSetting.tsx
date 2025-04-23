@@ -30,7 +30,6 @@ const Parent = styled.div`
 
 
 type propsType = {
-    videoId: string,
     videoDetail: FavoriteVideoDetailDataType,
 }
 
@@ -76,7 +75,6 @@ export function FavoriteDetailSetting(props: propsType) {
                     setSummary={setSummary}
                     setCategorys={setCategorys}
                     setViewStatus={setViewStatus}
-                    videoId={props.videoId}
                 />
             }
         </Parent>

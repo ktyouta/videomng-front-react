@@ -67,7 +67,6 @@ type propsType = {
     setSummary: React.Dispatch<React.SetStateAction<string>>,
     setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
     setViewStatus: React.Dispatch<React.SetStateAction<string>>,
-    videoId: string,
 }
 
 export function FavoriteDetailSettingEdit(props: propsType) {

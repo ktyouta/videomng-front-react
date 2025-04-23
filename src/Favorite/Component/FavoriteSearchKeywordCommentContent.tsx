@@ -41,7 +41,6 @@ const MetaDiv = styled.div`
 
 type propsType = {
     searchComment: SearchKeywordCommentType,
-    videoId: string,
 }
 
 export function FavoriteSearchKeywordCommentContent(props: propsType) {

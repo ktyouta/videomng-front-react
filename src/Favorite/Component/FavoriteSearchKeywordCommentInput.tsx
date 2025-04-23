@@ -31,12 +31,9 @@ const SearchIconAreaDiv = styled.div`
   justify-content: center;
 `;
 
-type propsType = {
-    videoId: string,
-}
 
 
-export function FavoriteSearchKeywordCommentInput(props: propsType) {
+export function FavoriteSearchKeywordCommentInput() {
 
     console.log("FavoriteSearchKeywordCommentInput render");
 
@@ -62,7 +59,7 @@ export function FavoriteSearchKeywordCommentInput(props: propsType) {
             <SearchIconAreaDiv>
                 <IconComponent
                     icon={IoSearch}
-                    onclick={() => { clickSearchBtn(props.videoId) }}
+                    onclick={() => { clickSearchBtn() }}
                     size="70%"
                 />
             </SearchIconAreaDiv>

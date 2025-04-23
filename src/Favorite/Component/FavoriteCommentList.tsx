@@ -27,11 +27,8 @@ const CommentListAreaDiv = styled.div`
   padding-right: 1%;
 `;
 
-type propsType = {
-    videoId: string,
-}
 
-export function FavoriteCommentList(props: propsType) {
+export function FavoriteCommentList() {
 
     console.log("FavoriteCommentList render");
 
@@ -68,7 +65,6 @@ export function FavoriteCommentList(props: propsType) {
                                 return (
                                     <FavoriteCommentContent
                                         favoriteVideoComment={e}
-                                        videoId={props.videoId}
                                         key={key}
                                     />
                                 )

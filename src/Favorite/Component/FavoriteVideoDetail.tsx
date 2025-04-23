@@ -36,7 +36,6 @@ export function FavoriteVideoDetail() {
   console.log("FavoriteVideoDetail render");
 
   const {
-    videoId,
     isLoading,
     videoDetail,
     errMessage } = useFavoriteVideoDetail();
@@ -63,12 +62,10 @@ export function FavoriteVideoDetail() {
         {/* 動画情報 */}
         <FavoriteVideoDetailInfo
           videoDetail={videoDetail}
-          videoId={videoId}
         />
         {/* メニュー */}
         <FavoriteVideoDetailMenu
           videoDetail={videoDetail}
-          videoId={videoId}
         />
       </VideoContentDiv>
     </Parent>

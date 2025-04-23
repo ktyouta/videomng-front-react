@@ -7,6 +7,7 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { DeleteToFavoriteVideoMemoReqestType } from "../Type/DeleteToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import useSwitch from "../../Common/Hook/useSwitch";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 
@@ -16,6 +17,9 @@ export function useFavoriteMemoContent() {
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
     // メモ編集エリアの切り替えフラグ
     const { flag: isOpenEdit, on: openEdit, off: closeEdit } = useSwitch();
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+
 
     /**
      * メモ削除リクエスト
@@ -43,21 +47,20 @@ export function useFavoriteMemoContent() {
 
     /**
      * メモを削除する
-     * @param videoId 
      */
-    function deleteMemo(videoId: string, videoMemoSeq: number) {
+    function deleteMemo(videoMemoSeq: number) {
 
         if (!window.confirm(`メモを削除しますか？`)) {
             return;
         }
 
-        if (!videoId) {
+        if (!favoriteVideoId) {
             alert(`メモを削除できませんでした。`);
             return;
         }
 
         const body: DeleteToFavoriteVideoMemoReqestType = {
-            videoId,
+            videoId: favoriteVideoId,
             videoMemoSeq
         }
 

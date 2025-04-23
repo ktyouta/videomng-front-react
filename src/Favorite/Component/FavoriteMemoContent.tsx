@@ -47,7 +47,6 @@ const MetaDiv = styled.div`
 
 type propsType = {
     favoriteVideoMemo: FavoriteVideoMemoType,
-    videoId: string,
 }
 
 export function FavoriteMemoContent(props: propsType) {
@@ -73,7 +72,6 @@ export function FavoriteMemoContent(props: propsType) {
                     <React.Fragment>
                         {/* 編集中 */}
                         <FavoriteMemoEditInput
-                            videoId={props.videoId}
                             videoMemoSeq={memoSeq}
                             closeEdit={closeEdit}
                             inputMemo={memo}
@@ -96,7 +94,7 @@ export function FavoriteMemoContent(props: propsType) {
                                 />
                                 {/* 削除 */}
                                 <FavoriteMemoDeleteIconArea
-                                    deleteMemo={() => { deleteMemo(props.videoId, memoSeq) }}
+                                    deleteMemo={() => { deleteMemo(memoSeq) }}
                                 />
                             </IconDiv>
                         </LowerDiv>

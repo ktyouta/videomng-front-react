@@ -44,7 +44,6 @@ const ComboTitleSpan = styled.span`
 
 type propsType = {
     videoDetail: FavoriteVideoDetailDataType | undefined,
-    videoId: string
 }
 
 
@@ -57,9 +56,6 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         setOpenMenuNo } = useFavoriteVideoDetailMenu();
 
     const videoDetail = props.videoDetail;
-    // 動画ID
-    const videoId = props.videoId;
-
 
     return (
         <React.Fragment>
@@ -85,46 +81,36 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                     // 動画情報
                     openMenuNo === MENU_NO.INFO &&
                     <FavoriteMetaInfo
-                        videoId={videoId}
                         videoDetail={videoDetail}
                     />
                 }
                 {
                     // メモ
                     openMenuNo === MENU_NO.MEMO &&
-                    <FavoriteMemo
-                        videoId={videoId}
-                    />
+                    <FavoriteMemo />
                 }
                 {
                     // 公開コメント
                     openMenuNo === MENU_NO.COMMENT &&
-                    <FavoriteComment
-                        videoId={videoId}
-                    />
+                    <FavoriteComment />
                 }
                 {
                     // キーワード検索(コメント)
                     openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-                    <FavoriteSearchKeywordComment
-                        videoId={videoId}
-                    />
+                    <FavoriteSearchKeywordComment />
                 }
                 {
                     // 動画詳細設定
                     openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
                     videoDetail &&
                     <FavoriteDetailSetting
-                        videoId={videoId}
                         videoDetail={videoDetail}
                     />
                 }
                 {
                     // タグ
                     openMenuNo === MENU_NO.TAG &&
-                    <FavoriteTag
-                        videoId={videoId}
-                    />
+                    <FavoriteTag />
                 }
             </MenuParentDiv>
         </React.Fragment>

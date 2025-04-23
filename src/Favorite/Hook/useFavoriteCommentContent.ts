@@ -13,12 +13,15 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../Type/AddToFavoriteVideoFavoriteCommentReqestType";
 import { FavoriteVideoFavoriteCommentType } from "../Type/FavoriteVideoFavoriteCommentType";
 import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 export function useFavoriteCommentContent() {
 
     // コメント情報
     const setFavoriteVideoCommentList = useSetAtom(favoriteVideoCommentListAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
     /**
      * コメントブロックリクエスト
@@ -61,12 +64,18 @@ export function useFavoriteCommentContent() {
         }
 
         if (!commentId) {
-            alert(`ブロックできませんでした。`);
+            alert(`ブロックできません。`);
+            return;
+        }
+
+        if (!favoriteVideoId) {
+            alert(`ブロックできません。`);
             return;
         }
 
         const body: AddToFavoriteVideoBlockCommentReqestType = {
-            commentId
+            commentId,
+            videoId: favoriteVideoId
         }
 
         // リクエスト送信

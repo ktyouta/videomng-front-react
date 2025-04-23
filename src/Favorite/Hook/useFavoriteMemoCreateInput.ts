@@ -7,6 +7,7 @@ import { AddToFavoriteVideoMemoResponseType } from "../Type/AddToFavoriteVideoMe
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 export function useFavoriteMemoCreateInput() {
@@ -15,6 +16,8 @@ export function useFavoriteMemoCreateInput() {
     const [inputMemo, setInputMemo] = useState(``);
     // メモ情報
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     /**
@@ -41,22 +44,21 @@ export function useFavoriteMemoCreateInput() {
 
     /**
      * メモを登録する
-     * @param videoId 
      */
-    function addToMemo(videoId: string) {
+    function addToMemo() {
 
         if (!inputMemo) {
             alert(`メモが入力されていません。`);
             return;
         }
 
-        if (!videoId) {
-            alert(`メモを登録できませんでした。`);
+        if (!favoriteVideoId) {
+            alert(`メモを登録できません。`);
             return;
         }
 
         const body: AddToFavoriteVideoMemoReqestType = {
-            videoId,
+            videoId: favoriteVideoId,
             memo: inputMemo
         }
 

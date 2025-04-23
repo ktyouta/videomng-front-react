@@ -23,24 +23,17 @@ const Parent = styled.div`
 `;
 
 
-type propsType = {
-  videoId: string,
-}
 
-export function FavoriteSearchKeywordComment(props: propsType) {
+export function FavoriteSearchKeywordComment() {
 
   console.log("FavoriteSearchKeywordComment render");
 
   return (
     <Parent>
       {/* コメントリスト */}
-      <FavoriteSearchKeywordCommentList
-        videoId={props.videoId}
-      />
+      <FavoriteSearchKeywordCommentList />
       {/* 入力欄 */}
-      <FavoriteSearchKeywordCommentInput
-        videoId={props.videoId}
-      />
+      <FavoriteSearchKeywordCommentInput />
     </Parent>
   );
 }

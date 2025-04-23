@@ -14,12 +14,12 @@ import { AddToFavoriteVideoFavoriteCommentReqestType } from "../Type/AddToFavori
 import { FavoriteVideoFavoriteCommentType } from "../Type/FavoriteVideoFavoriteCommentType";
 import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 type propsType = {
     commentId: string,
     favoriteStatus: string,
-    videoId: string,
 }
 
 
@@ -29,6 +29,9 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     const setFavoriteVideoCommentList = useSetAtom(favoriteVideoCommentListAtom);
     // お気に入り状態
     const [favoriteStatus, setFavoriteStatus] = useState(props.favoriteStatus);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+
 
     /**
      * コメントブロックリクエスト
@@ -92,7 +95,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
 
         const body: AddToFavoriteVideoBlockCommentReqestType = {
             commentId,
-            videoId: props.videoId
+            videoId: favoriteVideoId
         }
 
         // リクエスト送信
@@ -130,7 +133,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
 
         const body: AddToFavoriteVideoFavoriteCommentReqestType = {
             commentId,
-            videoId: props.videoId
+            videoId: favoriteVideoId
         }
 
         // リクエスト送信
@@ -168,7 +171,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
 
         const body: AddToFavoriteVideoFavoriteCommentReqestType = {
             commentId,
-            videoId: props.videoId,
+            videoId: favoriteVideoId,
         }
 
         // リクエスト送信

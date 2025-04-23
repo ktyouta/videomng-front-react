@@ -53,7 +53,6 @@ const MetaDiv = styled.div`
 
 type propsType = {
     favoriteVideoComment: FavoriteVideoCommentThreadItemType,
-    videoId: string,
 }
 
 export function FavoriteCommentContent(props: propsType) {
@@ -99,7 +98,6 @@ export function FavoriteCommentContent(props: propsType) {
                     <FavoriteCommentContentIconArea
                         commentId={commentId}
                         favoriteStatus={favoriteStatus}
-                        videoId={props.videoId}
                     />
                 </IconDiv>
             </LowerDiv>
@@ -108,7 +106,6 @@ export function FavoriteCommentContent(props: propsType) {
                 replyCommentList && replyCommentList.length > 0 &&
                 <FavoriteReplyCommentList
                     replyCommentList={replyCommentList}
-                    videoId={props.videoId}
                 />
             }
         </Parent>

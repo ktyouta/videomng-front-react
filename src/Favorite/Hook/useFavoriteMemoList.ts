@@ -1,11 +1,12 @@
 import { useAtom, useAtomValue } from "jotai";
-import { favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoResponseType } from "../Type/FavoriteVideoMemoResponseType";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 export function useFavoriteMemoList() {
@@ -15,7 +16,7 @@ export function useFavoriteMemoList() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID
-    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     // メモ情報を取得

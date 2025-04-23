@@ -23,7 +23,6 @@ const Parent = styled.div`
 
 
 type propsType = {
-  videoId: string,
   changeEdit: () => void,
 }
 

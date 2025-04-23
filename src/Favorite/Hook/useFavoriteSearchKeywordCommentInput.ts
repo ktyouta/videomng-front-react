@@ -8,6 +8,7 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { SearchKeywordCommentUrlModel } from "../Model/SearchKeywordCommentUrlModel";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 export function useFavoriteSearchKeywordCommentInput() {
@@ -16,20 +17,22 @@ export function useFavoriteSearchKeywordCommentInput() {
     const [inputKeyword, setInputKeyword] = useState(``);
     // 動画取得用URL
     const setSearchKeywordCommentUrl = useSetAtom(searchKeywordCommentUrlAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     /**
      * 検索ボタン押下イベント
      * @returns 
      */
-    function clickSearchBtn(videoId: string) {
+    function clickSearchBtn() {
 
         if (!inputKeyword) {
             alert(`キーワードを入力してください。`);
             return;
         }
 
-        const searchKeywordCommentUrlModel = new SearchKeywordCommentUrlModel(inputKeyword, videoId);
+        const searchKeywordCommentUrlModel = new SearchKeywordCommentUrlModel(inputKeyword, favoriteVideoId);
         const searchKeywordCommentUrl = searchKeywordCommentUrlModel.path;
         setSearchKeywordCommentUrl(searchKeywordCommentUrl);
     }

@@ -6,23 +6,22 @@ import { useNavigate } from "react-router-dom";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useState } from "react";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
-type propsType = {
-    videoId: string
-}
 
-
-export function useFavoriteVideoDetailInfo(props: propsType) {
+export function useFavoriteVideoDetailInfo() {
 
     // ルーティング用
     const navigate = useNavigate();
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
     /**
      * お気に入り動画削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}/${props.videoId}`,
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<unknown>) => {
@@ -59,7 +58,7 @@ export function useFavoriteVideoDetailInfo(props: propsType) {
     function play() {
 
         // 動画URL
-        const videoUrlModel = new VideoUrlModel(props.videoId);
+        const videoUrlModel = new VideoUrlModel(favoriteVideoId);
         window.open(`${videoUrlModel.videoUrl}`, `_blank`);
     }
 

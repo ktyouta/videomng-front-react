@@ -25,20 +25,15 @@ const Parent = styled.div`
 `;
 
 
-type propsType = {
-  videoId: string,
-}
 
-export function FavoriteTag(props: propsType) {
+export function FavoriteTag() {
 
   console.log("FavoriteTag render");
 
   const {
     editMode,
     changeEdit,
-    changeView,
-    errMessage,
-    isLoading, } = useFavoriteTag();
+    changeView, } = useFavoriteTag();
 
   return (
     <Parent>
@@ -46,7 +41,6 @@ export function FavoriteTag(props: propsType) {
         // 閲覧
         editMode === TAG_EDIT_MODE.VIEW &&
         <FavoriteTagView
-          videoId={props.videoId}
           changeEdit={changeEdit}
         />
       }
@@ -54,7 +48,6 @@ export function FavoriteTag(props: propsType) {
         // 編集
         editMode === TAG_EDIT_MODE.EDIT &&
         <FavoriteTagEdit
-          videoId={props.videoId}
           changeView={changeView}
         />
       }

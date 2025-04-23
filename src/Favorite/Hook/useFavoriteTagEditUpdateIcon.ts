@@ -6,10 +6,11 @@ import ENV from "../../env.json";
 import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import { UpdateFavoriteVideoResponseDataType } from "../Type/UpdateFavoriteVideoResponseDataType";
-import { favoriteVideoIdAtom, favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
 import { UpdateToFavoriteVideoTagReqestType } from "../Type/UpdateToFavoriteVideoTagReqestType";
 import { tagType } from "../../Common/Component/TagsComponent";
 import { UpdateFavoriteVideoTagType } from "../Type/UpdateFavoriteVideoTagType";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 type propsType = {
@@ -23,7 +24,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
     // タグ編集リスト
     const favoriteVideoTagEditList = useAtomValue(favoriteVideoTagEditListAtom);
     // お気に入り動画ID
-    const favoriteVideoId = useAtomValue(favoriteVideoIdAtom);
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // タグリスト
     const setFavoriteVideoTagList = useSetAtom(favoriteVideoTagListAtom);
 

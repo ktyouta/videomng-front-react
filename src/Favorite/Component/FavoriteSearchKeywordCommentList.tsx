@@ -27,11 +27,8 @@ const CommentListAreaDiv = styled.div`
   padding: 2% 1% 1% 1%;
 `;
 
-type propsType = {
-    videoId: string,
-}
 
-export function FavoriteSearchKeywordCommentList(props: propsType) {
+export function FavoriteSearchKeywordCommentList() {
 
     console.log("FavoriteSearchKeywordCommentList render");
 
@@ -69,7 +66,6 @@ export function FavoriteSearchKeywordCommentList(props: propsType) {
                                     return (
                                         <FavoriteSearchKeywordCommentContent
                                             searchComment={e}
-                                            videoId={props.videoId}
                                         />
                                     )
                                 })

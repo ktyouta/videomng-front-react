@@ -24,7 +24,6 @@ const Parent = styled.div`
 
 
 type propsType = {
-  videoId: string,
   changeView: () => void,
 }
 

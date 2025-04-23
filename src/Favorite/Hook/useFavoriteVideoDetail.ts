@@ -1,17 +1,18 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
-import { favoriteVideoDetailItemAtom, favoriteVideoIdAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoDetailItemAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { FavoriteVideoDetailApiUrlModel, } from "../Model/FavoriteVideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoDetailResponseType } from "../Type/FavoriteVideoDetailResponseType";
 import { useState } from "react";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 export function useFavoriteVideoDetail() {
 
-    // 動画ID
-    const videoId = useAtomValue(favoriteVideoIdAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // 動画詳細
     const [videoDetail, setVideoDetail] = useAtom(favoriteVideoDetailItemAtom);
     // エラーメッセージ
@@ -20,7 +21,7 @@ export function useFavoriteVideoDetail() {
     // 動画詳細を取得
     const { isLoading } = useQueryWrapper<FavoriteVideoDetailResponseType>(
         {
-            url: videoId ? `${new FavoriteVideoDetailApiUrlModel(videoId).videoMngApiPath}` : ``,
+            url: favoriteVideoId ? `${new FavoriteVideoDetailApiUrlModel(favoriteVideoId).videoMngApiPath}` : ``,
             afSuccessFn: (response: FavoriteVideoDetailResponseType) => {
                 setVideoDetail(response.data);
             },
@@ -33,7 +34,7 @@ export function useFavoriteVideoDetail() {
     return {
         isLoading,
         videoDetail,
-        videoId,
+        favoriteVideoId,
         errMessage,
     };
 }
