@@ -104,20 +104,26 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                 {
                     // キーワード検索(コメント)
                     openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-                    <FavoriteSearchKeywordComment />
+                    <Provider>
+                        <FavoriteSearchKeywordComment />
+                    </Provider>
                 }
                 {
                     // 動画詳細設定
                     openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
                     videoDetail &&
-                    <FavoriteDetailSetting
-                        videoDetail={videoDetail}
-                    />
+                    <Provider>
+                        <FavoriteDetailSetting
+                            videoDetail={videoDetail}
+                        />
+                    </Provider>
                 }
                 {
                     // タグ
                     openMenuNo === MENU_NO.TAG &&
-                    <FavoriteTag />
+                    <Provider>
+                        <FavoriteTag />
+                    </Provider>
                 }
             </MenuParentDiv>
         </React.Fragment>

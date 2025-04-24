@@ -1,16 +1,14 @@
-import { useAtomValue } from 'jotai';
-import { useCookies } from 'react-cookie';
-import { isLoginAtom } from './Common/Atom/CommonAtom';
-import { useGlobalAtomValue } from './Common/Hook/useGlobalAtom';
+import { useState } from 'react';
 
 
 function useQueryApp() {
 
     // ログインフラグ
-    const isLogin = useGlobalAtomValue(isLoginAtom);
+    const [isLogin, setIsLogin] = useState(false);
 
     return {
         isLogin,
+        setIsLogin,
     }
 }
 

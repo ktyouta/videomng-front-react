@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue } from "jotai";
-import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../env.json';
@@ -11,6 +10,7 @@ import { AddToFavoriteRequestType } from "../Type/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
+import { IsLoginContext } from "../../QueryApp";
 
 
 type propsType = {
@@ -23,7 +23,7 @@ export function useHomeVideoDetailInfo(props: propsType) {
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const isLogin = useGlobalAtomValue(isLoginAtom);
+    const isLogin = IsLoginContext.useCtx();
 
 
     /**

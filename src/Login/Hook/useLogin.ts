@@ -8,10 +8,10 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { LoginRequestType } from '../Type/LoginRequestType';
 import { useSetAtom } from 'jotai';
-import { isLoginAtom } from '../../Common/Atom/CommonAtom';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { LoginResponseType } from '../Type/LoginResponseType';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
+import { SetIsLoginContext } from '../../QueryApp';
 
 
 export function useLogin() {
@@ -23,7 +23,7 @@ export function useLogin() {
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const setIsLogin = useSetGlobalAtom(isLoginAtom);
+    const setIsLogin = SetIsLoginContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
 

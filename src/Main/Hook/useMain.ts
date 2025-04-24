@@ -2,18 +2,18 @@ import { useSetAtom } from "jotai";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import ENV from "../../env.json";
-import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 import { videoCategoryAtom } from "../Atom/MainAtom";
 import { VideoCategoryResponseType } from "../Type/VideoCategoryResponseType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoCategoryItemType } from "../Type/VideoCategoryItemType";
 import { useSetGlobalAtom } from "../../Common/Hook/useGlobalAtom";
+import { SetIsLoginContext } from "../../QueryApp";
 
 
 export function useMain() {
 
     // ログインフラグ
-    const setIsLogin = useSetGlobalAtom(isLoginAtom);
+    const setIsLogin = SetIsLoginContext.useCtx();
     // 動画カテゴリ
     const setVideoCategory = useSetGlobalAtom(videoCategoryAtom);
 

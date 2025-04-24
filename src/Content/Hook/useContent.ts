@@ -1,11 +1,11 @@
 import { useAtomValue } from "jotai";
-import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
+import { IsLoginContext } from "../../QueryApp";
 
 export function useContent() {
 
     // ログインフラグ
-    const isLogin = useGlobalAtomValue(isLoginAtom);
+    const isLogin = IsLoginContext.useCtx();
 
     return {
         isLogin

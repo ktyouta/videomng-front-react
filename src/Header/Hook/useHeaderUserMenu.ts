@@ -3,13 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { LOGIN_PATH } from "../../Login/Const/LoginConst";
 import { useAtom, useAtomValue } from "jotai";
-import { isLoginAtom } from "../../Common/Atom/CommonAtom";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useCookies } from "react-cookie";
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
+import { IsLoginContext, SetIsLoginContext } from "../../QueryApp";
 
 
 export function useHeaderUserMenu() {
@@ -17,7 +17,8 @@ export function useHeaderUserMenu() {
     //ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const [isLogin, setIsLogin] = useGlobalAtom(isLoginAtom);
+    const isLogin = IsLoginContext.useCtx();
+    const setIsLogin = SetIsLoginContext.useCtx();
     //ナビゲーション表示フラグ
     const {
         flag: isOpenUserMenu,

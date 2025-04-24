@@ -6,28 +6,42 @@ import useQueryApp from './useQueryApp';
 import { LOGIN_PATH } from './Login/Const/LoginConst';
 import { Login } from './Login/Component/Login';
 import { HOME_ROOT_PATH } from './Home/Const/HomeConst';
+import { createCtx } from './Common/Function/createCtx';
+
+// ログインフラグ
+export const IsLoginContext = createCtx<boolean>();
+// ログインフラグ(setter)
+export const SetIsLoginContext = createCtx<React.Dispatch<React.SetStateAction<boolean>>>();
 
 
 function QueryApp() {
 
     console.log(`QueryApp render`);
 
-    const { isLogin } = useQueryApp();
+    const {
+        isLogin,
+        setIsLogin } = useQueryApp();
 
     return (
-        <React.Fragment>
-            <Routes>
-                <Route path="/" element={<Navigate to={`${HOME_ROOT_PATH}`} />} />
-                <Route
-                    path={LOGIN_PATH}
-                    element={isLogin ? <Navigate to={HOME_ROOT_PATH} /> : <Login />}
-                />
-                <Route
-                    path="/*"
-                    element={<Main />}
-                />
-            </Routes>
-        </React.Fragment>
+        <SetIsLoginContext.Provider value={setIsLogin}>
+            <IsLoginContext.Provider value={isLogin}>
+                <Routes>
+                    <Route path="/" element={<Navigate to={`${HOME_ROOT_PATH}`} />} />
+                    <Route
+                        path={LOGIN_PATH}
+                        element={isLogin ?
+                            <Navigate to={HOME_ROOT_PATH} />
+                            :
+                            <Login />
+                        }
+                    />
+                    <Route
+                        path="/*"
+                        element={<Main />}
+                    />
+                </Routes>
+            </IsLoginContext.Provider>
+        </SetIsLoginContext.Provider>
     );
 }
 
