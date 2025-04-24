@@ -21,12 +21,25 @@ export class VideoListApiUrlModel {
     private static readonly QUERY_KEY_NEXT_PAGE_TOKEN = `nextpagetoken`;
     // クエリパラメータのキー(カテゴリ)
     private static readonly QUERY_KEY_VIDEO_CATEOGRY = `videocategory`;
-    // 動画一覧取得パス
-    private readonly _videoMngApiPath: string;
+    // 動画一覧取得URL
+    private readonly _url: string;
+    // クエリパラメータ
+    private readonly _query: string;
 
-    constructor(props: porpsType) {
+    private constructor(queryParam: string) {
 
-        let queryParam = `${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}`;
+        this._query = queryParam;
+        this._url = `${VideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam}`;
+    }
+
+    /**
+     * APIの呼び出しURLを作成
+     * @param props 
+     * @returns 
+     */
+    static create(props: porpsType) {
+
+        let queryParam = `?${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}`;
 
         if (props.videoType) {
             queryParam += `&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${props.videoType}`;
@@ -40,10 +53,35 @@ export class VideoListApiUrlModel {
             queryParam += `&${VideoListApiUrlModel.QUERY_KEY_VIDEO_CATEOGRY}=${props.videoCategory}`;
         }
 
-        this._videoMngApiPath = `${VideoListApiUrlModel.VIDEO_INFO_PATH}?${queryParam}`;
+        return new VideoListApiUrlModel(queryParam);
     }
 
-    get videoMngApiPath() {
-        return this._videoMngApiPath;
+    /**
+     * APIの呼び出しURLを設定
+     * @param query 
+     */
+    static reConstruct(query: string) {
+
+        if (!query) {
+            throw Error(`動画一覧取得URLのクエリパラメータが存在しません。`);
+        }
+
+        if (query.length === 0) {
+            throw Error(`動画一覧取得URLのクエリパラメータが存在しません。`);
+        }
+
+        if (query.charAt(0) !== `?`) {
+            throw Error(`動画一覧取得URLのクエリパラメータの形式が不正です。`);
+        }
+
+        return new VideoListApiUrlModel(query);
+    }
+
+    get url() {
+        return this._url;
+    }
+
+    get query() {
+        return this._query;
     }
 }

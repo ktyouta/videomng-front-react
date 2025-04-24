@@ -10,8 +10,6 @@ import { atom } from "jotai";
 export const videoListDataAtom = atom<VideoListDataType | undefined>();
 // 検索キーワード
 export const keywordAtom = atom<string>(``);
-// 動画取得用URL
-export const videoApiUrlAtom = atom<string>(``);
 // APIから取得した動画詳細
 export const videoDetailItemAtom = atom<YouTubeDataApiVideoDetailItemType>();
 // 動画リスト追加読み込み用

@@ -1,19 +1,21 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoListResponseType } from "../Type/VideoListResponseType";
-import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoApiUrlAtom, videoListDataAtom } from "../Atom/HomeAtom";
+import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoListDataAtom } from "../Atom/HomeAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoListDataType } from "../Type/VideoListDataType";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { isEqual } from "lodash";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
 import { useState } from "react";
+import { SetVideoApiUrlContext, VideoApiUrlContext } from "../Component/Home";
 
 
 export function useHomeVideoArea() {
 
     // 動画取得用URL
-    const [videoApiUrl, setVideoApiUrl] = useAtom(videoApiUrlAtom);
+    const videoApiUrl = VideoApiUrlContext.useCtx();
+    const setVideoApiUrl = SetVideoApiUrlContext.useCtx();
     // 動画リスト
     const [videoListData, setVideoListData] = useAtom(videoListDataAtom);
     // 動画リスト追加読み込み用
@@ -86,8 +88,14 @@ export function useHomeVideoArea() {
             return;
         }
 
-        const videoListApiUrlModel = new VideoListApiUrlModel({ keyword, videoType, nextPageToken, videoCategory });
-        const videoApiUrl = videoListApiUrlModel.videoMngApiPath;
+        const videoListApiUrlModel = VideoListApiUrlModel.create({
+            keyword,
+            videoType,
+            nextPageToken,
+            videoCategory
+        });
+
+        const videoApiUrl = videoListApiUrlModel.url;
         setVideoApiUrl(`${videoApiUrl}`);
     }
 
