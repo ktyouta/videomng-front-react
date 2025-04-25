@@ -31,9 +31,10 @@ export function useHome() {
         }
         // 動画詳細
         else if (pathArray.length == 3) {
-            //ID部分を取得
-            const videoId = pathArray[2];
 
+            // ID部分を取得
+            const videoId = pathArray[2];
+            setVideoId(videoId);
         }
     }, []);
 

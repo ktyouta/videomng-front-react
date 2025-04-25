@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoIdContext } from "../Component/Home";
+import { useState } from "react";
 
 export function useHomeVideoDetail() {
 
@@ -16,6 +17,8 @@ export function useHomeVideoDetail() {
     const [videoDetail, setVideoDetail] = useAtom(videoDetailItemAtom);
     //ルーティング用
     const navigate = useNavigate();
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
 
     // 動画詳細を取得
     const { isLoading } = useQueryWrapper<VideoDetailResponseType>(
@@ -25,8 +28,7 @@ export function useHomeVideoDetail() {
                 const items = response.data.items;
 
                 if (items.length === 0) {
-                    alert(`動画情報を取得できませんでした。`);
-                    navigate(HOME_ROOT_PATH);
+                    setErrMessage(`動画情報を取得できませんでした。`);
                     return;
                 }
 
@@ -39,9 +41,18 @@ export function useHomeVideoDetail() {
         }
     );
 
+    /**
+     * ホーム画面(動画一覧)に戻る
+     */
+    function backHome() {
+        navigate(HOME_ROOT_PATH);
+    }
+
     return {
         isLoading,
         videoDetail,
         videoId,
+        errMessage,
+        backHome,
     };
 }

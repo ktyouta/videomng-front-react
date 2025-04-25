@@ -23,6 +23,18 @@ const VideoContentDiv = styled.div`
   padding-right:5%;
 `;
 
+const MessageDiv = styled.div`
+  color:white;
+  position: absolute;
+  top: 28%;
+  left: 42%;
+`;
+
+const BackHomeP = styled.p`
+  color:blue;
+  cursor: pointer;
+`;
+
 
 export function HomeVideoDetail() {
 
@@ -31,11 +43,28 @@ export function HomeVideoDetail() {
   const {
     videoId,
     isLoading,
-    videoDetail } = useHomeVideoDetail();
+    videoDetail,
+    errMessage,
+    backHome, } = useHomeVideoDetail();
 
   // ローディング
   if (isLoading) {
     return <LoadingBase />;
+  }
+
+  if (errMessage) {
+    return (
+      <MessageDiv>
+        <p>
+          {errMessage}
+        </p>
+        <BackHomeP
+          onClick={backHome}
+        >
+          一覧に戻る
+        </BackHomeP>
+      </MessageDiv>
+    );
   }
 
   return (
