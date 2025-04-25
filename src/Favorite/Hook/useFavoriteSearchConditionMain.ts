@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
-import { selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { objectDeepCopy } from "../../Common/Function/CommonFunction";
@@ -13,6 +13,8 @@ import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 import { ViewStatusListContext } from "../Component/Favorite";
+import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
+import { useNavigate } from "react-router-dom";
 
 
 type propsType = {
@@ -35,6 +37,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const [selectedFavoriteVideoTag, setSelectedFavoriteVideoTag] = useAtom(selectedFavoriteVideoTagAtom);
     // タグマスタリスト
     const [tagMasterList, setTagMasterList] = useState<comboType[]>([]);
+    // お気に入り動画リスト取得URL
+    const setFavoriteVideoUrl = useSetAtom(favoriteVideoApiUrlAtom);
+    //ルーティング用
+    const navigate = useNavigate();
 
 
     /**
@@ -86,12 +92,21 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
     );
 
+
     /**
      * カテゴリ選択イベント
      * @param selectedcCategory 
      */
     function changeVideoCategory(selectedCategory: string,) {
         setSelectedFavoriteVideoCategory(selectedCategory);
+
+        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
+            videoCategory: selectedCategory
+        });
+
+        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
+        navigate(favoriteVideoListApiUrlModel.query);
+
         props.close();
     }
 
@@ -101,6 +116,14 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeViewStatus(selectedViewStatus: string,) {
         setSelectedFavoriteVideoviewStatus(selectedViewStatus);
+
+        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
+            viewStatus: selectedViewStatus
+        });
+
+        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
+        navigate(favoriteVideoListApiUrlModel.query);
+
         props.close();
     }
 
@@ -110,6 +133,14 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeVideoTag(selectedVideoTag: string,) {
         setSelectedFavoriteVideoTag(selectedVideoTag);
+
+        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
+            videoTag: selectedVideoTag
+        });
+
+        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
+        navigate(favoriteVideoListApiUrlModel.query);
+
         props.close();
     }
 

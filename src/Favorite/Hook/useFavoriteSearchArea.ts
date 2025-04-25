@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useSwitch from "../../Common/Hook/useSwitch";
-import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom } from "../Atom/FavoriteAtom";
 
 
 export function useFavoriteSearchArea() {

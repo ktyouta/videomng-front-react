@@ -17,8 +17,10 @@ export class FavoriteVideoListApiUrlModel {
     private static readonly QUERY_KEY_CATEGORY = `videocategory`;
     // クエリパラメータのキー(タグ)
     private static readonly QUERY_KEY_TAG = `videotag`;
-    // 動画一覧取得パス
-    private readonly _apiPath: string;
+    // 動画一覧取得URL
+    private readonly _url: string;
+    // クエリパラメータ
+    private readonly _query: string;
 
     constructor(props: porpsType) {
 
@@ -36,10 +38,15 @@ export class FavoriteVideoListApiUrlModel {
             queryParam += `${FavoriteVideoListApiUrlModel.QUERY_KEY_TAG}=${props.videoTag}`;
         }
 
-        this._apiPath = `${FavoriteVideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam ? `?${queryParam}` : ``}`;
+        this._url = `${FavoriteVideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam ? `?${queryParam}` : ``}`;
+        this._query = `${queryParam ? `?${queryParam}` : ``}`;
     }
 
-    get apiPath() {
-        return this._apiPath;
+    get url() {
+        return this._url;
+    }
+
+    get query() {
+        return this._query;
     }
 }

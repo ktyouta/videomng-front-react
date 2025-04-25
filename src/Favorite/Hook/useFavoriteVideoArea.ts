@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoListResponseType } from "../Type/FavoriteVideoListResponseType";
-import { favoriteVideoListAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoApiUrlAtom, favoriteVideoListAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json"
@@ -21,16 +21,14 @@ export function useFavoriteVideoArea() {
     const selectedFavoriteVideoviewStatus = useAtomValue(selectedFavoriteVideoviewStatusAtom);
     // 動画一覧検索条件選択値(タグ)
     const selectedFavoriteVideoTag = useAtomValue(selectedFavoriteVideoTagAtom);
+    // お気に入り動画リスト取得URL
+    const favoriteVideoUrl = useAtomValue(favoriteVideoApiUrlAtom);
 
 
     // 動画一覧を取得
     const { isLoading, isFetching } = useQueryWrapper<FavoriteVideoListResponseType>(
         {
-            url: `${new FavoriteVideoListApiUrlModel({
-                videoCategory: selectedFavoriteVideoCategory,
-                viewStatus: selectedFavoriteVideoviewStatus,
-                videoTag: selectedFavoriteVideoTag,
-            }).apiPath}`,
+            url: favoriteVideoUrl,
             afSuccessFn: (response: FavoriteVideoListResponseType) => {
                 setVideoListItemAtom(response.data);
             },

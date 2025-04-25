@@ -31,11 +31,9 @@ export function Favorite() {
                 <Route
                     path={`/`}
                     element={
-                        <Provider>
-                            <SetFavoriteVideoIdContext.Provider value={setFavoriteVideoId}>
-                                <FavoriteVideoList />
-                            </SetFavoriteVideoIdContext.Provider>
-                        </Provider>
+                        <SetFavoriteVideoIdContext.Provider value={setFavoriteVideoId}>
+                            <FavoriteVideoList />
+                        </SetFavoriteVideoIdContext.Provider>
                     }
                 >
                 </Route>
