@@ -7,6 +7,7 @@ import { FAVORITE_ROOT_PATH } from "../../Favorite/Const/FavoriteConst";
 import { Favorite } from "../../Favorite/Component/Favorite";
 import { useContent } from "../Hook/useContent";
 import { Provider } from "jotai";
+import { NotFound } from "../../NotFound/Component/NotFound";
 
 const Parent = styled.div`
   width: 100%;
@@ -34,6 +35,11 @@ export function Content() {
                         element={<Provider><Favorite /></Provider>}
                     />
                 }
+                <Route
+                    key={"*"}
+                    path="*"
+                    element={<NotFound backUrl={`${HOME_ROOT_PATH}`} />}
+                />
             </Routes>
         </Parent>
     );
