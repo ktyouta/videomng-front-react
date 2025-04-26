@@ -43,7 +43,7 @@ export function useLogin() {
         afErrorFn: (res: errResType) => {
 
             //エラーメッセージを表示
-            setErrMessage(res.response.data.message);
+            setErrMessage(`ログインに失敗しました。`);
             userPasswordRef.current?.clearValue();
         },
     });

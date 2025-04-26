@@ -64,11 +64,20 @@ export function useFavorite() {
 
             // クエリパラメータが設定されている場合
             if (query && query.length > 0 && query.charAt(0) === `?`) {
-                const params = new URLSearchParams(query);
 
-                videoCategory = params.get(`videocategory`) ?? ``;
-                viewStatus = params.get(`viewstatus`) ?? ``;
-                videoTag = params.get(`videotag`) ?? ``;
+                const params = new URLSearchParams(query);
+                const videoCategoryValue = params.get(`videocategory`);
+                const viewStatusValue = params.get(`viewstatus`);
+                const videoTagValue = params.get(`videotag`);
+
+                videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
+                viewStatus = viewStatusValue !== null ? viewStatusValue : ``;
+                videoTag = videoTagValue !== null ? videoTagValue : ``;
+
+                // 検索条件の初期値設定
+                setSelectedFavoriteVideoCategory(videoCategory);
+                setSelectedFavoriteVideoviewStatus(viewStatus);
+                setSelectedFavoriteVideoTag(videoTag);
             }
 
             const videoListApiUrlModel = new FavoriteVideoListApiUrlModel({
