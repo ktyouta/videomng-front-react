@@ -35,15 +35,13 @@ export function Home() {
                 <Route
                     path={`/`}
                     element={
-                        <Provider>
-                            <SetVideoIdContext.Provider value={setVideoId}>
-                                <VideoApiUrlContext.Provider value={videoApiUrl}>
-                                    <SetVideoApiUrlContext.Provider value={setVideoApiUrl}>
-                                        <HomeVideoList />
-                                    </SetVideoApiUrlContext.Provider>
-                                </VideoApiUrlContext.Provider>
-                            </SetVideoIdContext.Provider>
-                        </Provider>
+                        <SetVideoIdContext.Provider value={setVideoId}>
+                            <VideoApiUrlContext.Provider value={videoApiUrl}>
+                                <SetVideoApiUrlContext.Provider value={setVideoApiUrl}>
+                                    <HomeVideoList />
+                                </SetVideoApiUrlContext.Provider>
+                            </VideoApiUrlContext.Provider>
+                        </SetVideoIdContext.Provider>
                     }
                 >
                 </Route>
