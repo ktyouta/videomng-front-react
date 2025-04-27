@@ -4,6 +4,7 @@ import ModalComponent from "../../Common/Component/ModalComponent";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 import { useFavoriteSearchArea } from "../Hook/useFavoriteSearchArea";
+import TagButtonComponent from "../../Common/Component/TagButtonComponent";
 
 const Parent = styled.div`
   width: 100%;
@@ -13,7 +14,7 @@ const Parent = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding-right: 13%;
-  padding-left: 22%;
+  padding-left: 9%;
 `;
 
 const SpaceDiv = styled.div`
@@ -30,10 +31,20 @@ export function FavoriteSearchArea() {
   const {
     isOpenFilterModal,
     openFilterModal,
-    closeFilterModal, } = useFavoriteSearchArea();
+    closeFilterModal,
+    selectedFavoriteVideoTag, } = useFavoriteSearchArea();
 
   return (
     <Parent>
+      {
+        selectedFavoriteVideoTag &&
+        <TagButtonComponent
+          title={selectedFavoriteVideoTag}
+          btnStyle={{
+            marginRight: "15px"
+          }}
+        />
+      }
       <SpaceDiv />
       <ButtonComponent
         styleTypeNumber="BASE"

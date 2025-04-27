@@ -73,12 +73,12 @@ export function useFavorite() {
                 videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
                 viewStatus = viewStatusValue !== null ? viewStatusValue : ``;
                 videoTag = videoTagValue !== null ? videoTagValue : ``;
-
-                // 検索条件の初期値設定
-                setSelectedFavoriteVideoCategory(videoCategory);
-                setSelectedFavoriteVideoviewStatus(viewStatus);
-                setSelectedFavoriteVideoTag(videoTag);
             }
+
+            // 検索条件の初期値設定
+            setSelectedFavoriteVideoCategory(videoCategory);
+            setSelectedFavoriteVideoviewStatus(viewStatus);
+            setSelectedFavoriteVideoTag(videoTag);
 
             const videoListApiUrlModel = new FavoriteVideoListApiUrlModel({
                 videoCategory,
@@ -95,6 +95,14 @@ export function useFavorite() {
             const videoId = pathArray[2];
             setFavoriteVideoId(videoId);
         }
+
+        // アンマウント時に検索条件をリセット
+        return (() => {
+            setSelectedFavoriteVideoCategory(``);
+            setSelectedFavoriteVideoviewStatus(``);
+            setSelectedFavoriteVideoTag(``);
+        })
+
     }, []);
 
     return {

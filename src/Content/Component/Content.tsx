@@ -26,13 +26,21 @@ export function Content() {
             <Routes>
                 <Route
                     path={`${HOME_ROOT_PATH}/*`}
-                    element={<Provider><Home /></Provider>}
+                    element={
+                        <Provider>
+                            <Home />
+                        </Provider>
+                    }
                 />
                 {
                     isLogin &&
                     <Route
                         path={`${FAVORITE_ROOT_PATH}/*`}
-                        element={<Provider><Favorite /></Provider>}
+                        element={
+                            <Provider>
+                                <Favorite />
+                            </Provider>
+                        }
                     />
                 }
                 <Route
