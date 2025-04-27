@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { IconComponent } from "../../Common/Component/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
-import { useFavoriteSearchKeywordCommentHeader } from "../Hook/useFavoriteSearchKeywordCommentHeader";
 
 
 //ヘッダータイトルのスタイル
@@ -22,15 +19,13 @@ const HeaderTitleSpan = styled.span`
 
 export function FavoriteSearchKeywordCommentHeader() {
 
-    console.log("FavoriteSearchKeywordCommentHeader render");
+  console.log("FavoriteSearchKeywordCommentHeader render");
 
-    const { resetSearchKeywordCommentInfo } = useFavoriteSearchKeywordCommentHeader();
-
-    return (
-        <HeaderDiv>
-            <HeaderTitleSpan>
-                キーワード検索(コメント)
-            </HeaderTitleSpan>
-        </HeaderDiv>
-    );
+  return (
+    <HeaderDiv>
+      <HeaderTitleSpan>
+        キーワード検索(コメント)
+      </HeaderTitleSpan>
+    </HeaderDiv>
+  );
 }

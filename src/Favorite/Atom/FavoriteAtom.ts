@@ -24,6 +24,8 @@ export const favoriteVideoCommentListAtom = atom<FavoriteVideoCommentThreadItemT
 export const searchKeywordCommentAtom = atom<SearchKeywordCommentType[]>();
 // キーワード検索(コメント)用URL
 export const searchKeywordCommentUrlAtom = atom<string>(``);
+// キーワード検索(コメント)キーワード
+export const searchKeywordCommentKeywordAtom = atom<string>(``);
 // ブロックコメントリスト
 export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
 // お気に入りコメントリスト

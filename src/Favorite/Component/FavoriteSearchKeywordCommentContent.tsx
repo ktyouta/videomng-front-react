@@ -7,6 +7,8 @@ import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
 import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
+import { useFavoriteSearchKeywordCommentContent } from "../Hook/useFavoriteSearchKeywordCommentContent";
+import { HighlightTextComponent } from "../../Common/Component/HighlightTextComponent";
 
 
 const Parent = styled.div`
@@ -41,11 +43,14 @@ const MetaDiv = styled.div`
 
 type propsType = {
     searchComment: SearchKeywordCommentType,
+    commentId: string,
 }
 
 export function FavoriteSearchKeywordCommentContent(props: propsType) {
 
     console.log("FavoriteSearchKeywordCommentContent render");
+
+    const { searchKeywordCommentKeyword } = useFavoriteSearchKeywordCommentContent();
 
     const data = props.searchComment;
     const comment = data.textOriginal;
@@ -59,7 +64,11 @@ export function FavoriteSearchKeywordCommentContent(props: propsType) {
                 {authorDisplayName}
             </AuthorNameDiv>
             <CommentDiv>
-                {comment}
+                <HighlightTextComponent
+                    message={comment}
+                    keyword={searchKeywordCommentKeyword}
+                    id={props.commentId}
+                />
             </CommentDiv>
             <LowerDiv>
                 <MetaDiv>

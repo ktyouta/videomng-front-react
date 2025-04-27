@@ -38,8 +38,8 @@ export function FavoriteSearchKeywordCommentInput() {
     console.log("FavoriteSearchKeywordCommentInput render");
 
     const {
-        inputKeyword,
-        setInputKeyword,
+        searchKeywordCommentKeyword,
+        setSearchKeywordCommentKeyword,
         clickSearchBtn,
     } = useFavoriteSearchKeywordCommentInput();
 
@@ -48,8 +48,8 @@ export function FavoriteSearchKeywordCommentInput() {
             <BaseTextbox
                 textWidth="92%"
                 placeholder="キーワード"
-                value={inputKeyword}
-                onChange={setInputKeyword}
+                value={searchKeywordCommentKeyword}
+                onChange={setSearchKeywordCommentKeyword}
                 style={{
                     borderTopRightRadius: 0,
                     borderBottomRightRadius: 0,

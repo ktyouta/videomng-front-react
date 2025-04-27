@@ -69,6 +69,7 @@ export function FavoriteSearchKeywordCommentList() {
                                     return (
                                         <FavoriteSearchKeywordCommentContent
                                             searchComment={e}
+                                            commentId={commentId}
                                             key={commentId}
                                         />
                                     )

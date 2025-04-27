@@ -1,5 +1,5 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoMemoListAtom, searchKeywordCommentUrlAtom } from "../Atom/FavoriteAtom";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { favoriteVideoMemoListAtom, searchKeywordCommentKeywordAtom, searchKeywordCommentUrlAtom } from "../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from "../../env.json";
@@ -14,7 +14,7 @@ import { FavoriteVideoIdContext } from "../Component/Favorite";
 export function useFavoriteSearchKeywordCommentInput() {
 
     // キーワード
-    const [inputKeyword, setInputKeyword] = useState(``);
+    const [searchKeywordCommentKeyword, setSearchKeywordCommentKeyword] = useAtom(searchKeywordCommentKeywordAtom);
     // 動画取得用URL
     const setSearchKeywordCommentUrl = useSetAtom(searchKeywordCommentUrlAtom);
     // お気に入り動画ID
@@ -27,20 +27,20 @@ export function useFavoriteSearchKeywordCommentInput() {
      */
     function clickSearchBtn() {
 
-        if (!inputKeyword) {
+        if (!searchKeywordCommentKeyword) {
             alert(`キーワードを入力してください。`);
             return;
         }
 
-        const searchKeywordCommentUrlModel = new SearchKeywordCommentUrlModel(inputKeyword, favoriteVideoId);
+        const searchKeywordCommentUrlModel = new SearchKeywordCommentUrlModel(searchKeywordCommentKeyword, favoriteVideoId);
         const searchKeywordCommentUrl = searchKeywordCommentUrlModel.path;
         setSearchKeywordCommentUrl(searchKeywordCommentUrl);
     }
 
 
     return {
-        inputKeyword,
-        setInputKeyword,
+        searchKeywordCommentKeyword,
+        setSearchKeywordCommentKeyword,
         clickSearchBtn,
     }
 }
