@@ -20,17 +20,22 @@ const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?:
     width:${({ width }) => (width ?? "")};
     heght:${({ heght }) => (heght ?? "")};
     padding: .375rem .5rem;
-    border: 0;
-    border-radius: 3px;
-    background: #b0e0e6;
+    border: 1px solid #3b82f6;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     font-size: inherit;
     line-height: inherit;
-    cursor:pointer;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
     &:hover {
         color: #fff;
-        background-color: #4f46e5;
+        background: linear-gradient(135deg, #1e40af, #1d4ed8);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     }
-    text-align: left;
+    min-width: 82px;
+    text-align: center;
 `;
 
 //spanの基本スタイル
@@ -43,7 +48,7 @@ const CrossButtonSpan = styled.span`
     background: none;
     border: none;
     font-size: 20px;
-    color: #7c7d86;
+    color: #bdbdc3;
     padding: 0;
     &:hover {
         color: #fff;
