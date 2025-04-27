@@ -7,15 +7,19 @@ import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
 import { HOME_ROOT_PATH, MENU_NO } from "../Const/HomeConst";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { VideoIdContext } from "../Component/Home";
 
 
 export function useHomeVideoDetailMenu() {
 
     // メニュー番号
     const [openMenuNo, setOpenMenuNo] = useState<string>(MENU_NO.INFO);
+    // お気に入り動画ID
+    const videoId = VideoIdContext.useCtx();
 
     return {
         openMenuNo,
         setOpenMenuNo,
+        videoId,
     }
 }

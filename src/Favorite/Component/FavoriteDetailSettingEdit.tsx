@@ -122,8 +122,12 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                         return e1 === e.value;
                                     });
 
+                                    const categoryId = e.value;
+
                                     return (
-                                        <CategoryDiv>
+                                        <CategoryDiv
+                                            key={categoryId}
+                                        >
                                             <CategoryLabel
                                                 htmlFor={htmlId}
                                             >

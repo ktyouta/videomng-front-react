@@ -93,8 +93,12 @@ export function FavoriteDetailSettingView(props: propsType) {
                                             return prev;
                                         }
 
+                                        const categoryId = current.categoryId;
+
                                         prev.push(
-                                            <CategoryDiv>
+                                            <CategoryDiv
+                                                key={categoryId}
+                                            >
                                                 {category.label}
                                             </CategoryDiv>
                                         );

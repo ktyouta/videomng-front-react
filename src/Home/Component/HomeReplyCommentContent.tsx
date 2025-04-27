@@ -24,16 +24,6 @@ const LowerDiv = styled.div`
     overflow-wrap: break-word;
 `;
 
-const IconDiv = styled.div`
-    box-sizing: border-box;
-    width:8%;
-    display:flex;
-    align-items: center;
-    justify-content: end;
-    padding-right: 1%;
-    position:relative;
-`;
-
 const MetaDiv = styled.div`
     font-size:13px;
     width:95%;

@@ -37,7 +37,6 @@ const MetaDiv = styled.div`
 
 type propsType = {
     homeVideoComment: HomeVideoCommentThreadItemType,
-    videoId: string,
 }
 
 export function HomeCommentContent(props: propsType) {
@@ -80,7 +79,6 @@ export function HomeCommentContent(props: propsType) {
                 replyCommentList && replyCommentList.length > 0 &&
                 <HomeReplyCommentList
                     replyCommentList={replyCommentList}
-                    videoId={props.videoId}
                 />
             }
         </Parent>

@@ -9,4 +9,6 @@ export type SearchKeywordCommentType = {
     readonly publishedAt: string;
     // コメント投稿者の表示名
     readonly authorDisplayName: string;
+    // コメントID
+    readonly commentId: string,
 }

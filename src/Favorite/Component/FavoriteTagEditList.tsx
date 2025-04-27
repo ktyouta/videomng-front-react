@@ -46,6 +46,9 @@ export function FavoriteTagEditList() {
                     <TagListAreaDiv>
                         {
                             favoriteVideoTagEditList.map((e: tagType, index: number) => {
+
+                                const tagKey = e.label;
+
                                 return (
                                     <TagButtonComponent
                                         title={e.label}
@@ -56,6 +59,7 @@ export function FavoriteTagEditList() {
                                         onclick={() => {
                                             deleteTag(index);
                                         }}
+                                        key={tagKey}
                                     />
                                 )
                             })

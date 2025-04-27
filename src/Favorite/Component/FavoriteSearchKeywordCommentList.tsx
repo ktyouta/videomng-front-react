@@ -63,9 +63,13 @@ export function FavoriteSearchKeywordCommentList() {
                         <CommentListAreaDiv>
                             {
                                 searchCommentList.map((e: SearchKeywordCommentType) => {
+
+                                    const commentId = e.commentId;
+
                                     return (
                                         <FavoriteSearchKeywordCommentContent
                                             searchComment={e}
+                                            key={commentId}
                                         />
                                     )
                                 })

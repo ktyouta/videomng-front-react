@@ -14,20 +14,14 @@ const Parent = styled.div`
 `;
 
 
-type propsType = {
-    videoId: string,
-}
-
-export function HomeComment(props: propsType) {
+export function HomeComment() {
 
     console.log("HomeComment render");
 
     return (
         <Parent>
             {/* コメントリスト */}
-            <HomeCommentList
-                videoId={props.videoId}
-            />
+            <HomeCommentList />
         </Parent>
     );
 }

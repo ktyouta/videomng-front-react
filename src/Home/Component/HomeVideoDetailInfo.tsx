@@ -35,7 +35,6 @@ const BtnDiv = styled.div`
 
 type propsType = {
     videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
-    videoId: string
 }
 
 
@@ -47,7 +46,7 @@ export function HomeVideoDetailInfo(props: propsType) {
         addToFavorite,
         play,
         isLogin,
-    } = useHomeVideoDetailInfo({ ...props });
+    } = useHomeVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
     const item = videoDetail;

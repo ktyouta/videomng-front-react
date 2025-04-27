@@ -48,12 +48,16 @@ export function FavoriteTagList() {
                         </TagListAreaTitleDiv>
                         {
                             favoriteVideoTagList.map((e: FavoriteVideoTagType) => {
+
+                                const tagId = e.tagId;
+
                                 return (
                                     <TagButtonComponent
                                         title={e.tagName}
                                         btnStyle={{
                                             marginRight: "15px"
                                         }}
+                                        key={tagId}
                                     />
                                 )
                             })

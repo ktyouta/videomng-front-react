@@ -23,11 +23,8 @@ const CommentListAreaDiv = styled.div`
   padding: 2% 1% 1% 1%;
 `;
 
-type propsType = {
-    videoId: string,
-}
 
-export function HomeCommentList(props: propsType) {
+export function HomeCommentList() {
 
     console.log("HomeCommentList render");
 
@@ -59,10 +56,13 @@ export function HomeCommentList(props: propsType) {
                     <CommentListAreaDiv>
                         {
                             homeVideoCommentList.map((e: HomeVideoCommentThreadItemType) => {
+
+                                const commentId = e.snippet.topLevelComment.id;
+
                                 return (
                                     <HomeCommentContent
                                         homeVideoComment={e}
-                                        videoId={props.videoId}
+                                        key={commentId}
                                     />
                                 )
                             })

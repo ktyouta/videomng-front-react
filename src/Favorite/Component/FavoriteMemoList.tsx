@@ -57,9 +57,13 @@ export function FavoriteMemoList() {
                     <MemoListAreaDiv>
                         {
                             favoriteVideoMemoList.map((e: FavoriteVideoMemoType) => {
+
+                                const memoId = e.videoMemoSeq
+
                                 return (
                                     <FavoriteMemoContent
                                         favoriteVideoMemo={e}
+                                        key={memoId}
                                     />
                                 )
                             })

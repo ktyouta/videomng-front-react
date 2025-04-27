@@ -20,7 +20,6 @@ const ReplyDiv = styled.div`
 
 type propsType = {
     replyCommentList: HomeVideoCommentThreadReplyCommentType[],
-    videoId: string,
 }
 
 export function HomeReplyCommentList(props: propsType) {
@@ -54,10 +53,14 @@ export function HomeReplyCommentList(props: propsType) {
                 isDisplayReply &&
                 <ReplyDiv>
                     {
-                        props.replyCommentList.map((e) => {
+                        props.replyCommentList.map((e: HomeVideoCommentThreadReplyCommentType) => {
+
+                            const commentId = e.id
+
                             return (
                                 <HomeReplyCommentContent
                                     commentThreadReplySnippet={e.snippet}
+                                    key={commentId}
                                 />
                             )
                         })

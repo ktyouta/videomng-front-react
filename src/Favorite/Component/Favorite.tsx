@@ -28,6 +28,7 @@ export function Favorite() {
     return (
         <ViewStatusListContext.Provider value={viewStatusList}>
             <Routes>
+                {/* お気に入り動画一覧 */}
                 <Route
                     path={`/`}
                     element={
@@ -37,6 +38,7 @@ export function Favorite() {
                     }
                 >
                 </Route>
+                {/* お気に入り動画詳細 */}
                 <Route
                     path={favoriteVideoId}
                     element={

@@ -31,7 +31,6 @@ const ComboTitleSpan = styled.span`
 
 type propsType = {
   videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
-  videoId: string
 }
 
 
@@ -42,11 +41,10 @@ export function HomeVideoDetailMenu(props: propsType) {
   const {
     openMenuNo,
     setOpenMenuNo,
+    videoId,
   } = useHomeVideoDetailMenu();
 
   const videoDetail = props.videoDetail;
-  // 動画ID
-  const videoId = props.videoId;
 
   return (
     <React.Fragment>
@@ -79,9 +77,7 @@ export function HomeVideoDetailMenu(props: propsType) {
         {
           // 公開コメント
           openMenuNo === MENU_NO.COMMENT &&
-          <HomeComment
-            videoId={videoId}
-          />
+          <HomeComment />
         }
       </MenuParentDiv>
     </React.Fragment>

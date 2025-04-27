@@ -73,12 +73,10 @@ export function HomeVideoDetail() {
         {/* 動画情報 */}
         <HomeVideoDetailInfo
           videoDetail={videoDetail}
-          videoId={videoId}
         />
         {/* メニュー */}
         <HomeVideoDetailMenu
           videoDetail={videoDetail}
-          videoId={videoId}
         />
       </VideoContentDiv>
     </Parent>

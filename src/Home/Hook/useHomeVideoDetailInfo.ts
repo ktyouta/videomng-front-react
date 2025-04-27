@@ -11,19 +11,18 @@ import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
 import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext } from "../../QueryApp";
+import { VideoIdContext } from "../Component/Home";
 
 
-type propsType = {
-    videoId: string
-}
 
-
-export function useHomeVideoDetailInfo(props: propsType) {
+export function useHomeVideoDetailInfo() {
 
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
+    // お気に入り動画ID
+    const videoId = VideoIdContext.useCtx();
 
 
     /**
@@ -63,13 +62,13 @@ export function useHomeVideoDetailInfo(props: propsType) {
             return;
         }
 
-        if (!props.videoId) {
-            alert(`お気に入りに登録できませんでした。`);
+        if (!videoId) {
+            alert(`お気に入りに登録できません。`);
             return;
         }
 
         const body: AddToFavoriteRequestType = {
-            videoId: props.videoId
+            videoId
         }
 
         // リクエスト送信
@@ -82,7 +81,7 @@ export function useHomeVideoDetailInfo(props: propsType) {
     function play() {
 
         // 動画URL
-        const videoUrlModel = new VideoUrlModel(props.videoId);
+        const videoUrlModel = new VideoUrlModel(videoId);
         window.open(`${videoUrlModel.videoUrl}`, `_blank`);
     }
 

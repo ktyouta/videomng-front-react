@@ -66,9 +66,13 @@ export function FavoriteFavoriteCommentList() {
                     <CommentListAreaDiv>
                         {
                             favoriteCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
+
+                                const commentId = e.id
+
                                 return (
                                     <FavoriteFavoriteCommentContent
                                         commentDetailItem={e}
+                                        key={commentId}
                                     />
                                 )
                             })

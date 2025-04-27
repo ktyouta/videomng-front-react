@@ -70,10 +70,14 @@ export function FavoriteReplyCommentList(props: propsType) {
                 isDisplayReply &&
                 <ReplyDiv>
                     {
-                        props.replyCommentList.map((e) => {
+                        props.replyCommentList.map((e: FavoriteVideoCommentThreadReplyCommentType) => {
+
+                            const commentId = e.id;
+
                             return (
                                 <FavoriteReplyCommentContent
                                     commentThreadReply={e}
+                                    key={commentId}
                                 />
                             )
                         })
