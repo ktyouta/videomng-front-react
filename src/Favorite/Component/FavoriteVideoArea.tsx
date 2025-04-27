@@ -51,7 +51,7 @@ export function FavoriteVideoArea() {
     return <LoadingBase />;
   }
 
-  if (videoListItem?.length === 0) {
+  if (!videoListItem || videoListItem.length === 0) {
     return (
       <MessageDiv>
         お気に入り動画が存在しません。

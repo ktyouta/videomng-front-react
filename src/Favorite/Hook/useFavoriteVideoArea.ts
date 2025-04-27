@@ -15,12 +15,6 @@ export function useFavoriteVideoArea() {
     const [videoListItem, setVideoListItemAtom] = useAtom(favoriteVideoListAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // 動画一覧検索条件選択値(カテゴリ)
-    const selectedFavoriteVideoCategory = useAtomValue(selectedFavoriteVideoCategoryAtom);
-    // 動画一覧検索条件選択値(視聴状況)
-    const selectedFavoriteVideoviewStatus = useAtomValue(selectedFavoriteVideoviewStatusAtom);
-    // 動画一覧検索条件選択値(タグ)
-    const selectedFavoriteVideoTag = useAtomValue(selectedFavoriteVideoTagAtom);
     // お気に入り動画リスト取得URL
     const favoriteVideoUrl = useAtomValue(favoriteVideoApiUrlAtom);
 
