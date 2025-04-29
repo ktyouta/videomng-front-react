@@ -41,6 +41,9 @@ const SearchIconAreaDiv = styled.div`
   border-bottom-left-radius: 0;
   border-top-right-radius: 15%;
   border-bottom-right-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SpaceDiv = styled.div`
@@ -80,7 +83,7 @@ export function HomeSearchArea() {
                     <IconComponent
                         icon={IoSearch}
                         onclick={clickSearchBtn}
-                        size="90%"
+                        size="80%"
                     />
                 </SearchIconAreaDiv>
             </TextBoxAreaDiv>
