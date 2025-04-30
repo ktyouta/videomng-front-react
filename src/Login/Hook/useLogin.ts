@@ -16,8 +16,8 @@ import { SetIsLoginContext } from '../../QueryApp';
 
 export function useLogin() {
 
-    // ユーザーID参照用
-    const userIdRef: RefObject<refType> = useRef(null);
+    // ユーザー名参照用
+    const userNameRef: RefObject<refType> = useRef(null);
     // パスワード参照用
     const userPasswordRef: RefObject<refType> = useRef(null);
     // ルーティング用
@@ -63,8 +63,8 @@ export function useLogin() {
     function clickLoginBtn() {
 
         // ユーザーID未入力
-        if (!userIdRef.current?.refValue) {
-            setErrMessage(`ユーザーIDが未入力です。`);
+        if (!userNameRef.current?.refValue) {
+            setErrMessage(`ユーザー名が未入力です。`);
             return;
         }
 
@@ -74,10 +74,10 @@ export function useLogin() {
             return;
         }
 
-        const userId = userIdRef.current?.refValue as string;
+        const userName = userNameRef.current?.refValue as string;
         const password = userPasswordRef.current?.refValue as string;
         const body: LoginRequestType = {
-            userId,
+            userName,
             password
         };
 
@@ -89,12 +89,12 @@ export function useLogin() {
      * 入力値のクリア
      */
     function clickClearBtn() {
-        userIdRef.current?.clearValue();
+        userNameRef.current?.clearValue();
         userPasswordRef.current?.clearValue();
     }
 
     return {
-        userIdRef,
+        userNameRef,
         userPasswordRef,
         clickLoginBtn,
         clickClearBtn,

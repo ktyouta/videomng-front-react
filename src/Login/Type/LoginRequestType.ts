@@ -1,5 +1,5 @@
 // ログインリクエスト
 export type LoginRequestType = {
-    userId: string,
+    userName: string,
     password: string,
 }

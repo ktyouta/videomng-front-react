@@ -43,7 +43,7 @@ export function Login() {
   console.log("Login render");
 
   const {
-    userIdRef,
+    userNameRef,
     userPasswordRef,
     clickLoginBtn,
     handleKeyPress,
@@ -65,10 +65,10 @@ export function Login() {
           value={""}
           length={100}
           disabled={false}
-          ref={userIdRef}
+          ref={userNameRef}
           textWidth='100%'
           onKeyDown={handleKeyPress}
-          placeholder='UserID'
+          placeholder='UserName'
           autoComplete={true}
           style={{ marginBottom: "8%" }}
         />
