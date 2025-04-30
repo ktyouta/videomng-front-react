@@ -6,16 +6,15 @@ import { useCookies } from "react-cookie";
 import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
-import { LoginRequestType } from '../Type/LoginRequestType';
 import { useSetAtom } from 'jotai';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
-import { LoginResponseType } from '../Type/LoginResponseType';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext } from '../../QueryApp';
-import { SIGNUP_PATH } from '../../Siginup/Const/SiginupConst';
+import { SiginupResponseType } from '../Type/SiginupResponseType';
+import { SiginupRequestType } from '../Type/SiginupRequestType';
 
 
-export function useLogin() {
+export function useSiginup() {
 
     // ユーザー名参照用
     const userNameRef: RefObject<refType> = useRef(null);
@@ -29,13 +28,13 @@ export function useLogin() {
     const [errMessage, setErrMessage] = useState(``);
 
     /**
-     * ログインリクエスト
+     * 登録リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_LOGIN}`,
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_INFO}`,
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<LoginResponseType>) => {
+        afSuccessFn: (res: resType<SiginupResponseType>) => {
 
             setIsLogin(true);
             navigate(HOME_ROOT_PATH);
@@ -44,7 +43,7 @@ export function useLogin() {
         afErrorFn: (res: errResType) => {
 
             //エラーメッセージを表示
-            setErrMessage(`ログインに失敗しました。`);
+            setErrMessage(`登録に失敗しました。`);
             userPasswordRef.current?.clearValue();
         },
     });
@@ -77,12 +76,12 @@ export function useLogin() {
 
         const userName = userNameRef.current?.refValue as string;
         const password = userPasswordRef.current?.refValue as string;
-        const body: LoginRequestType = {
+        const body: SiginupRequestType = {
             userName,
             password
         };
 
-        //認証API呼び出し
+        // 登録リクエスト呼び出し
         postMutation.mutate(body);
     }
 
@@ -94,13 +93,6 @@ export function useLogin() {
         userPasswordRef.current?.clearValue();
     }
 
-    /**
-     * 会員登録画面遷移
-     */
-    function clickSignup() {
-        navigate(SIGNUP_PATH);
-    }
-
     return {
         userNameRef,
         userPasswordRef,
@@ -108,6 +100,5 @@ export function useLogin() {
         clickClearBtn,
         handleKeyPress,
         errMessage,
-        clickSignup,
     }
 }

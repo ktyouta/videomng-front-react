@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useLogin } from "../Hook/useLogin";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
+import { useSiginup } from "../Hook/useSiginup";
 
 
 const Parent = styled.div`
@@ -20,7 +20,7 @@ const LoginFormDiv = styled.div`
 
 const LoginButtonDiv = styled.div`
     text-align: center;
-    margin-top: 6%;
+    margin-top: 9%;
 `;
 
 const TitleDiv = styled.div`
@@ -37,32 +37,23 @@ const ErrMessageDiv = styled.div`
     color: red;
 `;
 
-const SignUpDiv = styled.div`
-    text-align: center;
-    font-size: 15px;
-    margin-top: 7%;
-    color: blue;
-    cursor:pointer;
-`;
 
+export function Siginup() {
 
-export function Login() {
-
-  console.log("Login render");
+  console.log("Siginup render");
 
   const {
     userNameRef,
     userPasswordRef,
     clickLoginBtn,
     handleKeyPress,
-    clickSignup,
-    errMessage } = useLogin();
+    errMessage } = useSiginup();
 
   return (
     <Parent>
       <LoginFormDiv>
         <TitleDiv>
-          ログイン
+          アカウント作成
         </TitleDiv>
         {
           errMessage &&
@@ -91,15 +82,10 @@ export function Login() {
           onKeyDown={handleKeyPress}
           placeholder='Password'
         />
-        <SignUpDiv
-          onClick={clickSignup}
-        >
-          ユーザー登録はこちらから
-        </SignUpDiv>
         <LoginButtonDiv>
           <ButtonComponent
             styleTypeNumber="RUN"
-            title={"ログイン"}
+            title={"登録"}
             onclick={clickLoginBtn}
             style={{
               "borderRadius": "23px",

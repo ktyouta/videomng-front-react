@@ -7,6 +7,8 @@ import { LOGIN_PATH } from './Login/Const/LoginConst';
 import { Login } from './Login/Component/Login';
 import { HOME_ROOT_PATH } from './Home/Const/HomeConst';
 import { createCtx } from './Common/Function/createCtx';
+import { SIGNUP_PATH } from './Siginup/Const/SiginupConst';
+import { Siginup } from './Siginup/Component/Siginup';
 
 // ログインフラグ
 export const IsLoginContext = createCtx<boolean>();
@@ -34,6 +36,10 @@ function QueryApp() {
                             :
                             <Login />
                         }
+                    />
+                    <Route
+                        path={SIGNUP_PATH}
+                        element={<Siginup />}
                     />
                     <Route
                         path="/*"
