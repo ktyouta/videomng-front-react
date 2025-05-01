@@ -39,12 +39,20 @@ const ErrMessageDiv = styled.div`
 
 const SignUpDiv = styled.div`
     text-align: center;
-    font-size: 15px;
     margin-top: 7%;
+`;
+
+const SignUpSpan = styled.span`
+    font-size: 15px;
     color: blue;
     cursor:pointer;
 `;
 
+const InputRowDiv = styled.div`
+`;
+
+const InputTitleDiv = styled.div`
+`;
 
 export function Login() {
 
@@ -70,31 +78,43 @@ export function Login() {
             {errMessage}
           </ErrMessageDiv>
         }
-        <BaseTextbox
-          value={""}
-          length={100}
-          disabled={false}
-          ref={userNameRef}
-          textWidth='100%'
-          onKeyDown={handleKeyPress}
-          placeholder='UserName'
-          autoComplete={true}
-          style={{ marginBottom: "8%" }}
-        />
-        <BaseTextbox
-          type={"password"}
-          value={""}
-          length={100}
-          disabled={false}
-          ref={userPasswordRef}
-          textWidth='100%'
-          onKeyDown={handleKeyPress}
-          placeholder='Password'
-        />
+        <InputRowDiv>
+          <InputTitleDiv>
+            ユーザー名
+          </InputTitleDiv>
+          <BaseTextbox
+            value={""}
+            length={100}
+            disabled={false}
+            ref={userNameRef}
+            textWidth='100%'
+            onKeyDown={handleKeyPress}
+            placeholder='UserName'
+            autoComplete={true}
+            style={{ marginBottom: "7%" }}
+          />
+        </InputRowDiv>
+        <InputRowDiv>
+          <InputTitleDiv>
+            パスワード
+          </InputTitleDiv>
+          <BaseTextbox
+            type="password"
+            value={""}
+            length={100}
+            disabled={false}
+            ref={userPasswordRef}
+            textWidth='100%'
+            onKeyDown={handleKeyPress}
+            placeholder='Password'
+          />
+        </InputRowDiv>
         <SignUpDiv
           onClick={clickSignup}
         >
-          ユーザー登録はこちらから
+          <SignUpSpan>
+            アカウント作成はこちらから
+          </SignUpSpan>
         </SignUpDiv>
         <LoginButtonDiv>
           <ButtonComponent

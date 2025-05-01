@@ -69,7 +69,7 @@ const BaseTextbox = forwardRef<refType, propsType>((props, ref) => {
 
     return (
         <BaseInput
-            type="text"
+            type={props.type ?? "text"}
             maxLength={props.length}
             onChange={changeInput}
             value={inputValue}

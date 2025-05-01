@@ -3,6 +3,8 @@ import styled from "styled-components";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { useSiginup } from "../Hook/useSiginup";
+import ComboComponent from "../../Common/Component/ComboComponent";
+import { DAY_LIST, MONTH_LIST, YEAR_LIST } from "../../Common/Const/CommonConst";
 
 
 const Parent = styled.div`
@@ -11,14 +13,14 @@ const Parent = styled.div`
   height: 100vh;
 `;
 
-const LoginFormDiv = styled.div`
+const SiginupFormDiv = styled.div`
     width: 25%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 10%;
 `;
 
-const LoginButtonDiv = styled.div`
+const SiginupButtonDiv = styled.div`
     text-align: center;
     margin-top: 9%;
 `;
@@ -35,7 +37,26 @@ const ErrMessageDiv = styled.div`
     font-size: 15px;
     margin-bottom: 6%;
     color: red;
+    white-space: pre-line;
 `;
+
+const BirthDayDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom:6%;
+`;
+
+const BirthDayLabelDiv = styled.div`
+  margin-right:2px;
+`;
+
+const InputRowDiv = styled.div`
+`;
+
+const InputTitleDiv = styled.div`
+`;
+
 
 
 export function Siginup() {
@@ -45,13 +66,16 @@ export function Siginup() {
   const {
     userNameRef,
     userPasswordRef,
-    clickLoginBtn,
+    clickSiginupBtn,
     handleKeyPress,
-    errMessage } = useSiginup();
+    errMessage,
+    userBirthdayYearRef,
+    userBirthdayMonthRef,
+    userBirthdayDayRef, } = useSiginup();
 
   return (
     <Parent>
-      <LoginFormDiv>
+      <SiginupFormDiv>
         <TitleDiv>
           アカウント作成
         </TitleDiv>
@@ -61,40 +85,89 @@ export function Siginup() {
             {errMessage}
           </ErrMessageDiv>
         }
-        <BaseTextbox
-          value={""}
-          length={100}
-          disabled={false}
-          ref={userNameRef}
-          textWidth='100%'
-          onKeyDown={handleKeyPress}
-          placeholder='UserName'
-          autoComplete={true}
-          style={{ marginBottom: "8%" }}
-        />
-        <BaseTextbox
-          type={"password"}
-          value={""}
-          length={100}
-          disabled={false}
-          ref={userPasswordRef}
-          textWidth='100%'
-          onKeyDown={handleKeyPress}
-          placeholder='Password'
-        />
-        <LoginButtonDiv>
+        <InputRowDiv>
+          <InputTitleDiv>
+            ユーザー名
+          </InputTitleDiv>
+          <BaseTextbox
+            value={""}
+            length={100}
+            disabled={false}
+            ref={userNameRef}
+            textWidth='98%'
+            onKeyDown={handleKeyPress}
+            placeholder='UserName'
+            autoComplete={true}
+            style={{ marginBottom: "8%" }}
+          />
+        </InputRowDiv>
+        <InputRowDiv>
+          <InputTitleDiv>
+            生年月日
+          </InputTitleDiv>
+          <BirthDayDiv>
+            <ComboComponent
+              combo={YEAR_LIST}
+              initValue={YEAR_LIST && YEAR_LIST.length > 0 ? YEAR_LIST[0].value : ``}
+              width="68%"
+              minWidth="8%"
+              height="39px"
+              ref={userBirthdayYearRef}
+            />
+            <BirthDayLabelDiv>
+              年
+            </BirthDayLabelDiv>
+            <ComboComponent
+              combo={MONTH_LIST}
+              initValue={MONTH_LIST && MONTH_LIST.length > 0 ? MONTH_LIST[0].value : ``}
+              width="68%"
+              minWidth="8%"
+              height="39px"
+              ref={userBirthdayMonthRef}
+            />
+            <BirthDayLabelDiv>
+              月
+            </BirthDayLabelDiv>
+            <ComboComponent
+              combo={DAY_LIST}
+              initValue={DAY_LIST && DAY_LIST.length > 0 ? DAY_LIST[0].value : ``}
+              width="68%"
+              minWidth="8%"
+              height="39px"
+              ref={userBirthdayDayRef}
+            />
+            日
+          </BirthDayDiv>
+        </InputRowDiv>
+        <InputRowDiv>
+          <InputTitleDiv>
+            パスワード
+          </InputTitleDiv>
+          <BaseTextbox
+            type={"password"}
+            value={""}
+            length={100}
+            disabled={false}
+            ref={userPasswordRef}
+            textWidth='98%'
+            onKeyDown={handleKeyPress}
+            placeholder='Password'
+            style={{ marginBottom: "8%" }}
+          />
+        </InputRowDiv>
+        <SiginupButtonDiv>
           <ButtonComponent
             styleTypeNumber="RUN"
             title={"登録"}
-            onclick={clickLoginBtn}
+            onclick={clickSiginupBtn}
             style={{
               "borderRadius": "23px",
               "background": "black",
               "fontSize": "1rem",
             }}
           />
-        </LoginButtonDiv>
-      </LoginFormDiv>
+        </SiginupButtonDiv>
+      </SiginupFormDiv>
     </Parent>
   );
 }

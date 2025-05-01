@@ -20,10 +20,16 @@ export function useSiginup() {
     const userNameRef: RefObject<refType> = useRef(null);
     // パスワード参照用
     const userPasswordRef: RefObject<refType> = useRef(null);
+    // 生年月日(年)参照用
+    const userBirthdayYearRef: RefObject<refType> = useRef(null);
+    // 生年月日(月)参照用
+    const userBirthdayMonthRef: RefObject<refType> = useRef(null);
+    // 生年月日(日)参照用
+    const userBirthdayDayRef: RefObject<refType> = useRef(null);
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
-    const setIsLogin = SetIsLoginContext.useCtx();
+    const setIsSiginup = SetIsLoginContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
 
@@ -36,14 +42,16 @@ export function useSiginup() {
         // 正常終了後の処理
         afSuccessFn: (res: resType<SiginupResponseType>) => {
 
-            setIsLogin(true);
+            setIsSiginup(true);
             navigate(HOME_ROOT_PATH);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
 
+            const errMessage = res.response.data.message;
+
             //エラーメッセージを表示
-            setErrMessage(`登録に失敗しました。`);
+            setErrMessage(`${errMessage}`);
             userPasswordRef.current?.clearValue();
         },
     });
@@ -53,32 +61,41 @@ export function useSiginup() {
      */
     function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
         if (event.key === 'Enter') {
-            clickLoginBtn();
+            clickSiginupBtn();
         }
     };
 
     /**
      * ログインボタン押下
      */
-    function clickLoginBtn() {
+    function clickSiginupBtn() {
+
+        const userName = userNameRef.current?.refValue as string;
+        const password = userPasswordRef.current?.refValue as string;
+        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
 
         // ユーザーID未入力
-        if (!userNameRef.current?.refValue) {
+        if (!userName) {
             setErrMessage(`ユーザー名が未入力です。`);
             return;
         }
 
         // パスワード未入力
-        if (!userPasswordRef.current?.refValue) {
+        if (!password) {
             setErrMessage(`パスワードが未入力です。`);
             return;
         }
 
-        const userName = userNameRef.current?.refValue as string;
-        const password = userPasswordRef.current?.refValue as string;
+        // 生年月日未選択
+        if (!userBirthday) {
+            setErrMessage(`生年月日が未選択です。`);
+            return;
+        }
+
         const body: SiginupRequestType = {
             userName,
-            password
+            password,
+            userBirthday,
         };
 
         // 登録リクエスト呼び出し
@@ -96,9 +113,12 @@ export function useSiginup() {
     return {
         userNameRef,
         userPasswordRef,
-        clickLoginBtn,
+        clickSiginupBtn,
         clickClearBtn,
         handleKeyPress,
         errMessage,
+        userBirthdayYearRef,
+        userBirthdayMonthRef,
+        userBirthdayDayRef,
     }
 }
