@@ -21,14 +21,14 @@ export type errResType = {
 }
 
 //引数の型
-type propsType<T> = {
+type propsType<U> = {
     url: string,
     method: methodType,
     queryKey?: [string, (Record<string, unknown> | string)?],
     //処理待ち中の処理
     waitingFn?: () => void,
     //処理成功後の処理
-    afSuccessFn?: (res: resType<T>) => void,
+    afSuccessFn?: (res: resType<U>) => void,
     //失敗後の処理
     afErrorFn?: (res: errResType) => void,
     finaliryFn?: () => void,
@@ -39,8 +39,8 @@ type methodType = "POST" | "PUT" | "DELETE" | undefined;
 
 
 const useMutationWrapperBase = <
-    T,
->(props: propsType<T>) => {
+    T, U
+>(props: propsType<U>) => {
 
     const queryClient = useQueryClient();
 
