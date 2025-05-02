@@ -9,7 +9,7 @@ import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { SetIsLoginContext } from '../../QueryApp';
+import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { SiginupResponseType } from '../Type/SiginupResponseType';
 import { SiginupRequestType } from '../Type/SiginupRequestType';
 
@@ -32,6 +32,8 @@ export function useSiginup() {
     const setIsSiginup = SetIsLoginContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // ログインユーザー情報(setter)
+    const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
 
     /**
      * 登録リクエスト
@@ -42,6 +44,9 @@ export function useSiginup() {
         // 正常終了後の処理
         afSuccessFn: (res: resType<SiginupResponseType>) => {
 
+            const loginUserInfo = res.data;
+
+            setLoginUserInfo(loginUserInfo);
             setIsSiginup(true);
             navigate(HOME_ROOT_PATH);
         },

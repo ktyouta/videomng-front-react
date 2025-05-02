@@ -9,11 +9,16 @@ import { HOME_ROOT_PATH } from './Home/Const/HomeConst';
 import { createCtx } from './Common/Function/createCtx';
 import { SIGNUP_PATH } from './Siginup/Const/SiginupConst';
 import { Siginup } from './Siginup/Component/Siginup';
+import { LoginResponseType } from './Login/Type/LoginResponseType';
 
 // ログインフラグ
 export const IsLoginContext = createCtx<boolean>();
 // ログインフラグ(setter)
 export const SetIsLoginContext = createCtx<React.Dispatch<React.SetStateAction<boolean>>>();
+// ログインユーザー情報
+export const LoginUserInfoContext = createCtx<LoginResponseType>();
+// ログインユーザー情報(setter)
+export const SetLoginUserInfoContext = createCtx<React.Dispatch<React.SetStateAction<LoginResponseType>>>();
 
 
 function QueryApp() {
@@ -22,7 +27,9 @@ function QueryApp() {
 
     const {
         isLogin,
-        setIsLogin } = useQueryApp();
+        setIsLogin,
+        loginUserInfo,
+        setLoginUserInfo, } = useQueryApp();
 
     return (
         <SetIsLoginContext.Provider value={setIsLogin}>
@@ -34,16 +41,28 @@ function QueryApp() {
                         element={isLogin ?
                             <Navigate to={HOME_ROOT_PATH} />
                             :
-                            <Login />
+                            <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                <Login />
+                            </SetLoginUserInfoContext.Provider>
                         }
                     />
                     <Route
                         path={SIGNUP_PATH}
-                        element={<Siginup />}
+                        element={
+                            <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                <Siginup />
+                            </SetLoginUserInfoContext.Provider>
+                        }
                     />
                     <Route
                         path="/*"
-                        element={<Main />}
+                        element={
+                            <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                <LoginUserInfoContext.Provider value={loginUserInfo}>
+                                    <Main />
+                                </LoginUserInfoContext.Provider>
+                            </SetLoginUserInfoContext.Provider>
+                        }
                     />
                 </Routes>
             </IsLoginContext.Provider>

@@ -11,7 +11,7 @@ import { useSetAtom } from 'jotai';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { LoginResponseType } from '../Type/LoginResponseType';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { SetIsLoginContext } from '../../QueryApp';
+import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { SIGNUP_PATH } from '../../Siginup/Const/SiginupConst';
 
 
@@ -27,6 +27,8 @@ export function useLogin() {
     const setIsLogin = SetIsLoginContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // ログインユーザー情報(setter)
+    const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
 
     /**
      * ログインリクエスト
@@ -37,6 +39,9 @@ export function useLogin() {
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginResponseType>) => {
 
+            const loginUserInfo: LoginResponseType = res.data;
+
+            setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
             navigate(HOME_ROOT_PATH);
         },

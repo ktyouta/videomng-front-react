@@ -4,10 +4,11 @@ import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import ENV from "../../env.json";
 import { videoCategoryAtom } from "../Atom/MainAtom";
 import { VideoCategoryResponseType } from "../Type/VideoCategoryResponseType";
-import { errResType } from "../../Common/Hook/useMutationWrapperBase";
+import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoCategoryItemType } from "../Type/VideoCategoryItemType";
 import { useSetGlobalAtom } from "../../Common/Hook/useGlobalAtom";
-import { SetIsLoginContext } from "../../QueryApp";
+import { SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
+import { SiginupResponseType } from "../../Siginup/Type/SiginupResponseType";
 
 
 export function useMain() {
@@ -16,6 +17,8 @@ export function useMain() {
     const setIsLogin = SetIsLoginContext.useCtx();
     // 動画カテゴリ
     const setVideoCategory = useSetGlobalAtom(videoCategoryAtom);
+    // ログインユーザー情報(setter)
+    const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
 
     // 動画カテゴリを取得
     useQueryWrapper<VideoCategoryResponseType>(
@@ -49,7 +52,11 @@ export function useMain() {
     useQueryWrapper(
         {
             url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_CHECK_AUTH}`,
-            afSuccessFn: () => {
+            afSuccessFn: (res: resType<SiginupResponseType>) => {
+
+                const loginUserInfo = res.data;
+
+                setLoginUserInfo(loginUserInfo);
                 setIsLogin(true);
             },
             afErrorFn: (res) => {

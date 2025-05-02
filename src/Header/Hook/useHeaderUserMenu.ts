@@ -9,7 +9,7 @@ import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
-import { IsLoginContext, SetIsLoginContext } from "../../QueryApp";
+import { IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
 
 
 export function useHeaderUserMenu() {
@@ -20,10 +20,13 @@ export function useHeaderUserMenu() {
     const isLogin = IsLoginContext.useCtx();
     const setIsLogin = SetIsLoginContext.useCtx();
     //ナビゲーション表示フラグ
-    const {
-        flag: isOpenUserMenu,
+    const { flag: isOpenUserMenu,
         on: oepnUserMenu,
         off: closeUserMenu } = useSwitch();
+    // ログインユーザー情報
+    const loginUserInfo = LoginUserInfoContext.useCtx();
+    // ログインユーザー情報(setter)
+    const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
 
 
     /**
@@ -35,6 +38,9 @@ export function useHeaderUserMenu() {
         // 正常終了後の処理
         afSuccessFn: () => {
 
+            setLoginUserInfo({
+                userName: ``
+            });
             setIsLogin(false);
             navigate(HOME_ROOT_PATH);
         },
@@ -66,5 +72,6 @@ export function useHeaderUserMenu() {
         oepnUserMenu,
         closeUserMenu,
         clickLogout,
+        loginUserInfo,
     }
 }

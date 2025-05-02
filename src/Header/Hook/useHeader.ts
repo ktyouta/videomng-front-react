@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { LOGIN_PATH } from "../../Login/Const/LoginConst";
+import { LoginUserInfoContext } from "../../QueryApp";
 
 export function useHeader() {
 
@@ -10,6 +11,8 @@ export function useHeader() {
     const [nowPath, setNowPath] = useState<string>();
     //ルーティング用
     const navigate = useNavigate();
+    // ログインユーザー情報
+    const loginUserInfo = LoginUserInfoContext.useCtx();
 
     /**
      * URL切り替え時のイベント
@@ -35,6 +38,7 @@ export function useHeader() {
 
     return {
         nowPath,
-        clickLogin
+        clickLogin,
+        loginUserInfo,
     }
 }

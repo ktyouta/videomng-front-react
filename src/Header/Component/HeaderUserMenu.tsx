@@ -9,7 +9,7 @@ import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
 
 //ボタンのスタイル
 const BtnDiv = styled.div`
-  margin-left: 2%;
+  margin-left: 1%;
   margin-right: 5%;
   position:relative;
   align-items: center;
@@ -58,6 +58,13 @@ const OverlayDiv = styled.div`
   z-index: ${Z_INDEX_PARAM.HEADOVERLAY}; 
 `;
 
+// ユーザー名のスタイル
+const UserNameSpan = styled.span`
+  color:white;
+  display: inline-flex;
+  align-items: center;
+`;
+
 
 export function HeaderUserMenu() {
 
@@ -69,7 +76,8 @@ export function HeaderUserMenu() {
         isOpenUserMenu,
         oepnUserMenu,
         closeUserMenu,
-        clickLogout, } = useHeaderUserMenu();
+        clickLogout,
+        loginUserInfo, } = useHeaderUserMenu();
 
     return (
         <React.Fragment>
@@ -77,6 +85,9 @@ export function HeaderUserMenu() {
                 isLogin ?
                     // ログイン時メニュー
                     <React.Fragment>
+                        <UserNameSpan>
+                            {loginUserInfo.userName}
+                        </UserNameSpan>
                         <BtnDiv>
                             <IconComponent
                                 icon={IoPersonCircleOutline}
