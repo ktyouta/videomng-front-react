@@ -1,4 +1,4 @@
-import React, { RefObject, useContext, useRef, useState } from 'react';
+import React, { RefObject, useContext, useMemo, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { SiginupResponseType } from '../Type/SiginupResponseType';
 import { SiginupRequestType } from '../Type/SiginupRequestType';
+import { comboType } from '../../Common/Component/ComboComponent';
+import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 
 
 export function useSiginup() {
@@ -34,6 +36,8 @@ export function useSiginup() {
     const [errMessage, setErrMessage] = useState(``);
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
+    // 年リスト
+    const yearCoomboList = useCreateYearList();
 
     /**
      * 登録リクエスト
@@ -125,5 +129,6 @@ export function useSiginup() {
         userBirthdayYearRef,
         userBirthdayMonthRef,
         userBirthdayDayRef,
+        yearCoomboList,
     }
 }

@@ -4,7 +4,7 @@ import BaseTextbox from "../../Common/Component/BaseTextbox";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { useSiginup } from "../Hook/useSiginup";
 import ComboComponent from "../../Common/Component/ComboComponent";
-import { DAY_LIST, MONTH_LIST, YEAR_LIST } from "../../Common/Const/CommonConst";
+import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 
 
 const Parent = styled.div`
@@ -71,7 +71,8 @@ export function Siginup() {
     errMessage,
     userBirthdayYearRef,
     userBirthdayMonthRef,
-    userBirthdayDayRef, } = useSiginup();
+    userBirthdayDayRef,
+    yearCoomboList, } = useSiginup();
 
   return (
     <Parent>
@@ -101,44 +102,47 @@ export function Siginup() {
             style={{ marginBottom: "8%" }}
           />
         </InputRowDiv>
-        <InputRowDiv>
-          <InputTitleDiv>
-            生年月日
-          </InputTitleDiv>
-          <BirthDayDiv>
-            <ComboComponent
-              combo={YEAR_LIST}
-              initValue={YEAR_LIST && YEAR_LIST.length > 0 ? YEAR_LIST[0].value : ``}
-              width="68%"
-              minWidth="8%"
-              height="39px"
-              ref={userBirthdayYearRef}
-            />
-            <BirthDayLabelDiv>
-              年
-            </BirthDayLabelDiv>
-            <ComboComponent
-              combo={MONTH_LIST}
-              initValue={MONTH_LIST && MONTH_LIST.length > 0 ? MONTH_LIST[0].value : ``}
-              width="68%"
-              minWidth="8%"
-              height="39px"
-              ref={userBirthdayMonthRef}
-            />
-            <BirthDayLabelDiv>
-              月
-            </BirthDayLabelDiv>
-            <ComboComponent
-              combo={DAY_LIST}
-              initValue={DAY_LIST && DAY_LIST.length > 0 ? DAY_LIST[0].value : ``}
-              width="68%"
-              minWidth="8%"
-              height="39px"
-              ref={userBirthdayDayRef}
-            />
-            日
-          </BirthDayDiv>
-        </InputRowDiv>
+        {
+          yearCoomboList && yearCoomboList.length > 0 &&
+          <InputRowDiv>
+            <InputTitleDiv>
+              生年月日
+            </InputTitleDiv>
+            <BirthDayDiv>
+              <ComboComponent
+                combo={yearCoomboList}
+                initValue={yearCoomboList[0].value}
+                width="68%"
+                minWidth="8%"
+                height="39px"
+                ref={userBirthdayYearRef}
+              />
+              <BirthDayLabelDiv>
+                年
+              </BirthDayLabelDiv>
+              <ComboComponent
+                combo={MONTH_LIST}
+                initValue={MONTH_LIST && MONTH_LIST.length > 0 ? MONTH_LIST[0].value : ``}
+                width="68%"
+                minWidth="8%"
+                height="39px"
+                ref={userBirthdayMonthRef}
+              />
+              <BirthDayLabelDiv>
+                月
+              </BirthDayLabelDiv>
+              <ComboComponent
+                combo={DAY_LIST}
+                initValue={DAY_LIST && DAY_LIST.length > 0 ? DAY_LIST[0].value : ``}
+                width="68%"
+                minWidth="8%"
+                height="39px"
+                ref={userBirthdayDayRef}
+              />
+              日
+            </BirthDayDiv>
+          </InputRowDiv>
+        }
         <InputRowDiv>
           <InputTitleDiv>
             パスワード
