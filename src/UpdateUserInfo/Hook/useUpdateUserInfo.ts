@@ -49,6 +49,7 @@ export function useUpdateUserInfo() {
 
             const loginUserInfo = res.data;
 
+            alert(`ユーザー情報を更新しました。`);
             setLoginUserInfo(loginUserInfo);
             navigate(HOME_ROOT_PATH);
         },
@@ -71,6 +72,12 @@ export function useUpdateUserInfo() {
         const userName = userNameRef.current?.refValue as string;
         const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
 
+        // ユーザーIDが存在しない
+        if (!loginUserInfo.userId) {
+            setErrMessage(`ユーザー情報を更新できません。`);
+            return;
+        }
+
         // ユーザーID未入力
         if (!userName) {
             setErrMessage(`ユーザー名が未入力です。`);
@@ -80,6 +87,10 @@ export function useUpdateUserInfo() {
         // 生年月日未選択
         if (!userBirthday) {
             setErrMessage(`生年月日が未選択です。`);
+            return;
+        }
+
+        if (!window.confirm(`入力した内容でユーザー情報を更新しますか？`)) {
             return;
         }
 

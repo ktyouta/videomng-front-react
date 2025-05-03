@@ -14,26 +14,21 @@ const Parent = styled.div`
 `;
 
 const UpdateUserInfoFormDiv = styled.div`
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10%;
+    width: 40%;
+    padding-left: 10%;
+    padding-top: 8%;
 `;
 
 const UpdateUserInfoButtonDiv = styled.div`
-    text-align: center;
     margin-top: 9%;
 `;
 
 const TitleDiv = styled.div`
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 6%;
+    font-size: 30px;
+    margin-bottom: 8%;
 `;
 
 const ErrMessageDiv = styled.div`
-    text-align: center;
     font-size: 15px;
     margin-bottom: 6%;
     color: red;
@@ -105,7 +100,9 @@ export function UpdateUserInfo() {
                     </InputRowDiv>
                 }
                 {
-                    yearCoomboList && yearCoomboList.length > 0 &&
+                    yearCoomboList &&
+                    yearCoomboList.length > 0 &&
+                    loginUserInfo.birthday &&
                     <InputRowDiv>
                         <InputTitleDiv>
                             生年月日
@@ -113,7 +110,7 @@ export function UpdateUserInfo() {
                         <BirthDayDiv>
                             <ComboComponent
                                 combo={yearCoomboList}
-                                initValue={yearCoomboList[0].value}
+                                initValue={loginUserInfo.birthday.slice(0, 4)}
                                 width="68%"
                                 minWidth="8%"
                                 height="39px"
@@ -124,7 +121,7 @@ export function UpdateUserInfo() {
                             </BirthDayLabelDiv>
                             <ComboComponent
                                 combo={MONTH_LIST}
-                                initValue={MONTH_LIST && MONTH_LIST.length > 0 ? MONTH_LIST[0].value : ``}
+                                initValue={loginUserInfo.birthday.slice(4, 6)}
                                 width="68%"
                                 minWidth="8%"
                                 height="39px"
@@ -135,7 +132,7 @@ export function UpdateUserInfo() {
                             </BirthDayLabelDiv>
                             <ComboComponent
                                 combo={DAY_LIST}
-                                initValue={DAY_LIST && DAY_LIST.length > 0 ? DAY_LIST[0].value : ``}
+                                initValue={loginUserInfo.birthday.slice(6, 8)}
                                 width="68%"
                                 minWidth="8%"
                                 height="39px"
