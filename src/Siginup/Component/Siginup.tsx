@@ -14,26 +14,21 @@ const Parent = styled.div`
 `;
 
 const SiginupFormDiv = styled.div`
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10%;
+    width: 40%;
+    padding-left: 10%;
+    padding-top: 8%;
 `;
 
 const SiginupButtonDiv = styled.div`
-    text-align: center;
     margin-top: 9%;
 `;
 
 const TitleDiv = styled.div`
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 6%;
+    font-size: 30px;
+    margin-bottom: 8%;
 `;
 
 const ErrMessageDiv = styled.div`
-    text-align: center;
     font-size: 15px;
     margin-bottom: 6%;
     color: red;
@@ -72,7 +67,8 @@ export function Siginup() {
     userBirthdayYearRef,
     userBirthdayMonthRef,
     userBirthdayDayRef,
-    yearCoomboList, } = useSiginup();
+    yearCoomboList,
+    clickBack, } = useSiginup();
 
   return (
     <Parent>
@@ -168,6 +164,17 @@ export function Siginup() {
               "borderRadius": "23px",
               "background": "black",
               "fontSize": "1rem",
+            }}
+          />
+          <ButtonComponent
+            styleTypeNumber="RUN"
+            title={"戻る"}
+            onclick={clickBack}
+            style={{
+              "borderRadius": "23px",
+              "background": "black",
+              "fontSize": "1rem",
+              "marginLeft": "5%",
             }}
           />
         </SiginupButtonDiv>

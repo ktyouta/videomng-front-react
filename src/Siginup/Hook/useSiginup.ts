@@ -14,6 +14,7 @@ import { SiginupRequestType } from '../Type/SiginupRequestType';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
+import { LOGIN_PATH } from '../../Login/Const/LoginConst';
 
 
 export function useSiginup() {
@@ -119,6 +120,13 @@ export function useSiginup() {
         userPasswordRef.current?.clearValue();
     }
 
+    /**
+     * 戻るボタン押下
+     */
+    function clickBack() {
+        navigate(LOGIN_PATH);
+    }
+
     return {
         userNameRef,
         userPasswordRef,
@@ -130,5 +138,6 @@ export function useSiginup() {
         userBirthdayMonthRef,
         userBirthdayDayRef,
         yearCoomboList,
+        clickBack,
     }
 }
