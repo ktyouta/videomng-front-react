@@ -1,4 +1,5 @@
 import ENV from "../../env.json";
+import { LoginUserInfoType } from "../Type/LoginUserInfoType";
 
 // videomng-apiのパス
 export const VIDEO_MNG_PATH = `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}`;
@@ -60,3 +61,9 @@ export const DAY_LIST = [
     { label: `30`, value: `30` },
     { label: `31`, value: `31` },
 ];
+
+// ログインユーザー情報初期値
+export const LOGIN_USER_INFO_INIT: LoginUserInfoType = {
+    userName: ``,
+    birthday: ``,
+}

@@ -10,15 +10,16 @@ import { createCtx } from './Common/Function/createCtx';
 import { SIGNUP_PATH } from './Siginup/Const/SiginupConst';
 import { Siginup } from './Siginup/Component/Siginup';
 import { LoginResponseType } from './Login/Type/LoginResponseType';
+import { LoginUserInfoType } from './Common/Type/LoginUserInfoType';
 
 // ログインフラグ
 export const IsLoginContext = createCtx<boolean>();
 // ログインフラグ(setter)
 export const SetIsLoginContext = createCtx<React.Dispatch<React.SetStateAction<boolean>>>();
 // ログインユーザー情報
-export const LoginUserInfoContext = createCtx<LoginResponseType>();
+export const LoginUserInfoContext = createCtx<LoginUserInfoType>();
 // ログインユーザー情報(setter)
-export const SetLoginUserInfoContext = createCtx<React.Dispatch<React.SetStateAction<LoginResponseType>>>();
+export const SetLoginUserInfoContext = createCtx<React.Dispatch<React.SetStateAction<LoginUserInfoType>>>();
 
 
 function QueryApp() {
@@ -49,9 +50,12 @@ function QueryApp() {
                     <Route
                         path={SIGNUP_PATH}
                         element={
-                            <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
-                                <Siginup />
-                            </SetLoginUserInfoContext.Provider>
+                            isLogin ?
+                                <Navigate to={HOME_ROOT_PATH} />
+                                :
+                                <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                    <Siginup />
+                                </SetLoginUserInfoContext.Provider>
                         }
                     />
                     <Route

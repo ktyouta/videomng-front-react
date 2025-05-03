@@ -10,6 +10,8 @@ import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
+import { UPDATE_USER_INFO_PATH } from "../../UpdateUserInfo/Const/UpdateUserInfoConst";
+import { LOGIN_USER_INFO_INIT } from "../../Common/Const/CommonConst";
 
 
 export function useHeaderUserMenu() {
@@ -38,9 +40,7 @@ export function useHeaderUserMenu() {
         // 正常終了後の処理
         afSuccessFn: () => {
 
-            setLoginUserInfo({
-                userName: ``
-            });
+            setLoginUserInfo(LOGIN_USER_INFO_INIT);
             setIsLogin(false);
             navigate(HOME_ROOT_PATH);
         },
@@ -61,8 +61,15 @@ export function useHeaderUserMenu() {
     /**
      * ログアウト
      */
-    const clickLogout = () => {
+    function clickLogout() {
         postMutation.mutate();
+    }
+
+    /**
+     * ユーザー情報更新画面遷移
+     */
+    function clickUpdateUserInfo() {
+        navigate(UPDATE_USER_INFO_PATH);
     }
 
     return {
@@ -73,5 +80,6 @@ export function useHeaderUserMenu() {
         closeUserMenu,
         clickLogout,
         loginUserInfo,
+        clickUpdateUserInfo,
     }
 }

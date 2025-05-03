@@ -25,20 +25,21 @@ const NavDiv = styled.div<{ isDisplay: boolean }>`
   width: 240px;
   height: auto;
   min-height: 169px;
-  background-color: white;
   padding-top: 14px;
-  border: 1px solid #a9a9a9;
   display: ${({ isDisplay }) => (isDisplay ? "block" : "none")};
   border-radius: 6px;
   z-index:${Z_INDEX_PARAM.HEADNAV};
   box-sizing: border-box;
+  background-color: #1c1f26;
+  border: 1px solid #3a3f4b;
+  color: #f1f1f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 `;
 
 //コンテンツのスタイル
 const ContentDiv = styled.div`
     cursor:pointer;
     &:hover {
-        color: blue;
         text-decoration: underline;
     }
     min-height: 29px;
@@ -77,7 +78,8 @@ export function HeaderUserMenu() {
         oepnUserMenu,
         closeUserMenu,
         clickLogout,
-        loginUserInfo, } = useHeaderUserMenu();
+        loginUserInfo,
+        clickUpdateUserInfo, } = useHeaderUserMenu();
 
     return (
         <React.Fragment>
@@ -97,6 +99,11 @@ export function HeaderUserMenu() {
                             <NavDiv
                                 isDisplay={isOpenUserMenu}
                             >
+                                <ContentDiv
+                                    onClick={clickUpdateUserInfo}
+                                >
+                                    ユーザー情報更新
+                                </ContentDiv>
                                 <ContentDiv
                                     onClick={clickLogout}
                                 >

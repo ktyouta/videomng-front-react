@@ -13,6 +13,7 @@ import { LoginResponseType } from '../Type/LoginResponseType';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { SIGNUP_PATH } from '../../Siginup/Const/SiginupConst';
+import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 
 
 export function useLogin() {
@@ -37,9 +38,9 @@ export function useLogin() {
         url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_LOGIN}`,
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<LoginResponseType>) => {
+        afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
-            const loginUserInfo: LoginResponseType = res.data;
+            const loginUserInfo: LoginUserInfoType = res.data;
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);

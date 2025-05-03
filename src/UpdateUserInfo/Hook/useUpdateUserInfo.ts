@@ -9,19 +9,18 @@ import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
-import { SiginupRequestType } from '../Type/SiginupRequestType';
+import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
+import { UpdateUserInfoResponseType } from '../Type/UpdateUserInfoResponseType';
+import { UpdateUserInfoRequestType } from '../Type/UpdateUserInfoRequestType';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 
 
-export function useSiginup() {
+export function useUpdateUserInfo() {
 
     // ユーザー名参照用
     const userNameRef: RefObject<refType> = useRef(null);
-    // パスワード参照用
-    const userPasswordRef: RefObject<refType> = useRef(null);
     // 生年月日(年)参照用
     const userBirthdayYearRef: RefObject<refType> = useRef(null);
     // 生年月日(月)参照用
@@ -30,28 +29,27 @@ export function useSiginup() {
     const userBirthdayDayRef: RefObject<refType> = useRef(null);
     // ルーティング用
     const navigate = useNavigate();
-    // ログインフラグ
-    const setIsLogin = SetIsLoginContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // 年リスト
     const yearCoomboList = useCreateYearList();
+    // 更新前ユーザー情報
+    const loginUserInfo = LoginUserInfoContext.useCtx();
 
     /**
-     * 登録リクエスト
+     * 更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_INFO}`,
-        method: "POST",
+        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_INFO}/${loginUserInfo.userId}`,
+        method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
             const loginUserInfo = res.data;
 
             setLoginUserInfo(loginUserInfo);
-            setIsLogin(true);
             navigate(HOME_ROOT_PATH);
         },
         // 失敗後の処理
@@ -61,37 +59,21 @@ export function useSiginup() {
 
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
-            userPasswordRef.current?.clearValue();
         },
     });
 
-    /**
-     * エンターキー押下時イベント
-     */
-    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.key === 'Enter') {
-            clickSiginupBtn();
-        }
-    };
 
     /**
-     * ログインボタン押下
+     * 保存ボタン押下
      */
-    function clickSiginupBtn() {
+    function clickUpdateUserInfoBtn() {
 
         const userName = userNameRef.current?.refValue as string;
-        const password = userPasswordRef.current?.refValue as string;
         const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
 
         // ユーザーID未入力
         if (!userName) {
             setErrMessage(`ユーザー名が未入力です。`);
-            return;
-        }
-
-        // パスワード未入力
-        if (!password) {
-            setErrMessage(`パスワードが未入力です。`);
             return;
         }
 
@@ -101,34 +83,31 @@ export function useSiginup() {
             return;
         }
 
-        const body: SiginupRequestType = {
+        const body: UpdateUserInfoRequestType = {
             userName,
-            password,
             userBirthday,
         };
 
-        // 登録リクエスト呼び出し
+        // 更新リクエスト呼び出し
         postMutation.mutate(body);
     }
 
     /**
-     * 入力値のクリア
+     * キャンセルボタン押下
      */
-    function clickClearBtn() {
-        userNameRef.current?.clearValue();
-        userPasswordRef.current?.clearValue();
+    function clickCancel() {
+        navigate(HOME_ROOT_PATH);
     }
 
     return {
         userNameRef,
-        userPasswordRef,
-        clickSiginupBtn,
-        clickClearBtn,
-        handleKeyPress,
+        clickUpdateUserInfoBtn,
         errMessage,
         userBirthdayYearRef,
         userBirthdayMonthRef,
         userBirthdayDayRef,
         yearCoomboList,
+        loginUserInfo,
+        clickCancel
     }
 }
