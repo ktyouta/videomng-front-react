@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { useErrorBoundary } from "react-error-boundary";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 export function useException() {
 
@@ -14,7 +14,7 @@ export function useException() {
      */
     function backHome() {
         resetBoundary();
-        navigate(`${HOME_ROOT_PATH}`);
+        navigate(`${ROUTER_PATH.HOME}`);
     }
 
     return {

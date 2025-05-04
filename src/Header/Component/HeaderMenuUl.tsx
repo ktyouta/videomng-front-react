@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { useHeaderMenuUl } from "../Hook/useHeaderMenuUl";
-import { FAVORITE_ROOT_PATH } from "../../Favorite/Const/FavoriteConst";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 const NavUl = styled.ul`
@@ -45,10 +44,10 @@ export function HeaderMenuUl() {
     return (
         <NavUl>
             <NavLi
-                isActive={nowPath === HOME_ROOT_PATH}
+                isActive={nowPath === ROUTER_PATH.HOME}
             >
                 <Link
-                    to={HOME_ROOT_PATH}
+                    to={ROUTER_PATH.HOME}
                     style={{ color: "inherit", fontWeight: "inherit" }}
                 >
                     ホーム
@@ -57,10 +56,10 @@ export function HeaderMenuUl() {
             {
                 isLogin &&
                 <NavLi
-                    isActive={nowPath === FAVORITE_ROOT_PATH}
+                    isActive={nowPath === ROUTER_PATH.FAVORITE}
                 >
                     <Link
-                        to={FAVORITE_ROOT_PATH}
+                        to={ROUTER_PATH.FAVORITE}
                         style={{ color: "inherit", fontWeight: "inherit" }}
                     >
                         お気に入り

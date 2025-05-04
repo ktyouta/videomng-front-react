@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { useAtomValue } from "jotai";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext } from "../../QueryApp";

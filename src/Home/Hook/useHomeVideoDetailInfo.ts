@@ -8,10 +8,10 @@ import { useState } from "react";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { AddToFavoriteRequestType } from "../Type/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
-import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext } from "../../QueryApp";
 import { VideoIdContext } from "../Component/Home";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 
@@ -39,7 +39,7 @@ export function useHomeVideoDetailInfo() {
                 alert(message);
             }
 
-            navigate(HOME_ROOT_PATH);
+            navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

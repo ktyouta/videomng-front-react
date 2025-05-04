@@ -1,12 +1,12 @@
 import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../env.json';
-import { FAVORITE_ROOT_PATH, MENU_NO } from "../Const/FavoriteConst";
 import { useNavigate } from "react-router-dom";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useState } from "react";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 
@@ -30,7 +30,7 @@ export function useFavoriteVideoDetailInfo() {
             if (message) {
                 alert(message);
             }
-            navigate(FAVORITE_ROOT_PATH);
+            navigate(ROUTER_PATH.FAVORITE);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

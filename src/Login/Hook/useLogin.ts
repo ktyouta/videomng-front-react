@@ -8,12 +8,11 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { LoginRequestType } from '../Type/LoginRequestType';
 import { useSetAtom } from 'jotai';
-import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { LoginResponseType } from '../Type/LoginResponseType';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
-import { SIGNUP_PATH } from '../../Siginup/Const/SiginupConst';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
+import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 
 
 export function useLogin() {
@@ -44,7 +43,7 @@ export function useLogin() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(HOME_ROOT_PATH);
+            navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -104,7 +103,7 @@ export function useLogin() {
      * 会員登録画面遷移
      */
     function clickSignup() {
-        navigate(SIGNUP_PATH);
+        navigate(ROUTER_PATH.SIGNUP);
     }
 
     return {

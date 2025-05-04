@@ -1,7 +1,6 @@
 import React, { createContext } from "react";
 import { HomeVideoList } from "./HomeVideoList";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { HomeVideoDetail } from "./HomeVideoDetail";
 import { useHome } from "../Hook/useHome";
 import { createCtx } from "../../Common/Function/createCtx";

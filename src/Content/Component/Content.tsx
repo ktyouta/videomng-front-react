@@ -2,12 +2,11 @@ import React from "react";
 import { Home } from "../../Home/Component/Home";
 import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
-import { FAVORITE_ROOT_PATH } from "../../Favorite/Const/FavoriteConst";
 import { Favorite } from "../../Favorite/Component/Favorite";
 import { useContent } from "../Hook/useContent";
 import { Provider } from "jotai";
 import { NotFound } from "../../NotFound/Component/NotFound";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 const Parent = styled.div`
   width: 100%;
@@ -25,7 +24,7 @@ export function Content() {
         <Parent>
             <Routes>
                 <Route
-                    path={`${HOME_ROOT_PATH}/*`}
+                    path={`${ROUTER_PATH.HOME}/*`}
                     element={
                         <Provider>
                             <Home />
@@ -35,7 +34,7 @@ export function Content() {
                 {
                     isLogin &&
                     <Route
-                        path={`${FAVORITE_ROOT_PATH}/*`}
+                        path={`${ROUTER_PATH.FAVORITE}/*`}
                         element={
                             <Provider>
                                 <Favorite />
@@ -46,7 +45,7 @@ export function Content() {
                 <Route
                     key={"*"}
                     path="*"
-                    element={<NotFound backUrl={`${HOME_ROOT_PATH}`} />}
+                    element={<NotFound backUrl={`${ROUTER_PATH.HOME}`} />}
                 />
             </Routes>
         </Parent>

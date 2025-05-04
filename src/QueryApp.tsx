@@ -3,14 +3,12 @@ import { Home } from './Home/Component/Home';
 import { Main } from './Main/Component/Main';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import useQueryApp from './useQueryApp';
-import { LOGIN_PATH } from './Login/Const/LoginConst';
 import { Login } from './Login/Component/Login';
-import { HOME_ROOT_PATH } from './Home/Const/HomeConst';
 import { createCtx } from './Common/Function/createCtx';
-import { SIGNUP_PATH } from './Siginup/Const/SiginupConst';
 import { Siginup } from './Siginup/Component/Siginup';
 import { LoginResponseType } from './Login/Type/LoginResponseType';
 import { LoginUserInfoType } from './Common/Type/LoginUserInfoType';
+import { ROUTER_PATH } from './Common/Const/RouterPath';
 
 // ログインフラグ
 export const IsLoginContext = createCtx<boolean>();
@@ -36,11 +34,11 @@ function QueryApp() {
         <SetIsLoginContext.Provider value={setIsLogin}>
             <IsLoginContext.Provider value={isLogin}>
                 <Routes>
-                    <Route path="/" element={<Navigate to={`${HOME_ROOT_PATH}`} />} />
+                    <Route path="/" element={<Navigate to={`${ROUTER_PATH.HOME}`} />} />
                     <Route
-                        path={LOGIN_PATH}
+                        path={ROUTER_PATH.LOGIN}
                         element={isLogin ?
-                            <Navigate to={HOME_ROOT_PATH} />
+                            <Navigate to={ROUTER_PATH.HOME} />
                             :
                             <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
                                 <Login />
@@ -48,10 +46,10 @@ function QueryApp() {
                         }
                     />
                     <Route
-                        path={SIGNUP_PATH}
+                        path={ROUTER_PATH.SIGNUP}
                         element={
                             isLogin ?
-                                <Navigate to={HOME_ROOT_PATH} />
+                                <Navigate to={ROUTER_PATH.HOME} />
                                 :
                                 <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
                                     <Siginup />

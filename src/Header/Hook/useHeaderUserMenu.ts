@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
-import { LOGIN_PATH } from "../../Login/Const/LoginConst";
 import { useAtom, useAtomValue } from "jotai";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useCookies } from "react-cookie";
@@ -10,8 +8,8 @@ import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
-import { UPDATE_USER_INFO_PATH } from "../../UpdateUserInfo/Const/UpdateUserInfoConst";
 import { LOGIN_USER_INFO_INIT } from "../../Common/Const/CommonConst";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 export function useHeaderUserMenu() {
@@ -42,7 +40,7 @@ export function useHeaderUserMenu() {
 
             setLoginUserInfo(LOGIN_USER_INFO_INIT);
             setIsLogin(false);
-            navigate(HOME_ROOT_PATH);
+            navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -55,7 +53,7 @@ export function useHeaderUserMenu() {
      * ログインボタン押下イベント
      */
     function clickLogin() {
-        navigate(LOGIN_PATH);
+        navigate(ROUTER_PATH.LOGIN);
     }
 
     /**
@@ -69,7 +67,7 @@ export function useHeaderUserMenu() {
      * ユーザー情報更新画面遷移
      */
     function clickUpdateUserInfo() {
-        navigate(UPDATE_USER_INFO_PATH);
+        navigate(ROUTER_PATH.UPDATE_USER_INFO);
     }
 
     return {

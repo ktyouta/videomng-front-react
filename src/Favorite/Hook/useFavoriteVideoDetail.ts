@@ -3,7 +3,6 @@ import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { favoriteVideoDetailItemAtom, favoriteVideoMemoListAtom } from "../Atom/FavoriteAtom";
 import { FavoriteVideoDetailApiUrlModel, } from "../Model/FavoriteVideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
-import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoDetailResponseType } from "../Type/FavoriteVideoDetailResponseType";
 import { useState } from "react";

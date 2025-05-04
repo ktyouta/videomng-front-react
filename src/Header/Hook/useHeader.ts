@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
-import { LOGIN_PATH } from "../../Login/Const/LoginConst";
 import { LoginUserInfoContext } from "../../QueryApp";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 export function useHeader() {
 
@@ -25,7 +24,7 @@ export function useHeader() {
             return;
         }
 
-        const mainPath = pathArray[1] ? pathArray[1] : HOME_ROOT_PATH;
+        const mainPath = pathArray[1] ? pathArray[1] : ROUTER_PATH.HOME;
         setNowPath(mainPath);
     }, [location]);
 
@@ -33,7 +32,7 @@ export function useHeader() {
      * ログインボタン押下イベント
      */
     function clickLogin() {
-        navigate(LOGIN_PATH);
+        navigate(ROUTER_PATH.LOGIN);
     }
 
     return {

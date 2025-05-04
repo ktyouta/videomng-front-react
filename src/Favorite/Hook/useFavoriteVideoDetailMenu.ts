@@ -1,4 +1,4 @@
-import { FAVORITE_ROOT_PATH, MENU_NO } from "../Const/FavoriteConst";
+import { MENU_NO } from "../Const/FavoriteConst";
 import { useNavigate } from "react-router-dom";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useState } from "react";

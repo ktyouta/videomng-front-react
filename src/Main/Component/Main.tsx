@@ -6,8 +6,8 @@ import { Footer } from "../../Footer/Component/Footer";
 import { Header } from "../../Header/Component/Header";
 import { useMain } from "../Hook/useMain";
 import { Route, Routes } from "react-router-dom";
-import { UPDATE_USER_INFO_PATH } from "../../UpdateUserInfo/Const/UpdateUserInfoConst";
 import { UpdateUserInfo } from "../../UpdateUserInfo/Component/UpdateUserInfo";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`
@@ -27,7 +27,7 @@ export function Main() {
     return (
         <Routes>
             <Route
-                path={UPDATE_USER_INFO_PATH}
+                path={ROUTER_PATH.UPDATE_USER_INFO}
                 element={<UpdateUserInfo />}
             />
             <Route

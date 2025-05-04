@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { useContext } from "react";
 import { SetVideoIdContext } from "../Component/Home";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 export function useHomeVideoContent() {
@@ -22,7 +22,7 @@ export function useHomeVideoContent() {
         }
 
         setVideoId(id);
-        navigate(`${HOME_ROOT_PATH}/${id}`);
+        navigate(`${ROUTER_PATH.HOME}/${id}`);
     }
 
     return {

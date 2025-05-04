@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../../Home/Const/HomeConst";
 import { inherits } from "util";
 import { useHeader } from "../Hook/useHeader";
 import ButtonComponent from "../../Common/Component/ButtonComponent";

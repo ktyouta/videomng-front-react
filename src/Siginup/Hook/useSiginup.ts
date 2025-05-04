@@ -7,14 +7,13 @@ import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
-import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { SiginupRequestType } from '../Type/SiginupRequestType';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
-import { LOGIN_PATH } from '../../Login/Const/LoginConst';
+import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 
 
 export function useSiginup() {
@@ -53,7 +52,7 @@ export function useSiginup() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(HOME_ROOT_PATH);
+            navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -124,7 +123,7 @@ export function useSiginup() {
      * 戻るボタン押下
      */
     function clickBack() {
-        navigate(LOGIN_PATH);
+        navigate(ROUTER_PATH.LOGIN);
     }
 
     return {

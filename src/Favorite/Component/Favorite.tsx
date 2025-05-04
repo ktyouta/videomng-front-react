@@ -1,7 +1,6 @@
 import React from "react";
 import { FavoriteVideoList } from "./FavoriteVideoList";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 import { FavoriteVideoDetail } from "./FavoriteVideoDetail";
 import { useFavorite } from "../Hook/useFavorite";
 import { createCtx } from "../../Common/Function/createCtx";

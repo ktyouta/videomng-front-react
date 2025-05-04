@@ -4,7 +4,7 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../env.json';
 import { AddToFavoriteRequestType } from "../Type/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../Type/AddToFavoriteResponseType";
-import { HOME_ROOT_PATH, MENU_NO } from "../Const/HomeConst";
+import { MENU_NO } from "../Const/HomeConst";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { VideoIdContext } from "../Component/Home";

@@ -7,7 +7,6 @@ import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
-import { HOME_ROOT_PATH } from '../../Home/Const/HomeConst';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
@@ -15,6 +14,7 @@ import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { UpdateUserInfoResponseType } from '../Type/UpdateUserInfoResponseType';
 import { UpdateUserInfoRequestType } from '../Type/UpdateUserInfoRequestType';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
+import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 
 
 export function useUpdateUserInfo() {
@@ -51,7 +51,7 @@ export function useUpdateUserInfo() {
 
             alert(`ユーザー情報を更新しました。`);
             setLoginUserInfo(loginUserInfo);
-            navigate(HOME_ROOT_PATH);
+            navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -107,7 +107,7 @@ export function useUpdateUserInfo() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(HOME_ROOT_PATH);
+        navigate(ROUTER_PATH.HOME);
     }
 
     return {

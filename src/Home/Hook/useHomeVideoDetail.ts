@@ -4,10 +4,10 @@ import { VideoDetailResponseType } from "../Type/VideoDetailResponseType";
 import { videoDetailItemAtom } from "../Atom/HomeAtom";
 import { VideoDetailApiUrlModel } from "../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
-import { HOME_ROOT_PATH } from "../Const/HomeConst";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoIdContext } from "../Component/Home";
 import { useState } from "react";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 export function useHomeVideoDetail() {
 
@@ -45,7 +45,7 @@ export function useHomeVideoDetail() {
      * ホーム画面(動画一覧)に戻る
      */
     function backHome() {
-        navigate(HOME_ROOT_PATH);
+        navigate(ROUTER_PATH.HOME);
     }
 
     return {

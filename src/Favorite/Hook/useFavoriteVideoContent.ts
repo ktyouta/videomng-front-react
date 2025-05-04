@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { FAVORITE_ROOT_PATH } from "../Const/FavoriteConst";
 import { SetFavoriteVideoIdContext } from "../Component/Favorite";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 export function useFavoriteVideoContent() {
@@ -21,7 +21,7 @@ export function useFavoriteVideoContent() {
         }
 
         setFavoriteVideoId(id);
-        navigate(`${FAVORITE_ROOT_PATH}/${id}`);
+        navigate(`${ROUTER_PATH.FAVORITE}/${id}`);
     }
 
     return {
