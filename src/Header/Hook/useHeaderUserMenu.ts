@@ -70,6 +70,13 @@ export function useHeaderUserMenu() {
         navigate(ROUTER_PATH.UPDATE_USER_INFO);
     }
 
+    /**
+     * ユーザーパスワード更新画面遷移
+     */
+    function clickUpdateUserPassword() {
+        navigate(ROUTER_PATH.UPDATE_USER_PASSWORD);
+    }
+
     return {
         clickLogin,
         isLogin,
@@ -79,5 +86,6 @@ export function useHeaderUserMenu() {
         clickLogout,
         loginUserInfo,
         clickUpdateUserInfo,
+        clickUpdateUserPassword,
     }
 }

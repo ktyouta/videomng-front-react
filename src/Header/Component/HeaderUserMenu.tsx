@@ -19,12 +19,12 @@ const BtnDiv = styled.div`
 //ナビゲーション
 const NavDiv = styled.div<{ isDisplay: boolean }>`
   position: absolute;
-  top: 48px;
-  left: -154px;
+  left: -150px;
   font-size: 15px;
-  width: 240px;
+  width: 263px;
+  width: 273px;
   height: auto;
-  min-height: 169px;
+  min-height: 200px;
   padding-top: 14px;
   display: ${({ isDisplay }) => (isDisplay ? "block" : "none")};
   border-radius: 6px;
@@ -34,6 +34,7 @@ const NavDiv = styled.div<{ isDisplay: boolean }>`
   border: 1px solid #3a3f4b;
   color: #f1f1f1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  padding-left: 22px;
 `;
 
 //コンテンツのスタイル
@@ -43,10 +44,10 @@ const ContentDiv = styled.div`
         text-decoration: underline;
     }
     min-height: 29px;
-    padding-left: 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    margin-bottom: 2px;
 `;
 
 //アイコンクリック時の背景のスタイル
@@ -79,7 +80,8 @@ export function HeaderUserMenu() {
         closeUserMenu,
         clickLogout,
         loginUserInfo,
-        clickUpdateUserInfo, } = useHeaderUserMenu();
+        clickUpdateUserInfo,
+        clickUpdateUserPassword, } = useHeaderUserMenu();
 
     return (
         <React.Fragment>
@@ -103,6 +105,11 @@ export function HeaderUserMenu() {
                                     onClick={clickUpdateUserInfo}
                                 >
                                     ユーザー情報更新
+                                </ContentDiv>
+                                <ContentDiv
+                                    onClick={clickUpdateUserPassword}
+                                >
+                                    パスワードの変更
                                 </ContentDiv>
                                 <ContentDiv
                                     onClick={clickLogout}

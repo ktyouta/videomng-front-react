@@ -10,4 +10,6 @@ export const ROUTER_PATH = {
     SIGNUP: `/signup`,
     // ユーザー情報更新
     UPDATE_USER_INFO: `updateuserinfo`,
+    // ユーザーパスワード更新
+    UPDATE_USER_PASSWORD: `updateuserpassword`,
 }

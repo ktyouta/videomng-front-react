@@ -8,6 +8,7 @@ import { useMain } from "../Hook/useMain";
 import { Route, Routes } from "react-router-dom";
 import { UpdateUserInfo } from "../../UpdateUserInfo/Component/UpdateUserInfo";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { UpdateUserPassword } from "../../UpdateUserPassword/Component/UpdateUserPassword";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`
@@ -29,6 +30,10 @@ export function Main() {
             <Route
                 path={ROUTER_PATH.UPDATE_USER_INFO}
                 element={<UpdateUserInfo />}
+            />
+            <Route
+                path={ROUTER_PATH.UPDATE_USER_PASSWORD}
+                element={<UpdateUserPassword />}
             />
             <Route
                 path={`/*`}
