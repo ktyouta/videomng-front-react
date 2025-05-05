@@ -6,6 +6,7 @@ import React from "react";
 import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
 import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
+import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 
 
 const Parent = styled.div`
@@ -58,6 +59,9 @@ export function FavoriteMemoContent(props: propsType) {
         isOpenEdit,
         openEdit,
         closeEdit,
+        isOpenModal,
+        closeModal,
+        executeDelete,
     } = useFavoriteMemoContent();
 
     const data = props.favoriteVideoMemo;
@@ -94,10 +98,18 @@ export function FavoriteMemoContent(props: propsType) {
                                 />
                                 {/* 削除 */}
                                 <FavoriteMemoDeleteIconArea
-                                    deleteMemo={() => { deleteMemo(memoSeq) }}
+                                    deleteMemo={() => { deleteMemo() }}
                                 />
                             </IconDiv>
                         </LowerDiv>
+                        <ConfirmModalComponent
+                            isOpenModal={isOpenModal}
+                            closeModal={closeModal}
+                            titleMessage={`メモを削除しますか？`}
+                            clickOk={() => {
+                                executeDelete(memoSeq);
+                            }}
+                        />
                     </React.Fragment>
             }
         </Parent>

@@ -15,6 +15,7 @@ import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import { UpdateUserInfoRequestType } from '../../UpdateUserInfo/Type/UpdateUserInfoRequestType';
 import useSwitch from '../../Common/Hook/useSwitch';
+import { UpdateUserPasswordRequestType } from '../Type/UpdateUserPasswordRequestType';
 
 
 export function useUpdateUserPassword() {
@@ -110,7 +111,7 @@ export function useUpdateUserPassword() {
         const newPassword = newPasswordRef.current?.refValue as string;
         const confirmPassword = confirmPasswordRef.current?.refValue as string;
 
-        const body: UpdateUserInfoRequestType = {
+        const body: UpdateUserPasswordRequestType = {
             currentPassword,
             newPassword,
             confirmPassword,

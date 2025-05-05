@@ -64,7 +64,8 @@ export function Login() {
     clickLoginBtn,
     handleKeyPress,
     clickSignup,
-    errMessage } = useLogin();
+    errMessage,
+    clickBack } = useLogin();
 
   return (
     <Parent>
@@ -119,12 +120,23 @@ export function Login() {
         <LoginButtonDiv>
           <ButtonComponent
             styleTypeNumber="RUN"
+            title={"戻る"}
+            onclick={clickBack}
+            style={{
+              "borderRadius": "23px",
+              "background": "black",
+              "fontSize": "1rem",
+            }}
+          />
+          <ButtonComponent
+            styleTypeNumber="RUN"
             title={"ログイン"}
             onclick={clickLoginBtn}
             style={{
               "borderRadius": "23px",
               "background": "black",
               "fontSize": "1rem",
+              "marginLeft": "5%",
             }}
           />
         </LoginButtonDiv>

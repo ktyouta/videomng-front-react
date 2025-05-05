@@ -14,6 +14,7 @@ import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
+import useSwitch from '../../Common/Hook/useSwitch';
 
 
 export function useSiginup() {
@@ -38,6 +39,8 @@ export function useSiginup() {
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // 年リスト
     const yearCoomboList = useCreateYearList();
+    // 確認モーダルの表示フラグ
+    const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
 
     /**
      * 登録リクエスト
@@ -75,7 +78,7 @@ export function useSiginup() {
     };
 
     /**
-     * ログインボタン押下
+     * 登録ボタン押下
      */
     function clickSiginupBtn() {
 
@@ -101,14 +104,8 @@ export function useSiginup() {
             return;
         }
 
-        const body: SiginupRequestType = {
-            userName,
-            password,
-            userBirthday,
-        };
-
-        // 登録リクエスト呼び出し
-        postMutation.mutate(body);
+        // 登録確認用モーダルを展開
+        openModal();
     }
 
     /**
@@ -126,6 +123,25 @@ export function useSiginup() {
         navigate(ROUTER_PATH.LOGIN);
     }
 
+    /**
+     * アカウント登録実行
+     */
+    function executeSiginup() {
+
+        const userName = userNameRef.current?.refValue as string;
+        const password = userPasswordRef.current?.refValue as string;
+        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
+
+        const body: SiginupRequestType = {
+            userName,
+            password,
+            userBirthday,
+        };
+
+        // 登録リクエスト呼び出し
+        postMutation.mutate(body);
+    }
+
     return {
         userNameRef,
         userPasswordRef,
@@ -138,5 +154,8 @@ export function useSiginup() {
         userBirthdayDayRef,
         yearCoomboList,
         clickBack,
+        isOpenModal,
+        closeModal,
+        executeSiginup,
     }
 }

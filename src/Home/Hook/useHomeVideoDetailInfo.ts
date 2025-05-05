@@ -58,10 +58,6 @@ export function useHomeVideoDetailInfo() {
      */
     function addToFavorite() {
 
-        if (!window.confirm(`動画をお気に入りに登録しますか？`)) {
-            return;
-        }
-
         if (!videoId) {
             alert(`お気に入りに登録できません。`);
             return;

@@ -5,6 +5,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { useSiginup } from "../Hook/useSiginup";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
+import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 
 
 const Parent = styled.div`
@@ -68,7 +69,10 @@ export function Siginup() {
     userBirthdayMonthRef,
     userBirthdayDayRef,
     yearCoomboList,
-    clickBack, } = useSiginup();
+    clickBack,
+    isOpenModal,
+    closeModal,
+    executeSiginup, } = useSiginup();
 
   return (
     <Parent>
@@ -179,6 +183,12 @@ export function Siginup() {
           />
         </SiginupButtonDiv>
       </SiginupFormDiv>
+      <ConfirmModalComponent
+        isOpenModal={isOpenModal}
+        closeModal={closeModal}
+        titleMessage={`入力した内容でアカウントを作成しますか？`}
+        clickOk={executeSiginup}
+      />
     </Parent>
   );
 }

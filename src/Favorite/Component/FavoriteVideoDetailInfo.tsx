@@ -10,6 +10,7 @@ import AccordionComponent from "../../Common/Component/AccordionComponent";
 import { useFavoriteVideoDetailInfo } from "../Hook/useFavoriteVideoDetailInfo";
 import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../Common/Component/IconComponent";
+import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 
 const VideoInfoDiv = styled.div`
   width: 25%;
@@ -45,8 +46,11 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     console.log("FavoriteVideoDetailInfo render");
 
     const {
-        deleteFavoriteVide,
+        clickDeleteFavoriteVide,
         play,
+        isOpenModal,
+        closeModal,
+        executeDelete,
     } = useFavoriteVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
@@ -91,7 +95,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                 <ButtonComponent
                     styleTypeNumber="BASE"
                     title={"お気に入りから外す"}
-                    onclick={deleteFavoriteVide}
+                    onclick={clickDeleteFavoriteVide}
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
@@ -102,6 +106,12 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     }}
                 />
             </VideoMetaDiv>
+            <ConfirmModalComponent
+                isOpenModal={isOpenModal}
+                closeModal={closeModal}
+                titleMessage={`この動画をお気に入りから外しもよろしいですか？`}
+                clickOk={executeDelete}
+            />
         </VideoInfoDiv>
     );
 }

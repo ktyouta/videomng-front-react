@@ -15,6 +15,7 @@ import { UpdateUserInfoResponseType } from '../Type/UpdateUserInfoResponseType';
 import { UpdateUserInfoRequestType } from '../Type/UpdateUserInfoRequestType';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
+import useSwitch from '../../Common/Hook/useSwitch';
 
 
 export function useUpdateUserInfo() {
@@ -37,6 +38,8 @@ export function useUpdateUserInfo() {
     const yearCoomboList = useCreateYearList();
     // 更新前ユーザー情報
     const loginUserInfo = LoginUserInfoContext.useCtx();
+    // 確認モーダルの表示フラグ
+    const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
 
     /**
      * 更新リクエスト
@@ -90,9 +93,26 @@ export function useUpdateUserInfo() {
             return;
         }
 
-        if (!window.confirm(`入力した内容でユーザー情報を更新しますか？`)) {
-            return;
-        }
+        // 確認用モーダルを展開する
+        openModal();
+
+
+    }
+
+    /**
+     * キャンセルボタン押下
+     */
+    function clickCancel() {
+        navigate(ROUTER_PATH.HOME);
+    }
+
+    /**
+     * ユーザー情報更新実行
+     */
+    function executeUpdate() {
+
+        const userName = userNameRef.current?.refValue as string;
+        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
 
         const body: UpdateUserInfoRequestType = {
             userName,
@@ -101,13 +121,6 @@ export function useUpdateUserInfo() {
 
         // 更新リクエスト呼び出し
         postMutation.mutate(body);
-    }
-
-    /**
-     * キャンセルボタン押下
-     */
-    function clickCancel() {
-        navigate(ROUTER_PATH.HOME);
     }
 
     return {
@@ -119,6 +132,9 @@ export function useUpdateUserInfo() {
         userBirthdayDayRef,
         yearCoomboList,
         loginUserInfo,
-        clickCancel
+        clickCancel,
+        isOpenModal,
+        closeModal,
+        executeUpdate,
     }
 }

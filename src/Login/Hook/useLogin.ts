@@ -106,6 +106,13 @@ export function useLogin() {
         navigate(ROUTER_PATH.SIGNUP);
     }
 
+    /**
+     * 戻るボタン
+     */
+    function clickBack() {
+        navigate(ROUTER_PATH.HOME);
+    }
+
     return {
         userNameRef,
         userPasswordRef,
@@ -114,5 +121,6 @@ export function useLogin() {
         handleKeyPress,
         errMessage,
         clickSignup,
+        clickBack
     }
 }

@@ -5,6 +5,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { useUpdateUserInfo } from "../Hook/useUpdateUserInfo";
+import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 
 
 const Parent = styled.div`
@@ -67,7 +68,10 @@ export function UpdateUserInfo() {
         userBirthdayDayRef,
         yearCoomboList,
         loginUserInfo,
-        clickCancel, } = useUpdateUserInfo();
+        clickCancel,
+        isOpenModal,
+        closeModal,
+        executeUpdate, } = useUpdateUserInfo();
 
     return (
         <Parent>
@@ -166,6 +170,12 @@ export function UpdateUserInfo() {
                     />
                 </UpdateUserInfoButtonDiv>
             </UpdateUserInfoFormDiv>
+            <ConfirmModalComponent
+                isOpenModal={isOpenModal}
+                closeModal={closeModal}
+                titleMessage={`入力した内容でユーザー情報を更新しますか？`}
+                clickOk={executeUpdate}
+            />
         </Parent>
     );
 }

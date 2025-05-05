@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
-import { useFavoriteCommentContent } from "../Hook/useFavoriteCommentContent";
 import parse from "html-react-parser";
 import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconArea";
 import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";

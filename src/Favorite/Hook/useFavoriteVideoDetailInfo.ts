@@ -16,6 +16,9 @@ export function useFavoriteVideoDetailInfo() {
     const navigate = useNavigate();
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 確認モーダルの表示フラグ
+    const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+
 
     /**
      * お気に入り動画削除リクエスト
@@ -39,16 +42,12 @@ export function useFavoriteVideoDetailInfo() {
     });
 
     /**
-     * お気に入り動画削除
+     * お気に入り動画削除ボタン押下
      */
-    function deleteFavoriteVide() {
+    function clickDeleteFavoriteVide() {
 
-        if (!window.confirm(`この動画をお気に入りから外しもよろしいですか？`)) {
-            return;
-        }
-
-        // リクエスト送信
-        postMutation.mutate();
+        // 削除確認用モーダルを展開
+        openModal();
     }
 
 
@@ -62,8 +61,20 @@ export function useFavoriteVideoDetailInfo() {
         window.open(`${videoUrlModel.videoUrl}`, `_blank`);
     }
 
+    /**
+     * お気に入り動画削除実行
+     */
+    function executeDelete() {
+
+        // リクエスト送信
+        postMutation.mutate();
+    }
+
     return {
-        deleteFavoriteVide,
+        clickDeleteFavoriteVide,
         play,
+        isOpenModal,
+        closeModal,
+        executeDelete,
     }
 }

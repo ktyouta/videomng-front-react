@@ -19,6 +19,8 @@ export function useFavoriteMemoContent() {
     const { flag: isOpenEdit, on: openEdit, off: closeEdit } = useSwitch();
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 確認モーダルの表示フラグ
+    const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
 
 
     /**
@@ -48,16 +50,22 @@ export function useFavoriteMemoContent() {
     /**
      * メモを削除する
      */
-    function deleteMemo(videoMemoSeq: number) {
-
-        if (!window.confirm(`メモを削除しますか？`)) {
-            return;
-        }
+    function deleteMemo() {
 
         if (!favoriteVideoId) {
-            alert(`メモを削除できませんでした。`);
+            alert(`メモを削除できません。`);
             return;
         }
+
+        // 削除確認用モーダルを展開
+        openModal();
+
+    }
+
+    /**
+     * メモ削除実行
+     */
+    function executeDelete(videoMemoSeq: number) {
 
         const body: DeleteToFavoriteVideoMemoReqestType = {
             videoId: favoriteVideoId,
@@ -74,5 +82,8 @@ export function useFavoriteMemoContent() {
         isOpenEdit,
         openEdit,
         closeEdit,
+        isOpenModal,
+        closeModal,
+        executeDelete,
     }
 }
