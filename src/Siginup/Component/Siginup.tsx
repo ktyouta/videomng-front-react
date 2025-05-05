@@ -158,8 +158,8 @@ export function Siginup() {
         <SiginupButtonDiv>
           <ButtonComponent
             styleTypeNumber="RUN"
-            title={"登録"}
-            onclick={clickSiginupBtn}
+            title={"戻る"}
+            onclick={clickBack}
             style={{
               "borderRadius": "23px",
               "background": "black",
@@ -168,8 +168,8 @@ export function Siginup() {
           />
           <ButtonComponent
             styleTypeNumber="RUN"
-            title={"戻る"}
-            onclick={clickBack}
+            title={"登録"}
+            onclick={clickSiginupBtn}
             style={{
               "borderRadius": "23px",
               "background": "black",

@@ -145,8 +145,8 @@ export function UpdateUserInfo() {
                 <UpdateUserInfoButtonDiv>
                     <ButtonComponent
                         styleTypeNumber="RUN"
-                        title={"保存"}
-                        onclick={clickUpdateUserInfoBtn}
+                        title={"キャンセル"}
+                        onclick={clickCancel}
                         style={{
                             "borderRadius": "23px",
                             "background": "black",
@@ -155,8 +155,8 @@ export function UpdateUserInfo() {
                     />
                     <ButtonComponent
                         styleTypeNumber="RUN"
-                        title={"キャンセル"}
-                        onclick={clickCancel}
+                        title={"保存"}
+                        onclick={clickUpdateUserInfoBtn}
                         style={{
                             "borderRadius": "23px",
                             "background": "black",

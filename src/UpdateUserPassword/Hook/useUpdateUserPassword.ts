@@ -14,6 +14,7 @@ import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import { UpdateUserInfoRequestType } from '../../UpdateUserInfo/Type/UpdateUserInfoRequestType';
+import useSwitch from '../../Common/Hook/useSwitch';
 
 
 export function useUpdateUserPassword() {
@@ -30,6 +31,8 @@ export function useUpdateUserPassword() {
     const [errMessage, setErrMessage] = useState(``);
     // ログインユーザー情報
     const loginUserInfo = LoginUserInfoContext.useCtx();
+    // 確認モーダルの表示フラグ
+    const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
 
     /**
      * 更新リクエスト
@@ -87,9 +90,25 @@ export function useUpdateUserPassword() {
             return;
         }
 
-        if (!window.confirm(`入力した内容でパスワードを更新しますか？`)) {
-            return;
-        }
+        // 確認用モーダル展開
+        openModal();
+    }
+
+    /**
+     * キャンセルボタン押下
+     */
+    function clickCancel() {
+        navigate(ROUTER_PATH.HOME);
+    }
+
+    /**
+     * 更新処理実行
+     */
+    function executeUpdate() {
+
+        const currentPassword = currentPasswordRef.current?.refValue as string;
+        const newPassword = newPasswordRef.current?.refValue as string;
+        const confirmPassword = confirmPasswordRef.current?.refValue as string;
 
         const body: UpdateUserInfoRequestType = {
             currentPassword,
@@ -102,19 +121,15 @@ export function useUpdateUserPassword() {
         postMutation.mutate(body);
     }
 
-    /**
-     * キャンセルボタン押下
-     */
-    function clickCancel() {
-        navigate(ROUTER_PATH.HOME);
-    }
-
     return {
         currentPasswordRef,
         newPasswordRef,
         confirmPasswordRef,
         clickUpdateUserInfoBtn,
         errMessage,
-        clickCancel
+        clickCancel,
+        isOpenModal,
+        closeModal,
+        executeUpdate,
     }
 }

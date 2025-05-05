@@ -5,6 +5,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { useUpdateUserPassword } from "../Hook/useUpdateUserPassword";
+import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 
 
 const Parent = styled.div`
@@ -53,7 +54,10 @@ export function UpdateUserPassword() {
         confirmPasswordRef,
         clickUpdateUserInfoBtn,
         errMessage,
-        clickCancel, } = useUpdateUserPassword();
+        clickCancel,
+        isOpenModal,
+        closeModal,
+        executeUpdate, } = useUpdateUserPassword();
 
     return (
         <Parent>
@@ -73,6 +77,7 @@ export function UpdateUserPassword() {
                     </InputTitleDiv>
                     <BaseTextbox
                         value={``}
+                        type="password"
                         length={100}
                         disabled={false}
                         ref={currentPasswordRef}
@@ -88,6 +93,7 @@ export function UpdateUserPassword() {
                     </InputTitleDiv>
                     <BaseTextbox
                         value={``}
+                        type="password"
                         length={100}
                         disabled={false}
                         ref={newPasswordRef}
@@ -103,6 +109,7 @@ export function UpdateUserPassword() {
                     </InputTitleDiv>
                     <BaseTextbox
                         value={``}
+                        type="password"
                         length={100}
                         disabled={false}
                         ref={confirmPasswordRef}
@@ -115,8 +122,8 @@ export function UpdateUserPassword() {
                 <FormButtonDiv>
                     <ButtonComponent
                         styleTypeNumber="RUN"
-                        title={"保存"}
-                        onclick={clickUpdateUserInfoBtn}
+                        title={"キャンセル"}
+                        onclick={clickCancel}
                         style={{
                             "borderRadius": "23px",
                             "background": "black",
@@ -125,8 +132,8 @@ export function UpdateUserPassword() {
                     />
                     <ButtonComponent
                         styleTypeNumber="RUN"
-                        title={"キャンセル"}
-                        onclick={clickCancel}
+                        title={"保存"}
+                        onclick={clickUpdateUserInfoBtn}
                         style={{
                             "borderRadius": "23px",
                             "background": "black",
@@ -136,6 +143,12 @@ export function UpdateUserPassword() {
                     />
                 </FormButtonDiv>
             </FormDiv>
+            <ConfirmModalComponent
+                isOpenModal={isOpenModal}
+                closeModal={closeModal}
+                titleMessage={`入力した内容でパスワードを更新しますか？`}
+                clickOk={executeUpdate}
+            />
         </Parent>
     );
 }
