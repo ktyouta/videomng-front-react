@@ -10,6 +10,7 @@ import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
 import { LOGIN_USER_INFO_INIT } from "../../Common/Const/CommonConst";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { toast } from "react-toastify";
 
 
 export function useHeaderUserMenu() {
@@ -44,7 +45,7 @@ export function useHeaderUserMenu() {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`ログアウトに失敗しました。再度お試しください。`);
+            toast.error(`ログアウトに失敗しました。再度お試しください。`);
         },
     });
 

@@ -8,7 +8,8 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoCategoryItemType } from "../Type/VideoCategoryItemType";
 import { useSetGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 import { SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
-import { SiginupResponseType } from "../../Siginup/Type/SiginupResponseType";
+import { toast } from "react-toastify";
+import { LoginUserInfoType } from "../../Common/Type/LoginUserInfoType";
 
 
 export function useMain() {
@@ -43,7 +44,9 @@ export function useMain() {
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
-                alert(errRes.response.data.message);
+                if (errRes.response.data.message) {
+                    toast.error(errRes.response.data.message);
+                }
             }
         }
     );
@@ -52,7 +55,7 @@ export function useMain() {
     useQueryWrapper(
         {
             url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_CHECK_AUTH}`,
-            afSuccessFn: (res: resType<SiginupResponseType>) => {
+            afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
                 const loginUserInfo = res.data;
 

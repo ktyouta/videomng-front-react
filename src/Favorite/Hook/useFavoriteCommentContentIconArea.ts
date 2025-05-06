@@ -15,6 +15,7 @@ import { FavoriteVideoFavoriteCommentType } from "../Type/FavoriteVideoFavoriteC
 import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 type propsType = {
@@ -77,7 +78,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`コメントの非表示に失敗しました。`);
+            toast.error(`コメントの非表示に失敗しました。`);
         },
     });
 
@@ -89,7 +90,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     function blockComment(commentId: string) {
 
         if (!commentId) {
-            alert(`非表示にできませんでした。`);
+            toast.error(`非表示にできませんでした。`);
             return;
         }
 
@@ -115,7 +116,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`お気に入り登録に失敗しました。`);
+            toast.error(`お気に入り登録に失敗しました。`);
         },
     });
 
@@ -127,7 +128,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     function favoriteComment(commentId: string) {
 
         if (!commentId) {
-            alert(`お気に入りに登録できませんでした。`);
+            toast.error(`お気に入りに登録できません。`);
             return;
         }
 
@@ -153,7 +154,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`削除に失敗しました。`);
+            toast.error(`削除に失敗しました。`);
         },
     });
 
@@ -165,7 +166,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     function deleteFavoriteComment(commentId: string) {
 
         if (!commentId) {
-            alert(`お気に入りから外せません。`);
+            toast.error(`お気に入りから外せません。`);
             return;
         }
 

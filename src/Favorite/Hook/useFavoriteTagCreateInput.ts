@@ -8,6 +8,7 @@ import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { tagType } from "../../Common/Component/TagsComponent";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
+import { toast } from "react-toastify";
 
 
 export function useFavoriteTagCreateInput() {
@@ -61,12 +62,12 @@ export function useFavoriteTagCreateInput() {
         setAddTagList((e) => {
 
             if (favoriteVideoTagEditList.find((e1) => e1.label === newTag.label)) {
-                alert(`同名のタグが設定されています。`);
+                toast.error(`同名のタグが設定されています。`);
                 return e;
             }
 
             if (e.find((e1) => e1.label === newTag.label)) {
-                alert(`同名のタグを設定できません。`);
+                toast.error(`同名のタグを設定できません。`);
                 return e;
             }
 

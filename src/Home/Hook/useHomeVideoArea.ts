@@ -9,6 +9,7 @@ import { isEqual } from "lodash";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
 import { useState } from "react";
 import { SetVideoApiUrlContext, VideoApiUrlContext } from "../Component/Home";
+import { toast } from "react-toastify";
 
 
 export function useHomeVideoArea() {
@@ -84,7 +85,7 @@ export function useHomeVideoArea() {
         const videoCategory = showMoreData?.videoCategory ?? ``;
 
         if (!keyword) {
-            alert(`動画を取得できません`);
+            toast.error(`動画を取得できません`);
             return;
         }
 

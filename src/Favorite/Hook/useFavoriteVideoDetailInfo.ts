@@ -7,6 +7,7 @@ import { useState } from "react";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { toast } from "react-toastify";
 
 
 
@@ -31,13 +32,14 @@ export function useFavoriteVideoDetailInfo() {
 
             const message = res.message;
             if (message) {
-                alert(message);
+                toast.success(message);
             }
             navigate(ROUTER_PATH.FAVORITE);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`動画の削除に失敗しました。`);
+            closeModal();
+            toast.error(`動画の削除に失敗しました。`);
         },
     });
 

@@ -8,7 +8,7 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext, SetToastStatusContext } from '../../QueryApp';
+import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { UpdateUserInfoResponseType } from '../Type/UpdateUserInfoResponseType';
@@ -16,6 +16,7 @@ import { UpdateUserInfoRequestType } from '../Type/UpdateUserInfoRequestType';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
+import { toast } from 'react-toastify';
 
 
 export function useUpdateUserInfo() {
@@ -40,8 +41,6 @@ export function useUpdateUserInfo() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // トーストの表示状態(setter)
-    const setToastStatus = SetToastStatusContext.useCtx();
 
     /**
      * 更新リクエスト
@@ -54,10 +53,7 @@ export function useUpdateUserInfo() {
 
             const loginUserInfo = res.data;
 
-            setToastStatus({
-                message: `ユーザー情報を更新しました。`,
-                toastType: `info`
-            });
+            toast.success("ユーザー情報を更新しました。");
             setLoginUserInfo(loginUserInfo);
             navigate(ROUTER_PATH.HOME);
         },
@@ -66,6 +62,7 @@ export function useUpdateUserInfo() {
 
             const errMessage = res.response.data.message;
 
+            closeModal();
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
         },
@@ -100,8 +97,6 @@ export function useUpdateUserInfo() {
 
         // 確認用モーダルを展開する
         openModal();
-
-
     }
 
     /**

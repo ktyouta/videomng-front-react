@@ -8,6 +8,7 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 export function useFavoriteMemoCreateInput() {
@@ -38,7 +39,7 @@ export function useFavoriteMemoCreateInput() {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`メモの登録に失敗しました。`);
+            toast.error(`メモの登録に失敗しました。`);
         },
     });
 
@@ -48,12 +49,12 @@ export function useFavoriteMemoCreateInput() {
     function addToMemo() {
 
         if (!inputMemo) {
-            alert(`メモが入力されていません。`);
+            toast.warn(`メモが入力されていません。`);
             return;
         }
 
         if (!favoriteVideoId) {
-            alert(`メモを登録できません。`);
+            toast.error(`メモを登録できません。`);
             return;
         }
 

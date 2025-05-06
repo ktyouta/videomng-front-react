@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { SetVideoIdContext } from "../Component/Home";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { toast } from "react-toastify";
 
 
 export function useHomeVideoContent() {
@@ -17,7 +18,7 @@ export function useHomeVideoContent() {
     function clickVideo(id: string) {
 
         if (!id) {
-            alert(`動画情報を取得できませんでした。`);
+            toast.error(`動画情報を取得できませんでした。`);
             return;
         }
 

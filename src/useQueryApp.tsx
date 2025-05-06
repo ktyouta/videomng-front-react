@@ -11,16 +11,12 @@ function useQueryApp() {
     const [isLogin, setIsLogin] = useState(false);
     // ログインユーザー情報
     const [loginUserInfo, setLoginUserInfo] = useState<LoginUserInfoType>(LOGIN_USER_INFO_INIT);
-    // トーストの表示状態
-    const [toastStatus, setToastStatus] = useState(TOAST_INIT);
 
     return {
         isLogin,
         setIsLogin,
         loginUserInfo,
         setLoginUserInfo,
-        toastStatus,
-        setToastStatus,
     }
 }
 

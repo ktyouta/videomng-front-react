@@ -8,6 +8,7 @@ import { DeleteToFavoriteVideoMemoReqestType } from "../Type/DeleteToFavoriteVid
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 
@@ -42,7 +43,8 @@ export function useFavoriteMemoContent() {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`メモの削除に失敗しました。`);
+            closeModal();
+            toast.error(`メモの削除に失敗しました。`);
         },
     });
 
@@ -53,13 +55,12 @@ export function useFavoriteMemoContent() {
     function deleteMemo() {
 
         if (!favoriteVideoId) {
-            alert(`メモを削除できません。`);
+            toast.error(`メモを削除できません。`);
             return;
         }
 
         // 削除確認用モーダルを展開
         openModal();
-
     }
 
     /**

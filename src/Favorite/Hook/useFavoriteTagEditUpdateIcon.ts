@@ -11,6 +11,7 @@ import { UpdateToFavoriteVideoTagReqestType } from "../Type/UpdateToFavoriteVide
 import { tagType } from "../../Common/Component/TagsComponent";
 import { UpdateFavoriteVideoTagType } from "../Type/UpdateFavoriteVideoTagType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 type propsType = {
@@ -41,7 +42,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`タグの更新に失敗しました。`);
+            toast.error(`タグの更新に失敗しました。`);
         },
     });
 
@@ -51,12 +52,12 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
      */
     function udpateTag() {
         if (!favoriteVideoTagEditList || favoriteVideoTagEditList.length === 0) {
-            alert(`タグが設定されていません。`);
+            toast.error(`タグが設定されていません。`);
             return;
         }
 
         if (!favoriteVideoId) {
-            alert(`タグを更新できません。`);
+            toast.error(`タグを更新できません。`);
             return;
         }
 

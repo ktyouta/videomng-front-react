@@ -67,3 +67,6 @@ export const LOGIN_USER_INFO_INIT: LoginUserInfoType = {
     userName: ``,
     birthday: ``,
 }
+
+// トースト表示時間
+export const TOAST_DISPLAY_TIME = 3000;

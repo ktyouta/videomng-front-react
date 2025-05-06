@@ -13,6 +13,7 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiCommentDetailItemType";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { DeleteToFavoriteVideoFavoriteCommentReqestType } from "../Type/DeleteToFavoriteVideoFavoriteCommentReqestType";
+import { toast } from "react-toastify";
 
 
 type propsType = {
@@ -50,7 +51,7 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`削除に失敗しました。`);
+            toast.error(`削除に失敗しました。`);
         },
     });
 
@@ -62,7 +63,7 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
     function deleteFavoriteComment(commentId: string) {
 
         if (!commentId) {
-            alert(`お気に入りから外せません。`);
+            toast.error(`お気に入りから外せません。`);
             return;
         }
 

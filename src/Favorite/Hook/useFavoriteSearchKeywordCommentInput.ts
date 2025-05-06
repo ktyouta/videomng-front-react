@@ -9,6 +9,7 @@ import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemo
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { SearchKeywordCommentUrlModel } from "../Model/SearchKeywordCommentUrlModel";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 export function useFavoriteSearchKeywordCommentInput() {
@@ -28,7 +29,7 @@ export function useFavoriteSearchKeywordCommentInput() {
     function clickSearchBtn() {
 
         if (!searchKeywordCommentKeyword) {
-            alert(`キーワードを入力してください。`);
+            toast.warn(`キーワードを入力してください。`);
             return;
         }
 

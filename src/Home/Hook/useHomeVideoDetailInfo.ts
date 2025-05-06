@@ -12,6 +12,7 @@ import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
 import { IsLoginContext } from "../../QueryApp";
 import { VideoIdContext } from "../Component/Home";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { toast } from "react-toastify";
 
 
 
@@ -36,7 +37,7 @@ export function useHomeVideoDetailInfo() {
 
             const message = res.message;
             if (message) {
-                alert(message);
+                toast.success(message);
             }
 
             navigate(ROUTER_PATH.HOME);
@@ -46,7 +47,7 @@ export function useHomeVideoDetailInfo() {
 
             const message = res.response.data.message;
             if (message) {
-                alert(message);
+                toast.error(message);
             }
         },
     });
@@ -59,7 +60,7 @@ export function useHomeVideoDetailInfo() {
     function addToFavorite() {
 
         if (!videoId) {
-            alert(`お気に入りに登録できません。`);
+            toast.error(`お気に入りに登録できません。`);
             return;
         }
 

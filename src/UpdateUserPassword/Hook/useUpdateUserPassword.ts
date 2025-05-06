@@ -8,7 +8,7 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext, SetToastStatusContext } from '../../QueryApp';
+import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
@@ -16,6 +16,7 @@ import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import { UpdateUserInfoRequestType } from '../../UpdateUserInfo/Type/UpdateUserInfoRequestType';
 import useSwitch from '../../Common/Hook/useSwitch';
 import { UpdateUserPasswordRequestType } from '../Type/UpdateUserPasswordRequestType';
+import { toast } from 'react-toastify';
 
 
 export function useUpdateUserPassword() {
@@ -34,8 +35,6 @@ export function useUpdateUserPassword() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // トーストの表示状態(setter)
-    const setToastStatus = SetToastStatusContext.useCtx();
 
     /**
      * 更新リクエスト
@@ -46,10 +45,7 @@ export function useUpdateUserPassword() {
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
-            setToastStatus({
-                message: `パスワードを更新しました。`,
-                toastType: `info`
-            });
+            toast.success("パスワードを更新しました。");
             navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理

@@ -8,6 +8,7 @@ import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoIdContext } from "../Component/Home";
 import { useState } from "react";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { toast } from "react-toastify";
 
 export function useHomeVideoDetail() {
 
@@ -36,7 +37,9 @@ export function useHomeVideoDetail() {
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
-                alert(errRes.response.data.message);
+                if (errRes.response.data.message) {
+                    toast.error(`${errRes.response.data.message}`);
+                }
             }
         }
     );

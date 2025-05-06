@@ -10,6 +10,7 @@ import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import ENV from "../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../Type/UpdateToFavoriteVideoReqestType";
 import { FavoriteVideoIdContext, ViewStatusListContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 type propsType = {
@@ -59,7 +60,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`動画情報の更新に失敗しました。`);
+            toast.error(`動画情報の更新に失敗しました。`);
         },
     });
 

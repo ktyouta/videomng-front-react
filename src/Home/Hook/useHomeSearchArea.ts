@@ -8,6 +8,7 @@ import { isEqual } from "lodash";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { useNavigate } from "react-router-dom";
 import { SetVideoApiUrlContext } from "../Component/Home";
+import { toast } from "react-toastify";
 
 
 export function useHomeSearchArea() {
@@ -32,7 +33,7 @@ export function useHomeSearchArea() {
     function clickSearchBtn() {
 
         if (!keyword) {
-            alert(`キーワードを入力してください。`);
+            toast.warn(`キーワードを入力してください。`);
             return;
         }
 

@@ -62,6 +62,7 @@ export function useSiginup() {
 
             const errMessage = res.response.data.message;
 
+            closeModal();
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
             userPasswordRef.current?.clearValue();

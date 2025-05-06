@@ -14,6 +14,7 @@ import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiComme
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
 import { DeleteToFavoriteVideoBlockCommentReqestType } from "../Type/DeleteToFavoriteVideoBlockCommentReqestType";
+import { toast } from "react-toastify";
 
 
 type propsType = {
@@ -51,7 +52,7 @@ export function useFavoriteBlockCommentContent(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`再表示に失敗しました。`);
+            toast.error(`再表示に失敗しました。`);
         },
     });
 
@@ -63,7 +64,7 @@ export function useFavoriteBlockCommentContent(props: propsType) {
     function restoreComment(commentId: string) {
 
         if (!commentId) {
-            alert(`再表示できませんでした。`);
+            toast.error(`再表示できません。`);
             return;
         }
 

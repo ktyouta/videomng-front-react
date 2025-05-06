@@ -10,6 +10,7 @@ import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { UpdateToFavoriteVideoMemoReqestType } from "../Type/UpdateToFavoriteVideoMemoReqestType";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { toast } from "react-toastify";
 
 
 type propsType = {
@@ -62,7 +63,7 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-            alert(`メモの更新に失敗しました。`);
+            toast.error(`メモの更新に失敗しました。`);
         },
     });
 
@@ -73,12 +74,12 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
     function updateMemo(videoMemoSeq: number) {
 
         if (!inputMemo) {
-            alert(`メモが入力されていません。`);
+            toast.warn(`メモが入力されていません。`);
             return;
         }
 
         if (!favoriteVideoId) {
-            alert(`メモを更新できません。`);
+            toast.error(`メモを更新できません。`);
             return;
         }
 
