@@ -8,7 +8,7 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
+import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext, SetToastStatusContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { UpdateUserInfoResponseType } from '../Type/UpdateUserInfoResponseType';
@@ -40,6 +40,8 @@ export function useUpdateUserInfo() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+    // トーストの表示状態(setter)
+    const setToastStatus = SetToastStatusContext.useCtx();
 
     /**
      * 更新リクエスト
@@ -52,7 +54,10 @@ export function useUpdateUserInfo() {
 
             const loginUserInfo = res.data;
 
-            alert(`ユーザー情報を更新しました。`);
+            setToastStatus({
+                message: `ユーザー情報を更新しました。`,
+                toastType: `info`
+            });
             setLoginUserInfo(loginUserInfo);
             navigate(ROUTER_PATH.HOME);
         },

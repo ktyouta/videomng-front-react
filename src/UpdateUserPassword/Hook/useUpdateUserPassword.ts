@@ -8,7 +8,7 @@ import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
-import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
+import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext, SetToastStatusContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
@@ -34,6 +34,8 @@ export function useUpdateUserPassword() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+    // トーストの表示状態(setter)
+    const setToastStatus = SetToastStatusContext.useCtx();
 
     /**
      * 更新リクエスト
@@ -44,7 +46,10 @@ export function useUpdateUserPassword() {
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
-            alert(`パスワードを更新しました。`);
+            setToastStatus({
+                message: `パスワードを更新しました。`,
+                toastType: `info`
+            });
             navigate(ROUTER_PATH.HOME);
         },
         // 失敗後の処理
@@ -52,6 +57,7 @@ export function useUpdateUserPassword() {
 
             const errMessage = res.response.data.message;
 
+            closeModal();
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
         },
