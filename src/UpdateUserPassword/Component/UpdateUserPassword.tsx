@@ -78,7 +78,7 @@ export function UpdateUserPassword() {
                     <BaseTextbox
                         value={``}
                         type="password"
-                        length={100}
+                        length={30}
                         disabled={false}
                         ref={currentPasswordRef}
                         textWidth='98%'
@@ -89,12 +89,12 @@ export function UpdateUserPassword() {
                 </InputRowDiv>
                 <InputRowDiv>
                     <InputTitleDiv>
-                        新しいパスワード
+                        新しいパスワード(3～30文字)
                     </InputTitleDiv>
                     <BaseTextbox
                         value={``}
                         type="password"
-                        length={100}
+                        length={30}
                         disabled={false}
                         ref={newPasswordRef}
                         textWidth='98%'
@@ -110,7 +110,7 @@ export function UpdateUserPassword() {
                     <BaseTextbox
                         value={``}
                         type="password"
-                        length={100}
+                        length={30}
                         disabled={false}
                         ref={confirmPasswordRef}
                         textWidth='98%'

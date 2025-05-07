@@ -89,11 +89,11 @@ export function UpdateUserInfo() {
                     loginUserInfo.userName &&
                     <InputRowDiv>
                         <InputTitleDiv>
-                            ユーザー名
+                            ユーザー名(3～30文字)
                         </InputTitleDiv>
                         <BaseTextbox
                             value={loginUserInfo.userName}
-                            length={100}
+                            length={30}
                             disabled={false}
                             ref={userNameRef}
                             textWidth='98%'

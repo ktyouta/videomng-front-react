@@ -88,11 +88,11 @@ export function Siginup() {
         }
         <InputRowDiv>
           <InputTitleDiv>
-            ユーザー名
+            ユーザー名(3～30文字)
           </InputTitleDiv>
           <BaseTextbox
             value={""}
-            length={100}
+            length={30}
             disabled={false}
             ref={userNameRef}
             textWidth='98%'
@@ -145,12 +145,12 @@ export function Siginup() {
         }
         <InputRowDiv>
           <InputTitleDiv>
-            パスワード
+            パスワード(3～30文字)
           </InputTitleDiv>
           <BaseTextbox
             type={"password"}
             value={""}
-            length={100}
+            length={30}
             disabled={false}
             ref={userPasswordRef}
             textWidth='98%'
