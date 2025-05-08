@@ -70,3 +70,9 @@ export const LOGIN_USER_INFO_INIT: LoginUserInfoType = {
 
 // トースト表示時間
 export const TOAST_DISPLAY_TIME = 3000;
+
+// フラグ
+export const FLG = {
+    OFF: `0`,
+    ON: `1`,
+}

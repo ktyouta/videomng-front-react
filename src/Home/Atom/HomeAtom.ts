@@ -1,6 +1,7 @@
 import { VIDEO_TYPE_LIST } from "../Const/HomeConst";
 import { HomeVideoCommentThreadItemType } from "../Type/HomeVideoCommentThreadItemType";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
+import { VideoDetailItemType } from "../Type/VideoDetailItemType";
 import { VideoListDataType } from "../Type/VideoListDataType";
 import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
 import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
@@ -11,7 +12,7 @@ export const videoListDataAtom = atom<VideoListDataType | undefined>();
 // 検索キーワード
 export const keywordAtom = atom<string>(``);
 // APIから取得した動画詳細
-export const videoDetailItemAtom = atom<YouTubeDataApiVideoDetailItemType>();
+export const videoDetailItemAtom = atom<VideoDetailItemType>();
 // 動画リスト追加読み込み用
 export const showMoreDataAtom = atom<ShowMoreDataType>();
 // コメント情報

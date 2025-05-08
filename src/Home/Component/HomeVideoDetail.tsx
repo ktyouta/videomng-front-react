@@ -41,7 +41,6 @@ export function HomeVideoDetail() {
   console.log("HomeVideoDetail render");
 
   const {
-    videoId,
     isLoading,
     videoDetail,
     errMessage,

@@ -8,6 +8,8 @@ import AccordionComponent from "../../Common/Component/AccordionComponent";
 import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { useHomeVideoDetailInfo } from "../Hook/useHomeVideoDetailInfo";
+import { VideoDetailItemType } from "../Type/VideoDetailItemType";
+import { FLG } from "../../Common/Const/CommonConst";
 
 const VideoInfoDiv = styled.div`
   width: 25%;
@@ -34,7 +36,7 @@ const BtnDiv = styled.div`
 
 
 type propsType = {
-    videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
+    videoDetail: VideoDetailItemType | undefined,
 }
 
 
@@ -55,6 +57,8 @@ export function HomeVideoDetailInfo(props: propsType) {
     const imgUrl = snippet?.thumbnails.high?.url;
     // タイトル
     const title = snippet?.title;
+    // お気に入りフラグ
+    const favoriteFlg = item?.favoriteFlg;
 
     return (
         <VideoInfoDiv>
@@ -89,19 +93,41 @@ export function HomeVideoDetailInfo(props: propsType) {
                 />
                 {
                     isLogin &&
-                    <ButtonComponent
-                        styleTypeNumber="BASE"
-                        title={"お気に入りに登録する"}
-                        onclick={addToFavorite}
-                        style={{
-                            "fontSize": "0.9rem",
-                            "height": "50px",
-                            "width": "90%",
-                            "background": "#ff9f00",
-                            "color": "white",
-                            "borderRadius": "0",
-                        }}
-                    />
+                    <React.Fragment>
+                        {
+                            favoriteFlg === FLG.ON
+                                ?
+                                // お気に入り登録済み
+                                <ButtonComponent
+                                    styleTypeNumber="BASE"
+                                    title={"お気に入り登録済み"}
+                                    onclick={() => { }}
+                                    style={{
+                                        "fontSize": "0.9rem",
+                                        "height": "50px",
+                                        "width": "90%",
+                                        "background": "rgb(100, 100, 100)",
+                                        "color": "white",
+                                        "borderRadius": "0",
+                                    }}
+                                />
+                                :
+                                // お気に入り未登録
+                                <ButtonComponent
+                                    styleTypeNumber="BASE"
+                                    title={"お気に入りに登録する"}
+                                    onclick={addToFavorite}
+                                    style={{
+                                        "fontSize": "0.9rem",
+                                        "height": "50px",
+                                        "width": "90%",
+                                        "background": "#ff9f00",
+                                        "color": "white",
+                                        "borderRadius": "0",
+                                    }}
+                                />
+                        }
+                    </React.Fragment>
                 }
             </VideoMetaDiv>
         </VideoInfoDiv>
