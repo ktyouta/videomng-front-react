@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 import { useHomeVideoContent } from "../Hook/useHomeVideoContent";
+import { VideoListItemType } from "../Type/VideoListItemType";
+import { IconComponent } from "../../Common/Component/IconComponent";
+import { FaStar } from "react-icons/fa";
+import { FLG } from "../../Common/Const/CommonConst";
+import { HomeVideoContentFavoriteIconArea } from "./HomeFavoriteIconArea";
+
 
 const VideoArticle = styled.article`
     width:100%;
@@ -15,9 +21,16 @@ const VideoSection = styled.section`
 
 const VideoImg = styled.img`
     width:100%;
-    height:85%;
+    height:100%;
     border-radius: 6%;
     cursor:pointer;
+`;
+
+const VideoImgAreaDiv = styled.div`
+    width:100%;
+    height:85%;
+    font-size: 16px;
+    position:relative;
 `;
 
 const VideoTitleDiv = styled.div`
@@ -36,7 +49,7 @@ const ChennelTitleDiv = styled.div`
 
 
 type propsType = {
-    data: YouTubeDataApiVideoListItemType,
+    data: VideoListItemType,
 }
 
 export function HomeVideoContent(props: propsType) {
@@ -58,16 +71,25 @@ export function HomeVideoContent(props: propsType) {
     // 日付
     const dateList = snipet.publishedAt.split("T");
     const publishedDate = dateList.length > 0 ? dateList[0] : ``;
+    // お気に入りフラグ
+    const favoriteFlg = data.favoriteFlg;
 
     return (
         <VideoArticle>
             <VideoSection>
-                <VideoImg
-                    src={imgUrl}
-                    onClick={() => {
-                        clickVideo(videoId)
-                    }}
-                />
+                <VideoImgAreaDiv>
+                    <VideoImg
+                        src={imgUrl}
+                        onClick={() => {
+                            clickVideo(videoId)
+                        }}
+                    />
+                    {
+                        favoriteFlg === FLG.ON &&
+                        // お気に入りアイコン
+                        <HomeVideoContentFavoriteIconArea />
+                    }
+                </VideoImgAreaDiv>
                 <VideoTitleDiv
                     onClick={() => {
                         clickVideo(videoId)

@@ -5,6 +5,7 @@ import LoadingBase from "../../Common/Component/LoadingBase";
 import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
 import { HomeVideoContent } from "./HomeVideoContent";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
+import { VideoListItemType } from "../Type/VideoListItemType";
 
 const Parent = styled.div`
   width: 100%;
@@ -91,7 +92,7 @@ export function HomeVideoArea() {
       }
       <VideoUl>
         {
-          videoListItems?.map((e: YouTubeDataApiVideoListItemType) => {
+          videoListItems?.map((e: VideoListItemType) => {
             return (
               <HomeVideoContent
                 data={e}

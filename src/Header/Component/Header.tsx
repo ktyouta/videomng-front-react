@@ -15,6 +15,7 @@ const Parent = styled.div`
   left: 0;
   position: fixed;
   background-color:#00050d;
+  z-index: 2;
 `;
 
 const MenuNav = styled.nav`
