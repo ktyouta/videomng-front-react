@@ -25,6 +25,8 @@ export function useHomeSearchArea() {
     const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
     //ルーティング用
     const navigate = useNavigate();
+    // 動画リスト追加読み込み用
+    const setShowMoreData = useSetAtom(showMoreDataAtom);
 
 
     /**
@@ -44,6 +46,7 @@ export function useHomeSearchArea() {
         });
 
         setVideoApiUrl(videoListApiUrlModel.url);
+        setShowMoreData(undefined);
         navigate(videoListApiUrlModel.query);
     }
 
