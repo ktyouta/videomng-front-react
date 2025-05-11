@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import { UpdateUserInfo } from "../../UpdateUserInfo/Component/UpdateUserInfo";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { UpdateUserPassword } from "../../UpdateUserPassword/Component/UpdateUserPassword";
+import { createCtx } from "../../Common/Function/createCtx";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`
@@ -18,12 +19,15 @@ const AppDiv = styled.div`
   box-sizing: border-box;
 `;
 
+// 認証チェック済みフラグ
+export const IsCheckedAuthContext = createCtx<boolean>();
+
 
 export function Main() {
 
     console.log("Main render");
 
-    useMain();
+    const { isCheckedAuth, } = useMain();
 
     return (
         <Routes>
@@ -40,7 +44,9 @@ export function Main() {
                 element={
                     <AppDiv>
                         {/* ヘッダ */}
-                        <Header />
+                        <IsCheckedAuthContext.Provider value={isCheckedAuth}>
+                            <Header />
+                        </IsCheckedAuthContext.Provider>
                         {/* コンテンツ */}
                         <Content />
                         {/* フッター */}

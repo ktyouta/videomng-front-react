@@ -81,64 +81,70 @@ export function HeaderUserMenu() {
         clickLogout,
         loginUserInfo,
         clickUpdateUserInfo,
-        clickUpdateUserPassword, } = useHeaderUserMenu();
+        clickUpdateUserPassword,
+        isCheckedAuth, } = useHeaderUserMenu();
 
     return (
         <React.Fragment>
             {
-                isLogin ?
-                    // ログイン時メニュー
-                    <React.Fragment>
-                        <UserNameSpan>
-                            {loginUserInfo.userName}
-                        </UserNameSpan>
-                        <BtnDiv>
-                            <IconComponent
-                                icon={IoPersonCircleOutline}
-                                onclick={isOpenUserMenu ? closeUserMenu : oepnUserMenu}
-                                size='100%'
+                // 認証チェック済み
+                isCheckedAuth &&
+                <React.Fragment>
+                    {
+                        isLogin ?
+                            // ログイン時メニュー
+                            <React.Fragment>
+                                <UserNameSpan>
+                                    {loginUserInfo.userName}
+                                </UserNameSpan>
+                                <BtnDiv>
+                                    <IconComponent
+                                        icon={IoPersonCircleOutline}
+                                        onclick={isOpenUserMenu ? closeUserMenu : oepnUserMenu}
+                                        size='100%'
+                                    />
+                                    <NavDiv
+                                        isDisplay={isOpenUserMenu}
+                                    >
+                                        <ContentDiv
+                                            onClick={clickUpdateUserInfo}
+                                        >
+                                            ユーザー情報更新
+                                        </ContentDiv>
+                                        <ContentDiv
+                                            onClick={clickUpdateUserPassword}
+                                        >
+                                            パスワードの変更
+                                        </ContentDiv>
+                                        <ContentDiv
+                                            onClick={clickLogout}
+                                        >
+                                            ログアウト
+                                        </ContentDiv>
+                                    </NavDiv>
+                                </BtnDiv>
+                                {
+                                    isOpenUserMenu &&
+                                    <OverlayDiv
+                                        onClick={closeUserMenu}
+                                    >
+                                    </OverlayDiv>
+                                }
+                            </React.Fragment>
+                            :
+                            <ButtonComponent
+                                styleTypeNumber="GRAD_RED"
+                                title={"ログイン"}
+                                onclick={clickLogin}
+                                style={{
+                                    fontSize: "0.9rem",
+                                    width: "7%",
+                                    height: "100%",
+                                }}
                             />
-                            <NavDiv
-                                isDisplay={isOpenUserMenu}
-                            >
-                                <ContentDiv
-                                    onClick={clickUpdateUserInfo}
-                                >
-                                    ユーザー情報更新
-                                </ContentDiv>
-                                <ContentDiv
-                                    onClick={clickUpdateUserPassword}
-                                >
-                                    パスワードの変更
-                                </ContentDiv>
-                                <ContentDiv
-                                    onClick={clickLogout}
-                                >
-                                    ログアウト
-                                </ContentDiv>
-                            </NavDiv>
-                        </BtnDiv>
-                        {
-                            isOpenUserMenu &&
-                            <OverlayDiv
-                                onClick={closeUserMenu}
-                            >
-                            </OverlayDiv>
-                        }
-                    </React.Fragment>
-                    :
-                    <ButtonComponent
-                        styleTypeNumber="GRAD_RED"
-                        title={"ログイン"}
-                        onclick={clickLogin}
-                        style={{
-                            fontSize: "0.9rem",
-                            width: "7%",
-                            height: "100%",
-                        }}
-                    />
+                    }
+                </React.Fragment>
             }
         </React.Fragment>
-
     );
 }

@@ -11,6 +11,7 @@ import { IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserIn
 import { LOGIN_USER_INFO_INIT } from "../../Common/Const/CommonConst";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { IsCheckedAuthContext } from "../../Main/Component/Main";
 
 
 export function useHeaderUserMenu() {
@@ -28,6 +29,8 @@ export function useHeaderUserMenu() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
+    // 認証チェック済みフラグ
+    const isCheckedAuth = IsCheckedAuthContext.useCtx();
 
 
     /**
@@ -88,5 +91,6 @@ export function useHeaderUserMenu() {
         loginUserInfo,
         clickUpdateUserInfo,
         clickUpdateUserPassword,
+        isCheckedAuth,
     }
 }

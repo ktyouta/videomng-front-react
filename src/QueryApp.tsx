@@ -39,7 +39,10 @@ function QueryApp() {
         <SetIsLoginContext.Provider value={setIsLogin}>
             <IsLoginContext.Provider value={isLogin}>
                 {/* トースト */}
-                <ToastContainer position="top-center" autoClose={TOAST_DISPLAY_TIME} />
+                <ToastContainer
+                    position="top-center"
+                    autoClose={TOAST_DISPLAY_TIME}
+                />
                 <Routes>
                     <Route path="/" element={<Navigate to={`${ROUTER_PATH.HOME}`} />} />
                     {/* ログイン */}

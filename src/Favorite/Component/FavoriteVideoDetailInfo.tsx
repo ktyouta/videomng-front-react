@@ -109,7 +109,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
             <ConfirmModalComponent
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
-                titleMessage={`この動画をお気に入りから外しもよろしいですか？`}
+                titleMessage={`この動画をお気に入りから外してもよろしいですか？`}
                 clickOk={executeDelete}
             />
         </VideoInfoDiv>

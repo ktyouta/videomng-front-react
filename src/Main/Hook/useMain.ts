@@ -10,6 +10,7 @@ import { useSetGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 import { SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
 import { toast } from "react-toastify";
 import { LoginUserInfoType } from "../../Common/Type/LoginUserInfoType";
+import { useState } from "react";
 
 
 export function useMain() {
@@ -20,6 +21,8 @@ export function useMain() {
     const setVideoCategory = useSetGlobalAtom(videoCategoryAtom);
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
+    // 認証チェック済みフラグ
+    const [isCheckedAuth, setIsCheckedAuth] = useState(false);
 
     // 動画カテゴリを取得
     useQueryWrapper<VideoCategoryResponseType>(
@@ -61,10 +64,16 @@ export function useMain() {
 
                 setLoginUserInfo(loginUserInfo);
                 setIsLogin(true);
+                setIsCheckedAuth(true);
             },
             afErrorFn: (res) => {
                 setIsLogin(false);
+                setIsCheckedAuth(true);
             }
         }
     );
+
+    return {
+        isCheckedAuth,
+    }
 }
