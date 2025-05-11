@@ -55,17 +55,17 @@
 
 .react-tags__tag:hover {
   color: #fff;
-  background-color: #4f46e5;
+  background: linear-gradient(135deg, #1e40af, #1d4ed8);
 }
 
 .react-tags__tag {
-  margin: 0 .25rem .25rem 0;
+  margin: 0 .35rem .25rem 0;
   padding: .375rem .5rem;
   border: 0;
-  border-radius: 3px;
-  background: #b0e0e6;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   font-size: inherit;
-  line-height: inherit;
+  min-width: 82px;
 }
 
 .react-tags__tag:after {
@@ -76,7 +76,7 @@
   clip-path: polygon(10% 0, 0 10%, 40% 50%, 0 90%, 10% 100%, 50% 60%, 90% 100%, 100% 90%, 60% 50%, 100% 10%, 90% 0, 50% 40%);
   margin-left: .5rem;
   font-size: .875rem;
-  background-color: #7c7d86;
+  background-color: #bdbdc3;
 }
 
 .react-tags__combobox-input {

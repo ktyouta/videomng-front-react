@@ -53,7 +53,8 @@ export function FavoriteTagEditList() {
                                     <TagButtonComponent
                                         title={e.label}
                                         btnStyle={{
-                                            marginRight: "15px"
+                                            marginRight: "15px",
+                                            marginBottom: "10px"
                                         }}
                                         isDispCross={true}
                                         onclick={() => {
