@@ -5,6 +5,7 @@ import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 import { useFavoriteSearchArea } from "../Hook/useFavoriteSearchArea";
 import TagButtonComponent from "../../Common/Component/TagButtonComponent";
+import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 const Parent = styled.div`
   width: 100%;
@@ -17,9 +18,6 @@ const Parent = styled.div`
   padding-left: 9%;
 `;
 
-const SpaceDiv = styled.div`
-    flex:1;
-`;
 
 /**
  * 検索条件エリア
@@ -45,7 +43,7 @@ export function FavoriteSearchArea() {
           }}
         />
       }
-      <SpaceDiv />
+      <FlexSpaceDiv />
       <ButtonComponent
         styleTypeNumber="BASE"
         title={"条件を指定"}

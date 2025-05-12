@@ -6,6 +6,7 @@ import { useHeader } from "../Hook/useHeader";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { HeaderMenuUl } from "./HeaderMenuUl";
 import { HeaderUserMenu } from "./HeaderUserMenu";
+import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 
 const Parent = styled.div`
@@ -29,12 +30,6 @@ const MenuNav = styled.nav`
 `;
 
 
-//メニューとコンテンツの間隔
-const SpaceDiv = styled.div`
-    flex:1;
-`;
-
-
 export function Header() {
 
   console.log(`Header render`);
@@ -44,7 +39,7 @@ export function Header() {
       <MenuNav>
         {/* メニュー */}
         <HeaderMenuUl />
-        <SpaceDiv />
+        <FlexSpaceDiv />
         {/* ユーザーメニュー */}
         <HeaderUserMenu />
       </MenuNav>

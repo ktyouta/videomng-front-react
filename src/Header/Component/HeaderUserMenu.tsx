@@ -140,6 +140,8 @@ export function HeaderUserMenu() {
                                     fontSize: "0.9rem",
                                     width: "7%",
                                     height: "100%",
+                                    background: "#eb3941",
+                                    boxShadow: "none",
                                 }}
                             />
                     }

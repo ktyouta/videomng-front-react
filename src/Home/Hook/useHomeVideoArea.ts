@@ -65,6 +65,7 @@ export function useHomeVideoArea() {
 
                 setShowMoreData(latestShowMoreData);
                 setVideoApiUrl(``);
+                setErrMessage(``);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;

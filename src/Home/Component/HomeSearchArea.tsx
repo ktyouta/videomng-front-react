@@ -11,6 +11,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import ModalComponent from "../../Common/Component/ModalComponent";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { HomeSearchCondition } from "./HomeSearchCondition";
+import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 const Parent = styled.div`
   width: 100%;
@@ -46,9 +47,7 @@ const SearchIconAreaDiv = styled.div`
   justify-content: center;
 `;
 
-const SpaceDiv = styled.div`
-    flex:1;
-`;
+
 
 /**
  * 検索条件エリア
@@ -87,7 +86,7 @@ export function HomeSearchArea() {
                     />
                 </SearchIconAreaDiv>
             </TextBoxAreaDiv>
-            <SpaceDiv />
+            <FlexSpaceDiv />
             <ButtonComponent
                 styleTypeNumber="BASE"
                 title={"条件を指定"}
