@@ -1,4 +1,4 @@
-import React, { RefObject, useContext, useRef, useState } from 'react';
+import React, { RefObject, useContext, useEffect, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -29,6 +29,31 @@ export function useLogin() {
     const [errMessage, setErrMessage] = useState(``);
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
+    // 遷移先(戻る)
+    const [backPath, setBackPath] = useState(ROUTER_PATH.HOME);
+    // 遷移先(ログイン後)
+    const [nextPath, setNextPath] = useState(ROUTER_PATH.HOME);
+
+    useEffect(() => {
+
+        const query = window.location.search;
+
+        if (query && query.length > 0 && query.charAt(0) === `?`) {
+
+            const params = new URLSearchParams(query);
+            const backPathValue = params.get(`backpath`);
+            const nextPathValue = params.get(`nextpath`);
+
+            if (backPathValue) {
+                setBackPath(backPathValue);
+            }
+
+            if (nextPathValue) {
+                setNextPath(nextPathValue);
+            }
+        }
+
+    }, []);
 
     /**
      * ログインリクエスト
@@ -43,7 +68,7 @@ export function useLogin() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(ROUTER_PATH.HOME);
+            navigate(nextPath);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -110,7 +135,7 @@ export function useLogin() {
      * 戻るボタン
      */
     function clickBack() {
-        navigate(ROUTER_PATH.HOME);
+        navigate(backPath);
     }
 
     return {

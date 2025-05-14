@@ -82,9 +82,25 @@ export function useHomeVideoDetailInfo() {
         window.open(`${videoUrlModel.videoUrl}`, `_blank`);
     }
 
+
+    /**
+     * ログイン画面に遷移
+     */
+    function moveLogin() {
+
+        let query = ``;
+
+        if (videoId) {
+            query = `?backpath=${ROUTER_PATH.HOME}/${videoId}&nextpath=${ROUTER_PATH.HOME}/${videoId}`;
+        }
+
+        navigate(`${ROUTER_PATH.LOGIN}${query}`);
+    }
+
     return {
         addToFavorite,
         play,
         isLogin,
+        moveLogin,
     }
 }
