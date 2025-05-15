@@ -43,12 +43,12 @@ export function Main() {
                 path={`/*`}
                 element={
                     <AppDiv>
-                        {/* ヘッダ */}
                         <IsCheckedAuthContext.Provider value={isCheckedAuth}>
+                            {/* ヘッダ */}
                             <Header />
+                            {/* コンテンツ */}
+                            <Content />
                         </IsCheckedAuthContext.Provider>
-                        {/* コンテンツ */}
-                        <Content />
                         {/* フッター */}
                         <Footer />
                     </AppDiv>

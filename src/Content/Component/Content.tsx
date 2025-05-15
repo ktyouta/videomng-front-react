@@ -18,7 +18,9 @@ export function Content() {
 
     console.log("Content render");
 
-    const { isLogin } = useContent();
+    const {
+        isLogin,
+        isCheckedAuth } = useContent();
 
     return (
         <Parent>
@@ -42,11 +44,14 @@ export function Content() {
                         }
                     />
                 }
-                <Route
-                    key={"*"}
-                    path="*"
-                    element={<NotFound backUrl={`${ROUTER_PATH.HOME}`} />}
-                />
+                {
+                    isCheckedAuth &&
+                    <Route
+                        key={"*"}
+                        path="*"
+                        element={<NotFound backUrl={`${ROUTER_PATH.HOME}`} />}
+                    />
+                }
             </Routes>
         </Parent>
     );
