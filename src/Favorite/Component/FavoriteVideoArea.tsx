@@ -44,9 +44,14 @@ export function FavoriteVideoArea() {
     videoListItem,
     isLoading,
     errMessage,
-    isFetching, } = useFavoriteVideoArea();
+    isFetching,
+    isCalledListApi, } = useFavoriteVideoArea();
 
   // ローディング
+  if (!isCalledListApi) {
+    return <LoadingBase />;
+  }
+
   if (isLoading || isFetching) {
     return <LoadingBase />;
   }

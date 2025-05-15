@@ -17,6 +17,8 @@ export function useFavoriteVideoArea() {
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画リスト取得URL
     const favoriteVideoUrl = useAtomValue(favoriteVideoApiUrlAtom);
+    // 動画一覧API呼び出し済みフラグ
+    const [isCalledListApi, setIsCalledListApi] = useState(false);
 
 
     // 動画一覧を取得
@@ -24,10 +26,12 @@ export function useFavoriteVideoArea() {
         {
             url: favoriteVideoUrl,
             afSuccessFn: (response: FavoriteVideoListResponseType) => {
+                setIsCalledListApi(true);
                 setVideoListItemAtom(response.data);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
+                setIsCalledListApi(true);
                 setErrMessage(`動画情報の取得に失敗しました`);
             }
         }
@@ -38,5 +42,6 @@ export function useFavoriteVideoArea() {
         isLoading,
         errMessage,
         isFetching,
+        isCalledListApi,
     }
 }
