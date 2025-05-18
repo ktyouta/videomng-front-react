@@ -13,10 +13,9 @@ import { createCtx } from "../../Common/Function/createCtx";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`
-  width: 99vw;
-  min-height:100vh;
-  padding-top: 100px;
-  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 // 認証チェック済みフラグ
@@ -55,6 +54,5 @@ export function Main() {
                 }
             />
         </Routes>
-
     );
 }

@@ -2,6 +2,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import Modal from 'react-modal';
 import { IconType } from 'react-icons';
 import { CSSProperties } from 'styled-components';
+import { Z_INDEX_PARAM } from '../Const/CommonConst';
 
 
 //引数の型
@@ -33,6 +34,7 @@ function ModalComponent(props: propsType) {
                     marginRight: '-50%',
                     width: props.width ?? '70%',
                     height: props.height ?? '85%',
+                    zIndex: Z_INDEX_PARAM.MODAL,
                     ...props.style
                 }
             }}

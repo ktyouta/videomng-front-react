@@ -11,7 +11,9 @@ import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-top: 1%;
+  flex: 1;
+  padding-top: 100px;
+  margin-top: 1%;
 `;
 
 export function Content() {
