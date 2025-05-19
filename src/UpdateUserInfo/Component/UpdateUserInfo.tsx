@@ -18,6 +18,7 @@ const UpdateUserInfoFormDiv = styled.div`
     width: 40%;
     padding-left: 10%;
     padding-top: 8%;
+    box-sizing: border-box;
 `;
 
 const UpdateUserInfoButtonDiv = styled.div`

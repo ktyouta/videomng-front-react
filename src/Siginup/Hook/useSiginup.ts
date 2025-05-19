@@ -23,6 +23,8 @@ export function useSiginup() {
     const userNameRef: RefObject<refType> = useRef(null);
     // パスワード参照用
     const userPasswordRef: RefObject<refType> = useRef(null);
+    // 確認用パスワード参照用
+    const confirmPasswordRef: RefObject<refType> = useRef(null);
     // 生年月日(年)参照用
     const userBirthdayYearRef: RefObject<refType> = useRef(null);
     // 生年月日(月)参照用
@@ -66,6 +68,7 @@ export function useSiginup() {
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
             userPasswordRef.current?.clearValue();
+            confirmPasswordRef.current?.clearValue();
         },
     });
 
@@ -85,6 +88,7 @@ export function useSiginup() {
 
         const userName = userNameRef.current?.refValue as string;
         const password = userPasswordRef.current?.refValue as string;
+        const confirmPassword = confirmPasswordRef.current?.refValue as string;
         const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
 
         // ユーザーID未入力
@@ -96,6 +100,12 @@ export function useSiginup() {
         // パスワード未入力
         if (!password) {
             setErrMessage(`パスワードが未入力です。`);
+            return;
+        }
+
+        // 確認用パスワード未入力
+        if (!confirmPassword) {
+            setErrMessage(`確認用パスワードが未入力です。`);
             return;
         }
 
@@ -132,11 +142,13 @@ export function useSiginup() {
         const userName = userNameRef.current?.refValue as string;
         const password = userPasswordRef.current?.refValue as string;
         const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
+        const confirmPassword = confirmPasswordRef.current?.refValue as string;
 
         const body: SiginupRequestType = {
             userName,
             password,
             userBirthday,
+            confirmPassword
         };
 
         // 登録リクエスト呼び出し
@@ -158,5 +170,6 @@ export function useSiginup() {
         isOpenModal,
         closeModal,
         executeSiginup,
+        confirmPasswordRef,
     }
 }

@@ -18,10 +18,11 @@ const SiginupFormDiv = styled.div`
     width: 40%;
     padding-left: 10%;
     padding-top: 8%;
+    box-sizing: border-box;
 `;
 
 const SiginupButtonDiv = styled.div`
-    margin-top: 9%;
+    margin-top: 8%;
 `;
 
 const TitleDiv = styled.div`
@@ -72,7 +73,8 @@ export function Siginup() {
     clickBack,
     isOpenModal,
     closeModal,
-    executeSiginup, } = useSiginup();
+    executeSiginup,
+    confirmPasswordRef } = useSiginup();
 
   return (
     <Parent>
@@ -156,6 +158,22 @@ export function Siginup() {
             textWidth='98%'
             onKeyDown={handleKeyPress}
             placeholder='Password'
+            style={{ marginBottom: "8%" }}
+          />
+        </InputRowDiv>
+        <InputRowDiv>
+          <InputTitleDiv>
+            確認用パスワード
+          </InputTitleDiv>
+          <BaseTextbox
+            value={``}
+            type="password"
+            length={30}
+            disabled={false}
+            ref={confirmPasswordRef}
+            textWidth='98%'
+            placeholder='UserName'
+            autoComplete={true}
             style={{ marginBottom: "8%" }}
           />
         </InputRowDiv>

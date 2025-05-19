@@ -18,6 +18,7 @@ const FormDiv = styled.div`
     width: 40%;
     padding-left: 10%;
     padding-top: 8%;
+    box-sizing: border-box;
 `;
 
 const FormButtonDiv = styled.div`
