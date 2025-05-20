@@ -30,9 +30,10 @@ export function useLogin() {
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // 遷移先(戻る)
-    const [backPath, setBackPath] = useState(ROUTER_PATH.HOME);
+    const [backPath, setBackPath] = useState(``);
     // 遷移先(ログイン後)
-    const [nextPath, setNextPath] = useState(ROUTER_PATH.HOME);
+    const [nextPath, setNextPath] = useState(``);
+
 
     useEffect(() => {
 
@@ -44,11 +45,9 @@ export function useLogin() {
             const backPathValue = params.get(`backpath`);
             const nextPathValue = params.get(`nextpath`);
 
-            if (backPathValue) {
-                setBackPath(backPathValue);
-            }
+            if (backPathValue && nextPathValue) {
 
-            if (nextPathValue) {
+                setBackPath(backPathValue);
                 setNextPath(nextPathValue);
             }
         }
@@ -128,14 +127,28 @@ export function useLogin() {
      * 会員登録画面遷移
      */
     function clickSignup() {
-        navigate(ROUTER_PATH.SIGNUP);
+
+        let query = ``;
+
+        if (backPath && nextPath) {
+            query = `?backpath=${backPath}&nextpath=${nextPath}`;
+        }
+
+        navigate(`${ROUTER_PATH.SIGNUP}${query}`);
     }
 
     /**
      * 戻るボタン
      */
     function clickBack() {
-        navigate(backPath);
+
+        let backPagePath = ROUTER_PATH.HOME;
+
+        if (backPath) {
+            backPagePath = backPath;
+        }
+
+        navigate(backPagePath);
     }
 
     return {

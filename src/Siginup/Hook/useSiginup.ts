@@ -1,4 +1,4 @@
-import React, { RefObject, useContext, useMemo, useRef, useState } from 'react';
+import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -43,6 +43,28 @@ export function useSiginup() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+    // 遷移先(戻る)
+    const [backPath, setBackPath] = useState(``);
+    // 遷移先(ログイン後)
+    const [nextPath, setNextPath] = useState(``);
+
+    useEffect(() => {
+
+        const query = window.location.search;
+
+        if (query && query.length > 0 && query.charAt(0) === `?`) {
+
+            const params = new URLSearchParams(query);
+            const backPathValue = params.get(`backpath`);
+            const nextPathValue = params.get(`nextpath`);
+
+            if (backPathValue && nextPathValue) {
+
+                setBackPath(backPathValue);
+                setNextPath(nextPathValue);
+            }
+        }
+    }, []);
 
     /**
      * 登録リクエスト
@@ -57,7 +79,8 @@ export function useSiginup() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(ROUTER_PATH.HOME);
+            navigate(nextPath);
+
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -131,7 +154,14 @@ export function useSiginup() {
      * 戻るボタン押下
      */
     function clickBack() {
-        navigate(ROUTER_PATH.LOGIN);
+
+        let query = ``;
+
+        if (backPath && nextPath) {
+            query = `?backpath=${backPath}&nextpath=${nextPath}`;
+        }
+
+        navigate(`${ROUTER_PATH.LOGIN}${query}`);
     }
 
     /**
