@@ -10,25 +10,19 @@ import { HomeVideoContentFavoriteIconArea } from "./HomeFavoriteIconArea";
 
 
 const VideoArticle = styled.article`
-    width:100%;
-    height:65%;
 `;
 
 const VideoSection = styled.section`
     width:100%;
-    height:100%;
 `;
 
 const VideoImg = styled.img`
     width:100%;
-    height:100%;
     border-radius: 6%;
     cursor:pointer;
 `;
 
 const VideoImgAreaDiv = styled.div`
-    width:100%;
-    height:85%;
     font-size: 16px;
     position:relative;
 `;
@@ -36,7 +30,7 @@ const VideoImgAreaDiv = styled.div`
 const VideoTitleDiv = styled.div`
     color:white;
     cursor:pointer;
-    font-size: 16px;
+    font-size: 14px;
 `;
 
 const DateDiv = styled.div`

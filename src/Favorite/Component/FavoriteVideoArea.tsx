@@ -25,7 +25,7 @@ const VideoUl = styled.ul`
   padding-top: 4%;
   --grid-container-columns: 5;
   grid-column-gap: 4%;
-  grid-row-gap: 30px;
+  grid-row-gap: 38px;
 `;
 
 const MessageDiv = styled.div`

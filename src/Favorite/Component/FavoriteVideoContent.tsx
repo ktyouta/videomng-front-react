@@ -4,18 +4,14 @@ import { useFavoriteVideoContent } from "../Hook/useFavoriteVideoContent";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 
 const VideoArticle = styled.article`
-    width:100%;
-    height:65%;
 `;
 
 const VideoSection = styled.section`
     width:100%;
-    height:100%;
 `;
 
 const VideoImg = styled.img`
     width:100%;
-    height:85%;
     border-radius: 6%;
     cursor:pointer;
 `;
