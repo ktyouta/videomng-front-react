@@ -6,7 +6,7 @@ import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
-import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoSortKeyAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 
@@ -25,6 +25,8 @@ export function useFavorite() {
     const setSelectedFavoriteVideoviewStatus = useSetAtom(selectedFavoriteVideoviewStatusAtom);
     // 動画一覧検索条件選択値(タグ)
     const setSelectedFavoriteVideoTag = useSetAtom(selectedFavoriteVideoTagAtom);
+    // 動画一覧検索ソートキー
+    const setSelectedFavoriteVideoSortKey = useSetAtom(selectedFavoriteVideoSortKeyAtom);
 
 
     // 視聴状況リストを取得
@@ -61,6 +63,7 @@ export function useFavorite() {
             let videoCategory = ``;
             let viewStatus = ``;
             let videoTag = ``;
+            let sortKey = ``;
 
             // クエリパラメータが設定されている場合
             if (query && query.length > 0 && query.charAt(0) === `?`) {
@@ -69,21 +72,26 @@ export function useFavorite() {
                 const videoCategoryValue = params.get(`videocategory`);
                 const viewStatusValue = params.get(`viewstatus`);
                 const videoTagValue = params.get(`videotag`);
+                const sortKeyValue = params.get(`sortkey`);
+
 
                 videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
                 viewStatus = viewStatusValue !== null ? viewStatusValue : ``;
                 videoTag = videoTagValue !== null ? videoTagValue : ``;
+                sortKey = sortKeyValue !== null ? sortKeyValue : ``;
             }
 
             // 検索条件の初期値設定
             setSelectedFavoriteVideoCategory(videoCategory);
             setSelectedFavoriteVideoviewStatus(viewStatus);
             setSelectedFavoriteVideoTag(videoTag);
+            setSelectedFavoriteVideoSortKey(sortKey);
 
             const videoListApiUrlModel = new FavoriteVideoListApiUrlModel({
                 videoCategory,
                 viewStatus,
                 videoTag,
+                sortKey,
             });
 
             setFavoriteVideoUrl(videoListApiUrlModel.url);

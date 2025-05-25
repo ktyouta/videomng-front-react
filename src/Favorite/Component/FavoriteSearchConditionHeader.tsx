@@ -37,7 +37,7 @@ export function FavoriteSearchConditionHeader(props: propsType) {
     return (
         <HeaderDiv>
             <TitleSpan>
-                条件を指定
+                フィルター
             </TitleSpan>
             <FlexSpaceDiv />
             <BlockIconDiv>

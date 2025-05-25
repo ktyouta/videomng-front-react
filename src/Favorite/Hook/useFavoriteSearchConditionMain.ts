@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { videoCategoryAtom } from "../../Main/Atom/MainAtom";
-import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoSortKeyAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { objectDeepCopy } from "../../Common/Function/CommonFunction";
@@ -41,6 +41,8 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const setFavoriteVideoUrl = useSetAtom(favoriteVideoApiUrlAtom);
     //ルーティング用
     const navigate = useNavigate();
+    // 動画一覧検索ソートキー
+    const selectedFavoriteVideoSortKey = useAtomValue(selectedFavoriteVideoSortKeyAtom);
 
 
     /**
@@ -101,7 +103,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoCategory(selectedCategory);
 
         const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            videoCategory: selectedCategory
+            videoTag: selectedFavoriteVideoTag,
+            videoCategory: selectedCategory,
+            viewStatus: selectedFavoriteVideoviewStatus,
+            sortKey: selectedFavoriteVideoSortKey,
         });
 
         setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
@@ -118,7 +123,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoviewStatus(selectedViewStatus);
 
         const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            viewStatus: selectedViewStatus
+            videoTag: selectedFavoriteVideoTag,
+            videoCategory: selectedFavoriteVideoCategory,
+            viewStatus: selectedViewStatus,
+            sortKey: selectedFavoriteVideoSortKey,
         });
 
         setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
@@ -135,7 +143,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoTag(selectedVideoTag);
 
         const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            videoTag: selectedVideoTag
+            videoTag: selectedVideoTag,
+            videoCategory: selectedFavoriteVideoCategory,
+            viewStatus: selectedFavoriteVideoviewStatus,
+            sortKey: selectedFavoriteVideoSortKey,
         });
 
         setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);

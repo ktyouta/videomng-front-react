@@ -6,6 +6,8 @@ import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 import { useFavoriteSearchArea } from "../Hook/useFavoriteSearchArea";
 import TagButtonComponent from "../../Common/Component/TagButtonComponent";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
+import ComboComponent from "../../Common/Component/ComboComponent";
+import React from "react";
 
 const Parent = styled.div`
   width: 100%;
@@ -16,6 +18,12 @@ const Parent = styled.div`
   box-sizing: border-box;
   padding-right: 13%;
   padding-left: 9%;
+`;
+
+const ComboTitleSpan = styled.span`
+  margin-right:5px;
+  color: white;
+  font-size: 16px;
 `;
 
 
@@ -30,7 +38,10 @@ export function FavoriteSearchArea() {
     isOpenFilterModal,
     openFilterModal,
     closeFilterModal,
-    selectedFavoriteVideoTag, } = useFavoriteSearchArea();
+    selectedFavoriteVideoTag,
+    sortList,
+    selectSort,
+    selectedFavoriteVideoSortKey } = useFavoriteSearchArea();
 
   return (
     <Parent>
@@ -44,9 +55,30 @@ export function FavoriteSearchArea() {
         />
       }
       <FlexSpaceDiv />
+      {
+        sortList && sortList.length > 0 &&
+        <React.Fragment>
+          <ComboTitleSpan>
+            並べ替え：
+          </ComboTitleSpan>
+          <ComboComponent
+            combo={sortList}
+            initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
+            onChange={selectSort}
+            width="16%"
+            minWidth="16%"
+            height="39px"
+            selectStyle={{
+              "backgroundColor": "rgb(24, 26, 30)",
+              "color": "white",
+              "marginRight": "3%"
+            }}
+          />
+        </React.Fragment>
+      }
       <ButtonComponent
         styleTypeNumber="BASE"
-        title={"条件を指定"}
+        title={"フィルター"}
         onclick={openFilterModal}
         style={{
           "fontSize": "0.9rem",
@@ -58,7 +90,7 @@ export function FavoriteSearchArea() {
         }}
       />
       {
-        // 検索条件指定モーダル
+        // フィルターモーダル
         isOpenFilterModal &&
         <ModalComponent
           modalIsOpen={isOpenFilterModal}

@@ -5,6 +5,7 @@ type porpsType = {
     viewStatus?: string,
     videoCategory?: string,
     videoTag?: string,
+    sortKey?: string,
 }
 
 export class FavoriteVideoListApiUrlModel {
@@ -17,6 +18,8 @@ export class FavoriteVideoListApiUrlModel {
     private static readonly QUERY_KEY_CATEGORY = `videocategory`;
     // クエリパラメータのキー(タグ)
     private static readonly QUERY_KEY_TAG = `videotag`;
+    // クエリパラメータのキー(ソート)
+    private static readonly QUERY_KEY_SORT = `sortkey`;
     // 動画一覧取得URL
     private readonly _url: string;
     // クエリパラメータ
@@ -27,19 +30,27 @@ export class FavoriteVideoListApiUrlModel {
         let queryParam = ``;
 
         if (props.viewStatus) {
-            queryParam += `${FavoriteVideoListApiUrlModel.QUERY_KEY_VIEW_STATUS}=${props.viewStatus}`;
+            queryParam += `&${FavoriteVideoListApiUrlModel.QUERY_KEY_VIEW_STATUS}=${props.viewStatus}`;
         }
 
         if (props.videoCategory) {
-            queryParam += `${FavoriteVideoListApiUrlModel.QUERY_KEY_CATEGORY}=${props.videoCategory}`;
+            queryParam += `&${FavoriteVideoListApiUrlModel.QUERY_KEY_CATEGORY}=${props.videoCategory}`;
         }
 
         if (props.videoTag) {
-            queryParam += `${FavoriteVideoListApiUrlModel.QUERY_KEY_TAG}=${props.videoTag}`;
+            queryParam += `&${FavoriteVideoListApiUrlModel.QUERY_KEY_TAG}=${props.videoTag}`;
         }
 
-        this._url = `${FavoriteVideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam ? `?${queryParam}` : ``}`;
-        this._query = `${queryParam ? `?${queryParam}` : ``}`;
+        if (props.sortKey) {
+            queryParam += `&${FavoriteVideoListApiUrlModel.QUERY_KEY_SORT}=${props.sortKey}`;
+        }
+
+        if (queryParam) {
+            queryParam = `?${queryParam.slice(0)}`;
+        }
+
+        this._url = `${FavoriteVideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam}`;
+        this._query = `${queryParam}`;
     }
 
     get url() {
