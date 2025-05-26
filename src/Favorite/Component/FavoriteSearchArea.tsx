@@ -65,8 +65,7 @@ export function FavoriteSearchArea() {
             combo={sortList}
             initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
             onChange={selectSort}
-            width="16%"
-            minWidth="16%"
+            width="20%"
             height="39px"
             selectStyle={{
               "backgroundColor": "rgb(24, 26, 30)",
