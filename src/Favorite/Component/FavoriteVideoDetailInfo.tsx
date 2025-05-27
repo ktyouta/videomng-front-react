@@ -14,11 +14,11 @@ import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalCompon
 
 const VideoInfoDiv = styled.div`
   width: 25%;
+  padding-top: 3%;
 `;
 
 const VideoImg = styled.img`
-    width: 92%;
-    height: 325px;
+    width: 100%;
     border-radius: 6%;
 `;
 
@@ -27,6 +27,7 @@ const VideoMetaDiv = styled.div`
 `;
 
 const VideoTitle = styled.h3`
+    margin-bottom: 14%;
 `;
 
 const BtnDiv = styled.div`
@@ -88,7 +89,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                         "width": "90%",
                         "background": "rgb(34, 139, 84)",
                         "color": "white",
-                        "borderRadius": "0",
+                        "borderRadius": "8px",
                         "marginBottom": "10%",
                     }}
                 />
@@ -102,7 +103,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                         "width": "90%",
                         "background": "rgb(175, 55, 42)",
                         "color": "white",
-                        "borderRadius": "0",
+                        "borderRadius": "8px",
                     }}
                 />
             </VideoMetaDiv>

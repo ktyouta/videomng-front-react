@@ -19,7 +19,7 @@ const VideoContentDiv = styled.div`
   height: 52%;
   display:flex;
   box-sizing:border-box;
-  padding-left:9%;
+  padding-left:6%;
   padding-right:5%;
 `;
 
