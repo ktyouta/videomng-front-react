@@ -21,7 +21,8 @@ import { useFavoriteDetailSettingEdit } from "../Hook/useFavoriteDetailSettingEd
 import BaseTextAreaComponent from "../../Common/Component/BaseTextAreaComponent";
 import LabelCheckBoxListComponent from "../../Common/Component/LabelCheckBoxListComponent";
 import CheckBoxComponent from "../../Common/Component/CheckBoxComponent";
-
+import { FAVORITE_LEVEL_SETTING_LIST } from "../Const/FavoriteConst";
+import { FaStar } from "react-icons/fa";
 
 
 const ContentDiv = styled.div`
@@ -57,16 +58,27 @@ const CategoryLabel = styled.label`
   width:auto;
 `;
 
+const FavoriteLevelAreaDiv = styled.div`
+  box-sizing:border-box;
+  align-items: center;
+  display:flex;
+  flex-wrap: wrap;
+  grid-column-gap: 2%;
+  margin-bottom: 4%;
+`;
+
 
 type propsType = {
     categoryList: comboType[] | undefined,
     summary: string,
     categorys: FavoriteVideoDetailCategoryType[],
     viewStatus: string,
+    favoriteLevel: number,
     changeView: () => void,
     setSummary: React.Dispatch<React.SetStateAction<string>>,
     setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
     setViewStatus: React.Dispatch<React.SetStateAction<string>>,
+    setFavoriteLevel: React.Dispatch<React.SetStateAction<number>>,
 }
 
 export function FavoriteDetailSettingEdit(props: propsType) {
@@ -82,6 +94,8 @@ export function FavoriteDetailSettingEdit(props: propsType) {
         viewStatusList,
         selectCategory,
         updateFavoriteVideo,
+        favoriteLevel,
+        clickFavoriteLevelIcon,
     } = useFavoriteDetailSettingEdit({ ...props });
 
     const cateogryList = props.categoryList;
@@ -167,6 +181,31 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                         </MetaDiv>
                     </React.Fragment>
                 }
+                <TitleDiv>
+                    【お気に入り度】
+                </TitleDiv>
+                <FavoriteLevelAreaDiv>
+                    {
+                        [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
+
+                            const favoriteLevelId = index + 1;
+                            const color = favoriteLevel >= favoriteLevelId ? `yellow` : ``;
+
+                            return (
+                                <IconComponent
+                                    icon={FaStar}
+                                    size="25px"
+                                    style={{
+                                        color,
+                                    }}
+                                    onclick={() => {
+                                        clickFavoriteLevelIcon(favoriteLevelId);
+                                    }}
+                                />
+                            )
+                        })
+                    }
+                </FavoriteLevelAreaDiv>
             </ContentDiv>
         </React.Fragment>
     );

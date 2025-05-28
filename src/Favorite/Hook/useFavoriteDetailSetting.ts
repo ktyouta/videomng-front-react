@@ -24,6 +24,8 @@ export function useFavoriteDetailSetting(props: propsType) {
     const [categorys, setCategorys] = useState(videDetail.categorys);
     // 視聴状況
     const [viewStatus, setViewStatus] = useState(videDetail.detail.viewStatus);
+    // お気に入り度
+    const [favoriteLevel, setFavoriteLevel] = useState(videDetail.detail.favoriteLevel);
 
     // カテゴリリスト
     const categoryList = useMemo(() => {
@@ -72,5 +74,7 @@ export function useFavoriteDetailSetting(props: propsType) {
         setCategorys,
         viewStatus,
         setViewStatus,
+        favoriteLevel,
+        setFavoriteLevel,
     };
 }

@@ -48,6 +48,8 @@ export function FavoriteDetailSetting(props: propsType) {
         setCategorys,
         viewStatus,
         setViewStatus,
+        favoriteLevel,
+        setFavoriteLevel,
     } = useFavoriteDetailSetting({ ...props });
 
     return (
@@ -61,6 +63,7 @@ export function FavoriteDetailSetting(props: propsType) {
                     summary={summary}
                     categorys={categorys}
                     viewStatus={viewStatus}
+                    favoriteLevel={favoriteLevel}
                 />
             }
             {
@@ -71,10 +74,12 @@ export function FavoriteDetailSetting(props: propsType) {
                     summary={summary}
                     categorys={categorys}
                     viewStatus={viewStatus}
+                    favoriteLevel={favoriteLevel}
                     changeView={changeView}
                     setSummary={setSummary}
                     setCategorys={setCategorys}
                     setViewStatus={setViewStatus}
+                    setFavoriteLevel={setFavoriteLevel}
                 />
             }
         </Parent>

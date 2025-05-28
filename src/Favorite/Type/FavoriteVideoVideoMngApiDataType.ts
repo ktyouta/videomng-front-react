@@ -4,4 +4,5 @@ export type FavoriteVideoVideoMngApiDataType = {
     summary: string,
     viewStatus: string,
     viewStatusName: string,
+    favoriteLevel: number,
 }

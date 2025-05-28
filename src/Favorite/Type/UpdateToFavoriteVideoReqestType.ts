@@ -3,4 +3,5 @@ export type UpdateToFavoriteVideoReqestType = {
     summary: string,
     viewStatus: string,
     category: string[],
+    favoriteLevel: number,
 }

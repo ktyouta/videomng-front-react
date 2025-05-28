@@ -18,10 +18,12 @@ type propsType = {
     summary: string,
     categorys: FavoriteVideoDetailCategoryType[],
     viewStatus: string,
+    favoriteLevel: number,
     changeView: () => void,
     setSummary: React.Dispatch<React.SetStateAction<string>>,
     setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
     setViewStatus: React.Dispatch<React.SetStateAction<string>>,
+    setFavoriteLevel: React.Dispatch<React.SetStateAction<number>>,
 }
 
 
@@ -39,6 +41,8 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const viewStatusList = ViewStatusListContext.useCtx();
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // お気に入り度
+    const [favoriteLevel, setFavoriteLevel] = useState(props.favoriteLevel);
 
 
     /**
@@ -56,6 +60,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
             props.setSummary(detail.summary);
             props.setViewStatus(detail.viewStatus);
             props.setCategorys(data.category);
+            props.setFavoriteLevel(detail.favoriteLevel);
             props.changeView();
         },
         // 失敗後の処理
@@ -74,6 +79,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
             summary: summary,
             viewStatus: viewStatus,
             category: categorys,
+            favoriteLevel: favoriteLevel,
         }
 
         // リクエスト送信
@@ -100,6 +106,20 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         });
     }
 
+    /**
+     * お気に入り度アイコンクリックイベント
+     * @param favoriteLevel 
+     */
+    function clickFavoriteLevelIcon(selectFavoriteLevel: number) {
+
+        if (favoriteLevel === 1 && selectFavoriteLevel === 1) {
+            setFavoriteLevel(0);
+            return;
+        }
+
+        setFavoriteLevel(selectFavoriteLevel);
+    }
+
     return {
         summary,
         setSummary,
@@ -109,5 +129,8 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         viewStatusList,
         selectCategory,
         updateFavoriteVideo,
+        favoriteLevel,
+        setFavoriteLevel,
+        clickFavoriteLevelIcon,
     };
 }

@@ -17,6 +17,8 @@ import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCate
 import { comboType } from "../../Common/Component/ComboComponent";
 import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHeader";
 import { useFavoriteDetailSettingView } from "../Hook/useFavoriteDetailSettingView";
+import { FAVORITE_LEVEL_SETTING_LIST } from "../Const/FavoriteConst";
+import { FaStar } from "react-icons/fa";
 
 
 const ContentDiv = styled.div`
@@ -48,6 +50,14 @@ const CategoryDiv = styled.div`
   align-items: center;
 `;
 
+const FavoriteLevelAreaDiv = styled.div`
+  box-sizing:border-box;
+  align-items: center;
+  display:flex;
+  flex-wrap: wrap;
+  grid-column-gap: 2%;
+`;
+
 
 type propsType = {
     categoryList: comboType[] | undefined,
@@ -55,6 +65,7 @@ type propsType = {
     summary: string,
     categorys: FavoriteVideoDetailCategoryType[],
     viewStatus: string,
+    favoriteLevel: number,
 }
 
 export function FavoriteDetailSettingView(props: propsType) {
@@ -125,6 +136,29 @@ export function FavoriteDetailSettingView(props: propsType) {
                         </MetaDiv>
                     </React.Fragment>
                 }
+                <TitleDiv>
+                    【お気に入り度】
+                </TitleDiv>
+                <FavoriteLevelAreaDiv>
+                    {
+                        [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
+
+                            const favoriteLevel = index + 1;
+                            const color = props.favoriteLevel >= favoriteLevel ? `yellow` : ``;
+
+                            return (
+                                <IconComponent
+                                    icon={FaStar}
+                                    size="25px"
+                                    style={{
+                                        color,
+                                    }}
+                                    key={favoriteLevel}
+                                />
+                            )
+                        })
+                    }
+                </FavoriteLevelAreaDiv>
             </ContentDiv>
         </React.Fragment>
     );

@@ -58,3 +58,6 @@ export enum TAG_EDIT_MODE {
     VIEW = `1`,
     EDIT = `2`,
 }
+
+// お気に入り度設定値
+export const FAVORITE_LEVEL_SETTING_LIST = 5;
