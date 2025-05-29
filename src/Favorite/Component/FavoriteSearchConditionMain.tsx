@@ -56,7 +56,10 @@ export function FavoriteSearchConditionMain(props: propsType) {
         changeViewStatus,
         tagMasterList,
         changeVideoTag,
-        selectedFavoriteVideoTag, } = useFavoriteSearchConditionMain({ ...props });
+        selectedFavoriteVideoTag,
+        favoriteLevelList,
+        selectedFavoriteVideoFavoriteLevel,
+        changeFavoriteLevel, } = useFavoriteSearchConditionMain({ ...props });
 
     // カテゴリリスト
     const categoryComboList: comboType[] | undefined = videoCategory?.items.map((e: VideoCategoryItemType) => {
@@ -115,6 +118,22 @@ export function FavoriteSearchConditionMain(props: propsType) {
                             combo={tagMasterList}
                             initValue={selectedFavoriteVideoTag ?? tagMasterList[0].value}
                             onChange={changeVideoTag}
+                            width="68%"
+                            minWidth="8%"
+                            height="39px"
+                        />
+                    </InputDiv>
+                }
+                {
+                    favoriteLevelList && favoriteLevelList.length > 0 &&
+                    <InputDiv>
+                        <InputLabel>
+                            お気に入り度
+                        </InputLabel>
+                        <ComboComponent
+                            combo={favoriteLevelList}
+                            initValue={selectedFavoriteVideoFavoriteLevel ?? favoriteLevelList[0].value}
+                            onChange={changeFavoriteLevel}
                             width="68%"
                             minWidth="8%"
                             height="39px"

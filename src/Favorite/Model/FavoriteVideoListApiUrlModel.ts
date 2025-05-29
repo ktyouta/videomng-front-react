@@ -6,6 +6,7 @@ type porpsType = {
     videoCategory?: string,
     videoTag?: string,
     sortKey?: string,
+    favoriteLevel?: string,
 }
 
 export class FavoriteVideoListApiUrlModel {
@@ -20,6 +21,8 @@ export class FavoriteVideoListApiUrlModel {
     private static readonly QUERY_KEY_TAG = `videotag`;
     // クエリパラメータのキー(ソート)
     private static readonly QUERY_KEY_SORT = `sortkey`;
+    // クエリパラメータのキー(お気に入り度)
+    private static readonly QUERY_KEY_FAVORITE_LEVEL = `favoritelevel`;
     // 動画一覧取得URL
     private readonly _url: string;
     // クエリパラメータ
@@ -45,8 +48,12 @@ export class FavoriteVideoListApiUrlModel {
             queryParam += `&${FavoriteVideoListApiUrlModel.QUERY_KEY_SORT}=${props.sortKey}`;
         }
 
+        if (props.favoriteLevel) {
+            queryParam += `&${FavoriteVideoListApiUrlModel.QUERY_KEY_FAVORITE_LEVEL}=${props.favoriteLevel}`;
+        }
+
         if (queryParam) {
-            queryParam = `?${queryParam.slice(0)}`;
+            queryParam = `?${queryParam.slice(1)}`;
         }
 
         this._url = `${FavoriteVideoListApiUrlModel.VIDEO_INFO_PATH}${queryParam}`;
