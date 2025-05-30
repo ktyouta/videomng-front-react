@@ -54,7 +54,7 @@ export function FavoriteSearchConditionMain(props: propsType) {
         videoCategory,
         selectedFavoriteVideoCategory,
         viewStatusSelectList,
-        selectedFavoriteVideoviewStatus,
+        selectedFavoriteVideoViewStatus,
         changeVideoCategory,
         changeViewStatus,
         tagMasterList,
@@ -103,7 +103,7 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         </InputLabel>
                         <ComboComponent
                             combo={viewStatusSelectList}
-                            initValue={selectedFavoriteVideoviewStatus ?? viewStatusSelectList[0].value}
+                            initValue={selectedFavoriteVideoViewStatus ?? viewStatusSelectList[0].value}
                             onChange={changeViewStatus}
                             width="68%"
                             minWidth="8%"

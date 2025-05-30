@@ -16,6 +16,7 @@ import { ViewStatusListContext } from "../Component/Favorite";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../Const/FavoriteConst";
+import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 
 
 type propsType = {
@@ -26,27 +27,19 @@ export function useFavoriteSearchConditionMain(props: propsType) {
 
     // 動画カテゴリ
     const videoCategory = useGlobalAtomValue(videoCategoryAtom);
-    // 動画一覧検索条件選択値(カテゴリ)
-    const [selectedFavoriteVideoCategory, setSelectedFavoriteVideoCategory] = useAtom(selectedFavoriteVideoCategoryAtom);
-    // 動画一覧検索条件選択値(視聴状況)
-    const [selectedFavoriteVideoviewStatus, setSelectedFavoriteVideoviewStatus] = useAtom(selectedFavoriteVideoviewStatusAtom);
     // 視聴状況リスト
     const viewStatusList = ViewStatusListContext.useCtx();
     // 視聴状況選択リスト
     const [viewStatusSelectList, setViewStatusSelectList] = useState<comboType[]>();
-    // 動画一覧検索条件選択値(タグ)
-    const [selectedFavoriteVideoTag, setSelectedFavoriteVideoTag] = useAtom(selectedFavoriteVideoTagAtom);
     // タグマスタリスト
     const [tagMasterList, setTagMasterList] = useState<comboType[]>([]);
-    // お気に入り動画リスト取得URL
-    const setFavoriteVideoUrl = useSetAtom(favoriteVideoApiUrlAtom);
-    //ルーティング用
-    const navigate = useNavigate();
-    // 動画一覧検索ソートキー
-    const selectedFavoriteVideoSortKey = useAtomValue(selectedFavoriteVideoSortKeyAtom);
-    // 動画一覧検索条件選択値(お気に入り度)
-    const [selectedFavoriteVideoFavoriteLevel, setSelectedFavoriteVideoFavoriteLevel] = useAtom(selectedFavoriteVideoFavoriteLevelAtom);
-
+    // お気に入り動画一覧取得用フック
+    const {
+        changeUrl,
+        selectedFavoriteVideoCategory,
+        selectedFavoriteVideoViewStatus,
+        selectedFavoriteVideoTag,
+        selectedFavoriteVideoFavoriteLevel, } = useFavoriteListApiUrl();
 
     /**
      * 画面表示用の視聴状況リストを作成
@@ -123,20 +116,11 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * @param selectedcCategory 
      */
     function changeVideoCategory(selectedCategory: string,) {
-        setSelectedFavoriteVideoCategory(selectedCategory);
 
-        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            videoTag: selectedFavoriteVideoTag,
+        changeUrl({
             videoCategory: selectedCategory,
-            viewStatus: selectedFavoriteVideoviewStatus,
-            sortKey: selectedFavoriteVideoSortKey,
-            favoriteLevel: selectedFavoriteVideoFavoriteLevel,
+            callback: props.close,
         });
-
-        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
-        navigate(favoriteVideoListApiUrlModel.query);
-
-        props.close();
     }
 
     /**
@@ -144,20 +128,11 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * @param selectedcCategory 
      */
     function changeViewStatus(selectedViewStatus: string,) {
-        setSelectedFavoriteVideoviewStatus(selectedViewStatus);
 
-        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            videoTag: selectedFavoriteVideoTag,
-            videoCategory: selectedFavoriteVideoCategory,
+        changeUrl({
             viewStatus: selectedViewStatus,
-            sortKey: selectedFavoriteVideoSortKey,
-            favoriteLevel: selectedFavoriteVideoFavoriteLevel,
+            callback: props.close,
         });
-
-        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
-        navigate(favoriteVideoListApiUrlModel.query);
-
-        props.close();
     }
 
     /**
@@ -165,20 +140,11 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * @param selectedcCategory 
      */
     function changeVideoTag(selectedVideoTag: string,) {
-        setSelectedFavoriteVideoTag(selectedVideoTag);
 
-        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
+        changeUrl({
             videoTag: selectedVideoTag,
-            videoCategory: selectedFavoriteVideoCategory,
-            viewStatus: selectedFavoriteVideoviewStatus,
-            sortKey: selectedFavoriteVideoSortKey,
-            favoriteLevel: selectedFavoriteVideoFavoriteLevel,
+            callback: props.close,
         });
-
-        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
-        navigate(favoriteVideoListApiUrlModel.query);
-
-        props.close();
     }
 
     /**
@@ -186,27 +152,18 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * @param selectedcCategory 
      */
     function changeFavoriteLevel(selectedFavoriteLevel: string,) {
-        setSelectedFavoriteVideoFavoriteLevel(selectedFavoriteLevel);
 
-        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            videoTag: selectedFavoriteVideoTag,
-            videoCategory: selectedFavoriteVideoCategory,
-            viewStatus: selectedFavoriteVideoviewStatus,
-            sortKey: selectedFavoriteVideoSortKey,
+        changeUrl({
             favoriteLevel: selectedFavoriteLevel,
+            callback: props.close,
         });
-
-        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
-        navigate(favoriteVideoListApiUrlModel.query);
-
-        props.close();
     }
 
     return {
         videoCategory,
         selectedFavoriteVideoCategory,
         viewStatusSelectList,
-        selectedFavoriteVideoviewStatus,
+        selectedFavoriteVideoViewStatus,
         changeVideoCategory,
         changeViewStatus,
         selectedFavoriteVideoTag,

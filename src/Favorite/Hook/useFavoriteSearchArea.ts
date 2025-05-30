@@ -11,26 +11,20 @@ import { FavoriteVideoSortType } from "../Type/FavoriteVideoSortType";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
+import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 
 
 export function useFavoriteSearchArea() {
 
     // 条件指定モーダルの表示フラグ
     const { flag: isOpenFilterModal, on: openFilterModal, off: closeFilterModal } = useSwitch();
-    // 動画一覧検索条件選択値(タグ)
-    const selectedFavoriteVideoTag = useAtomValue(selectedFavoriteVideoTagAtom);
     // ソートリスト
     const [sortList, setSortList] = useState<comboType[]>([]);
-    // 動画一覧検索ソートキー
-    const [selectedFavoriteVideoSortKey, setSelectedFavoriteVideoSortKey] = useAtom(selectedFavoriteVideoSortKeyAtom);
-    // お気に入り動画リスト取得URL
-    const setFavoriteVideoUrl = useSetAtom(favoriteVideoApiUrlAtom);
-    //ルーティング用
-    const navigate = useNavigate();
-    // 動画一覧検索条件選択値(カテゴリ)
-    const selectedFavoriteVideoCategory = useAtomValue(selectedFavoriteVideoCategoryAtom);
-    // 動画一覧検索条件選択値(視聴状況)
-    const selectedFavoriteVideoviewStatus = useAtomValue(selectedFavoriteVideoviewStatusAtom);
+    // お気に入り動画一覧取得用フック
+    const {
+        changeUrl,
+        selectedFavoriteVideoTag,
+        selectedFavoriteVideoSortKey, } = useFavoriteListApiUrl();
 
 
     // ソートリストを取得
@@ -57,17 +51,9 @@ export function useFavoriteSearchArea() {
      */
     function selectSort(value: string) {
 
-        setSelectedFavoriteVideoSortKey(value);
-
-        const favoriteVideoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-            videoTag: selectedFavoriteVideoTag,
-            videoCategory: selectedFavoriteVideoCategory,
-            viewStatus: selectedFavoriteVideoviewStatus,
+        changeUrl({
             sortKey: value,
         });
-
-        setFavoriteVideoUrl(favoriteVideoListApiUrlModel.url);
-        navigate(favoriteVideoListApiUrlModel.query);
     }
 
     return {

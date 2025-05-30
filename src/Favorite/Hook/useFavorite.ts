@@ -9,6 +9,7 @@ import { comboType } from "../../Common/Component/ComboComponent";
 import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoFavoriteLevelAtom, selectedFavoriteVideoSortKeyAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
+import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 
 
 export function useFavorite() {
@@ -17,18 +18,10 @@ export function useFavorite() {
     const [viewStatusList, setViewStatusList] = useState<comboType[]>([]);
     // お気に入り動画ID
     const [favoriteVideoId, setFavoriteVideoId] = useState(``);
-    // お気に入り動画リスト取得URL
-    const setFavoriteVideoUrl = useSetAtom(favoriteVideoApiUrlAtom);
-    // 動画一覧検索条件選択値(カテゴリ)
-    const setSelectedFavoriteVideoCategory = useSetAtom(selectedFavoriteVideoCategoryAtom);
-    // 動画一覧検索条件選択値(視聴状況)
-    const setSelectedFavoriteVideoviewStatus = useSetAtom(selectedFavoriteVideoviewStatusAtom);
-    // 動画一覧検索条件選択値(タグ)
-    const setSelectedFavoriteVideoTag = useSetAtom(selectedFavoriteVideoTagAtom);
-    // 動画一覧検索ソートキー
-    const setSelectedFavoriteVideoSortKey = useSetAtom(selectedFavoriteVideoSortKeyAtom);
-    // 動画一覧検索条件選択値(お気に入り度)
-    const setSelectedFavoriteVideoFavoriteLevel = useSetAtom(selectedFavoriteVideoFavoriteLevelAtom);
+    // お気に入り動画一覧取得用フック
+    const {
+        changeUrl,
+        resetCondition, } = useFavoriteListApiUrl();
 
 
     // 視聴状況リストを取得
@@ -76,7 +69,7 @@ export function useFavorite() {
                 const viewStatusValue = params.get(`viewstatus`);
                 const videoTagValue = params.get(`videotag`);
                 const sortKeyValue = params.get(`sortkey`);
-                const favoriteLevelValue = params.get(`sortkey`);
+                const favoriteLevelValue = params.get(`favoritelevel`);
 
                 videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
                 viewStatus = viewStatusValue !== null ? viewStatusValue : ``;
@@ -85,22 +78,13 @@ export function useFavorite() {
                 favoriteLevel = favoriteLevelValue !== null ? favoriteLevelValue : ``;
             }
 
-            // 検索条件の初期値設定
-            setSelectedFavoriteVideoCategory(videoCategory);
-            setSelectedFavoriteVideoviewStatus(viewStatus);
-            setSelectedFavoriteVideoTag(videoTag);
-            setSelectedFavoriteVideoSortKey(sortKey);
-            setSelectedFavoriteVideoFavoriteLevel(favoriteLevel);
-
-            const videoListApiUrlModel = new FavoriteVideoListApiUrlModel({
-                videoCategory,
+            changeUrl({
                 viewStatus,
+                videoCategory,
                 videoTag,
                 sortKey,
                 favoriteLevel,
             });
-
-            setFavoriteVideoUrl(videoListApiUrlModel.url);
         }
         // 動画詳細
         else if (pathArray.length == 3) {
@@ -112,9 +96,7 @@ export function useFavorite() {
 
         // アンマウント時に検索条件をリセット
         return (() => {
-            setSelectedFavoriteVideoCategory(``);
-            setSelectedFavoriteVideoviewStatus(``);
-            setSelectedFavoriteVideoTag(``);
+            resetCondition();
         })
 
     }, []);
