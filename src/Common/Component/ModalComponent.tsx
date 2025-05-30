@@ -1,8 +1,9 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, useEffect } from 'react';
 import Modal from 'react-modal';
 import { IconType } from 'react-icons';
 import { CSSProperties } from 'styled-components';
 import { Z_INDEX_PARAM } from '../Const/CommonConst';
+import "../css/ModalComponent.css";
 
 
 //引数の型
@@ -18,6 +19,21 @@ type propsType = {
 }
 
 function ModalComponent(props: propsType) {
+
+    // モーダル展開中に背景要素のスクロールを停止する
+    useEffect(() => {
+        const className = "html-modal-open";
+
+        if (props.modalIsOpen) {
+            document.documentElement.classList.add(className);
+        } else {
+            document.documentElement.classList.remove(className);
+        }
+
+        return () => {
+            document.documentElement.classList.remove(className);
+        };
+    }, [props.modalIsOpen]);
 
     return (
         <Modal
