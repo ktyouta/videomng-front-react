@@ -13,6 +13,7 @@ const HeaderDiv = styled.div`
   color: white;
   padding-left: 1%;
   height:4%;
+  margin-bottom:7%;
 `;
 
 const BlockIconDiv = styled.div`

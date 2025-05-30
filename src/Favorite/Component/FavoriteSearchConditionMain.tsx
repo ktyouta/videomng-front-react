@@ -6,34 +6,37 @@ import { useFavoriteSearchConditionMain } from "../Hook/useFavoriteSearchConditi
 
 const Parent = styled.div`
     width: 100%;
-    height: 96%;
+    height: 87%;
     box-sizing: border-box;
     padding-left: 6%;
     color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
 `;
 
 const ConditionAreaDiv = styled.div`
   width: 97%;
-  height: 100%;
+  height: 97%;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
   padding-left: 1%;
   padding-right: 1%;
-  padding-top: 11%;
+  padding-top: 3%;
 `;
 
 const InputDiv = styled.div`
   display:flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 13%;
+  margin-bottom: 8%;
   box-sizing: border-box;
+  width:100%;
 `;
 
 const InputLabel = styled.label`
   display: inline-block;
-  width: 65px;
+  width: 17%;
   margin-right: 10px;
   white-space: normal;
   word-wrap: break-word;

@@ -21,7 +21,7 @@ const Parent = styled.div`
 `;
 
 const ComboTitleSpan = styled.span`
-  margin-right:5px;
+  margin-right:7px;
   color: white;
   font-size: 16px;
 `;
@@ -65,7 +65,7 @@ export function FavoriteSearchArea() {
             combo={sortList}
             initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
             onChange={selectSort}
-            width="20%"
+            width="23%"
             height="39px"
             selectStyle={{
               "backgroundColor": "rgb(24, 26, 30)",
@@ -98,12 +98,13 @@ export function FavoriteSearchArea() {
             backgroundColor: "#181a1e",
             borderRadius: "1%",
             border: "solid 1px",
-            color: "white"
+            color: "white",
+            overflowY: "hidden",
           }}
-          width="32%"
-          height="50%"
-          positionTop="22%"
-          positionLeft="33%"
+          width="42%"
+          height="65%"
+          positionTop="15%"
+          positionLeft="29%"
         >
           <FavoriteSearchCondition
             close={closeFilterModal}
