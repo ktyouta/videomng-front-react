@@ -15,7 +15,7 @@ import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 const Parent = styled.div`
   width: 100%;
-  height: 10%;
+  height: 41px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -32,12 +32,13 @@ const TextBoxAreaDiv = styled.div`
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
+  margin-right: 5%;
 `;
 
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
-  width: 6%;
-  height: 37px;
+  width: 46px;
+  height: 99%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 15%;
@@ -75,29 +76,30 @@ export function HomeSearchArea() {
                     style={{
                         borderTopRightRadius: 0,
                         borderBottomRightRadius: 0,
-                        height: "34px",
+                        height: "99%",
+                        boxSizing: "border-box",
                     }}
                 />
                 <SearchIconAreaDiv>
                     <IconComponent
                         icon={IoSearch}
                         onclick={clickSearchBtn}
-                        size="80%"
+                        size="75%"
                     />
                 </SearchIconAreaDiv>
             </TextBoxAreaDiv>
-            <FlexSpaceDiv />
             <ButtonComponent
                 styleTypeNumber="BASE"
                 title={"条件を指定"}
                 onclick={openFilterModal}
                 style={{
-                    "fontSize": "0.9rem",
-                    "height": "41px",
-                    "width": "13%",
-                    "background": "#29323c",
-                    "color": "white",
-                    "borderRadius": "5",
+                    fontSize: "0.9rem",
+                    height: "41px",
+                    width: "13%",
+                    background: "#29323c",
+                    color: "white",
+                    borderRadius: "5",
+                    minWidth: "112px"
                 }}
             />
             {
