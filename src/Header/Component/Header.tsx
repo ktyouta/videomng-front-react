@@ -24,7 +24,7 @@ const MenuNav = styled.nav`
   height:84%;
   box-sizing: border-box;
   padding-left: 9%;
-  padding-top: 3%;
+  padding-top: 45px;
   padding-right: 5%;
   display:flex;
 `;

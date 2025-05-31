@@ -19,7 +19,7 @@ const VideoImg = styled.img`
 const VideoTitleDiv = styled.div`
     color:white;
     cursor:pointer;
-    font-size: 16px;
+    font-size: 14px;
 `;
 
 const DateDiv = styled.div`

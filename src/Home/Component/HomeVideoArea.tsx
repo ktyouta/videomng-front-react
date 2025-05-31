@@ -14,19 +14,13 @@ const Parent = styled.div`
 
 const VideoUl = styled.ul`
   display: grid;
-  grid-template-columns: repeat(var(--grid-container-columns), minmax(0, 1fr));
-  margin-bottom: 0;
-  color: #fff;
-  margin: 0;
-  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(182px, 1fr));
+  color: rgb(255, 255, 255);
+  margin: 0px;
+  padding: 4% 5% 0px;
   width: 100%;
   box-sizing: border-box;
-  padding-left:5%;
-  padding-right:5%;
-  padding-top: 4%;
-  --grid-container-columns: 5;
-  grid-column-gap: 4%;
-  grid-row-gap: 38px;
+  gap: 38px 4%;
 `;
 
 const MessageDiv = styled.div`
