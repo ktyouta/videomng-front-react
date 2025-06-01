@@ -11,7 +11,7 @@ import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 
 const Parent = styled.div`
   width: 100%;
-  height:100px;
+  height:115px;
   top: 0;
   left: 0;
   position: fixed;
@@ -21,12 +21,12 @@ const Parent = styled.div`
 
 const MenuNav = styled.nav`
   width: 100%;
-  height:84%;
+  height:100%;
   box-sizing: border-box;
   padding-left: 9%;
-  padding-top: 45px;
   padding-right: 5%;
   display:flex;
+  align-items: center;
 `;
 
 

@@ -1,12 +1,13 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoListResponseType } from "../Type/FavoriteVideoListResponseType";
-import { favoriteVideoApiUrlAtom, favoriteVideoListAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
+import { favoriteVideoListAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json"
 import { useState } from "react";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
+import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 
 
 export function useFavoriteVideoArea() {
@@ -16,7 +17,7 @@ export function useFavoriteVideoArea() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画リスト取得URL
-    const favoriteVideoUrl = useAtomValue(favoriteVideoApiUrlAtom);
+    const { favoriteVideoUrl } = useFavoriteListApiUrl();
     // 動画一覧API呼び出し済みフラグ
     const [isCalledListApi, setIsCalledListApi] = useState(false);
 

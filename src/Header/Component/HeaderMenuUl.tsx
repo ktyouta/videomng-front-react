@@ -9,7 +9,7 @@ const NavUl = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  height: 100%;
+  height: 35%;
   width: 70%;
 `;
 
@@ -21,7 +21,7 @@ const NavLi = styled.li<{ isActive: boolean }>`
   box-sizing: border-box;
   background: ${({ isActive }) => (isActive ? "radial-gradient(50% 50% at 50% 0, rgba(var(--action-background-color,255,255,255),.8) 0, transparent 100%), hsla(0, 0%, 100%, .2);" : "")};
   box-shadow: ${({ isActive }) => (isActive ? "0 -4px 16px 0 rgba(var(--action-background-color,255,255,255),.2)" : "")};
-  border-radius: 7%;
+  border-radius: 5px;
   font-weight:400;
   font-size: 19px;
   color:white;

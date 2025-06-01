@@ -35,7 +35,7 @@ const QUERY_KEY_FAVORITE_LEVEL = `favoritelevel`;
 export function useFavoriteListApiUrl() {
 
     // お気に入り動画リスト取得URL
-    const setFavoriteVideoUrl = useSetAtom(favoriteVideoApiUrlAtom);
+    const [favoriteVideoUrl, setFavoriteVideoUrl] = useAtom(favoriteVideoApiUrlAtom);
     //ルーティング用
     const navigate = useNavigate();
     // 動画一覧検索条件選択値(カテゴリ)
@@ -122,6 +122,7 @@ export function useFavoriteListApiUrl() {
     }
 
     return {
+        favoriteVideoUrl,
         changeUrl,
         resetCondition,
         selectedFavoriteVideoCategory,

@@ -14,14 +14,15 @@ const BtnDiv = styled.div`
   position:relative;
   align-items: center;
   width:47px;
+  display: flex
 `;
 
 //ナビゲーション
 const NavDiv = styled.div<{ isDisplay: boolean }>`
   position: absolute;
-  left: -150px;
+  left: -160px;
+  top: 48px;
   font-size: 15px;
-  width: 263px;
   width: 273px;
   height: auto;
   min-height: 200px;
@@ -101,7 +102,7 @@ export function HeaderUserMenu() {
                                     <IconComponent
                                         icon={IoPersonCircleOutline}
                                         onclick={isOpenUserMenu ? closeUserMenu : oepnUserMenu}
-                                        size='100%'
+                                        size='80%'
                                     />
                                     <NavDiv
                                         isDisplay={isOpenUserMenu}
@@ -139,7 +140,7 @@ export function HeaderUserMenu() {
                                 style={{
                                     fontSize: "0.9rem",
                                     width: "7%",
-                                    height: "100%",
+                                    height: "35%",
                                     background: "#eb3941",
                                     boxShadow: "none",
                                 }}

@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useSwitch from "../../Common/Hook/useSwitch";
-import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoSortKeyAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoSortListResponseType } from "../Type/FavoriteVideoSortListResponseType";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";

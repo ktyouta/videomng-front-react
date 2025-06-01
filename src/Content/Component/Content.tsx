@@ -12,7 +12,7 @@ const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
   flex: 1;
-  padding-top: 100px;
+  padding-top: 115px;
   margin-top: 1%;
 `;
 

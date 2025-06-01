@@ -6,7 +6,6 @@ import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
-import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoFavoriteLevelAtom, selectedFavoriteVideoSortKeyAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
