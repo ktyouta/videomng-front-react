@@ -7,6 +7,7 @@ import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { NotFound } from "../../NotFound/Component/NotFound";
+import { HomeChannel } from "./HomeChannel";
 
 // 動画ID
 export const VideoIdContext = createCtx<string>();
@@ -16,6 +17,10 @@ export const SetVideoIdContext = createCtx<React.Dispatch<React.SetStateAction<s
 export const VideoApiUrlContext = createCtx<string>();
 // 動画取得用URL(setter)
 export const SetVideoApiUrlContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+// チャンネルID
+export const ChannelIdContext = createCtx<string>();
+// チャンネルID(setter)
+export const SetChannelIdContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
 
 
 export function Home() {
@@ -28,6 +33,8 @@ export function Home() {
         videoApiUrl,
         setVideoApiUrl,
         isLoadingComp,
+        channelId,
+        setChannelId,
     } = useHome();
 
     return (
@@ -37,13 +44,15 @@ export function Home() {
                 <Route
                     path={`/`}
                     element={
-                        <SetVideoIdContext.Provider value={setVideoId}>
-                            <VideoApiUrlContext.Provider value={videoApiUrl}>
-                                <SetVideoApiUrlContext.Provider value={setVideoApiUrl}>
-                                    <HomeVideoList />
-                                </SetVideoApiUrlContext.Provider>
-                            </VideoApiUrlContext.Provider>
-                        </SetVideoIdContext.Provider>
+                        <SetChannelIdContext.Provider value={setChannelId}>
+                            <SetVideoIdContext.Provider value={setVideoId}>
+                                <VideoApiUrlContext.Provider value={videoApiUrl}>
+                                    <SetVideoApiUrlContext.Provider value={setVideoApiUrl}>
+                                        <HomeVideoList />
+                                    </SetVideoApiUrlContext.Provider>
+                                </VideoApiUrlContext.Provider>
+                            </SetVideoIdContext.Provider>
+                        </SetChannelIdContext.Provider>
                     }
                 />
                 {/* 動画詳細 */}
@@ -55,7 +64,21 @@ export function Home() {
                                 <HomeVideoDetail />
                             </VideoIdContext.Provider>
                         </Provider>
-                    } />
+                    }
+                />
+                {/* チャンネル動画一覧 */}
+                <Route
+                    path={`${ROUTER_PATH.HOME.CHANNEL}/${channelId}`}
+                    element={
+                        <Provider>
+                            <ChannelIdContext.Provider value={channelId}>
+                                <SetVideoIdContext.Provider value={setVideoId}>
+                                    <HomeChannel />
+                                </SetVideoIdContext.Provider>
+                            </ChannelIdContext.Provider>
+                        </Provider>
+                    }
+                />
                 {
                     isLoadingComp &&
                     <Route

@@ -7,6 +7,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { FaStar } from "react-icons/fa";
 import { FLG } from "../../Common/Const/CommonConst";
 import { HomeVideoContentFavoriteIconArea } from "./HomeFavoriteIconArea";
+import { useHomeChannelVideoContent } from "../Hook/useHomeChannelVideoContent";
 
 
 const VideoArticle = styled.article`
@@ -39,12 +40,9 @@ const DateDiv = styled.div`
 
 const ChennelTitleDiv = styled.div`
     font-size: 11px;
-`;
-
-const ChennelTitleSpan = styled.span`
     cursor:pointer;
     &:hover {
-        color:#2563eb;
+        color:blue;
     }
 `;
 
@@ -53,13 +51,11 @@ type propsType = {
     data: VideoListItemType,
 }
 
-export function HomeVideoContent(props: propsType) {
+export function HomeChannelVideoContent(props: propsType) {
 
-    console.log("HomeVideoContent render");
+    console.log("HomeChannelVideoContent render");
 
-    const {
-        clickVideo,
-        clickChannel } = useHomeVideoContent();
+    const { clickVideo } = useHomeChannelVideoContent();
 
     const data = props.data
     const snipet = data.snippet;
@@ -67,10 +63,6 @@ export function HomeVideoContent(props: propsType) {
     const title = snipet.title;
     // サムネイルURL
     const imgUrl = snipet.thumbnails.high.url;
-    // チャンネル名
-    const channelTitle = snipet.channelTitle;
-    // チャンネルID
-    const channelId = snipet.channelId;
     // 動画ID
     const videoId = data.id.videoId ?? ``;
     // 日付
@@ -105,15 +97,6 @@ export function HomeVideoContent(props: propsType) {
                 <DateDiv>
                     {publishedDate}
                 </DateDiv>
-                <ChennelTitleDiv
-                    onClick={() => {
-                        clickChannel(channelId)
-                    }}
-                >
-                    <ChennelTitleSpan>
-                        {channelTitle}
-                    </ChennelTitleSpan>
-                </ChennelTitleDiv>
             </VideoSection>
         </VideoArticle>
     );

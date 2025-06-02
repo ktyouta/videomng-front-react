@@ -18,6 +18,8 @@ export function useHome() {
     const setKeyword = useSetAtom(keywordAtom);
     // ページ読み込み完了フラグ
     const [isLoadingComp, setIsLoadingComp] = useState(false);
+    // チャンネルID
+    const [channelId, setChannelId] = useState(``);
 
 
     // URL直打ち対応
@@ -72,5 +74,7 @@ export function useHome() {
         videoApiUrl,
         setVideoApiUrl,
         isLoadingComp,
+        channelId,
+        setChannelId,
     }
 }

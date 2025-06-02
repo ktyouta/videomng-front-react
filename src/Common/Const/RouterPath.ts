@@ -4,6 +4,7 @@ export const ROUTER_PATH = {
     HOME: {
         ROOT: `/video`,
         DETAIL: `/detail`,
+        CHANNEL: `/channel`,
     },
     // お気に入り画面ルートパス
     FAVORITE: `/favorite`,
