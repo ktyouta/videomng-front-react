@@ -44,7 +44,7 @@ export function useHeaderUserMenu() {
 
             setLoginUserInfo(LOGIN_USER_INFO_INIT);
             setIsLogin(false);
-            navigate(ROUTER_PATH.HOME);
+            navigate(ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

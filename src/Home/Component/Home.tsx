@@ -5,6 +5,8 @@ import { HomeVideoDetail } from "./HomeVideoDetail";
 import { useHome } from "../Hook/useHome";
 import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { NotFound } from "../../NotFound/Component/NotFound";
 
 // 動画ID
 export const VideoIdContext = createCtx<string>();
@@ -25,6 +27,7 @@ export function Home() {
         setVideoId,
         videoApiUrl,
         setVideoApiUrl,
+        isLoadingComp,
     } = useHome();
 
     return (
@@ -42,18 +45,25 @@ export function Home() {
                             </VideoApiUrlContext.Provider>
                         </SetVideoIdContext.Provider>
                     }
-                >
-                </Route>
+                />
                 {/* 動画詳細 */}
                 <Route
-                    path={`${videoId}`}
+                    path={`${ROUTER_PATH.HOME.DETAIL}/${videoId}`}
                     element={
                         <Provider>
                             <VideoIdContext.Provider value={videoId}>
                                 <HomeVideoDetail />
                             </VideoIdContext.Provider>
                         </Provider>
-                    }></Route>
+                    } />
+                {
+                    isLoadingComp &&
+                    <Route
+                        key={"*"}
+                        path="*"
+                        element={<NotFound backUrl={`${ROUTER_PATH.HOME.ROOT}`} />}
+                    />
+                }
             </Routes>
         </React.Fragment>
     );

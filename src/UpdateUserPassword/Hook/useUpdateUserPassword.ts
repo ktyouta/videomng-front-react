@@ -46,7 +46,7 @@ export function useUpdateUserPassword() {
         afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
             toast.success("パスワードを更新しました。");
-            navigate(ROUTER_PATH.HOME);
+            navigate(ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -101,7 +101,7 @@ export function useUpdateUserPassword() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(ROUTER_PATH.HOME);
+        navigate(ROUTER_PATH.HOME.ROOT);
     }
 
     /**

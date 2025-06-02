@@ -142,7 +142,7 @@ export function useLogin() {
      */
     function clickBack() {
 
-        let backPagePath = ROUTER_PATH.HOME;
+        let backPagePath = ROUTER_PATH.HOME.ROOT;
 
         if (backPath) {
             backPagePath = backPath;

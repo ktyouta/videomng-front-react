@@ -1,7 +1,10 @@
 // ルーティングパスリスト
 export const ROUTER_PATH = {
-    // ホーム画面ルートパス
-    HOME: `/video`,
+    // ホーム画面パス
+    HOME: {
+        ROOT: `/video`,
+        DETAIL: `/detail`,
+    },
     // お気に入り画面ルートパス
     FAVORITE: `/favorite`,
     // ログイン

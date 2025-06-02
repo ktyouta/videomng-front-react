@@ -48,7 +48,7 @@ export function useHomeVideoDetail() {
      * ホーム画面(動画一覧)に戻る
      */
     function backHome() {
-        navigate(ROUTER_PATH.HOME);
+        navigate(ROUTER_PATH.HOME.ROOT);
     }
 
     return {

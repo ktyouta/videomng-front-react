@@ -2,6 +2,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom } from "../Atom/HomeAtom";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 export function useHome() {
 
@@ -15,6 +16,8 @@ export function useHome() {
     const setSelectedVideoCategory = useSetAtom(selectedVideoCategoryAtom);
     // 検索キーワード
     const setKeyword = useSetAtom(keywordAtom);
+    // ページ読み込み完了フラグ
+    const [isLoadingComp, setIsLoadingComp] = useState(false);
 
 
     // URL直打ち対応
@@ -53,12 +56,14 @@ export function useHome() {
             }
         }
         // 動画詳細
-        else if (pathArray.length == 3) {
+        else if (pathArray.length == 4 && `/${pathArray[2]}` === `${ROUTER_PATH.HOME.DETAIL}`) {
 
             // ID部分を取得
-            const videoId = pathArray[2];
+            const videoId = pathArray[3];
             setVideoId(videoId);
         }
+
+        setIsLoadingComp(true);
     }, []);
 
     return {
@@ -66,5 +71,6 @@ export function useHome() {
         setVideoId,
         videoApiUrl,
         setVideoApiUrl,
+        isLoadingComp,
     }
 }

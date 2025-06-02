@@ -40,7 +40,7 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(ROUTER_PATH.HOME);
+            navigate(ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -91,7 +91,8 @@ export function useHomeVideoDetailInfo() {
         let query = ``;
 
         if (videoId) {
-            query = `?backpath=${ROUTER_PATH.HOME}/${videoId}&nextpath=${ROUTER_PATH.HOME}/${videoId}`;
+            const transitionPath = `${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${videoId}`;
+            query = `?backpath=${transitionPath}&nextpath=${transitionPath}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${query}`);

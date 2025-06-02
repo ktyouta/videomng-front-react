@@ -28,7 +28,7 @@ export function Content() {
         <Parent>
             <Routes>
                 <Route
-                    path={`${ROUTER_PATH.HOME}/*`}
+                    path={`${ROUTER_PATH.HOME.ROOT}/*`}
                     element={
                         <Provider>
                             <Home />
@@ -51,7 +51,7 @@ export function Content() {
                     <Route
                         key={"*"}
                         path="*"
-                        element={<NotFound backUrl={`${ROUTER_PATH.HOME}`} />}
+                        element={<NotFound backUrl={`${ROUTER_PATH.HOME.ROOT}`} />}
                     />
                 }
             </Routes>
