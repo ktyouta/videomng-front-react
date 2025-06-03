@@ -38,14 +38,6 @@ const DateDiv = styled.div`
     font-size: 11px;
 `;
 
-const ChennelTitleDiv = styled.div`
-    font-size: 11px;
-    cursor:pointer;
-    &:hover {
-        color:blue;
-    }
-`;
-
 
 type propsType = {
     data: VideoListItemType,

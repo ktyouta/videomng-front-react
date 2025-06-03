@@ -6,8 +6,9 @@ import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoList
 import { HomeVideoContent } from "./HomeVideoContent";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoListItemType } from "../Type/VideoListItemType";
-import { useHomeChannelVideoArea } from "../Hook/useHomeChannelVideoArea";
 import { HomeChannelVideoContent } from "./HomeChannelVideoContent";
+import { VideoListDataType } from "../Type/VideoListDataType";
+import { useHomeChannelVideoArea } from "../Hook/useHomeChannelVideoArea";
 
 const Parent = styled.div`
   width: 100%;
@@ -19,7 +20,7 @@ const VideoUl = styled.ul`
   grid-template-columns: repeat(auto-fit, minmax(182px, 1fr));
   color: rgb(255, 255, 255);
   margin: 0px;
-  padding: 4% 5% 0px;
+  padding: 3% 5% 0px;
   width: 100%;
   box-sizing: border-box;
   gap: 38px 4%;
@@ -41,33 +42,20 @@ const NextGetBtnAreaDiv = styled.div`
   margin-top: 3%;
 `;
 
-export function HomeChannelVideoArea() {
+type propsType = {
+    videoListData: VideoListDataType
+}
+
+export function HomeChannelVideoArea(props: propsType) {
 
     console.log("HomeChannelVideoArea render");
 
-    const {
-        videoListData,
-        isLoading,
-        errMessage, } = useHomeChannelVideoArea();
-
-    if (!videoListData) {
-        return (
-            <LoadingBase />
-        );
-    }
-
-    if (errMessage) {
-        return (
-            <MessageDiv>
-                {errMessage}
-            </MessageDiv>
-        );
-    }
+    const { clickShowMore } = useHomeChannelVideoArea();
 
     // 動画リスト
-    const videoListItems = videoListData.items;
+    const videoListItems = props.videoListData.items;
     // 次データ取得用トークン
-    const nextPageToken = videoListData.nextPageToken;
+    const nextPageToken = props.videoListData.nextPageToken;
 
     if (videoListItems.length === 0) {
         return (
@@ -79,10 +67,6 @@ export function HomeChannelVideoArea() {
 
     return (
         <Parent>
-            {
-                isLoading &&
-                <LoadingBase />
-            }
             <VideoUl>
                 {
                     videoListItems?.map((e: VideoListItemType) => {
@@ -95,7 +79,7 @@ export function HomeChannelVideoArea() {
                     })
                 }
             </VideoUl>
-            {/* {
+            {
                 nextPageToken &&
                 <NextGetBtnAreaDiv>
                     <ButtonComponent
@@ -110,7 +94,7 @@ export function HomeChannelVideoArea() {
                         }}
                     />
                 </NextGetBtnAreaDiv>
-            } */}
+            }
         </Parent>
     );
 }

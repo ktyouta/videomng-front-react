@@ -1,3 +1,4 @@
+import { ChannelVideoListDataType } from "./ChannelVideoListDataType";
 import { VideoListDataType } from "./VideoListDataType";
 import { YouTubeDataApiVideoListItemType } from "./YouTubeDataApiVideoListItemType";
 
@@ -5,5 +6,5 @@ import { YouTubeDataApiVideoListItemType } from "./YouTubeDataApiVideoListItemTy
 export type ChannelVideoListResponseType = {
     status: number;
     message: string,
-    data: VideoListDataType;
+    data: ChannelVideoListDataType;
 }

@@ -81,6 +81,7 @@ export function Home() {
                 />
                 {
                     isLoadingComp &&
+                    // Not Found
                     <Route
                         key={"*"}
                         path="*"

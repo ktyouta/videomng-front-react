@@ -64,6 +64,13 @@ export function useHome() {
             const videoId = pathArray[3];
             setVideoId(videoId);
         }
+        // チャンネル動画一覧
+        else if (pathArray.length == 4 && `/${pathArray[2]}` === `${ROUTER_PATH.HOME.CHANNEL}`) {
+
+            // ID部分を取得
+            const channelId = pathArray[3];
+            setChannelId(channelId);
+        }
 
         setIsLoadingComp(true);
     }, []);
