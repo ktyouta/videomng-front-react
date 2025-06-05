@@ -13,6 +13,16 @@ import { TOAST_INIT, ToastComponent, toastStatusType } from './Common/Component/
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TOAST_DISPLAY_TIME } from './Common/Const/CommonConst';
+import { UpdateUserInfo } from './UpdateUserInfo/Component/UpdateUserInfo';
+import { UpdateUserPassword } from './UpdateUserPassword/Component/UpdateUserPassword';
+import styled from 'styled-components';
+import LoadingBase from './Common/Component/LoadingBase';
+
+
+const LoadingScreenDiv = styled.div`
+  height:100vh;
+  background-color: rgb(0, 5, 13);
+`;
 
 
 // ログインフラグ
@@ -23,6 +33,8 @@ export const SetIsLoginContext = createCtx<React.Dispatch<React.SetStateAction<b
 export const LoginUserInfoContext = createCtx<LoginUserInfoType>();
 // ログインユーザー情報(setter)
 export const SetLoginUserInfoContext = createCtx<React.Dispatch<React.SetStateAction<LoginUserInfoType>>>();
+// 認証チェック済みフラグ
+export const IsCheckedAuthContext = createCtx<boolean>();
 
 
 function QueryApp() {
@@ -33,7 +45,8 @@ function QueryApp() {
         isLogin,
         setIsLogin,
         loginUserInfo,
-        setLoginUserInfo, } = useQueryApp();
+        setLoginUserInfo,
+        isCheckedAuth, } = useQueryApp();
 
     return (
         <SetIsLoginContext.Provider value={setIsLogin}>
@@ -68,15 +81,50 @@ function QueryApp() {
                                 </SetLoginUserInfoContext.Provider>
                         }
                     />
+                    {/* ユーザー情報更新 */}
+                    {
+                        isLogin &&
+                        <Route
+                            path={ROUTER_PATH.UPDATE_USER_INFO}
+                            element={
+                                <LoginUserInfoContext.Provider value={loginUserInfo}>
+                                    <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                        <UpdateUserInfo />
+                                    </SetLoginUserInfoContext.Provider>
+                                </LoginUserInfoContext.Provider>
+                            }
+                        />
+                    }
+                    {/* パスワード変更 */}
+                    {
+                        isLogin &&
+                        <Route
+                            path={ROUTER_PATH.UPDATE_USER_PASSWORD}
+                            element={
+                                <LoginUserInfoContext.Provider value={loginUserInfo}>
+                                    <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                        <UpdateUserPassword />
+                                    </SetLoginUserInfoContext.Provider>
+                                </LoginUserInfoContext.Provider>
+                            }
+                        />
+                    }
                     {/* コンテンツ */}
                     <Route
                         path="/*"
                         element={
-                            <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
-                                <LoginUserInfoContext.Provider value={loginUserInfo}>
-                                    <Main />
-                                </LoginUserInfoContext.Provider>
-                            </SetLoginUserInfoContext.Provider>
+                            isCheckedAuth ?
+                                <IsCheckedAuthContext.Provider value={isCheckedAuth}>
+                                    <SetLoginUserInfoContext.Provider value={setLoginUserInfo}>
+                                        <LoginUserInfoContext.Provider value={loginUserInfo}>
+                                            <Main />
+                                        </LoginUserInfoContext.Provider>
+                                    </SetLoginUserInfoContext.Provider>
+                                </IsCheckedAuthContext.Provider>
+                                :
+                                <LoadingScreenDiv>
+                                    <LoadingBase />
+                                </LoadingScreenDiv>
                         }
                     />
                 </Routes>

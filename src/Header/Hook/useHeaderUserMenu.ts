@@ -7,11 +7,10 @@ import useMutationWrapper from "../../Common/Hook/useMutationWrapper";
 import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
-import { IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
+import { IsCheckedAuthContext, IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
 import { LOGIN_USER_INFO_INIT } from "../../Common/Const/CommonConst";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { IsCheckedAuthContext } from "../../Main/Component/Main";
 
 
 export function useHeaderUserMenu() {

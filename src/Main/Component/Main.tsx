@@ -18,41 +18,21 @@ const AppDiv = styled.div`
   flex-direction: column;
 `;
 
-// 認証チェック済みフラグ
-export const IsCheckedAuthContext = createCtx<boolean>();
-
 
 export function Main() {
 
     console.log("Main render");
 
-    const { isCheckedAuth, } = useMain();
+    useMain();
 
     return (
-        <Routes>
-            <Route
-                path={ROUTER_PATH.UPDATE_USER_INFO}
-                element={<UpdateUserInfo />}
-            />
-            <Route
-                path={ROUTER_PATH.UPDATE_USER_PASSWORD}
-                element={<UpdateUserPassword />}
-            />
-            <Route
-                path={`/*`}
-                element={
-                    <AppDiv>
-                        <IsCheckedAuthContext.Provider value={isCheckedAuth}>
-                            {/* ヘッダ */}
-                            <Header />
-                            {/* コンテンツ */}
-                            <Content />
-                        </IsCheckedAuthContext.Provider>
-                        {/* フッター */}
-                        <Footer />
-                    </AppDiv>
-                }
-            />
-        </Routes>
+        <AppDiv>
+            {/* ヘッダ */}
+            <Header />
+            {/* コンテンツ */}
+            <Content />
+            {/* フッター */}
+            <Footer />
+        </AppDiv>
     );
 }

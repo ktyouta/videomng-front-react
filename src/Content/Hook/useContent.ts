@@ -1,7 +1,6 @@
 import { useAtomValue } from "jotai";
 import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
-import { IsLoginContext } from "../../QueryApp";
-import { IsCheckedAuthContext } from "../../Main/Component/Main";
+import { IsCheckedAuthContext, IsLoginContext } from "../../QueryApp";
 
 export function useContent() {
 

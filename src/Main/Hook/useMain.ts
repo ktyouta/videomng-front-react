@@ -15,14 +15,8 @@ import { useState } from "react";
 
 export function useMain() {
 
-    // ログインフラグ
-    const setIsLogin = SetIsLoginContext.useCtx();
     // 動画カテゴリ
     const setVideoCategory = useSetGlobalAtom(videoCategoryAtom);
-    // ログインユーザー情報(setter)
-    const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // 認証チェック済みフラグ
-    const [isCheckedAuth, setIsCheckedAuth] = useState(false);
 
     // 動画カテゴリを取得
     useQueryWrapper<VideoCategoryResponseType>(
@@ -54,26 +48,4 @@ export function useMain() {
         }
     );
 
-    // 認証チェック
-    useQueryWrapper(
-        {
-            url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_CHECK_AUTH}`,
-            afSuccessFn: (res: resType<LoginUserInfoType>) => {
-
-                const loginUserInfo = res.data;
-
-                setLoginUserInfo(loginUserInfo);
-                setIsLogin(true);
-                setIsCheckedAuth(true);
-            },
-            afErrorFn: (res) => {
-                setIsLogin(false);
-                setIsCheckedAuth(true);
-            }
-        }
-    );
-
-    return {
-        isCheckedAuth,
-    }
 }
