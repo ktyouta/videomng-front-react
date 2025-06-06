@@ -14,7 +14,7 @@ const Parent = styled.div`
 
 const VideoUl = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(182px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
   color: rgb(255, 255, 255);
   margin: 0px;
   padding: 4% 5% 0px;
