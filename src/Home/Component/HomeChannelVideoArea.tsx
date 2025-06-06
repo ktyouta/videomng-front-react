@@ -43,14 +43,15 @@ const NextGetBtnAreaDiv = styled.div`
 `;
 
 type propsType = {
-    videoListData: VideoListDataType
+    videoListData: VideoListDataType,
+    setNextPageToken: React.Dispatch<React.SetStateAction<string>>
 }
 
 export function HomeChannelVideoArea(props: propsType) {
 
     console.log("HomeChannelVideoArea render");
 
-    const { clickShowMore } = useHomeChannelVideoArea();
+    const { clickShowMore } = useHomeChannelVideoArea({ ...props });
 
     // 動画リスト
     const videoListItems = props.videoListData.items;

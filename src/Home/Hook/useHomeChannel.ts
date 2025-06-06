@@ -3,7 +3,7 @@ import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChannelIdContext } from "../Component/Home";
 import { toast } from "react-toastify";
 import { ChannelVideoListResponseType } from "../Type/ChannelVideoListResponseType";
@@ -14,44 +14,41 @@ import { ChannelVideoListDataType } from "../Type/ChannelVideoListDataType";
 
 export function useHomeChannel() {
 
-    // 動画リスト
-    const [videoListData, setVideoListData] = useState<VideoListDataType>();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // チャンネルID
     const channelId = ChannelIdContext.useCtx();
-    // チャンネル情報
-    const [channelInfo, setChannelInfo] = useState<ChannelInfoType>();
     // 次データ取得用トークン
     const [nextPageToken, setNextPageToken] = useState(``);
+    // チャンネル情報データ
+    const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
+    // チャンネル情報取得エンドポイント
+    const [channelInfoEndPoint, setChannelInfoEndPoint] = useState(``);
+
 
     // チャンネル動画一覧を取得
     const { isLoading } = useQueryWrapper<ChannelVideoListResponseType>(
         {
-            url: channelId ? `${VIDEO_MNG_PATH}${ENV.CHANNEL_VIDEO_INFO}/${channelId}${nextPageToken ? `?nextpagetoken=${nextPageToken}` : ``}` : ``,
+            url: channelInfoEndPoint,
             afSuccessFn: (response: ChannelVideoListResponseType) => {
 
                 const responseData: ChannelVideoListDataType = response.data;
 
-                setVideoListData((e) => {
+                setChannelVideoListData((e) => {
 
-                    const videoListData: VideoListDataType = response.data;
                     // 現在画面表示されている動画リスト
                     const nowVideoItems = e?.items ?? [];
                     // 新たに取得した動画リスト
                     const newVideoItems = responseData.items;
                     // 次に画面に表示する動画リスト
-                    const latestVideoItems = newVideoItems;
+                    const latestVideoItems = [...nowVideoItems, ...newVideoItems];
 
-                    const latestResponse: VideoListDataType = {
+                    return {
                         ...responseData,
                         items: latestVideoItems
                     }
-
-                    return latestResponse;
                 });
 
-                setChannelInfo(responseData.channelInfo);
                 setErrMessage(``);
             },
             afErrorFn: (res) => {
@@ -61,11 +58,26 @@ export function useHomeChannel() {
         }
     );
 
+    useEffect(() => {
+
+        if (!channelId) {
+            return;
+        }
+
+        let channelInfoUrl = `${VIDEO_MNG_PATH}${ENV.CHANNEL_VIDEO_INFO}/${channelId}`;
+
+        if (nextPageToken) {
+            channelInfoUrl += `?nextpagetoken=${nextPageToken}`;
+        }
+
+        setChannelInfoEndPoint(channelInfoUrl);
+
+    }, [channelId, nextPageToken]);
+
     return {
-        videoListData,
         isLoading,
         errMessage,
-        channelInfo,
-        setNextPageToken
+        setNextPageToken,
+        channelVideoListData,
     }
 }

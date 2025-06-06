@@ -22,14 +22,10 @@ export function HomeChannel() {
     console.log("HomeChannel render");
 
     const {
-        videoListData,
         isLoading,
         errMessage,
-        channelInfo } = useHomeChannel();
-
-    if (isLoading) {
-        return <LoadingBase />;
-    }
+        channelVideoListData,
+        setNextPageToken, } = useHomeChannel();
 
     if (errMessage) {
         return (
@@ -39,7 +35,7 @@ export function HomeChannel() {
         );
     }
 
-    if (!videoListData || !channelInfo) {
+    if (!channelVideoListData) {
         return (
             <React.Fragment></React.Fragment>
         );
@@ -47,13 +43,18 @@ export function HomeChannel() {
 
     return (
         <Parent>
+            {
+                isLoading &&
+                <LoadingBase />
+            }
             {/* ヘッダ */}
             <HomeChannelHeader
-                channelInfo={channelInfo}
+                channelInfo={channelVideoListData.channelInfo}
             />
             {/* 動画表示エリア */}
             <HomeChannelVideoArea
-                videoListData={videoListData}
+                videoListData={channelVideoListData}
+                setNextPageToken={setNextPageToken}
             />
         </Parent>
     );
