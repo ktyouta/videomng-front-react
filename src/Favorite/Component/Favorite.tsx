@@ -24,8 +24,7 @@ export function Favorite() {
     const {
         favoriteVideoId,
         setFavoriteVideoId,
-        viewStatusList,
-        isLoadingComp, } = useFavorite();
+        viewStatusList } = useFavorite();
 
     return (
         <ViewStatusListContext.Provider value={viewStatusList}>
@@ -42,24 +41,23 @@ export function Favorite() {
                 </Route>
                 {/* お気に入り動画詳細 */}
                 <Route
-                    path={`${ROUTER_PATH.FAVORITE.DETAIL}/${favoriteVideoId}`}
+                    path={`${ROUTER_PATH.FAVORITE.DETAIL}/*`}
                     element={
                         <Provider>
                             <FavoriteVideoIdContext.Provider value={favoriteVideoId}>
-                                <FavoriteVideoDetail />
+                                <SetFavoriteVideoIdContext.Provider value={setFavoriteVideoId}>
+                                    <FavoriteVideoDetail />
+                                </SetFavoriteVideoIdContext.Provider>
                             </FavoriteVideoIdContext.Provider>
                         </Provider>
                     } >
                 </Route>
-                {
-                    isLoadingComp &&
-                    // Not Found
-                    <Route
-                        key={"*"}
-                        path="*"
-                        element={<NotFound backUrl={`${ROUTER_PATH.FAVORITE.ROOT}`} />}
-                    />
-                }
+                {/* Not Found */}
+                <Route
+                    key={"*"}
+                    path="*"
+                    element={<NotFound backUrl={`${ROUTER_PATH.FAVORITE.ROOT}`} />}
+                />
             </Routes>
         </ViewStatusListContext.Provider>
     );

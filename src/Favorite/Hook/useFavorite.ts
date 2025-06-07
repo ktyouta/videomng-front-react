@@ -19,11 +19,7 @@ export function useFavorite() {
     // お気に入り動画ID
     const [favoriteVideoId, setFavoriteVideoId] = useState(``);
     // お気に入り動画一覧取得用フック
-    const {
-        changeUrl,
-        resetCondition, } = useFavoriteListApiUrl();
-    // ページ読み込み完了フラグ
-    const [isLoadingComp, setIsLoadingComp] = useState(false);
+    const { resetCondition } = useFavoriteListApiUrl();
 
 
     // 視聴状況リストを取得
@@ -43,65 +39,12 @@ export function useFavorite() {
         }
     );
 
-    // URL直打ち対応
     useEffect(() => {
-
-        const pathArray = window.location.pathname.split("/");
-
-        if (pathArray.length < 2) {
-            return;
-        }
-
-        const query = window.location.search;
-
-        // 動画一覧
-        if (pathArray.length == 2) {
-
-            let videoCategory = ``;
-            let viewStatus = ``;
-            let videoTag = ``;
-            let sortKey = ``;
-            let favoriteLevel = ``;
-
-            // クエリパラメータが設定されている場合
-            if (query && query.length > 0 && query.charAt(0) === `?`) {
-
-                const params = new URLSearchParams(query);
-                const videoCategoryValue = params.get(`videocategory`);
-                const viewStatusValue = params.get(`viewstatus`);
-                const videoTagValue = params.get(`videotag`);
-                const sortKeyValue = params.get(`sortkey`);
-                const favoriteLevelValue = params.get(`favoritelevel`);
-
-                videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
-                viewStatus = viewStatusValue !== null ? viewStatusValue : ``;
-                videoTag = videoTagValue !== null ? videoTagValue : ``;
-                sortKey = sortKeyValue !== null ? sortKeyValue : ``;
-                favoriteLevel = favoriteLevelValue !== null ? favoriteLevelValue : ``;
-            }
-
-            changeUrl({
-                viewStatus,
-                videoCategory,
-                videoTag,
-                sortKey,
-                favoriteLevel,
-            });
-        }
-        // 動画詳細
-        else if (pathArray.length == 4 && `/${pathArray[2]}` === `${ROUTER_PATH.FAVORITE.DETAIL}`) {
-
-            // ID部分を取得
-            const videoId = pathArray[3];
-            setFavoriteVideoId(videoId);
-        }
-
-        setIsLoadingComp(true);
 
         // アンマウント時に検索条件をリセット
         return (() => {
             resetCondition();
-        })
+        });
 
     }, []);
 
@@ -109,6 +52,5 @@ export function useFavorite() {
         favoriteVideoId,
         setFavoriteVideoId,
         viewStatusList,
-        isLoadingComp,
     }
 }

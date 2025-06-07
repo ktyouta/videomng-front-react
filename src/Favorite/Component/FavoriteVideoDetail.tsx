@@ -40,6 +40,10 @@ export function FavoriteVideoDetail() {
     videoDetail,
     errMessage } = useFavoriteVideoDetail();
 
+  if (!videoDetail) {
+    return <LoadingBase />;
+  }
+
   // ローディング
   if (isLoading) {
     return <LoadingBase />;
