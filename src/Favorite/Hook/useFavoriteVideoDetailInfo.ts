@@ -34,7 +34,7 @@ export function useFavoriteVideoDetailInfo() {
             if (message) {
                 toast.success(message);
             }
-            navigate(ROUTER_PATH.FAVORITE);
+            navigate(ROUTER_PATH.FAVORITE.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

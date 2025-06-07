@@ -6,6 +6,8 @@ import { useFavorite } from "../Hook/useFavorite";
 import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";
 import { comboType } from "../../Common/Component/ComboComponent";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { NotFound } from "../../NotFound/Component/NotFound";
 
 // お気に入り動画ID
 export const FavoriteVideoIdContext = createCtx<string>();
@@ -22,7 +24,8 @@ export function Favorite() {
     const {
         favoriteVideoId,
         setFavoriteVideoId,
-        viewStatusList, } = useFavorite();
+        viewStatusList,
+        isLoadingComp, } = useFavorite();
 
     return (
         <ViewStatusListContext.Provider value={viewStatusList}>
@@ -39,7 +42,7 @@ export function Favorite() {
                 </Route>
                 {/* お気に入り動画詳細 */}
                 <Route
-                    path={favoriteVideoId}
+                    path={`${ROUTER_PATH.FAVORITE.DETAIL}/${favoriteVideoId}`}
                     element={
                         <Provider>
                             <FavoriteVideoIdContext.Provider value={favoriteVideoId}>
@@ -48,6 +51,15 @@ export function Favorite() {
                         </Provider>
                     } >
                 </Route>
+                {
+                    isLoadingComp &&
+                    // Not Found
+                    <Route
+                        key={"*"}
+                        path="*"
+                        element={<NotFound backUrl={`${ROUTER_PATH.FAVORITE.ROOT}`} />}
+                    />
+                }
             </Routes>
         </ViewStatusListContext.Provider>
     );

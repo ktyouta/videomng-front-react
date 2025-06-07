@@ -38,7 +38,7 @@ export function Content() {
                 {
                     isLogin &&
                     <Route
-                        path={`${ROUTER_PATH.FAVORITE}/*`}
+                        path={`${ROUTER_PATH.FAVORITE.ROOT}/*`}
                         element={
                             <Provider>
                                 <Favorite />

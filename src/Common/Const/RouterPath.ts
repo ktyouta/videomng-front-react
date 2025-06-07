@@ -7,7 +7,10 @@ export const ROUTER_PATH = {
         CHANNEL: `/channel`,
     },
     // お気に入り画面ルートパス
-    FAVORITE: `/favorite`,
+    FAVORITE: {
+        ROOT: `/favorite`,
+        DETAIL: `/detail`,
+    },
     // ログイン
     LOGIN: `/login`,
     // アカウント作成

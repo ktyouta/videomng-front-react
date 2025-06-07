@@ -9,6 +9,7 @@ import { comboType } from "../../Common/Component/ComboComponent";
 import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
 export function useFavorite() {
@@ -21,6 +22,8 @@ export function useFavorite() {
     const {
         changeUrl,
         resetCondition, } = useFavoriteListApiUrl();
+    // ページ読み込み完了フラグ
+    const [isLoadingComp, setIsLoadingComp] = useState(false);
 
 
     // 視聴状況リストを取得
@@ -86,12 +89,14 @@ export function useFavorite() {
             });
         }
         // 動画詳細
-        else if (pathArray.length == 3) {
+        else if (pathArray.length == 4 && `/${pathArray[2]}` === `${ROUTER_PATH.FAVORITE.DETAIL}`) {
 
             // ID部分を取得
-            const videoId = pathArray[2];
+            const videoId = pathArray[3];
             setFavoriteVideoId(videoId);
         }
+
+        setIsLoadingComp(true);
 
         // アンマウント時に検索条件をリセット
         return (() => {
@@ -104,5 +109,6 @@ export function useFavorite() {
         favoriteVideoId,
         setFavoriteVideoId,
         viewStatusList,
+        isLoadingComp,
     }
 }
