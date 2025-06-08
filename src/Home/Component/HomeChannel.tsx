@@ -4,6 +4,8 @@ import { HomeChannelVideoArea } from "./HomeChannelVideoArea";
 import { HomeChannelHeader } from "./HomeChannelHeader";
 import { useHomeChannel } from "../Hook/useHomeChannel";
 import LoadingBase from "../../Common/Component/LoadingBase";
+import { FaArrowLeft } from "react-icons/fa6";
+import { IconComponent } from "../../Common/Component/IconComponent";
 
 
 const Parent = styled.div`
@@ -25,7 +27,8 @@ export function HomeChannel() {
         isLoading,
         errMessage,
         channelVideoListData,
-        setNextPageToken, } = useHomeChannel();
+        setNextPageToken,
+        backHome, } = useHomeChannel();
 
     if (errMessage) {
         return (
@@ -47,6 +50,17 @@ export function HomeChannel() {
                 isLoading &&
                 <LoadingBase />
             }
+            <IconComponent
+                icon={FaArrowLeft}
+                size="20"
+                style={{
+                    "color": "white",
+                    "position": "absolute",
+                    "top": "18%",
+                    "left": "3%",
+                }}
+                onclick={backHome}
+            />
             {/* ヘッダ */}
             <HomeChannelHeader
                 channelInfo={channelVideoListData.channelInfo}

@@ -10,6 +10,10 @@ import { ChannelVideoListResponseType } from "../Type/ChannelVideoListResponseTy
 import { VideoListDataType } from "../Type/VideoListDataType";
 import { ChannelInfoType } from "../Type/ChannelInfoType";
 import { ChannelVideoListDataType } from "../Type/ChannelVideoListDataType";
+import { showMoreDataAtom } from "../Atom/HomeAtom";
+import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
+import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { useNavigate } from "react-router-dom";
 
 
 export function useHomeChannel() {
@@ -24,6 +28,10 @@ export function useHomeChannel() {
     const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
     // チャンネル情報取得エンドポイント
     const [channelInfoEndPoint, setChannelInfoEndPoint] = useState(``);
+    // 動画リスト追加読み込み用
+    const showMoreData = useAtomValue(showMoreDataAtom);
+    //ルーティング用
+    const navigate = useNavigate();
 
 
     // チャンネル動画一覧を取得
@@ -58,6 +66,9 @@ export function useHomeChannel() {
         }
     );
 
+    /**
+     * チャンネル情報取得用エンドポイント作成
+     */
     useEffect(() => {
 
         if (!channelId) {
@@ -74,10 +85,29 @@ export function useHomeChannel() {
 
     }, [channelId, nextPageToken]);
 
+    /**
+         * ホーム画面に戻る
+         */
+    function backHome() {
+
+        const keyword = showMoreData?.keyword ?? ``;
+        const videoType = showMoreData?.videoType ?? ``;
+        const videoCategory = showMoreData?.videoCategory ?? ``;
+
+        const videoListApiUrlModel = VideoListApiUrlModel.create({
+            keyword,
+            videoType,
+            videoCategory,
+        });
+
+        navigate(`${ROUTER_PATH.HOME.ROOT}${videoListApiUrlModel.query}`);
+    }
+
     return {
         isLoading,
         errMessage,
         setNextPageToken,
         channelVideoListData,
+        backHome,
     }
 }
