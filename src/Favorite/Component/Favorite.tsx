@@ -43,13 +43,11 @@ export function Favorite() {
                 <Route
                     path={`${ROUTER_PATH.FAVORITE.DETAIL}/*`}
                     element={
-                        <Provider>
-                            <FavoriteVideoIdContext.Provider value={favoriteVideoId}>
-                                <SetFavoriteVideoIdContext.Provider value={setFavoriteVideoId}>
-                                    <FavoriteVideoDetail />
-                                </SetFavoriteVideoIdContext.Provider>
-                            </FavoriteVideoIdContext.Provider>
-                        </Provider>
+                        <FavoriteVideoIdContext.Provider value={favoriteVideoId}>
+                            <SetFavoriteVideoIdContext.Provider value={setFavoriteVideoId}>
+                                <FavoriteVideoDetail />
+                            </SetFavoriteVideoIdContext.Provider>
+                        </FavoriteVideoIdContext.Provider>
                     } >
                 </Route>
                 {/* Not Found */}

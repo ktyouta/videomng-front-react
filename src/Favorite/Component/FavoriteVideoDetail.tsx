@@ -6,12 +6,15 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { FavoriteVideoDetailMenu } from "./FavoriteVideoDetailMenu";
+import { FaArrowLeft } from "react-icons/fa6";
+import { IconComponent } from "../../Common/Component/IconComponent";
 
 
 const Parent = styled.div`
   width: 100%;
   box-sizing:border-box;
   padding-top:1%;
+  position:relative;
 `;
 
 const VideoContentDiv = styled.div`
@@ -38,7 +41,8 @@ export function FavoriteVideoDetail() {
   const {
     isLoading,
     videoDetail,
-    errMessage } = useFavoriteVideoDetail();
+    errMessage,
+    backPage } = useFavoriteVideoDetail();
 
   if (!videoDetail) {
     return <LoadingBase />;
@@ -62,6 +66,17 @@ export function FavoriteVideoDetail() {
 
   return (
     <Parent>
+      <IconComponent
+        icon={FaArrowLeft}
+        size="20"
+        style={{
+          "color": "white",
+          "position": "absolute",
+          "top": "0%",
+          "left": "3%",
+        }}
+        onclick={backPage}
+      />
       <VideoContentDiv>
         {/* 動画情報 */}
         <FavoriteVideoDetailInfo

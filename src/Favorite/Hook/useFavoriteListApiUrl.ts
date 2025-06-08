@@ -2,7 +2,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { favoriteVideoApiUrlAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoFavoriteLevelAtom, selectedFavoriteVideoSortKeyAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../Atom/FavoriteAtom";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type CreateUrlPropsType = {
@@ -121,6 +121,17 @@ export function useFavoriteListApiUrl() {
         return retQuery;
     }
 
+    /**
+     * クエリパラメータ
+     */
+    const queryParam = useMemo(() => {
+
+        const urlArray = favoriteVideoUrl.split(`?`);
+        const query = urlArray.length > 1 ? `?${urlArray[1]}` : ``;
+
+        return query;
+    }, [favoriteVideoUrl]);
+
     return {
         favoriteVideoUrl,
         changeUrl,
@@ -130,5 +141,6 @@ export function useFavoriteListApiUrl() {
         selectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey,
+        queryParam,
     }
 }

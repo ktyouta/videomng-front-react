@@ -8,6 +8,7 @@ import { FavoriteVideoDetailResponseType } from "../Type/FavoriteVideoDetailResp
 import { useEffect, useState } from "react";
 import { FavoriteVideoIdContext, SetFavoriteVideoIdContext } from "../Component/Favorite";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 
 export function useFavoriteVideoDetail() {
 
@@ -19,6 +20,11 @@ export function useFavoriteVideoDetail() {
     const [videoDetail, setVideoDetail] = useAtom(favoriteVideoDetailItemAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // お気に入り動画一覧取得用フック
+    const { queryParam } = useFavoriteListApiUrl();
+    //ルーティング用
+    const navigate = useNavigate();
+
 
     // URL直打ち対応
     useEffect(() => {
@@ -46,10 +52,19 @@ export function useFavoriteVideoDetail() {
         }
     );
 
+    /**
+     * お気に入り動画一覧画面に戻る
+     */
+    function backPage() {
+
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${queryParam}`);
+    }
+
     return {
         isLoading,
         videoDetail,
         favoriteVideoId,
         errMessage,
+        backPage,
     };
 }
