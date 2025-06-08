@@ -6,12 +6,15 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
+import { FaArrowLeft } from "react-icons/fa6";
+import { IconComponent } from "../../Common/Component/IconComponent";
 
 
 const Parent = styled.div`
   width: 100%;
   box-sizing:border-box;
   padding-top:1%;
+  position-relative;
 `;
 
 const VideoContentDiv = styled.div`
@@ -68,6 +71,17 @@ export function HomeVideoDetail() {
 
   return (
     <Parent>
+      <IconComponent
+        icon={FaArrowLeft}
+        size="20"
+        style={{
+          "color": "white",
+          "position": "absolute",
+          "top": "18%",
+          "left": "3%",
+        }}
+        onclick={backHome}
+      />
       <VideoContentDiv>
         {/* 動画情報 */}
         <HomeVideoDetailInfo

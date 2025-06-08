@@ -39,7 +39,11 @@ export class VideoListApiUrlModel {
      */
     static create(props: porpsType) {
 
-        let queryParam = `?${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}`;
+        let queryParam = ``;
+
+        if (props.keyword) {
+            queryParam += `&${VideoListApiUrlModel.QUERY_KEY_KEYWORD}=${props.keyword}`;
+        }
 
         if (props.videoType) {
             queryParam += `&${VideoListApiUrlModel.QUERY_KEY_TYPE}=${props.videoType}`;
@@ -51,6 +55,10 @@ export class VideoListApiUrlModel {
 
         if (props.videoCategory) {
             queryParam += `&${VideoListApiUrlModel.QUERY_KEY_VIDEO_CATEOGRY}=${props.videoCategory}`;
+        }
+
+        if (queryParam) {
+            queryParam = `?${queryParam.slice(1)}`;
         }
 
         return new VideoListApiUrlModel(queryParam);

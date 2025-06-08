@@ -59,11 +59,9 @@ export function Home() {
                 <Route
                     path={`${ROUTER_PATH.HOME.DETAIL}/${videoId}`}
                     element={
-                        <Provider>
-                            <VideoIdContext.Provider value={videoId}>
-                                <HomeVideoDetail />
-                            </VideoIdContext.Provider>
-                        </Provider>
+                        <VideoIdContext.Provider value={videoId}>
+                            <HomeVideoDetail />
+                        </VideoIdContext.Provider>
                     }
                 />
                 {/* チャンネル動画一覧 */}

@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../Type/VideoDetailResponseType";
-import { videoDetailItemAtom } from "../Atom/HomeAtom";
+import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoDetailItemAtom } from "../Atom/HomeAtom";
 import { VideoDetailApiUrlModel } from "../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
@@ -9,6 +9,7 @@ import { VideoIdContext } from "../Component/Home";
 import { useState } from "react";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 
 export function useHomeVideoDetail() {
 
@@ -20,6 +21,9 @@ export function useHomeVideoDetail() {
     const navigate = useNavigate();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // 動画リスト追加読み込み用
+    const showMoreData = useAtomValue(showMoreDataAtom);
+
 
     // 動画詳細を取得
     const { isLoading } = useQueryWrapper<VideoDetailResponseType>(
@@ -44,11 +48,23 @@ export function useHomeVideoDetail() {
         }
     );
 
+
     /**
-     * ホーム画面(動画一覧)に戻る
+     * ホーム画面に戻る
      */
     function backHome() {
-        navigate(ROUTER_PATH.HOME.ROOT);
+
+        const keyword = showMoreData?.keyword ?? ``;
+        const videoType = showMoreData?.videoType ?? ``;
+        const videoCategory = showMoreData?.videoCategory ?? ``;
+
+        const videoListApiUrlModel = VideoListApiUrlModel.create({
+            keyword,
+            videoType,
+            videoCategory,
+        });
+
+        navigate(`${ROUTER_PATH.HOME.ROOT}${videoListApiUrlModel.query}`);
     }
 
     return {
