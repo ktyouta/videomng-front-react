@@ -50,6 +50,14 @@ export function useHomeSearchArea() {
         navigate(videoListApiUrlModel.query);
     }
 
+    /**
+     * キーワードをクリアする
+     */
+    function clearInput() {
+        setKeyword(``);
+    }
+
+
     return {
         keyword,
         setKeyword,
@@ -57,5 +65,6 @@ export function useHomeSearchArea() {
         isOpenFilterModal,
         openFilterModal,
         closeFilterModal,
+        clearInput,
     }
 }

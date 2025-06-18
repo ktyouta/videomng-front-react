@@ -12,6 +12,7 @@ import ModalComponent from "../../Common/Component/ModalComponent";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { HomeSearchCondition } from "./HomeSearchCondition";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
+import { ClearableTextbox } from "../../Common/Component/ClearableTextbox";
 
 const Parent = styled.div`
   width: 100%;
@@ -63,22 +64,23 @@ export function HomeSearchArea() {
         clickSearchBtn,
         isOpenFilterModal,
         openFilterModal,
-        closeFilterModal, } = useHomeSearchArea();
+        closeFilterModal,
+        clearInput, } = useHomeSearchArea();
 
     return (
         <Parent>
             <TextBoxAreaDiv>
-                <BaseTextbox
-                    textWidth="100%"
+                <ClearableTextbox
+                    width="100%"
+                    height="99%"
                     placeholder="キーワード"
                     value={keyword}
                     onChange={setKeyword}
                     style={{
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0,
-                        height: "99%",
-                        boxSizing: "border-box",
+                        borderBottomLeftRadius: 5,
+                        borderTopLeftRadius: 5,
                     }}
+                    clear={clearInput}
                 />
                 <SearchIconAreaDiv>
                     <IconComponent
