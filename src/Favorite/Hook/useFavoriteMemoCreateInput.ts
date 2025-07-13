@@ -9,6 +9,7 @@ import { AddToFavoriteVideoMemoReqestType } from "../Type/AddToFavoriteVideoMemo
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 export function useFavoriteMemoCreateInput() {
@@ -25,7 +26,7 @@ export function useFavoriteMemoCreateInput() {
      * お気に入り動画メモ登録リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {

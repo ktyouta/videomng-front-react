@@ -14,6 +14,7 @@ import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiComme
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { DeleteToFavoriteVideoFavoriteCommentReqestType } from "../Type/DeleteToFavoriteVideoFavoriteCommentReqestType";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 type propsType = {
@@ -29,7 +30,7 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
      * お気に入りコメント削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_COMMENT}/${props.commentDetailItem.id}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}/${props.commentDetailItem.id}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {

@@ -11,6 +11,7 @@ import { UpdateToFavoriteVideoMemoReqestType } from "../Type/UpdateToFavoriteVid
 import useSwitch from "../../Common/Hook/useSwitch";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 type propsType = {
@@ -32,7 +33,7 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      * お気に入り動画メモ更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}`,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {

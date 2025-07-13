@@ -1,8 +1,12 @@
 import ENV from "../../env.json";
 import { LoginUserInfoType } from "../Type/LoginUserInfoType";
 
+const protocol = import.meta.env.VITE_PROTOCOL;
+const domain = import.meta.env.VITE_DOMAIN;
+const port = import.meta.env.VITE_PORT;
+
 // videomng-apiのパス
-export const VIDEO_MNG_PATH = `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}`;
+export const VIDEO_MNG_PATH = `${protocol}${domain}${port}`;
 //z-index設定用
 export const Z_INDEX_PARAM = {
     WAITL_OADING: 1000,

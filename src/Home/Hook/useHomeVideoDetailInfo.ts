@@ -13,6 +13,7 @@ import { IsLoginContext } from "../../QueryApp";
 import { VideoIdContext } from "../Component/Home";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 
@@ -30,7 +31,7 @@ export function useHomeVideoDetailInfo() {
      * お気に入り登録リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<AddToFavoriteResponseType>) => {

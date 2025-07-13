@@ -12,6 +12,7 @@ import { tagType } from "../../Common/Component/TagsComponent";
 import { UpdateFavoriteVideoTagType } from "../Type/UpdateFavoriteVideoTagType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 type propsType = {
@@ -34,7 +35,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
      * お気に入り動画タグ更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_TAG}/${favoriteVideoId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_TAG}/${favoriteVideoId}`,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoTagType[]>) => {

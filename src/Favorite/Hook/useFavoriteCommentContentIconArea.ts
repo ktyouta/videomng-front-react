@@ -16,6 +16,7 @@ import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 type propsType = {
@@ -38,7 +39,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントブロックリクエスト
      */
     const postBlockMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}`,
+        url: `${VIDEO_MNG_PATH}${ENV.BLOCK_COMMENT}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
@@ -108,7 +109,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントお気に入りリクエスト
      */
     const postFavoriteMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_COMMENT}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
@@ -146,7 +147,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * お気に入りコメント削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_COMMENT}/${props.commentId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}/${props.commentId}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {

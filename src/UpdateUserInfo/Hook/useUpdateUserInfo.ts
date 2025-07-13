@@ -17,6 +17,7 @@ import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
 import { toast } from 'react-toastify';
+import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 
 
 export function useUpdateUserInfo() {
@@ -46,7 +47,7 @@ export function useUpdateUserInfo() {
      * 更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_INFO}/${loginUserInfo.userId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_INFO}/${loginUserInfo.userId}`,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginUserInfoType>) => {

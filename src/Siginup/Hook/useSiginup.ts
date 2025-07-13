@@ -15,6 +15,7 @@ import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
+import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 
 
 export function useSiginup() {
@@ -70,7 +71,7 @@ export function useSiginup() {
      * 登録リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_INFO}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_INFO}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginUserInfoType>) => {

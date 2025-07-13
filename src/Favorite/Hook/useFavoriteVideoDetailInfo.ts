@@ -8,6 +8,7 @@ import { VideoUrlModel } from "../../Common/Model/VideoUrlModel";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 
@@ -25,7 +26,7 @@ export function useFavoriteVideoDetailInfo() {
      * お気に入り動画削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<unknown>) => {

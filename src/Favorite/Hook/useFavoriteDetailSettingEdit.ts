@@ -11,6 +11,7 @@ import ENV from "../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../Type/UpdateToFavoriteVideoReqestType";
 import { FavoriteVideoIdContext, ViewStatusListContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 type propsType = {
@@ -49,7 +50,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
      * お気に入り動画更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<UpdateFavoriteVideoResponseDataType>) => {

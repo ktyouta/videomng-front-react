@@ -15,6 +15,7 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-
 import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
 import { DeleteToFavoriteVideoBlockCommentReqestType } from "../Type/DeleteToFavoriteVideoBlockCommentReqestType";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 type propsType = {
@@ -30,7 +31,7 @@ export function useFavoriteBlockCommentContent(props: propsType) {
      * コメントブロックリクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.BLOCK_COMMENT}/${props.commentDetailItem.id}`,
+        url: `${VIDEO_MNG_PATH}${ENV.BLOCK_COMMENT}/${props.commentDetailItem.id}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {

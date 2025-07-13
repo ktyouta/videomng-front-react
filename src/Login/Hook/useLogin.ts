@@ -13,6 +13,7 @@ import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
+import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 
 
 export function useLogin() {
@@ -58,7 +59,7 @@ export function useLogin() {
      * ログインリクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_LOGIN}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_LOGIN}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<LoginUserInfoType>) => {

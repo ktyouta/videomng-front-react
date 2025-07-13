@@ -9,6 +9,7 @@ import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import useSwitch from "../../Common/Hook/useSwitch";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 
 
 
@@ -28,7 +29,7 @@ export function useFavoriteMemoContent() {
      * メモ削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FAVORITE_VIDEO_MEMO}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {

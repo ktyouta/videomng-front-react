@@ -8,7 +8,7 @@ import ENV from '../../env.json';
 import { errResType, resType } from "../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../Common/Hook/useGlobalAtom";
 import { IsCheckedAuthContext, IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../QueryApp";
-import { LOGIN_USER_INFO_INIT } from "../../Common/Const/CommonConst";
+import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 
@@ -36,7 +36,7 @@ export function useHeaderUserMenu() {
      * ログアウトリクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${ENV.PROTOCOL}${ENV.DOMAIN}${ENV.PORT}${ENV.FRONT_USER_LOGOUT}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_LOGOUT}`,
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: () => {
