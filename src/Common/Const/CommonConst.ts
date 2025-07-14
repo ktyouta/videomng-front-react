@@ -1,9 +1,9 @@
 import ENV from "../../env.json";
 import { LoginUserInfoType } from "../Type/LoginUserInfoType";
 
-const protocol = import.meta.env.VITE_PROTOCOL;
-const domain = import.meta.env.VITE_DOMAIN;
-const port = import.meta.env.VITE_PORT;
+const protocol = import.meta.env.VITE_PROTOCOL ?? ``;
+const domain = import.meta.env.VITE_DOMAIN ?? ``;
+const port = import.meta.env.VITE_PORT ?? ``;
 
 // videomng-apiのパス
 export const VIDEO_MNG_PATH = `${protocol}${domain}${port}`;
