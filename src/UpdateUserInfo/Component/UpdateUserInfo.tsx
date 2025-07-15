@@ -11,13 +11,15 @@ import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalCompon
 const Parent = styled.div`
   width: 100vw;
   background-color: #dcdcdc;
-  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 3%;
+  padding-left: 10%;
+  padding-top: 5%;
 `;
 
 const UpdateUserInfoFormDiv = styled.div`
     width: 40%;
-    padding-left: 10%;
-    padding-top: 8%;
     box-sizing: border-box;
 `;
 

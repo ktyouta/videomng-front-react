@@ -8,7 +8,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 const Parent = styled.div`
   width: 100vw;
   background-color: #dcdcdc;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const LoginFormDiv = styled.div`
