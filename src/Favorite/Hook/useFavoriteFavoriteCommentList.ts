@@ -12,6 +12,7 @@ import { FavoriteVideoCommentThreadType } from "../Type/FavoriteVideoCommentThre
 import { FavoriteVideoBlockCommentListResponseType } from "../Type/FavoriteVideoBlockCommentListResponseType";
 import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 
 
 export function useFavoriteFavoriteCommentList() {
@@ -27,7 +28,7 @@ export function useFavoriteFavoriteCommentList() {
     // コメント情報を取得
     const { isLoading } = useQueryWrapper<FavoriteVideoBlockCommentListResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}/${favoriteVideoId}`,
+            url: useFavoriteFavoriteCommentEndpoint(favoriteVideoId),
             afSuccessFn: (response: FavoriteVideoBlockCommentListResponseType) => {
 
                 const data = response.data;

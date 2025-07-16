@@ -15,6 +15,8 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-
 import { DeleteToFavoriteVideoFavoriteCommentReqestType } from "../Type/DeleteToFavoriteVideoFavoriteCommentReqestType";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { useFavoriteFavoriteCommentIdEndpoint } from "./useFavoriteFavoriteCommentIdEndpoint";
+import { FavoriteVideoIdContext } from "../Component/Favorite";
 
 
 type propsType = {
@@ -25,12 +27,17 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
 
     // お気に入りコメントリスト
     const setFavoriteCommentData = useSetAtom(favoriteCommentDataAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
     /**
      * お気に入りコメント削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}/${props.commentDetailItem.id}`,
+        url: useFavoriteFavoriteCommentIdEndpoint({
+            videoId: favoriteVideoId,
+            commentId: props.commentDetailItem.id
+        }),
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
@@ -68,12 +75,8 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
             return;
         }
 
-        const body: DeleteToFavoriteVideoFavoriteCommentReqestType = {
-            commentId
-        }
-
         // リクエスト送信
-        postMutation.mutate(body);
+        postMutation.mutate();
     }
 
 

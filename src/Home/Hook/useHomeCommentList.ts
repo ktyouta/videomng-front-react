@@ -6,6 +6,7 @@ import ENV from "../../env.json";
 import { HomeVideoCommentThreadResponseType } from "../Type/HomeVideoCommentThreadResponseType";
 import { homeVideoCommentListAtom, } from "../Atom/HomeAtom";
 import { VideoIdContext } from "../Component/Home";
+import { useHomeCommentEndpoint } from "./useHomeCommentEndpoint";
 
 
 export function useHomeCommentList() {
@@ -21,7 +22,7 @@ export function useHomeCommentList() {
     // コメント情報を取得
     const { isLoading } = useQueryWrapper<HomeVideoCommentThreadResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.VIDEO_COMMENT_ID}/${videoId}`,
+            url: useHomeCommentEndpoint(videoId),
             afSuccessFn: (response: HomeVideoCommentThreadResponseType) => {
 
                 const items = response.data.items;

@@ -17,6 +17,9 @@ import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVide
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
+import { useFavoriteFavoriteCommentIdEndpoint } from "./useFavoriteFavoriteCommentIdEndpoint";
+import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 
 
 type propsType = {
@@ -39,7 +42,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントブロックリクエスト
      */
     const postBlockMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.BLOCK_COMMENT}`,
+        url: useFavoriteBlockCommentEndpoint(favoriteVideoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
@@ -109,7 +112,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントお気に入りリクエスト
      */
     const postFavoriteMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}`,
+        url: useFavoriteFavoriteCommentEndpoint(favoriteVideoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
@@ -135,7 +138,6 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
 
         const body: AddToFavoriteVideoFavoriteCommentReqestType = {
             commentId,
-            videoId: favoriteVideoId
         }
 
         // リクエスト送信
@@ -146,8 +148,11 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     /**
      * お気に入りコメント削除リクエスト
      */
-    const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}/${props.commentId}`,
+    const delMutation = useMutationWrapper({
+        url: useFavoriteFavoriteCommentIdEndpoint({
+            videoId: favoriteVideoId,
+            commentId: props.commentId
+        }),
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
@@ -171,13 +176,8 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
             return;
         }
 
-        const body: AddToFavoriteVideoFavoriteCommentReqestType = {
-            commentId,
-            videoId: favoriteVideoId,
-        }
-
         // リクエスト送信
-        postMutation.mutate(body);
+        delMutation.mutate();
     }
 
     return {

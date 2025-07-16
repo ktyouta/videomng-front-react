@@ -10,6 +10,7 @@ import { FavoriteVideoCommentThreadResponseType } from "../Type/FavoriteVideoCom
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoCommentThreadType } from "../Type/FavoriteVideoCommentThreadType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { useFavoriteCommentEndpoint } from "./useFavoriteCommentEndpoint";
 
 
 export function useFavoriteCommentList() {
@@ -25,7 +26,7 @@ export function useFavoriteCommentList() {
     // コメント情報を取得
     const { isLoading } = useQueryWrapper<FavoriteVideoCommentThreadResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_COMMENT_ID}/${favoriteVideoId}`,
+            url: useFavoriteCommentEndpoint(favoriteVideoId),
             afSuccessFn: (response: FavoriteVideoCommentThreadResponseType) => {
 
                 const items = response.data.items;
