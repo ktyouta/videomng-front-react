@@ -62,7 +62,7 @@ export function FavoriteMemoContent(props: propsType) {
         isOpenModal,
         closeModal,
         executeDelete,
-    } = useFavoriteMemoContent();
+    } = useFavoriteMemoContent({ ...props });
 
     const data = props.favoriteVideoMemo;
     const memo = data.videoMemo;
@@ -107,7 +107,7 @@ export function FavoriteMemoContent(props: propsType) {
                             closeModal={closeModal}
                             titleMessage={`メモを削除しますか？`}
                             clickOk={() => {
-                                executeDelete(memoSeq);
+                                executeDelete();
                             }}
                         />
                     </React.Fragment>

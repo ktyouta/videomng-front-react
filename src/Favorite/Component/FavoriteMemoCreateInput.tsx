@@ -12,13 +12,15 @@ const MemoInputAreaDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding-left: 3%;
-  display:flex;
+  display: flex;
+  align-items: center;
+  height: 37px;
 `;
 
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
   width: 4%;
-  height: 37px;
+  height: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 15%;
@@ -50,7 +52,8 @@ export function FavoriteMemoCreateInput() {
                 style={{
                     borderTopRightRadius: 0,
                     borderBottomRightRadius: 0,
-                    height: "33px",
+                    height: "100%",
+                    boxSizing: "border-box",
                 }}
             />
             <SearchIconAreaDiv>

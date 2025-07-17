@@ -7,6 +7,7 @@ import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoResponseType } from "../Type/FavoriteVideoMemoResponseType";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 
 
 export function useFavoriteMemoList() {
@@ -22,7 +23,7 @@ export function useFavoriteMemoList() {
     // メモ情報を取得
     const { isLoading } = useQueryWrapper<FavoriteVideoMemoResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}/${favoriteVideoId}`,
+            url: useFavoriteMemoEndpoint(favoriteVideoId),
             afSuccessFn: (response: FavoriteVideoMemoResponseType) => {
                 setVideoListItemAtom(response.data);
             },

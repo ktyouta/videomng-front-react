@@ -65,7 +65,7 @@ export function FavoriteMemoEditInput(props: propsType) {
                 />
                 {/* 更新 */}
                 <FavoriteMemoUpdateIconArea
-                    updateMemo={() => { updateMemo(props.videoMemoSeq); }}
+                    updateMemo={() => { updateMemo(); }}
                 />
             </EditIconAreaDiv>
         </MemoInputAreaDiv>

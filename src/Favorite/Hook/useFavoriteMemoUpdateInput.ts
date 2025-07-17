@@ -12,11 +12,13 @@ import useSwitch from "../../Common/Hook/useSwitch";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 
 
 type propsType = {
     inputMemo: string,
     closeEdit: () => void,
+    videoMemoSeq: number
 }
 
 export function useFavoriteMemoUpdateInput(props: propsType) {
@@ -33,7 +35,10 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      * お気に入り動画メモ更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}`,
+        url: useFavoriteMemoIdEndpoint({
+            videoId: favoriteVideoId,
+            memoId: props.videoMemoSeq
+        }),
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
@@ -72,7 +77,7 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      * メモを更新する
      * @param videoId 
      */
-    function updateMemo(videoMemoSeq: number) {
+    function updateMemo() {
 
         if (!inputMemo) {
             toast.warn(`メモが入力されていません。`);
@@ -85,8 +90,6 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
         }
 
         const body: UpdateToFavoriteVideoMemoReqestType = {
-            videoId: favoriteVideoId,
-            videoMemoSeq,
             memo: inputMemo
         }
 

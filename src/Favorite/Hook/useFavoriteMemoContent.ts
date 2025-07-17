@@ -10,10 +10,14 @@ import useSwitch from "../../Common/Hook/useSwitch";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 
 
+type propsType = {
+    favoriteVideoMemo: FavoriteVideoMemoType,
+}
 
-export function useFavoriteMemoContent() {
+export function useFavoriteMemoContent(props: propsType) {
 
     // メモ情報
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
@@ -29,7 +33,10 @@ export function useFavoriteMemoContent() {
      * メモ削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_MEMO}`,
+        url: useFavoriteMemoIdEndpoint({
+            videoId: favoriteVideoId,
+            memoId: props.favoriteVideoMemo.videoMemoSeq
+        }),
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
@@ -67,15 +74,10 @@ export function useFavoriteMemoContent() {
     /**
      * メモ削除実行
      */
-    function executeDelete(videoMemoSeq: number) {
-
-        const body: DeleteToFavoriteVideoMemoReqestType = {
-            videoId: favoriteVideoId,
-            videoMemoSeq
-        }
+    function executeDelete() {
 
         // リクエスト送信
-        postMutation.mutate(body);
+        postMutation.mutate();
     }
 
 
