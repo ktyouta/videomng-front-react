@@ -8,6 +8,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { FavoriteVideoTagResponseType } from "../Type/FavoriteVideoTagResponseType";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
+import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 export function useFavoriteTag() {
@@ -25,7 +26,7 @@ export function useFavoriteTag() {
     // タグリストを取得
     const { isLoading } = useQueryWrapper<FavoriteVideoTagResponseType>(
         {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_TAG}/${favoriteVideoId}`,
+            url: useFavoriteTagEndpoint(favoriteVideoId),
             afSuccessFn: (response: FavoriteVideoTagResponseType) => {
                 setFavoriteVideoTagList(response.data ?? undefined);
             },
