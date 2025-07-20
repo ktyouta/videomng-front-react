@@ -50,7 +50,6 @@ const SearchIconAreaDiv = styled.div`
 `;
 
 
-
 /**
  * 検索条件エリア
  */

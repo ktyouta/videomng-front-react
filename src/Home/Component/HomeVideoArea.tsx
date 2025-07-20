@@ -6,6 +6,7 @@ import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoList
 import { HomeVideoContent } from "./HomeVideoContent";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoListItemType } from "../Type/VideoListItemType";
+import { HomeRecentKeywod } from "./HomeRecentKeywod";
 
 const Parent = styled.div`
   width: 100%;
@@ -25,9 +26,12 @@ const VideoUl = styled.ul`
 
 const MessageDiv = styled.div`
   color:white;
-  position: absolute;
-  top: 32%;
-  left: 42%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-top: 5%;
+  font-size: 17px;
 `;
 
 const NextGetBtnAreaDiv = styled.div`
@@ -51,9 +55,12 @@ export function HomeVideoArea() {
 
   if (!videoListData) {
     return (
-      <MessageDiv>
-        キーワードを入力して動画を検索
-      </MessageDiv>
+      <React.Fragment>
+        <MessageDiv>
+          キーワードを入力して動画を検索
+        </MessageDiv>
+        <HomeRecentKeywod />
+      </React.Fragment>
     );
   }
 

@@ -31,3 +31,9 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
         value: `2`,
     }
 ];
+
+// ローカルストレージKey(最近の検索)
+export const REACENT_KEYWORD = `recentKeyword`;
+
+// ローカルストレージKey(最近の検索)
+export const REACENT_KEYWORD_MAX = 5;

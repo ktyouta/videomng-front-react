@@ -9,6 +9,7 @@ import useSwitch from "../../Common/Hook/useSwitch";
 import { useNavigate } from "react-router-dom";
 import { SetVideoApiUrlContext } from "../Component/Home";
 import { toast } from "react-toastify";
+import { REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../Const/HomeConst";
 
 
 export function useHomeSearchArea() {
@@ -48,6 +49,18 @@ export function useHomeSearchArea() {
         setVideoApiUrl(videoListApiUrlModel.url);
         setShowMoreData(undefined);
         navigate(videoListApiUrlModel.query);
+
+        // ローカルストレージから検索ワードを取得
+        const nowWordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
+
+        // ローカルストレージに検索ワードを保存
+        const newWordList = [keyword, ...nowWordList.filter((e) => e !== keyword.trim())];
+
+        if (nowWordList.length >= REACENT_KEYWORD_MAX) {
+            newWordList.length = REACENT_KEYWORD_MAX
+        }
+
+        localStorage.setItem(REACENT_KEYWORD, JSON.stringify(newWordList));
     }
 
     /**
