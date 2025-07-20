@@ -38,10 +38,18 @@ export function FavoriteTagList() {
 
     const { favoriteVideoTagList } = useFavoriteTagList();
 
+    if (!favoriteVideoTagList) {
+        return (
+            <Parent>
+                <LoadingBase />
+            </Parent>
+        );
+    }
+
     return (
         <Parent>
             {
-                favoriteVideoTagList && favoriteVideoTagList.length > 0 ?
+                favoriteVideoTagList.length > 0 ?
                     <TagListAreaDiv>
                         <TagListAreaTitleDiv>
                             設定タグ

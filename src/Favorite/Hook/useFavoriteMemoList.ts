@@ -25,7 +25,7 @@ export function useFavoriteMemoList() {
         {
             url: useFavoriteMemoEndpoint(favoriteVideoId),
             afSuccessFn: (response: FavoriteVideoMemoResponseType) => {
-                setVideoListItemAtom(response.data);
+                setVideoListItemAtom(response.data ?? []);
             },
             afErrorFn: (res) => {
                 setErrMessage(`メモの取得に失敗しました。`);

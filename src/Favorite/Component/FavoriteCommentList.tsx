@@ -53,10 +53,18 @@ export function FavoriteCommentList() {
         );
     }
 
+    if (!favoriteVideoCommentList) {
+        return (
+            <Parent>
+                <LoadingBase />
+            </Parent>
+        );
+    }
+
     return (
         <Parent>
             {
-                favoriteVideoCommentList && favoriteVideoCommentList.length > 0 ?
+                favoriteVideoCommentList.length > 0 ?
                     <CommentListAreaDiv>
                         {
                             favoriteVideoCommentList.map((e: FavoriteVideoCommentThreadItemType) => {

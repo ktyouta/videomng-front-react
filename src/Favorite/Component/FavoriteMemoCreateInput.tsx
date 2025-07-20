@@ -3,11 +3,12 @@ import BaseTextbox from "../../Common/Component/BaseTextbox";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { FaArrowUp } from "react-icons/fa";
 import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
+import { ClearableTextbox } from "../../Common/Component/ClearableTextbox";
 
 
 const MemoInputAreaDiv = styled.div`
-  position: sticky;
-  bottom: 0;
+  position: absolute;
+  bottom: 12px;
   left: 0;
   width: 100%;
   box-sizing: border-box;
@@ -39,22 +40,23 @@ export function FavoriteMemoCreateInput() {
     const {
         inputMemo,
         setInputMemo,
-        addToMemo
+        addToMemo,
+        clearInputMemo
     } = useFavoriteMemoCreateInput();
 
     return (
         <MemoInputAreaDiv>
-            <BaseTextbox
-                textWidth="92%"
+            <ClearableTextbox
+                width="92%"
+                height="100%"
                 placeholder="メモ"
                 value={inputMemo}
                 onChange={setInputMemo}
                 style={{
-                    borderTopRightRadius: 0,
-                    borderBottomRightRadius: 0,
-                    height: "100%",
-                    boxSizing: "border-box",
+                    borderBottomLeftRadius: 5,
+                    borderTopLeftRadius: 5,
                 }}
+                clear={clearInputMemo}
             />
             <SearchIconAreaDiv>
                 <IconComponent

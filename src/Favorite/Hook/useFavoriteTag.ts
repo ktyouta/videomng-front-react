@@ -28,7 +28,7 @@ export function useFavoriteTag() {
         {
             url: useFavoriteTagEndpoint(favoriteVideoId),
             afSuccessFn: (response: FavoriteVideoTagResponseType) => {
-                setFavoriteVideoTagList(response.data ?? undefined);
+                setFavoriteVideoTagList(response.data ?? []);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;

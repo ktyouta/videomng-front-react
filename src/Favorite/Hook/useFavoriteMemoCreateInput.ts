@@ -63,9 +63,17 @@ export function useFavoriteMemoCreateInput() {
         postMutation.mutate(body);
     }
 
+    /**
+     * 入力中のメモをクリアする
+     */
+    function clearInputMemo() {
+        setInputMemo(``);
+    }
+
     return {
         inputMemo,
         setInputMemo,
-        addToMemo
+        addToMemo,
+        clearInputMemo,
     }
 }

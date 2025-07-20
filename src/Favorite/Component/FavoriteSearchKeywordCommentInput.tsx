@@ -5,22 +5,24 @@ import { FaArrowUp } from "react-icons/fa";
 import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
 import { useFavoriteSearchKeywordCommentInput } from "../Hook/useFavoriteSearchKeywordCommentInput";
 import { IoSearch } from "react-icons/io5";
+import { ClearableTextbox } from "../../Common/Component/ClearableTextbox";
 
 
 const MemoInputAreaDiv = styled.div`
-  position: sticky;
-  bottom: 0;
+  position: absolute;
+  bottom: 12px;
   left: 0;
   width: 100%;
   box-sizing: border-box;
   padding-left: 3%;
   display:flex;
+  height: 38px;
 `;
 
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
   width: 4%;
-  height: 37px;
+  height: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 15%;
@@ -41,20 +43,22 @@ export function FavoriteSearchKeywordCommentInput() {
         searchKeywordCommentKeyword,
         setSearchKeywordCommentKeyword,
         clickSearchBtn,
+        clearInputKeyword,
     } = useFavoriteSearchKeywordCommentInput();
 
     return (
         <MemoInputAreaDiv>
-            <BaseTextbox
-                textWidth="92%"
+            <ClearableTextbox
+                width="92%"
+                height="100%"
                 placeholder="キーワード"
                 value={searchKeywordCommentKeyword}
                 onChange={setSearchKeywordCommentKeyword}
                 style={{
-                    borderTopRightRadius: 0,
-                    borderBottomRightRadius: 0,
-                    height: "33px",
+                    borderBottomLeftRadius: 5,
+                    borderTopLeftRadius: 5,
                 }}
+                clear={clearInputKeyword}
             />
             <SearchIconAreaDiv>
                 <IconComponent

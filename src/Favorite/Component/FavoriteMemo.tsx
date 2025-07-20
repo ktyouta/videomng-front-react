@@ -12,6 +12,7 @@ import { FavoriteMemoList } from "./FavoriteMemoList";
 
 
 const Parent = styled.div`
+  position:relative;
   box-sizing:border-box;
   height: 502px;
   background-color: #181a1e;

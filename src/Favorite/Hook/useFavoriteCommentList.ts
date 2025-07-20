@@ -30,7 +30,7 @@ export function useFavoriteCommentList() {
             afSuccessFn: (response: FavoriteVideoCommentThreadResponseType) => {
 
                 const items = response.data.items;
-                setFavoriteVideoCommentList(items);
+                setFavoriteVideoCommentList(items ?? []);
             },
             afErrorFn: (res) => {
                 setErrMessage(`コメントの取得に失敗しました。`);

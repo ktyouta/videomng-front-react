@@ -42,6 +42,14 @@ export function FavoriteMemoList() {
         );
     }
 
+    if (!favoriteVideoMemoList) {
+        return (
+            <Parent>
+                <LoadingBase />
+            </Parent>
+        );
+    }
+
     if (errMessage) {
         return (
             <Parent>
@@ -53,7 +61,8 @@ export function FavoriteMemoList() {
     return (
         <Parent>
             {
-                favoriteVideoMemoList && favoriteVideoMemoList.length > 0 ?
+                favoriteVideoMemoList.length > 0
+                    ?
                     <MemoListAreaDiv>
                         {
                             favoriteVideoMemoList.map((e: FavoriteVideoMemoType) => {

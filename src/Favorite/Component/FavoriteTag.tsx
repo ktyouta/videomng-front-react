@@ -14,6 +14,7 @@ import { useFavoriteTag } from "../Hook/useFavoriteTag";
 import { TAG_EDIT_MODE } from "../Const/FavoriteConst";
 import { FavoriteTagEdit } from "./FavoriteTagEdit";
 import { FavoriteTagView } from "./FavoriteTagView";
+import LoadingBase from "../../Common/Component/LoadingBase";
 
 
 const Parent = styled.div`
@@ -25,7 +26,6 @@ const Parent = styled.div`
 `;
 
 
-
 export function FavoriteTag() {
 
   console.log("FavoriteTag render");
@@ -33,7 +33,16 @@ export function FavoriteTag() {
   const {
     editMode,
     changeEdit,
-    changeView, } = useFavoriteTag();
+    changeView,
+    isLoading, } = useFavoriteTag();
+
+  if (isLoading) {
+    return (
+      <Parent>
+        <LoadingBase />
+      </Parent>
+    );
+  }
 
   return (
     <Parent>

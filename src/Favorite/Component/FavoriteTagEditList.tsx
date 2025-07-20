@@ -39,10 +39,14 @@ export function FavoriteTagEditList() {
         favoriteVideoTagEditList,
         deleteTag } = useFavoriteTagEditList();
 
+    if (!favoriteVideoTagEditList) {
+        return;
+    }
+
     return (
         <Parent>
             {
-                favoriteVideoTagEditList && favoriteVideoTagEditList.length > 0 ?
+                favoriteVideoTagEditList.length > 0 ?
                     <TagListAreaDiv>
                         {
                             favoriteVideoTagEditList.map((e: tagType, index: number) => {

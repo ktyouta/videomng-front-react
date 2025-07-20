@@ -38,10 +38,16 @@ export function useFavoriteSearchKeywordCommentInput() {
         setSearchKeywordCommentUrl(searchKeywordCommentUrl);
     }
 
-
+    /**
+     * 入力中のキーワードをクリアする
+     */
+    function clearInputKeyword() {
+        setSearchKeywordCommentKeyword(``);
+    }
     return {
         searchKeywordCommentKeyword,
         setSearchKeywordCommentKeyword,
         clickSearchBtn,
+        clearInputKeyword,
     }
 }
