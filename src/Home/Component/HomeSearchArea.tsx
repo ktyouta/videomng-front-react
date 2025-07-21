@@ -13,6 +13,7 @@ import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { HomeSearchCondition } from "./HomeSearchCondition";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 import { ClearableTextbox } from "../../Common/Component/ClearableTextbox";
+import { MdTune } from 'react-icons/md';
 
 const Parent = styled.div`
   width: 100%;
@@ -21,8 +22,8 @@ const Parent = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 22%;
+  padding-right: 12%;
+  padding-left: 21%;
 `;
 
 const TextBoxAreaDiv = styled.div`
@@ -33,7 +34,7 @@ const TextBoxAreaDiv = styled.div`
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  margin-right: 5%;
+  margin-right: 3%;
 `;
 
 const SearchIconAreaDiv = styled.div`
@@ -49,6 +50,23 @@ const SearchIconAreaDiv = styled.div`
   justify-content: center;
 `;
 
+const SearchConditionIconAreaDiv = styled.div`
+  width: 46px;
+  height: 99%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 15%;
+  border-bottom-right-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#9e9e9e;
+`;
+
+const SearchConditionTitleSpan = styled.span`
+  color: #9e9e9e;
+  font-size: 14px;
+`;
 
 /**
  * 検索条件エリア
@@ -89,20 +107,16 @@ export function HomeSearchArea() {
                     />
                 </SearchIconAreaDiv>
             </TextBoxAreaDiv>
-            <ButtonComponent
-                styleTypeNumber="BASE"
-                title={"条件を指定"}
-                onclick={openFilterModal}
-                style={{
-                    fontSize: "0.9rem",
-                    height: "41px",
-                    width: "13%",
-                    background: "#29323c",
-                    color: "white",
-                    borderRadius: "5",
-                    minWidth: "112px"
-                }}
-            />
+            <SearchConditionIconAreaDiv>
+                <IconComponent
+                    icon={MdTune}
+                    onclick={openFilterModal}
+                    size="85%"
+                />
+            </SearchConditionIconAreaDiv>
+            <SearchConditionTitleSpan>
+                条件を指定
+            </SearchConditionTitleSpan>
             {
                 // 検索条件指定モーダル
                 isOpenFilterModal &&

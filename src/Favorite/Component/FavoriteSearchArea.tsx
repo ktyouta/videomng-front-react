@@ -8,6 +8,8 @@ import TagButtonComponent from "../../Common/Component/TagButtonComponent";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import React from "react";
+import { FaFilter } from 'react-icons/fa';
+import { IconComponent } from "../../Common/Component/IconComponent";
 
 const Parent = styled.div`
   width: 100%;
@@ -26,6 +28,23 @@ const ComboTitleSpan = styled.span`
   font-size: 16px;
 `;
 
+const FilterIconAreaDiv = styled.div`
+  width: 46px;
+  height: 99%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 15%;
+  border-bottom-right-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#9e9e9e;
+`;
+
+const FilterTitleSpan = styled.span`
+  color: #9e9e9e;
+  font-size: 14px;
+`;
 
 /**
  * 検索条件エリア
@@ -75,19 +94,16 @@ export function FavoriteSearchArea() {
           />
         </React.Fragment>
       }
-      <ButtonComponent
-        styleTypeNumber="BASE"
-        title={"フィルター"}
-        onclick={openFilterModal}
-        style={{
-          "fontSize": "0.9rem",
-          "height": "41px",
-          "width": "13%",
-          "background": "#29323c",
-          "color": "white",
-          "borderRadius": "5",
-        }}
-      />
+      <FilterIconAreaDiv>
+        <IconComponent
+          icon={FaFilter}
+          onclick={openFilterModal}
+          size="45%"
+        />
+      </FilterIconAreaDiv>
+      <FilterTitleSpan>
+        フィルター
+      </FilterTitleSpan>
       {
         // フィルターモーダル
         isOpenFilterModal &&
