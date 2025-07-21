@@ -72,7 +72,7 @@ export function useFavoriteVideoArea() {
             afErrorFn: (res) => {
                 const errRes = res as errResType;
                 setIsCalledListApi(true);
-                setErrMessage(`動画情報の取得に失敗しました`);
+                setErrMessage(`お気に入り動画の取得に失敗しました`);
             }
         }
     );

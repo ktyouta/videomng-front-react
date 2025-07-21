@@ -5,39 +5,45 @@ import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 export function useHeader() {
 
-    const location = useLocation();
-    // 現在のパス
-    const [nowPath, setNowPath] = useState<string>();
-    //ルーティング用
-    const navigate = useNavigate();
-    // ログインユーザー情報
-    const loginUserInfo = LoginUserInfoContext.useCtx();
+    // サイドメニュー展開フラグ
+    const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
+    // 使い方を見るモーダル展開フラグ
+    const [isOpenHowToUseModal, setIsOpenHowToUseModal] = useState(false);
 
     /**
-     * URL切り替え時のイベント
+     * サイドメニュー展開
      */
-    useEffect(() => {
-
-        const pathArray = window.location.pathname.split("/");
-
-        if (pathArray.length < 2) {
-            return;
-        }
-
-        const mainPath = pathArray[1] ? pathArray[1] : ROUTER_PATH.HOME.ROOT;
-        setNowPath(mainPath);
-    }, [location]);
+    function openSideMenu() {
+        setIsOpenSideMenu(true);
+    }
 
     /**
-     * ログインボタン押下イベント
+     * サイドメニューを閉じる
      */
-    function clickLogin() {
-        navigate(ROUTER_PATH.LOGIN);
+    function closeSideMenu() {
+        setIsOpenSideMenu(false);
+    }
+
+    /**
+     * 使い方を見るモダール展開
+     */
+    function openHowToUseModal() {
+        setIsOpenHowToUseModal(true);
+    }
+
+    /**
+     * 使い方を見るモダールを閉じる
+     */
+    function closeHowToUseModal() {
+        setIsOpenHowToUseModal(false);
     }
 
     return {
-        nowPath,
-        clickLogin,
-        loginUserInfo,
+        openSideMenu,
+        closeSideMenu,
+        isOpenSideMenu,
+        isOpenHowToUseModal,
+        openHowToUseModal,
+        closeHowToUseModal,
     }
 }

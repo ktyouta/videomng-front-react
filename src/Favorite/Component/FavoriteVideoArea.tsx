@@ -50,18 +50,18 @@ export function FavoriteVideoArea() {
     return <LoadingBase />;
   }
 
-  if (!videoListItem || videoListItem.length === 0) {
-    return (
-      <MessageDiv>
-        お気に入り動画が存在しません。
-      </MessageDiv>
-    );
-  }
-
   if (errMessage) {
     return (
       <MessageDiv>
         {errMessage}
+      </MessageDiv>
+    );
+  }
+
+  if (!videoListItem || videoListItem.length === 0) {
+    return (
+      <MessageDiv>
+        お気に入り動画が存在しません。
       </MessageDiv>
     );
   }
