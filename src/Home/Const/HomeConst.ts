@@ -35,5 +35,14 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
 // ローカルストレージKey(最近の検索)
 export const REACENT_KEYWORD = `recentKeyword`;
 
-// ローカルストレージKey(最近の検索)
+// ローカルストレージ最大表示数/最大保存数(最近の検索)
 export const REACENT_KEYWORD_MAX = 5;
+
+// ローカルストレージKey(あなたがよく検索するワード)
+export const FREQUENT_KEYWORD = `frequentKeyword`;
+
+// ローカルストレージ最大表示数(あなたがよく検索するワード)
+export const FREQUENT_KEYWORD_MAX = 5;
+
+// ローカルストレージ最大保存数(あなたがよく検索するワード)
+export const FREQUENT_KEYWORD_MAX_SAVE_LIMIT = 5;

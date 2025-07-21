@@ -9,7 +9,10 @@ import useSwitch from "../../Common/Hook/useSwitch";
 import { useNavigate } from "react-router-dom";
 import { SetVideoApiUrlContext } from "../Component/Home";
 import { toast } from "react-toastify";
-import { REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../Const/HomeConst";
+import { FREQUENT_KEYWORD, FREQUENT_KEYWORD_MAX, FREQUENT_KEYWORD_MAX_SAVE_LIMIT, REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../Const/HomeConst";
+import { FrequentWordType } from "../Type/FrequentWordType";
+import { useFrequentKeywords } from "./useFrequentKeywords";
+import { useRecentKeywod } from "./useRecentKeywod";
 
 
 export function useHomeSearchArea() {
@@ -28,7 +31,10 @@ export function useHomeSearchArea() {
     const navigate = useNavigate();
     // 動画リスト追加読み込み用
     const setShowMoreData = useSetAtom(showMoreDataAtom);
-
+    // 最近の検索ワード保存用
+    const { saveRecentKeywod } = useRecentKeywod();
+    // あなたがよく検索するワード保存用
+    const { saveFrequentKeyword } = useFrequentKeywords();
 
     /**
      * 検索ボタン押下イベント
@@ -50,17 +56,11 @@ export function useHomeSearchArea() {
         setShowMoreData(undefined);
         navigate(videoListApiUrlModel.query);
 
-        // ローカルストレージから検索ワードを取得
-        const nowWordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
+        // ローカルストレージの検索ワード(最近の検索)を保存
+        saveRecentKeywod(keyword);
 
-        // ローカルストレージに検索ワードを保存
-        const newWordList = [keyword, ...nowWordList.filter((e) => e !== keyword.trim())];
-
-        if (nowWordList.length >= REACENT_KEYWORD_MAX) {
-            newWordList.length = REACENT_KEYWORD_MAX
-        }
-
-        localStorage.setItem(REACENT_KEYWORD, JSON.stringify(newWordList));
+        // ローカルストレージの検索ワード(あなたがよく検索するワード)を保存
+        saveFrequentKeyword(keyword);
     }
 
     /**

@@ -1,17 +1,18 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { REACENT_KEYWORD } from "../Const/HomeConst";
+import { FREQUENT_KEYWORD, REACENT_KEYWORD } from "../Const/HomeConst";
 import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom } from "../Atom/HomeAtom";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { SetVideoApiUrlContext } from "../Component/Home";
 import { useEffect, useState } from "react";
+import { FrequentWordType } from "../Type/FrequentWordType";
 import { useFrequentKeywords } from "./useFrequentKeywords";
 import { useRecentKeywod } from "./useRecentKeywod";
 
-export function useHomeRecentKeywod() {
+export function useHomeFrequentKeywords() {
 
-    // 最近の検索リスト
-    const [recentWordList, setRecentWordList] = useState<string[]>([]);
+    // よく検索するワードリスト
+    const [frequentWordList, setFrequentWordList] = useState<FrequentWordType[]>([]);
     // キーワード
     const setKeyword = useSetAtom(keywordAtom);
     // 動画一覧検索条件選択値(種別)
@@ -32,9 +33,15 @@ export function useHomeRecentKeywod() {
 
     useEffect(() => {
 
-        const wordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
+        // キーワードリストを取得
+        const wordList = JSON.parse(localStorage.getItem(FREQUENT_KEYWORD) || "[]") as FrequentWordType[];
 
-        setRecentWordList(wordList);
+        // 検索回数でソート
+        const sortedWordList = wordList.sort((a, b) => {
+            return b.count - a.count;
+        });
+
+        setFrequentWordList(sortedWordList);
     }, []);
 
     /**
@@ -59,8 +66,8 @@ export function useHomeRecentKeywod() {
 
         // ローカルストレージの検索ワード(あなたがよく検索するワード)を保存
         saveFrequentKeyword(keyword);
-    }
 
+    }
 
     /**
      * キーワード削除イベント
@@ -68,17 +75,17 @@ export function useHomeRecentKeywod() {
     function deleteKeyWord(keyword: string,) {
 
         // ローカルストレージから検索ワードを取得
-        const nowWordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
+        const nowWordList = JSON.parse(localStorage.getItem(FREQUENT_KEYWORD) || "[]") as FrequentWordType[];
 
         // ローカルストレージに検索ワードを保存
-        const newWordList = [...nowWordList.filter((e) => e !== keyword.trim())];
-        localStorage.setItem(REACENT_KEYWORD, JSON.stringify(newWordList));
+        const newWordList = [...nowWordList.filter((e: FrequentWordType) => e.keyword !== keyword.trim())];
+        localStorage.setItem(FREQUENT_KEYWORD, JSON.stringify(newWordList));
 
-        setRecentWordList(newWordList);
+        setFrequentWordList(newWordList);
     }
 
     return {
-        recentWordList,
+        frequentWordList,
         clickKeyWord,
         deleteKeyWord,
     }

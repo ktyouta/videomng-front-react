@@ -7,6 +7,7 @@ import { HomeVideoContent } from "./HomeVideoContent";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoListItemType } from "../Type/VideoListItemType";
 import { HomeRecentKeywod } from "./HomeRecentKeywod";
+import { HomeFrequentKeywords } from "./HomeFrequentKeywords";
 
 const Parent = styled.div`
   width: 100%;
@@ -59,7 +60,10 @@ export function HomeVideoArea() {
         <MessageDiv>
           キーワードを入力して動画を検索
         </MessageDiv>
+        {/* 最近の検索 */}
         <HomeRecentKeywod />
+        {/* あなたがよく検索するワード */}
+        <HomeFrequentKeywords />
       </React.Fragment>
     );
   }
