@@ -46,3 +46,9 @@ export const FREQUENT_KEYWORD_MAX = 5;
 
 // ローカルストレージ最大保存数(あなたがよく検索するワード)
 export const FREQUENT_KEYWORD_MAX_SAVE_LIMIT = 5;
+
+// ローカルストレージKey(お気に入りワード)
+export const FAVORITE_KEYWORD = `favoriteKeyword`;
+
+// ローカルストレージ最大表示数/最大保存数(お気に入りワード)
+export const FAVORITE_KEYWORD_MAX = 5;

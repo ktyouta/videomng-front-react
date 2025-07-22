@@ -116,10 +116,7 @@ export function Header() {
           positionLeft="29%"
         >
           <HeaderHowToUse
-            close={() => {
-              closeSideMenu();
-              closeHowToUseModal();
-            }}
+            close={closeHowToUseModal}
           />
         </ModalComponent>
       }

@@ -4,6 +4,7 @@ import { useHomeRecentKeywod } from "../Hook/useHomeRecentKeywod";
 import { RxCross1 } from "react-icons/rx";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { useHomeFrequentKeywords } from "../Hook/useHomeFrequentKeywords";
+import { useHomeFavoriteKeywords } from "../Hook/useHomeFavoriteKeywords";
 
 
 const Parent = styled.div`
@@ -50,38 +51,38 @@ const IconDiv = styled.div`
   margin-left:3px
 `;
 
-export function HomeFrequentKeywords() {
+export function HomeFavoriteKeywords() {
 
     const {
-        frequentWordList,
+        favoriteWordList,
         clickKeyWord,
         deleteKeyWord,
-    } = useHomeFrequentKeywords();
+    } = useHomeFavoriteKeywords();
 
     return (
         <Parent>
             <TitleDiv>
-                あなたがよく検索するワード：
+                お気に入りワード：
             </TitleDiv>
             <WordAreaDiv>
                 {
-                    frequentWordList && frequentWordList.length > 0 &&
-                    frequentWordList.map((e) => {
+                    favoriteWordList && favoriteWordList.length > 0 &&
+                    favoriteWordList.map((e) => {
                         return (
                             <WordDiv>
                                 <WordSpan
                                     onClick={() => {
-                                        clickKeyWord(e.keyword);
+                                        clickKeyWord(e);
                                     }}
                                 >
-                                    {e.keyword}
+                                    {e}
                                 </WordSpan>
                                 <IconDiv>
                                     <IconComponent
                                         icon={RxCross1}
                                         size="60%"
                                         onclick={() => {
-                                            deleteKeyWord(e.keyword)
+                                            deleteKeyWord(e)
                                         }}
                                     />
                                 </IconDiv>

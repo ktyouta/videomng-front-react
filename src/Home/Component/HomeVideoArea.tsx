@@ -8,10 +8,18 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { VideoListItemType } from "../Type/VideoListItemType";
 import { HomeRecentKeywod } from "./HomeRecentKeywod";
 import { HomeFrequentKeywords } from "./HomeFrequentKeywords";
+import { IconComponent } from "../../Common/Component/IconComponent";
+import { FaStar } from "react-icons/fa";
+import { HomeFavoriteKeywords } from "./HomeFavoriteKeywords";
+import { FAVORITE_KEYWORD_MAX } from "../Const/HomeConst";
+import { HomeVideoAreaDefault } from "./HomeVideoAreaDefault";
+import { FaCheck } from "react-icons/fa6";
+
 
 const Parent = styled.div`
   width: 100%;
   height: 90%;
+  padding-top: 3%;
 `;
 
 const VideoUl = styled.ul`
@@ -19,7 +27,7 @@ const VideoUl = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
   color: rgb(255, 255, 255);
   margin: 0px;
-  padding: 4% 5% 0px;
+  padding: 2% 5% 0px;
   width: 100%;
   box-sizing: border-box;
   gap: 38px 4%;
@@ -44,6 +52,41 @@ const NextGetBtnAreaDiv = styled.div`
   margin-top: 3%;
 `;
 
+const SearchKeywordAreaDiv = styled.div`
+  display:flex;
+  align-items: center;
+  color: white;
+  box-sizing: border-box;
+  padding-left: 22%;
+`;
+
+const SearchKeywordDiv = styled.div`
+  display:flex;
+  align-items: center;
+  margin-right: 1%;
+`;
+
+const SearchKeywordFavoriteIconDiv = styled.div`
+  width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SearchKeywordFavoriteTitleSpan = styled.span`
+`;
+
+const RegisterdFavoriteIconDiv = styled.div`
+  width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const RegisterdFavoriteTitleSpan = styled.span`
+  color: rgb(158, 158, 158);
+`;
+
 export function HomeVideoArea() {
 
   console.log("HomeVideoArea render");
@@ -52,19 +95,19 @@ export function HomeVideoArea() {
     videoListData,
     isLoading,
     clickShowMore,
-    errMessage, } = useHomeVideoArea();
+    errMessage,
+    showMoreData,
+    addFavoriteWord,
+    favoriteWordList } = useHomeVideoArea();
 
+  if (isLoading) {
+    return <LoadingBase />;
+  }
+
+  // 初期表示
   if (!videoListData) {
     return (
-      <React.Fragment>
-        <MessageDiv>
-          キーワードを入力して動画を検索
-        </MessageDiv>
-        {/* 最近の検索 */}
-        <HomeRecentKeywod />
-        {/* あなたがよく検索するワード */}
-        <HomeFrequentKeywords />
-      </React.Fragment>
+      <HomeVideoAreaDefault />
     );
   }
 
@@ -80,6 +123,12 @@ export function HomeVideoArea() {
   const videoListItems = videoListData.items;
   // 次データ取得用トークン
   const nextPageToken = videoListData.nextPageToken;
+  // 検索ワード
+  const searchKeyword = showMoreData?.keyword;
+  // お気に入りワード登録フラグ
+  const isRegisterdFavoriteKeyword = favoriteWordList.some((e) => {
+    return e === searchKeyword;
+  });
 
   if (videoListItems.length === 0) {
     return (
@@ -92,8 +141,48 @@ export function HomeVideoArea() {
   return (
     <Parent>
       {
-        isLoading &&
-        <LoadingBase />
+        showMoreData?.keyword &&
+        <SearchKeywordAreaDiv>
+          <SearchKeywordDiv>
+            キーワード：{showMoreData.keyword}
+          </SearchKeywordDiv>
+          {
+            isRegisterdFavoriteKeyword
+              ?
+              <React.Fragment>
+                <RegisterdFavoriteIconDiv>
+                  <IconComponent
+                    icon={FaCheck}
+                    size="30%"
+                    style={{
+                      color: `rgb(158, 158, 158)`
+                    }}
+                  />
+                </RegisterdFavoriteIconDiv>
+                <RegisterdFavoriteTitleSpan>
+                  お気に入りワード登録済み
+                </RegisterdFavoriteTitleSpan>
+              </React.Fragment>
+              :
+              <React.Fragment>
+                <SearchKeywordFavoriteIconDiv>
+                  <IconComponent
+                    icon={FaStar}
+                    onclick={() => {
+                      addFavoriteWord(showMoreData.keyword);
+                    }}
+                    size="30%"
+                    style={{
+                      color: `yellow`
+                    }}
+                  />
+                </SearchKeywordFavoriteIconDiv>
+                <SearchKeywordFavoriteTitleSpan>
+                  {`このワードをお気に入りに登録（最大${FAVORITE_KEYWORD_MAX}つ）`}
+                </SearchKeywordFavoriteTitleSpan>
+              </React.Fragment>
+          }
+        </SearchKeywordAreaDiv>
       }
       <VideoUl>
         {

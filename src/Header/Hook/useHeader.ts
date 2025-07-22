@@ -29,6 +29,7 @@ export function useHeader() {
      */
     function openHowToUseModal() {
         setIsOpenHowToUseModal(true);
+        closeSideMenu();
     }
 
     /**

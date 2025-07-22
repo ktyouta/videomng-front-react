@@ -7,9 +7,11 @@ import { VideoListDataType } from "../Type/VideoListDataType";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { isEqual } from "lodash";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SetVideoApiUrlContext, VideoApiUrlContext } from "../Component/Home";
 import { toast } from "react-toastify";
+import { useFavoriteKeywod } from "./useFavoriteKeywod";
+import { FAVORITE_KEYWORD } from "../Const/HomeConst";
 
 
 export function useHomeVideoArea() {
@@ -29,7 +31,17 @@ export function useHomeVideoArea() {
     const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // お気に入りワード保存用
+    const { saveFavoriteKeywod } = useFavoriteKeywod();
+    // お気に入りワードリスト
+    const [favoriteWordList, setFavoriteWordList] = useState<string[]>([]);
 
+    useEffect(() => {
+
+        const wordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];
+
+        setFavoriteWordList(wordList);
+    }, [videoListData]);
 
     // 動画一覧を取得
     const { isLoading } = useQueryWrapper<VideoListResponseType>(
@@ -101,10 +113,27 @@ export function useHomeVideoArea() {
         setVideoApiUrl(`${videoApiUrl}`);
     }
 
+    /**
+     * お気に入りワード追加
+     */
+    function addFavoriteWord(keyword: string) {
+
+        saveFavoriteKeywod(keyword);
+
+        // ローカルストレージから検索ワードを取得
+        const nowWordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];
+        setFavoriteWordList(nowWordList);
+
+        toast.success(`お気に入りワードに登録しました。`);
+    }
+
     return {
         videoListData,
         isLoading,
         clickShowMore,
         errMessage,
+        showMoreData,
+        addFavoriteWord,
+        favoriteWordList,
     }
 }
