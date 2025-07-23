@@ -31,7 +31,12 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     // 視聴状況選択リスト
     const [viewStatusSelectList, setViewStatusSelectList] = useState<comboType[]>();
     // タグマスタリスト
-    const [tagMasterList, setTagMasterList] = useState<comboType[]>([]);
+    const [tagMasterList, setTagMasterList] = useState<comboType[]>([
+        {
+            value: ``,
+            label: `すべて`,
+        }
+    ]);
     // お気に入り動画一覧取得用フック
     const {
         changeUrl,
@@ -98,10 +103,12 @@ export function useFavoriteSearchConditionMain(props: propsType) {
                     }
                 });
 
-                setTagMasterList([{
-                    value: ``,
-                    label: `すべて`,
-                }, ...tagComboList]);
+                setTagMasterList((e) => {
+                    return [
+                        ...e,
+                        ...tagComboList
+                    ];
+                })
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
