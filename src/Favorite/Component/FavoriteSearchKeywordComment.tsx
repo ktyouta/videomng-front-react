@@ -16,7 +16,7 @@ import { FavoriteSearchKeywordCommentList } from "./FavoriteSearchKeywordComment
 
 const Parent = styled.div`
   box-sizing:border-box;
-  height: 502px;
+  height: 525px;
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
