@@ -9,6 +9,7 @@ import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
 import { useFavoriteSearchKeywordCommentContent } from "../Hook/useFavoriteSearchKeywordCommentContent";
 import { HighlightTextComponent } from "../../Common/Component/HighlightTextComponent";
+import { FavoriteSearchKeywordContentIconArea } from "./FavoriteSearchKeywordContentIconArea";
 
 
 const Parent = styled.div`
@@ -40,6 +41,16 @@ const MetaDiv = styled.div`
     align-items: center;
 `;
 
+const IconDiv = styled.div`
+    box-sizing: border-box;
+    width:8%;
+    display:flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 1%;
+    position:relative;
+`;
+
 
 type propsType = {
     searchComment: SearchKeywordCommentType,
@@ -56,7 +67,8 @@ export function FavoriteSearchKeywordCommentContent(props: propsType) {
     const comment = data.textOriginal;
     const authorDisplayName = data.authorDisplayName;
     const publishedDate = format(new Date(data.publishedAt), "yyyy/MM/dd  HH:mm");
-
+    const commentId = data.commentId;
+    const favoriteStatus = data.favoriteStatus;
 
     return (
         <Parent>
@@ -74,6 +86,13 @@ export function FavoriteSearchKeywordCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
+                <IconDiv>
+                    {/* アイコンエリア */}
+                    <FavoriteSearchKeywordContentIconArea
+                        commentId={commentId}
+                        favoriteStatus={favoriteStatus}
+                    />
+                </IconDiv>
             </LowerDiv>
         </Parent>
     );

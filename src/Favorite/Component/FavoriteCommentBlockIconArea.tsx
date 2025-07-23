@@ -28,7 +28,8 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
 `;
 
 type propsType = {
-    blockComment: () => void
+    blockComment: () => void,
+    iconSize?: string
 }
 
 export function FavoriteCommentBlockIconArea(props: propsType) {
@@ -45,7 +46,7 @@ export function FavoriteCommentBlockIconArea(props: propsType) {
             <IconComponent
                 icon={MdVisibilityOff}
                 onclick={props.blockComment}
-                size="45%"
+                size={props.iconSize ?? "45%"}
                 style={{ color: "white" }}
                 onMouseEnter={openBlockNav}
                 onMouseLeave={closeBlockNav}

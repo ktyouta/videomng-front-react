@@ -35,6 +35,7 @@ type propsType = {
     favoriteStatus: string,
     favoriteComment: (commentId: string) => void,
     deleteFavoriteComment: (commentId: string) => void,
+    iconSize?: string
 }
 
 export function FavoriteCommentFavoriteIconArea(props: propsType) {
@@ -59,7 +60,7 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
             <IconComponent
                 icon={FaStar}
                 onclick={() => { iconClick(props.commentId); }}
-                size="45%"
+                size={props.iconSize ?? "45%"}
                 style={{
                     color: iconColor,
                 }}

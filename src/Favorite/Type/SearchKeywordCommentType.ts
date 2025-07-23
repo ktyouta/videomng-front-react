@@ -10,5 +10,7 @@ export type SearchKeywordCommentType = {
     // コメント投稿者の表示名
     readonly authorDisplayName: string;
     // コメントID
-    readonly commentId: string,
+    readonly commentId: string;
+    // お気に入りステータス
+    readonly favoriteStatus: string;
 }

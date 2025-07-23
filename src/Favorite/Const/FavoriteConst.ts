@@ -20,20 +20,21 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
         value: `1`,
     },
     {
-        label: `メモ`,
-        value: `2`,
+        label: `公開コメント`,
+        value: `4`,
     },
     {
         label: `キーワード検索(コメント)`,
         value: `3`,
     },
-    {
-        label: `公開コメント`,
-        value: `4`,
-    },
+
     {
         label: `動画詳細設定`,
         value: `5`,
+    },
+    {
+        label: `メモ`,
+        value: `2`,
     },
     {
         label: `タグ`,
