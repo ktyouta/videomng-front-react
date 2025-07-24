@@ -18,6 +18,7 @@ export const VIDEO_TYPE_LIST: comboType[] = [
 export enum MENU_NO {
     INFO = `1`,
     COMMENT = `2`,
+    KEYWORD_SEARCH_COMMENT = `3`,
 }
 
 // 動画詳細画面メニューリスト
@@ -29,6 +30,10 @@ export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
     {
         label: `公開コメント`,
         value: `2`,
+    },
+    {
+        label: `キーワード検索(コメント)`,
+        value: `3`,
     }
 ];
 

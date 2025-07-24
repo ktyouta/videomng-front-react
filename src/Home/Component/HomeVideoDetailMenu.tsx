@@ -6,6 +6,7 @@ import ComboComponent from "../../Common/Component/ComboComponent";
 import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../Const/HomeConst";
 import { useHomeVideoDetailMenu } from "../Hook/useHomeVideoDetailMenu";
 import { HomeComment } from "./HomeComment";
+import { HomeSearchKeywordComment } from "./HomeSearchKeywordComment";
 
 
 const MenuParentDiv = styled.div`
@@ -78,6 +79,11 @@ export function HomeVideoDetailMenu(props: propsType) {
           // 公開コメント
           openMenuNo === MENU_NO.COMMENT &&
           <HomeComment />
+        }
+        {
+          // キーワード検索(コメント)
+          openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
+          <HomeSearchKeywordComment />
         }
       </MenuParentDiv>
     </React.Fragment>

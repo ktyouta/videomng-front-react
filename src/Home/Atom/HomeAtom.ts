@@ -1,5 +1,6 @@
 import { VIDEO_TYPE_LIST } from "../Const/HomeConst";
 import { HomeVideoCommentThreadItemType } from "../Type/HomeVideoCommentThreadItemType";
+import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
 import { VideoDetailItemType } from "../Type/VideoDetailItemType";
 import { VideoListDataType } from "../Type/VideoListDataType";
@@ -21,3 +22,9 @@ export const homeVideoCommentListAtom = atom<HomeVideoCommentThreadItemType[]>()
 export const selectedVideoTypeAtom = atom<string>(VIDEO_TYPE_LIST[0].value);
 // 動画一覧検索条件選択値(カテゴリ)
 export const selectedVideoCategoryAtom = atom<string>(``);
+// キーワード検索(コメント)情報
+export const homeSearchKeywordCommentAtom = atom<SearchKeywordCommentType[]>();
+// キーワード検索(コメント)用URL
+export const homeSearchKeywordCommentUrlAtom = atom<string>(``);
+// キーワード検索(コメント)キーワード
+export const homeSearchKeywordCommentKeywordAtom = atom<string>(``);
