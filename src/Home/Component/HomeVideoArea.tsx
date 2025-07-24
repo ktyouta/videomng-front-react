@@ -14,6 +14,7 @@ import { HomeFavoriteKeywords } from "./HomeFavoriteKeywords";
 import { FAVORITE_KEYWORD_MAX } from "../Const/HomeConst";
 import { HomeVideoAreaDefault } from "./HomeVideoAreaDefault";
 import { FaCheck } from "react-icons/fa6";
+import { FaBookmark } from "react-icons/fa";
 
 
 const Parent = styled.div`
@@ -100,7 +101,8 @@ export function HomeVideoArea() {
     addFavoriteWord,
     favoriteWordList } = useHomeVideoArea();
 
-  if (isLoading) {
+  // 初回検索ローディング
+  if (!showMoreData && isLoading) {
     return <LoadingBase />;
   }
 
@@ -167,13 +169,13 @@ export function HomeVideoArea() {
               <React.Fragment>
                 <SearchKeywordFavoriteIconDiv>
                   <IconComponent
-                    icon={FaStar}
+                    icon={FaBookmark}
                     onclick={() => {
                       addFavoriteWord(showMoreData.keyword);
                     }}
                     size="30%"
                     style={{
-                      color: `yellow`
+                      color: `#1E90FF`
                     }}
                   />
                 </SearchKeywordFavoriteIconDiv>
@@ -183,6 +185,10 @@ export function HomeVideoArea() {
               </React.Fragment>
           }
         </SearchKeywordAreaDiv>
+      }
+      {
+        isLoading &&
+        <LoadingBase />
       }
       <VideoUl>
         {
