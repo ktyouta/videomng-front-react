@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useHeaderMenuUl } from "../Hook/useHeaderMenuUl";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const NavUl = styled.ul`
@@ -30,6 +31,20 @@ const NavLi = styled.li<{ isActive: boolean }>`
   &:hover {
      color: black;
      background-color: white;
+  }
+
+  font-size: 15px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 15px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 19px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 19px;
   }
 `;
 

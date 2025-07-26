@@ -13,6 +13,7 @@ import { HeaderSideMenu } from "./HeaderSideMenu";
 import ModalComponent from "../../Common/Component/ModalComponent";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { HeaderHowToUse } from "./HeaderHowToUse";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
@@ -33,6 +34,20 @@ const MenuNav = styled.nav`
   padding-right: 5%;
   display:flex;
   align-items: center;
+
+  height:78%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    height:78%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    height:100%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    height:100%;
+  }
 `;
 
 const BurgerIconDiv = styled.div`

@@ -13,6 +13,7 @@ import { FREQUENT_KEYWORD, FREQUENT_KEYWORD_MAX, FREQUENT_KEYWORD_MAX_SAVE_LIMIT
 import { FrequentWordType } from "../Type/FrequentWordType";
 import { useFrequentKeywords } from "./useFrequentKeywords";
 import { useRecentKeywod } from "./useRecentKeywod";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useHomeSearchArea() {
@@ -35,6 +36,8 @@ export function useHomeSearchArea() {
     const { saveRecentKeywod } = useRecentKeywod();
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
+    // 画面サイズ判定
+    const isSp = useMediaQuery(mediaQuery.sp)
 
     /**
      * 検索ボタン押下イベント
@@ -79,5 +82,6 @@ export function useHomeSearchArea() {
         openFilterModal,
         closeFilterModal,
         clearInput,
+        isSp,
     }
 }

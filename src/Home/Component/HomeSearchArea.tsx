@@ -14,6 +14,7 @@ import { HomeSearchCondition } from "./HomeSearchCondition";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
 import { ClearableTextbox } from "../../Common/Component/ClearableTextbox";
 import { MdTune } from 'react-icons/md';
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
@@ -23,23 +24,23 @@ const Parent = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding-right: 12%;
-  padding-left: 21%;
+  padding-left: 17%;
 `;
 
 const TextBoxAreaDiv = styled.div`
-  width: 83%;
+  width: 78%;
   height: 100%;
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  margin-right: 3%;
+  margin-right: 1%;
 `;
 
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
-  width: 46px;
+  width: 47px;
   height: 99%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -48,6 +49,20 @@ const SearchIconAreaDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 35px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 35px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 40px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 47px;
+  }
 `;
 
 const SearchConditionIconAreaDiv = styled.div`
@@ -82,13 +97,14 @@ export function HomeSearchArea() {
         isOpenFilterModal,
         openFilterModal,
         closeFilterModal,
-        clearInput, } = useHomeSearchArea();
+        clearInput,
+        isSp, } = useHomeSearchArea();
 
     return (
         <Parent>
             <TextBoxAreaDiv>
                 <ClearableTextbox
-                    width="100%"
+                    width="89%"
                     height="99%"
                     placeholder="キーワード"
                     value={keyword}
@@ -114,9 +130,12 @@ export function HomeSearchArea() {
                     size="85%"
                 />
             </SearchConditionIconAreaDiv>
-            <SearchConditionTitleSpan>
-                条件を指定
-            </SearchConditionTitleSpan>
+            {
+                !isSp &&
+                <SearchConditionTitleSpan>
+                    条件を指定
+                </SearchConditionTitleSpan>
+            }
             {
                 // 検索条件指定モーダル
                 isOpenFilterModal &&
