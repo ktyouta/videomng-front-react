@@ -5,6 +5,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../../Common/Const/CommonConst";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 //ボタンのスタイル
@@ -20,10 +21,9 @@ const BtnDiv = styled.div`
 //ナビゲーション
 const NavDiv = styled.div<{ isDisplay: boolean }>`
   position: absolute;
-  left: -160px;
+  left: -201px;
   top: 48px;
-  font-size: 15px;
-  width: 273px;
+  width: 243px;
   height: auto;
   min-height: 200px;
   padding-top: 14px;
@@ -36,6 +36,26 @@ const NavDiv = styled.div<{ isDisplay: boolean }>`
   color: #f1f1f1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   padding-left: 22px;
+
+  font-size: 12px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 15px;
+    width: 273px;
+    left: -160px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 15px;
+    width: 273px;
+    left: -160px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 15px;
+    width: 273px;
+    left: -160px;
+  }
 `;
 
 //コンテンツのスタイル
@@ -83,7 +103,8 @@ export function HeaderUserMenu() {
         loginUserInfo,
         clickUpdateUserInfo,
         clickUpdateUserPassword,
-        isCheckedAuth, } = useHeaderUserMenu();
+        isCheckedAuth,
+        isMobile, } = useHeaderUserMenu();
 
     return (
         <React.Fragment>
@@ -102,7 +123,7 @@ export function HeaderUserMenu() {
                                     <IconComponent
                                         icon={IoPersonCircleOutline}
                                         onclick={isOpenUserMenu ? closeUserMenu : oepnUserMenu}
-                                        size='80%'
+                                        size={isMobile ? '65%' : '80%'}
                                     />
                                     <NavDiv
                                         isDisplay={isOpenUserMenu}

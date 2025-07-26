@@ -37,7 +37,7 @@ export function useHomeSearchArea() {
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
     // 画面サイズ判定
-    const isSp = useMediaQuery(mediaQuery.sp)
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     /**
      * 検索ボタン押下イベント
@@ -82,6 +82,6 @@ export function useHomeSearchArea() {
         openFilterModal,
         closeFilterModal,
         clearInput,
-        isSp,
+        isMobile,
     }
 }

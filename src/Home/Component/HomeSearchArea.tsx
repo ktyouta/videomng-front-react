@@ -50,10 +50,10 @@ const SearchIconAreaDiv = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 35px;
+  width: 38px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    width: 35px;
+    width: 38px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
@@ -83,6 +83,7 @@ const SearchConditionTitleSpan = styled.span`
   font-size: 14px;
 `;
 
+
 /**
  * 検索条件エリア
  */
@@ -98,13 +99,16 @@ export function HomeSearchArea() {
         openFilterModal,
         closeFilterModal,
         clearInput,
-        isSp, } = useHomeSearchArea();
+        isMobile, } = useHomeSearchArea();
+
+    const searchConditionModalWidth = isMobile ? "59%" : "42%";
+    const searchConditionModalpositionLeft = isMobile ? "19%" : "25%";
 
     return (
         <Parent>
             <TextBoxAreaDiv>
                 <ClearableTextbox
-                    width="89%"
+                    width={isMobile ? "85%" : "89%"}
                     height="99%"
                     placeholder="キーワード"
                     value={keyword}
@@ -131,7 +135,7 @@ export function HomeSearchArea() {
                 />
             </SearchConditionIconAreaDiv>
             {
-                !isSp &&
+                !isMobile &&
                 <SearchConditionTitleSpan>
                     条件を指定
                 </SearchConditionTitleSpan>
@@ -148,10 +152,10 @@ export function HomeSearchArea() {
                         border: "solid 1px",
                         color: "white"
                     }}
-                    width="26%"
+                    width={searchConditionModalWidth}
                     height="50%"
                     positionTop="22%"
-                    positionLeft="35%"
+                    positionLeft={searchConditionModalpositionLeft}
                 >
                     <HomeSearchCondition
                         close={closeFilterModal}

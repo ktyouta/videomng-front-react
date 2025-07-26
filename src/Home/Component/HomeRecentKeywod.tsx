@@ -78,49 +78,52 @@ const IconDiv = styled.div`
   align-items: center;
   justify-content: center;
   width:15px;
-  margin-left:3px
+  margin-left:3px;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
 export function HomeRecentKeywod() {
 
-    const {
-        recentWordList,
-        clickKeyWord,
-        deleteKeyWord,
-    } = useHomeRecentKeywod();
+  const {
+    recentWordList,
+    clickKeyWord,
+    deleteKeyWord,
+  } = useHomeRecentKeywod();
 
-    return (
-        <Parent>
-            <TitleDiv>
-                最近の検索：
-            </TitleDiv>
-            <WordAreaDiv>
-                {
-                    recentWordList && recentWordList.length > 0 &&
-                    recentWordList.map((e) => {
-                        return (
-                            <WordDiv>
-                                <WordSpan
-                                    onClick={() => {
-                                        clickKeyWord(e);
-                                    }}
-                                >
-                                    {e}
-                                </WordSpan>
-                                <IconDiv>
-                                    <IconComponent
-                                        icon={RxCross1}
-                                        size="60%"
-                                        onclick={() => {
-                                            deleteKeyWord(e)
-                                        }}
-                                    />
-                                </IconDiv>
-                            </WordDiv>
-                        )
-                    })
-                }
-            </WordAreaDiv>
-        </Parent>
-    );
+  return (
+    <Parent>
+      <TitleDiv>
+        最近の検索：
+      </TitleDiv>
+      <WordAreaDiv>
+        {
+          recentWordList && recentWordList.length > 0 &&
+          recentWordList.map((e) => {
+            return (
+              <WordDiv>
+                <WordSpan
+                  onClick={() => {
+                    clickKeyWord(e);
+                  }}
+                >
+                  {e}
+                </WordSpan>
+                <IconDiv>
+                  <IconComponent
+                    icon={RxCross1}
+                    size="60%"
+                    onclick={() => {
+                      deleteKeyWord(e)
+                    }}
+                  />
+                </IconDiv>
+              </WordDiv>
+            )
+          })
+        }
+      </WordAreaDiv>
+    </Parent>
+  );
 }

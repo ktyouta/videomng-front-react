@@ -15,6 +15,7 @@ import { FAVORITE_KEYWORD_MAX } from "../Const/HomeConst";
 import { HomeVideoAreaDefault } from "./HomeVideoAreaDefault";
 import { FaCheck } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
@@ -25,13 +26,26 @@ const Parent = styled.div`
 
 const VideoUl = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
   color: rgb(255, 255, 255);
   margin: 0px;
   padding: 2% 5% 0px;
   width: 100%;
   box-sizing: border-box;
   gap: 38px 4%;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  box-sizing: border-box;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  }
 `;
 
 const MessageDiv = styled.div`
@@ -58,7 +72,24 @@ const SearchKeywordAreaDiv = styled.div`
   align-items: center;
   color: white;
   box-sizing: border-box;
-  padding-left: 22%;
+  padding-left: 8%;
+
+  font-size: 12px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 12px;
+    padding-left: 20%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 15px;
+    padding-left: 24%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 15px;
+    padding-left: 24%;
+  }
 `;
 
 const SearchKeywordDiv = styled.div`

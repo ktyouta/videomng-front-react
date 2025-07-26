@@ -11,6 +11,7 @@ import { IsCheckedAuthContext, IsLoginContext, LoginUserInfoContext, SetIsLoginC
 import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useHeaderUserMenu() {
@@ -30,7 +31,8 @@ export function useHeaderUserMenu() {
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // 認証チェック済みフラグ
     const isCheckedAuth = IsCheckedAuthContext.useCtx();
-
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile)
 
     /**
      * ログアウトリクエスト
@@ -91,5 +93,6 @@ export function useHeaderUserMenu() {
         clickUpdateUserInfo,
         clickUpdateUserPassword,
         isCheckedAuth,
+        isMobile,
     }
 }
