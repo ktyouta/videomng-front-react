@@ -21,14 +21,39 @@ import { FavoriteMetaInfo } from "./FavoriteMetaInfo";
 import { FavoriteDetailSetting } from "./FavoriteDetailSetting";
 import { FavoriteTag } from "./FavoriteTag";
 import { Provider } from "jotai";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const MenuParentDiv = styled.div`
-  width: 75%;
-  margin-left: 2%;
+  width: 96%;
   box-sizing:border-box;
   padding-top: 1%;
-  padding-left: 3%;
+  margin-top: 8%;
+  font-size: 14px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 0;
+    padding-left: 3%;
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 0;
+    padding-left: 3%;
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 0;
+    padding-left: 3%;
+    font-size: 16px;
+  }
 `;
 
 const ComboAreaDiv = styled.div`
@@ -40,7 +65,20 @@ const ComboAreaDiv = styled.div`
 const ComboTitleSpan = styled.span`
   margin-right:2%;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 18px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 18px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 18px;
+  }
+
 `;
 
 type propsType = {
@@ -54,9 +92,12 @@ export function FavoriteVideoDetailMenu(props: propsType) {
 
     const {
         openMenuNo,
-        setOpenMenuNo } = useFavoriteVideoDetailMenu();
+        setOpenMenuNo,
+        isMobile } = useFavoriteVideoDetailMenu();
 
     const videoDetail = props.videoDetail;
+    const menuWidth = isMobile ? "75%" : "50%";
+    const menuComboFontSize = isMobile ? "11px" : "13px";
 
     return (
         <React.Fragment>
@@ -69,12 +110,13 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                         combo={VIDEO_DETIAL_MENU_LIST}
                         initValue={VIDEO_DETIAL_MENU_LIST[0].value}
                         onChange={setOpenMenuNo}
-                        width="50%"
+                        width={menuWidth}
                         minWidth="8%"
                         height="39px"
                         selectStyle={{
                             "backgroundColor": "rgb(24, 26, 30)",
                             "color": "white",
+                            "fontSize": `${menuComboFontSize}`
                         }}
                     />
                 </ComboAreaDiv>

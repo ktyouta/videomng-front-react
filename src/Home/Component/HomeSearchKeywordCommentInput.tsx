@@ -5,6 +5,7 @@ import { FaArrowUp } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { ClearableTextbox } from "../../Common/Component/ClearableTextbox";
 import { useHomeSearchKeywordCommentInput } from "../Hook/useHomeSearchKeywordCommentInput";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const MemoInputAreaDiv = styled.div`
@@ -20,7 +21,6 @@ const MemoInputAreaDiv = styled.div`
 
 const SearchIconAreaDiv = styled.div`
   background-color:#FF9900;
-  width: 4%;
   height: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -30,6 +30,19 @@ const SearchIconAreaDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 34px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 37px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 37px;
+  }
 `;
 
 
@@ -43,12 +56,15 @@ export function HomeSearchKeywordCommentInput() {
         setSearchKeywordCommentKeyword,
         clickSearchBtn,
         clearInputKeyword,
+        isMobile
     } = useHomeSearchKeywordCommentInput();
+
+    const inputWidth = isMobile ? "88%" : "92%";
 
     return (
         <MemoInputAreaDiv>
             <ClearableTextbox
-                width="92%"
+                width={inputWidth}
                 height="100%"
                 placeholder="キーワード"
                 value={searchKeywordCommentKeyword}

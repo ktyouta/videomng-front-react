@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useFavoriteVideoContent } from "../Hook/useFavoriteVideoContent";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 const VideoArticle = styled.article`
 `;
@@ -19,15 +20,51 @@ const VideoImg = styled.img`
 const VideoTitleDiv = styled.div`
     color:white;
     cursor:pointer;
-    font-size: 14px;
+    font-size: 11px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 12px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 14px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 14px;
+    }
 `;
 
 const DateDiv = styled.div`
-    font-size: 11px;
+    font-size: 10px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 10px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 11px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 11px;
+    }
 `;
 
 const ChennelTitleDiv = styled.div`
-    font-size: 11px;
+    font-size: 10px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 10px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 11px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 11px;
+    }
 `;
 
 

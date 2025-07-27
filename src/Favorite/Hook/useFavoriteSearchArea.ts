@@ -11,6 +11,7 @@ import { comboType } from "../../Common/Component/ComboComponent";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useFavoriteSearchArea() {
@@ -24,6 +25,8 @@ export function useFavoriteSearchArea() {
         changeUrl,
         selectedFavoriteVideoTag,
         selectedFavoriteVideoSortKey, } = useFavoriteListApiUrl();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     // ソートリストを取得
@@ -65,5 +68,6 @@ export function useFavoriteSearchArea() {
         sortList,
         selectSort,
         selectedFavoriteVideoSortKey,
+        isMobile,
     }
 }

@@ -11,10 +11,23 @@ import { useFavoriteVideoDetailInfo } from "../Hook/useFavoriteVideoDetailInfo";
 import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 const VideoInfoDiv = styled.div`
-  width: 25%;
+  width: 95%;
   padding-top: 3%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 95%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 25%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 25%;
+  }
 `;
 
 const VideoImg = styled.img`
@@ -28,6 +41,19 @@ const VideoMetaDiv = styled.div`
 
 const VideoTitle = styled.h3`
     margin-bottom: 14%;
+    font-size: 15px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 16px;
+    }
 `;
 
 const BtnDiv = styled.div`
@@ -52,6 +78,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
         isOpenModal,
         closeModal,
         executeDelete,
+        isMobile,
     } = useFavoriteVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
@@ -61,6 +88,8 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     const imgUrl = snippet?.thumbnails.high?.url;
     // タイトル
     const title = snippet?.title;
+    // ボタン幅
+    const buttonWidth = isMobile ? "50%" : "90%";
 
     return (
         <VideoInfoDiv>
@@ -86,11 +115,12 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
-                        "width": "90%",
+                        "width": `${buttonWidth}`,
                         "background": "rgb(34, 139, 84)",
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": "10%",
+                        "display": "block",
                     }}
                 />
                 <ButtonComponent
@@ -100,10 +130,11 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
-                        "width": "90%",
+                        "width": `${buttonWidth}`,
                         "background": "rgb(175, 55, 42)",
                         "color": "white",
                         "borderRadius": "8px",
+                        "display": "block",
                     }}
                 />
             </VideoMetaDiv>

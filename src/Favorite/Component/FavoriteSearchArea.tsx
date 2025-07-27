@@ -10,6 +10,7 @@ import ComboComponent from "../../Common/Component/ComboComponent";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../Common/Component/IconComponent";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
@@ -25,7 +26,19 @@ const Parent = styled.div`
 const ComboTitleSpan = styled.span`
   margin-right:7px;
   color: white;
-  font-size: 16px;
+  font-size: 12px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 13px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 16px;
+  }
 `;
 
 const FilterIconAreaDiv = styled.div`
@@ -60,7 +73,8 @@ export function FavoriteSearchArea() {
     selectedFavoriteVideoTag,
     sortList,
     selectSort,
-    selectedFavoriteVideoSortKey } = useFavoriteSearchArea();
+    selectedFavoriteVideoSortKey,
+    isMobile } = useFavoriteSearchArea();
 
   return (
     <Parent>
@@ -101,9 +115,12 @@ export function FavoriteSearchArea() {
           size="45%"
         />
       </FilterIconAreaDiv>
-      <FilterTitleSpan>
-        フィルター
-      </FilterTitleSpan>
+      {
+        !isMobile &&
+        <FilterTitleSpan>
+          フィルター
+        </FilterTitleSpan>
+      }
       {
         // フィルターモーダル
         isOpenFilterModal &&

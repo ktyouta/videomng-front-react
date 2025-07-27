@@ -19,7 +19,10 @@ const IconDiv = styled.div`
   align-items: center;
   justify-content: center;
   width:15px;
-  margin-left:3px
+  margin-left:3px;
+  &:hover {
+    transform: scale(1.3);
+  }
 `;
 
 type propsType = {

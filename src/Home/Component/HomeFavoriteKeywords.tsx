@@ -64,25 +64,6 @@ const WordAreaDiv = styled.div`
 
 `;
 
-const WordDiv = styled.div`
-  display:flex;
-  align-items: center;
-`;
-
-const WordSpan = styled.span`
-    cursor:pointer;
-    &:hover {
-        color:#2563eb;
-    }
-`;
-
-const IconDiv = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  width:15px;
-  margin-left:3px
-`;
 
 export function HomeFavoriteKeywords() {
 

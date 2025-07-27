@@ -9,6 +9,7 @@ import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 
@@ -20,6 +21,8 @@ export function useFavoriteVideoDetailInfo() {
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     /**
@@ -79,5 +82,6 @@ export function useFavoriteVideoDetailInfo() {
         isOpenModal,
         closeModal,
         executeDelete,
+        isMobile,
     }
 }

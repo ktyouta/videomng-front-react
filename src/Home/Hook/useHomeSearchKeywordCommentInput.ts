@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { homeSearchKeywordCommentKeywordAtom, homeSearchKeywordCommentUrlAtom } from "../Atom/HomeAtom";
 import { VideoIdContext } from "../Component/Home";
 import { SearchKeywordCommentUrlModel } from "../Model/SearchKeywordCommentUrlModel";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useHomeSearchKeywordCommentInput() {
@@ -13,6 +14,8 @@ export function useHomeSearchKeywordCommentInput() {
     const setSearchKeywordCommentUrl = useSetAtom(homeSearchKeywordCommentUrlAtom);
     // 動画ID
     const videoId = VideoIdContext.useCtx();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     /**
@@ -42,5 +45,6 @@ export function useHomeSearchKeywordCommentInput() {
         setSearchKeywordCommentKeyword,
         clickSearchBtn,
         clearInputKeyword,
+        isMobile,
     }
 }

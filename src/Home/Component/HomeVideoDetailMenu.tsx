@@ -86,6 +86,7 @@ export function HomeVideoDetailMenu(props: propsType) {
 
   const videoDetail = props.videoDetail;
   const menuWidth = isMobile ? "75%" : "50%";
+  const menuComboFontSize = isMobile ? "11px" : "13px";
 
   return (
     <React.Fragment>
@@ -104,6 +105,7 @@ export function HomeVideoDetailMenu(props: propsType) {
             selectStyle={{
               "backgroundColor": "rgb(24, 26, 30)",
               "color": "white",
+              "fontSize": `${menuComboFontSize}`
             }}
           />
         </ComboAreaDiv>
