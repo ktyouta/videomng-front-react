@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LoginUserInfoContext } from "../../QueryApp";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 export function useHeader() {
 
@@ -9,6 +10,8 @@ export function useHeader() {
     const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
     // 使い方を見るモーダル展開フラグ
     const [isOpenHowToUseModal, setIsOpenHowToUseModal] = useState(false);
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     /**
      * サイドメニュー展開
@@ -46,5 +49,6 @@ export function useHeader() {
         isOpenHowToUseModal,
         openHowToUseModal,
         closeHowToUseModal,
+        isMobile,
     }
 }

@@ -80,8 +80,12 @@ export function Header() {
     isOpenSideMenu,
     isOpenHowToUseModal,
     openHowToUseModal,
-    closeHowToUseModal
+    closeHowToUseModal,
+    isMobile
   } = useHeader();
+
+  const modalWidth = isMobile ? "73%" : "42%";
+  const modalpositionLeft = isMobile ? "9%" : "29%";
 
   return (
     <Parent>
@@ -125,10 +129,10 @@ export function Header() {
             color: "white",
             overflowY: "hidden",
           }}
-          width="42%"
+          width={modalWidth}
           height="65%"
           positionTop="15%"
-          positionLeft="29%"
+          positionLeft={modalpositionLeft}
         >
           <HeaderHowToUse
             close={closeHowToUseModal}

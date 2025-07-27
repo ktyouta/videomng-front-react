@@ -4,6 +4,7 @@ import { useHomeRecentKeywod } from "../Hook/useHomeRecentKeywod";
 import { RxCross1 } from "react-icons/rx";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import { HomeHistoryWord } from "./HomeHistoryWord";
 
 
 const Parent = styled.div`
@@ -102,24 +103,11 @@ export function HomeRecentKeywod() {
           recentWordList && recentWordList.length > 0 &&
           recentWordList.map((e) => {
             return (
-              <WordDiv>
-                <WordSpan
-                  onClick={() => {
-                    clickKeyWord(e);
-                  }}
-                >
-                  {e}
-                </WordSpan>
-                <IconDiv>
-                  <IconComponent
-                    icon={RxCross1}
-                    size="60%"
-                    onclick={() => {
-                      deleteKeyWord(e)
-                    }}
-                  />
-                </IconDiv>
-              </WordDiv>
+              <HomeHistoryWord
+                keyword={e}
+                clickKeyword={clickKeyWord}
+                deleteKeyword={deleteKeyWord}
+              />
             )
           })
         }

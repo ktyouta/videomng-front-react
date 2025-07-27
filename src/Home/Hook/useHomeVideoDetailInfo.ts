@@ -14,6 +14,7 @@ import { VideoIdContext } from "../Component/Home";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 
@@ -25,6 +26,8 @@ export function useHomeVideoDetailInfo() {
     const isLogin = IsLoginContext.useCtx();
     // お気に入り動画ID
     const videoId = VideoIdContext.useCtx();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     /**
@@ -104,5 +107,6 @@ export function useHomeVideoDetailInfo() {
         play,
         isLogin,
         moveLogin,
+        isMobile,
     }
 }

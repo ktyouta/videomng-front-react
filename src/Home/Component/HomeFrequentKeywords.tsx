@@ -5,6 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { useHomeFrequentKeywords } from "../Hook/useHomeFrequentKeywords";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import { HomeHistoryWord } from "./HomeHistoryWord";
 
 
 const Parent = styled.div`
@@ -83,44 +84,31 @@ const IconDiv = styled.div`
 
 export function HomeFrequentKeywords() {
 
-    const {
-        frequentWordList,
-        clickKeyWord,
-        deleteKeyWord,
-    } = useHomeFrequentKeywords();
+  const {
+    frequentWordList,
+    clickKeyWord,
+    deleteKeyWord,
+  } = useHomeFrequentKeywords();
 
-    return (
-        <Parent>
-            <TitleDiv>
-                あなたがよく検索するワード：
-            </TitleDiv>
-            <WordAreaDiv>
-                {
-                    frequentWordList && frequentWordList.length > 0 &&
-                    frequentWordList.map((e) => {
-                        return (
-                            <WordDiv>
-                                <WordSpan
-                                    onClick={() => {
-                                        clickKeyWord(e.keyword);
-                                    }}
-                                >
-                                    {e.keyword}
-                                </WordSpan>
-                                <IconDiv>
-                                    <IconComponent
-                                        icon={RxCross1}
-                                        size="60%"
-                                        onclick={() => {
-                                            deleteKeyWord(e.keyword)
-                                        }}
-                                    />
-                                </IconDiv>
-                            </WordDiv>
-                        )
-                    })
-                }
-            </WordAreaDiv>
-        </Parent>
-    );
+  return (
+    <Parent>
+      <TitleDiv>
+        あなたがよく検索するワード：
+      </TitleDiv>
+      <WordAreaDiv>
+        {
+          frequentWordList && frequentWordList.length > 0 &&
+          frequentWordList.map((e) => {
+            return (
+              <HomeHistoryWord
+                keyword={e.keyword}
+                clickKeyword={clickKeyWord}
+                deleteKeyword={deleteKeyWord}
+              />
+            )
+          })
+        }
+      </WordAreaDiv>
+    </Parent>
+  );
 }

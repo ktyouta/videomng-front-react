@@ -8,6 +8,7 @@ import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IconComponent } from "../../Common/Component/IconComponent";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
@@ -20,10 +21,21 @@ const Parent = styled.div`
 const VideoContentDiv = styled.div`
   width: 100%;
   height: 52%;
-  display:flex;
   box-sizing:border-box;
   padding-left:6%;
   padding-right:5%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    display:flex;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    display:flex;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    display:flex;
+  }
 `;
 
 const MessageDiv = styled.div`

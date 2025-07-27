@@ -6,6 +6,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { useHomeFrequentKeywords } from "../Hook/useHomeFrequentKeywords";
 import { useHomeFavoriteKeywords } from "../Hook/useHomeFavoriteKeywords";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import { HomeHistoryWord } from "./HomeHistoryWord";
 
 
 const Parent = styled.div`
@@ -85,44 +86,31 @@ const IconDiv = styled.div`
 
 export function HomeFavoriteKeywords() {
 
-    const {
-        favoriteWordList,
-        clickKeyWord,
-        deleteKeyWord,
-    } = useHomeFavoriteKeywords();
+  const {
+    favoriteWordList,
+    clickKeyWord,
+    deleteKeyWord,
+  } = useHomeFavoriteKeywords();
 
-    return (
-        <Parent>
-            <TitleDiv>
-                お気に入りワード：
-            </TitleDiv>
-            <WordAreaDiv>
-                {
-                    favoriteWordList && favoriteWordList.length > 0 &&
-                    favoriteWordList.map((e) => {
-                        return (
-                            <WordDiv>
-                                <WordSpan
-                                    onClick={() => {
-                                        clickKeyWord(e);
-                                    }}
-                                >
-                                    {e}
-                                </WordSpan>
-                                <IconDiv>
-                                    <IconComponent
-                                        icon={RxCross1}
-                                        size="60%"
-                                        onclick={() => {
-                                            deleteKeyWord(e)
-                                        }}
-                                    />
-                                </IconDiv>
-                            </WordDiv>
-                        )
-                    })
-                }
-            </WordAreaDiv>
-        </Parent>
-    );
+  return (
+    <Parent>
+      <TitleDiv>
+        お気に入りワード：
+      </TitleDiv>
+      <WordAreaDiv>
+        {
+          favoriteWordList && favoriteWordList.length > 0 &&
+          favoriteWordList.map((e) => {
+            return (
+              <HomeHistoryWord
+                keyword={e}
+                clickKeyword={clickKeyWord}
+                deleteKeyword={deleteKeyWord}
+              />
+            )
+          })
+        }
+      </WordAreaDiv>
+    </Parent>
+  );
 }

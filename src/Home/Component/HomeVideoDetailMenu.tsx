@@ -7,14 +7,39 @@ import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../Const/HomeConst";
 import { useHomeVideoDetailMenu } from "../Hook/useHomeVideoDetailMenu";
 import { HomeComment } from "./HomeComment";
 import { HomeSearchKeywordComment } from "./HomeSearchKeywordComment";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const MenuParentDiv = styled.div`
-  width: 75%;
-  margin-left: 2%;
+  width: 96%;
   box-sizing:border-box;
   padding-top: 1%;
-  padding-left: 3%;
+  margin-top: 8%;
+  font-size: 14px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 0;
+    padding-left: 3%;
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 0;
+    padding-left: 3%;
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 0;
+    padding-left: 3%;
+    font-size: 16px;
+  }
 `;
 
 
@@ -27,7 +52,20 @@ const ComboAreaDiv = styled.div`
 const ComboTitleSpan = styled.span`
   margin-right:2%;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 18px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 18px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 18px;
+  }
+
 `;
 
 type propsType = {
@@ -43,9 +81,11 @@ export function HomeVideoDetailMenu(props: propsType) {
     openMenuNo,
     setOpenMenuNo,
     videoId,
+    isMobile,
   } = useHomeVideoDetailMenu();
 
   const videoDetail = props.videoDetail;
+  const menuWidth = isMobile ? "75%" : "50%";
 
   return (
     <React.Fragment>
@@ -58,7 +98,7 @@ export function HomeVideoDetailMenu(props: propsType) {
             combo={VIDEO_DETIAL_MENU_LIST}
             initValue={VIDEO_DETIAL_MENU_LIST[0].value}
             onChange={setOpenMenuNo}
-            width="50%"
+            width={menuWidth}
             minWidth="8%"
             height="39px"
             selectStyle={{
