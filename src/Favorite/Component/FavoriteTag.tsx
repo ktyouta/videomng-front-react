@@ -15,6 +15,7 @@ import { TAG_EDIT_MODE } from "../Const/FavoriteConst";
 import { FavoriteTagEdit } from "./FavoriteTagEdit";
 import { FavoriteTagView } from "./FavoriteTagView";
 import LoadingBase from "../../Common/Component/LoadingBase";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -25,6 +26,11 @@ const Parent = styled.div`
   border: solid 1px;
 `;
 
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 export function FavoriteTag() {
 
@@ -38,9 +44,9 @@ export function FavoriteTag() {
 
   if (isLoading) {
     return (
-      <Parent>
-        <LoadingBase />
-      </Parent>
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
     );
   }
 

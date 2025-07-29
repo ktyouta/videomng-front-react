@@ -7,6 +7,7 @@ import { useFavoriteTagList } from "../Hook/useFavoriteTagList";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import React from "react";
 import TagButtonComponent from "../../Common/Component/TagButtonComponent";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -16,6 +17,12 @@ const Parent = styled.div`
   padding-left: 2%;
   padding-right: 2%;
   color:white;
+`;
+
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const TagListAreaDiv = styled.div`
@@ -40,9 +47,9 @@ export function FavoriteTagList() {
 
     if (!favoriteVideoTagList) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

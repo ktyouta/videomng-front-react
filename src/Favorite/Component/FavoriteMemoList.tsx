@@ -3,6 +3,7 @@ import { useFavoriteMemoList } from "../Hook/useFavoriteMemoList";
 import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { FavoriteMemoContent } from "./FavoriteMemoContent";
 import LoadingBase from "../../Common/Component/LoadingBase";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -13,6 +14,12 @@ const Parent = styled.div`
   padding-top: 2%;
   padding-right: 2%;
   color:white;
+`;
+
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const MemoListAreaDiv = styled.div`
@@ -36,17 +43,17 @@ export function FavoriteMemoList() {
 
     if (isLoading) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 
     if (!favoriteVideoMemoList) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

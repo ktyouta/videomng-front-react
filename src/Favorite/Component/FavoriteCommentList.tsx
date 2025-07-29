@@ -6,6 +6,7 @@ import LoadingBase from "../../Common/Component/LoadingBase";
 import { useFavoriteCommentList } from "../Hook/useFavoriteCommentList";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteCommentContent } from "./FavoriteCommentContent";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -15,6 +16,12 @@ const Parent = styled.div`
   padding-left: 2%;
   color:white;
   padding-top: 1%;
+`;
+
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
@@ -39,9 +46,9 @@ export function FavoriteCommentList() {
 
     if (isLoading) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

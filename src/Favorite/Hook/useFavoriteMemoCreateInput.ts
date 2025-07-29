@@ -11,6 +11,7 @@ import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useFavoriteMemoCreateInput() {
@@ -21,6 +22,8 @@ export function useFavoriteMemoCreateInput() {
     const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     /**
@@ -75,5 +78,6 @@ export function useFavoriteMemoCreateInput() {
         setInputMemo,
         addToMemo,
         clearInputMemo,
+        isMobile,
     }
 }

@@ -24,6 +24,12 @@ const Parent = styled.div`
   padding-top: 3%;
 `;
 
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const VideoUl = styled.ul`
   display: grid;
   color: rgb(255, 255, 255);

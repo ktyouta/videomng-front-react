@@ -10,6 +10,7 @@ import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
 import { SearchKeywordCommentUrlModel } from "../Model/SearchKeywordCommentUrlModel";
 import { FavoriteVideoIdContext } from "../Component/Favorite";
 import { toast } from "react-toastify";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useFavoriteSearchKeywordCommentInput() {
@@ -20,6 +21,8 @@ export function useFavoriteSearchKeywordCommentInput() {
     const setSearchKeywordCommentUrl = useSetAtom(searchKeywordCommentUrlAtom);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     /**
@@ -49,5 +52,6 @@ export function useFavoriteSearchKeywordCommentInput() {
         setSearchKeywordCommentKeyword,
         clickSearchBtn,
         clearInputKeyword,
+        isMobile,
     }
 }

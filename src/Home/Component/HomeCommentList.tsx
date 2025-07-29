@@ -3,6 +3,7 @@ import LoadingBase from "../../Common/Component/LoadingBase";
 import { useHomeCommentList } from "../Hook/useHomeCommentList";
 import { HomeVideoCommentThreadItemType } from "../Type/HomeVideoCommentThreadItemType";
 import { HomeCommentContent } from "./HomeCommentContent";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -12,6 +13,13 @@ const Parent = styled.div`
   padding-left: 2%;
   padding-top: 4%;
   color:white;
+  position: relative;
+`;
+
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
@@ -35,9 +43,9 @@ export function HomeCommentList() {
 
     if (isLoading) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 
