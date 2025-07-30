@@ -14,7 +14,6 @@ import { MEDIA } from "../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
-  height: 10%;
   display:flex;
   justify-content: center;
   align-items: center;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useLogin } from "../Hook/useLogin";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
@@ -12,10 +13,31 @@ const Parent = styled.div`
 `;
 
 const LoginFormDiv = styled.div`
-    width: 25%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 10%;
+    width: 100%;
+    padding-left: 3%;
+    padding-right: 3%;
+    box-sizing: border-box;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 382px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 382px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      width: 382px;
+      padding-left: 0;
+      padding-right: 0;
+    }
 `;
 
 const LoginButtonDiv = styled.div`
@@ -92,7 +114,11 @@ export function Login() {
             onKeyDown={handleKeyPress}
             placeholder='UserName'
             autoComplete={true}
-            style={{ marginBottom: "7%" }}
+            style={{
+              marginBottom: "7%",
+              boxSizing: "border-box",
+              height: "37px",
+            }}
           />
         </InputRowDiv>
         <InputRowDiv>
@@ -108,6 +134,10 @@ export function Login() {
             textWidth='100%'
             onKeyDown={handleKeyPress}
             placeholder='Password'
+            style={{
+              boxSizing: "border-box",
+              height: "37px",
+            }}
           />
         </InputRowDiv>
         <SignUpDiv

@@ -62,9 +62,9 @@ export function FavoriteCommentList() {
 
     if (!favoriteVideoCommentList) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

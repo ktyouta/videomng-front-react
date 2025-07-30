@@ -14,6 +14,7 @@ import ModalComponent from "../../Common/Component/ModalComponent";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { HeaderHowToUse } from "./HeaderHowToUse";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import { HeaderMenuUlMobile } from "./HeaderMenuUlMobile";
 
 
 const Parent = styled.div`
@@ -111,7 +112,13 @@ export function Header() {
           </React.Fragment>
         }
         {/* メニュー */}
-        <HeaderMenuUl />
+        {
+          isMobile
+            ?
+            <HeaderMenuUlMobile />
+            :
+            <HeaderMenuUl />
+        }
         <FlexSpaceDiv />
         {/* ユーザーメニュー */}
         <HeaderUserMenu />

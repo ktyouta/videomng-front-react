@@ -16,6 +16,7 @@ import { HomeVideoAreaDefault } from "./HomeVideoAreaDefault";
 import { FaCheck } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -24,10 +25,11 @@ const Parent = styled.div`
   padding-top: 3%;
 `;
 
-const LoadingParent = styled(Parent)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const LoadingParent = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
 `;
 
 const VideoUl = styled.ul`
@@ -140,7 +142,11 @@ export function HomeVideoArea() {
 
   // 初回検索ローディング
   if (!showMoreData && isLoading) {
-    return <LoadingBase />;
+    return (
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
+    );
   }
 
   // 初期表示

@@ -6,10 +6,17 @@ import { FavoriteVideoContent } from "./FavoriteVideoContent";
 import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import Loading from "../../Common/Component/Loading";
 
 const Parent = styled.div`
   width: 100%;
-  height: 90%;
+`;
+
+const LoadingParent = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
 `;
 
 const VideoUl = styled.ul`
@@ -70,11 +77,19 @@ export function FavoriteVideoArea() {
 
   // ローディング
   if (!isCalledListApi) {
-    return <LoadingBase />;
+    return (
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
+    );
   }
 
   if (isLoading || isFetching) {
-    return <LoadingBase />;
+    return (
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
+    );
   }
 
   if (errMessage) {
