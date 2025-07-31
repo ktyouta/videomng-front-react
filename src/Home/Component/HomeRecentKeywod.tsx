@@ -10,27 +10,30 @@ import { HomeHistoryWord } from "./HomeHistoryWord";
 const Parent = styled.div`
   color:white;
   box-sizing: border-box;
-  margin-top: 3%;
+  margin-top: 8%;
   padding-left: 23%;
   width: 75%;
-  font-size: 12px;
+  font-size: 13px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 15px;
     display:flex;
     align-items: center;
+    margin-top: 3%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     font-size: 17px;
     display:flex;
     align-items: center;
+    margin-top: 3%;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     font-size: 17px;
     display:flex;
     align-items: center;
+    margin-top: 3%;
   }
 `;
 
@@ -44,20 +47,25 @@ const TitleDiv = styled.div`
 const WordAreaDiv = styled.div`
   flex-wrap: wrap;
   gap: 16px;
+  box-sizing: border-box;
+  padding-left: 2%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     display:flex;
     align-items: center;
+    padding-left: 0;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     display:flex;
     align-items: center;
+    padding-left: 0;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     display:flex;
     align-items: center;
+    padding-left: 0;
   }
 
 `;

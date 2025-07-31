@@ -18,13 +18,31 @@ import { MEDIA } from "../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
-  height: 41px;
   display:flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 12%;
-  padding-left: 17%;
+  padding-right: 3%;
+  padding-left: 4%;
+  height: 36px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    height: 41px;
+    padding-right: 12%;
+    padding-left: 17%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    height: 41px;
+    padding-right: 12%;
+    padding-left: 17%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    height: 41px;
+    padding-right: 12%;
+    padding-left: 17%;
+  }
 `;
 
 const TextBoxAreaDiv = styled.div`

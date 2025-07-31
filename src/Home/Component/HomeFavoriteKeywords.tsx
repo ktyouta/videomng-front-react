@@ -15,7 +15,7 @@ const Parent = styled.div`
   margin-top: 5%;
   padding-left: 23%;
   width: 75%;
-  font-size: 12px;
+  font-size: 13px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 15px;
@@ -46,22 +46,25 @@ const TitleDiv = styled.div`
 const WordAreaDiv = styled.div`
   flex-wrap: wrap;
   gap: 16px;
+  padding-left: 2%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     display:flex;
     align-items: center;
+    padding-left: 0;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     display:flex;
     align-items: center;
+    padding-left: 0;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     display:flex;
     align-items: center;
+    padding-left: 0;
   }
-
 `;
 
 

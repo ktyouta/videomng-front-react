@@ -47,8 +47,7 @@ const LoginButtonDiv = styled.div`
 
 const TitleDiv = styled.div`
     text-align: center;
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 27px;
     margin-bottom: 6%;
 `;
 

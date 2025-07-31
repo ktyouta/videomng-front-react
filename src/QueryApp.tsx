@@ -17,6 +17,7 @@ import { UpdateUserInfo } from './UpdateUserInfo/Component/UpdateUserInfo';
 import { UpdateUserPassword } from './UpdateUserPassword/Component/UpdateUserPassword';
 import styled from 'styled-components';
 import LoadingBase from './Common/Component/LoadingBase';
+import Loading from './Common/Component/Loading';
 
 
 const LoadingScreenDiv = styled.div`
@@ -24,6 +25,12 @@ const LoadingScreenDiv = styled.div`
   background-color: rgb(0, 5, 13);
 `;
 
+const LoadingParent = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`;
 
 // ログインフラグ
 export const IsLoginContext = createCtx<boolean>();
@@ -123,7 +130,9 @@ function QueryApp() {
                                 </IsCheckedAuthContext.Provider>
                                 :
                                 <LoadingScreenDiv>
-                                    <LoadingBase />
+                                    <LoadingParent>
+                                        <Loading />
+                                    </LoadingParent>
                                 </LoadingScreenDiv>
                         }
                     />
