@@ -16,6 +16,14 @@ type propsType = {
     positionTop?: string,
     positionLeft?: string,
     style?: CSSProperties,
+    isPositionCenter?: boolean,
+}
+
+const centerPositionStyle: CSSProperties = {
+    position: `fixed`,
+    top: `50%`,
+    left: `50%`,
+    transform: `translate(-50%, -50%)`,
 }
 
 function ModalComponent(props: propsType) {
@@ -35,6 +43,8 @@ function ModalComponent(props: propsType) {
         };
     }, [props.modalIsOpen]);
 
+    const style = props.isPositionCenter ? { ...centerPositionStyle, ...props.style } : props.style;
+
     return (
         <Modal
             isOpen={props.modalIsOpen}
@@ -51,7 +61,7 @@ function ModalComponent(props: propsType) {
                     width: props.width ?? '70%',
                     height: props.height ?? '85%',
                     zIndex: Z_INDEX_PARAM.MODAL,
-                    ...props.style
+                    ...style
                 }
             }}
             ariaHideApp={false}

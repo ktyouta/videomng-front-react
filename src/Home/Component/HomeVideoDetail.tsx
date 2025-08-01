@@ -9,6 +9,7 @@ import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -16,6 +17,13 @@ const Parent = styled.div`
   box-sizing:border-box;
   padding-top:1%;
   position-relative;
+`;
+
+const LoadingParent = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
 `;
 
 const VideoContentDiv = styled.div`
@@ -63,7 +71,11 @@ export function HomeVideoDetail() {
 
   // ローディング
   if (isLoading) {
-    return <LoadingBase />;
+    return (
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
+    );
   }
 
   if (errMessage) {

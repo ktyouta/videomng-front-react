@@ -35,7 +35,6 @@ const MenuNav = styled.nav`
   padding-right: 5%;
   display:flex;
   align-items: center;
-
   height:78%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -86,7 +85,6 @@ export function Header() {
   } = useHeader();
 
   const modalWidth = isMobile ? "73%" : "42%";
-  const modalpositionLeft = isMobile ? "9%" : "29%";
 
   return (
     <Parent>
@@ -138,8 +136,7 @@ export function Header() {
           }}
           width={modalWidth}
           height="65%"
-          positionTop="15%"
-          positionLeft={modalpositionLeft}
+          isPositionCenter={true}
         >
           <HeaderHowToUse
             close={closeHowToUseModal}

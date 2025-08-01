@@ -107,83 +107,81 @@ const SearchConditionTitleSpan = styled.span`
  */
 export function HomeSearchArea() {
 
-    console.log("HomeSearchArea render");
+  console.log("HomeSearchArea render");
 
-    const {
-        keyword,
-        setKeyword,
-        clickSearchBtn,
-        isOpenFilterModal,
-        openFilterModal,
-        closeFilterModal,
-        clearInput,
-        isMobile, } = useHomeSearchArea();
+  const {
+    keyword,
+    setKeyword,
+    clickSearchBtn,
+    isOpenFilterModal,
+    openFilterModal,
+    closeFilterModal,
+    clearInput,
+    isMobile, } = useHomeSearchArea();
 
-    const searchConditionModalWidth = isMobile ? "59%" : "42%";
-    const searchConditionModalpositionLeft = isMobile ? "19%" : "25%";
+  const searchConditionModalWidth = isMobile ? "59%" : "42%";
 
-    return (
-        <Parent>
-            <TextBoxAreaDiv>
-                <ClearableTextbox
-                    width={isMobile ? "85%" : "89%"}
-                    height="99%"
-                    placeholder="キーワード"
-                    value={keyword}
-                    onChange={setKeyword}
-                    style={{
-                        borderBottomLeftRadius: 5,
-                        borderTopLeftRadius: 5,
-                    }}
-                    clear={clearInput}
-                />
-                <SearchIconAreaDiv>
-                    <IconComponent
-                        icon={IoSearch}
-                        onclick={clickSearchBtn}
-                        size="75%"
-                    />
-                </SearchIconAreaDiv>
-            </TextBoxAreaDiv>
-            <SearchConditionIconAreaDiv>
-                <IconComponent
-                    icon={MdTune}
-                    onclick={openFilterModal}
-                    size="85%"
-                />
-            </SearchConditionIconAreaDiv>
-            {
-                !isMobile &&
-                <SearchConditionTitleSpan>
-                    条件を指定
-                </SearchConditionTitleSpan>
-            }
-            {
-                // 検索条件指定モーダル
-                isOpenFilterModal &&
-                <ModalComponent
-                    modalIsOpen={isOpenFilterModal}
-                    closeModal={closeFilterModal}
-                    style={{
-                        backgroundColor: "#181a1e",
-                        borderRadius: "1%",
-                        border: "solid 1px",
-                        color: "white"
-                    }}
-                    width={searchConditionModalWidth}
-                    height="50%"
-                    positionTop="22%"
-                    positionLeft={searchConditionModalpositionLeft}
-                >
-                    <HomeSearchCondition
-                        close={closeFilterModal}
-                    />
-                </ModalComponent>
-            }
-            {
-                isOpenFilterModal &&
-                <OverlayDiv />
-            }
-        </Parent>
-    );
+  return (
+    <Parent>
+      <TextBoxAreaDiv>
+        <ClearableTextbox
+          width={isMobile ? "85%" : "89%"}
+          height="99%"
+          placeholder="キーワード"
+          value={keyword}
+          onChange={setKeyword}
+          style={{
+            borderBottomLeftRadius: 5,
+            borderTopLeftRadius: 5,
+          }}
+          clear={clearInput}
+        />
+        <SearchIconAreaDiv>
+          <IconComponent
+            icon={IoSearch}
+            onclick={clickSearchBtn}
+            size="75%"
+          />
+        </SearchIconAreaDiv>
+      </TextBoxAreaDiv>
+      <SearchConditionIconAreaDiv>
+        <IconComponent
+          icon={MdTune}
+          onclick={openFilterModal}
+          size="85%"
+        />
+      </SearchConditionIconAreaDiv>
+      {
+        !isMobile &&
+        <SearchConditionTitleSpan>
+          条件を指定
+        </SearchConditionTitleSpan>
+      }
+      {
+        // 検索条件指定モーダル
+        isOpenFilterModal &&
+        <ModalComponent
+          modalIsOpen={isOpenFilterModal}
+          closeModal={closeFilterModal}
+          style={{
+            backgroundColor: "#181a1e",
+            borderRadius: "1%",
+            border: "solid 1px",
+            color: "white"
+          }}
+          width={searchConditionModalWidth}
+          height="50%"
+          isPositionCenter={true}
+        >
+          <HomeSearchCondition
+            close={closeFilterModal}
+          />
+        </ModalComponent>
+      }
+      {
+        isOpenFilterModal &&
+        <OverlayDiv />
+      }
+    </Parent>
+  );
 }

@@ -120,8 +120,7 @@ export function FavoriteSearchAreaMobile() {
             }}
             width="80%"
             height="65%"
-            positionTop="15%"
-            positionLeft="5%"
+            isPositionCenter={true}
           >
             <FavoriteSearchCondition
               close={closeFilterModal}

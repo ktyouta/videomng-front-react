@@ -49,6 +49,9 @@ type propsType = {
 
 export function ConfirmModalComponent(props: propsType) {
 
+    const { isMobile } = useConfirmModalComponent();
+
+    const modalWidth = isMobile ? "73%" : "26%";
 
     return (
         <React.Fragment>
@@ -63,10 +66,9 @@ export function ConfirmModalComponent(props: propsType) {
                         border: "solid 1px",
                         color: "black",
                     }}
-                    width="26%"
+                    width={modalWidth}
                     height="25%"
-                    positionTop="32%"
-                    positionLeft="35%"
+                    isPositionCenter={true}
                 >
                     <Parent>
                         <HeaderDiv>

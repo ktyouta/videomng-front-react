@@ -131,8 +131,7 @@ export function FavoriteSearchArea() {
           }}
           width="42%"
           height="65%"
-          positionTop="15%"
-          positionLeft="29%"
+          isPositionCenter={true}
         >
           <FavoriteSearchCondition
             close={closeFilterModal}

@@ -1,13 +1,12 @@
+import { mediaQuery, useMediaQuery } from "./useMediaQuery";
 import useSwitch from "./useSwitch";
 
 export function useConfirmModalComponent() {
 
-    // モーダル開閉フラグ
-    const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     return {
-        isOpenModal,
-        openModal,
-        closeModal,
+        isMobile
     };
 }

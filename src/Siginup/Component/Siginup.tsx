@@ -6,6 +6,7 @@ import { useSiginup } from "../Hook/useSiginup";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
@@ -14,13 +15,44 @@ const Parent = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
   padding-bottom: 3%;
-  padding-left: 10%;
   padding-top: 5%;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        padding-left: 10%;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        padding-left: 10%;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        padding-left: 10%;
+    }
 `;
 
 const SiginupFormDiv = styled.div`
-    width: 40%;
     box-sizing: border-box;
+    width: 382px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        margin-left: 0;
+        margin-right: 0;
+        width: 550px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        margin-left: 0;
+        margin-right: 0;
+        width: 550px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        margin-left: 0;
+        margin-right: 0;
+        width: 550px;
+    }
 `;
 
 const SiginupButtonDiv = styled.div`

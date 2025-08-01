@@ -63,6 +63,7 @@ export function FavoriteBlockCommentModalIcon() {
                         borderRadius: "1%",
                         border: "solid 1px",
                     }}
+                    isPositionCenter={true}
                 >
                     <FavoriteBlockComment
                         close={closeBlockListModal}
