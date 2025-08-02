@@ -117,7 +117,8 @@ export function HomeSearchArea() {
     openFilterModal,
     closeFilterModal,
     clearInput,
-    isMobile, } = useHomeSearchArea();
+    isMobile,
+    handleKeyPress, } = useHomeSearchArea();
 
   const searchConditionModalWidth = isMobile ? "59%" : "42%";
 
@@ -135,6 +136,7 @@ export function HomeSearchArea() {
             borderTopLeftRadius: 5,
           }}
           clear={clearInput}
+          onKeyDown={handleKeyPress}
         />
         <SearchIconAreaDiv>
           <IconComponent

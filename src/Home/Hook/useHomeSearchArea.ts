@@ -73,6 +73,14 @@ export function useHomeSearchArea() {
         setKeyword(``);
     }
 
+    /**
+     * エンターキー押下時イベント
+     */
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            clickSearchBtn();
+        }
+    };
 
     return {
         keyword,
@@ -83,5 +91,6 @@ export function useHomeSearchArea() {
         closeFilterModal,
         clearInput,
         isMobile,
+        handleKeyPress,
     }
 }
