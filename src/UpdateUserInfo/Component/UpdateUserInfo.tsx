@@ -34,23 +34,31 @@ const UpdateUserInfoFormDiv = styled.div`
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 3%;
+    padding-right: 3%;
     width: 382px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         margin-left: 0;
         margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
         width: 550px;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
         margin-left: 0;
         margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
         width: 550px;
     }
 
     @media (min-width: ${MEDIA.PC}) {
         margin-left: 0;
         margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
         width: 550px;
     }
 `;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ChannelInfoType } from "../Type/ChannelInfoType";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
@@ -13,13 +14,40 @@ const Parent = styled.div`
 
 const ChannelTitleSpan = styled.span`
   color:white;
-  font-size: 24px;
+  font-size: 17px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 17px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 24px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 24px;
+  }
 `;
 
 const VideoImg = styled.img`
-    width:10%;
     border-radius: 50%;
-    margin-right: 2%;
+    margin-right: 4%;
+    width:19%;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width:10%;
+      margin-right: 2%;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width:10%;
+      margin-right: 2%;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      width:10%;
+      margin-right: 2%;
+    }
 `;
 
 type propsType = {

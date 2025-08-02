@@ -12,7 +12,7 @@ const Parent = styled.div`
   box-sizing: border-box;
   margin-top: 8%;
   padding-left: 23%;
-  width: 75%;
+  width: 90%;
   font-size: 13px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {

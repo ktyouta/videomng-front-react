@@ -9,6 +9,7 @@ import { VideoListItemType } from "../Type/VideoListItemType";
 import { HomeChannelVideoContent } from "./HomeChannelVideoContent";
 import { VideoListDataType } from "../Type/VideoListDataType";
 import { useHomeChannelVideoArea } from "../Hook/useHomeChannelVideoArea";
+import Loading from "../../Common/Component/Loading";
 
 const Parent = styled.div`
   width: 100%;
@@ -40,11 +41,20 @@ const NextGetBtnAreaDiv = styled.div`
   width:100%;
   box-sizing: border-box;
   margin-top: 3%;
+  position: relative;
+`;
+
+const LoadingParentNext = styled.div`
+  position: absolute;
+  top: -125%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
 `;
 
 type propsType = {
     videoListData: VideoListDataType,
-    setNextPageToken: React.Dispatch<React.SetStateAction<string>>
+    setNextPageToken: React.Dispatch<React.SetStateAction<string>>,
+    isLoading: boolean,
 }
 
 export function HomeChannelVideoArea(props: propsType) {
@@ -83,6 +93,12 @@ export function HomeChannelVideoArea(props: propsType) {
             {
                 nextPageToken &&
                 <NextGetBtnAreaDiv>
+                    {
+                        props.isLoading &&
+                        <LoadingParentNext>
+                            <Loading />
+                        </LoadingParentNext>
+                    }
                     <ButtonComponent
                         styleTypeNumber="GRAD_GRAY"
                         title={"もっと見る"}

@@ -6,17 +6,29 @@ import { useHomeChannel } from "../Hook/useHomeChannel";
 import LoadingBase from "../../Common/Component/LoadingBase";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IconComponent } from "../../Common/Component/IconComponent";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
   width: 100%;
 `;
 
+const LoadingParent = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  z-index: 10;
+`;
+
 const MessageDiv = styled.div`
   color:white;
-  position: absolute;
-  top: 32%;
-  left: 42%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-top: 5%;
+  font-size: 17px;
 `;
 
 export function HomeChannel() {
@@ -40,16 +52,14 @@ export function HomeChannel() {
 
     if (!channelVideoListData) {
         return (
-            <React.Fragment></React.Fragment>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 
     return (
         <Parent>
-            {
-                isLoading &&
-                <LoadingBase />
-            }
             <IconComponent
                 icon={FaArrowLeft}
                 size="20"
@@ -69,6 +79,7 @@ export function HomeChannel() {
             <HomeChannelVideoArea
                 videoListData={channelVideoListData}
                 setNextPageToken={setNextPageToken}
+                isLoading={isLoading}
             />
         </Parent>
     );

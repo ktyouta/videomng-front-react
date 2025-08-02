@@ -116,9 +116,12 @@ export function HeaderUserMenu() {
                         isLogin ?
                             // ログイン時メニュー
                             <React.Fragment>
-                                <UserNameSpan>
-                                    {loginUserInfo.userName}
-                                </UserNameSpan>
+                                {
+                                    !isMobile &&
+                                    <UserNameSpan>
+                                        {loginUserInfo.userName}
+                                    </UserNameSpan>
+                                }
                                 <BtnDiv>
                                     <IconComponent
                                         icon={IoPersonCircleOutline}
@@ -159,9 +162,10 @@ export function HeaderUserMenu() {
                                 title={"ログイン"}
                                 onclick={clickLogin}
                                 style={{
-                                    fontSize: "0.9rem",
-                                    width: "7%",
-                                    height: "35%",
+                                    fontSize: isMobile ? "12px" : "14px",
+                                    width: isMobile ? "82px" : "100px",
+                                    minWidth: "82px",
+                                    height: isMobile ? "38%" : "35%",
                                     background: "#eb3941",
                                     boxShadow: "none",
                                 }}

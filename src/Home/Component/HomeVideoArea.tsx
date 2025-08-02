@@ -32,6 +32,13 @@ const LoadingParent = styled.div`
   transform: translate(-50%, -50%); 
 `;
 
+const LoadingParentNext = styled.div`
+  position: absolute;
+  top: -125%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`;
+
 const VideoUl = styled.ul`
   display: grid;
   color: rgb(255, 255, 255);
@@ -73,6 +80,7 @@ const NextGetBtnAreaDiv = styled.div`
   width:100%;
   box-sizing: border-box;
   margin-top: 3%;
+  position: relative;
 `;
 
 const SearchKeywordAreaDiv = styled.div`
@@ -229,10 +237,6 @@ export function HomeVideoArea() {
           }
         </SearchKeywordAreaDiv>
       }
-      {
-        isLoading &&
-        <LoadingBase />
-      }
       <VideoUl>
         {
           videoListItems?.map((e: VideoListItemType) => {
@@ -248,6 +252,12 @@ export function HomeVideoArea() {
       {
         nextPageToken &&
         <NextGetBtnAreaDiv>
+          {
+            isLoading &&
+            <LoadingParentNext>
+              <Loading />
+            </LoadingParentNext>
+          }
           <ButtonComponent
             styleTypeNumber="GRAD_GRAY"
             title={"もっと見る"}
