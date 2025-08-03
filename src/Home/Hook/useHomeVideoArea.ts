@@ -7,11 +7,13 @@ import { VideoListDataType } from "../Type/VideoListDataType";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { isEqual } from "lodash";
 import { ShowMoreDataType } from "../Type/ShowMoreDataType";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SetVideoApiUrlContext, VideoApiUrlContext } from "../Component/Home";
 import { toast } from "react-toastify";
 import { useFavoriteKeywod } from "./useFavoriteKeywod";
 import { FAVORITE_KEYWORD } from "../Const/HomeConst";
+import { useLocation } from "react-router-dom";
+import { useHomeResetCondition } from "./useHomeResetCondition";
 
 
 export function useHomeVideoArea() {
@@ -35,7 +37,13 @@ export function useHomeVideoArea() {
     const { saveFavoriteKeywod } = useFavoriteKeywod();
     // お気に入りワードリスト
     const [favoriteWordList, setFavoriteWordList] = useState<string[]>([]);
+    // URL情報
+    const location = useLocation();
+    const prevSearch = useRef(location.search);
+    // ホーム画面初期化イベント
+    const { reset } = useHomeResetCondition();
 
+    // ローカルストレージからお気に入りワードリストを取得
     useEffect(() => {
 
         const wordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];
@@ -126,6 +134,16 @@ export function useHomeVideoArea() {
 
         toast.success(`お気に入りワードに登録しました。`);
     }
+
+    // クエリパラメータが存在しない場合はホーム画面を初期化する
+    useEffect(() => {
+
+        if (prevSearch.current && !location.search) {
+            reset();
+        }
+
+        prevSearch.current = location.search;
+    }, [location.search]);
 
     return {
         videoListData,
