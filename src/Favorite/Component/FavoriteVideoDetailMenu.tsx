@@ -25,7 +25,7 @@ import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const MenuParentDiv = styled.div`
-  width: 96%;
+  width: 99%;
   box-sizing:border-box;
   padding-top: 1%;
   margin-top: 8%;

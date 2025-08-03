@@ -48,39 +48,41 @@ const SearchIconAreaDiv = styled.div`
 
 export function FavoriteMemoCreateInput() {
 
-    console.log("FavoriteMemoCreateInput render");
+  console.log("FavoriteMemoCreateInput render");
 
-    const {
-        inputMemo,
-        setInputMemo,
-        addToMemo,
-        clearInputMemo,
-        isMobile
-    } = useFavoriteMemoCreateInput();
+  const {
+    inputMemo,
+    setInputMemo,
+    addToMemo,
+    clearInputMemo,
+    isMobile,
+    handleKeyPress,
+  } = useFavoriteMemoCreateInput();
 
-    const inputWidth = isMobile ? "88%" : "92%";
+  const inputWidth = isMobile ? "88%" : "92%";
 
-    return (
-        <MemoInputAreaDiv>
-            <ClearableTextbox
-                width={inputWidth}
-                height="100%"
-                placeholder="メモ"
-                value={inputMemo}
-                onChange={setInputMemo}
-                style={{
-                    borderBottomLeftRadius: 5,
-                    borderTopLeftRadius: 5,
-                }}
-                clear={clearInputMemo}
-            />
-            <SearchIconAreaDiv>
-                <IconComponent
-                    icon={FaArrowUp}
-                    onclick={() => { addToMemo() }}
-                    size="70%"
-                />
-            </SearchIconAreaDiv>
-        </MemoInputAreaDiv>
-    );
+  return (
+    <MemoInputAreaDiv>
+      <ClearableTextbox
+        width={inputWidth}
+        height="100%"
+        placeholder="メモ"
+        value={inputMemo}
+        onChange={setInputMemo}
+        style={{
+          borderBottomLeftRadius: 5,
+          borderTopLeftRadius: 5,
+        }}
+        clear={clearInputMemo}
+        onKeyDown={handleKeyPress}
+      />
+      <SearchIconAreaDiv>
+        <IconComponent
+          icon={FaArrowUp}
+          onclick={() => { addToMemo() }}
+          size="70%"
+        />
+      </SearchIconAreaDiv>
+    </MemoInputAreaDiv>
+  );
 }

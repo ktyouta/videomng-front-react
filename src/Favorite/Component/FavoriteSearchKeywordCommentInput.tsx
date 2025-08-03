@@ -50,39 +50,41 @@ const SearchIconAreaDiv = styled.div`
 
 export function FavoriteSearchKeywordCommentInput() {
 
-    console.log("FavoriteSearchKeywordCommentInput render");
+  console.log("FavoriteSearchKeywordCommentInput render");
 
-    const {
-        searchKeywordCommentKeyword,
-        setSearchKeywordCommentKeyword,
-        clickSearchBtn,
-        clearInputKeyword,
-        isMobile
-    } = useFavoriteSearchKeywordCommentInput();
+  const {
+    searchKeywordCommentKeyword,
+    setSearchKeywordCommentKeyword,
+    clickSearchBtn,
+    clearInputKeyword,
+    isMobile,
+    handleKeyPress,
+  } = useFavoriteSearchKeywordCommentInput();
 
-    const inputWidth = isMobile ? "88%" : "92%";
+  const inputWidth = isMobile ? "88%" : "92%";
 
-    return (
-        <MemoInputAreaDiv>
-            <ClearableTextbox
-                width={inputWidth}
-                height="100%"
-                placeholder="キーワード"
-                value={searchKeywordCommentKeyword}
-                onChange={setSearchKeywordCommentKeyword}
-                style={{
-                    borderBottomLeftRadius: 5,
-                    borderTopLeftRadius: 5,
-                }}
-                clear={clearInputKeyword}
-            />
-            <SearchIconAreaDiv>
-                <IconComponent
-                    icon={IoSearch}
-                    onclick={() => { clickSearchBtn() }}
-                    size="70%"
-                />
-            </SearchIconAreaDiv>
-        </MemoInputAreaDiv>
-    );
+  return (
+    <MemoInputAreaDiv>
+      <ClearableTextbox
+        width={inputWidth}
+        height="100%"
+        placeholder="キーワード"
+        value={searchKeywordCommentKeyword}
+        onChange={setSearchKeywordCommentKeyword}
+        style={{
+          borderBottomLeftRadius: 5,
+          borderTopLeftRadius: 5,
+        }}
+        clear={clearInputKeyword}
+        onKeyDown={handleKeyPress}
+      />
+      <SearchIconAreaDiv>
+        <IconComponent
+          icon={IoSearch}
+          onclick={() => { clickSearchBtn() }}
+          size="70%"
+        />
+      </SearchIconAreaDiv>
+    </MemoInputAreaDiv>
+  );
 }

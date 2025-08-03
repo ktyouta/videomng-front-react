@@ -2,17 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from "react-icons/rx";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const SideMenuAside = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 195px;
   height: 100%;
   background: white;
   transition: transform 0.3s ease;
   z-index: 1000;
+  font-size: 13px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 250px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 250px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 250px;
+  }
 `;
 
 const MenuUl = styled.ul`
@@ -29,6 +43,19 @@ const MenuUl = styled.ul`
   background-color: #1e1e1e;
   padding-left: 10%;
   gap: 1%;
+  font-size: 13px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 13px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 16px;
+  }
 `;
 
 const MenuLi = styled.li<{ isTopLine?: boolean }>`

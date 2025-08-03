@@ -35,6 +35,16 @@ export function useHomeSearchKeywordCommentInput() {
     }
 
     /**
+     * エンターキー押下時イベント
+     * @param event 
+     */
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            clickSearchBtn();
+        }
+    };
+
+    /**
      * 入力中のキーワードをクリアする
      */
     function clearInputKeyword() {
@@ -46,5 +56,6 @@ export function useHomeSearchKeywordCommentInput() {
         clickSearchBtn,
         clearInputKeyword,
         isMobile,
+        handleKeyPress,
     }
 }

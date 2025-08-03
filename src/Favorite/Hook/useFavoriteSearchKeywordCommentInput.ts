@@ -47,11 +47,23 @@ export function useFavoriteSearchKeywordCommentInput() {
     function clearInputKeyword() {
         setSearchKeywordCommentKeyword(``);
     }
+
+    /**
+     * エンターキー押下時イベント
+     * @param event 
+     */
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            clickSearchBtn();
+        }
+    };
+
     return {
         searchKeywordCommentKeyword,
         setSearchKeywordCommentKeyword,
         clickSearchBtn,
         clearInputKeyword,
         isMobile,
+        handleKeyPress,
     }
 }

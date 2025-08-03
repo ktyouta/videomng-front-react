@@ -11,7 +11,7 @@ import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const MenuParentDiv = styled.div`
-  width: 96%;
+  width: 99%;
   box-sizing:border-box;
   padding-top: 1%;
   margin-top: 8%;
@@ -41,7 +41,6 @@ const MenuParentDiv = styled.div`
     font-size: 16px;
   }
 `;
-
 
 const ComboAreaDiv = styled.div`
   display:flex;

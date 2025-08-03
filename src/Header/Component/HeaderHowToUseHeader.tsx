@@ -23,7 +23,6 @@ const BlockIconDiv = styled.div`
 `;
 
 const TitleSpan = styled.div`
-  font-size:17px;
 `;
 
 type propsType = {

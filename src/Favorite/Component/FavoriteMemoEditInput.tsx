@@ -45,6 +45,7 @@ export function FavoriteMemoEditInput(props: propsType) {
         inputMemo,
         setInputMemo,
         updateMemo,
+        handleKeyPress,
     } = useFavoriteMemoUpdateInput({ ...props });
 
     return (
@@ -57,6 +58,7 @@ export function FavoriteMemoEditInput(props: propsType) {
                 style={{
                     height: "34px",
                 }}
+                onKeyDown={handleKeyPress}
             />
             <EditIconAreaDiv>
                 {/* キャンセル */}

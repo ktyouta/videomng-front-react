@@ -73,11 +73,22 @@ export function useFavoriteMemoCreateInput() {
         setInputMemo(``);
     }
 
+    /**
+     * エンターキー押下時イベント
+     * @param event 
+     */
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            addToMemo();
+        }
+    };
+
     return {
         inputMemo,
         setInputMemo,
         addToMemo,
         clearInputMemo,
         isMobile,
+        handleKeyPress,
     }
 }

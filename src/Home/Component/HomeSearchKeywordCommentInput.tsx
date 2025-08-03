@@ -49,39 +49,41 @@ const SearchIconAreaDiv = styled.div`
 
 export function HomeSearchKeywordCommentInput() {
 
-    console.log("HomeSearchKeywordCommentInput render");
+  console.log("HomeSearchKeywordCommentInput render");
 
-    const {
-        searchKeywordCommentKeyword,
-        setSearchKeywordCommentKeyword,
-        clickSearchBtn,
-        clearInputKeyword,
-        isMobile
-    } = useHomeSearchKeywordCommentInput();
+  const {
+    searchKeywordCommentKeyword,
+    setSearchKeywordCommentKeyword,
+    clickSearchBtn,
+    clearInputKeyword,
+    isMobile,
+    handleKeyPress,
+  } = useHomeSearchKeywordCommentInput();
 
-    const inputWidth = isMobile ? "88%" : "92%";
+  const inputWidth = isMobile ? "88%" : "92%";
 
-    return (
-        <MemoInputAreaDiv>
-            <ClearableTextbox
-                width={inputWidth}
-                height="100%"
-                placeholder="キーワード"
-                value={searchKeywordCommentKeyword}
-                onChange={setSearchKeywordCommentKeyword}
-                style={{
-                    borderBottomLeftRadius: 5,
-                    borderTopLeftRadius: 5,
-                }}
-                clear={clearInputKeyword}
-            />
-            <SearchIconAreaDiv>
-                <IconComponent
-                    icon={IoSearch}
-                    onclick={() => { clickSearchBtn() }}
-                    size="70%"
-                />
-            </SearchIconAreaDiv>
-        </MemoInputAreaDiv>
-    );
+  return (
+    <MemoInputAreaDiv>
+      <ClearableTextbox
+        width={inputWidth}
+        height="100%"
+        placeholder="キーワード"
+        value={searchKeywordCommentKeyword}
+        onChange={setSearchKeywordCommentKeyword}
+        style={{
+          borderBottomLeftRadius: 5,
+          borderTopLeftRadius: 5,
+        }}
+        clear={clearInputKeyword}
+        onKeyDown={handleKeyPress}
+      />
+      <SearchIconAreaDiv>
+        <IconComponent
+          icon={IoSearch}
+          onclick={() => { clickSearchBtn() }}
+          size="70%"
+        />
+      </SearchIconAreaDiv>
+    </MemoInputAreaDiv>
+  );
 }

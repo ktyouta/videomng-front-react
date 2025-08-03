@@ -7,10 +7,11 @@ const Parent = styled.div`
     width: 100%;
     height: 87%;
     box-sizing: border-box;
-    padding-left: 6%;
     color: white;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    justify-content: center;
 `;
 
 const MessageOl = styled.ol`

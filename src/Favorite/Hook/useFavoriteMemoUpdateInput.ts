@@ -97,9 +97,20 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
         postMutation.mutate(body);
     }
 
+    /**
+     * エンターキー押下時イベント
+     * @param event 
+     */
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            updateMemo();
+        }
+    };
+
     return {
         inputMemo,
         setInputMemo,
         updateMemo,
+        handleKeyPress,
     }
 }
