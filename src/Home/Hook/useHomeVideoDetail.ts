@@ -10,6 +10,7 @@ import { useState } from "react";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
+import { useGetVideoListUrl } from "./useGetVideoListUrl";
 
 export function useHomeVideoDetail() {
 
@@ -21,8 +22,8 @@ export function useHomeVideoDetail() {
     const navigate = useNavigate();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // 動画リスト追加読み込み用
-    const showMoreData = useAtomValue(showMoreDataAtom);
+    // 動画一覧取得URL情報
+    const { query } = useGetVideoListUrl();
 
 
     // 動画詳細を取得
@@ -54,17 +55,7 @@ export function useHomeVideoDetail() {
      */
     function backHome() {
 
-        const keyword = showMoreData?.keyword ?? ``;
-        const videoType = showMoreData?.videoType ?? ``;
-        const videoCategory = showMoreData?.videoCategory ?? ``;
-
-        const videoListApiUrlModel = VideoListApiUrlModel.create({
-            keyword,
-            videoType,
-            videoCategory,
-        });
-
-        navigate(`${ROUTER_PATH.HOME.ROOT}${videoListApiUrlModel.query}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${query()}`);
     }
 
     return {
