@@ -4,6 +4,8 @@ import { useLogin } from "../Hook/useLogin";
 import BaseTextbox from "../../Common/Component/BaseTextbox";
 import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import Loading from "../../Common/Component/Loading";
+import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 
 
 const Parent = styled.div`
@@ -75,6 +77,14 @@ const InputRowDiv = styled.div`
 const InputTitleDiv = styled.div`
 `;
 
+const LoadingParent = styled.div`
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`;
+
+
 export function Login() {
 
   console.log("Login render");
@@ -86,10 +96,22 @@ export function Login() {
     handleKeyPress,
     clickSignup,
     errMessage,
-    clickBack } = useLogin();
+    clickBack,
+    isLoading } = useLogin();
 
   return (
     <Parent>
+      {
+        isLoading &&
+        <React.Fragment>
+          <LoadingParent>
+            <Loading />
+          </LoadingParent>
+          <OverlayDiv
+            bgColor="rgba(0, 0, 0, 0.1)"
+          />
+        </React.Fragment>
+      }
       <LoginFormDiv>
         <TitleDiv>
           ログイン
