@@ -137,5 +137,6 @@ export function useUpdateUserInfo() {
         isOpenModal,
         closeModal,
         executeUpdate,
+        isLoading: postMutation.isLoading,
     }
 }

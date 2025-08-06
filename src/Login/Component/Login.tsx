@@ -6,6 +6,7 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
 import Loading from "../../Common/Component/Loading";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 
 
 const Parent = styled.div`
@@ -77,13 +78,6 @@ const InputRowDiv = styled.div`
 const InputTitleDiv = styled.div`
 `;
 
-const LoadingParent = styled.div`
-  position: fixed;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%); 
-`;
-
 
 export function Login() {
 
@@ -104,9 +98,7 @@ export function Login() {
       {
         isLoading &&
         <React.Fragment>
-          <LoadingParent>
-            <Loading />
-          </LoadingParent>
+          <LoadingCenter />
           <OverlayDiv
             bgColor="rgba(0, 0, 0, 0.1)"
           />

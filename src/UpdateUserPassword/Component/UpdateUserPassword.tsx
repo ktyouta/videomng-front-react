@@ -7,6 +7,8 @@ import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { useUpdateUserPassword } from "../Hook/useUpdateUserPassword";
 import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import { LoadingCenter } from "../../Common/Component/LoadingCenter";
+import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 
 
 const Parent = styled.div`
@@ -92,10 +94,20 @@ export function UpdateUserPassword() {
         clickCancel,
         isOpenModal,
         closeModal,
-        executeUpdate, } = useUpdateUserPassword();
+        executeUpdate,
+        isLoading } = useUpdateUserPassword();
 
     return (
         <Parent>
+            {
+                isLoading &&
+                <React.Fragment>
+                    <LoadingCenter />
+                    <OverlayDiv
+                        bgColor="rgba(0, 0, 0, 0.1)"
+                    />
+                </React.Fragment>
+            }
             <FormDiv>
                 <TitleDiv>
                     パスワードの変更

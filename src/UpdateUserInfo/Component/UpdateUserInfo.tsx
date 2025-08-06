@@ -7,6 +7,9 @@ import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { useUpdateUserInfo } from "../Hook/useUpdateUserInfo";
 import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import Loading from "../../Common/Component/Loading";
+import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 
 
 const Parent = styled.div`
@@ -126,10 +129,20 @@ export function UpdateUserInfo() {
         clickCancel,
         isOpenModal,
         closeModal,
-        executeUpdate, } = useUpdateUserInfo();
+        executeUpdate,
+        isLoading, } = useUpdateUserInfo();
 
     return (
         <Parent>
+            {
+                isLoading &&
+                <React.Fragment>
+                    <LoadingCenter />
+                    <OverlayDiv
+                        bgColor="rgba(0, 0, 0, 0.1)"
+                    />
+                </React.Fragment>
+            }
             <UpdateUserInfoFormDiv>
                 <TitleDiv>
                     ユーザー情報更新

@@ -202,5 +202,6 @@ export function useSiginup() {
         closeModal,
         executeSiginup,
         confirmPasswordRef,
+        isLoading: postMutation.isLoading,
     }
 }

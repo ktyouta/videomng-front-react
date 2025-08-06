@@ -7,6 +7,8 @@ import ComboComponent from "../../Common/Component/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
+import { LoadingCenter } from "../../Common/Component/LoadingCenter";
+import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 
 
 const Parent = styled.div`
@@ -108,10 +110,20 @@ export function Siginup() {
     isOpenModal,
     closeModal,
     executeSiginup,
-    confirmPasswordRef } = useSiginup();
+    confirmPasswordRef,
+    isLoading } = useSiginup();
 
   return (
     <Parent>
+      {
+        isLoading &&
+        <React.Fragment>
+          <LoadingCenter />
+          <OverlayDiv
+            bgColor="rgba(0, 0, 0, 0.1)"
+          />
+        </React.Fragment>
+      }
       <SiginupFormDiv>
         <TitleDiv>
           アカウント作成

@@ -135,5 +135,6 @@ export function useUpdateUserPassword() {
         isOpenModal,
         closeModal,
         executeUpdate,
+        isLoading: postMutation.isLoading,
     }
 }
