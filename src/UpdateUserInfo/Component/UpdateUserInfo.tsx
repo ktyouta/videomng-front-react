@@ -13,7 +13,7 @@ import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 
 
 const Parent = styled.div`
-  width: 100vw;
+  width: 100%;
   background-color: #dcdcdc;
   min-height: 100vh;
   box-sizing: border-box;
