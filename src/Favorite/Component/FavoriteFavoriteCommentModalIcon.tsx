@@ -38,7 +38,10 @@ export function FavoriteFavoriteCommentModalIcon() {
         isOpenFavoriteListModal,
         openFavoriteListModal,
         closeFavoriteListModal,
+        isMobile,
     } = useFavoriteFavoriteCommentModalIcon();
+
+    const modalWidth = isMobile ? "84%" : "70%";
 
     return (
         <React.Fragment>
@@ -67,6 +70,7 @@ export function FavoriteFavoriteCommentModalIcon() {
                         border: "solid 1px",
                     }}
                     isPositionCenter={true}
+                    width={modalWidth}
                 >
                     <FavoriteFavoriteComment
                         close={closeFavoriteListModal}
