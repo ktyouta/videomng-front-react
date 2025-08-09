@@ -1,4 +1,4 @@
-import React, { RefObject, useContext, useMemo, useRef, useState } from 'react';
+import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -42,6 +42,21 @@ export function useUpdateUserInfo() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
+    // 遷移元パス
+    const [previousPath, setPreviousPath] = useState(``);
+
+    // 遷移元パス取得
+    useEffect(() => {
+
+        const params = new URLSearchParams(window.location.search);
+        const previousPathValue = params.get(`previouspath`);
+
+        if (!previousPathValue) {
+            return;
+        }
+
+        setPreviousPath(previousPathValue);
+    }, []);
 
     /**
      * 更新リクエスト
@@ -56,7 +71,7 @@ export function useUpdateUserInfo() {
 
             toast.success("ユーザー情報を更新しました。");
             setLoginUserInfo(loginUserInfo);
-            navigate(ROUTER_PATH.HOME.ROOT);
+            navigate(previousPath ?? ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -104,7 +119,7 @@ export function useUpdateUserInfo() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(ROUTER_PATH.HOME.ROOT);
+        navigate(previousPath ?? ROUTER_PATH.HOME.ROOT);
     }
 
     /**

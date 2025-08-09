@@ -12,6 +12,7 @@ import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from "../../Common/Const/CommonC
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
+import { useGetPreviousPath } from "../../Common/Hook/useGetPreviousPath";
 
 
 export function useHeaderUserMenu() {
@@ -32,7 +33,9 @@ export function useHeaderUserMenu() {
     // 認証チェック済みフラグ
     const isCheckedAuth = IsCheckedAuthContext.useCtx();
     // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile)
+    const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 遷移元パス
+    const previousPath = useGetPreviousPath();
 
     /**
      * ログアウトリクエスト
@@ -72,14 +75,14 @@ export function useHeaderUserMenu() {
      * ユーザー情報更新画面遷移
      */
     function clickUpdateUserInfo() {
-        navigate(ROUTER_PATH.UPDATE_USER_INFO);
+        navigate(`${ROUTER_PATH.UPDATE_USER_INFO}?previouspath=${previousPath}`);
     }
 
     /**
      * ユーザーパスワード更新画面遷移
      */
     function clickUpdateUserPassword() {
-        navigate(ROUTER_PATH.UPDATE_USER_PASSWORD);
+        navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}?previouspath=${previousPath}`);
     }
 
     return {
