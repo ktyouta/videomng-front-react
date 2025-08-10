@@ -42,7 +42,9 @@ const MenuUl = styled.ul`
   color: white;
   background-color: #1e1e1e;
   padding-left: 10%;
-  gap: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
   font-size: 13px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -59,7 +61,6 @@ const MenuUl = styled.ul`
 `;
 
 const MenuLi = styled.li<{ isTopLine?: boolean }>`
-  margin-bottom: 10%;
   cursor:pointer;
 `;
 
@@ -73,30 +74,36 @@ const CloseIconAreaDiv = styled.div`
 `;
 
 type propsType = {
-    closeSideMenu: () => void,
-    openHowToUseModal: () => void
+  closeSideMenu: () => void,
+  openHowToUseModal: () => void,
+  openUsagePrecautionModal: () => void,
 }
 
 export function HeaderSideMenu(props: propsType) {
 
-    return (
-        <SideMenuAside>
-            <CloseIconAreaDiv>
-                <IconComponent
-                    icon={RxCross1}
-                    onclick={props.closeSideMenu}
-                    style={{
-                        color: "white"
-                    }}
-                />
-            </CloseIconAreaDiv>
-            <MenuUl>
-                <MenuLi
-                    onClick={props.openHowToUseModal}
-                >
-                    使い方を見る
-                </MenuLi>
-            </MenuUl>
-        </SideMenuAside>
-    );
+  return (
+    <SideMenuAside>
+      <CloseIconAreaDiv>
+        <IconComponent
+          icon={RxCross1}
+          onclick={props.closeSideMenu}
+          style={{
+            color: "white"
+          }}
+        />
+      </CloseIconAreaDiv>
+      <MenuUl>
+        <MenuLi
+          onClick={props.openHowToUseModal}
+        >
+          使い方を見る
+        </MenuLi>
+        <MenuLi
+          onClick={props.openUsagePrecautionModal}
+        >
+          使用上の注意
+        </MenuLi>
+      </MenuUl>
+    </SideMenuAside>
+  );
 }

@@ -10,6 +10,8 @@ export function useHeader() {
     const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
     // 使い方を見るモーダル展開フラグ
     const [isOpenHowToUseModal, setIsOpenHowToUseModal] = useState(false);
+    // 使い方を見るモーダル展開フラグ
+    const [isOpenUsagePrecautionModal, setIsOpenUsagePrecautionModal] = useState(false);
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
 
@@ -42,6 +44,21 @@ export function useHeader() {
         setIsOpenHowToUseModal(false);
     }
 
+    /**
+     * 使用上の注意モダール展開
+     */
+    function openUsagePrecautionModal() {
+        setIsOpenUsagePrecautionModal(true);
+        closeSideMenu();
+    }
+
+    /**
+     * 使用上の注意モダールを閉じる
+     */
+    function closeUsagePrecautionModal() {
+        setIsOpenUsagePrecautionModal(false);
+    }
+
     return {
         openSideMenu,
         closeSideMenu,
@@ -50,5 +67,8 @@ export function useHeader() {
         openHowToUseModal,
         closeHowToUseModal,
         isMobile,
+        openUsagePrecautionModal,
+        closeUsagePrecautionModal,
+        isOpenUsagePrecautionModal,
     }
 }

@@ -15,6 +15,7 @@ import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { HeaderHowToUse } from "./HeaderHowToUse";
 import { MEDIA } from "../../Common/Const/MediaConst";
 import { HeaderMenuUlMobile } from "./HeaderMenuUlMobile";
+import { HeaderUsagePrecaution } from "./HeaderUsagePrecaution";
 
 
 const Parent = styled.div`
@@ -81,10 +82,14 @@ export function Header() {
     isOpenHowToUseModal,
     openHowToUseModal,
     closeHowToUseModal,
-    isMobile
+    isMobile,
+    openUsagePrecautionModal,
+    closeUsagePrecautionModal,
+    isOpenUsagePrecautionModal,
   } = useHeader();
 
-  const modalWidth = isMobile ? "73%" : "42%";
+  const howToUseModalWidth = isMobile ? "73%" : "42%";
+  const usagePrecautionModalWidth = isMobile ? "73%" : "47%";
 
   return (
     <Parent>
@@ -105,6 +110,7 @@ export function Header() {
             <HeaderSideMenu
               closeSideMenu={closeSideMenu}
               openHowToUseModal={openHowToUseModal}
+              openUsagePrecautionModal={openUsagePrecautionModal}
             />
             <OverlaySimeMenuDiv />
           </React.Fragment>
@@ -134,7 +140,7 @@ export function Header() {
             color: "white",
             overflowY: "hidden",
           }}
-          width={modalWidth}
+          width={howToUseModalWidth}
           height="65%"
           isPositionCenter={true}
         >
@@ -144,7 +150,29 @@ export function Header() {
         </ModalComponent>
       }
       {
-        isOpenHowToUseModal &&
+        // 使用上の注意モーダル
+        isOpenUsagePrecautionModal &&
+        <ModalComponent
+          modalIsOpen={isOpenUsagePrecautionModal}
+          closeModal={closeUsagePrecautionModal}
+          style={{
+            backgroundColor: "#181a1e",
+            borderRadius: "1%",
+            border: "solid 1px",
+            color: "white",
+            overflowY: "hidden",
+          }}
+          width={usagePrecautionModalWidth}
+          height="65%"
+          isPositionCenter={true}
+        >
+          <HeaderUsagePrecaution
+            close={closeUsagePrecautionModal}
+          />
+        </ModalComponent>
+      }
+      {
+        (isOpenHowToUseModal || isOpenUsagePrecautionModal) &&
         <OverlayDiv />
       }
     </Parent>
