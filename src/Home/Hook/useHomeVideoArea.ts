@@ -14,6 +14,7 @@ import { useFavoriteKeywod } from "./useFavoriteKeywod";
 import { FAVORITE_KEYWORD } from "../Const/HomeConst";
 import { useLocation } from "react-router-dom";
 import { useHomeResetCondition } from "./useHomeResetCondition";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useHomeVideoArea() {
@@ -42,6 +43,8 @@ export function useHomeVideoArea() {
     const prevSearch = useRef(location.search);
     // ホーム画面初期化イベント
     const { reset } = useHomeResetCondition();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     // ローカルストレージからお気に入りワードリストを取得
     useEffect(() => {
@@ -153,5 +156,6 @@ export function useHomeVideoArea() {
         showMoreData,
         addFavoriteWord,
         favoriteWordList,
+        isMobile,
     }
 }

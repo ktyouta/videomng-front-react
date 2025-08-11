@@ -146,7 +146,8 @@ export function HomeVideoArea() {
     errMessage,
     showMoreData,
     addFavoriteWord,
-    favoriteWordList } = useHomeVideoArea();
+    favoriteWordList,
+    isMobile } = useHomeVideoArea();
 
   // 初回検索ローディング
   if (!showMoreData && isLoading) {
@@ -265,8 +266,12 @@ export function HomeVideoArea() {
               clickShowMore(nextPageToken);
             }}
             style={{
-              "fontSize": "0.9rem",
-              "height": "7%",
+              fontSize: isMobile ? "12px" : "13px",
+              width: isMobile ? "82px" : "100px",
+              minWidth: "82px",
+              height: "36px",
+              boxShadow: "none",
+              background: "rgb(41, 50, 60)"
             }}
           />
         </NextGetBtnAreaDiv>

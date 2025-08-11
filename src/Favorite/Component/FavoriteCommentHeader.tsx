@@ -13,15 +13,7 @@ const HeaderDiv = styled.div`
   color: white;
   padding-left: 1%;
   height:4%;
-  padding-right: 2%;
-`;
-
-const BlockIconDiv = styled.div`
-  width: 10%;
-  box-sizing: border-box;
-  position:relative;
-  display: flex;
-  grid-column-gap: 10px;
+  padding-right: 5%;
 `;
 
 export function FavoriteCommentHeader() {
@@ -31,12 +23,10 @@ export function FavoriteCommentHeader() {
   return (
     <HeaderDiv>
       <FlexSpaceDiv />
-      <BlockIconDiv>
-        {/* お気に入りコメントリスト */}
-        <FavoriteFavoriteCommentModalIcon />
-        {/* 非表示コメントリスト */}
-        <FavoriteBlockCommentModalIcon />
-      </BlockIconDiv>
+      {/* お気に入りコメントリスト */}
+      <FavoriteFavoriteCommentModalIcon />
+      {/* 非表示コメントリスト */}
+      <FavoriteBlockCommentModalIcon />
     </HeaderDiv>
   );
 }

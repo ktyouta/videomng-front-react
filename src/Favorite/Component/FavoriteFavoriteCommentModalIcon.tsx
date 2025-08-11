@@ -9,7 +9,30 @@ import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { useFavoriteFavoriteCommentModalIcon } from "../Hook/useFavoriteFavoriteCommentModalIcon";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const IconDiv = styled.div`
+    margin-right: 10px;
+    position: relative;
+    width: 15px;
+    height: 15px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        width: 22px;
+        height: 22px;
+    }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -45,19 +68,23 @@ export function FavoriteFavoriteCommentModalIcon() {
 
     return (
         <React.Fragment>
-            <IconComponent
-                icon={IoNewspaperOutline}
-                onclick={openFavoriteListModal}
-                size="25%"
-                style={{ color: "white" }}
-                onMouseEnter={openFavoriteListNav}
-                onMouseLeave={closeFavoriteListNav}
-            />
-            <BlockNavDiv
-                isDisplay={isOpenFavoriteListNav}
-            >
-                お気に入りリスト
-            </BlockNavDiv>
+            <IconDiv>
+                <IconComponent
+                    icon={IoNewspaperOutline}
+                    onclick={openFavoriteListModal}
+                    style={{
+                        color: "white",
+                    }}
+                    onMouseEnter={openFavoriteListNav}
+                    onMouseLeave={closeFavoriteListNav}
+                    size="100%"
+                />
+                <BlockNavDiv
+                    isDisplay={isOpenFavoriteListNav}
+                >
+                    お気に入りリスト
+                </BlockNavDiv>
+            </IconDiv>
             {
                 // お気に入りコメントリスト
                 isOpenFavoriteListModal &&

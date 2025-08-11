@@ -40,19 +40,22 @@ const VideoMetaDiv = styled.div`
 `;
 
 const VideoTitle = styled.h3`
-    margin-bottom: 14%;
+    margin-bottom: 9%;
     font-size: 15px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 15px;
+        margin-bottom: 14%;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
         font-size: 15px;
+        margin-bottom: 14%;
     }
 
     @media (min-width: ${MEDIA.PC}) {
         font-size: 16px;
+        margin-bottom: 14%;
     }
 `;
 
@@ -119,7 +122,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                         "background": "rgb(34, 139, 84)",
                         "color": "white",
                         "borderRadius": "8px",
-                        "marginBottom": "10%",
+                        "marginBottom": isMobile ? "7%" : "10%",
                         "display": "block",
                     }}
                 />

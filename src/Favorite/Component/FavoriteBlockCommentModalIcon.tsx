@@ -6,7 +6,31 @@ import React from "react";
 import ModalComponent from "../../Common/Component/ModalComponent";
 import { FavoriteBlockComment } from "./FavoriteBlockComment";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const IconDiv = styled.div`
+    margin-right: 10px;
+    position: relative;
+    width: 15px;
+    height: 15px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        width: 22px;
+        height: 22px;
+    }
+
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -17,7 +41,7 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: -3px;
+    left: -26px;
     box-sizing: border-box;
     color: black;
     -webkit-box-pack: center;
@@ -42,19 +66,23 @@ export function FavoriteBlockCommentModalIcon() {
 
     return (
         <React.Fragment>
-            <IconComponent
-                icon={HiOutlineInbox}
-                onclick={openBlockListModal}
-                size="25%"
-                style={{ color: "white" }}
-                onMouseEnter={openBlockListNav}
-                onMouseLeave={closeBlockListNav}
-            />
-            <BlockNavDiv
-                isDisplay={isOpenBlockListNav}
-            >
-                非表示リスト
-            </BlockNavDiv>
+            <IconDiv>
+                <IconComponent
+                    icon={HiOutlineInbox}
+                    onclick={openBlockListModal}
+                    style={{
+                        color: "white",
+                    }}
+                    onMouseEnter={openBlockListNav}
+                    onMouseLeave={closeBlockListNav}
+                    size="100%"
+                />
+                <BlockNavDiv
+                    isDisplay={isOpenBlockListNav}
+                >
+                    非表示リスト
+                </BlockNavDiv>
+            </IconDiv>
             {
                 // 非表示コメントリスト
                 isOpenBlockListModal &&
