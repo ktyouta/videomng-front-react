@@ -7,6 +7,7 @@ import { useContent } from "../Hook/useContent";
 import { Provider } from "jotai";
 import { NotFound } from "../../NotFound/Component/NotFound";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { BackToTopIcon } from "./BackToTopIcon";
 
 const Parent = styled.div`
   width: 100%;
@@ -55,6 +56,7 @@ export function Content() {
                     />
                 }
             </Routes>
+            <BackToTopIcon />
         </Parent>
     );
 }
