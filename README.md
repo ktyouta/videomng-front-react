@@ -1,54 +1,68 @@
-# React + TypeScript + Vite
+# 動画管理アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## サービス概要
+YouTube動画のお気に入り管理に特化したアプリです。YouTube APIを活用し、自分が気に入った動画を登録・整理し、あとから振り返りやすくすることを目的としています。
+お気に入り登録した動画には、視聴メモを残したり、コメントを精査・記録したり、タグやカテゴリで管理したりといった細かなカスタマイズが可能。自分だけのライブラリを作る感覚で、YouTube体験を再構築できます。
 
-Currently, two official plugins are available:
+## 開発背景
+YouTubeを日常的に利用する中で、「この動画、また見返したい」と思うことがよくありました。特に気に入った動画では、一部分だけ何度も見直したいというケースが多く、その都度検索して探すのが面倒でした。
+また、コメント欄には動画の内容を理解するヒントやユーモアのあるもの、逆にノイズに感じるコメントもあります。そうした情報を自分なりに整理し、蓄積したいという思いが、このアプリ開発のきっかけでした。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 機能一覧
+| トップページ |
+| ---- |
+| <img src="doc/screenshots/top.png" width="200" height="110"/>  |
+| 登録済み動画の一覧を表示します。キーワードや種別での検索が可能です。  |
 
-## Expanding the ESLint configuration
+| 　検索結果 |
+| ---- |
+| <img src="doc/screenshots/search-result.png" width="200" height="110"/>   |
+| 検索条件に一致した動画一覧を表示します。<br>※サムネイルはダミーです。アプリでは実際の動画情報が表示されます。  |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| 動画詳細 |
+| ---- |
+| <img src="doc/screenshots/video-detail.png" width="200" height="110" />   |
+| 動画の検索結果で気になる動画をクリックすると詳細画面に遷移します。ログイン時に動画のお気に入り登録が可能となっています。<br>また以下のメニューを選択できます。<br>・動画詳細：選択した動画の詳細情報を表示します。<br>・公開コメント：動画に投稿されたコメントを閲覧できます。<br>・キーワード検索(コメント)：投稿されたコメント内をキーワードで検索できます。  |
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+| サードメニュー |
+| ---- |
+| <img src="doc/screenshots/side-menu.png" width="200" height="110" />   |
+|画面左上のハンバーガーメニューをクリックすると、以下メニューを選択できます。<br>・使い方を見る<br>・使用上の注意|
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| ログイン |
+| ---- |
+| <img src="doc/screenshots/login.png" width="200" height="110" />   |
+| ユーザー名とパスワードによる認証画面です。  |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| ユーザー情報更新 |
+| ---- |
+| <img src="doc/screenshots/userinfo-update.png" width="200" height="110" />   |
+| ユーザー情報の更新画面です。  |
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+| パスワード変更 |
+| ---- |
+| <img src="doc/screenshots/password-update.png" width="200" height="110" />   |
+| パスワードの変更画面です。  |
+
+| お気に入り動画一覧 |
+| ---- |
+| <img src="doc/screenshots/favorite.png" width="200" height="110" />   |
+| お気に入り登録した動画の一覧を表示します。<br>一覧は以下の項目でソート可能です。<br>・更新日<br>・登録日<br>・メモ登録数<br>・お気に入りコメント登録数<br>・お気に入り度<br>さらに、以下の条件でフィルタリングも行えます。<br>・カテゴリ<br>・視聴状況<br>・タグ<br>・お気に入り度  |
+
+| お気に入り動画詳細 |
+| ---- |
+| <img src="doc/screenshots/favorite-detail.png" width="200" height="110" />   |
+|お気に入り動画一覧で動画をクリックすると詳細画面に遷移します。<br>詳細画面では以下のメニューを選択できます<br>・動画詳細：選択した動画の詳細情報を表示します。<br>・公開コメント：動画に投稿されたコメントを閲覧できます。<br>・キーワード検索(コメント)：投稿されたコメント内をキーワードで検索できます。<br>・動画詳細設定：視聴状況やお気に入り度などの設定を行います。<br>・メモ：見どころなどのメモを追加・編集できます。<br>・タグ：一覧画面でのフィルタリングに使用するタグを設定できます。  |
+
+## 使用技術
+| カテゴリ          | 技術スタック  |
+| ----------------- | --------------------------------------------------   |
+| フロントエンド          | TypeScript, React|
+| バックエンド           | TypeScript, Express, Prisma                           |
+| インフラ    | Cloudflare, Render                          |
+| データベース          | PostgreSQL                                           |
+
+## 注意事項
+- 本アプリは **YouTube Data API** を利用しており、表示されるコンテンツは YouTube が提供するデータに基づいています。  
+- 本アプリは **YouTube公式サービスではありません**。
+- 本アプリの内容を許可なく複製、配布、改変することを固く禁じます。
