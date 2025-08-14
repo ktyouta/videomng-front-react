@@ -14,7 +14,33 @@ import { MdEdit } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { useFavoriteDetailSettingCloseIcon } from "../Hook/useFavoriteDetailSettingCloseIcon";
 import { useFavoriteTagEditCloseIcon } from "../Hook/useFavoriteTagEditCloseIcon";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  grid-column-gap: 10px;
+  margin-right: 14px;
+  width: 15px;
+  height: 15px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 22px;
+      height: 22px;
+  }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -34,7 +60,6 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     align-items: center;
 `;
 
-
 type propsType = {
     changeView: () => void,
 }
@@ -49,11 +74,11 @@ export function FavoriteTagEditCloseIcon(props: propsType) {
     } = useFavoriteTagEditCloseIcon();
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={RxCross1}
                 onclick={props.changeView}
-                size="75%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openCloseNav}
                 onMouseLeave={closeCloseNav}
@@ -63,7 +88,7 @@ export function FavoriteTagEditCloseIcon(props: propsType) {
             >
                 閉じる
             </BlockNavDiv>
-        </React.Fragment>
+        </Parent>
 
     );
 }

@@ -6,8 +6,12 @@ import { useFavoriteMemoCreateInput } from "../Hook/useFavoriteMemoCreateInput";
 import { useFavoriteTagCreateInput } from "../Hook/useFavoriteTagCreateInput";
 import TagsComponent, { tagType } from "../../Common/Component/TagsComponent";
 import { FaPlusSquare } from 'react-icons/fa';
+import { GoPlus } from "react-icons/go";
+import ButtonComponent from "../../Common/Component/ButtonComponent";
+import { FaPlus } from "react-icons/fa";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
-const TagInputAreaDiv = styled.div`
+const Parent = styled.div`
     position: sticky;
     left: 0px;
     width: 100%;
@@ -15,8 +19,24 @@ const TagInputAreaDiv = styled.div`
     padding-left: 3%;
     display: flex;
     padding-top: 22px;
-    padding-right: 7%;
+    padding-right: 4%;
     align-items: center;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        padding-right: 2%;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        padding-right: 2%;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        padding-right: 2%;
+    }
+`;
+
+const TagInputAreaDiv = styled.div`
+    flex: 1;
 `;
 
 const AddIconAreaDiv = styled.div`
@@ -25,10 +45,16 @@ const AddIconAreaDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 1%;
+  margin-left: 3%;
   color: white;
 `;
 
+const BtnDiv = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export function FavoriteTagCreateInput() {
 
@@ -40,25 +66,57 @@ export function FavoriteTagCreateInput() {
         addTag,
         deleteTag,
         addTagEditList,
+        isMobile,
     } = useFavoriteTagCreateInput();
 
     return (
-        <TagInputAreaDiv>
+        <Parent>
             {/* タグ入力欄 */}
-            <TagsComponent
-                tagList={addTagList}
-                suggestions={suggestTagList}
-                addTag={addTag}
-                deleteTag={deleteTag}
-            />
-            {/* 編集リスト追加ボタン */}
-            <AddIconAreaDiv>
-                <IconComponent
-                    icon={FaPlusSquare}
-                    onclick={addTagEditList}
-                    size="90%"
+            <TagInputAreaDiv>
+                <TagsComponent
+                    tagList={addTagList}
+                    suggestions={suggestTagList}
+                    addTag={addTag}
+                    deleteTag={deleteTag}
                 />
-            </AddIconAreaDiv>
-        </TagInputAreaDiv>
+            </TagInputAreaDiv>
+            {/* 編集リスト追加ボタン */}
+            {
+                isMobile
+                    ?
+                    <AddIconAreaDiv>
+                        <IconComponent
+                            icon={FaPlus}
+                            onclick={addTagEditList}
+                            size="20px"
+                        />
+                    </AddIconAreaDiv>
+                    :
+                    <ButtonComponent
+                        styleTypeNumber="BASE"
+                        title={
+                            <BtnDiv>
+                                <IconComponent
+                                    icon={GoPlus}
+                                    size="20px"
+                                />
+                                追加
+                            </BtnDiv>
+                        }
+                        onclick={addTagEditList}
+                        style={{
+                            fontSize: "14px",
+                            height: "34px",
+                            width: `86px`,
+                            background: "rgb(41, 50, 60)",
+                            color: "white",
+                            borderRadius: "8px",
+                            display: "flex",
+                            minWidth: `86px`,
+                            marginLeft: "12px"
+                        }}
+                    />
+            }
+        </Parent>
     );
 }

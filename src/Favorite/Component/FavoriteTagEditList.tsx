@@ -9,16 +9,35 @@ import React from "react";
 import TagButtonComponent from "../../Common/Component/TagButtonComponent";
 import { useFavoriteTagEditList } from "../Hook/useFavoriteTagEditList";
 import { tagType } from "../../Common/Component/TagsComponent";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
   width: 100%;
-  height: 81%;
+  flex: 1;
   box-sizing: border-box;
   padding-left: 2%;
-  padding-top: 2%;
+  padding-top: 4%;
   padding-right: 2%;
   color:white;
+`;
+
+const TagListTitleDiv = styled.div`
+    box-sizing: border-box;
+    padding-left: 1%;
+    font-size: 14px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 17px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 17px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 17px;
+    }
 `;
 
 const TagListAreaDiv = styled.div`
@@ -45,6 +64,9 @@ export function FavoriteTagEditList() {
 
     return (
         <Parent>
+            <TagListTitleDiv>
+                設定されたタグ
+            </TagListTitleDiv>
             {
                 favoriteVideoTagEditList.length > 0 ?
                     <TagListAreaDiv>

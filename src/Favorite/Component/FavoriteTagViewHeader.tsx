@@ -8,6 +8,7 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { MdEdit } from "react-icons/md";
 import { useFavoriteDetailSettingEditIcon } from "../Hook/useFavoriteDetailSettingEditIcon";
 import { useFavoriteTagViewHeader } from "../Hook/useFavoriteTagViewHeader";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 //ヘッダータイトルのスタイル
@@ -23,11 +24,27 @@ const HeaderDiv = styled.div`
 `;
 
 const BlockIconDiv = styled.div`
-  width: 3%;
   box-sizing: border-box;
   position:relative;
   display: flex;
   grid-column-gap: 10px;
+  width: 15px;
+  height: 15px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 22px;
+      height: 22px;
+  }
 `;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
@@ -69,7 +86,7 @@ export function FavoriteTagViewHeader(props: propsType) {
         <IconComponent
           icon={MdEdit}
           onclick={props.changeEdit}
-          size="75%"
+          size="100%"
           style={{ color: "white" }}
           onMouseEnter={openEditNav}
           onMouseLeave={closeEditNav}

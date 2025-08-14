@@ -9,24 +9,13 @@ import { FavoriteTagEditUpdateIcon } from "./FavoriteTagEditUpdateIcon";
 
 
 const MemoInputAreaDiv = styled.div`
-  position: sticky;
-  bottom: 0;
-  left: 0;
   width: 100%;
   box-sizing: border-box;
   padding-left: 3%;
   display:flex;
   align-items: center;
-  height:4%;
+  height: 45px;
   padding-right: 2%;
-`;
-
-const BlockIconDiv = styled.div`
-  width: 6%;
-  box-sizing: border-box;
-  position:relative;
-  display: flex;
-  grid-column-gap: 20px;
 `;
 
 type propsType = {
@@ -41,16 +30,14 @@ export function FavoriteTagEditFooter(props: propsType) {
     return (
         <MemoInputAreaDiv>
             <FlexSpaceDiv />
-            <BlockIconDiv>
-                {/* 閉じるアイコン */}
-                <FavoriteTagEditCloseIcon
-                    changeView={props.changeView}
-                />
-                {/* 更新アイコン */}
-                <FavoriteTagEditUpdateIcon
-                    changeView={props.changeView}
-                />
-            </BlockIconDiv>
+            {/* 閉じるアイコン */}
+            <FavoriteTagEditCloseIcon
+                changeView={props.changeView}
+            />
+            {/* 更新アイコン */}
+            <FavoriteTagEditUpdateIcon
+                changeView={props.changeView}
+            />
         </MemoInputAreaDiv>
     );
 }

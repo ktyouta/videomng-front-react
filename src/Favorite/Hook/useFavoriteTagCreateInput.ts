@@ -9,6 +9,7 @@ import { tagType } from "../../Common/Component/TagsComponent";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../Atom/FavoriteAtom";
 import { toast } from "react-toastify";
+import { mediaQuery, useMediaQuery } from "../../Common/Hook/useMediaQuery";
 
 
 export function useFavoriteTagCreateInput() {
@@ -21,6 +22,8 @@ export function useFavoriteTagCreateInput() {
     const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useAtom(favoriteVideoTagEditListAtom);
     // お気に入り動画タグリスト
     const favoriteVideoTagList = useAtomValue(favoriteVideoTagListAtom);
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     // サジェスト用タグリストを取得
     useQueryWrapper<FavoriteVideoTagResponseType>(
@@ -105,5 +108,6 @@ export function useFavoriteTagCreateInput() {
         addTag,
         deleteTag,
         addTagEditList,
+        isMobile,
     }
 }
