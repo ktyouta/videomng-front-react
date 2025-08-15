@@ -17,17 +17,19 @@ const Parent = styled.div`
   padding-left: 2%;
   padding-right: 2%;
   color:white;
+  display: flex;
+  flex-direction: column;
 `;
 
 const LoadingParent = styled(Parent)`
-    display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
 `;
 
 const TagListAreaDiv = styled.div`
   width: 97%;
-  height: 90%;
+  flex: 1;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;

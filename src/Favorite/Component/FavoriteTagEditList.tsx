@@ -74,7 +74,9 @@ export function FavoriteTagEditList() {
 
     const {
         favoriteVideoTagEditList,
-        deleteTag } = useFavoriteTagEditList();
+        deleteTag,
+        tagMasterList,
+        addTagEditList, } = useFavoriteTagEditList();
 
     if (!favoriteVideoTagEditList) {
         return;
@@ -82,6 +84,39 @@ export function FavoriteTagEditList() {
 
     return (
         <Parent>
+            <TagListTitleDiv>
+                既存タグから設定
+            </TagListTitleDiv>
+            {
+                tagMasterList && tagMasterList.length > 0
+                    ?
+                    <TagListAreaDiv>
+                        {
+                            tagMasterList.map((e: tagType) => {
+
+                                const tagKey = e.label;
+
+                                return (
+                                    <TagButtonComponent
+                                        title={e.label}
+                                        btnStyle={{
+                                            marginRight: "15px",
+                                            marginBottom: "10px"
+                                        }}
+                                        onclick={() => {
+                                            addTagEditList(e);
+                                        }}
+                                        key={tagKey}
+                                    />
+                                )
+                            })
+                        }
+                    </TagListAreaDiv>
+                    :
+                    <NoTagListTitleDiv>
+                        既存タグが存在しません。
+                    </NoTagListTitleDiv>
+            }
             <TagListTitleDiv>
                 設定されているタグ
             </TagListTitleDiv>

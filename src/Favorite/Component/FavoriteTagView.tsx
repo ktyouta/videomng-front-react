@@ -15,7 +15,6 @@ import { FavoriteTagViewHeader } from "./FavoriteTagViewHeader";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  height: 502px;
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
@@ -31,13 +30,13 @@ export function FavoriteTagView(props: propsType) {
   console.log("FavoriteTagView render");
 
   return (
-    <Parent>
+    <React.Fragment>
       {/* 入力欄 */}
       <FavoriteTagViewHeader
         changeEdit={props.changeEdit}
       />
       {/* タグリスト */}
       <FavoriteTagList />
-    </Parent>
+    </React.Fragment>
   );
 }

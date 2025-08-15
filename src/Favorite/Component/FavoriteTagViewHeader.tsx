@@ -19,7 +19,7 @@ const HeaderDiv = styled.div`
   align-items: center;
   color: white;
   padding-left: 1%;
-  height:10%;
+  height: 50px;
   padding-right: 2%;
 `;
 

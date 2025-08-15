@@ -20,14 +20,15 @@ import Loading from "../../Common/Component/Loading";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  height: 502px;
+  min-height: 502px;
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const LoadingParent = styled(Parent)`
-    display: flex;
     align-items: center;
     justify-content: center;
 `;

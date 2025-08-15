@@ -16,7 +16,6 @@ import { FavoriteTagEditList } from "./FavoriteTagEditList";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  height: 502px;
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
@@ -34,7 +33,7 @@ export function FavoriteTagEdit(props: propsType) {
   console.log("FavoriteTagEdit render");
 
   return (
-    <Parent>
+    <React.Fragment>
       {/* 入力欄 */}
       <FavoriteTagCreateInput />
       {/* タグリスト */}
@@ -43,6 +42,6 @@ export function FavoriteTagEdit(props: propsType) {
       <FavoriteTagEditFooter
         changeView={props.changeView}
       />
-    </Parent>
+    </React.Fragment>
   );
 }
