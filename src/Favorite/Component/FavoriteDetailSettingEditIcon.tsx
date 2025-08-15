@@ -11,7 +11,32 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
 import { useFavoriteDetailSettingEditIcon } from "../Hook/useFavoriteDetailSettingEditIcon";
 import { MdEdit } from "react-icons/md";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  grid-column-gap: 10px;
+  width: 15px;
+  height: 15px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 22px;
+      height: 22px;
+  }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -46,11 +71,11 @@ export function FavoriteDetailSettingEditIcon(props: propsType) {
     } = useFavoriteDetailSettingEditIcon();
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={MdEdit}
                 onclick={props.changeEdit}
-                size="75%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openEditNav}
                 onMouseLeave={closeEditNav}
@@ -60,7 +85,7 @@ export function FavoriteDetailSettingEditIcon(props: propsType) {
             >
                 編集
             </BlockNavDiv>
-        </React.Fragment>
+        </Parent>
 
     );
 }

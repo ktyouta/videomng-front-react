@@ -25,6 +25,7 @@ const Parent = styled.div`
 const TagListTitleDiv = styled.div`
     box-sizing: border-box;
     padding-left: 1%;
+    font-weight: bold;
     font-size: 14px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -41,14 +42,31 @@ const TagListTitleDiv = styled.div`
 `;
 
 const TagListAreaDiv = styled.div`
-  width: 97%;
-  height: 90%;
-  overflow: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  padding: 2% 1% 1% 1%;
+    width: 97%;
+    height: 90%;
+    overflow: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 2% 1% 1% 1%;
 `;
 
+const NoTagListTitleDiv = styled.div`
+    margin-top: 3%;
+    margin-left: 1%;
+    font-size: 12px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 15px;
+    }
+`;
 
 export function FavoriteTagEditList() {
 
@@ -65,7 +83,7 @@ export function FavoriteTagEditList() {
     return (
         <Parent>
             <TagListTitleDiv>
-                設定されたタグ
+                設定されているタグ
             </TagListTitleDiv>
             {
                 favoriteVideoTagEditList.length > 0 ?
@@ -93,7 +111,9 @@ export function FavoriteTagEditList() {
                         }
                     </TagListAreaDiv>
                     :
-                    `タグが設定されていません。`
+                    <NoTagListTitleDiv>
+                        タグが設定されていません。
+                    </NoTagListTitleDiv>
             }
         </Parent>
     );

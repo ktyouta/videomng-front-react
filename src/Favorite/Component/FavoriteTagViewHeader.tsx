@@ -23,7 +23,7 @@ const HeaderDiv = styled.div`
   padding-right: 2%;
 `;
 
-const BlockIconDiv = styled.div`
+const EditIconDiv = styled.div`
   box-sizing: border-box;
   position:relative;
   display: flex;
@@ -82,7 +82,7 @@ export function FavoriteTagViewHeader(props: propsType) {
   return (
     <HeaderDiv>
       <FlexSpaceDiv />
-      <BlockIconDiv>
+      <EditIconDiv>
         <IconComponent
           icon={MdEdit}
           onclick={props.changeEdit}
@@ -96,7 +96,7 @@ export function FavoriteTagViewHeader(props: propsType) {
         >
           編集
         </BlockNavDiv>
-      </BlockIconDiv>
+      </EditIconDiv>
     </HeaderDiv>
   );
 }

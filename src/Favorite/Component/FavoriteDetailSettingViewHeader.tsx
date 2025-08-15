@@ -18,14 +18,6 @@ const HeaderDiv = styled.div`
   padding-right: 2%;
 `;
 
-const BlockIconDiv = styled.div`
-  width: 3%;
-  box-sizing: border-box;
-  position:relative;
-  display: flex;
-  grid-column-gap: 10px;
-`;
-
 type propsType = {
   changeEdit: () => void,
 }
@@ -37,12 +29,10 @@ export function FavoriteDetailSettingViewHeader(props: propsType) {
   return (
     <HeaderDiv>
       <FlexSpaceDiv />
-      <BlockIconDiv>
-        {/* 編集アイコン */}
-        <FavoriteDetailSettingEditIcon
-          changeEdit={props.changeEdit}
-        />
-      </BlockIconDiv>
+      {/* 編集アイコン */}
+      <FavoriteDetailSettingEditIcon
+        changeEdit={props.changeEdit}
+      />
     </HeaderDiv>
   );
 }

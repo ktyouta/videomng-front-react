@@ -79,7 +79,7 @@ export function FavoriteTagList() {
                         }
                     </TagListAreaDiv>
                     :
-                    `タグが登録されていません。`
+                    `タグが設定されていません。`
             }
         </Parent>
     );

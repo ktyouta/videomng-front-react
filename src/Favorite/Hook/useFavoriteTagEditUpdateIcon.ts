@@ -40,6 +40,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoTagType[]>) => {
+            toast.success(`タグを設定しました。`);
             setFavoriteVideoTagList(res.data);
             // 閲覧画面に遷移する
             props.changeView();
