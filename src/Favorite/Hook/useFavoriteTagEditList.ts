@@ -9,6 +9,7 @@ import { FavoriteVideoMemoResponseType } from "../Type/FavoriteVideoMemoResponse
 import { FavoriteVideoTagResponseType } from "../Type/FavoriteVideoTagResponseType";
 import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
 import { tagType } from "../../Common/Component/TagsComponent";
+import { toast } from "react-toastify";
 
 
 export function useFavoriteTagEditList() {
@@ -17,6 +18,8 @@ export function useFavoriteTagEditList() {
     const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useAtom(favoriteVideoTagEditListAtom);
     // タグマスタリスト
     const [tagMasterList, setTagMasterList] = useState<tagType[]>([]);
+    // タグマスタリスト表示フラグ
+    const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
 
     // タグマスタリストを取得
     useQueryWrapper<FavoriteVideoTagResponseType>(
@@ -47,11 +50,21 @@ export function useFavoriteTagEditList() {
     /**
      * 入力欄のタグを編集リストに追加する
      */
-    function addTagEditList(newTag: tagType) {
+    function addTagEditList(addTag: tagType) {
+
+        const existTag = favoriteVideoTagEditList.find((e) => {
+            return e.label === addTag.label;
+        });
+
+        // 同名のタグが設定されている場合は追加しない
+        if (existTag) {
+            toast.error(`同名のタグが設定されています。`);
+            return;
+        }
 
         // 編集リストに追加
         setFavoriteVideoTagEditList((e: tagType[]) => {
-            return [newTag, ...e];
+            return [{ label: addTag.label, value: null }, ...e];
         });
     }
 
@@ -65,10 +78,19 @@ export function useFavoriteTagEditList() {
         });
     }
 
+    /**
+     * タグマスタリスト表示切り替え
+     */
+    function switchTagMasterList() {
+        setIsOpenTagMasterList(!isOpenTagMasterList);
+    }
+
     return {
         favoriteVideoTagEditList,
         deleteTag,
         tagMasterList,
         addTagEditList,
+        isOpenTagMasterList,
+        switchTagMasterList,
     }
 }
