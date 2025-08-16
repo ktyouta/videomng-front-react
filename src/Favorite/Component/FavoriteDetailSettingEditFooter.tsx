@@ -16,16 +16,8 @@ const HeaderDiv = styled.div`
   align-items: center;
   color: white;
   padding-left: 1%;
-  height:4%;
+  height: 25px;
   padding-right: 2%;
-`;
-
-const BlockIconDiv = styled.div`
-  width: 5%;
-  box-sizing: border-box;
-  position:relative;
-  display: flex;
-  grid-column-gap: 10px;
 `;
 
 type propsType = {
@@ -33,23 +25,21 @@ type propsType = {
   updateFavoriteVideo: () => void,
 }
 
-export function FavoriteDetailSettingEditHeader(props: propsType) {
+export function FavoriteDetailSettingEditFooter(props: propsType) {
 
-  console.log("FavoriteDetailSettingEditHeader render");
+  console.log("FavoriteDetailSettingEditFooter render");
 
   return (
     <HeaderDiv>
       <FlexSpaceDiv />
-      <BlockIconDiv>
-        {/* 閉じるアイコン */}
-        <FavoriteDetailSettingCloseIcon
-          changeView={props.changeView}
-        />
-        {/* 更新アイコン */}
-        <FavoriteDetailSettingUpdateIcon
-          updateFavoriteVideo={props.updateFavoriteVideo}
-        />
-      </BlockIconDiv>
+      {/* 閉じるアイコン */}
+      <FavoriteDetailSettingCloseIcon
+        changeView={props.changeView}
+      />
+      {/* 更新アイコン */}
+      <FavoriteDetailSettingUpdateIcon
+        updateFavoriteVideo={props.updateFavoriteVideo}
+      />
     </HeaderDiv>
   );
 }

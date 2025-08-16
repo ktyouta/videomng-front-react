@@ -16,7 +16,32 @@ import { useFavoriteDetailSettingCloseIcon } from "../Hook/useFavoriteDetailSett
 import { FaCheck } from "react-icons/fa6";
 import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
 import { useFavoriteDetailSettingUpdateIcon } from "../Hook/useFavoriteDetailSettingUpdateIcon";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  grid-column-gap: 10px;
+  width: 15px;
+  height: 15px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 22px;
+      height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 22px;
+      height: 22px;
+  }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -51,11 +76,11 @@ export function FavoriteDetailSettingUpdateIcon(props: propsType) {
     } = useFavoriteDetailSettingUpdateIcon();
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={FaCheck}
                 onclick={props.updateFavoriteVideo}
-                size="75%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openUpdateNav}
                 onMouseLeave={closeUpdateNav}
@@ -65,7 +90,7 @@ export function FavoriteDetailSettingUpdateIcon(props: propsType) {
             >
                 更新
             </BlockNavDiv>
-        </React.Fragment>
+        </Parent>
 
     );
 }

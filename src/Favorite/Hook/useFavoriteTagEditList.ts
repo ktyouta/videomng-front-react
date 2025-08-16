@@ -17,7 +17,7 @@ export function useFavoriteTagEditList() {
     // タグ編集リスト
     const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useAtom(favoriteVideoTagEditListAtom);
     // タグマスタリスト
-    const [tagMasterList, setTagMasterList] = useState<tagType[]>([]);
+    const [tagMasterList, setTagMasterList] = useState<tagType[]>();
     // タグマスタリスト表示フラグ
     const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
 
@@ -34,12 +34,7 @@ export function useFavoriteTagEditList() {
                     }
                 });
 
-                setTagMasterList((e) => {
-                    return [
-                        ...e,
-                        ...tagComboList
-                    ];
-                })
+                setTagMasterList(tagComboList);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;

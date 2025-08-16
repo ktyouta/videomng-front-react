@@ -26,6 +26,8 @@ const Parent = styled.div`
   border-radius: 1%;
   border: solid 1px;
   padding:2%;
+  display:flex;
+  flex-direction: column;
 `;
 
 

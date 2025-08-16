@@ -10,7 +10,32 @@ import { MdVisibilityOff } from "react-icons/md";
 import { useFavoriteCommentFavoriteIconArea } from "../Hook/useFavoriteCommentFavoriteIconArea";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FaStar } from "react-icons/fa";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  margin-right: 14px;
+  width: 10px;
+  height: 10px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 12px;
+      height: 12px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 12px;
+      height: 12px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 12px;
+      height: 12px;
+  }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -56,11 +81,11 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
     const iconClick = isFavorite() ? props.deleteFavoriteComment : props.favoriteComment;
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={FaStar}
                 onclick={() => { iconClick(props.commentId); }}
-                size={props.iconSize ?? "45%"}
+                size="100%"
                 style={{
                     color: iconColor,
                 }}
@@ -72,6 +97,6 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
             >
                 {navMessage}
             </BlockNavDiv>
-        </React.Fragment>
+        </Parent>
     );
 }

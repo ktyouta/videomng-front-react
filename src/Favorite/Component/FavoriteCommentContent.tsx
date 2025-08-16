@@ -29,25 +29,17 @@ const LowerDiv = styled.div`
     display:flex;
     text-align: left;
     overflow-wrap: break-word;
-`;
-
-const IconDiv = styled.div`
-    box-sizing: border-box;
-    width:8%;
-    display:flex;
     align-items: center;
-    justify-content: end;
     padding-right: 1%;
-    position:relative;
 `;
 
 const MetaDiv = styled.div`
     font-size:13px;
-    width:95%;
+    flex:1;
     display: flex;
     align-items: center;
+    word-break: break-word;
 `;
-
 
 
 type propsType = {
@@ -92,13 +84,11 @@ export function FavoriteCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
-                <IconDiv>
-                    {/* アイコンエリア */}
-                    <FavoriteCommentContentIconArea
-                        commentId={commentId}
-                        favoriteStatus={favoriteStatus}
-                    />
-                </IconDiv>
+                {/* アイコンエリア */}
+                <FavoriteCommentContentIconArea
+                    commentId={commentId}
+                    favoriteStatus={favoriteStatus}
+                />
             </LowerDiv>
             {
                 // 返信コメント

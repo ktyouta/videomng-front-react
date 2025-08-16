@@ -7,6 +7,31 @@ import { useFavoriteMemoDeleteIconArea } from "../Hook/useFavoriteMemoDeleteIcon
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useFavoriteCommentBlockIconArea } from "../Hook/useFavoriteCommentBlockIconArea";
 import { MdVisibilityOff } from "react-icons/md";
+import { MEDIA } from "../../Common/Const/MediaConst";
+
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  width: 10px;
+  height: 10px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 12px;
+      height: 12px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 12px;
+      height: 12px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 12px;
+      height: 12px;
+  }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -42,11 +67,11 @@ export function FavoriteCommentBlockIconArea(props: propsType) {
         closeBlockNav, } = useFavoriteCommentBlockIconArea();
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={MdVisibilityOff}
                 onclick={props.blockComment}
-                size={props.iconSize ?? "45%"}
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openBlockNav}
                 onMouseLeave={closeBlockNav}
@@ -56,6 +81,6 @@ export function FavoriteCommentBlockIconArea(props: propsType) {
             >
                 非表示
             </BlockNavDiv>
-        </React.Fragment>
+        </Parent>
     );
 }

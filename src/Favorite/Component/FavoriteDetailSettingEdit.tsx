@@ -15,18 +15,18 @@ import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType
 import AccordionComponent from "../../Common/Component/AccordionComponent";
 import { FavoriteVideoDetailCategoryType } from "../Type/FavoriteVideoDetailCategoryType";
 import ComboComponent, { comboType } from "../../Common/Component/ComboComponent";
-import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHeader";
-import { FavoriteDetailSettingEditHeader } from "./FavoriteDetailSettingEditHeader";
 import { useFavoriteDetailSettingEdit } from "../Hook/useFavoriteDetailSettingEdit";
 import BaseTextAreaComponent from "../../Common/Component/BaseTextAreaComponent";
 import LabelCheckBoxListComponent from "../../Common/Component/LabelCheckBoxListComponent";
 import CheckBoxComponent from "../../Common/Component/CheckBoxComponent";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../Const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
+import { FavoriteDetailSettingEditFooter } from "./FavoriteDetailSettingEditFooter";
 
 
 const ContentDiv = styled.div`
     color:white;
+    flex: 1;
 `;
 
 const TitleDiv = styled.div`
@@ -102,10 +102,6 @@ export function FavoriteDetailSettingEdit(props: propsType) {
 
     return (
         <React.Fragment>
-            <FavoriteDetailSettingEditHeader
-                changeView={props.changeView}
-                updateFavoriteVideo={updateFavoriteVideo}
-            />
             <ContentDiv>
                 <TitleDiv>
                     【要約】
@@ -114,7 +110,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                     <BaseTextAreaComponent
                         value={summary}
                         onChange={setSummary}
-                        textWidth="90%"
+                        textWidth="94%"
                         style={{
                             "backgroundColor": "rgb(44, 47, 54)",
                             "color": "white",
@@ -207,6 +203,10 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                     }
                 </FavoriteLevelAreaDiv>
             </ContentDiv>
+            <FavoriteDetailSettingEditFooter
+                changeView={props.changeView}
+                updateFavoriteVideo={updateFavoriteVideo}
+            />
         </React.Fragment>
     );
 }
