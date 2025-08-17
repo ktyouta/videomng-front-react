@@ -60,7 +60,6 @@ type propsType = {
     favoriteStatus: string,
     favoriteComment: (commentId: string) => void,
     deleteFavoriteComment: (commentId: string) => void,
-    iconSize?: string
 }
 
 export function FavoriteCommentFavoriteIconArea(props: propsType) {

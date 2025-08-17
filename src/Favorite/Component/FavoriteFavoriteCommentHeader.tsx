@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IconComponent } from "../../Common/Component/IconComponent";
 import { RxCross1 } from "react-icons/rx";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
 
 //ヘッダータイトルのスタイル
@@ -15,10 +16,25 @@ const HeaderDiv = styled.div`
   height:4%;
 `;
 
-const BlockIconDiv = styled.div`
-  width: 4%;
-  box-sizing: border-box;
-  position:relative;
+const IconDiv = styled.div`
+    position: relative;
+    width: 15px;
+    height: 15px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        width: 22px;
+        height: 22px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        width: 22px;
+        height: 22px;
+    }
 `;
 
 const TitleSpan = styled.div`
@@ -39,14 +55,14 @@ export function FavoriteFavoriteCommentHeader(props: propsType) {
         お気に入りコメント
       </TitleSpan>
       <FlexSpaceDiv />
-      <BlockIconDiv>
+      <IconDiv>
         <IconComponent
           icon={RxCross1}
           onclick={props.close}
-          size="50%"
+          size="100%"
           style={{ color: "white" }}
         />
-      </BlockIconDiv>
+      </IconDiv>
     </HeaderDiv>
   );
 }

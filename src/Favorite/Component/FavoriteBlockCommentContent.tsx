@@ -31,26 +31,17 @@ const LowerDiv = styled.div`
     display:flex;
     text-align: left;
     overflow-wrap: break-word;
-`;
-
-const IconDiv = styled.div`
-    box-sizing: border-box;
-    width:8%;
-    display:flex;
+    height: 33px;
     align-items: center;
-    justify-content: end;
-    padding-right: 1%;
-    position:relative;
+    padding-right: 3px;
 `;
 
 const MetaDiv = styled.div`
     font-size:13px;
-    width:95%;
+    flex: 1;
     display: flex;
     align-items: center;
 `;
-
-
 
 type propsType = {
     commentDetailItem: YouTubeDataApiCommentDetailItemType,
@@ -87,12 +78,10 @@ export function FavoriteBlockCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
-                <IconDiv>
-                    {/* 再表示 */}
-                    <FavoriteCommentRestoreIconArea
-                        restoreComment={() => { restoreComment(commentId) }}
-                    />
-                </IconDiv>
+                {/* 再表示 */}
+                <FavoriteCommentRestoreIconArea
+                    restoreComment={() => { restoreComment(commentId) }}
+                />
             </LowerDiv>
         </Parent>
     );

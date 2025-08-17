@@ -3,7 +3,32 @@ import { IconComponent } from "../../Common/Component/IconComponent";
 import { MdEdit } from "react-icons/md";
 import styled from "styled-components";
 import { useFavoriteMemoEditIconArea } from "../Hook/useFavoriteMemoEditIconArea";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  margin-right: 14px;
+  width: 10px;
+  height: 10px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 13px;
+      height: 13px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 13px;
+      height: 13px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 13px;
+      height: 13px;
+  }
+`;
 
 const EditNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -35,11 +60,11 @@ export function FavoriteMemoEditIconArea(props: propsType) {
         closeEditNav, } = useFavoriteMemoEditIconArea();
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={MdEdit}
                 onclick={props.openEdit}
-                size="45%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openEditNav}
                 onMouseLeave={closeEditNav}
@@ -49,6 +74,6 @@ export function FavoriteMemoEditIconArea(props: propsType) {
             >
                 編集
             </EditNavDiv>
-        </React.Fragment>
+        </Parent>
     );
 }

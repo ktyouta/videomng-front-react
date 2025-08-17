@@ -9,7 +9,29 @@ import { useFavoriteCommentBlockIconArea } from "../Hook/useFavoriteCommentBlock
 import { MdVisibility } from "react-icons/md";
 import { useFavoriteCommentRestoreIconArea } from "../Hook/useFavoriteCommentRestoreIconArea";
 import { useFavoriteFavoriteCommentDeleteIconArea } from "../Hook/useFavoriteFavoriteCommentDeleteIconArea";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const IconDiv = styled.div`
+    position: relative;
+    width: 12px;
+    height: 12px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        width: 16px;
+        height: 16px;
+    }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -43,11 +65,11 @@ export function FavoriteFavoriteCommentDeleteIconArea(props: propsType) {
         closeDeleteNav, } = useFavoriteFavoriteCommentDeleteIconArea();
 
     return (
-        <React.Fragment>
+        <IconDiv>
             <IconComponent
                 icon={FaRegTrashAlt}
                 onclick={props.deleteComment}
-                size="45%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openDeleteNav}
                 onMouseLeave={closeDeleteNav}
@@ -57,6 +79,6 @@ export function FavoriteFavoriteCommentDeleteIconArea(props: propsType) {
             >
                 お気に入りから外す
             </BlockNavDiv>
-        </React.Fragment>
+        </IconDiv>
     );
 }

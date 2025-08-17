@@ -5,7 +5,31 @@ import styled from "styled-components";
 import { useFavoriteMemoEditIconArea } from "../Hook/useFavoriteMemoEditIconArea";
 import { useFavoriteMemoDeleteIconArea } from "../Hook/useFavoriteMemoDeleteIconArea";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { MEDIA } from "../../Common/Const/MediaConst";
 
+
+const Parent = styled.div`
+  box-sizing: border-box;
+  position:relative;
+  display: flex;
+  width: 10px;
+  height: 10px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 13px;
+      height: 13px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 13px;
+      height: 13px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      width: 13px;
+      height: 13px;
+  }
+`;
 
 const DeleteNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -37,11 +61,11 @@ export function FavoriteMemoDeleteIconArea(props: propsType) {
         closeDeleteNav, } = useFavoriteMemoDeleteIconArea();
 
     return (
-        <React.Fragment>
+        <Parent>
             <IconComponent
                 icon={FaRegTrashAlt}
                 onclick={props.deleteMemo}
-                size="45%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openDeleteNav}
                 onMouseLeave={closeDeleteNav}
@@ -51,6 +75,6 @@ export function FavoriteMemoDeleteIconArea(props: propsType) {
             >
                 削除
             </DeleteNavDiv>
-        </React.Fragment>
+        </Parent>
     );
 }

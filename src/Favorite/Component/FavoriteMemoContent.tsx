@@ -26,21 +26,12 @@ const LowerDiv = styled.div`
     display:flex;
     text-align: left;
     overflow-wrap: break-word;
-`;
-
-const IconDiv = styled.div`
-    box-sizing: border-box;
-    width:8%;
-    display:flex;
     align-items: center;
-    justify-content: end;
-    padding-right: 1%;
-    position:relative;
 `;
 
 const MetaDiv = styled.div`
     font-size:13px;
-    width:95%;
+    flex: 1;
     display: flex;
     align-items: center;
 `;
@@ -91,16 +82,14 @@ export function FavoriteMemoContent(props: propsType) {
                             <MetaDiv>
                                 {updateDate}
                             </MetaDiv>
-                            <IconDiv>
-                                {/* 編集 */}
-                                <FavoriteMemoEditIconArea
-                                    openEdit={openEdit}
-                                />
-                                {/* 削除 */}
-                                <FavoriteMemoDeleteIconArea
-                                    deleteMemo={() => { deleteMemo() }}
-                                />
-                            </IconDiv>
+                            {/* 編集 */}
+                            <FavoriteMemoEditIconArea
+                                openEdit={openEdit}
+                            />
+                            {/* 削除 */}
+                            <FavoriteMemoDeleteIconArea
+                                deleteMemo={() => { deleteMemo() }}
+                            />
                         </LowerDiv>
                         <ConfirmModalComponent
                             isOpenModal={isOpenModal}

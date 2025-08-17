@@ -4,8 +4,6 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoComment
 import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import parse from "html-react-parser";
-import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconArea";
-import { COMMENT_FAVORITE_STATUS } from "../Const/FavoriteConst";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 
 

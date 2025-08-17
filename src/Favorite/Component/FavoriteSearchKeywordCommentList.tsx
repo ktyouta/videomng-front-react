@@ -26,7 +26,7 @@ const LoadingParent = styled(Parent)`
 `;
 
 const CommentListAreaDiv = styled.div`
-  width: 97%;
+  width: 99%;
   height: 90%;
   overflow: auto;
   overflow-x: hidden;

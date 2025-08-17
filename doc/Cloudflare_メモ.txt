@@ -1,0 +1,46 @@
+★Cloudflareメモ
+
+
+フロント側をホスティング
+
+
+■ドメイン
+videomng-front-react.pages.dev
+
+
+
+■デプロイ
+①アプリ名クリック
+②developmentタブクリック
+③All deploymentsのコミット履歴の右端の三点アイコンからRetry deploymentを選択
+
+
+
+■再ビルド
+①アプリ名クリック
+②developmentタブクリック
+③最新のコミット履歴のview detailをクリック
+④manage deploymentのretry deploymentを選択
+
+
+
+■環境変数変更
+①アプリ名クリック
+②Settingsタブクリック
+③Variables and Secretsから環境変数を設定
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

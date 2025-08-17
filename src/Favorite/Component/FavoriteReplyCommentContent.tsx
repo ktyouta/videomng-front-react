@@ -11,7 +11,6 @@ import { FavoriteVideoCommentThreadReplySnippetType } from "../Type/FavoriteVide
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../Type/FavoriteVideoCommentThreadReplyCommentType";
 import parse from "html-react-parser";
-import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconArea";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 
 

@@ -12,6 +12,7 @@ import { FavoriteBlockCommentContent } from "./FavoriteBlockCommentContent";
 import React from "react";
 import { useFavoriteFavoriteCommentList } from "../Hook/useFavoriteFavoriteCommentList";
 import { FavoriteFavoriteCommentContent } from "./FavoriteFavoriteCommentContent";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -21,6 +22,12 @@ const Parent = styled.div`
   padding-left: 2%;
   color:white;
   padding-top: 2%;
+`;
+
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
@@ -33,7 +40,6 @@ const CommentListAreaDiv = styled.div`
   padding-right: 1%;
 `;
 
-
 export function FavoriteFavoriteCommentList() {
 
     console.log("FavoriteFavoriteCommentList render");
@@ -45,9 +51,9 @@ export function FavoriteFavoriteCommentList() {
 
     if (isLoading) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

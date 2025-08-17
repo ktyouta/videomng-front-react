@@ -36,21 +36,10 @@ const LowerDiv = styled.div`
 
 const MetaDiv = styled.div`
     font-size:13px;
-    width:95%;
+    flex: 1;
     display: flex;
     align-items: center;
 `;
-
-const IconDiv = styled.div`
-    box-sizing: border-box;
-    width:8%;
-    display:flex;
-    align-items: center;
-    justify-content: end;
-    padding-right: 1%;
-    position:relative;
-`;
-
 
 type propsType = {
     searchComment: SearchKeywordCommentType,
@@ -86,13 +75,11 @@ export function FavoriteSearchKeywordCommentContent(props: propsType) {
                 <MetaDiv>
                     {publishedDate}
                 </MetaDiv>
-                <IconDiv>
-                    {/* アイコンエリア */}
-                    <FavoriteSearchKeywordContentIconArea
-                        commentId={commentId}
-                        favoriteStatus={favoriteStatus}
-                    />
-                </IconDiv>
+                {/* アイコンエリア */}
+                <FavoriteSearchKeywordContentIconArea
+                    commentId={commentId}
+                    favoriteStatus={favoriteStatus}
+                />
             </LowerDiv>
         </Parent>
     );

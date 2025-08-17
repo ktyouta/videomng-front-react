@@ -8,6 +8,29 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { useFavoriteCommentBlockIconArea } from "../Hook/useFavoriteCommentBlockIconArea";
 import { MdVisibility } from "react-icons/md";
 import { useFavoriteCommentRestoreIconArea } from "../Hook/useFavoriteCommentRestoreIconArea";
+import { MEDIA } from "../../Common/Const/MediaConst";
+
+
+const IconDiv = styled.div`
+    position: relative;
+    width: 12px;
+    height: 12px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        width: 16px;
+        height: 16px;
+    }
+`;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -41,11 +64,11 @@ export function FavoriteCommentRestoreIconArea(props: propsType) {
         closeBlockNav, } = useFavoriteCommentRestoreIconArea();
 
     return (
-        <React.Fragment>
+        <IconDiv>
             <IconComponent
                 icon={MdVisibility}
                 onclick={props.restoreComment}
-                size="45%"
+                size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openBlockNav}
                 onMouseLeave={closeBlockNav}
@@ -55,6 +78,6 @@ export function FavoriteCommentRestoreIconArea(props: propsType) {
             >
                 再表示
             </BlockNavDiv>
-        </React.Fragment>
+        </IconDiv>
     );
 }

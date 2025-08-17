@@ -10,6 +10,7 @@ import { useFavoriteBlockCommentList } from "../Hook/useFavoriteBlockCommentList
 import { YouTubeDataApiCommentDetailItemType } from "../Type/YouTubeDataApiCommentDetailItemType";
 import { FavoriteBlockCommentContent } from "./FavoriteBlockCommentContent";
 import React from "react";
+import Loading from "../../Common/Component/Loading";
 
 
 const Parent = styled.div`
@@ -19,6 +20,12 @@ const Parent = styled.div`
   padding-left: 2%;
   color:white;
   padding-top: 2%;
+`;
+
+const LoadingParent = styled(Parent)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
@@ -43,9 +50,9 @@ export function FavoriteBlockCommentList() {
 
     if (isLoading) {
         return (
-            <Parent>
-                <LoadingBase />
-            </Parent>
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 
