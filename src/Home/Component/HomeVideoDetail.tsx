@@ -69,6 +69,14 @@ export function HomeVideoDetail() {
     errMessage,
     backHome, } = useHomeVideoDetail();
 
+  if (!videoDetail) {
+    return (
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
+    );
+  }
+
   // ローディング
   if (isLoading) {
     return (

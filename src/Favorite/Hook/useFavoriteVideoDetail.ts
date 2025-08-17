@@ -37,6 +37,11 @@ export function useFavoriteVideoDetail() {
             const videoId = pathArray[3];
             setFavoriteVideoId(videoId);
         }
+
+        // アンマウント時に動画情報をリセット
+        return () => {
+            setVideoDetail(undefined);
+        }
     }, []);
 
     // 動画詳細を取得

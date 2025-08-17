@@ -6,7 +6,7 @@ import { VideoDetailApiUrlModel } from "../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { VideoIdContext } from "../Component/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
@@ -25,6 +25,13 @@ export function useHomeVideoDetail() {
     // 動画一覧取得URL情報
     const { query } = useGetVideoListUrl();
 
+    useEffect(() => {
+
+        // アンマウント時に動画情報をリセット
+        return () => {
+            setVideoDetail(undefined);
+        }
+    }, []);
 
     // 動画詳細を取得
     const { isLoading } = useQueryWrapper<VideoDetailResponseType>(
