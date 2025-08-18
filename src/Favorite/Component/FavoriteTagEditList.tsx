@@ -129,11 +129,11 @@ export function FavoriteTagEditList() {
         switchTagMasterList, } = useFavoriteTagEditList();
 
     if (!favoriteVideoTagEditList) {
-        return;
+        return <Parent />;
     }
 
     if (!tagMasterList) {
-        return;
+        return <Parent />;
     }
 
     return (

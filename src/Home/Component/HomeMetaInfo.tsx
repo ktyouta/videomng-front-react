@@ -26,7 +26,7 @@ const TitleDiv = styled.div`
 
 const MetaDiv = styled.div`
   box-sizing:border-box;
-  margin-bottom:4%;
+  margin-bottom: 37px;
 `;
 
 

@@ -35,12 +35,12 @@ const DeleteNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
     width: 40px;
     height: 25px;
-    top: 39px;
+    top: 20px;
     font-size: 10px;
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: 32px;
+    left: -28px;
     box-sizing: border-box;
     color: black;
     justify-content: center;

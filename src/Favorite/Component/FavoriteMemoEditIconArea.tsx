@@ -34,12 +34,12 @@ const EditNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
     width: 40px;
     height: 25px;
-    top: 39px;
+    top: 20px;
     font-size: 10px;
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: 2px;
+    left: -22px;
     box-sizing: border-box;
     color: black;
     justify-content: center;

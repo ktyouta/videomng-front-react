@@ -47,12 +47,12 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
     width: 40px;
     height: 20px;
-    top: 33px;
+    top: 29px;
     font-size: 10px;
     background-color: white;
     z-index: 10;
     position: absolute;
-    left: 20px;
+    left: -12px;
     box-sizing: border-box;
     color: black;
     -webkit-box-pack: center;
