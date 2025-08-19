@@ -12,7 +12,7 @@ const Parent = styled.div`
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
-  padding:2%;
+  padding: 19px;
 `;
 
 const ContentDiv = styled.div`

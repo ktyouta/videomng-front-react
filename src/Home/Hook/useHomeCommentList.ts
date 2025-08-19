@@ -7,12 +7,13 @@ import { HomeVideoCommentThreadResponseType } from "../Type/HomeVideoCommentThre
 import { homeVideoCommentListAtom, } from "../Atom/HomeAtom";
 import { VideoIdContext } from "../Component/Home";
 import { useHomeCommentEndpoint } from "./useHomeCommentEndpoint";
+import { HomeVideoCommentThreadItemType } from "../Type/HomeVideoCommentThreadItemType";
 
 
 export function useHomeCommentList() {
 
     // コメント情報
-    const [homeVideoCommentList, setHomeVideoCommentList] = useAtom(homeVideoCommentListAtom);
+    const [homeVideoCommentList, setHomeVideoCommentList] = useState<HomeVideoCommentThreadItemType[]>();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID

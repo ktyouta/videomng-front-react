@@ -10,8 +10,8 @@ const Parent = styled.div`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding-left: 2%;
-  padding-top: 4%;
+  padding-left: 19px;
+  padding-top: 30px;
   color:white;
   position: relative;
 `;
@@ -54,6 +54,14 @@ export function HomeCommentList() {
             <Parent>
                 {errMessage}
             </Parent>
+        );
+    }
+
+    if (!homeVideoCommentList) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

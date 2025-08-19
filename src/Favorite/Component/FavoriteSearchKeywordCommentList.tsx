@@ -13,9 +13,9 @@ const Parent = styled.div`
   width: 100%;
   height: 90%;
   box-sizing: border-box;
-  padding-left: 2%;
-  padding-top: 2%;
-  padding-right: 2%;
+  padding-left: 19px;
+  padding-top: 19px;
+  padding-right: 19px;
   color:white;
 `;
 

@@ -10,9 +10,9 @@ const Parent = styled.div`
   width: 100%;
   height: 90%;
   box-sizing: border-box;
-  padding-left: 2%;
-  padding-top: 2%;
-  padding-right: 2%;
+  padding-left: 19px;
+  padding-top: 19px;
+  padding-right: 19px;
   color:white;
 `;
 
@@ -23,7 +23,7 @@ const LoadingParent = styled(Parent)`
 `;
 
 const CommentListAreaDiv = styled.div`
-  width: 97%;
+  width: 99%;
   height: 90%;
   overflow: auto;
   overflow-x: hidden;

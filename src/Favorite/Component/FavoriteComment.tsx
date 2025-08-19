@@ -19,7 +19,8 @@ const Parent = styled.div`
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
-  padding-top:2%;
+  padding-left: 19px;
+  padding-top: 23px;
 `;
 
 

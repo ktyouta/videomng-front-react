@@ -13,7 +13,6 @@ const Parent = styled.div`
   width: 100%;
   height: 90%;
   box-sizing: border-box;
-  padding-left: 2%;
   color:white;
   padding-top: 1%;
 `;
