@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
-import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom } from "../Atom/HomeAtom";
+import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, videoListDataAtom } from "../Atom/HomeAtom";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 export function useHome() {
@@ -20,6 +20,8 @@ export function useHome() {
     const [isLoadingComp, setIsLoadingComp] = useState(false);
     // チャンネルID
     const [channelId, setChannelId] = useState(``);
+    // 動画リスト
+    const setVideoListData = useSetAtom(videoListDataAtom);
 
 
     // URL直打ち対応
@@ -73,6 +75,14 @@ export function useHome() {
         }
 
         setIsLoadingComp(true);
+    }, []);
+
+    // アンマウント時に動画一覧をリセット
+    useEffect(() => {
+
+        return () => {
+            setVideoListData(undefined);
+        }
     }, []);
 
     return {
