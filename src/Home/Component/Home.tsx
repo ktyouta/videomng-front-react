@@ -1,13 +1,13 @@
 import React, { createContext } from "react";
-import { HomeVideoList } from "./HomeVideoList";
+import { HomeVideoList } from "./VideoList/HomeVideoList";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { HomeVideoDetail } from "./HomeVideoDetail";
+import { HomeVideoDetail } from "./VideoDetail/HomeVideoDetail";
 import { useHome } from "../Hook/useHome";
 import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { NotFound } from "../../NotFound/Component/NotFound";
-import { HomeChannel } from "./HomeChannel";
+import { HomeChannel } from "./VideoChannel/HomeChannel";
 
 // 動画ID
 export const VideoIdContext = createCtx<string>();

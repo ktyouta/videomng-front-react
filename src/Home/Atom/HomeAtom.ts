@@ -1,11 +1,11 @@
 import { VIDEO_TYPE_LIST } from "../Const/HomeConst";
-import { HomeVideoCommentThreadItemType } from "../Type/HomeVideoCommentThreadItemType";
-import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
-import { ShowMoreDataType } from "../Type/ShowMoreDataType";
-import { VideoDetailItemType } from "../Type/VideoDetailItemType";
-import { VideoListDataType } from "../Type/VideoListDataType";
-import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
-import { YouTubeDataApiVideoListItemType } from "../Type/YouTubeDataApiVideoListItemType";
+import { HomeVideoCommentThreadItemType } from "../Type/VideoDetail/VideoComment/HomeVideoCommentThreadItemType";
+import { SearchKeywordCommentType } from "../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
+import { ShowMoreDataType } from "../Type/VideoList/ShowMoreDataType";
+import { VideoDetailItemType } from "../Type/VideoDetail/VideoDetailItemType";
+import { VideoListDataType } from "../Type/VideoList/VideoListDataType";
+import { YouTubeDataApiVideoDetailItemType } from "../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
+import { YouTubeDataApiVideoListItemType } from "../Type/VideoList/YouTubeDataApiVideoListItemType";
 import { atom } from "jotai";
 
 // APIから取得した動画リスト

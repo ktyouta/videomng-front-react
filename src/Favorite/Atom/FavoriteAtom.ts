@@ -1,6 +1,6 @@
 import { comboType } from "../../Common/Component/ComboComponent";
 import { tagType } from "../../Common/Component/TagsComponent";
-import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
+import { VideoListResponseType } from "../../Home/Type/VideoList/VideoListResponseType";
 import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";

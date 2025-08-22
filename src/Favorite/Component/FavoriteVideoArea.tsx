@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useFavoriteVideoArea } from "../Hook/useFavoriteVideoArea";
 import LoadingBase from "../../Common/Component/LoadingBase";
 import { FavoriteVideoContent } from "./FavoriteVideoContent";
-import { VideoListResponseType } from "../../Home/Type/VideoListResponseType";
+import { VideoListResponseType } from "../../Home/Type/VideoList/VideoListResponseType";
 import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
 import { MEDIA } from "../../Common/Const/MediaConst";
 import Loading from "../../Common/Component/Loading";
