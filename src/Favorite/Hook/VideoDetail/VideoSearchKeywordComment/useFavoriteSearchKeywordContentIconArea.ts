@@ -1,0 +1,170 @@
+import { useAtomValue, useSetAtom } from "jotai";
+import { favoriteVideoCommentListAtom, favoriteVideoMemoListAtom, searchKeywordCommentAtom } from "../../../Atom/FavoriteAtom";
+import { useState } from "react";
+import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
+import ENV from "../../../../env.json";
+import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { DeleteToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/DeleteToFavoriteVideoMemoReqestType";
+import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
+import useSwitch from "../../../../Common/Hook/useSwitch";
+import { AddToFavoriteVideoBlockCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/AddToFavoriteVideoBlockCommentReqestType";
+import { FavoriteVideoBlockCommentType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
+import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
+import { FavoriteVideoFavoriteCommentType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/FavoriteVideoFavoriteCommentType";
+import { COMMENT_FAVORITE_STATUS } from "../../../Const/FavoriteConst";
+import { FavoriteVideoIdContext } from "../../../Component/Favorite";
+import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
+import { useFavoriteBlockCommentEndpoint } from "../VideoComment/VideoBlockComment/useFavoriteBlockCommentEndpoint";
+import { useFavoriteFavoriteCommentIdEndpoint } from "../VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentIdEndpoint";
+import { useFavoriteFavoriteCommentEndpoint } from "../VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentEndpoint";
+import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
+
+
+type propsType = {
+    commentId: string,
+    favoriteStatus: string,
+}
+
+
+export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
+
+    // コメント情報
+    const setSearchCommentList = useSetAtom(searchKeywordCommentAtom);
+    // お気に入り状態
+    const [favoriteStatus, setFavoriteStatus] = useState(props.favoriteStatus);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+
+
+    /**
+     * コメントブロックリクエスト
+     */
+    const postBlockMutation = useMutationWrapper({
+        url: useFavoriteBlockCommentEndpoint(favoriteVideoId),
+        method: "POST",
+        // 正常終了後の処理
+        afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
+            setSearchCommentList((e) => {
+
+                const blockCommentId = res.data.commentId;
+
+                if (e) {
+                    // ブロックコメントをフィルターする
+                    e = e.filter((e1: SearchKeywordCommentType) => {
+
+                        const commentId = e1.commentId;
+
+                        return commentId !== blockCommentId;
+                    });
+                }
+                return e;
+            });
+        },
+        // 失敗後の処理
+        afErrorFn: (res: errResType) => {
+            toast.error(`コメントの非表示に失敗しました。`);
+        },
+    });
+
+
+    /**
+     * コメントをブロックする
+     * @param videoId 
+     */
+    function blockComment(commentId: string) {
+
+        if (!commentId) {
+            toast.error(`非表示にできませんでした。`);
+            return;
+        }
+
+        const body: AddToFavoriteVideoBlockCommentReqestType = {
+            commentId,
+            videoId: favoriteVideoId
+        }
+
+        // リクエスト送信
+        postBlockMutation.mutate(body);
+    }
+
+
+    /**
+     * コメントお気に入りリクエスト
+     */
+    const postFavoriteMutation = useMutationWrapper({
+        url: useFavoriteFavoriteCommentEndpoint(favoriteVideoId),
+        method: "POST",
+        // 正常終了後の処理
+        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+            setFavoriteStatus(COMMENT_FAVORITE_STATUS.FAVORITE);
+        },
+        // 失敗後の処理
+        afErrorFn: (res: errResType) => {
+            toast.error(`お気に入り登録に失敗しました。`);
+        },
+    });
+
+
+    /**
+     * コメントをお気に入りに登録する
+     * @param videoId 
+     */
+    function favoriteComment(commentId: string) {
+
+        if (!commentId) {
+            toast.error(`お気に入りに登録できません。`);
+            return;
+        }
+
+        const body: AddToFavoriteVideoFavoriteCommentReqestType = {
+            commentId,
+        }
+
+        // リクエスト送信
+        postFavoriteMutation.mutate(body);
+    }
+
+
+    /**
+     * お気に入りコメント削除リクエスト
+     */
+    const delMutation = useMutationWrapper({
+        url: useFavoriteFavoriteCommentIdEndpoint({
+            videoId: favoriteVideoId,
+            commentId: props.commentId
+        }),
+        method: "DELETE",
+        // 正常終了後の処理
+        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+            setFavoriteStatus(COMMENT_FAVORITE_STATUS.NONE);
+        },
+        // 失敗後の処理
+        afErrorFn: (res: errResType) => {
+            toast.error(`削除に失敗しました。`);
+        },
+    });
+
+
+    /**
+     * お気に入りコメントを削除する
+     * @param videoId 
+     */
+    function deleteFavoriteComment(commentId: string) {
+
+        if (!commentId) {
+            toast.error(`お気に入りから外せません。`);
+            return;
+        }
+
+        // リクエスト送信
+        delMutation.mutate();
+    }
+
+    return {
+        blockComment,
+        favoriteComment,
+        deleteFavoriteComment,
+        favoriteStatus,
+    }
+}

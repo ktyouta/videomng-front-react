@@ -1,16 +1,16 @@
 import { comboType } from "../../Common/Component/ComboComponent";
 import { tagType } from "../../Common/Component/TagsComponent";
 import { VideoListResponseType } from "../../Home/Type/VideoList/VideoListResponseType";
-import { FavoriteVideoCommentThreadItemType } from "../Type/FavoriteVideoCommentThreadItemType";
-import { FavoriteVideoDetailDataType } from "../Type/FavoriteVideoDetailDataType";
-import { FavoriteVideoListMergedType } from "../Type/FavoriteVideoListMergedType";
-import { FavoriteVideoMemoType } from "../Type/FavoriteVideoMemoType";
-import { FavoriteVideoTagType } from "../Type/FavoriteVideoTagType";
-import { SearchKeywordCommentType } from "../Type/SearchKeywordCommentType";
-import { ViewStatusType } from "../Type/ViewStatusType";
-import { YouTubeDataApiCommentDetailResponseType } from "../Type/YouTubeDataApiCommentDetailResponseType";
-import { YouTubeDataApiVideoDetailItemType } from "../Type/YouTubeDataApiVideoDetailItemType";
+import { FavoriteVideoDetailDataType } from "../Type/VideoDetail/FavoriteVideoDetailDataType";
+import { FavoriteVideoListMergedType } from "../Type/VideoList/FavoriteVideoListMergedType";
+import { FavoriteVideoMemoType } from "../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
+import { FavoriteVideoTagType } from "../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
+import { SearchKeywordCommentType } from "../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
+import { ViewStatusType } from "../Type/VideoList/ViewStatusType";
+import { YouTubeDataApiCommentDetailResponseType } from "../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailResponseType";
+import { YouTubeDataApiVideoDetailItemType } from "../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
 import { atom } from "jotai";
+import { FavoriteVideoCommentThreadItemType } from "../Type/VideoDetail/VideoComment/FavoriteVideoCommentThreadItemType";
 
 // APIから取得した動画リスト
 export const favoriteVideoListAtom = atom<FavoriteVideoListMergedType[] | undefined>();

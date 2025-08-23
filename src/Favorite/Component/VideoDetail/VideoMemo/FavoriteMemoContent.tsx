@@ -1,0 +1,106 @@
+import styled from "styled-components";
+import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
+import { format } from "date-fns";
+import { useFavoriteMemoContent } from "../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoContent";
+import React from "react";
+import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
+import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
+import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
+import { ConfirmModalComponent } from "../../../../Common/Component/ConfirmModalComponent";
+
+
+const Parent = styled.div`
+    height: auto;
+    box-sizing: border-box;
+    border-bottom: solid 1px;
+    margin-bottom: 5%;
+`;
+
+const MemoDiv = styled.div`
+    box-sizing: border-box;
+    margin-bottom: 8px;
+`;
+
+const LowerDiv = styled.div`
+    box-sizing: border-box;
+    display:flex;
+    text-align: left;
+    overflow-wrap: break-word;
+    align-items: center;
+`;
+
+const MetaDiv = styled.div`
+    font-size:13px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+`;
+
+
+type propsType = {
+    favoriteVideoMemo: FavoriteVideoMemoType,
+}
+
+export function FavoriteMemoContent(props: propsType) {
+
+    console.log("FavoriteMemoContent render");
+
+    const {
+        deleteMemo,
+        isOpenEdit,
+        openEdit,
+        closeEdit,
+        isOpenModal,
+        closeModal,
+        executeDelete,
+    } = useFavoriteMemoContent({ ...props });
+
+    const data = props.favoriteVideoMemo;
+    const memo = data.videoMemo;
+    const memoSeq = data.videoMemoSeq;
+    const updateDate = format(new Date(data.updateDate), "yyyy/MM/dd  HH:mm");
+
+    return (
+        <Parent>
+            {
+                isOpenEdit ?
+                    <React.Fragment>
+                        {/* 編集中 */}
+                        <FavoriteMemoEditInput
+                            videoMemoSeq={memoSeq}
+                            closeEdit={closeEdit}
+                            inputMemo={memo}
+                        />
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                        {/* 閲覧 */}
+                        <MemoDiv>
+                            {memo}
+                        </MemoDiv>
+                        <LowerDiv>
+                            <MetaDiv>
+                                {updateDate}
+                            </MetaDiv>
+                            {/* 編集 */}
+                            <FavoriteMemoEditIconArea
+                                openEdit={openEdit}
+                            />
+                            {/* 削除 */}
+                            <FavoriteMemoDeleteIconArea
+                                deleteMemo={() => { deleteMemo() }}
+                            />
+                        </LowerDiv>
+                        <ConfirmModalComponent
+                            isOpenModal={isOpenModal}
+                            closeModal={closeModal}
+                            titleMessage={`メモを削除しますか？`}
+                            clickOk={() => {
+                                executeDelete();
+                            }}
+                        />
+                    </React.Fragment>
+            }
+        </Parent>
+    );
+}

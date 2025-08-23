@@ -1,7 +1,7 @@
 import React from "react";
-import { FavoriteVideoList } from "./FavoriteVideoList";
+import { FavoriteVideoList } from "./VideoList/FavoriteVideoList";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { FavoriteVideoDetail } from "./FavoriteVideoDetail";
+import { FavoriteVideoDetail } from "./VideoDetail/FavoriteVideoDetail";
 import { useFavorite } from "../Hook/useFavorite";
 import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";

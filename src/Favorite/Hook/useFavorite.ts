@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { ViewStatusResponseType } from "../Type/ViewStatusResponseType";
+import { ViewStatusResponseType } from "../Type/VideoList/ViewStatusResponseType";
 import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
 import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
-import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
+import { useFavoriteListApiUrl } from "./VideoList/useFavoriteListApiUrl";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 

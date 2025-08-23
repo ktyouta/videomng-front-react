@@ -1,0 +1,85 @@
+import { useAtomValue, useSetAtom } from "jotai";
+import { favoriteCommentDataAtom, favoriteVideoCommentListAtom, favoriteVideoMemoListAtom } from "../../../../Atom/FavoriteAtom";
+import { useState } from "react";
+import useMutationWrapper from "../../../../../Common/Hook/useMutationWrapper";
+import ENV from "../../../../../env.json";
+import { errResType, resType } from "../../../../../Common/Hook/useMutationWrapperBase";
+import { DeleteToFavoriteVideoMemoReqestType } from "../../../../Type/VideoDetail/VideoMemo/DeleteToFavoriteVideoMemoReqestType";
+import { FavoriteVideoMemoType } from "../../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
+import useSwitch from "../../../../../Common/Hook/useSwitch";
+import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
+import { FavoriteVideoFavoriteCommentType } from "../../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/FavoriteVideoFavoriteCommentType";
+import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailItemType";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import { DeleteToFavoriteVideoFavoriteCommentReqestType } from "../../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/DeleteToFavoriteVideoFavoriteCommentReqestType";
+import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../../../../Common/Const/CommonConst";
+import { useFavoriteFavoriteCommentIdEndpoint } from "./useFavoriteFavoriteCommentIdEndpoint";
+import { FavoriteVideoIdContext } from "../../../../Component/Favorite";
+
+
+type propsType = {
+    commentDetailItem: YouTubeDataApiCommentDetailItemType,
+}
+
+export function useFavoriteFavoriteCommentContent(props: propsType) {
+
+    // お気に入りコメントリスト
+    const setFavoriteCommentData = useSetAtom(favoriteCommentDataAtom);
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+
+    /**
+     * お気に入りコメント削除リクエスト
+     */
+    const postMutation = useMutationWrapper({
+        url: useFavoriteFavoriteCommentIdEndpoint({
+            videoId: favoriteVideoId,
+            commentId: props.commentDetailItem.id
+        }),
+        method: "DELETE",
+        // 正常終了後の処理
+        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+            setFavoriteCommentData((e) => {
+                const commentId = res.data.commentId;
+
+                if (!e) {
+                    return e;
+                }
+
+                return {
+                    ...e,
+                    // コメントをフィルターする
+                    items: e.items.filter((e1: YouTubeDataApiCommentDetailItemType) => {
+                        return e1.id !== commentId;
+                    })
+                };
+            });
+        },
+        // 失敗後の処理
+        afErrorFn: (res: errResType) => {
+            toast.error(`削除に失敗しました。`);
+        },
+    });
+
+
+    /**
+     * お気に入りコメントを削除する
+     * @param videoId 
+     */
+    function deleteFavoriteComment(commentId: string) {
+
+        if (!commentId) {
+            toast.error(`お気に入りから外せません。`);
+            return;
+        }
+
+        // リクエスト送信
+        postMutation.mutate();
+    }
+
+
+    return {
+        deleteFavoriteComment,
+    }
+}
