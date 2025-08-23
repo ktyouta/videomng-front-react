@@ -1,5 +1,4 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoMemoListAtom } from "../../../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import ENV from "../../../../env.json";
@@ -13,10 +12,12 @@ import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
+import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
+import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 
 
 type propsType = {
-    inputMemo: string,
+    initMemo: string,
     closeEdit: () => void,
     videoMemoSeq: number
 }
@@ -24,11 +25,11 @@ type propsType = {
 export function useFavoriteMemoUpdateInput(props: propsType) {
 
     // メモ入力情報
-    const [inputMemo, setInputMemo] = useState(props.inputMemo);
-    // メモ情報
-    const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
+    const [inputMemo, setInputMemo] = useState(props.initMemo);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // メモ再取得用
+    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(favoriteVideoId));
 
 
     /**
@@ -42,29 +43,9 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
-            setVideoListItemAtom((e) => {
-                if (e) {
-                    const resMemo = res.data;
-                    const videoId = resMemo.videoId;
-                    const userId = resMemo.userId;
-                    const memoSeq = resMemo.videoMemoSeq;
-                    const memo = resMemo.videoMemo;
 
-                    // 対象のメモを更新
-                    const updateMemo = e.find((e1) => {
-                        return e1.userId === userId &&
-                            e1.videoId === videoId &&
-                            e1.videoMemoSeq === memoSeq;
-                    });
-
-                    if (updateMemo) {
-                        updateMemo.videoMemo = memo;
-                        updateMemo.updateDate = resMemo.updateDate;
-                    }
-                }
-                return e;
-            });
-
+            // メモを再取得
+            invalidate()
             props.closeEdit();
         },
         // 失敗後の処理

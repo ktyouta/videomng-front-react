@@ -33,7 +33,7 @@ const EditIconAreaDiv = styled.div`
 type propsType = {
     videoMemoSeq: number,
     closeEdit: () => void,
-    inputMemo: string,
+    initMemo: string,
 }
 
 

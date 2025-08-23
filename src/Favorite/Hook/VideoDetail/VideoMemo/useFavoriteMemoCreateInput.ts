@@ -1,5 +1,4 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoMemoListAtom } from "../../../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import ENV from "../../../../env.json";
@@ -12,19 +11,20 @@ import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
+import { useQueryClient } from "react-query";
+import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 
 
 export function useFavoriteMemoCreateInput() {
 
     // メモ入力情報
     const [inputMemo, setInputMemo] = useState(``);
-    // メモ情報
-    const setVideoListItemAtom = useSetAtom(favoriteVideoMemoListAtom);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-
+    // メモ再取得用
+    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(favoriteVideoId));
 
     /**
      * お気に入り動画メモ登録リクエスト
@@ -34,13 +34,9 @@ export function useFavoriteMemoCreateInput() {
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
-            setVideoListItemAtom((e) => {
-                if (e) {
-                    e = [...e, res.data];
-                }
-                setInputMemo(``);
-                return e;
-            });
+
+            // メモを再取得
+            invalidate();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -64,6 +60,8 @@ export function useFavoriteMemoCreateInput() {
 
         // リクエスト送信
         postMutation.mutate(body);
+
+        clearInputMemo();
     }
 
     /**

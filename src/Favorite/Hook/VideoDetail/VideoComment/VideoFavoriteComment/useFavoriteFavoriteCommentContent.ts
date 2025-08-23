@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteCommentDataAtom, favoriteVideoCommentListAtom, favoriteVideoMemoListAtom } from "../../../../Atom/FavoriteAtom";
+import { favoriteCommentDataAtom, favoriteVideoCommentListAtom } from "../../../../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../../../../Common/Hook/useMutationWrapper";
 import ENV from "../../../../../env.json";

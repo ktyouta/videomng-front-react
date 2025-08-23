@@ -79,7 +79,7 @@ export function FavoriteMemoCreateInput() {
       <SearchIconAreaDiv>
         <IconComponent
           icon={FaArrowUp}
-          onclick={() => { addToMemo() }}
+          onclick={addToMemo}
           size="70%"
         />
       </SearchIconAreaDiv>

@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
-import { favoriteVideoDetailItemAtom, favoriteVideoMemoListAtom } from "../../Atom/FavoriteAtom";
+import { favoriteVideoDetailItemAtom } from "../../Atom/FavoriteAtom";
 import { FavoriteVideoDetailApiUrlModel, } from "../../Model/FavoriteVideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";

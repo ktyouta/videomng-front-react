@@ -16,8 +16,6 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/VideoDetail/VideoCom
 export const favoriteVideoListAtom = atom<FavoriteVideoListMergedType[] | undefined>();
 // APIから取得した動画詳細
 export const favoriteVideoDetailItemAtom = atom<FavoriteVideoDetailDataType>();
-// メモ情報
-export const favoriteVideoMemoListAtom = atom<FavoriteVideoMemoType[]>();
 // コメント情報
 export const favoriteVideoCommentListAtom = atom<FavoriteVideoCommentThreadItemType[]>();
 // キーワード検索(コメント)情報
