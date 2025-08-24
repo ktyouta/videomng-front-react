@@ -12,8 +12,6 @@ import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/Favor
 
 export function useFavoriteMemoList() {
 
-    // メモ情報
-    const [favoriteVideoMemoList, setFavoriteVideoMemoList] = useState<FavoriteVideoMemoType[]>();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID
@@ -21,14 +19,14 @@ export function useFavoriteMemoList() {
 
 
     // メモ情報を取得
-    const { isLoading } = useQueryWrapper<FavoriteVideoMemoResponseType>(
+    const { data: favoriteVideoMemoList, isLoading } = useQueryWrapper<FavoriteVideoMemoResponseType, FavoriteVideoMemoType[]>(
         {
             url: useFavoriteMemoEndpoint(favoriteVideoId),
-            afSuccessFn: (response: FavoriteVideoMemoResponseType) => {
-                setFavoriteVideoMemoList(response.data ?? []);
-            },
             afErrorFn: (res) => {
                 setErrMessage(`メモの取得に失敗しました。`);
+            },
+            select: (res: FavoriteVideoMemoResponseType) => {
+                return res.data;
             }
         }
     );

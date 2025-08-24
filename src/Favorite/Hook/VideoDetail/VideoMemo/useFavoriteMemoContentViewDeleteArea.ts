@@ -13,7 +13,7 @@ type propsType = {
     data: FavoriteVideoMemoType,
 }
 
-export function useFavoriteMemoContentView(props: propsType) {
+export function useFavoriteMemoContentViewDeleteArea(props: propsType) {
 
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();

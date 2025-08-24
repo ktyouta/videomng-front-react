@@ -5,7 +5,7 @@ import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { ConfirmModalComponent } from "../../../../Common/Component/ConfirmModalComponent";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { format } from "date-fns";
-import { useFavoriteMemoContentView } from "../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoContentView";
+import { FavoriteMemoContentViewDeleteArea } from "./FavoriteMemoContentViewDeleteArea";
 
 const MemoDiv = styled.div`
     box-sizing: border-box;
@@ -34,11 +34,7 @@ type propsType = {
 
 export function FavoriteMemoContentView(props: propsType) {
 
-    const {
-        isOpenModal,
-        closeModal,
-        deleteMemo,
-        executeDelete } = useFavoriteMemoContentView({ ...props });
+    console.log("FavoriteMemoContentView render");
 
     const memoData = props.data;
     const memo = memoData.videoMemo;
@@ -59,16 +55,10 @@ export function FavoriteMemoContentView(props: propsType) {
                     openEdit={props.openEdit}
                 />
                 {/* 削除 */}
-                <FavoriteMemoDeleteIconArea
-                    deleteMemo={deleteMemo}
+                <FavoriteMemoContentViewDeleteArea
+                    data={props.data}
                 />
             </LowerDiv>
-            <ConfirmModalComponent
-                isOpenModal={isOpenModal}
-                closeModal={closeModal}
-                titleMessage={`メモを削除しますか？`}
-                clickOk={executeDelete}
-            />
         </React.Fragment>
     );
 }

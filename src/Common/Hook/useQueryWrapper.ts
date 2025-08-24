@@ -12,7 +12,7 @@ type propsType<TData, RData, PData> = {
         "queryKey" | "queryFn" | "enabled" | "notifyOnChangeProps" | "select" | "initialData"
     >,
     init?: TData,
-    callback?: (data: TData) => RData,
+    select?: (data: TData) => RData,
     afSuccessFn?: (data: RData) => void,
     afErrorFn?: (res: unknown) => void,
     method?: methodType,
@@ -52,7 +52,7 @@ const useQueryWrapper = <
         {
             enabled: !!props.url,
             notifyOnChangeProps: "tracked",
-            select: props.callback,
+            select: props.select,
             initialData: props.init,
             onSuccess: props.afSuccessFn,
             onError: props.afErrorFn,
