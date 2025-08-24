@@ -100,7 +100,7 @@ export function useHomeVideoDetailInfo() {
 
         if (videoId) {
             const transitionPath = `${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${videoId}`;
-            query = `?backpath=${transitionPath}&nextpath=${transitionPath}`;
+            query = `?previouspath=${transitionPath}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${query}`);

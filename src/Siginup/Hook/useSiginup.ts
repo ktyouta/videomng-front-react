@@ -44,10 +44,8 @@ export function useSiginup() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // 遷移先(戻る)
-    const [backPath, setBackPath] = useState(``);
-    // 遷移先(ログイン後)
-    const [nextPath, setNextPath] = useState(``);
+    // 遷移元
+    const [previousPath, setPreviousPath] = useState(``);
 
     useEffect(() => {
 
@@ -56,13 +54,11 @@ export function useSiginup() {
         if (query && query.length > 0 && query.charAt(0) === `?`) {
 
             const params = new URLSearchParams(query);
-            const backPathValue = params.get(`backpath`);
-            const nextPathValue = params.get(`nextpath`);
+            const previousPathValue = params.get(`previouspath`);
 
-            if (backPathValue && nextPathValue) {
+            if (previousPathValue) {
 
-                setBackPath(backPathValue);
-                setNextPath(nextPathValue);
+                setPreviousPath(previousPathValue);
             }
         }
     }, []);
@@ -80,7 +76,7 @@ export function useSiginup() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(nextPath);
+            navigate(previousPath);
 
         },
         // 失敗後の処理
@@ -158,8 +154,8 @@ export function useSiginup() {
 
         let query = ``;
 
-        if (backPath && nextPath) {
-            query = `?backpath=${backPath}&nextpath=${nextPath}`;
+        if (previousPath) {
+            query = `?previouspath=${previousPath}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${query}`);
