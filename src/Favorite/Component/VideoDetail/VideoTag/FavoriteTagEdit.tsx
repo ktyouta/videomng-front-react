@@ -12,16 +12,7 @@ import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagEditFooter } from "./FavoriteTagEditFooter";
 import { FavoriteTagEditList } from "./FavoriteTagEditList";
-
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  display: flex;
-  flex-direction: column;
-`;
+import { useFavoriteTagEdit } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagEdit";
 
 
 type propsType = {
@@ -32,15 +23,27 @@ export function FavoriteTagEdit(props: propsType) {
 
   console.log("FavoriteTagEdit render");
 
+  const {
+    favoriteVideoTagEditList,
+    setFavoriteVideoTagEditList } = useFavoriteTagEdit();
+
   return (
     <React.Fragment>
       {/* 入力欄 */}
-      <FavoriteTagCreateInput />
+      <FavoriteTagCreateInput
+        favoriteVideoTagEditList={favoriteVideoTagEditList}
+        setFavoriteVideoTagEditList={setFavoriteVideoTagEditList}
+      />
       {/* タグリスト */}
-      <FavoriteTagEditList />
+      <FavoriteTagEditList
+        favoriteVideoTagEditList={favoriteVideoTagEditList}
+        setFavoriteVideoTagEditList={setFavoriteVideoTagEditList}
+      />
       {/* タグフッター */}
       <FavoriteTagEditFooter
         changeView={props.changeView}
+        favoriteVideoTagEditList={favoriteVideoTagEditList}
+        setFavoriteVideoTagEditList={setFavoriteVideoTagEditList}
       />
     </React.Fragment>
   );

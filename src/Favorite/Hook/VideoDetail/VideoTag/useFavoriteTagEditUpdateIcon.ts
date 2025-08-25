@@ -6,7 +6,6 @@ import ENV from "../../../../env.json";
 import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
 import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
 import { UpdateFavoriteVideoResponseDataType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateFavoriteVideoResponseDataType";
-import { favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../../../Atom/FavoriteAtom";
 import { UpdateToFavoriteVideoTagReqestType } from "../../../Type/VideoDetail/VideoTag/UpdateToFavoriteVideoTagReqestType";
 import { tagType } from "../../../../Common/Component/TagsComponent";
 import { UpdateFavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/UpdateFavoriteVideoTagType";
@@ -18,19 +17,16 @@ import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 type propsType = {
     changeView: () => void,
+    favoriteVideoTagEditList: tagType[],
+    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
 }
 
 export function useFavoriteTagEditUpdateIcon(props: propsType) {
 
     // 更新ナビゲーション表示フラグ
     const { flag: isOpenUpdateNav, on: openUpdateNav, off: closeUpdateNav } = useSwitch();
-    // タグ編集リスト
-    const favoriteVideoTagEditList = useAtomValue(favoriteVideoTagEditListAtom);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
-    // タグリスト
-    const setFavoriteVideoTagList = useSetAtom(favoriteVideoTagListAtom);
-
 
     /**
      * お気に入り動画タグ更新リクエスト
@@ -41,7 +37,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoTagType[]>) => {
             toast.success(`タグを設定しました。`);
-            setFavoriteVideoTagList(res.data);
+            //setFavoriteVideoTagList(res.data);
             // 閲覧画面に遷移する
             props.changeView();
         },
@@ -56,7 +52,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
      * @returns 
      */
     function udpateTag() {
-        if (!favoriteVideoTagEditList || favoriteVideoTagEditList.length === 0) {
+        if (!props.favoriteVideoTagEditList || props.favoriteVideoTagEditList.length === 0) {
             toast.error(`タグが設定されていません。`);
             return;
         }
@@ -67,7 +63,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
         }
 
         const body: UpdateToFavoriteVideoTagReqestType = {
-            tag: favoriteVideoTagEditList.reduce((prev: UpdateFavoriteVideoTagType[], e: tagType) => {
+            tag: props.favoriteVideoTagEditList.reduce((prev: UpdateFavoriteVideoTagType[], e: tagType) => {
 
                 const value = e.value;
 

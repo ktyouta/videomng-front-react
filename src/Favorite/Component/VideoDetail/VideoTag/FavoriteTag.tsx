@@ -40,16 +40,7 @@ export function FavoriteTag() {
   const {
     editMode,
     changeEdit,
-    changeView,
-    isLoading, } = useFavoriteTag();
-
-  if (isLoading) {
-    return (
-      <LoadingParent>
-        <Loading />
-      </LoadingParent>
-    );
-  }
+    changeView, } = useFavoriteTag();
 
   return (
     <Parent>

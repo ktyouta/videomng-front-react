@@ -6,6 +6,7 @@ import { useFavoriteMemoCreateInput } from "../../../Hook/VideoDetail/VideoMemo/
 import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
 import { FavoriteTagEditCloseIcon } from "./FavoriteTagEditCloseIcon";
 import { FavoriteTagEditUpdateIcon } from "./FavoriteTagEditUpdateIcon";
+import { tagType } from "../../../../Common/Component/TagsComponent";
 
 
 const MemoInputAreaDiv = styled.div`
@@ -20,8 +21,9 @@ const MemoInputAreaDiv = styled.div`
 
 type propsType = {
     changeView: () => void,
+    favoriteVideoTagEditList: tagType[],
+    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
 }
-
 
 export function FavoriteTagEditFooter(props: propsType) {
 
@@ -37,6 +39,8 @@ export function FavoriteTagEditFooter(props: propsType) {
             {/* 更新アイコン */}
             <FavoriteTagEditUpdateIcon
                 changeView={props.changeView}
+                favoriteVideoTagEditList={props.favoriteVideoTagEditList}
+                setFavoriteVideoTagEditList={props.setFavoriteVideoTagEditList}
             />
         </MemoInputAreaDiv>
     );

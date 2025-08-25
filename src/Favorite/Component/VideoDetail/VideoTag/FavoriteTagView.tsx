@@ -13,14 +13,6 @@ import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagViewHeader } from "./FavoriteTagViewHeader";
 
 
-const Parent = styled.div`
-  box-sizing:border-box;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-`;
-
-
 type propsType = {
   changeEdit: () => void,
 }

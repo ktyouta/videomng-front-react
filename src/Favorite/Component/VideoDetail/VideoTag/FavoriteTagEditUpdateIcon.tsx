@@ -17,6 +17,7 @@ import { FaCheck } from "react-icons/fa6";
 import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
 import { useFavoriteTagEditUpdateIcon } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagEditUpdateIcon";
 import { MEDIA } from "../../../../Common/Const/MediaConst";
+import { tagType } from "../../../../Common/Component/TagsComponent";
 
 
 const Parent = styled.div`
@@ -63,8 +64,9 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
 
 type propsType = {
     changeView: () => void,
+    favoriteVideoTagEditList: tagType[],
+    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
 }
-
 
 export function FavoriteTagEditUpdateIcon(props: propsType) {
 

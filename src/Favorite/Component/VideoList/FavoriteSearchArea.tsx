@@ -56,6 +56,9 @@ const FilterIconAreaDiv = styled.div`
 const FilterTitleSpan = styled.span`
   color: #9e9e9e;
   font-size: 14px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 /**
@@ -113,7 +116,9 @@ export function FavoriteSearchArea() {
           size="45%"
         />
       </FilterIconAreaDiv>
-      <FilterTitleSpan>
+      <FilterTitleSpan
+        onClick={openFilterModal}
+      >
         フィルター
       </FilterTitleSpan>
       {

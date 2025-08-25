@@ -7,55 +7,42 @@ import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/Favorit
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { tagType } from "../../../../Common/Component/TagsComponent";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoTagEditListAtom, favoriteVideoTagListAtom } from "../../../Atom/FavoriteAtom";
 import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 
 
-export function useFavoriteTagCreateInput() {
+type propsType = {
+    favoriteVideoTagEditList: tagType[],
+    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
+}
 
-    // サジェスト用タグリスト
-    const [suggestTagList, setSuggestTagList] = useState<tagType[]>([]);
+export function useFavoriteTagCreateInput(props: propsType) {
+
     // 追加用タグリスト
     const [addTagList, setAddTagList] = useState<tagType[]>([]);
-    // タグ編集リスト
-    const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useAtom(favoriteVideoTagEditListAtom);
-    // お気に入り動画タグリスト
-    const favoriteVideoTagList = useAtomValue(favoriteVideoTagListAtom);
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
 
     // サジェスト用タグリストを取得
-    useQueryWrapper<FavoriteVideoTagResponseType>(
+    const { data: suggestTagList } = useQueryWrapper<FavoriteVideoTagResponseType, tagType[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
-            afSuccessFn: (response: FavoriteVideoTagResponseType) => {
-                setSuggestTagList(response.data.map((e: FavoriteVideoTagType) => {
+            select: (res: FavoriteVideoTagResponseType) => {
+
+                const suggestTagList = res.data.map((e: FavoriteVideoTagType) => {
                     return {
                         value: e.tagId,
                         label: e.tagName,
                     }
-                }));
+                });
+
+                return suggestTagList;
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
             }
         }
     );
-
-    useEffect(() => {
-        if (!favoriteVideoTagList) {
-            setFavoriteVideoTagEditList([]);
-            return;
-        }
-
-        setFavoriteVideoTagEditList(favoriteVideoTagList.map((e) => {
-            return {
-                label: e.tagName,
-                value: e.tagId,
-            }
-        }));
-    }, [favoriteVideoTagList]);
 
     /**
      * タグを追加
@@ -64,7 +51,7 @@ export function useFavoriteTagCreateInput() {
 
         setAddTagList((e) => {
 
-            if (favoriteVideoTagEditList.find((e1) => e1.label === newTag.label)) {
+            if (props.favoriteVideoTagEditList.find((e1) => e1.label === newTag.label)) {
                 toast.error(`同名のタグが設定されています。`);
                 return e;
             }
@@ -94,7 +81,7 @@ export function useFavoriteTagCreateInput() {
      */
     function addTagEditList() {
         // 編集リストに追加
-        setFavoriteVideoTagEditList((e) => {
+        props.setFavoriteVideoTagEditList((e) => {
             return [...addTagList, ...e];
         });
 

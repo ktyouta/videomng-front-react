@@ -45,13 +45,32 @@ export function FavoriteTagList() {
 
     console.log("FavoriteTagList render");
 
-    const { favoriteVideoTagList } = useFavoriteTagList();
+    const {
+        favoriteVideoTagList,
+        isLoading,
+        errMessage } = useFavoriteTagList();
 
     if (!favoriteVideoTagList) {
         return (
             <LoadingParent>
                 <Loading />
             </LoadingParent>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
+        );
+    }
+
+    if (errMessage) {
+        return (
+            <Parent>
+                {errMessage}
+            </Parent>
         );
     }
 

@@ -99,6 +99,9 @@ const SearchConditionIconAreaDiv = styled.div`
 const SearchConditionTitleSpan = styled.span`
   color: #9e9e9e;
   font-size: 14px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 
@@ -155,7 +158,9 @@ export function HomeSearchArea() {
       </SearchConditionIconAreaDiv>
       {
         !isMobile &&
-        <SearchConditionTitleSpan>
+        <SearchConditionTitleSpan
+          onClick={openFilterModal}
+        >
           条件を指定
         </SearchConditionTitleSpan>
       }
