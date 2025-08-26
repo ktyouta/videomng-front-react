@@ -65,11 +65,8 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     align-items: center;
 `;
 
-type propsType = {
-  changeEdit: () => void,
-}
 
-export function FavoriteTagViewHeader(props: propsType) {
+export function FavoriteTagViewHeader() {
 
   console.log("FavoriteTagViewHeader render");
 
@@ -77,6 +74,7 @@ export function FavoriteTagViewHeader(props: propsType) {
     isOpenEditNav,
     openEditNav,
     closeEditNav,
+    changeEdit,
   } = useFavoriteTagViewHeader();
 
   return (
@@ -85,7 +83,7 @@ export function FavoriteTagViewHeader(props: propsType) {
       <EditIconDiv>
         <IconComponent
           icon={MdEdit}
-          onclick={props.changeEdit}
+          onclick={changeEdit}
           size="100%"
           style={{ color: "white" }}
           onMouseEnter={openEditNav}

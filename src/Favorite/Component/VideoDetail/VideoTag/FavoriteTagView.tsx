@@ -13,20 +13,14 @@ import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagViewHeader } from "./FavoriteTagViewHeader";
 
 
-type propsType = {
-  changeEdit: () => void,
-}
-
-export function FavoriteTagView(props: propsType) {
+export function FavoriteTagView() {
 
   console.log("FavoriteTagView render");
 
   return (
     <React.Fragment>
       {/* 入力欄 */}
-      <FavoriteTagViewHeader
-        changeEdit={props.changeEdit}
-      />
+      <FavoriteTagViewHeader />
       {/* タグリスト */}
       <FavoriteTagList />
     </React.Fragment>

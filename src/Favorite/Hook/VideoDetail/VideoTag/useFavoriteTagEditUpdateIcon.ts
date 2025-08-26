@@ -13,20 +13,21 @@ import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
+import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
+import { ChangeViewContext } from "../../../Component/VideoDetail/VideoTag/FavoriteTag";
 
 
-type propsType = {
-    changeView: () => void,
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
 
-export function useFavoriteTagEditUpdateIcon(props: propsType) {
+export function useFavoriteTagEditUpdateIcon() {
 
     // 更新ナビゲーション表示フラグ
     const { flag: isOpenUpdateNav, on: openUpdateNav, off: closeUpdateNav } = useSwitch();
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // タグ編集リスト
+    const favoriteVideoTagEditList = FavoriteVideoTagEditListContext.useCtx();
+    // 閲覧画面遷移
+    const changeView = ChangeViewContext.useCtx();
 
     /**
      * お気に入り動画タグ更新リクエスト
@@ -37,9 +38,8 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoTagType[]>) => {
             toast.success(`タグを設定しました。`);
-            //setFavoriteVideoTagList(res.data);
             // 閲覧画面に遷移する
-            props.changeView();
+            changeView();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -52,7 +52,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
      * @returns 
      */
     function udpateTag() {
-        if (!props.favoriteVideoTagEditList || props.favoriteVideoTagEditList.length === 0) {
+        if (!favoriteVideoTagEditList || favoriteVideoTagEditList.length === 0) {
             toast.error(`タグが設定されていません。`);
             return;
         }
@@ -63,7 +63,7 @@ export function useFavoriteTagEditUpdateIcon(props: propsType) {
         }
 
         const body: UpdateToFavoriteVideoTagReqestType = {
-            tag: props.favoriteVideoTagEditList.reduce((prev: UpdateFavoriteVideoTagType[], e: tagType) => {
+            tag: favoriteVideoTagEditList.reduce((prev: UpdateFavoriteVideoTagType[], e: tagType) => {
 
                 const value = e.value;
 

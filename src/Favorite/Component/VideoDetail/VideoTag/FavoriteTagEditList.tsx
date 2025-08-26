@@ -116,12 +116,8 @@ const NoTagListTitleDiv = styled.div`
     }
 `;
 
-type propsType = {
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
 
-export function FavoriteTagEditList(props: propsType) {
+export function FavoriteTagEditList() {
 
     console.log("FavoriteTagEditList render");
 
@@ -130,9 +126,10 @@ export function FavoriteTagEditList(props: propsType) {
         tagMasterList,
         addTagEditList,
         isOpenTagMasterList,
-        switchTagMasterList, } = useFavoriteTagEditList({ ...props });
+        switchTagMasterList,
+        favoriteVideoTagEditList } = useFavoriteTagEditList();
 
-    if (!props.favoriteVideoTagEditList) {
+    if (!favoriteVideoTagEditList) {
         return <Parent />;
     }
 
@@ -195,10 +192,10 @@ export function FavoriteTagEditList(props: propsType) {
                     設定されているタグ
                 </TagListTitleDiv>
                 {
-                    props.favoriteVideoTagEditList.length > 0 ?
+                    favoriteVideoTagEditList.length > 0 ?
                         <TagListAreaDiv>
                             {
-                                props.favoriteVideoTagEditList.map((e: tagType, index: number) => {
+                                favoriteVideoTagEditList.map((e: tagType, index: number) => {
 
                                     const tagKey = e.label;
 

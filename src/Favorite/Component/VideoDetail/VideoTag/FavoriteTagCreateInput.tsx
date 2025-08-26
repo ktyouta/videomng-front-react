@@ -56,12 +56,8 @@ const BtnDiv = styled.div`
   justify-content: center;
 `;
 
-type propsType = {
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
 
-export function FavoriteTagCreateInput(props: propsType) {
+export function FavoriteTagCreateInput() {
 
     console.log("FavoriteTagCreateInput render");
 
@@ -72,7 +68,7 @@ export function FavoriteTagCreateInput(props: propsType) {
         deleteTag,
         addTagEditList,
         isMobile,
-    } = useFavoriteTagCreateInput({ ...props });
+    } = useFavoriteTagCreateInput();
 
     return (
         <Parent>

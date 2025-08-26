@@ -62,20 +62,14 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     align-items: center;
 `;
 
-type propsType = {
-    changeView: () => void,
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
-
-export function FavoriteTagEditUpdateIcon(props: propsType) {
+export function FavoriteTagEditUpdateIcon() {
 
     const {
         isOpenUpdateNav,
         openUpdateNav,
         closeUpdateNav,
         udpateTag,
-    } = useFavoriteTagEditUpdateIcon({ ...props });
+    } = useFavoriteTagEditUpdateIcon();
 
     return (
         <Parent>

@@ -60,24 +60,21 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
     align-items: center;
 `;
 
-type propsType = {
-    changeView: () => void,
-}
 
-
-export function FavoriteTagEditCloseIcon(props: propsType) {
+export function FavoriteTagEditCloseIcon() {
 
     const {
         isOpenCloseNav,
         openCloseNav,
         closeCloseNav,
+        changeView,
     } = useFavoriteTagEditCloseIcon();
 
     return (
         <Parent>
             <IconComponent
                 icon={RxCross1}
-                onclick={props.changeView}
+                onclick={changeView}
                 size="100%"
                 style={{ color: "white" }}
                 onMouseEnter={openCloseNav}

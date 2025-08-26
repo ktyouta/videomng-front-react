@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { tagType } from "../../../../Common/Component/TagsComponent";
-import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
-import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoIdContext } from "../../../Component/Favorite";
+import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
+import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
 
-export function useFavoriteTagEdit() {
+
+export function useFavoriteVideoTagEditListProvider() {
 
     // タグ編集リスト
     const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useState<tagType[]>([]);
@@ -14,7 +15,6 @@ export function useFavoriteTagEdit() {
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-
 
     // 設定されたタグリストを取得
     const { isLoading } = useQueryWrapper<FavoriteVideoTagResponseType>(
@@ -41,6 +41,6 @@ export function useFavoriteTagEdit() {
 
     return {
         favoriteVideoTagEditList,
-        setFavoriteVideoTagEditList
+        setFavoriteVideoTagEditList,
     }
 }

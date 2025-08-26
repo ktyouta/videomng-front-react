@@ -19,13 +19,8 @@ const MemoInputAreaDiv = styled.div`
   padding-right: 2%;
 `;
 
-type propsType = {
-    changeView: () => void,
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
 
-export function FavoriteTagEditFooter(props: propsType) {
+export function FavoriteTagEditFooter() {
 
     console.log("FavoriteTagEditFooter render");
 
@@ -33,15 +28,9 @@ export function FavoriteTagEditFooter(props: propsType) {
         <MemoInputAreaDiv>
             <FlexSpaceDiv />
             {/* 閉じるアイコン */}
-            <FavoriteTagEditCloseIcon
-                changeView={props.changeView}
-            />
+            <FavoriteTagEditCloseIcon />
             {/* 更新アイコン */}
-            <FavoriteTagEditUpdateIcon
-                changeView={props.changeView}
-                favoriteVideoTagEditList={props.favoriteVideoTagEditList}
-                setFavoriteVideoTagEditList={props.setFavoriteVideoTagEditList}
-            />
+            <FavoriteTagEditUpdateIcon />
         </MemoInputAreaDiv>
     );
 }

@@ -12,39 +12,22 @@ import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagEditFooter } from "./FavoriteTagEditFooter";
 import { FavoriteTagEditList } from "./FavoriteTagEditList";
-import { useFavoriteTagEdit } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagEdit";
+import { FavoriteVideoTagEditListProvider } from "./FavoriteVideoTagEditListProvider";
 
 
-type propsType = {
-  changeView: () => void,
-}
 
-export function FavoriteTagEdit(props: propsType) {
+export function FavoriteTagEdit() {
 
   console.log("FavoriteTagEdit render");
 
-  const {
-    favoriteVideoTagEditList,
-    setFavoriteVideoTagEditList } = useFavoriteTagEdit();
-
   return (
-    <React.Fragment>
+    <FavoriteVideoTagEditListProvider>
       {/* 入力欄 */}
-      <FavoriteTagCreateInput
-        favoriteVideoTagEditList={favoriteVideoTagEditList}
-        setFavoriteVideoTagEditList={setFavoriteVideoTagEditList}
-      />
+      <FavoriteTagCreateInput />
       {/* タグリスト */}
-      <FavoriteTagEditList
-        favoriteVideoTagEditList={favoriteVideoTagEditList}
-        setFavoriteVideoTagEditList={setFavoriteVideoTagEditList}
-      />
+      <FavoriteTagEditList />
       {/* タグフッター */}
-      <FavoriteTagEditFooter
-        changeView={props.changeView}
-        favoriteVideoTagEditList={favoriteVideoTagEditList}
-        setFavoriteVideoTagEditList={setFavoriteVideoTagEditList}
-      />
-    </React.Fragment>
+      <FavoriteTagEditFooter />
+    </FavoriteVideoTagEditListProvider>
   );
 }

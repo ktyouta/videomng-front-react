@@ -11,17 +11,18 @@ import { tagType } from "../../../../Common/Component/TagsComponent";
 import { toast } from "react-toastify";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoIdContext } from "../../../Component/Favorite";
+import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
 
 
-type propsType = {
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
 
-export function useFavoriteTagEditList(props: propsType) {
+export function useFavoriteTagEditList() {
 
     // タグマスタリスト表示フラグ
     const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
+    // タグ編集リスト
+    const favoriteVideoTagEditList = FavoriteVideoTagEditListContext.useCtx();
+    // タグ編集リスト(setter)
+    const setFavoriteVideoTagEditList = SetFavoriteVideoTagEditListContext.useCtx();
 
 
     // タグマスタリストを取得
@@ -50,7 +51,7 @@ export function useFavoriteTagEditList(props: propsType) {
      */
     function addTagEditList(addTag: tagType) {
 
-        const existTag = props.favoriteVideoTagEditList.find((e) => {
+        const existTag = favoriteVideoTagEditList.find((e) => {
             return e.label === addTag.label;
         });
 
@@ -61,7 +62,7 @@ export function useFavoriteTagEditList(props: propsType) {
         }
 
         // 編集リストに追加
-        props.setFavoriteVideoTagEditList((e: tagType[]) => {
+        setFavoriteVideoTagEditList((e: tagType[]) => {
             return [{ label: addTag.label, value: null }, ...e];
         });
     }
@@ -71,7 +72,7 @@ export function useFavoriteTagEditList(props: propsType) {
      * @param tagIndex 
      */
     function deleteTag(tagIndex: number) {
-        props.setFavoriteVideoTagEditList((e) => {
+        setFavoriteVideoTagEditList((e) => {
             return e.filter((_, index) => index !== tagIndex);
         });
     }
@@ -89,5 +90,6 @@ export function useFavoriteTagEditList(props: propsType) {
         addTagEditList,
         isOpenTagMasterList,
         switchTagMasterList,
+        favoriteVideoTagEditList,
     }
 }

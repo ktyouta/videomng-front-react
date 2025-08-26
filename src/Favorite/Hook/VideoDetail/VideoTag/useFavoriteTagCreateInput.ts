@@ -9,19 +9,20 @@ import { tagType } from "../../../../Common/Component/TagsComponent";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
+import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
 
 
-type propsType = {
-    favoriteVideoTagEditList: tagType[],
-    setFavoriteVideoTagEditList: React.Dispatch<React.SetStateAction<tagType[]>>
-}
 
-export function useFavoriteTagCreateInput(props: propsType) {
+export function useFavoriteTagCreateInput() {
 
     // 追加用タグリスト
     const [addTagList, setAddTagList] = useState<tagType[]>([]);
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // タグ編集リスト
+    const favoriteVideoTagEditList = FavoriteVideoTagEditListContext.useCtx();
+    const setFavoriteVideoTagEditList = SetFavoriteVideoTagEditListContext.useCtx();
+
 
     // サジェスト用タグリストを取得
     const { data: suggestTagList } = useQueryWrapper<FavoriteVideoTagResponseType, tagType[]>(
@@ -51,7 +52,7 @@ export function useFavoriteTagCreateInput(props: propsType) {
 
         setAddTagList((e) => {
 
-            if (props.favoriteVideoTagEditList.find((e1) => e1.label === newTag.label)) {
+            if (favoriteVideoTagEditList.find((e1) => e1.label === newTag.label)) {
                 toast.error(`同名のタグが設定されています。`);
                 return e;
             }
@@ -81,7 +82,7 @@ export function useFavoriteTagCreateInput(props: propsType) {
      */
     function addTagEditList() {
         // 編集リストに追加
-        props.setFavoriteVideoTagEditList((e) => {
+        setFavoriteVideoTagEditList((e) => {
             return [...addTagList, ...e];
         });
 

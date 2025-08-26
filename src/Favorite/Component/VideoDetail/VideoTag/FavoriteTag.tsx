@@ -16,6 +16,7 @@ import { FavoriteTagEdit } from "./FavoriteTagEdit";
 import { FavoriteTagView } from "./FavoriteTagView";
 import LoadingBase from "../../../../Common/Component/LoadingBase";
 import Loading from "../../../../Common/Component/Loading";
+import { createCtx } from "../../../../Common/Function/createCtx";
 
 
 const Parent = styled.div`
@@ -28,10 +29,11 @@ const Parent = styled.div`
   flex-direction: column;
 `;
 
-const LoadingParent = styled(Parent)`
-    align-items: center;
-    justify-content: center;
-`;
+// 編集画面遷移
+export const ChangeEditContext = createCtx<() => void>();
+// 編集画面遷移
+export const ChangeViewContext = createCtx<() => void>();
+
 
 export function FavoriteTag() {
 
@@ -47,18 +49,17 @@ export function FavoriteTag() {
       {
         // 閲覧
         editMode === TAG_EDIT_MODE.VIEW &&
-        <FavoriteTagView
-          changeEdit={changeEdit}
-        />
+        <ChangeEditContext.Provider value={changeEdit}>
+          <FavoriteTagView />
+        </ChangeEditContext.Provider>
       }
       {
         // 編集
         editMode === TAG_EDIT_MODE.EDIT &&
-        <FavoriteTagEdit
-          changeView={changeView}
-        />
+        <ChangeViewContext.Provider value={changeView}>
+          <FavoriteTagEdit />
+        </ChangeViewContext.Provider>
       }
-
     </Parent>
   );
 }
