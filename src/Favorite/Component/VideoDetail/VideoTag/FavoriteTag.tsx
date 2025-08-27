@@ -31,7 +31,7 @@ const Parent = styled.div`
 
 // 編集画面遷移
 export const ChangeEditContext = createCtx<() => void>();
-// 編集画面遷移
+// 閲覧画面遷移
 export const ChangeViewContext = createCtx<() => void>();
 
 

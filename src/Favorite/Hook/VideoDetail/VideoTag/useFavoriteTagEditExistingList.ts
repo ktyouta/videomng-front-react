@@ -15,7 +15,7 @@ import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } f
 
 
 
-export function useFavoriteTagEditList() {
+export function useFavoriteTagEditExistingList() {
 
     // タグマスタリスト表示フラグ
     const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
@@ -67,15 +67,6 @@ export function useFavoriteTagEditList() {
         });
     }
 
-    /**
-     * タグ削除
-     * @param tagIndex 
-     */
-    function deleteTag(tagIndex: number) {
-        setFavoriteVideoTagEditList((e) => {
-            return e.filter((_, index) => index !== tagIndex);
-        });
-    }
 
     /**
      * タグマスタリスト表示切り替え
@@ -85,11 +76,9 @@ export function useFavoriteTagEditList() {
     }
 
     return {
-        deleteTag,
         tagMasterList,
         addTagEditList,
         isOpenTagMasterList,
         switchTagMasterList,
-        favoriteVideoTagEditList,
     }
 }
