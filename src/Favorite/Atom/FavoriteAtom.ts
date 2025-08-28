@@ -20,10 +20,6 @@ export const favoriteVideoDetailItemAtom = atom<FavoriteVideoDetailDataType>();
 export const favoriteVideoCommentListAtom = atom<FavoriteVideoCommentThreadItemType[]>();
 // キーワード検索(コメント)情報
 export const searchKeywordCommentAtom = atom<SearchKeywordCommentType[]>();
-// キーワード検索(コメント)用URL
-export const searchKeywordCommentUrlAtom = atom<string>(``);
-// キーワード検索(コメント)キーワード
-export const searchKeywordCommentKeywordAtom = atom<string>(``);
 // ブロックコメントリスト
 export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
 // お気に入りコメントリスト

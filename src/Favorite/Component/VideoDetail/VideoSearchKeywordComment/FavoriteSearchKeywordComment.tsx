@@ -1,17 +1,8 @@
-import React from "react";
-import { IconComponent } from "../../../../Common/Component/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../VideoMemo/FavoriteMemoContent";
-import BaseTextbox from "../../../../Common/Component/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "../VideoMemo/FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
-import { FavoriteMemoList } from "../VideoMemo/FavoriteMemoList";
-import { FavoriteSearchKeywordCommentHeader } from "./FavoriteSearchKeywordCommentHeader";
 import { FavoriteSearchKeywordCommentList } from "./FavoriteSearchKeywordCommentList";
 import { FavoriteSearchKeywordCommentInput } from "./FavoriteSearchKeywordCommentInput";
+import { useFavoriteSearchKeywordComment } from "../../../Hook/VideoDetail/VideoSearchKeywordComment/useFavoriteSearchKeywordComment";
+import { createCtx } from "../../../../Common/Function/createCtx";
 
 
 const Parent = styled.div`
@@ -23,18 +14,30 @@ const Parent = styled.div`
   position:relative;
 `;
 
+// 検索用キーワード
+export const SearchKeywordCommentKeywordContext = createCtx<string>();
+// 検索用キーワード(setter)
+export const SetSearchKeywordCommentKeywordContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
 
 
 export function FavoriteSearchKeywordComment() {
 
   console.log("FavoriteSearchKeywordComment render");
 
+  const {
+    searchKeywordCommentKeyword,
+    setSearchKeywordCommentKeyword, } = useFavoriteSearchKeywordComment();
+
   return (
     <Parent>
-      {/* コメントリスト */}
-      <FavoriteSearchKeywordCommentList />
-      {/* 入力欄 */}
-      <FavoriteSearchKeywordCommentInput />
+      <SearchKeywordCommentKeywordContext.Provider value={searchKeywordCommentKeyword}>
+        {/* コメントリスト */}
+        <FavoriteSearchKeywordCommentList />
+        <SetSearchKeywordCommentKeywordContext.Provider value={setSearchKeywordCommentKeyword}>
+          {/* 入力欄 */}
+          <FavoriteSearchKeywordCommentInput />
+        </SetSearchKeywordCommentKeywordContext.Provider>
+      </SearchKeywordCommentKeywordContext.Provider>
     </Parent>
   );
 }

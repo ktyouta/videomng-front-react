@@ -53,8 +53,8 @@ export function FavoriteSearchKeywordCommentInput() {
   console.log("FavoriteSearchKeywordCommentInput render");
 
   const {
-    searchKeywordCommentKeyword,
-    setSearchKeywordCommentKeyword,
+    inputKeyword,
+    setInputKeyword,
     clickSearchBtn,
     clearInputKeyword,
     isMobile,
@@ -69,8 +69,8 @@ export function FavoriteSearchKeywordCommentInput() {
         width={inputWidth}
         height="100%"
         placeholder="キーワード"
-        value={searchKeywordCommentKeyword}
-        onChange={setSearchKeywordCommentKeyword}
+        value={inputKeyword}
+        onChange={setInputKeyword}
         style={{
           borderBottomLeftRadius: 5,
           borderTopLeftRadius: 5,
@@ -81,7 +81,7 @@ export function FavoriteSearchKeywordCommentInput() {
       <SearchIconAreaDiv>
         <IconComponent
           icon={IoSearch}
-          onclick={() => { clickSearchBtn() }}
+          onclick={clickSearchBtn}
           size="70%"
         />
       </SearchIconAreaDiv>

@@ -19,6 +19,9 @@ import { useFavoriteBlockCommentEndpoint } from "../VideoComment/VideoBlockComme
 import { useFavoriteFavoriteCommentIdEndpoint } from "../VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentIdEndpoint";
 import { useFavoriteFavoriteCommentEndpoint } from "../VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentEndpoint";
 import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
+import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
+import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
+import { SearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";
 
 
 type propsType = {
@@ -29,12 +32,17 @@ type propsType = {
 
 export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
 
-    // コメント情報
-    const setSearchCommentList = useSetAtom(searchKeywordCommentAtom);
     // お気に入り状態
     const [favoriteStatus, setFavoriteStatus] = useState(props.favoriteStatus);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 検索用キーワード
+    const searchKeywordCommentKeyword = SearchKeywordCommentKeywordContext.useCtx();
+    // コメント再取得用
+    const { invalidate } = useInvalidateQuery(useFavoriteSearchKeywordCommentEndpoint({
+        videoId: favoriteVideoId,
+        keyword: searchKeywordCommentKeyword,
+    }));
 
 
     /**
@@ -45,21 +53,8 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
-            setSearchCommentList((e) => {
-
-                const blockCommentId = res.data.commentId;
-
-                if (e) {
-                    // ブロックコメントをフィルターする
-                    e = e.filter((e1: SearchKeywordCommentType) => {
-
-                        const commentId = e1.commentId;
-
-                        return commentId !== blockCommentId;
-                    });
-                }
-                return e;
-            });
+            // コメント再取得
+            invalidate();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

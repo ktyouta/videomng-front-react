@@ -1,28 +1,17 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { searchKeywordCommentKeywordAtom, searchKeywordCommentUrlAtom } from "../../../Atom/FavoriteAtom";
 import { useState } from "react";
-import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
-import ENV from "../../../../env.json";
-import { AddToFavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMemo/AddToFavoriteVideoMemoResponseType";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { AddToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/AddToFavoriteVideoMemoReqestType";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { SearchKeywordCommentUrlModel } from "../../../Model/SearchKeywordCommentUrlModel";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
+import { SetSearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";
 
 
 export function useFavoriteSearchKeywordCommentInput() {
 
-    // キーワード
-    const [searchKeywordCommentKeyword, setSearchKeywordCommentKeyword] = useAtom(searchKeywordCommentKeywordAtom);
-    // 動画取得用URL
-    const setSearchKeywordCommentUrl = useSetAtom(searchKeywordCommentUrlAtom);
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 入力用キーワード
+    const [inputKeyword, setInputKeyword] = useState(``);
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 検索用キーワード(setter)
+    const setSearchKeywordCommentKeyword = SetSearchKeywordCommentKeywordContext.useCtx();
 
 
     /**
@@ -31,21 +20,19 @@ export function useFavoriteSearchKeywordCommentInput() {
      */
     function clickSearchBtn() {
 
-        if (!searchKeywordCommentKeyword) {
+        if (!inputKeyword) {
             toast.warn(`キーワードを入力してください。`);
             return;
         }
 
-        const searchKeywordCommentUrlModel = new SearchKeywordCommentUrlModel(searchKeywordCommentKeyword, favoriteVideoId);
-        const searchKeywordCommentUrl = searchKeywordCommentUrlModel.path;
-        setSearchKeywordCommentUrl(searchKeywordCommentUrl);
+        setSearchKeywordCommentKeyword(inputKeyword);
     }
 
     /**
      * 入力中のキーワードをクリアする
      */
     function clearInputKeyword() {
-        setSearchKeywordCommentKeyword(``);
+        setInputKeyword(``);
     }
 
     /**
@@ -59,8 +46,8 @@ export function useFavoriteSearchKeywordCommentInput() {
     };
 
     return {
-        searchKeywordCommentKeyword,
-        setSearchKeywordCommentKeyword,
+        inputKeyword,
+        setInputKeyword,
         clickSearchBtn,
         clearInputKeyword,
         isMobile,

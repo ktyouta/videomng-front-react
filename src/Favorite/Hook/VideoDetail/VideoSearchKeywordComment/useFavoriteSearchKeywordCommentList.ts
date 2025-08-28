@@ -1,35 +1,34 @@
-import { useAtom, useAtomValue } from "jotai";
-import { searchKeywordCommentAtom, searchKeywordCommentUrlAtom } from "../../../Atom/FavoriteAtom";
 import { useState } from "react";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
-import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
-import ENV from "../../../../env.json";
-import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { FavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoResponseType";
 import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
 import { SearchKeywordCommentResponseType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentResponseType";
+import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
+import { SearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";
+import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 
 
 export function useFavoriteSearchKeywordCommentList() {
 
-    // コメント情報
-    const [searchCommentList, setSearchCommentList] = useAtom(searchKeywordCommentAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // 動画取得用URL
-    const [searchKeywordCommentUrl, setSearchKeywordCommentUrl] = useAtom(searchKeywordCommentUrlAtom);
+    // 検索用キーワード
+    const searchKeywordCommentKeyword = SearchKeywordCommentKeywordContext.useCtx();
+    // お気に入り動画ID
+    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
 
 
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<SearchKeywordCommentResponseType>(
+    const { data: searchCommentList, isLoading } = useQueryWrapper<SearchKeywordCommentResponseType, SearchKeywordCommentType[]>(
         {
-            url: `${searchKeywordCommentUrl}`,
-            afSuccessFn: (response: SearchKeywordCommentResponseType) => {
-                setSearchCommentList(response.data);
+            url: useFavoriteSearchKeywordCommentEndpoint({
+                videoId: favoriteVideoId,
+                keyword: searchKeywordCommentKeyword
+            }),
+            select: (res: SearchKeywordCommentResponseType) => {
+                return res.data;
             },
             afErrorFn: (res) => {
                 setErrMessage(`コメントの取得に失敗しました。`);
-                setSearchKeywordCommentUrl(``);
             }
         }
     );
