@@ -3,6 +3,15 @@ import { FavoriteCommentFavoriteIconArea } from "./FavoriteCommentFavoriteIconAr
 import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import { COMMENT_FAVORITE_STATUS } from "../../../Const/FavoriteConst";
 import { useFavoriteCommentContentIconArea } from "../../../Hook/VideoDetail/VideoComment/useFavoriteCommentContentIconArea";
+import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
+import styled from "styled-components";
+
+
+const Parent = styled.div`
+    display:flex;
+    align-items: center;
+    width: 38px;
+`;
 
 type propsType = {
     commentId: string,
@@ -21,22 +30,25 @@ export function FavoriteCommentContentIconArea(props: propsType) {
         favoriteStatus,
     } = useFavoriteCommentContentIconArea({ ...props });
 
+    // お気に入り状態
+    const isFavorite = favoriteStatus === COMMENT_FAVORITE_STATUS.FAVORITE;
+
     return (
-        <React.Fragment>
+        <Parent>
             {/* お気に入り */}
             <FavoriteCommentFavoriteIconArea
                 commentId={props.commentId}
-                favoriteStatus={favoriteStatus}
-                favoriteComment={favoriteComment}
-                deleteFavoriteComment={deleteFavoriteComment}
+                isFavorite={isFavorite}
+                onClick={isFavorite ? deleteFavoriteComment : favoriteComment}
             />
+            <FlexSpaceDiv />
             {
                 favoriteStatus === COMMENT_FAVORITE_STATUS.NONE &&
                 // 非表示
                 <FavoriteCommentBlockIconArea
-                    blockComment={() => { blockComment(props.commentId) }}
+                    blockComment={blockComment}
                 />
             }
-        </React.Fragment>
+        </Parent>
     );
 }

@@ -12,23 +12,14 @@ type propsType = {
     favoriteStatus: string,
 }
 
-export function useFavoriteCommentFavoriteIconArea(props: propsType) {
+export function useFavoriteCommentFavoriteIconArea() {
 
     // お気に入りナビゲーション表示フラグ
     const { flag: isOpenFavoriteNav, on: openFavoriteNav, off: closeFavoriteNav } = useSwitch();
-
-    /**
-     * コメントお気に入りチェック
-     * @returns 
-     */
-    function isFavorite() {
-        return props.favoriteStatus === COMMENT_FAVORITE_STATUS.FAVORITE;
-    }
 
     return {
         isOpenFavoriteNav,
         openFavoriteNav,
         closeFavoriteNav,
-        isFavorite,
     }
 }

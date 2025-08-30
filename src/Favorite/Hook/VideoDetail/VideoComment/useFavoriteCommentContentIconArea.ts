@@ -24,12 +24,16 @@ type propsType = {
 export function useFavoriteCommentContentIconArea(props: propsType) {
 
     // お気に入り状態
-    const [favoriteStatus, setFavoriteStatus] = useState(props.favoriteStatus);
+    const [favoriteStatus, setFavoriteStatus] = useState<string>(props.favoriteStatus);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // コメント再取得用
     const { invalidate } = useInvalidateQuery(useFavoriteCommentEndpoint(favoriteVideoId));
 
+    // コメント情報再取得時にアイコン状態を変更する
+    useEffect(() => {
+        setFavoriteStatus(props.favoriteStatus);
+    }, [props.favoriteStatus]);
 
     /**
      * コメントブロックリクエスト
@@ -53,15 +57,15 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントをブロックする
      * @param videoId 
      */
-    function blockComment(commentId: string) {
+    function blockComment() {
 
-        if (!commentId) {
+        if (!props.commentId) {
             toast.error(`非表示にできませんでした。`);
             return;
         }
 
         const body: AddToFavoriteVideoBlockCommentReqestType = {
-            commentId,
+            commentId: props.commentId,
             videoId: favoriteVideoId
         }
 
@@ -78,7 +82,12 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+
+            // アイコンを強調表示
             setFavoriteStatus(COMMENT_FAVORITE_STATUS.FAVORITE);
+
+            // コメント再取得
+            invalidate();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -91,15 +100,15 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントをお気に入りに登録する
      * @param videoId 
      */
-    function favoriteComment(commentId: string) {
+    function favoriteComment() {
 
-        if (!commentId) {
+        if (!props.commentId) {
             toast.error(`お気に入りに登録できません。`);
             return;
         }
 
         const body: AddToFavoriteVideoFavoriteCommentReqestType = {
-            commentId,
+            commentId: props.commentId,
         }
 
         // リクエスト送信
@@ -118,7 +127,12 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+
+            // アイコン強調表示解除
             setFavoriteStatus(COMMENT_FAVORITE_STATUS.NONE);
+
+            // コメント再取得
+            invalidate();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -131,9 +145,9 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * お気に入りコメントを削除する
      * @param videoId 
      */
-    function deleteFavoriteComment(commentId: string) {
+    function deleteFavoriteComment() {
 
-        if (!commentId) {
+        if (!props.commentId) {
             toast.error(`お気に入りから外せません。`);
             return;
         }
