@@ -16,14 +16,8 @@ import { FavoriteVideoCommentThreadItemType } from "../Type/VideoDetail/VideoCom
 export const favoriteVideoListAtom = atom<FavoriteVideoListMergedType[] | undefined>();
 // APIから取得した動画詳細
 export const favoriteVideoDetailItemAtom = atom<FavoriteVideoDetailDataType>();
-// コメント情報
-export const favoriteVideoCommentListAtom = atom<FavoriteVideoCommentThreadItemType[]>();
 // キーワード検索(コメント)情報
 export const searchKeywordCommentAtom = atom<SearchKeywordCommentType[]>();
-// ブロックコメントリスト
-export const blockCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
-// お気に入りコメントリスト
-export const favoriteCommentDataAtom = atom<YouTubeDataApiCommentDetailResponseType>();
 // 動画一覧検索条件選択値(カテゴリ)
 export const selectedFavoriteVideoCategoryAtom = atom<string>(``);
 // 動画一覧検索条件選択値(視聴状況)

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { format } from "date-fns";
 import { FavoriteCommentBlockIconArea } from "../FavoriteCommentBlockIconArea";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailItemType";
-import { FavoriteCommentRestoreIconArea } from "../FavoriteCommentRestoreIconArea";
+import { FavoriteCommentRestoreIconArea } from "./FavoriteCommentRestoreIconArea";
 import { useFavoriteBlockCommentContent } from "../../../../Hook/VideoDetail/VideoComment/VideoBlockComment/useFavoriteBlockCommentContent";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { FavoriteVideoBlockCommentListResponseType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentListResponseType";

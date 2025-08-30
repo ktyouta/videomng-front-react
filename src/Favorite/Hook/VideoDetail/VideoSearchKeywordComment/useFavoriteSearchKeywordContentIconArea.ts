@@ -1,12 +1,6 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoCommentListAtom, searchKeywordCommentAtom } from "../../../Atom/FavoriteAtom";
 import { useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
-import ENV from "../../../../env.json";
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { DeleteToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/DeleteToFavoriteVideoMemoReqestType";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import useSwitch from "../../../../Common/Hook/useSwitch";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
@@ -14,11 +8,9 @@ import { FavoriteVideoFavoriteCommentType } from "../../../Type/VideoDetail/Vide
 import { COMMENT_FAVORITE_STATUS } from "../../../Const/FavoriteConst";
 import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteBlockCommentEndpoint } from "../VideoComment/VideoBlockComment/useFavoriteBlockCommentEndpoint";
 import { useFavoriteFavoriteCommentIdEndpoint } from "../VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentIdEndpoint";
 import { useFavoriteFavoriteCommentEndpoint } from "../VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentEndpoint";
-import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
 import { SearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";

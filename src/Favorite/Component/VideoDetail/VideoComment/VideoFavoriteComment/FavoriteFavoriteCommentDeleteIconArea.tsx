@@ -7,7 +7,7 @@ import { useFavoriteMemoDeleteIconArea } from "../../../../Hook/VideoDetail/Vide
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useFavoriteCommentBlockIconArea } from "../../../../Hook/VideoDetail/VideoComment/useFavoriteCommentBlockIconArea";
 import { MdVisibility } from "react-icons/md";
-import { useFavoriteCommentRestoreIconArea } from "../../../../Hook/VideoDetail/VideoComment/useFavoriteCommentRestoreIconArea";
+import { useFavoriteCommentRestoreIconArea } from "../../../../Hook/VideoDetail/VideoComment/VideoBlockComment/useFavoriteCommentRestoreIconArea";
 import { useFavoriteFavoriteCommentDeleteIconArea } from "../../../../Hook/VideoDetail/VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentDeleteIconArea";
 import { MEDIA } from "../../../../../Common/Const/MediaConst";
 

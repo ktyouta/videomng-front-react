@@ -1,22 +1,15 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { blockCommentDataAtom, favoriteVideoCommentListAtom } from "../../../../Atom/FavoriteAtom";
-import { useState } from "react";
 import useMutationWrapper from "../../../../../Common/Hook/useMutationWrapper";
-import ENV from "../../../../../env.json";
 import { errResType, resType } from "../../../../../Common/Hook/useMutationWrapperBase";
-import { DeleteToFavoriteVideoMemoReqestType } from "../../../../Type/VideoDetail/VideoMemo/DeleteToFavoriteVideoMemoReqestType";
-import { FavoriteVideoMemoType } from "../../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import useSwitch from "../../../../../Common/Hook/useSwitch";
-import { AddToFavoriteVideoBlockCommentReqestType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailItemType";
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
-import { FavoriteVideoBlockCommentListResponseType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentListResponseType";
 import { DeleteToFavoriteVideoBlockCommentReqestType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/DeleteToFavoriteVideoBlockCommentReqestType";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../../Common/Const/CommonConst";
 import { useFavoriteBlockCommentIdEndpoint } from "./useFavoriteBlockCommentIdEndpoint";
 import { FavoriteVideoIdContext } from "../../../../Component/Favorite";
+import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
+import { useInvalidateQuery } from "../../../../../Common/Hook/useInvalidateQuery";
+import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
 
 
 type propsType = {
@@ -25,10 +18,13 @@ type propsType = {
 
 export function useFavoriteBlockCommentContent(props: propsType) {
 
-    // ブロックコメントリスト
-    const setBlockCommentData = useSetAtom(blockCommentDataAtom);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 公開コメント再取得用
+    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint(favoriteVideoId));
+    // 非表示コメント再取得用
+    const { invalidate: invalidateBlock } = useInvalidateQuery(useFavoriteBlockCommentEndpoint(favoriteVideoId));
+
 
     /**
      * コメントブロックリクエスト
@@ -41,21 +37,12 @@ export function useFavoriteBlockCommentContent(props: propsType) {
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
-            setBlockCommentData((e) => {
-                const commentId = res.data.commentId;
 
-                if (!e) {
-                    return e;
-                }
+            // 非表示コメント再取得
+            invalidateBlock();
 
-                return {
-                    ...e,
-                    // 再表示コメントをフィルターする
-                    items: e.items.filter((e1: YouTubeDataApiCommentDetailItemType) => {
-                        return e1.id !== commentId;
-                    })
-                };
-            });
+            // 公開コメント再取得
+            invalidataPublic();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

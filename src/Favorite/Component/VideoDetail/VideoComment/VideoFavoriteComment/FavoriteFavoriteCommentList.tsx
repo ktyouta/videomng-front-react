@@ -77,7 +77,7 @@ export function FavoriteFavoriteCommentList() {
                                 return (
                                     <FavoriteFavoriteCommentContent
                                         commentDetailItem={e}
-                                        key={commentId}
+                                        key={`${commentId}-favoritecommentid`}
                                     />
                                 )
                             })

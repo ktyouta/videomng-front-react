@@ -1,4 +1,4 @@
-import useSwitch from "../../../../Common/Hook/useSwitch";
+import useSwitch from "../../../../../Common/Hook/useSwitch";
 
 
 export function useFavoriteCommentRestoreIconArea() {

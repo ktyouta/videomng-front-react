@@ -1,14 +1,14 @@
 import React from "react";
-import { IconComponent } from "../../../../Common/Component/IconComponent";
+import { IconComponent } from "../../../../../Common/Component/IconComponent";
 import { MdEdit } from "react-icons/md";
 import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoEditIconArea";
-import { useFavoriteMemoDeleteIconArea } from "../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoDeleteIconArea";
+import { useFavoriteMemoEditIconArea } from "../../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoEditIconArea";
+import { useFavoriteMemoDeleteIconArea } from "../../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoDeleteIconArea";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useFavoriteCommentBlockIconArea } from "../../../Hook/VideoDetail/VideoComment/useFavoriteCommentBlockIconArea";
+import { useFavoriteCommentBlockIconArea } from "../../../../Hook/VideoDetail/VideoComment/useFavoriteCommentBlockIconArea";
 import { MdVisibility } from "react-icons/md";
-import { useFavoriteCommentRestoreIconArea } from "../../../Hook/VideoDetail/VideoComment/useFavoriteCommentRestoreIconArea";
-import { MEDIA } from "../../../../Common/Const/MediaConst";
+import { useFavoriteCommentRestoreIconArea } from "../../../../Hook/VideoDetail/VideoComment/VideoBlockComment/useFavoriteCommentRestoreIconArea";
+import { MEDIA } from "../../../../../Common/Const/MediaConst";
 
 
 const IconDiv = styled.div`

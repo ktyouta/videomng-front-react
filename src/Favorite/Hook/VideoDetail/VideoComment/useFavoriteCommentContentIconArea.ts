@@ -1,12 +1,6 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { favoriteVideoCommentListAtom } from "../../../Atom/FavoriteAtom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
-import ENV from "../../../../env.json";
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { DeleteToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/DeleteToFavoriteVideoMemoReqestType";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import useSwitch from "../../../../Common/Hook/useSwitch";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
@@ -14,12 +8,11 @@ import { FavoriteVideoFavoriteCommentType } from "../../../Type/VideoDetail/Vide
 import { COMMENT_FAVORITE_STATUS } from "../../../Const/FavoriteConst";
 import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteBlockCommentEndpoint } from "./VideoBlockComment/useFavoriteBlockCommentEndpoint";
 import { useFavoriteFavoriteCommentIdEndpoint } from "./VideoFavoriteComment/useFavoriteFavoriteCommentIdEndpoint";
 import { useFavoriteFavoriteCommentEndpoint } from "./VideoFavoriteComment/useFavoriteFavoriteCommentEndpoint";
-import { FavoriteVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoComment/FavoriteVideoCommentThreadItemType";
-import { FavoriteVideoCommentThreadReplyCommentType } from "../../../Type/VideoDetail/VideoComment/FavoriteVideoCommentThreadReplyCommentType";
+import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
+import { useFavoriteCommentEndpoint } from "./useFavoriteCommentEndpoint";
 
 
 type propsType = {
@@ -30,12 +23,12 @@ type propsType = {
 
 export function useFavoriteCommentContentIconArea(props: propsType) {
 
-    // コメント情報
-    const setFavoriteVideoCommentList = useSetAtom(favoriteVideoCommentListAtom);
     // お気に入り状態
     const [favoriteStatus, setFavoriteStatus] = useState(props.favoriteStatus);
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // コメント再取得用
+    const { invalidate } = useInvalidateQuery(useFavoriteCommentEndpoint(favoriteVideoId));
 
 
     /**
@@ -46,39 +39,8 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
-            setFavoriteVideoCommentList((e) => {
-
-                const commentId = res.data.commentId;
-
-                if (e) {
-                    // ブロックコメントをフィルターする
-                    e = e.filter((e1: FavoriteVideoCommentThreadItemType) => {
-
-                        const topLevelComment = e1.snippet.topLevelComment;
-
-                        // 親コメントのIDチェック
-                        if (topLevelComment.id === commentId) {
-                            return false;
-                        }
-
-                        // 返信コメントのIDチェック
-                        const replyComment = e1.replies?.comments;
-
-                        if (!replyComment) {
-                            return true;
-                        }
-
-                        const newReplyComments = replyComment.filter((e2: FavoriteVideoCommentThreadReplyCommentType) => {
-                            return e2.id !== commentId
-                        });
-
-                        e1.replies.comments = newReplyComments;
-
-                        return true;
-                    });
-                }
-                return e;
-            });
+            // コメント再取得
+            invalidate();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

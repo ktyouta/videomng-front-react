@@ -79,7 +79,7 @@ export function FavoriteCommentList() {
                                 return (
                                     <FavoriteCommentContent
                                         favoriteVideoComment={e}
-                                        key={key}
+                                        key={`${key}-commentid`}
                                     />
                                 )
                             })
