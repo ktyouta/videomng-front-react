@@ -1,22 +1,17 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { toast } from "react-toastify";
-import { homeSearchKeywordCommentKeywordAtom, homeSearchKeywordCommentUrlAtom } from "../../../Atom/HomeAtom";
-import { VideoIdContext } from "../../../Component/Home";
-import { SearchKeywordCommentUrlModel } from "../../../Model/SearchKeywordCommentUrlModel";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
+import { useState } from "react";
+import { SetSearchKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/HomeSearchKeywordComment";
 
 
 export function useHomeSearchKeywordCommentInput() {
 
-    // キーワード
-    const [searchKeywordCommentKeyword, setSearchKeywordCommentKeyword] = useAtom(homeSearchKeywordCommentKeywordAtom);
-    // 動画取得用URL
-    const setSearchKeywordCommentUrl = useSetAtom(homeSearchKeywordCommentUrlAtom);
-    // 動画ID
-    const videoId = VideoIdContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-
+    // 入力用キーワード
+    const [inputKeyword, setInputKeyword] = useState(``);
+    // 検索用キーワード(setter)
+    const setSearchKeyword = SetSearchKeywordContext.useCtx();
 
     /**
      * 検索ボタン押下イベント
@@ -24,14 +19,12 @@ export function useHomeSearchKeywordCommentInput() {
      */
     function clickSearchBtn() {
 
-        if (!searchKeywordCommentKeyword) {
+        if (!inputKeyword) {
             toast.warn(`キーワードを入力してください。`);
             return;
         }
 
-        const searchKeywordCommentUrlModel = new SearchKeywordCommentUrlModel(searchKeywordCommentKeyword, videoId);
-        const searchKeywordCommentUrl = searchKeywordCommentUrlModel.path;
-        setSearchKeywordCommentUrl(searchKeywordCommentUrl);
+        setSearchKeyword(inputKeyword);
     }
 
     /**
@@ -48,14 +41,15 @@ export function useHomeSearchKeywordCommentInput() {
      * 入力中のキーワードをクリアする
      */
     function clearInputKeyword() {
-        setSearchKeywordCommentKeyword(``);
+        setInputKeyword(``);
     }
+
     return {
-        searchKeywordCommentKeyword,
-        setSearchKeywordCommentKeyword,
         clickSearchBtn,
         clearInputKeyword,
         isMobile,
         handleKeyPress,
+        inputKeyword,
+        setInputKeyword,
     }
 }

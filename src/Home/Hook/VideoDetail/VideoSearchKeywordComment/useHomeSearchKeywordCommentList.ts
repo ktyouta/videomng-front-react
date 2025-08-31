@@ -1,30 +1,36 @@
-import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { SearchKeywordCommentResponseType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentResponseType";
-import { homeSearchKeywordCommentAtom, homeSearchKeywordCommentUrlAtom } from "../../../Atom/HomeAtom";
+import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
+import { useHomeSearchKeywordCommentEndpoint } from "./useHomeSearchKeywordCommentEndpoint";
+import { VideoIdContext } from "../../../Component/Home";
+import { SearchKeywordContext, SetSearchKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/HomeSearchKeywordComment";
 
 
 export function useHomeSearchKeywordCommentList() {
 
-    // コメント情報
-    const [searchCommentList, setSearchCommentList] = useAtom(homeSearchKeywordCommentAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // 動画取得用URL
-    const [searchKeywordCommentUrl, setSearchKeywordCommentUrl] = useAtom(homeSearchKeywordCommentUrlAtom);
-
+    // 動画ID
+    const videoId = VideoIdContext.useCtx();
+    // 検索用キーワード
+    const searchKeyword = SearchKeywordContext.useCtx();
+    // 検索用キーワード(setter)
+    const setSearchKeyword = SetSearchKeywordContext.useCtx();
 
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<SearchKeywordCommentResponseType>(
+    const { data: searchCommentList, isLoading } = useQueryWrapper<SearchKeywordCommentResponseType, SearchKeywordCommentType[]>(
         {
-            url: `${searchKeywordCommentUrl}`,
-            afSuccessFn: (response: SearchKeywordCommentResponseType) => {
-                setSearchCommentList(response.data);
+            url: useHomeSearchKeywordCommentEndpoint({
+                videoId,
+                keyword: searchKeyword
+            }),
+            select: (res: SearchKeywordCommentResponseType) => {
+                return res.data;
             },
             afErrorFn: (res) => {
                 setErrMessage(`コメントの取得に失敗しました。`);
-                setSearchKeywordCommentUrl(``);
+                setSearchKeyword(``);
             }
         }
     );

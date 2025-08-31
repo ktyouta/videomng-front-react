@@ -52,13 +52,12 @@ export function HomeSearchKeywordCommentInput() {
   console.log("HomeSearchKeywordCommentInput render");
 
   const {
-    searchKeywordCommentKeyword,
-    setSearchKeywordCommentKeyword,
     clickSearchBtn,
     clearInputKeyword,
     isMobile,
     handleKeyPress,
-  } = useHomeSearchKeywordCommentInput();
+    inputKeyword,
+    setInputKeyword, } = useHomeSearchKeywordCommentInput();
 
   const inputWidth = isMobile ? "88%" : "92%";
 
@@ -68,8 +67,8 @@ export function HomeSearchKeywordCommentInput() {
         width={inputWidth}
         height="100%"
         placeholder="キーワード"
-        value={searchKeywordCommentKeyword}
-        onChange={setSearchKeywordCommentKeyword}
+        value={inputKeyword}
+        onChange={setInputKeyword}
         style={{
           borderBottomLeftRadius: 5,
           borderTopLeftRadius: 5,

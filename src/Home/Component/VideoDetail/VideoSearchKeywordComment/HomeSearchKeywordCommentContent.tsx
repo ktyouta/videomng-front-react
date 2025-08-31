@@ -44,7 +44,7 @@ export function HomeSearchKeywordCommentContent(props: propsType) {
 
     console.log("HomeSearchKeywordCommentContent render");
 
-    const { searchKeywordCommentKeyword } = useHomeSearchKeywordCommentContent();
+    const { searchKeyword } = useHomeSearchKeywordCommentContent();
 
     const data = props.searchComment;
     const comment = data.textOriginal;
@@ -59,7 +59,7 @@ export function HomeSearchKeywordCommentContent(props: propsType) {
             <CommentDiv>
                 <HighlightTextComponent
                     message={comment}
-                    keyword={searchKeywordCommentKeyword}
+                    keyword={searchKeyword}
                     id={props.commentId}
                 />
             </CommentDiv>

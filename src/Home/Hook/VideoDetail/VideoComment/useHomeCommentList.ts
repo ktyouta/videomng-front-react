@@ -12,8 +12,6 @@ import { HomeVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoC
 
 export function useHomeCommentList() {
 
-    // コメント情報
-    const [homeVideoCommentList, setHomeVideoCommentList] = useState<HomeVideoCommentThreadItemType[]>();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画ID
@@ -21,13 +19,11 @@ export function useHomeCommentList() {
 
 
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<HomeVideoCommentThreadResponseType>(
+    const { data: homeVideoCommentList, isLoading } = useQueryWrapper<HomeVideoCommentThreadResponseType, HomeVideoCommentThreadItemType[]>(
         {
             url: useHomeCommentEndpoint(videoId),
-            afSuccessFn: (response: HomeVideoCommentThreadResponseType) => {
-
-                const items = response.data.items;
-                setHomeVideoCommentList(items);
+            select: (res: HomeVideoCommentThreadResponseType) => {
+                return res.data.items;
             },
             afErrorFn: (res) => {
                 setErrMessage(`コメントの取得に失敗しました。`);

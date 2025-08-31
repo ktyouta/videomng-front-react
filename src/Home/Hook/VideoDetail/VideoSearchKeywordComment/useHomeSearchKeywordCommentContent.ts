@@ -1,12 +1,11 @@
-import { useAtomValue } from "jotai";
-import { homeSearchKeywordCommentKeywordAtom } from "../../../Atom/HomeAtom";
+import { SearchKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/HomeSearchKeywordComment";
 
 export function useHomeSearchKeywordCommentContent() {
 
-    // キーワード
-    const searchKeywordCommentKeyword = useAtomValue(homeSearchKeywordCommentKeywordAtom);
+    // 検索用キーワード
+    const searchKeyword = SearchKeywordContext.useCtx();
 
     return {
-        searchKeywordCommentKeyword
+        searchKeyword
     }
 }
