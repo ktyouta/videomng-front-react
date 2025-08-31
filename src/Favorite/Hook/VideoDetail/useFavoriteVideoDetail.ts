@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
-import { favoriteVideoDetailItemAtom } from "../../Atom/FavoriteAtom";
 import { FavoriteVideoDetailApiUrlModel, } from "../../Model/FavoriteVideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
@@ -9,6 +8,8 @@ import { useEffect, useState } from "react";
 import { FavoriteVideoIdContext, SetFavoriteVideoIdContext } from "../../Component/Favorite";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { useFavoriteListApiUrl } from "../VideoList/useFavoriteListApiUrl";
+import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
+import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
 
 export function useFavoriteVideoDetail() {
 
@@ -16,15 +17,12 @@ export function useFavoriteVideoDetail() {
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // 動画ID
     const setFavoriteVideoId = SetFavoriteVideoIdContext.useCtx();
-    // 動画詳細
-    const [videoDetail, setVideoDetail] = useAtom(favoriteVideoDetailItemAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画一覧取得用フック
     const { queryParam } = useFavoriteListApiUrl();
     //ルーティング用
     const navigate = useNavigate();
-
 
     // URL直打ち対応
     useEffect(() => {
@@ -37,19 +35,14 @@ export function useFavoriteVideoDetail() {
             const videoId = pathArray[3];
             setFavoriteVideoId(videoId);
         }
-
-        // アンマウント時に動画情報をリセット
-        return () => {
-            setVideoDetail(undefined);
-        }
     }, []);
 
     // 動画詳細を取得
-    const { isLoading } = useQueryWrapper<FavoriteVideoDetailResponseType>(
+    const { data: videoDetail, isLoading } = useQueryWrapper<FavoriteVideoDetailResponseType, FavoriteVideoDetailDataType>(
         {
-            url: favoriteVideoId ? `${new FavoriteVideoDetailApiUrlModel(favoriteVideoId).videoMngApiPath}` : ``,
-            afSuccessFn: (response: FavoriteVideoDetailResponseType) => {
-                setVideoDetail(response.data);
+            url: useFavoriteVideoDetailEndpoint(favoriteVideoId),
+            select: (res: FavoriteVideoDetailResponseType) => {
+                return res.data
             },
             afErrorFn: (res) => {
                 setErrMessage(`動画情報の取得に失敗しました。`);

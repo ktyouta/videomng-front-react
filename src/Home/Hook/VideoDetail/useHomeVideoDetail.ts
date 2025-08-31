@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../../Type/VideoDetail/VideoDetailResponseType";
-import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoDetailItemAtom } from "../../Atom/HomeAtom";
 import { VideoDetailApiUrlModel } from "../../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
@@ -9,15 +8,15 @@ import { VideoIdContext } from "../../Component/Home";
 import { useEffect, useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
 import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";
+import { VideoDetailItemType } from "../../Type/VideoDetail/VideoDetailItemType";
 
 export function useHomeVideoDetail() {
 
     // お気に入り動画ID
     const videoId = VideoIdContext.useCtx();
     // 動画詳細
-    const [videoDetail, setVideoDetail] = useAtom(videoDetailItemAtom);
+    const [videoDetail, setVideoDetail] = useState<VideoDetailItemType>();
     //ルーティング用
     const navigate = useNavigate();
     // エラーメッセージ
@@ -34,7 +33,7 @@ export function useHomeVideoDetail() {
     }, []);
 
     // 動画詳細を取得
-    const { isLoading } = useQueryWrapper<VideoDetailResponseType>(
+    const { data: isLoading } = useQueryWrapper<VideoDetailResponseType>(
         {
             url: videoId ? `${new VideoDetailApiUrlModel(videoId).videoMngApiPath}` : ``,
             afSuccessFn: (response: VideoDetailResponseType) => {
