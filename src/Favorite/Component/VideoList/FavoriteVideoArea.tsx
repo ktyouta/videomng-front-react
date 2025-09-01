@@ -72,7 +72,6 @@ export function FavoriteVideoArea() {
     videoListItem,
     isLoading,
     errMessage,
-    isFetching,
     isCalledListApi, } = useFavoriteVideoArea();
 
   // ローディング
@@ -84,7 +83,7 @@ export function FavoriteVideoArea() {
     );
   }
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return (
       <LoadingParent>
         <Loading />
@@ -112,7 +111,7 @@ export function FavoriteVideoArea() {
     <Parent>
       <VideoUl>
         {
-          videoListItem?.map((e: FavoriteVideoListMergedType) => {
+          videoListItem.map((e: FavoriteVideoListMergedType) => {
             return (
               <FavoriteVideoContent
                 data={e}

@@ -33,7 +33,7 @@ export function useHomeVideoDetail() {
     }, []);
 
     // 動画詳細を取得
-    const { data: isLoading } = useQueryWrapper<VideoDetailResponseType>(
+    const { isLoading } = useQueryWrapper<VideoDetailResponseType>(
         {
             url: videoId ? `${new VideoDetailApiUrlModel(videoId).videoMngApiPath}` : ``,
             afSuccessFn: (response: VideoDetailResponseType) => {

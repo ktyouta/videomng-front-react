@@ -1,19 +1,17 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoListResponseType } from "../../Type/VideoList/FavoriteVideoListResponseType";
-import { favoriteVideoListAtom, selectedFavoriteVideoCategoryAtom, selectedFavoriteVideoTagAtom, selectedFavoriteVideoviewStatusAtom } from "../../Atom/FavoriteAtom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import ENV from "../../../env.json"
 import { useEffect, useState } from "react";
 import { FavoriteVideoListApiUrlModel } from "../../Model/FavoriteVideoListApiUrlModel";
 import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
+import { FavoriteVideoListMergedType } from "../../Type/VideoList/FavoriteVideoListMergedType";
 
 
 export function useFavoriteVideoArea() {
 
-    // 動画リスト
-    const [videoListItem, setVideoListItemAtom] = useAtom(favoriteVideoListAtom);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画リスト取得URL
@@ -62,12 +60,14 @@ export function useFavoriteVideoArea() {
     }, []);
 
     // 動画一覧を取得
-    const { isLoading, isFetching } = useQueryWrapper<FavoriteVideoListResponseType>(
+    const { data: videoListItem, isLoading } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListMergedType[]>(
         {
             url: favoriteVideoUrl,
-            afSuccessFn: (response: FavoriteVideoListResponseType) => {
+            select: (res: FavoriteVideoListResponseType) => {
+                return res.data;
+            },
+            afSuccessFn: () => {
                 setIsCalledListApi(true);
-                setVideoListItemAtom(response.data);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
@@ -81,7 +81,6 @@ export function useFavoriteVideoArea() {
         videoListItem,
         isLoading,
         errMessage,
-        isFetching,
         isCalledListApi,
     }
 }
