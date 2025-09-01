@@ -66,7 +66,7 @@ const BtnDiv = styled.div`
 
 
 type propsType = {
-    videoDetail: VideoDetailItemType | undefined,
+    videoDetail: VideoDetailItemType,
 }
 
 

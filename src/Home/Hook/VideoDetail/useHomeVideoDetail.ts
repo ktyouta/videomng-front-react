@@ -10,13 +10,12 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";
 import { VideoDetailItemType } from "../../Type/VideoDetail/VideoDetailItemType";
+import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
 
 export function useHomeVideoDetail() {
 
     // お気に入り動画ID
     const videoId = VideoIdContext.useCtx();
-    // 動画詳細
-    const [videoDetail, setVideoDetail] = useState<VideoDetailItemType>();
     //ルーティング用
     const navigate = useNavigate();
     // エラーメッセージ
@@ -24,32 +23,17 @@ export function useHomeVideoDetail() {
     // 動画一覧取得URL情報
     const { query } = useGetVideoListUrl();
 
-    useEffect(() => {
-
-        // アンマウント時に動画情報をリセット
-        return () => {
-            setVideoDetail(undefined);
-        }
-    }, []);
-
     // 動画詳細を取得
-    const { isLoading } = useQueryWrapper<VideoDetailResponseType>(
+    const { data: videoDetail, isLoading } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
         {
-            url: videoId ? `${new VideoDetailApiUrlModel(videoId).videoMngApiPath}` : ``,
-            afSuccessFn: (response: VideoDetailResponseType) => {
-                const items = response.data.items;
-
-                if (items.length === 0) {
-                    setErrMessage(`動画情報を取得できませんでした。`);
-                    return;
-                }
-
-                setVideoDetail(items[0]);
+            url: useHomeVideoDetailEndpoint(videoId),
+            select: (res: VideoDetailResponseType) => {
+                return res.data.items;
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
                 if (errRes.response.data.message) {
-                    toast.error(`${errRes.response.data.message}`);
+                    setErrMessage(`${errRes.response.data.message}`);
                 }
             }
         }

@@ -69,6 +69,21 @@ export function HomeVideoDetail() {
     errMessage,
     backHome, } = useHomeVideoDetail();
 
+  if (errMessage) {
+    return (
+      <MessageDiv>
+        <p>
+          {errMessage}
+        </p>
+        <BackHomeP
+          onClick={backHome}
+        >
+          一覧に戻る
+        </BackHomeP>
+      </MessageDiv>
+    );
+  }
+
   if (!videoDetail) {
     return (
       <LoadingParent>
@@ -83,21 +98,6 @@ export function HomeVideoDetail() {
       <LoadingParent>
         <Loading />
       </LoadingParent>
-    );
-  }
-
-  if (errMessage) {
-    return (
-      <MessageDiv>
-        <p>
-          {errMessage}
-        </p>
-        <BackHomeP
-          onClick={backHome}
-        >
-          一覧に戻る
-        </BackHomeP>
-      </MessageDiv>
     );
   }
 

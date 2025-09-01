@@ -1,11 +1,12 @@
 import { VideoDetailItemType } from "./VideoDetailItemType";
-import { YouTubeDataApiVideoDetailItemType } from "./YouTubeDataApiVideoDetailItemType";
 
 //YouTube Data Api(動画詳細)のレスポンス
 export type VideoDetailResponseType = {
+    status: number,
+    message: string,
     data: {
         readonly kind: string;
         readonly etag: string;
-        readonly items: VideoDetailItemType[];
+        readonly items: VideoDetailItemType;
     }
 }

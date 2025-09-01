@@ -68,7 +68,7 @@ const ComboTitleSpan = styled.span`
 `;
 
 type propsType = {
-  videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
+  videoDetail: YouTubeDataApiVideoDetailItemType,
 }
 
 
