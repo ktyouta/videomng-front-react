@@ -22,14 +22,16 @@ export function FavoriteSearchKeywordContentIconArea(props: propsType) {
         favoriteStatus,
     } = useFavoriteSearchKeywordContentIconArea({ ...props });
 
+    // お気に入り状態
+    const isFavorite = favoriteStatus === COMMENT_FAVORITE_STATUS.FAVORITE;
+
     return (
         <React.Fragment>
             {/* お気に入り */}
             <FavoriteCommentFavoriteIconArea
                 commentId={props.commentId}
-                favoriteStatus={favoriteStatus}
-                favoriteComment={favoriteComment}
-                deleteFavoriteComment={deleteFavoriteComment}
+                isFavorite={isFavorite}
+                onClick={isFavorite ? deleteFavoriteComment : favoriteComment}
             />
             {
                 favoriteStatus === COMMENT_FAVORITE_STATUS.NONE &&

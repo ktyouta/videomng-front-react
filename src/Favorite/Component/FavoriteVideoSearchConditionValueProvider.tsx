@@ -1,0 +1,69 @@
+import { ReactNode, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ENV from "../../env.json";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
+import { createCtx } from "../../Common/Function/createCtx";
+
+
+// 動画一覧検索条件選択値(カテゴリ)
+export const SelectedFavoriteVideoCategoryContext = createCtx<string>();
+// 動画一覧検索条件選択値(カテゴリ) setter
+export const SetSelectedFavoriteVideoCategoryContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+// 動画一覧検索条件選択値(視聴状況)
+export const SelectedFavoriteVideoViewStatusContext = createCtx<string>();
+// 動画一覧検索条件選択値(視聴状況) setter
+export const SetselectedFavoriteVideoViewStatusContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+// 動画一覧検索条件選択値(タグ)
+export const SelectedFavoriteVideoTagContext = createCtx<string>();
+// 動画一覧検索条件選択値(タグ) setter
+export const SetselectedFavoriteVideoTagContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+// 動画一覧検索条件選択値(タグ)
+export const SelectedFavoriteVideoFavoriteLevelContext = createCtx<string>();
+// 動画一覧検索条件選択値(タグ) setter
+export const SetSelectedFavoriteVideoFavoriteLevelContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+// 動画一覧検索ソートキー
+export const SelectedFavoriteVideoSortKeyContext = createCtx<string>();
+// 動画一覧検索ソートキー setter
+export const SetSelectedFavoriteVideoSortKeyContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+
+// 引数の型
+type propsType = {
+    children: ReactNode
+}
+
+export function FavoriteVideoSearchConditionValueProvider(props: propsType) {
+
+    // 動画一覧検索条件選択値(カテゴリ)
+    const [selectedFavoriteVideoCategory, setSelectedFavoriteVideoCategory] = useState(``);
+    // 動画一覧検索条件選択値(視聴状況)
+    const [selectedFavoriteVideoViewStatus, setSelectedFavoriteVideoViewStatus] = useState(``);
+    // 動画一覧検索条件選択値(タグ)
+    const [selectedFavoriteVideoTag, setSelectedFavoriteVideoTag] = useState(``);
+    // 動画一覧検索条件選択値(お気に入り度)
+    const [selectedFavoriteVideoFavoriteLevel, setSelectedFavoriteVideoFavoriteLevel] = useState(``);
+    // 動画一覧検索ソートキー
+    const [selectedFavoriteVideoSortKey, setSelectedFavoriteVideoSortKey] = useState(``);
+
+
+    return <SelectedFavoriteVideoCategoryContext.Provider value={selectedFavoriteVideoCategory}>
+        <SetSelectedFavoriteVideoCategoryContext.Provider value={setSelectedFavoriteVideoCategory}>
+            <SelectedFavoriteVideoViewStatusContext.Provider value={selectedFavoriteVideoViewStatus}>
+                <SetselectedFavoriteVideoViewStatusContext.Provider value={setSelectedFavoriteVideoViewStatus}>
+                    <SelectedFavoriteVideoTagContext.Provider value={selectedFavoriteVideoTag}>
+                        <SetselectedFavoriteVideoTagContext.Provider value={setSelectedFavoriteVideoTag}>
+                            <SelectedFavoriteVideoFavoriteLevelContext.Provider value={selectedFavoriteVideoFavoriteLevel}>
+                                <SetSelectedFavoriteVideoFavoriteLevelContext.Provider value={setSelectedFavoriteVideoFavoriteLevel}>
+                                    <SelectedFavoriteVideoSortKeyContext.Provider value={selectedFavoriteVideoSortKey}>
+                                        <SetSelectedFavoriteVideoSortKeyContext.Provider value={setSelectedFavoriteVideoSortKey}>
+                                            {props.children}
+                                        </SetSelectedFavoriteVideoSortKeyContext.Provider>
+                                    </SelectedFavoriteVideoSortKeyContext.Provider>
+                                </SetSelectedFavoriteVideoFavoriteLevelContext.Provider>
+                            </SelectedFavoriteVideoFavoriteLevelContext.Provider>
+                        </SetselectedFavoriteVideoTagContext.Provider>
+                    </SelectedFavoriteVideoTagContext.Provider>
+                </SetselectedFavoriteVideoViewStatusContext.Provider>
+            </SelectedFavoriteVideoViewStatusContext.Provider>
+        </SetSelectedFavoriteVideoCategoryContext.Provider>
+    </SelectedFavoriteVideoCategoryContext.Provider>
+}

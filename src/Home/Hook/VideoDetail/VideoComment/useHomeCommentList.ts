@@ -4,7 +4,6 @@ import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import ENV from "../../../../env.json";
 import { HomeVideoCommentThreadResponseType } from "../../../Type/VideoDetail/VideoComment/HomeVideoCommentThreadResponseType";
-import { homeVideoCommentListAtom, } from "../../../Atom/HomeAtom";
 import { VideoIdContext } from "../../../Component/Home";
 import { useHomeCommentEndpoint } from "./useHomeCommentEndpoint";
 import { HomeVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoComment/HomeVideoCommentThreadItemType";
