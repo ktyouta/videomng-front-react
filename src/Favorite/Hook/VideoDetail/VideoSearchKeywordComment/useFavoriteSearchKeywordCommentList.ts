@@ -4,7 +4,7 @@ import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchK
 import { SearchKeywordCommentResponseType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentResponseType";
 import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
 import { SearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 export function useFavoriteSearchKeywordCommentList() {

@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
 import useSwitch from "../../../../Common/Hook/useSwitch";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 type propsType = {

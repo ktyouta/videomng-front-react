@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoListDataAtom } from "../../Atom/HomeAtom";
+import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom } from "../../Atom/HomeAtom";
 import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
 import { comboType } from "../../../Common/Component/ComboComponent";
 import { Label } from "recharts";

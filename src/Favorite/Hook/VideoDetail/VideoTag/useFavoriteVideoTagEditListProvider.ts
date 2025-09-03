@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { tagType } from "../../../../Common/Component/TagsComponent";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 export function useFavoriteVideoTagEditListProvider() {

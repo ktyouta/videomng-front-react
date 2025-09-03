@@ -10,7 +10,6 @@ import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/Favorit
 import { tagType } from "../../../../Common/Component/TagsComponent";
 import { toast } from "react-toastify";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
 
 

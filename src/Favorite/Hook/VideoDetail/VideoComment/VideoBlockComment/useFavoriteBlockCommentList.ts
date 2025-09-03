@@ -2,9 +2,9 @@ import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
 import useQueryWrapper from "../../../../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoBlockCommentListResponseType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentListResponseType";
-import { FavoriteVideoIdContext } from "../../../../Component/Favorite";
 import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
 import { YouTubeDataApiCommentDetailResponseType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailResponseType";
+import { FavoriteVideoIdContext } from "../../../../Component/FavoriteMain";
 
 
 export function useFavoriteBlockCommentList() {

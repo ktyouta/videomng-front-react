@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { SetFavoriteVideoIdContext } from "../../Component/Favorite";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { SetFavoriteVideoIdContext } from "../../Component/FavoriteMain";
 
 
 export function useFavoriteVideoContent() {

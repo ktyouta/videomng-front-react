@@ -10,8 +10,8 @@ import { FavoriteVideoSortType } from "../../Type/VideoList/FavoriteVideoSortTyp
 import { comboType } from "../../../Common/Component/ComboComponent";
 import { FavoriteVideoListApiUrlModel } from "../../Model/FavoriteVideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
-import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
+import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
 
 
 export function useFavoriteSearchArea() {
@@ -21,10 +21,14 @@ export function useFavoriteSearchArea() {
     // ソートリスト
     const [sortList, setSortList] = useState<comboType[]>([]);
     // お気に入り動画一覧取得用フック
+    // const {
+    //     changeUrl,
+    //     selectedFavoriteVideoTag,
+    //     selectedFavoriteVideoSortKey, } = useFavoriteListApiUrl();
     const {
-        changeUrl,
         selectedFavoriteVideoTag,
-        selectedFavoriteVideoSortKey, } = useFavoriteListApiUrl();
+        selectedFavoriteVideoSortKey,
+        setSelectedFavoriteVideoSortKey, } = useFavoriteVideoSearchConditionValue();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
 
@@ -53,9 +57,10 @@ export function useFavoriteSearchArea() {
      */
     function selectSort(value: string) {
 
-        changeUrl({
-            sortKey: value,
-        });
+        // changeUrl({
+        //     sortKey: value,
+        // });
+        setSelectedFavoriteVideoSortKey(value);
     }
 
     return {

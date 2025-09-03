@@ -9,12 +9,12 @@ import { UpdateFavoriteVideoResponseDataType } from "../../../Type/VideoDetail/V
 import { UpdateToFavoriteVideoTagReqestType } from "../../../Type/VideoDetail/VideoTag/UpdateToFavoriteVideoTagReqestType";
 import { tagType } from "../../../../Common/Component/TagsComponent";
 import { UpdateFavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/UpdateFavoriteVideoTagType";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
 import { ChangeViewContext } from "../../../Component/VideoDetail/VideoTag/FavoriteTag";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 

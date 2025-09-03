@@ -6,13 +6,13 @@ import { AddToFavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/Vi
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useQueryClient } from "react-query";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 export function useFavoriteMemoCreateInput() {

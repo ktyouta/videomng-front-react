@@ -6,8 +6,10 @@ import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import ENV from "../../../env.json"
 import { useEffect, useState } from "react";
 import { FavoriteVideoListApiUrlModel } from "../../Model/FavoriteVideoListApiUrlModel";
-import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
 import { FavoriteVideoListMergedType } from "../../Type/VideoList/FavoriteVideoListMergedType";
+import { useCreateFavoriteVideoListQuery } from "./useCreateFavoriteVideoListQuery";
+import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
+import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 
 export function useFavoriteVideoArea() {
@@ -15,12 +17,18 @@ export function useFavoriteVideoArea() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画リスト取得URL
-    const { favoriteVideoUrl } = useFavoriteListApiUrl();
+    //const { favoriteVideoUrl } = useFavoriteListApiUrl();
+    //const { endpoint } = useCreateFavoriteVideoListQuery();
     // 動画一覧API呼び出し済みフラグ
     const [isCalledListApi, setIsCalledListApi] = useState(false);
     // お気に入り動画一覧取得用フック
-    const { changeUrl } = useFavoriteListApiUrl();
-
+    //const { changeUrl } = useFavoriteListApiUrl();
+    const {
+        setSelectedFavoriteVideoCategory,
+        setSelectedFavoriteVideoViewStatus,
+        setSelectedFavoriteVideoTag,
+        setSelectedFavoriteVideoFavoriteLevel,
+        setSelectedFavoriteVideoSortKey, } = useFavoriteVideoSearchConditionValue();
 
     // URL直打ち対応
     useEffect(() => {
@@ -50,19 +58,24 @@ export function useFavoriteVideoArea() {
             favoriteLevel = favoriteLevelValue !== null ? favoriteLevelValue : ``;
         }
 
-        changeUrl({
-            viewStatus,
-            videoCategory,
-            videoTag,
-            sortKey,
-            favoriteLevel,
-        });
+        setSelectedFavoriteVideoCategory(videoCategory);
+        setSelectedFavoriteVideoViewStatus(viewStatus);
+        setSelectedFavoriteVideoTag(videoTag);
+        setSelectedFavoriteVideoSortKey(sortKey);
+        setSelectedFavoriteVideoFavoriteLevel(favoriteLevel);
+        // changeUrl({
+        //     viewStatus,
+        //     videoCategory,
+        //     videoTag,
+        //     sortKey,
+        //     favoriteLevel,
+        // });
     }, []);
 
     // 動画一覧を取得
     const { data: videoListItem, isLoading } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListMergedType[]>(
         {
-            url: favoriteVideoUrl,
+            url: useFavoriteVideoListEndpoint(),
             select: (res: FavoriteVideoListResponseType) => {
                 return res.data;
             },

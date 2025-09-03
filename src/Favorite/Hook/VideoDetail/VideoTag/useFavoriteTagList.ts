@@ -6,9 +6,9 @@ import ENV from "../../../../env.json";
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoResponseType";
 import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 export function useFavoriteTagList() {

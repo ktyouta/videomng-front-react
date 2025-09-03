@@ -11,11 +11,11 @@ import ENV from "../../../env.json";
 import { FavoriteVideoTagType } from "../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
-import { ViewStatusListContext } from "../../Component/Favorite";
 import { FavoriteVideoListApiUrlModel } from "../../Model/FavoriteVideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../Const/FavoriteConst";
-import { useFavoriteListApiUrl } from "./useFavoriteListApiUrl";
+import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
+import { ViewStatusListContext } from "../../Component/FavoriteMain";
 
 
 type propsType = {
@@ -38,12 +38,22 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
     ]);
     // お気に入り動画一覧取得用フック
+    // const {
+    //     changeUrl,
+    //     selectedFavoriteVideoCategory,
+    //     selectedFavoriteVideoViewStatus,
+    //     selectedFavoriteVideoTag,
+    //     selectedFavoriteVideoFavoriteLevel, } = useFavoriteListApiUrl();
+
     const {
-        changeUrl,
         selectedFavoriteVideoCategory,
+        setSelectedFavoriteVideoCategory,
         selectedFavoriteVideoViewStatus,
+        setSelectedFavoriteVideoViewStatus,
         selectedFavoriteVideoTag,
-        selectedFavoriteVideoFavoriteLevel, } = useFavoriteListApiUrl();
+        setSelectedFavoriteVideoTag,
+        selectedFavoriteVideoFavoriteLevel,
+        setSelectedFavoriteVideoFavoriteLevel, } = useFavoriteVideoSearchConditionValue();
 
     /**
      * 画面表示用の視聴状況リストを作成
@@ -123,10 +133,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeVideoCategory(selectedCategory: string,) {
 
-        changeUrl({
-            videoCategory: selectedCategory,
-            callback: props.close,
-        });
+        // changeUrl({
+        //     videoCategory: selectedCategory,
+        //     callback: props.close,
+        // });
+
+        setSelectedFavoriteVideoCategory(selectedCategory);
+        props.close();
     }
 
     /**
@@ -135,10 +148,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeViewStatus(selectedViewStatus: string,) {
 
-        changeUrl({
-            viewStatus: selectedViewStatus,
-            callback: props.close,
-        });
+        // changeUrl({
+        //     viewStatus: selectedViewStatus,
+        //     callback: props.close,
+        // });
+
+        setSelectedFavoriteVideoViewStatus(selectedViewStatus);
+        props.close();
     }
 
     /**
@@ -147,10 +163,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeVideoTag(selectedVideoTag: string,) {
 
-        changeUrl({
-            videoTag: selectedVideoTag,
-            callback: props.close,
-        });
+        // changeUrl({
+        //     videoTag: selectedVideoTag,
+        //     callback: props.close,
+        // });
+
+        setSelectedFavoriteVideoTag(selectedVideoTag);
+        props.close();
     }
 
     /**
@@ -159,10 +178,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeFavoriteLevel(selectedFavoriteLevel: string,) {
 
-        changeUrl({
-            favoriteLevel: selectedFavoriteLevel,
-            callback: props.close,
-        });
+        // changeUrl({
+        //     favoriteLevel: selectedFavoriteLevel,
+        //     callback: props.close,
+        // });
+
+        setSelectedFavoriteVideoFavoriteLevel(selectedFavoriteLevel);
+        props.close();
     }
 
     return {

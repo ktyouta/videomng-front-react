@@ -5,10 +5,10 @@ import { FavoriteVideoFavoriteCommentType } from "../../../../Type/VideoDetail/V
 import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailItemType";
 import { toast } from "react-toastify";
 import { useFavoriteFavoriteCommentIdEndpoint } from "./useFavoriteFavoriteCommentIdEndpoint";
-import { FavoriteVideoIdContext } from "../../../../Component/Favorite";
 import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 import { useInvalidateQuery } from "../../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
+import { FavoriteVideoIdContext } from "../../../../Component/FavoriteMain";
 
 
 type propsType = {

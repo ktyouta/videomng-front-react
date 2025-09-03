@@ -9,9 +9,9 @@ import { UpdateFavoriteVideoResponseDataType } from "../../../Type/VideoDetail/V
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import ENV from "../../../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateToFavoriteVideoReqestType";
-import { FavoriteVideoIdContext, ViewStatusListContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
+import { FavoriteVideoIdContext, ViewStatusListContext } from "../../../Component/FavoriteMain";
 
 
 type propsType = {

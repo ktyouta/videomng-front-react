@@ -1,10 +1,10 @@
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
 import ENV from "../../../env.json";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 
-// 動画一覧取得エンドポイント
-const VIDEO_INFO_PATH = `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}`;
 // クエリパラメータのキー(視聴状況)
 const QUERY_KEY_VIEW_STATUS = `viewstatus`;
 // クエリパラメータのキー(カテゴリ)
@@ -16,7 +16,7 @@ const QUERY_KEY_SORT = `sortkey`;
 // クエリパラメータのキー(お気に入り度)
 const QUERY_KEY_FAVORITE_LEVEL = `favoritelevel`;
 
-export function useFavoriteListEndpoint() {
+export function useCreateFavoriteVideoListQuery() {
 
     const {
         selectedFavoriteVideoCategory,
@@ -52,7 +52,6 @@ export function useFavoriteListEndpoint() {
     }
 
     return {
-        endpoint: `${VIDEO_INFO_PATH}${createQuery()}`,
         query: createQuery()
     };
 }

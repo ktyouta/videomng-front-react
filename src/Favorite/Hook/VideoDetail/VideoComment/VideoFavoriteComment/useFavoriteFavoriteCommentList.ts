@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useQueryWrapper from "../../../../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoBlockCommentListResponseType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentListResponseType";
-import { FavoriteVideoIdContext } from "../../../../Component/Favorite";
+import { FavoriteVideoIdContext } from "../../../../Component/FavoriteMain";
 import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 import { YouTubeDataApiCommentDetailResponseType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailResponseType";
 

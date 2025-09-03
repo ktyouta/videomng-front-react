@@ -8,12 +8,12 @@ import { AddToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/Vide
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { UpdateToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/UpdateToFavoriteVideoMemoReqestType";
 import useSwitch from "../../../../Common/Hook/useSwitch";
-import { FavoriteVideoIdContext } from "../../../Component/Favorite";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
+import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 
 
 type propsType = {

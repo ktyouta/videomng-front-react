@@ -6,10 +6,10 @@ import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetai
 import { DeleteToFavoriteVideoBlockCommentReqestType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/DeleteToFavoriteVideoBlockCommentReqestType";
 import { toast } from "react-toastify";
 import { useFavoriteBlockCommentIdEndpoint } from "./useFavoriteBlockCommentIdEndpoint";
-import { FavoriteVideoIdContext } from "../../../../Component/Favorite";
 import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
 import { useInvalidateQuery } from "../../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
+import { FavoriteVideoIdContext } from "../../../../Component/FavoriteMain";
 
 
 type propsType = {

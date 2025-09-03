@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoDetailResponseType } from "../../Type/VideoDetail/FavoriteVideoDetailResponseType";
 import { useEffect, useState } from "react";
-import { FavoriteVideoIdContext, SetFavoriteVideoIdContext } from "../../Component/Favorite";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
-import { useFavoriteListApiUrl } from "../VideoList/useFavoriteListApiUrl";
 import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
 import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
+import { useCreateFavoriteVideoListQuery } from "../VideoList/useCreateFavoriteVideoListQuery";
+import { FavoriteVideoIdContext, SetFavoriteVideoIdContext } from "../../Component/FavoriteMain";
 
 export function useFavoriteVideoDetail() {
 
@@ -20,7 +20,8 @@ export function useFavoriteVideoDetail() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入り動画一覧取得用フック
-    const { queryParam } = useFavoriteListApiUrl();
+    //const { queryParam } = useFavoriteListApiUrl();
+    const { query } = useCreateFavoriteVideoListQuery();
     //ルーティング用
     const navigate = useNavigate();
 
@@ -55,7 +56,7 @@ export function useFavoriteVideoDetail() {
      */
     function backPage() {
 
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${queryParam}`);
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${query}`);
     }
 
     return {

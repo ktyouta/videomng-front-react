@@ -2,12 +2,12 @@ import React from "react";
 import { Home } from "../../Home/Component/Home";
 import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
-import { Favorite } from "../../Favorite/Component/Favorite";
 import { useContent } from "../Hook/useContent";
 import { Provider } from "jotai";
 import { NotFound } from "../../NotFound/Component/NotFound";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { BackToTopIcon } from "./BackToTopIcon";
+import { Favorite } from "../../Favorite/Component/Favorite";
 
 const Parent = styled.div`
   width: 100%;

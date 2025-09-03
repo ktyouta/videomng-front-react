@@ -24,18 +24,6 @@ export function useFavoriteVideoSearchConditionValue() {
     // 動画一覧検索ソートキー setter
     const setSelectedFavoriteVideoSortKey = SetSelectedFavoriteVideoSortKeyContext.useCtx();
 
-    /**
-     * 検索条件をリセット
-     */
-    function resetCondition() {
-
-        setSelectedFavoriteVideoCategory(``);
-        setSelectedFavoriteVideoViewStatus(``);
-        setSelectedFavoriteVideoTag(``);
-        setSelectedFavoriteVideoSortKey(``);
-        setSelectedFavoriteVideoFavoriteLevel(``);
-    }
-
     return {
         selectedFavoriteVideoCategory,
         setSelectedFavoriteVideoCategory,
@@ -47,6 +35,5 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey,
         setSelectedFavoriteVideoSortKey,
-        resetCondition,
     };
 }

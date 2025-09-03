@@ -9,7 +9,7 @@ import { UpdateFavoriteVideoResponseDataType } from "../../../Type/VideoDetail/V
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import ENV from "../../../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateToFavoriteVideoReqestType";
-import { ViewStatusListContext } from "../../../Component/Favorite";
+import { ViewStatusListContext } from "../../../Component/FavoriteMain";
 
 
 export function useFavoriteDetailSettingView() {
