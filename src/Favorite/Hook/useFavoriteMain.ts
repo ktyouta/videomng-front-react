@@ -4,25 +4,20 @@ import useQueryWrapper from "../../Common/Hook/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
-import { FavoriteVideoListApiUrlModel } from "../Model/FavoriteVideoListApiUrlModel";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { useFavoriteVideoSearchConditionValue } from "./VideoList/useFavoriteVideoSearchConditionValue";
 import { useSyncFavoriteVideoListUrl } from "./VideoList/useSyncFavoriteVideoListUrl";
 
 
-export function useFavorite() {
+export function useFavoriteMain() {
 
     // 視聴状況リスト
     const [viewStatusList, setViewStatusList] = useState<comboType[]>([]);
     // お気に入り動画ID
     const [favoriteVideoId, setFavoriteVideoId] = useState(``);
-    // お気に入り動画一覧取得用フック
-    //const { resetCondition } = useFavoriteListApiUrl();
-
-    useSyncFavoriteVideoListUrl();
 
     // 視聴状況リストを取得
     useQueryWrapper<ViewStatusResponseType>(

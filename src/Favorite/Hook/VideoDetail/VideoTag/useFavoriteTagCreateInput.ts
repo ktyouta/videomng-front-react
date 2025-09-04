@@ -2,7 +2,7 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
 import ENV from "../../../../env.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { tagType } from "../../../../Common/Component/TagsComponent";

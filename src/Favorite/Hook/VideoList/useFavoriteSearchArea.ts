@@ -8,10 +8,10 @@ import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useState } from "react";
 import { FavoriteVideoSortType } from "../../Type/VideoList/FavoriteVideoSortType";
 import { comboType } from "../../../Common/Component/ComboComponent";
-import { FavoriteVideoListApiUrlModel } from "../../Model/FavoriteVideoListApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
+import { useSyncFavoriteVideoListUrl } from "./useSyncFavoriteVideoListUrl";
 
 
 export function useFavoriteSearchArea() {
@@ -20,11 +20,7 @@ export function useFavoriteSearchArea() {
     const { flag: isOpenFilterModal, on: openFilterModal, off: closeFilterModal } = useSwitch();
     // ソートリスト
     const [sortList, setSortList] = useState<comboType[]>([]);
-    // お気に入り動画一覧取得用フック
-    // const {
-    //     changeUrl,
-    //     selectedFavoriteVideoTag,
-    //     selectedFavoriteVideoSortKey, } = useFavoriteListApiUrl();
+    // 検索条件
     const {
         selectedFavoriteVideoTag,
         selectedFavoriteVideoSortKey,
@@ -57,9 +53,6 @@ export function useFavoriteSearchArea() {
      */
     function selectSort(value: string) {
 
-        // changeUrl({
-        //     sortKey: value,
-        // });
         setSelectedFavoriteVideoSortKey(value);
     }
 

@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
-import { FavoriteVideoDetailApiUrlModel, } from "../../Model/FavoriteVideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoDetailResponseType } from "../../Type/VideoDetail/FavoriteVideoDetailResponseType";
@@ -19,8 +18,7 @@ export function useFavoriteVideoDetail() {
     const setFavoriteVideoId = SetFavoriteVideoIdContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // お気に入り動画一覧取得用フック
-    //const { queryParam } = useFavoriteListApiUrl();
+    // 動画一覧画面のクエリパラメータ
     const { query } = useCreateFavoriteVideoListQuery();
     //ルーティング用
     const navigate = useNavigate();

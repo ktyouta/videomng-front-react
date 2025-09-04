@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LoginUserInfoContext } from "../../QueryApp";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";

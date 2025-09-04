@@ -21,6 +21,7 @@ export function useSyncFavoriteVideoListUrl() {
     //ルーティング用
     const navigate = useNavigate();
 
+    // 検索条件の変更時にURLを切り替える
     useEffect(() => {
         navigate(query);
     }, [

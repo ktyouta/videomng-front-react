@@ -62,3 +62,17 @@ export enum TAG_EDIT_MODE {
 
 // お気に入り度設定値
 export const FAVORITE_LEVEL_SETTING_LIST = 5;
+
+// 動画一覧の検索条件
+export const SEARCH_CONDITION = {
+    // クエリパラメータのキー(視聴状況)
+    QUERY_KEY_VIEW_STATUS: `viewstatus`,
+    // クエリパラメータのキー(カテゴリ)
+    QUERY_KEY_CATEGORY: `videocategory`,
+    // クエリパラメータのキー(タグ)
+    QUERY_KEY_TAG: `videotag`,
+    // クエリパラメータのキー(ソート)
+    QUERY_KEY_SORT: `sortkey`,
+    // クエリパラメータのキー(お気に入り度)
+    QUERY_KEY_FAVORITE_LEVEL: `favoritelevel`,
+}

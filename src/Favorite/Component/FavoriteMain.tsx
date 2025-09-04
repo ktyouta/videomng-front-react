@@ -2,7 +2,7 @@ import React from "react";
 import { FavoriteVideoList } from "./VideoList/FavoriteVideoList";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FavoriteVideoDetail } from "./VideoDetail/FavoriteVideoDetail";
-import { useFavorite } from "../Hook/useFavorite";
+import { useFavoriteMain } from "../Hook/useFavoriteMain";
 import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";
 import { comboType } from "../../Common/Component/ComboComponent";
@@ -25,7 +25,7 @@ export function FavoriteMain() {
     const {
         favoriteVideoId,
         setFavoriteVideoId,
-        viewStatusList } = useFavorite();
+        viewStatusList } = useFavoriteMain();
 
     return (
         <ViewStatusListContext.Provider value={viewStatusList}>

@@ -5,7 +5,7 @@ import { VideoDetailApiUrlModel } from "../../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { VideoIdContext } from "../../Component/Home";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";

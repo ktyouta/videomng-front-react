@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ENV from "../../env.json";
 import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import { createCtx } from "../../Common/Function/createCtx";
+import { SEARCH_CONDITION } from "../Const/FavoriteConst";
 
 
 // 動画一覧検索条件選択値(カテゴリ)
@@ -33,16 +34,18 @@ type propsType = {
 
 export function FavoriteVideoSearchConditionValueProvider(props: propsType) {
 
+    const searchParams = new URLSearchParams(window.location.search);
+
     // 動画一覧検索条件選択値(カテゴリ)
-    const [selectedFavoriteVideoCategory, setSelectedFavoriteVideoCategory] = useState(``);
+    const [selectedFavoriteVideoCategory, setSelectedFavoriteVideoCategory] = useState(searchParams.get(SEARCH_CONDITION.QUERY_KEY_CATEGORY) ?? ``);
     // 動画一覧検索条件選択値(視聴状況)
-    const [selectedFavoriteVideoViewStatus, setSelectedFavoriteVideoViewStatus] = useState(``);
+    const [selectedFavoriteVideoViewStatus, setSelectedFavoriteVideoViewStatus] = useState(searchParams.get(SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS) ?? ``);
     // 動画一覧検索条件選択値(タグ)
-    const [selectedFavoriteVideoTag, setSelectedFavoriteVideoTag] = useState(``);
+    const [selectedFavoriteVideoTag, setSelectedFavoriteVideoTag] = useState(searchParams.get(SEARCH_CONDITION.QUERY_KEY_TAG) ?? ``);
     // 動画一覧検索条件選択値(お気に入り度)
-    const [selectedFavoriteVideoFavoriteLevel, setSelectedFavoriteVideoFavoriteLevel] = useState(``);
+    const [selectedFavoriteVideoFavoriteLevel, setSelectedFavoriteVideoFavoriteLevel] = useState(searchParams.get(SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL) ?? ``);
     // 動画一覧検索ソートキー
-    const [selectedFavoriteVideoSortKey, setSelectedFavoriteVideoSortKey] = useState(``);
+    const [selectedFavoriteVideoSortKey, setSelectedFavoriteVideoSortKey] = useState(searchParams.get(SEARCH_CONDITION.QUERY_KEY_SORT) ?? ``);
 
 
     return <SelectedFavoriteVideoCategoryContext.Provider value={selectedFavoriteVideoCategory}>
