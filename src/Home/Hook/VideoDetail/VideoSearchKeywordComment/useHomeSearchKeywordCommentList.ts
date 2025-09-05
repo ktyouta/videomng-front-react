@@ -3,8 +3,8 @@ import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { SearchKeywordCommentResponseType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentResponseType";
 import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentType";
 import { useHomeSearchKeywordCommentEndpoint } from "./useHomeSearchKeywordCommentEndpoint";
-import { VideoIdContext } from "../../../Component/Home";
 import { SearchKeywordContext, SetSearchKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/HomeSearchKeywordComment";
+import { VideoIdContext } from "../../../Component/VideoDetail/HomeVideoDetail";
 
 
 export function useHomeSearchKeywordCommentList() {

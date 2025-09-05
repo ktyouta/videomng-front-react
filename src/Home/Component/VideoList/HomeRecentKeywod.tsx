@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useHomeRecentKeywod } from "../../Hook/VideoList/useHomeRecentKeywod";
+import { useHomeRecentKeyword } from "../../Hook/VideoList/useHomeRecentKeyword";
 import { RxCross1 } from "react-icons/rx";
 import { IconComponent } from "../../../Common/Component/IconComponent";
 import { MEDIA } from "../../../Common/Const/MediaConst";
@@ -77,7 +77,7 @@ export function HomeRecentKeywod() {
     recentWordList,
     clickKeyWord,
     deleteKeyWord,
-  } = useHomeRecentKeywod();
+  } = useHomeRecentKeyword();
 
   return (
     <Parent>

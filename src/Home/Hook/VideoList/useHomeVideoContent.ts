@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { SetChannelIdContext, SetVideoIdContext } from "../../Component/Home";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 
@@ -9,10 +8,6 @@ export function useHomeVideoContent() {
 
     //ルーティング用
     const navigate = useNavigate();
-    // 動画ID(setter)
-    const setVideoId = SetVideoIdContext.useCtx();
-    // チャンネルID(setter)
-    const setChannelId = SetChannelIdContext.useCtx();
 
     /**
      * 動画サムネイル、タイトルのクリックイベント
@@ -24,7 +19,6 @@ export function useHomeVideoContent() {
             return;
         }
 
-        setVideoId(id);
         navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}`);
     }
 
@@ -38,7 +32,6 @@ export function useHomeVideoContent() {
             return;
         }
 
-        setChannelId(id);
         navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}`);
     }
 

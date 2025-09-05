@@ -12,8 +12,9 @@ import { toast } from "react-toastify";
 import { FREQUENT_KEYWORD, FREQUENT_KEYWORD_MAX, FREQUENT_KEYWORD_MAX_SAVE_LIMIT, REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../../Const/HomeConst";
 import { FrequentWordType } from "../../Type/VideoList/FrequentWordType";
 import { useFrequentKeywords } from "./useFrequentKeywords";
-import { useRecentKeywod } from "./useRecentKeywod";
+import { useRecentKeyword } from "./useRecentKeyword";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
+import { useHomeVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
 
 
 export function useHomeSearchArea() {
@@ -33,24 +34,28 @@ export function useHomeSearchArea() {
     // 動画リスト追加読み込み用
     const setShowMoreData = useSetAtom(showMoreDataAtom);
     // 最近の検索ワード保存用
-    const { saveRecentKeywod } = useRecentKeywod();
+    const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 動画検索条件
+    const {
+        selectedVideoKeyword,
+        setSelectedVideoKeyword } = useHomeVideoSearchConditionValue();
 
     /**
      * 検索ボタン押下イベント
      */
     function clickSearchBtn() {
 
-        if (!keyword) {
+        if (!selectedVideoKeyword) {
             toast.warn(`キーワードを入力してください。`);
             return;
         }
 
         const videoListApiUrlModel = VideoListApiUrlModel.create({
-            keyword,
+            keyword: selectedVideoKeyword,
             videoType: selectedVideoType,
             videoCategory: selectedVideoCategory,
         });
@@ -60,17 +65,17 @@ export function useHomeSearchArea() {
         navigate(videoListApiUrlModel.query);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
-        saveRecentKeywod(keyword);
+        saveRecentKeyword(selectedVideoKeyword);
 
         // ローカルストレージの検索ワード(あなたがよく検索するワード)を保存
-        saveFrequentKeyword(keyword);
+        saveFrequentKeyword(selectedVideoKeyword);
     }
 
     /**
      * キーワードをクリアする
      */
     function clearInput() {
-        setKeyword(``);
+        setSelectedVideoKeyword(``);
     }
 
     /**
@@ -83,8 +88,8 @@ export function useHomeSearchArea() {
     };
 
     return {
-        keyword,
-        setKeyword,
+        //keyword,
+        //setKeyword,
         clickSearchBtn,
         isOpenFilterModal,
         openFilterModal,
@@ -92,5 +97,7 @@ export function useHomeSearchArea() {
         clearInput,
         isMobile,
         handleKeyPress,
+        selectedVideoKeyword,
+        setSelectedVideoKeyword
     }
 }

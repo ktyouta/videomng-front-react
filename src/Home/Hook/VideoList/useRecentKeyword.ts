@@ -1,8 +1,8 @@
 import { REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../../Const/HomeConst";
 
-export function useRecentKeywod() {
+export function useRecentKeyword() {
 
-    function saveRecentKeywod(keyword: string,) {
+    function saveRecentKeyword(keyword: string,) {
 
         // ローカルストレージから検索ワード(最近の検索)を取得
         const nowWordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
@@ -17,6 +17,6 @@ export function useRecentKeywod() {
     }
 
     return {
-        saveRecentKeywod
+        saveRecentKeyword
     }
 }

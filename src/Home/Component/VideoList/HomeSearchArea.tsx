@@ -113,8 +113,8 @@ export function HomeSearchArea() {
   console.log("HomeSearchArea render");
 
   const {
-    keyword,
-    setKeyword,
+    selectedVideoKeyword,
+    setSelectedVideoKeyword,
     clickSearchBtn,
     isOpenFilterModal,
     openFilterModal,
@@ -132,8 +132,8 @@ export function HomeSearchArea() {
           width={isMobile ? "85%" : "89%"}
           height="99%"
           placeholder="キーワード"
-          value={keyword}
-          onChange={setKeyword}
+          value={selectedVideoKeyword}
+          onChange={setSelectedVideoKeyword}
           style={{
             borderBottomLeftRadius: 5,
             borderTopLeftRadius: 5,

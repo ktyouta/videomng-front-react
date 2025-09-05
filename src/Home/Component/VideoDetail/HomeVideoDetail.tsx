@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { IconComponent } from "../../../Common/Component/IconComponent";
 import { MEDIA } from "../../../Common/Const/MediaConst";
 import Loading from "../../../Common/Component/Loading";
+import { createCtx } from "../../../Common/Function/createCtx";
 
 
 const Parent = styled.div`
@@ -58,12 +59,19 @@ const BackHomeP = styled.p`
   cursor: pointer;
 `;
 
+// 動画ID
+export const VideoIdContext = createCtx<string>();
+// 動画ID(setter)
+export const SetVideoIdContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+
 
 export function HomeVideoDetail() {
 
   console.log("HomeVideoDetail render");
 
   const {
+    videoId,
+    setVideoId,
     isLoading,
     videoDetail,
     errMessage,
@@ -114,16 +122,20 @@ export function HomeVideoDetail() {
         }}
         onclick={backHome}
       />
-      <VideoContentDiv>
-        {/* 動画情報 */}
-        <HomeVideoDetailInfo
-          videoDetail={videoDetail}
-        />
-        {/* メニュー */}
-        <HomeVideoDetailMenu
-          videoDetail={videoDetail}
-        />
-      </VideoContentDiv>
+      <VideoIdContext.Provider value={videoId}>
+        <SetVideoIdContext.Provider value={setVideoId}>
+          <VideoContentDiv>
+            {/* 動画情報 */}
+            <HomeVideoDetailInfo
+              videoDetail={videoDetail}
+            />
+            {/* メニュー */}
+            <HomeVideoDetailMenu
+              videoDetail={videoDetail}
+            />
+          </VideoContentDiv>
+        </SetVideoIdContext.Provider>
+      </VideoIdContext.Provider>
     </Parent>
   );
 }

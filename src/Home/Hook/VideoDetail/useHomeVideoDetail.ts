@@ -4,8 +4,7 @@ import { VideoDetailResponseType } from "../../Type/VideoDetail/VideoDetailRespo
 import { VideoDetailApiUrlModel } from "../../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
-import { VideoIdContext } from "../../Component/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";
@@ -14,14 +13,35 @@ import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
 
 export function useHomeVideoDetail() {
 
-    // お気に入り動画ID
-    const videoId = VideoIdContext.useCtx();
+    // 動画ID
+    const [videoId, setVideoId] = useState(``);
     //ルーティング用
     const navigate = useNavigate();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // 動画一覧取得URL情報
     const { query } = useGetVideoListUrl();
+
+
+    // URL直打ち対応
+    useEffect(() => {
+
+        const pathArray = window.location.pathname.split("/");
+
+        if (pathArray.length !== 4) {
+            throw Error(`動画IDが存在しません。`);
+        }
+
+        // ID部分を取得
+        const videoId = pathArray[3];
+
+        if (!videoId) {
+            throw Error(`動画IDが存在しません。`);
+        }
+
+        setVideoId(videoId);
+    }, []);
+
 
     // 動画詳細を取得
     const { data: videoDetail, isLoading } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
@@ -54,5 +74,6 @@ export function useHomeVideoDetail() {
         videoId,
         errMessage,
         backHome,
+        setVideoId,
     };
 }

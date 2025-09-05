@@ -7,14 +7,15 @@ import { SetVideoApiUrlContext } from "../../Component/Home";
 import { useEffect, useState } from "react";
 import { FrequentWordType } from "../../Type/VideoList/FrequentWordType";
 import { useFrequentKeywords } from "./useFrequentKeywords";
-import { useRecentKeywod } from "./useRecentKeywod";
+import { useRecentKeyword } from "./useRecentKeyword";
+import { useHomeVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
 
 export function useHomeFrequentKeywords() {
 
     // よく検索するワードリスト
     const [frequentWordList, setFrequentWordList] = useState<FrequentWordType[]>([]);
     // キーワード
-    const setKeyword = useSetAtom(keywordAtom);
+    //const setKeyword = useSetAtom(keywordAtom);
     // 動画一覧検索条件選択値(種別)
     const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
     // 動画一覧検索条件選択値(カテゴリ)
@@ -26,9 +27,11 @@ export function useHomeFrequentKeywords() {
     //ルーティング用
     const navigate = useNavigate();
     // 最近の検索ワード保存用
-    const { saveRecentKeywod } = useRecentKeywod();
+    const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
+    // 動画検索条件
+    const { setSelectedVideoKeyword } = useHomeVideoSearchConditionValue();
 
 
     useEffect(() => {
@@ -49,7 +52,7 @@ export function useHomeFrequentKeywords() {
      */
     function clickKeyWord(keyword: string,) {
 
-        setKeyword(keyword);
+        setSelectedVideoKeyword(keyword);
 
         const videoListApiUrlModel = VideoListApiUrlModel.create({
             keyword,
@@ -62,7 +65,7 @@ export function useHomeFrequentKeywords() {
         navigate(videoListApiUrlModel.query);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
-        saveRecentKeywod(keyword);
+        saveRecentKeyword(keyword);
 
         // ローカルストレージの検索ワード(あなたがよく検索するワード)を保存
         saveFrequentKeyword(keyword);

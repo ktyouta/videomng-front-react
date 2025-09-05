@@ -1,8 +1,8 @@
 import { FAVORITE_KEYWORD, FAVORITE_KEYWORD_MAX, REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../../Const/HomeConst";
 
-export function useFavoriteKeywod() {
+export function useFavoriteKeyword() {
 
-    function saveFavoriteKeywod(keyword: string,) {
+    function saveFavoriteKeyword(keyword: string,) {
 
         // ローカルストレージから検索ワード(お気に入りワード)を取得
         const nowWordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];
@@ -17,6 +17,6 @@ export function useFavoriteKeywod() {
     }
 
     return {
-        saveFavoriteKeywod
+        saveFavoriteKeyword
     }
 }

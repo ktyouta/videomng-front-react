@@ -7,8 +7,8 @@ import { AddToFavoriteResponseType } from "../../Type/VideoDetail/AddToFavoriteR
 import { MENU_NO } from "../../Const/HomeConst";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { VideoIdContext } from "../../Component/Home";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
+import { VideoIdContext } from "../../Component/VideoDetail/HomeVideoDetail";
 
 
 export function useHomeVideoDetailMenu() {

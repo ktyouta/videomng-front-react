@@ -1,9 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useHomeRecentKeywod } from "../../Hook/VideoList/useHomeRecentKeywod";
-import { RxCross1 } from "react-icons/rx";
-import { IconComponent } from "../../../Common/Component/IconComponent";
-import { useHomeFrequentKeywords } from "../../Hook/VideoList/useHomeFrequentKeywords";
 import { useHomeFavoriteKeywords } from "../../Hook/VideoList/useHomeFavoriteKeywords";
 import { MEDIA } from "../../../Common/Const/MediaConst";
 import { HomeHistoryWord } from "./HomeHistoryWord";

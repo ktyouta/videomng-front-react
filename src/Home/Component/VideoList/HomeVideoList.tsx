@@ -2,6 +2,7 @@ import React from "react";
 import { HomeSearchArea } from "./HomeSearchArea";
 import { HomeVideoArea } from "./HomeVideoArea";
 import styled from "styled-components";
+import { useHomeVideoList } from "../../Hook/VideoList/useHomeVideoList";
 
 
 const Parent = styled.div`
@@ -12,6 +13,8 @@ const Parent = styled.div`
 export function HomeVideoList() {
 
     console.log("HomeVideoList render");
+
+    useHomeVideoList();
 
     return (
         <Parent>

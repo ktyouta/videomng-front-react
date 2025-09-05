@@ -57,3 +57,13 @@ export const FAVORITE_KEYWORD = `favoriteKeyword`;
 
 // ローカルストレージ最大表示数/最大保存数(お気に入りワード)
 export const FAVORITE_KEYWORD_MAX = 5;
+
+// 動画一覧の検索条件
+export const SEARCH_CONDITION = {
+    // クエリパラメータのキー(検索キーワード)
+    QUERY_KEY_KEYWORD: `q`,
+    // クエリパラメータのキー(カテゴリ)
+    QUERY_KEY_CATEGORY: `videocategory`,
+    // クエリパラメータのキー(種別)
+    QUERY_KEY_TYPE: `videotype`,
+}

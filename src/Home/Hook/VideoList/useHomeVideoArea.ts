@@ -10,11 +10,12 @@ import { ShowMoreDataType } from "../../Type/VideoList/ShowMoreDataType";
 import { useEffect, useRef, useState } from "react";
 import { SetVideoApiUrlContext, VideoApiUrlContext } from "../../Component/Home";
 import { toast } from "react-toastify";
-import { useFavoriteKeywod } from "./useFavoriteKeywod";
+import { useFavoriteKeyword } from "./useFavoriteKeyword";
 import { FAVORITE_KEYWORD } from "../../Const/HomeConst";
 import { useLocation } from "react-router-dom";
 import { useHomeResetCondition } from "./useHomeResetCondition";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
+import { useHomeVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
 
 
 export function useHomeVideoArea() {
@@ -27,7 +28,7 @@ export function useHomeVideoArea() {
     // 動画リスト追加読み込み用
     const [showMoreData, setShowMoreData] = useAtom(showMoreDataAtom);
     // 検索キーワード
-    const keyword = useAtomValue(keywordAtom);
+    //const keyword = useAtomValue(keywordAtom);
     // 動画一覧検索条件選択値(種別)
     const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
     // 動画一覧検索条件選択値(カテゴリ)
@@ -35,7 +36,7 @@ export function useHomeVideoArea() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // お気に入りワード保存用
-    const { saveFavoriteKeywod } = useFavoriteKeywod();
+    const { saveFavoriteKeyword } = useFavoriteKeyword();
     // お気に入りワードリスト
     const [favoriteWordList, setFavoriteWordList] = useState<string[]>([]);
     // URL情報
@@ -45,6 +46,9 @@ export function useHomeVideoArea() {
     const { reset } = useHomeResetCondition();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 動画検索条件
+    const { selectedVideoKeyword } = useHomeVideoSearchConditionValue();
+
 
     // ローカルストレージからお気に入りワードリストを取得
     useEffect(() => {
@@ -62,7 +66,7 @@ export function useHomeVideoArea() {
 
                 // 動画リスト追加読み込み情報変更チェック
                 const latestShowMoreData: ShowMoreDataType = {
-                    keyword: keyword,
+                    keyword: selectedVideoKeyword,
                     videoType: selectedVideoType,
                     videoCategory: selectedVideoCategory,
                 }
@@ -129,7 +133,7 @@ export function useHomeVideoArea() {
      */
     function addFavoriteWord(keyword: string) {
 
-        saveFavoriteKeywod(keyword);
+        saveFavoriteKeyword(keyword);
 
         // ローカルストレージから検索ワードを取得
         const nowWordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];

@@ -4,7 +4,6 @@ import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import ENV from "../../../env.json"
 import { useEffect, useState } from "react";
-import { ChannelIdContext } from "../../Component/Home";
 import { toast } from "react-toastify";
 import { ChannelVideoListResponseType } from "../../Type/VideoChannel/ChannelVideoListResponseType";
 import { VideoListDataType } from "../../Type/VideoList/VideoListDataType";
@@ -14,6 +13,7 @@ import { showMoreDataAtom } from "../../Atom/HomeAtom";
 import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { useNavigate } from "react-router-dom";
+import { useHomeChannelEndpoint } from "./useHomeChannelEndpoint";
 
 
 export function useHomeChannel() {
@@ -21,23 +21,43 @@ export function useHomeChannel() {
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // チャンネルID
-    const channelId = ChannelIdContext.useCtx();
+    const [channelId, setChannelId] = useState(``);
     // 次データ取得用トークン
     const [nextPageToken, setNextPageToken] = useState(``);
     // チャンネル情報データ
     const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
-    // チャンネル情報取得エンドポイント
-    const [channelInfoEndPoint, setChannelInfoEndPoint] = useState(``);
     // 動画リスト追加読み込み用
     const showMoreData = useAtomValue(showMoreDataAtom);
     //ルーティング用
     const navigate = useNavigate();
 
 
+    // URL直打ち対応
+    useEffect(() => {
+
+        const pathArray = window.location.pathname.split("/");
+
+        if (pathArray.length !== 4) {
+            throw Error(`チャンネルIDが存在しません。`);
+        }
+
+        // ID部分を取得
+        const channelId = pathArray[3];
+
+        if (!channelId) {
+            throw Error(`チャンネルIDが存在しません。`);
+        }
+
+        setChannelId(channelId);
+    }, []);
+
     // チャンネル動画一覧を取得
     const { isLoading } = useQueryWrapper<ChannelVideoListResponseType>(
         {
-            url: channelInfoEndPoint,
+            url: useHomeChannelEndpoint({
+                channelId,
+                nextPageToken
+            }),
             afSuccessFn: (response: ChannelVideoListResponseType) => {
 
                 const responseData: ChannelVideoListDataType = response.data;
@@ -67,27 +87,8 @@ export function useHomeChannel() {
     );
 
     /**
-     * チャンネル情報取得用エンドポイント作成
+     * ホーム画面に戻る
      */
-    useEffect(() => {
-
-        if (!channelId) {
-            return;
-        }
-
-        let channelInfoUrl = `${VIDEO_MNG_PATH}${ENV.CHANNEL_VIDEO_INFO}/${channelId}`;
-
-        if (nextPageToken) {
-            channelInfoUrl += `?nextpagetoken=${nextPageToken}`;
-        }
-
-        setChannelInfoEndPoint(channelInfoUrl);
-
-    }, [channelId, nextPageToken]);
-
-    /**
-         * ホーム画面に戻る
-         */
     function backHome() {
 
         const keyword = showMoreData?.keyword ?? ``;

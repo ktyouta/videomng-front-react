@@ -10,7 +10,6 @@ import { AddToFavoriteRequestType } from "../../Type/VideoDetail/AddToFavoriteRe
 import { AddToFavoriteResponseType } from "../../Type/VideoDetail/AddToFavoriteResponseType";
 import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
 import { IsLoginContext } from "../../../QueryApp";
-import { VideoIdContext } from "../../Component/Home";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
@@ -18,6 +17,7 @@ import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { showMoreDataAtom } from "../../Atom/HomeAtom";
 import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
 import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";
+import { VideoIdContext } from "../../Component/VideoDetail/HomeVideoDetail";
 
 
 
