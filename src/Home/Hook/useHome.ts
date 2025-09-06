@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { VideoListApiUrlModel } from "../Model/VideoListApiUrlModel";
 import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, videoListDataAtom } from "../Atom/HomeAtom";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
-import { useHomeVideoSearchConditionValue } from "./VideoList/useFavoriteVideoSearchConditionValue";
+import { useHomeVideoSearchConditionValue } from "./VideoList/useHomeVideoSearchConditionValue";
 
 export function useHome() {
 

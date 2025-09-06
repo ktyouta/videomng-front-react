@@ -2,15 +2,18 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { selectedVideoCategoryAtom, selectedVideoTypeAtom } from "../../Atom/HomeAtom";
 import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
 import { useVideoCategory } from "../../../Main/Hook/useVideoCategory";
+import { useHomeVideoSearchConditionValue } from "./useHomeVideoSearchConditionValue";
 
 export function useHomeSearchConditionMain() {
 
     // 動画カテゴリ
     const { data: videoCategory } = useVideoCategory();
-    // 動画一覧検索条件選択値(種別)
-    const [selectedVideoType, setSelectedVideoType] = useAtom(selectedVideoTypeAtom);
-    // 動画一覧検索条件選択値(カテゴリ)
-    const [selectedVideoCategory, setSelectedVideoCategory] = useAtom(selectedVideoCategoryAtom);
+    // 入力中の検索条件
+    const {
+        selectedVideoCategory,
+        setSelectedVideoCategory,
+        selectedVideoType,
+        setSelectedVideoType, } = useHomeVideoSearchConditionValue();
 
     return {
         videoCategory,

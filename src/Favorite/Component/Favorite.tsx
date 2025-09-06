@@ -36,7 +36,11 @@ export function Favorite() {
                 <Route
                     key={"*"}
                     path="*"
-                    element={<NotFound backUrl={`${ROUTER_PATH.FAVORITE.ROOT}`} />}
+                    element={
+                        <NotFound
+                            backUrl={`${ROUTER_PATH.FAVORITE.ROOT}`}
+                        />
+                    }
                 />
             </Routes>
         </FavoriteVideoSearchConditionValueProvider>

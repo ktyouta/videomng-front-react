@@ -113,15 +113,15 @@ export function HomeSearchArea() {
   console.log("HomeSearchArea render");
 
   const {
-    selectedVideoKeyword,
-    setSelectedVideoKeyword,
     clickSearchBtn,
     isOpenFilterModal,
     openFilterModal,
     closeFilterModal,
     clearInput,
     isMobile,
-    handleKeyPress, } = useHomeSearchArea();
+    handleKeyPress,
+    inputKeyword,
+    setInputKeyword, } = useHomeSearchArea();
 
   const searchConditionModalWidth = isMobile ? "59%" : "42%";
 
@@ -132,8 +132,8 @@ export function HomeSearchArea() {
           width={isMobile ? "85%" : "89%"}
           height="99%"
           placeholder="キーワード"
-          value={selectedVideoKeyword}
-          onChange={setSelectedVideoKeyword}
+          value={inputKeyword}
+          onChange={setInputKeyword}
           style={{
             borderBottomLeftRadius: 5,
             borderTopLeftRadius: 5,
@@ -141,6 +141,7 @@ export function HomeSearchArea() {
           clear={clearInput}
           onKeyDown={handleKeyPress}
         />
+        {/* 検索ボタン */}
         <SearchIconAreaDiv>
           <IconComponent
             icon={IoSearch}
@@ -149,6 +150,7 @@ export function HomeSearchArea() {
           />
         </SearchIconAreaDiv>
       </TextBoxAreaDiv>
+      {/* 検索条件展開用ボタン */}
       <SearchConditionIconAreaDiv>
         <IconComponent
           icon={MdTune}

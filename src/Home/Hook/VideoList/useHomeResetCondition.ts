@@ -1,6 +1,6 @@
 import { useSetAtom } from "jotai";
 import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom, videoListDataAtom } from "../../Atom/HomeAtom";
-import { useHomeVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
+import { useHomeVideoSearchConditionValue } from "./useHomeVideoSearchConditionValue";
 
 export function useHomeResetCondition() {
 
@@ -15,14 +15,14 @@ export function useHomeResetCondition() {
     // 動画リスト追加読み込み用
     const setShowMoreData = useSetAtom(showMoreDataAtom);
     // 動画検索条件
-    const { setSelectedVideoKeyword } = useHomeVideoSearchConditionValue();
+    const { setInputKeyword } = useHomeVideoSearchConditionValue();
 
     /**
      * ホーム画面を初期化
      */
     function reset() {
         setVideoListData(undefined);
-        setSelectedVideoKeyword(``);
+        setInputKeyword(``);
         setSelectedVideoType(``);
         setSelectedVideoCategory(``);
         setShowMoreData(undefined);

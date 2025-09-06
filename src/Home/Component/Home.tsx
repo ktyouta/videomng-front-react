@@ -8,7 +8,7 @@ import { Provider } from "jotai";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { NotFound } from "../../NotFound/Component/NotFound";
 import { HomeChannel } from "./VideoChannel/HomeChannel";
-import { HomeVideoSearchConditionValueProvider } from "./HomeVideoSearchConditionValueProvider";
+import { HomeVideoNowSearchConditionValueProvider } from "./HomeVideoNowSearchConditionValueProvider";
 
 // 動画取得用URL
 export const VideoApiUrlContext = createCtx<string>();
@@ -27,7 +27,7 @@ export function Home() {
     } = useHome();
 
     return (
-        <HomeVideoSearchConditionValueProvider>
+        <HomeVideoNowSearchConditionValueProvider>
             <Routes>
                 {/* 動画一覧 */}
                 <Route
@@ -66,6 +66,6 @@ export function Home() {
                     />
                 }
             </Routes>
-        </HomeVideoSearchConditionValueProvider>
+        </HomeVideoNowSearchConditionValueProvider>
     );
 }

@@ -1,55 +1,59 @@
 import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { selectedVideoCategoryAtom, selectedVideoTypeAtom, videoListDataAtom } from "../../Atom/HomeAtom";
-import { useHomeVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
+import { useHomeVideoSearchConditionValue } from "./useHomeVideoSearchConditionValue";
 import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
+import { useSyncHomeVideoListUrl } from "./useSyncHomeVideoListUrl";
 
 export function useHomeVideoList() {
 
     // 動画取得用URL
-    const [videoApiUrl, setVideoApiUrl] = useState(``);
+    //const [videoApiUrl, setVideoApiUrl] = useState(``);
     // 動画一覧検索条件選択値(種別)
-    const setSelectedVideoType = useSetAtom(selectedVideoTypeAtom);
-    // 動画一覧検索条件選択値(カテゴリ)
-    const setSelectedVideoCategory = useSetAtom(selectedVideoCategoryAtom);
+    // const setSelectedVideoType = useSetAtom(selectedVideoTypeAtom);
+    // // 動画一覧検索条件選択値(カテゴリ)
+    // const setSelectedVideoCategory = useSetAtom(selectedVideoCategoryAtom);
     // 動画検索条件
-    const { setSelectedVideoKeyword } = useHomeVideoSearchConditionValue();
+    // const { setSelectedVideoKeyword } = useHomeVideoSearchConditionValue();
 
-    // URL直打ち対応
-    useEffect(() => {
+    // 検索条件に応じてURLを変更
+    useSyncHomeVideoListUrl();
 
-        const pathArray = window.location.pathname.split("/");
+    // // URL直打ち対応
+    // useEffect(() => {
 
-        if (pathArray.length < 2) {
-            return;
-        }
+    //     const pathArray = window.location.pathname.split("/");
 
-        const query = window.location.search;
+    //     if (pathArray.length < 2) {
+    //         return;
+    //     }
 
-        // 動画一覧
-        if (pathArray.length == 2) {
+    //     const query = window.location.search;
 
-            // クエリパラメータが設定されている場合
-            if (query && query.length > 0 && query.charAt(0) === `?`) {
+    //     // 動画一覧
+    //     if (pathArray.length == 2) {
 
-                const params = new URLSearchParams(query);
-                const keywordValue = params.get(`q`);
-                const videoCategoryValue = params.get(`videocategory`);
-                const videoTypeValue = params.get(`videotype`);
+    //         // クエリパラメータが設定されている場合
+    //         if (query && query.length > 0 && query.charAt(0) === `?`) {
 
-                const keyword = keywordValue !== null ? keywordValue : ``;
-                const videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
-                const videoType = videoTypeValue !== null ? videoTypeValue : ``;
+    //             const params = new URLSearchParams(query);
+    //             const keywordValue = params.get(`q`);
+    //             const videoCategoryValue = params.get(`videocategory`);
+    //             const videoTypeValue = params.get(`videotype`);
 
-                // 検索条件の初期値設定
-                setSelectedVideoKeyword(keyword);
-                setSelectedVideoType(videoType);
-                setSelectedVideoCategory(videoCategory);
+    //             const keyword = keywordValue !== null ? keywordValue : ``;
+    //             const videoCategory = videoCategoryValue !== null ? videoCategoryValue : ``;
+    //             const videoType = videoTypeValue !== null ? videoTypeValue : ``;
 
-                const videoListApiUrlModel = VideoListApiUrlModel.reConstruct(query);
-                setVideoApiUrl(videoListApiUrlModel.url);
-            }
-        }
+    //             // 検索条件の初期値設定
+    //             setSelectedVideoKeyword(keyword);
+    //             setSelectedVideoType(videoType);
+    //             setSelectedVideoCategory(videoCategory);
 
-    }, []);
+    //             const videoListApiUrlModel = VideoListApiUrlModel.reConstruct(query);
+    //             setVideoApiUrl(videoListApiUrlModel.url);
+    //         }
+    //     }
+
+    // }, []);
 }

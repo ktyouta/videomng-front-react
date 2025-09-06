@@ -1,4 +1,11 @@
-import { SelectedVideoCategoryContext, SelectedVideoKeywordContext, SelectedVideoTypeContext, SetSelectedVideoCategoryContext, SetselectedVideoKeywordContext, SetSelectedVideoTypeContext } from "../../Component/HomeVideoSearchConditionValueProvider";
+import {
+    SelectedVideoCategoryContext,
+    SelectedVideoTypeContext,
+    SetSelectedVideoCategoryContext,
+    SetSelectedVideoTypeContext,
+    InputKeywordContext,
+    SetInputKeywordContext
+} from "../../Component/VideoList/HomeVideoSearchConditionValueProvider";
 
 
 export function useHomeVideoSearchConditionValue() {
@@ -8,9 +15,9 @@ export function useHomeVideoSearchConditionValue() {
     // 動画一覧検索条件選択値(カテゴリ) setter
     const setSelectedVideoCategory = SetSelectedVideoCategoryContext.useCtx();
     // 動画一覧検索条件選択値(キーワード)
-    const selectedVideoKeyword = SelectedVideoKeywordContext.useCtx();
+    const inputKeyword = InputKeywordContext.useCtx();
     // 動画一覧検索条件選択値(キーワード) setter
-    const setSelectedVideoKeyword = SetselectedVideoKeywordContext.useCtx();
+    const setInputKeyword = SetInputKeywordContext.useCtx();
     // 動画一覧検索条件選択値(種別)
     const selectedVideoType = SelectedVideoTypeContext.useCtx();
     // 動画一覧検索条件選択値(種別) setter
@@ -19,8 +26,8 @@ export function useHomeVideoSearchConditionValue() {
     return {
         selectedVideoCategory,
         setSelectedVideoCategory,
-        selectedVideoKeyword,
-        setSelectedVideoKeyword,
+        inputKeyword,
+        setInputKeyword,
         selectedVideoType,
         setSelectedVideoType,
     };

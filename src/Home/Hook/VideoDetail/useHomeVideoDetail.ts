@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../../Type/VideoDetail/VideoDetailResponseType";
-import { VideoDetailApiUrlModel } from "../../Model/VideoDetailApiUrlModel";
 import { useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useEffect, useState } from "react";

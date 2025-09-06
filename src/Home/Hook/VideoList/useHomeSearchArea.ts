@@ -14,68 +14,79 @@ import { FrequentWordType } from "../../Type/VideoList/FrequentWordType";
 import { useFrequentKeywords } from "./useFrequentKeywords";
 import { useRecentKeyword } from "./useRecentKeyword";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
-import { useHomeVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
+import { useHomeVideoSearchConditionValue } from "./useHomeVideoSearchConditionValue";
+import { useState } from "react";
+import { useHomeVideoNowSearchConditionValue } from "../useHomeVideoNowSearchConditionValue";
 
 
 export function useHomeSearchArea() {
 
-    // 検索キーワード
-    const [keyword, setKeyword] = useAtom(keywordAtom);
+    // 入力中の検索条件
+    const {
+        inputKeyword,
+        setInputKeyword,
+        selectedVideoCategory,
+        selectedVideoType } = useHomeVideoSearchConditionValue();
     // 動画取得用URL
-    const setVideoApiUrl = SetVideoApiUrlContext.useCtx();
+    //const setVideoApiUrl = SetVideoApiUrlContext.useCtx();
     // 条件指定モーダルの表示フラグ
     const { flag: isOpenFilterModal, on: openFilterModal, off: closeFilterModal } = useSwitch();
-    // 動画一覧検索条件選択値(種別)
-    const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
-    // 動画一覧検索条件選択値(カテゴリ)
-    const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
     //ルーティング用
     const navigate = useNavigate();
     // 動画リスト追加読み込み用
-    const setShowMoreData = useSetAtom(showMoreDataAtom);
+    //const setShowMoreData = useSetAtom(showMoreDataAtom);
     // 最近の検索ワード保存用
     const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-    // 動画検索条件
-    const {
-        selectedVideoKeyword,
-        setSelectedVideoKeyword } = useHomeVideoSearchConditionValue();
+    // 現在の検索条件
+    const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
 
     /**
      * 検索ボタン押下イベント
      */
     function clickSearchBtn() {
 
-        if (!selectedVideoKeyword) {
+        if (!inputKeyword) {
             toast.warn(`キーワードを入力してください。`);
             return;
         }
 
-        const videoListApiUrlModel = VideoListApiUrlModel.create({
-            keyword: selectedVideoKeyword,
-            videoType: selectedVideoType,
-            videoCategory: selectedVideoCategory,
+        // const videoListApiUrlModel = VideoListApiUrlModel.create({
+        //     keyword: inputKeyword,
+        //     videoType: selectedVideoType,
+        //     videoCategory: selectedVideoCategory,
+        // });
+
+        // 現在の検索条件を更新
+        setNowSearchCondition(() => {
+
+            return {
+                keyword: inputKeyword,
+                category: selectedVideoCategory,
+                type: selectedVideoType,
+                nextPageToken: ``,
+            };
         });
 
-        setVideoApiUrl(videoListApiUrlModel.url);
-        setShowMoreData(undefined);
-        navigate(videoListApiUrlModel.query);
+        // setVideoApiUrl(videoListApiUrlModel.url);
+        // setShowMoreData(undefined);
+        // navigate(videoListApiUrlModel.query);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
-        saveRecentKeyword(selectedVideoKeyword);
+        saveRecentKeyword(inputKeyword);
 
         // ローカルストレージの検索ワード(あなたがよく検索するワード)を保存
-        saveFrequentKeyword(selectedVideoKeyword);
+        saveFrequentKeyword(inputKeyword);
     }
 
     /**
      * キーワードをクリアする
      */
     function clearInput() {
-        setSelectedVideoKeyword(``);
+        setInputKeyword(``);
     }
 
     /**
@@ -97,7 +108,7 @@ export function useHomeSearchArea() {
         clearInput,
         isMobile,
         handleKeyPress,
-        selectedVideoKeyword,
-        setSelectedVideoKeyword
+        inputKeyword,
+        setInputKeyword,
     }
 }

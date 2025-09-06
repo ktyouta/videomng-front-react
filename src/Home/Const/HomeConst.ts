@@ -66,4 +66,6 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_CATEGORY: `videocategory`,
     // クエリパラメータのキー(種別)
     QUERY_KEY_TYPE: `videotype`,
+    // クエリパラメータのキー(次データ取得用トークン)
+    QUERY_KEY_NEXT_PAGE_TOKEN: `nextpagetoken`
 }
