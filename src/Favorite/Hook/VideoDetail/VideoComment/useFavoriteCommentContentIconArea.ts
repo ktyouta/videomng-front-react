@@ -6,13 +6,13 @@ import { FavoriteVideoBlockCommentType } from "../../../Type/VideoDetail/VideoCo
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
 import { FavoriteVideoFavoriteCommentType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/FavoriteVideoFavoriteCommentType";
 import { COMMENT_FAVORITE_STATUS } from "../../../Const/FavoriteConst";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 import { toast } from "react-toastify";
 import { useFavoriteBlockCommentEndpoint } from "./VideoBlockComment/useFavoriteBlockCommentEndpoint";
 import { useFavoriteFavoriteCommentIdEndpoint } from "./VideoFavoriteComment/useFavoriteFavoriteCommentIdEndpoint";
 import { useFavoriteFavoriteCommentEndpoint } from "./VideoFavoriteComment/useFavoriteFavoriteCommentEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteCommentEndpoint } from "./useFavoriteCommentEndpoint";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 type propsType = {

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
 import { useFavoriteCommentEndpoint } from "./useFavoriteCommentEndpoint";
 import { FavoriteVideoCommentThreadResponseType } from "../../../Type/VideoDetail/VideoComment/FavoriteVideoCommentThreadResponseType";
 import { FavoriteVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoComment/FavoriteVideoCommentThreadItemType";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 export function useFavoriteCommentList() {

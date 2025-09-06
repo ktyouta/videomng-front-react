@@ -13,7 +13,7 @@ import { useFavoriteFavoriteCommentEndpoint } from "../VideoComment/VideoFavorit
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
 import { SearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 type propsType = {

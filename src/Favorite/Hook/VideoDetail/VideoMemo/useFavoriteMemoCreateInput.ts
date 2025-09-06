@@ -12,7 +12,7 @@ import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useQueryClient } from "react-query";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 export function useFavoriteMemoCreateInput() {

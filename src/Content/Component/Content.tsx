@@ -41,9 +41,7 @@ export function Content() {
                     <Route
                         path={`${ROUTER_PATH.FAVORITE.ROOT}/*`}
                         element={
-                            <Provider>
-                                <Favorite />
-                            </Provider>
+                            <Favorite />
                         }
                     />
                 }

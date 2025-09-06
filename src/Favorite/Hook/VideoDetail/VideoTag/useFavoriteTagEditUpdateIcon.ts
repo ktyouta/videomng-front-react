@@ -14,7 +14,7 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
 import { ChangeViewContext } from "../../../Component/VideoDetail/VideoTag/FavoriteTag";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 

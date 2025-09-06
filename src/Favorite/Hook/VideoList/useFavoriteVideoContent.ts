@@ -1,13 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { SetFavoriteVideoIdContext } from "../../Component/FavoriteMain";
 
 
 export function useFavoriteVideoContent() {
 
-    // 動画ID
-    const setFavoriteVideoId = SetFavoriteVideoIdContext.useCtx();
     //ルーティング用
     const navigate = useNavigate();
 
@@ -21,7 +18,6 @@ export function useFavoriteVideoContent() {
             return;
         }
 
-        setFavoriteVideoId(id);
         navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}`);
     }
 

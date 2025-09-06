@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { videoCategoryAtom } from "../../../Main/Atom/MainAtom";
 import { useEffect, useMemo, useState } from "react";
 import { comboType } from "../../../Common/Component/ComboComponent";
 import { objectDeepCopy } from "../../../Common/Function/CommonFunction";
@@ -14,7 +13,8 @@ import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
 import { useNavigate } from "react-router-dom";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../Const/FavoriteConst";
 import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
-import { ViewStatusListContext } from "../../Component/FavoriteMain";
+import { useViewStatusList } from "../useViewStatusList";
+import { useVideoCategory } from "../../../Main/Hook/useVideoCategory";
 
 
 type propsType = {
@@ -24,9 +24,9 @@ type propsType = {
 export function useFavoriteSearchConditionMain(props: propsType) {
 
     // 動画カテゴリ
-    const videoCategory = useGlobalAtomValue(videoCategoryAtom);
-    // 視聴状況リスト
-    const viewStatusList = ViewStatusListContext.useCtx();
+    const { data: videoCategory } = useVideoCategory();
+    // 視聴状況リストを取得
+    const { data: viewStatusList } = useViewStatusList();
     // 視聴状況選択リスト
     const [viewStatusSelectList, setViewStatusSelectList] = useState<comboType[]>();
     // タグマスタリスト

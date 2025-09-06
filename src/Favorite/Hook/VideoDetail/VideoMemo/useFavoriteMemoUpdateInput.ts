@@ -13,7 +13,7 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 type propsType = {

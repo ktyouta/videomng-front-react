@@ -40,7 +40,7 @@ export function FavoriteDetailSetting(props: propsType) {
     console.log("FavoriteDetailSetting render");
 
     const {
-        categoryList,
+        videoCategory,
         editMode,
         changeEdit,
         changeView,
@@ -60,7 +60,7 @@ export function FavoriteDetailSetting(props: propsType) {
                 // 閲覧
                 editMode === EDIT_MODE.VIEW &&
                 <FavoriteDetailSettingView
-                    categoryList={categoryList}
+                    categoryList={videoCategory}
                     changeEdit={changeEdit}
                     summary={summary}
                     categorys={categorys}
@@ -72,7 +72,7 @@ export function FavoriteDetailSetting(props: propsType) {
                 // 編集
                 editMode === EDIT_MODE.EDIT &&
                 <FavoriteDetailSettingEdit
-                    categoryList={categoryList}
+                    categoryList={videoCategory}
                     summary={summary}
                     categorys={categorys}
                     viewStatus={viewStatus}

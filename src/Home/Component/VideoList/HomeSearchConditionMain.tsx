@@ -52,18 +52,6 @@ export function HomeSearchConditionMain() {
         selectedVideoCategory,
         setSelectedVideoCategory, } = useHomeSearchConditionMain();
 
-    // カテゴリリスト
-    const categoryComboList: comboType[] | undefined = videoCategory?.items.map((e: VideoCategoryItemType) => {
-
-        const label = e.snippet.title;
-        const value = e.id;
-
-        return {
-            label: label,
-            value: value,
-        }
-    });
-
     return (
         <Parent>
             <ConditionAreaDiv>
@@ -81,14 +69,14 @@ export function HomeSearchConditionMain() {
                     />
                 </InputDiv>
                 {
-                    categoryComboList && categoryComboList.length > 0 &&
+                    videoCategory && videoCategory.length > 0 &&
                     <InputDiv>
                         <InputLabel>
                             カテゴリ
                         </InputLabel>
                         <ComboComponent
-                            combo={categoryComboList}
-                            initValue={selectedVideoCategory ?? categoryComboList[0].value}
+                            combo={videoCategory}
+                            initValue={selectedVideoCategory ?? videoCategory[0].value}
                             onChange={setSelectedVideoCategory}
                             width="68%"
                             minWidth="8%"

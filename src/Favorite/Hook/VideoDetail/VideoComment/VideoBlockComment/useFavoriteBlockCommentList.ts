@@ -4,7 +4,7 @@ import useQueryWrapper from "../../../../../Common/Hook/useQueryWrapper";
 import { FavoriteVideoBlockCommentListResponseType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentListResponseType";
 import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
 import { YouTubeDataApiCommentDetailResponseType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailResponseType";
-import { FavoriteVideoIdContext } from "../../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 export function useFavoriteBlockCommentList() {

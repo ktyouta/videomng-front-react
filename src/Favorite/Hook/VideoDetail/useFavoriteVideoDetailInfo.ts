@@ -9,7 +9,7 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
-import { FavoriteVideoIdContext } from "../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 

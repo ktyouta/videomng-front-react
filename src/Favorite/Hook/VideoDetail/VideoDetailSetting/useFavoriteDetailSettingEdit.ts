@@ -11,7 +11,8 @@ import ENV from "../../../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateToFavoriteVideoReqestType";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
-import { FavoriteVideoIdContext, ViewStatusListContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useViewStatusList } from "../../useViewStatusList";
 
 
 type propsType = {
@@ -39,7 +40,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     // 視聴状況
     const [viewStatus, setViewStatus] = useState(props.viewStatus);
     // 視聴状況リスト
-    const viewStatusList = ViewStatusListContext.useCtx();
+    const { data: viewStatusList } = useViewStatusList();
     // お気に入り動画ID
     const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // お気に入り度

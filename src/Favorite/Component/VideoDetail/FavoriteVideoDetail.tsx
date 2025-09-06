@@ -10,6 +10,7 @@ import { IconComponent } from "../../../Common/Component/IconComponent";
 import { MEDIA } from "../../../Common/Const/MediaConst";
 import Loading from "../../../Common/Component/Loading";
 import { FavoriteVideoDetailMenu } from "./FavoriteVideoDetailMenu";
+import { createCtx } from "../../../Common/Function/createCtx";
 
 
 const Parent = styled.div`
@@ -53,6 +54,11 @@ const MessageDiv = styled.div`
   left: 42%;
 `;
 
+// お気に入り動画ID
+export const FavoriteVideoIdContext = createCtx<string>();
+// お気に入り動画ID(setter)
+export const SetFavoriteVideoIdContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+
 
 export function FavoriteVideoDetail() {
 
@@ -62,7 +68,9 @@ export function FavoriteVideoDetail() {
     isLoading,
     videoDetail,
     errMessage,
-    backPage } = useFavoriteVideoDetail();
+    backPage,
+    favoriteVideoId,
+    setFavoriteVideoId } = useFavoriteVideoDetail();
 
   if (!videoDetail) {
     return (
@@ -103,16 +111,20 @@ export function FavoriteVideoDetail() {
         }}
         onclick={backPage}
       />
-      <VideoContentDiv>
-        {/* 動画情報 */}
-        <FavoriteVideoDetailInfo
-          videoDetail={videoDetail}
-        />
-        {/* メニュー */}
-        <FavoriteVideoDetailMenu
-          videoDetail={videoDetail}
-        />
-      </VideoContentDiv>
+      <FavoriteVideoIdContext.Provider value={favoriteVideoId}>
+        <SetFavoriteVideoIdContext.Provider value={setFavoriteVideoId}>
+          <VideoContentDiv>
+            {/* 動画情報 */}
+            <FavoriteVideoDetailInfo
+              videoDetail={videoDetail}
+            />
+            {/* メニュー */}
+            <FavoriteVideoDetailMenu
+              videoDetail={videoDetail}
+            />
+          </VideoContentDiv>
+        </SetFavoriteVideoIdContext.Provider>
+      </FavoriteVideoIdContext.Provider>
     </Parent>
   );
 }

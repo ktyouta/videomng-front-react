@@ -9,7 +9,7 @@ import { useFavoriteBlockCommentIdEndpoint } from "./useFavoriteBlockCommentIdEn
 import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
 import { useInvalidateQuery } from "../../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
-import { FavoriteVideoIdContext } from "../../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 type propsType = {

@@ -4,7 +4,7 @@ import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 export function useFavoriteVideoTagEditListProvider() {

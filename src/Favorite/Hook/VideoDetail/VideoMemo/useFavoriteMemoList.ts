@@ -7,7 +7,7 @@ import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoResponseType";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 export function useFavoriteMemoList() {

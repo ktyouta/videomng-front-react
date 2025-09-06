@@ -6,7 +6,7 @@ import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperB
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
-import { FavoriteVideoIdContext } from "../../../Component/FavoriteMain";
+import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 
 
 type propsType = {

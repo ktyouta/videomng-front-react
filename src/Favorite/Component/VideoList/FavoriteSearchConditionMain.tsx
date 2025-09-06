@@ -64,30 +64,19 @@ export function FavoriteSearchConditionMain(props: propsType) {
         selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel, } = useFavoriteSearchConditionMain({ ...props });
 
-    // カテゴリリスト
-    const categoryComboList: comboType[] | undefined = videoCategory?.items.map((e: VideoCategoryItemType) => {
-
-        const label = e.snippet.title;
-        const value = e.id;
-
-        return {
-            label: label,
-            value: value,
-        }
-    });
 
     return (
         <Parent>
             <ConditionAreaDiv>
                 {
-                    categoryComboList && categoryComboList.length > 0 &&
+                    videoCategory && videoCategory.length > 0 &&
                     <InputDiv>
                         <InputLabel>
                             カテゴリ
                         </InputLabel>
                         <ComboComponent
-                            combo={categoryComboList}
-                            initValue={selectedFavoriteVideoCategory ?? categoryComboList[0].value}
+                            combo={videoCategory}
+                            initValue={selectedFavoriteVideoCategory ?? videoCategory[0].value}
                             onChange={changeVideoCategory}
                             width="68%"
                             minWidth="8%"

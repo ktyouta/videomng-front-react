@@ -12,33 +12,23 @@ import { useFavoriteVideoSearchConditionValue } from "./VideoList/useFavoriteVid
 import { useSyncFavoriteVideoListUrl } from "./VideoList/useSyncFavoriteVideoListUrl";
 
 
-export function useFavoriteMain() {
+export function useViewStatusList() {
 
-    // 視聴状況リスト
-    const [viewStatusList, setViewStatusList] = useState<comboType[]>([]);
-    // お気に入り動画ID
-    const [favoriteVideoId, setFavoriteVideoId] = useState(``);
 
     // 視聴状況リストを取得
-    useQueryWrapper<ViewStatusResponseType>(
+    return useQueryWrapper<ViewStatusResponseType, comboType[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.VIEW_STATUS}`,
-            afSuccessFn: (response: ViewStatusResponseType) => {
-                setViewStatusList(response.data.map((e) => {
+            select: (res: ViewStatusResponseType) => {
+                return res.data.map((e) => {
                     return {
                         value: e.id,
                         label: e.label,
                     }
-                }));
+                });
             },
             afErrorFn: (res) => {
             }
         }
     );
-
-    return {
-        favoriteVideoId,
-        setFavoriteVideoId,
-        viewStatusList,
-    }
 }

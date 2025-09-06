@@ -4,12 +4,8 @@ import { Home } from "../../Home/Component/Home";
 import { Content } from "../../Content/Component/Content";
 import { Footer } from "../../Footer/Component/Footer";
 import { Header } from "../../Header/Component/Header";
+import { useVideoCategory } from "../Hook/useVideoCategory";
 import { useMain } from "../Hook/useMain";
-import { Route, Routes } from "react-router-dom";
-import { UpdateUserInfo } from "../../UpdateUserInfo/Component/UpdateUserInfo";
-import { ROUTER_PATH } from "../../Common/Const/RouterPath";
-import { UpdateUserPassword } from "../../UpdateUserPassword/Component/UpdateUserPassword";
-import { createCtx } from "../../Common/Function/createCtx";
 
 //アプリケーション全体のスタイル
 const AppDiv = styled.div`

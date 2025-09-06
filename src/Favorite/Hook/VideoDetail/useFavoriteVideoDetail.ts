@@ -8,14 +8,11 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
 import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
 import { useCreateFavoriteVideoListQuery } from "../VideoList/useCreateFavoriteVideoListQuery";
-import { FavoriteVideoIdContext, SetFavoriteVideoIdContext } from "../../Component/FavoriteMain";
 
 export function useFavoriteVideoDetail() {
 
     // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
-    // 動画ID
-    const setFavoriteVideoId = SetFavoriteVideoIdContext.useCtx();
+    const [favoriteVideoId, setFavoriteVideoId] = useState(``);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // 動画一覧画面のクエリパラメータ
@@ -28,12 +25,18 @@ export function useFavoriteVideoDetail() {
 
         const pathArray = window.location.pathname.split("/");
 
-        if (pathArray.length == 4 && `/${pathArray[2]}` === `${ROUTER_PATH.FAVORITE.DETAIL}`) {
-
-            // ID部分を取得
-            const videoId = pathArray[3];
-            setFavoriteVideoId(videoId);
+        if (pathArray.length !== 4) {
+            throw Error(`動画IDが存在しません。`);
         }
+
+        // ID部分を取得
+        const videoId = pathArray[3];
+
+        if (!videoId) {
+            throw Error(`動画IDが存在しません。`);
+        }
+
+        setFavoriteVideoId(videoId);
     }, []);
 
     // 動画詳細を取得
@@ -60,8 +63,9 @@ export function useFavoriteVideoDetail() {
     return {
         isLoading,
         videoDetail,
-        favoriteVideoId,
         errMessage,
         backPage,
+        favoriteVideoId,
+        setFavoriteVideoId,
     };
 }
