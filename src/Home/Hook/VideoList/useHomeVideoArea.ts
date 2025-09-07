@@ -28,6 +28,7 @@ export function useHomeVideoArea() {
     const [favoriteWordList, setFavoriteWordList] = useState<string[]>([]);
     // URL情報
     const location = useLocation();
+    // 前回のクエリパラメータを保持用
     const prevSearch = useRef(location.search);
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
@@ -36,8 +37,6 @@ export function useHomeVideoArea() {
         nowSearchCondition,
         setNowSearchCondition,
         reset: resetNowCondition } = useHomeVideoNowSearchConditionValue();
-    // 入力中の検索条件
-    const { reset: resetInputCondition } = useHomeVideoSearchConditionValue();
 
 
     // ローカルストレージからお気に入りワードリストを取得
@@ -54,7 +53,7 @@ export function useHomeVideoArea() {
             url: useHomeVideoListEndpoint(),
             afSuccessFn: (response: VideoListResponseType) => {
 
-                // // 動画リスト追加読み込み情報変更チェック
+                // 動画リスト追加読み込み情報変更チェック
                 const isEqualShowMoreData = !!nowSearchCondition.nextPageToken;
 
                 setVideoListData((e) => {
@@ -119,7 +118,6 @@ export function useHomeVideoArea() {
         if (prevSearch.current && !location.search) {
 
             resetNowCondition();
-            resetInputCondition();
             setVideoListData(undefined);
         }
 

@@ -2,7 +2,6 @@ import React, { createContext } from "react";
 import { HomeVideoList } from "./VideoList/HomeVideoList";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { HomeVideoDetail } from "./VideoDetail/HomeVideoDetail";
-import { useHome } from "../Hook/useHome";
 import { createCtx } from "../../Common/Function/createCtx";
 import { Provider } from "jotai";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
@@ -14,10 +13,6 @@ import { HomeVideoNowSearchConditionValueProvider } from "./HomeVideoNowSearchCo
 export function Home() {
 
     console.log("Home render");
-
-    const {
-        isLoadingComp,
-    } = useHome();
 
     return (
         <HomeVideoNowSearchConditionValueProvider>
@@ -46,7 +41,6 @@ export function Home() {
                     }
                 />
                 {
-                    isLoadingComp &&
                     // Not Found
                     <Route
                         key={"*"}

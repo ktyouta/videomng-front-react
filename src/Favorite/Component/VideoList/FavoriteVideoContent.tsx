@@ -20,6 +20,7 @@ const VideoImg = styled.img`
 const VideoTitleDiv = styled.div`
     color:white;
     cursor:pointer;
+    word-break: break-word;
     font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {

@@ -86,6 +86,7 @@ export function HomeFrequentKeywords() {
                 keyword={e.keyword}
                 clickKeyword={clickKeyWord}
                 deleteKeyword={deleteKeyWord}
+                key={e.keyword}
               />
             )
           })

@@ -93,6 +93,7 @@ export function HomeRecentKeywod() {
                 keyword={e}
                 clickKeyword={clickKeyWord}
                 deleteKeyword={deleteKeyWord}
+                key={e}
               />
             )
           })

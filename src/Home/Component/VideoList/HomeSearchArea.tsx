@@ -62,8 +62,8 @@ const SearchIconAreaDiv = styled.div`
   height: 99%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-right-radius: 15%;
-  border-bottom-right-radius: 15%;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,8 +135,8 @@ export function HomeSearchArea() {
           value={inputKeyword}
           onChange={setInputKeyword}
           style={{
-            borderBottomLeftRadius: 5,
-            borderTopLeftRadius: 5,
+            borderBottomLeftRadius: 6,
+            borderTopLeftRadius: 6,
           }}
           clear={clearInput}
           onKeyDown={handleKeyPress}
