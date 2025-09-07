@@ -10,19 +10,12 @@ import { NotFound } from "../../NotFound/Component/NotFound";
 import { HomeChannel } from "./VideoChannel/HomeChannel";
 import { HomeVideoNowSearchConditionValueProvider } from "./HomeVideoNowSearchConditionValueProvider";
 
-// 動画取得用URL
-export const VideoApiUrlContext = createCtx<string>();
-// 動画取得用URL(setter)
-export const SetVideoApiUrlContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
-
 
 export function Home() {
 
     console.log("Home render");
 
     const {
-        videoApiUrl,
-        setVideoApiUrl,
         isLoadingComp,
     } = useHome();
 
@@ -33,11 +26,7 @@ export function Home() {
                 <Route
                     path={`/`}
                     element={
-                        <VideoApiUrlContext.Provider value={videoApiUrl}>
-                            <SetVideoApiUrlContext.Provider value={setVideoApiUrl}>
-                                <HomeVideoList />
-                            </SetVideoApiUrlContext.Provider>
-                        </VideoApiUrlContext.Provider>
+                        <HomeVideoList />
                     }
                 />
                 {/* 動画詳細 */}

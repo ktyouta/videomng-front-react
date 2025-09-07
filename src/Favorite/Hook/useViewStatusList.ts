@@ -6,7 +6,6 @@ import ENV from "../../env.json";
 import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
-import { VideoListApiUrlModel } from "../../Home/Model/VideoListApiUrlModel";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { useFavoriteVideoSearchConditionValue } from "./VideoList/useFavoriteVideoSearchConditionValue";
 import { useSyncFavoriteVideoListUrl } from "./VideoList/useSyncFavoriteVideoListUrl";

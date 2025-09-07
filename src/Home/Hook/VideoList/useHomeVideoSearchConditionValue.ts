@@ -23,6 +23,16 @@ export function useHomeVideoSearchConditionValue() {
     // 動画一覧検索条件選択値(種別) setter
     const setSelectedVideoType = SetSelectedVideoTypeContext.useCtx();
 
+
+    /**
+     * 入力中の検索条件をリセットする
+     */
+    function reset() {
+        setSelectedVideoCategory(``);
+        setInputKeyword(``);
+        setSelectedVideoType(``);
+    }
+
     return {
         selectedVideoCategory,
         setSelectedVideoCategory,
@@ -30,5 +40,6 @@ export function useHomeVideoSearchConditionValue() {
         setInputKeyword,
         selectedVideoType,
         setSelectedVideoType,
+        reset,
     };
 }

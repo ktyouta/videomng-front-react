@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { selectedVideoCategoryAtom, selectedVideoTypeAtom } from "../../Atom/HomeAtom";
 import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
 import { useVideoCategory } from "../../../Main/Hook/useVideoCategory";
 import { useHomeVideoSearchConditionValue } from "./useHomeVideoSearchConditionValue";

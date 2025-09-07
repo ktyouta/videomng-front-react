@@ -144,13 +144,14 @@ export function HomeVideoArea() {
     isLoading,
     clickShowMore,
     errMessage,
-    showMoreData,
     addFavoriteWord,
     favoriteWordList,
-    isMobile } = useHomeVideoArea();
+    isMobile,
+    nowSearchCondition,
+    isFetching } = useHomeVideoArea();
 
   // 初回検索ローディング
-  if (!showMoreData && isLoading) {
+  if (!nowSearchCondition.nextPageToken && (isLoading || isFetching)) {
     return (
       <LoadingParent>
         <Loading />
@@ -178,7 +179,7 @@ export function HomeVideoArea() {
   // 次データ取得用トークン
   const nextPageToken = videoListData.nextPageToken;
   // 検索ワード
-  const searchKeyword = showMoreData?.keyword;
+  const searchKeyword = nowSearchCondition.keyword;
   // お気に入りワード登録フラグ
   const isRegisterdFavoriteKeyword = favoriteWordList.some((e) => {
     return e === searchKeyword;
@@ -195,10 +196,10 @@ export function HomeVideoArea() {
   return (
     <Parent>
       {
-        showMoreData?.keyword &&
+        searchKeyword &&
         <SearchKeywordAreaDiv>
           <SearchKeywordDiv>
-            キーワード：{showMoreData.keyword}
+            キーワード：{searchKeyword}
           </SearchKeywordDiv>
           {
             isRegisterdFavoriteKeyword
@@ -223,7 +224,7 @@ export function HomeVideoArea() {
                   <IconComponent
                     icon={FaBookmark}
                     onclick={() => {
-                      addFavoriteWord(showMoreData.keyword);
+                      addFavoriteWord(searchKeyword);
                     }}
                     size="30%"
                     style={{

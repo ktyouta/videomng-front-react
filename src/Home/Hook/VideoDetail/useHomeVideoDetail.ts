@@ -6,7 +6,6 @@ import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useEffect, useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";
 import { VideoDetailItemType } from "../../Type/VideoDetail/VideoDetailItemType";
 import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
 
@@ -18,8 +17,6 @@ export function useHomeVideoDetail() {
     const navigate = useNavigate();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // 動画一覧取得URL情報
-    const { query } = useGetVideoListUrl();
 
 
     // URL直打ち対応
@@ -64,7 +61,7 @@ export function useHomeVideoDetail() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${query()}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}`);
     }
 
     return {

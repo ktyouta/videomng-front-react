@@ -86,6 +86,7 @@ export function HomeFavoriteKeywords() {
                 keyword={e}
                 clickKeyword={clickKeyWord}
                 deleteKeyword={deleteKeyWord}
+                key={e}
               />
             )
           })

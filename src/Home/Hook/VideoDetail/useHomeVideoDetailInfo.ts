@@ -14,9 +14,6 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
-import { showMoreDataAtom } from "../../Atom/HomeAtom";
-import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
-import { useGetVideoListUrl } from "../VideoList/useGetVideoListUrl";
 import { VideoIdContext } from "../../Component/VideoDetail/HomeVideoDetail";
 
 
@@ -31,8 +28,6 @@ export function useHomeVideoDetailInfo() {
     const videoId = VideoIdContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-    // 動画一覧取得URL情報
-    const { query } = useGetVideoListUrl();
 
     /**
      * お気に入り登録リクエスト
@@ -48,7 +43,7 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(`${ROUTER_PATH.HOME.ROOT}${query()}`);
+            navigate(`${ROUTER_PATH.HOME.ROOT}`);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

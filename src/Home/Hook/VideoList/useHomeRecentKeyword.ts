@@ -1,9 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { REACENT_KEYWORD } from "../../Const/HomeConst";
-import { keywordAtom, selectedVideoCategoryAtom, selectedVideoTypeAtom, showMoreDataAtom } from "../../Atom/HomeAtom";
-import { VideoListApiUrlModel } from "../../Model/VideoListApiUrlModel";
-import { useNavigate } from "react-router-dom";
-import { SetVideoApiUrlContext } from "../../Component/Home";
 import { useEffect, useState } from "react";
 import { useFrequentKeywords } from "./useFrequentKeywords";
 import { useRecentKeyword } from "./useRecentKeyword";
@@ -14,18 +10,6 @@ export function useHomeRecentKeyword() {
 
     // 最近の検索リスト
     const [recentWordList, setRecentWordList] = useState<string[]>([]);
-    // キーワード
-    //const setKeyword = useSetAtom(keywordAtom);
-    // 動画一覧検索条件選択値(種別)
-    // const selectedVideoType = useAtomValue(selectedVideoTypeAtom);
-    // // 動画一覧検索条件選択値(カテゴリ)
-    // const selectedVideoCategory = useAtomValue(selectedVideoCategoryAtom);
-    // // 動画取得用URL
-    // const setVideoApiUrl = SetVideoApiUrlContext.useCtx();
-    // // 動画リスト追加読み込み用
-    // const setShowMoreData = useSetAtom(showMoreDataAtom);
-    // //ルーティング用
-    // const navigate = useNavigate();
     // 最近の検索ワード保存用
     const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
@@ -49,16 +33,6 @@ export function useHomeRecentKeyword() {
     function clickKeyWord(keyword: string,) {
 
         setInputKeyword(keyword);
-
-        // const videoListApiUrlModel = VideoListApiUrlModel.create({
-        //     keyword,
-        //     videoType: selectedVideoType,
-        //     videoCategory: selectedVideoCategory,
-        // });
-
-        // setVideoApiUrl(videoListApiUrlModel.url);
-        // setShowMoreData(undefined);
-        // navigate(videoListApiUrlModel.query);
 
         // 現在の検索条件を更新
         setNowSearchCondition((e) => {
