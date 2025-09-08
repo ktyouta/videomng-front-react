@@ -16,7 +16,7 @@ type propsType = {
 }
 
 // 現在の検索条件の型
-type nowSearchConditionType = {
+export type nowSearchConditionType = {
     category: string,
     keyword: string,
     type: string,

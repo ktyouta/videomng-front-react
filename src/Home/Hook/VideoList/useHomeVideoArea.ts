@@ -22,10 +22,6 @@ export function useHomeVideoArea() {
     const [videoListData, setVideoListData] = useState<VideoListDataType>();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // お気に入りワード保存用
-    const { saveFavoriteKeyword } = useFavoriteKeyword();
-    // お気に入りワードリスト
-    const [favoriteWordList, setFavoriteWordList] = useState<string[]>([]);
     // URL情報
     const location = useLocation();
     // 前回のクエリパラメータを保持用
@@ -35,17 +31,7 @@ export function useHomeVideoArea() {
     // 現在の動画検索条件
     const {
         nowSearchCondition,
-        setNowSearchCondition,
         reset: resetNowCondition } = useHomeVideoNowSearchConditionValue();
-
-
-    // ローカルストレージからお気に入りワードリストを取得
-    useEffect(() => {
-
-        const wordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];
-
-        setFavoriteWordList(wordList);
-    }, [videoListData]);
 
     // 動画一覧を取得
     const { isLoading, isFetching } = useQueryWrapper<VideoListResponseType>(
@@ -83,35 +69,6 @@ export function useHomeVideoArea() {
         }
     );
 
-    /**
-     * もっと見るボタン押下
-     */
-    function clickShowMore(nextPageToken: string) {
-
-        // 現在の検索条件を更新する
-        setNowSearchCondition((e) => {
-
-            return {
-                ...e,
-                nextPageToken
-            };
-        });
-    }
-
-    /**
-     * お気に入りワード追加
-     */
-    function addFavoriteWord(keyword: string) {
-
-        saveFavoriteKeyword(keyword);
-
-        // ローカルストレージから検索ワードを取得
-        const nowWordList = JSON.parse(localStorage.getItem(FAVORITE_KEYWORD) || "[]") as string[];
-        setFavoriteWordList(nowWordList);
-
-        toast.success(`お気に入りワードに登録しました。`);
-    }
-
     // クエリパラメータが存在しない場合はホーム画面を初期化する
     useEffect(() => {
 
@@ -127,10 +84,7 @@ export function useHomeVideoArea() {
     return {
         videoListData,
         isLoading,
-        clickShowMore,
         errMessage,
-        addFavoriteWord,
-        favoriteWordList,
         isMobile,
         nowSearchCondition,
         isFetching,
