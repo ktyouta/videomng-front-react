@@ -3,7 +3,6 @@ import { useFavoriteVideoDetail } from "../../Hook/VideoDetail/useFavoriteVideoD
 import LoadingBase from "../../../Common/Component/LoadingBase";
 import styled from "styled-components";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
 import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
 import AccordionComponent from "../../../Common/Component/AccordionComponent";

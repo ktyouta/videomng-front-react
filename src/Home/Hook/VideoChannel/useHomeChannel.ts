@@ -12,40 +12,25 @@ import { ChannelVideoListDataType } from "../../Type/VideoChannel/ChannelVideoLi
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { useNavigate } from "react-router-dom";
 import { useHomeChannelEndpoint } from "./useHomeChannelEndpoint";
+import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
+import { useChannelId } from "./useChannelId";
 
 
 export function useHomeChannel() {
 
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // チャンネルID
-    const [channelId, setChannelId] = useState(``);
     // 次データ取得用トークン
     const [nextPageToken, setNextPageToken] = useState(``);
     // チャンネル情報データ
     const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
     //ルーティング用
     const navigate = useNavigate();
+    // 一覧画面のクエリパラメータ
+    const { query } = useCreateHomeVideoListQuery();
+    // チャンネルID
+    const channelId = useChannelId();
 
-
-    // URL直打ち対応
-    useEffect(() => {
-
-        const pathArray = window.location.pathname.split("/");
-
-        if (pathArray.length !== 4) {
-            throw Error(`チャンネルIDが存在しません。`);
-        }
-
-        // ID部分を取得
-        const channelId = pathArray[3];
-
-        if (!channelId) {
-            throw Error(`チャンネルIDが存在しません。`);
-        }
-
-        setChannelId(channelId);
-    }, []);
 
     // チャンネル動画一覧を取得
     const { isLoading } = useQueryWrapper<ChannelVideoListResponseType>(
@@ -87,7 +72,7 @@ export function useHomeChannel() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${query}`);
     }
 
     return {

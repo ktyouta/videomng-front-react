@@ -3,7 +3,6 @@ import { useHomeVideoDetail } from "../../Hook/VideoDetail/useHomeVideoDetail";
 import LoadingBase from "../../../Common/Component/LoadingBase";
 import styled from "styled-components";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -59,19 +58,12 @@ const BackHomeP = styled.p`
   cursor: pointer;
 `;
 
-// 動画ID
-export const VideoIdContext = createCtx<string>();
-// 動画ID(setter)
-export const SetVideoIdContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
-
 
 export function HomeVideoDetail() {
 
   console.log("HomeVideoDetail render");
 
   const {
-    videoId,
-    setVideoId,
     isLoading,
     videoDetail,
     errMessage,
@@ -122,20 +114,16 @@ export function HomeVideoDetail() {
         }}
         onclick={backHome}
       />
-      <VideoIdContext.Provider value={videoId}>
-        <SetVideoIdContext.Provider value={setVideoId}>
-          <VideoContentDiv>
-            {/* 動画情報 */}
-            <HomeVideoDetailInfo
-              videoDetail={videoDetail}
-            />
-            {/* メニュー */}
-            <HomeVideoDetailMenu
-              videoDetail={videoDetail}
-            />
-          </VideoContentDiv>
-        </SetVideoIdContext.Provider>
-      </VideoIdContext.Provider>
+      <VideoContentDiv>
+        {/* 動画情報 */}
+        <HomeVideoDetailInfo
+          videoDetail={videoDetail}
+        />
+        {/* メニュー */}
+        <HomeVideoDetailMenu
+          videoDetail={videoDetail}
+        />
+      </VideoContentDiv>
     </Parent>
   );
 }

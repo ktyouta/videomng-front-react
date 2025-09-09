@@ -2,7 +2,6 @@ import React from "react";
 import LoadingBase from "../../../Common/Component/LoadingBase";
 import styled from "styled-components";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { YouTubeDataApiVideoDetailItemType } from "../../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
 import AccordionComponent from "../../../Common/Component/AccordionComponent";
 import { MdPlayArrow } from 'react-icons/md';

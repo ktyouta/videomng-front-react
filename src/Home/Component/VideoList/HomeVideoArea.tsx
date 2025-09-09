@@ -51,10 +51,11 @@ export function HomeVideoArea() {
     );
   }
 
-  // 初期表示
   if (!videoListData) {
     return (
-      <HomeVideoAreaDefault />
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
     );
   }
 

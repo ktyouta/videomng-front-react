@@ -5,20 +5,20 @@ import ENV from '../../../env.json';
 import { AddToFavoriteRequestType } from "../../Type/VideoDetail/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../../Type/VideoDetail/AddToFavoriteResponseType";
 import { MENU_NO } from "../../Const/HomeConst";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
-import { VideoIdContext } from "../../Component/VideoDetail/HomeVideoDetail";
+import { useVideoId } from "./useVideoId";
 
 
 export function useHomeVideoDetailMenu() {
 
     // メニュー番号
     const [openMenuNo, setOpenMenuNo] = useState<string>(MENU_NO.INFO);
-    // お気に入り動画ID
-    const videoId = VideoIdContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 動画ID
+    const videoId = useVideoId();
 
     return {
         openMenuNo,

@@ -26,18 +26,16 @@ export function Home() {
                 />
                 {/* 動画詳細 */}
                 <Route
-                    path={`${ROUTER_PATH.HOME.DETAIL}/*`}
+                    path={`${ROUTER_PATH.HOME.DETAIL}/:videoId/*`}
                     element={
                         <HomeVideoDetail />
                     }
                 />
                 {/* チャンネル動画一覧 */}
                 <Route
-                    path={`${ROUTER_PATH.HOME.CHANNEL}/*`}
+                    path={`${ROUTER_PATH.HOME.CHANNEL}/:channelId/*`}
                     element={
-                        <Provider>
-                            <HomeChannel />
-                        </Provider>
+                        <HomeChannel />
                     }
                 />
                 {
@@ -45,7 +43,11 @@ export function Home() {
                     <Route
                         key={"*"}
                         path="*"
-                        element={<NotFound backUrl={`${ROUTER_PATH.HOME.ROOT}`} />}
+                        element={
+                            <NotFound
+                                backUrl={`${ROUTER_PATH.HOME.ROOT}`}
+                            />
+                        }
                     />
                 }
             </Routes>

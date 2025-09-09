@@ -3,7 +3,6 @@ import { useFavoriteVideoDetail } from "../../Hook/VideoDetail/useFavoriteVideoD
 import LoadingBase from "../../../Common/Component/LoadingBase";
 import styled from "styled-components";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IconComponent } from "../../../Common/Component/IconComponent";

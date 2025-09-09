@@ -3,7 +3,6 @@ import { useFavoriteVideoDetail } from "../../Hook/VideoDetail/useFavoriteVideoD
 import LoadingBase from "../../../Common/Component/LoadingBase";
 import styled from "styled-components";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { YouTubeDataApiVideoDetailItemType } from "../../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
 import { useFavoriteVideoDetailMenu } from "../../Hook/VideoDetail/useFavoriteVideoDetailMenu";
@@ -123,49 +122,37 @@ export function FavoriteVideoDetailMenu(props: propsType) {
                 {
                     // 動画情報
                     openMenuNo === MENU_NO.INFO &&
-                    <Provider>
-                        <FavoriteMetaInfo
-                            videoDetail={videoDetail}
-                        />
-                    </Provider>
+                    <FavoriteMetaInfo
+                        videoDetail={videoDetail}
+                    />
                 }
                 {
                     // メモ
                     openMenuNo === MENU_NO.MEMO &&
-                    <Provider>
-                        <FavoriteMemo />
-                    </Provider>
+                    <FavoriteMemo />
                 }
                 {
                     // 公開コメント
                     openMenuNo === MENU_NO.COMMENT &&
-                    <Provider>
-                        <FavoriteComment />
-                    </Provider>
+                    <FavoriteComment />
                 }
                 {
                     // キーワード検索(コメント)
                     openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-                    <Provider>
-                        <FavoriteSearchKeywordComment />
-                    </Provider>
+                    <FavoriteSearchKeywordComment />
                 }
                 {
                     // 動画詳細設定
                     openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
                     videoDetail &&
-                    <Provider>
-                        <FavoriteDetailSetting
-                            videoDetail={videoDetail}
-                        />
-                    </Provider>
+                    <FavoriteDetailSetting
+                        videoDetail={videoDetail}
+                    />
                 }
                 {
                     // タグ
                     openMenuNo === MENU_NO.TAG &&
-                    <Provider>
-                        <FavoriteTag />
-                    </Provider>
+                    <FavoriteTag />
                 }
             </MenuParentDiv>
         </React.Fragment>

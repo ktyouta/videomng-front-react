@@ -6,15 +6,15 @@ import ENV from "../../../../env.json";
 import { HomeVideoCommentThreadResponseType } from "../../../Type/VideoDetail/VideoComment/HomeVideoCommentThreadResponseType";
 import { useHomeCommentEndpoint } from "./useHomeCommentEndpoint";
 import { HomeVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoComment/HomeVideoCommentThreadItemType";
-import { VideoIdContext } from "../../../Component/VideoDetail/HomeVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 export function useHomeCommentList() {
 
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // お気に入り動画ID
-    const videoId = VideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
 
 
     // コメント情報を取得

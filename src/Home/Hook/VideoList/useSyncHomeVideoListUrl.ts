@@ -9,8 +9,9 @@ import { SEARCH_CONDITION } from "../../Const/HomeConst";
 
 export function useSyncHomeVideoListUrl() {
 
+    // 現在の検索条件
     const { nowSearchCondition } = useHomeVideoNowSearchConditionValue();
-
+    // 一覧画面のクエリパラメータ
     const { query } = useCreateHomeVideoListQuery();
 
     //ルーティング用

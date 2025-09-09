@@ -2,7 +2,7 @@ import { useAtom, useAtomValue } from "jotai";
 import useMutationWrapper from "../../../Common/Hook/useMutationWrapper";
 import { errResType, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../../env.json';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useSwitch from "../../../Common/Hook/useSwitch";
 import { useState } from "react";
 import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
@@ -14,7 +14,7 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
-import { VideoIdContext } from "../../Component/VideoDetail/HomeVideoDetail";
+import { useVideoId } from "./useVideoId";
 
 
 
@@ -24,10 +24,11 @@ export function useHomeVideoDetailInfo() {
     const navigate = useNavigate();
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
-    // お気に入り動画ID
-    const videoId = VideoIdContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 動画ID
+    const videoId = useVideoId();
+
 
     /**
      * お気に入り登録リクエスト
@@ -62,11 +63,6 @@ export function useHomeVideoDetailInfo() {
      */
     function addToFavorite() {
 
-        if (!videoId) {
-            toast.error(`お気に入りに登録できません。`);
-            return;
-        }
-
         const body: AddToFavoriteRequestType = {
             videoId
         }
@@ -79,6 +75,10 @@ export function useHomeVideoDetailInfo() {
      * 動画を再生
      */
     function play() {
+
+        if (!videoId) {
+            throw Error(`動画IDが存在しません。`);
+        }
 
         // 動画URL
         const videoUrlModel = new VideoUrlModel(videoId);

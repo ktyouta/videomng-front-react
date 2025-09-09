@@ -1,42 +1,26 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../../Type/VideoDetail/VideoDetailResponseType";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useEffect, useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VideoDetailItemType } from "../../Type/VideoDetail/VideoDetailItemType";
 import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
+import { useVideoId } from "./useVideoId";
+import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 
 export function useHomeVideoDetail() {
 
-    // 動画ID
-    const [videoId, setVideoId] = useState(``);
     //ルーティング用
     const navigate = useNavigate();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-
-
-    // URL直打ち対応
-    useEffect(() => {
-
-        const pathArray = window.location.pathname.split("/");
-
-        if (pathArray.length !== 4) {
-            throw Error(`動画IDが存在しません。`);
-        }
-
-        // ID部分を取得
-        const videoId = pathArray[3];
-
-        if (!videoId) {
-            throw Error(`動画IDが存在しません。`);
-        }
-
-        setVideoId(videoId);
-    }, []);
+    // 動画ID
+    const videoId = useVideoId();
+    // 一覧画面のクエリパラメータ
+    const { query } = useCreateHomeVideoListQuery();
 
 
     // 動画詳細を取得
@@ -61,7 +45,7 @@ export function useHomeVideoDetail() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${query}`);
     }
 
     return {
@@ -70,6 +54,6 @@ export function useHomeVideoDetail() {
         videoId,
         errMessage,
         backHome,
-        setVideoId,
+        //setVideoId,
     };
 }
