@@ -8,20 +8,20 @@ import { FavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMe
 import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 export function useFavoriteTagList() {
 
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // 動画ID
+    const videoId = useVideoId();
 
     // タグリストを取得
     const { data: favoriteVideoTagList, isLoading } = useQueryWrapper<FavoriteVideoTagResponseType, FavoriteVideoTagType[]>(
         {
-            url: useFavoriteTagEndpoint(favoriteVideoId),
+            url: useFavoriteTagEndpoint(videoId),
             select: (res: FavoriteVideoTagResponseType) => {
                 return res.data ?? [];
             },

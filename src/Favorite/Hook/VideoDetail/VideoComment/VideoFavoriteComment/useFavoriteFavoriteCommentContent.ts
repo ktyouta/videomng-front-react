@@ -8,7 +8,7 @@ import { useFavoriteFavoriteCommentIdEndpoint } from "./useFavoriteFavoriteComme
 import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 import { useInvalidateQuery } from "../../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
-import { FavoriteVideoIdContext } from "../../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../../useVideoId";
 
 
 type propsType = {
@@ -17,19 +17,19 @@ type propsType = {
 
 export function useFavoriteFavoriteCommentContent(props: propsType) {
 
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
     // 公開コメント再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint(favoriteVideoId));
+    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint(videoId));
     // お気に入りコメント再取得用
-    const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteFavoriteCommentEndpoint(favoriteVideoId));
+    const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteFavoriteCommentEndpoint(videoId));
 
     /**
      * お気に入りコメント削除リクエスト
      */
     const postMutation = useMutationWrapper({
         url: useFavoriteFavoriteCommentIdEndpoint({
-            videoId: favoriteVideoId,
+            videoId,
             commentId: props.commentDetailItem.id
         }),
         method: "DELETE",

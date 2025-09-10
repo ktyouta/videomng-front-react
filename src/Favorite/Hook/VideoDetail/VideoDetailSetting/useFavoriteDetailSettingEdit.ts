@@ -11,8 +11,8 @@ import ENV from "../../../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateToFavoriteVideoReqestType";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
 import { useViewStatusList } from "../../useViewStatusList";
+import { useVideoId } from "../useVideoId";
 
 
 type propsType = {
@@ -41,17 +41,17 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const [viewStatus, setViewStatus] = useState(props.viewStatus);
     // 視聴状況リスト
     const { data: viewStatusList } = useViewStatusList();
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // お気に入り度
     const [favoriteLevel, setFavoriteLevel] = useState(props.favoriteLevel);
+    // 動画ID
+    const videoId = useVideoId();
 
 
     /**
      * お気に入り動画更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${videoId}`,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<UpdateFavoriteVideoResponseDataType>) => {

@@ -4,22 +4,22 @@ import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
 import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 export function useFavoriteVideoTagEditListProvider() {
 
     // タグ編集リスト
     const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useState<tagType[]>([]);
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // 動画ID
+    const videoId = useVideoId();
 
     // 設定されたタグリストを取得
     const { isLoading } = useQueryWrapper<FavoriteVideoTagResponseType>(
         {
-            url: useFavoriteTagEndpoint(favoriteVideoId),
+            url: useFavoriteTagEndpoint(videoId),
             afSuccessFn: (res: FavoriteVideoTagResponseType) => {
 
                 const settingTagList = res.data

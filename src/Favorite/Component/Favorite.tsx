@@ -27,7 +27,7 @@ export function Favorite() {
                 </Route>
                 {/* お気に入り動画詳細 */}
                 <Route
-                    path={`${ROUTER_PATH.FAVORITE.DETAIL}/*`}
+                    path={`${ROUTER_PATH.FAVORITE.DETAIL}/:videoId/*`}
                     element={
                         <FavoriteVideoDetail />
                     } >

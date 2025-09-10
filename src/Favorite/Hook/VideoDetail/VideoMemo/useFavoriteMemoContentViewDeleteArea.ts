@@ -6,7 +6,7 @@ import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperB
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 type propsType = {
@@ -17,10 +17,10 @@ export function useFavoriteMemoContentViewDeleteArea(props: propsType) {
 
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
     // メモ再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(favoriteVideoId));
+    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(videoId));
 
 
     /**
@@ -28,7 +28,7 @@ export function useFavoriteMemoContentViewDeleteArea(props: propsType) {
      */
     const postMutation = useMutationWrapper({
         url: useFavoriteMemoIdEndpoint({
-            videoId: favoriteVideoId,
+            videoId,
             memoId: props.data.videoMemoSeq,
         }),
         method: "DELETE",
@@ -51,7 +51,7 @@ export function useFavoriteMemoContentViewDeleteArea(props: propsType) {
      */
     function deleteMemo() {
 
-        if (!favoriteVideoId) {
+        if (!videoId) {
             toast.error(`メモを削除できません。`);
             return;
         }

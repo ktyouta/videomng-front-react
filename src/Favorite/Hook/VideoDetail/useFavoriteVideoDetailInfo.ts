@@ -9,7 +9,7 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
-import { FavoriteVideoIdContext } from "../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "./useVideoId";
 
 
 
@@ -17,19 +17,19 @@ export function useFavoriteVideoDetailInfo() {
 
     // ルーティング用
     const navigate = useNavigate();
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 動画ID
+    const videoId = useVideoId();
 
 
     /**
      * お気に入り動画削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${favoriteVideoId}`,
+        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${videoId}`,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<unknown>) => {
@@ -63,7 +63,7 @@ export function useFavoriteVideoDetailInfo() {
     function play() {
 
         // 動画URL
-        const videoUrlModel = new VideoUrlModel(favoriteVideoId);
+        const videoUrlModel = new VideoUrlModel(videoId);
         window.open(`${videoUrlModel.videoUrl}`, `_blank`);
     }
 

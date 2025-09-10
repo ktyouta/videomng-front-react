@@ -13,7 +13,7 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 type propsType = {
@@ -26,10 +26,10 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
 
     // メモ入力情報
     const [inputMemo, setInputMemo] = useState(props.initMemo);
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
     // メモ再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(favoriteVideoId));
+    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(videoId));
 
 
     /**
@@ -37,7 +37,7 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
      */
     const postMutation = useMutationWrapper({
         url: useFavoriteMemoIdEndpoint({
-            videoId: favoriteVideoId,
+            videoId,
             memoId: props.videoMemoSeq
         }),
         method: "PUT",
@@ -65,7 +65,7 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
             return;
         }
 
-        if (!favoriteVideoId) {
+        if (!videoId) {
             toast.error(`メモを更新できません。`);
             return;
         }

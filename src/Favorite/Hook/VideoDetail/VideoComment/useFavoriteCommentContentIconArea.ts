@@ -12,7 +12,7 @@ import { useFavoriteFavoriteCommentIdEndpoint } from "./VideoFavoriteComment/use
 import { useFavoriteFavoriteCommentEndpoint } from "./VideoFavoriteComment/useFavoriteFavoriteCommentEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
 import { useFavoriteCommentEndpoint } from "./useFavoriteCommentEndpoint";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 type propsType = {
@@ -25,10 +25,10 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
 
     // お気に入り状態
     const [favoriteStatus, setFavoriteStatus] = useState<string>(props.favoriteStatus);
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
     // コメント再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteCommentEndpoint(favoriteVideoId));
+    const { invalidate } = useInvalidateQuery(useFavoriteCommentEndpoint(videoId));
 
     // コメント情報再取得時にアイコン状態を変更する
     useEffect(() => {
@@ -39,7 +39,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントブロックリクエスト
      */
     const postBlockMutation = useMutationWrapper({
-        url: useFavoriteBlockCommentEndpoint(favoriteVideoId),
+        url: useFavoriteBlockCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
@@ -66,7 +66,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
 
         const body: AddToFavoriteVideoBlockCommentReqestType = {
             commentId: props.commentId,
-            videoId: favoriteVideoId
+            videoId
         }
 
         // リクエスト送信
@@ -78,7 +78,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントお気に入りリクエスト
      */
     const postFavoriteMutation = useMutationWrapper({
-        url: useFavoriteFavoriteCommentEndpoint(favoriteVideoId),
+        url: useFavoriteFavoriteCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
@@ -121,7 +121,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      */
     const delMutation = useMutationWrapper({
         url: useFavoriteFavoriteCommentIdEndpoint({
-            videoId: favoriteVideoId,
+            videoId,
             commentId: props.commentId
         }),
         method: "DELETE",

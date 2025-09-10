@@ -14,7 +14,7 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
 import { ChangeViewContext } from "../../../Component/VideoDetail/VideoTag/FavoriteTag";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 
@@ -22,18 +22,18 @@ export function useFavoriteTagEditUpdateIcon() {
 
     // 更新ナビゲーション表示フラグ
     const { flag: isOpenUpdateNav, on: openUpdateNav, off: closeUpdateNav } = useSwitch();
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // タグ編集リスト
     const favoriteVideoTagEditList = FavoriteVideoTagEditListContext.useCtx();
     // 閲覧画面遷移
     const changeView = ChangeViewContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
 
     /**
      * お気に入り動画タグ更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteTagEndpoint(favoriteVideoId),
+        url: useFavoriteTagEndpoint(videoId),
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoTagType[]>) => {
@@ -57,7 +57,7 @@ export function useFavoriteTagEditUpdateIcon() {
             return;
         }
 
-        if (!favoriteVideoId) {
+        if (!videoId) {
             toast.error(`タグを更新できません。`);
             return;
         }

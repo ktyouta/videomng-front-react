@@ -4,7 +4,7 @@ import { SearchKeywordCommentType } from "../../../Type/VideoDetail/VideoSearchK
 import { SearchKeywordCommentResponseType } from "../../../Type/VideoDetail/VideoSearchKeywordComment/SearchKeywordCommentResponseType";
 import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
 import { SearchKeywordCommentKeywordContext } from "../../../Component/VideoDetail/VideoSearchKeywordComment/FavoriteSearchKeywordComment";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 export function useFavoriteSearchKeywordCommentList() {
@@ -13,15 +13,15 @@ export function useFavoriteSearchKeywordCommentList() {
     const [errMessage, setErrMessage] = useState(``);
     // 検索用キーワード
     const searchKeywordCommentKeyword = SearchKeywordCommentKeywordContext.useCtx();
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
 
 
     // コメント情報を取得
     const { data: searchCommentList, isLoading } = useQueryWrapper<SearchKeywordCommentResponseType, SearchKeywordCommentType[]>(
         {
             url: useFavoriteSearchKeywordCommentEndpoint({
-                videoId: favoriteVideoId,
+                videoId,
                 keyword: searchKeywordCommentKeyword
             }),
             select: (res: SearchKeywordCommentResponseType) => {

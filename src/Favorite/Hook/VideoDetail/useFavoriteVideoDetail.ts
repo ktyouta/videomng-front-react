@@ -8,41 +8,43 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
 import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
 import { useCreateFavoriteVideoListQuery } from "../VideoList/useCreateFavoriteVideoListQuery";
+import { useVideoId } from "./useVideoId";
 
 export function useFavoriteVideoDetail() {
 
-    // お気に入り動画ID
-    const [favoriteVideoId, setFavoriteVideoId] = useState(``);
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // 動画一覧画面のクエリパラメータ
     const { query } = useCreateFavoriteVideoListQuery();
     //ルーティング用
     const navigate = useNavigate();
+    // 動画ID
+    const videoId = useVideoId();
 
-    // URL直打ち対応
-    useEffect(() => {
 
-        const pathArray = window.location.pathname.split("/");
+    // // URL直打ち対応
+    // useEffect(() => {
 
-        if (pathArray.length !== 4) {
-            throw Error(`動画IDが存在しません。`);
-        }
+    //     const pathArray = window.location.pathname.split("/");
 
-        // ID部分を取得
-        const videoId = pathArray[3];
+    //     if (pathArray.length !== 4) {
+    //         throw Error(`動画IDが存在しません。`);
+    //     }
 
-        if (!videoId) {
-            throw Error(`動画IDが存在しません。`);
-        }
+    //     // ID部分を取得
+    //     const videoId = pathArray[3];
 
-        setFavoriteVideoId(videoId);
-    }, []);
+    //     if (!videoId) {
+    //         throw Error(`動画IDが存在しません。`);
+    //     }
+
+    //     setFavoriteVideoId(videoId);
+    // }, []);
 
     // 動画詳細を取得
     const { data: videoDetail, isLoading } = useQueryWrapper<FavoriteVideoDetailResponseType, FavoriteVideoDetailDataType>(
         {
-            url: useFavoriteVideoDetailEndpoint(favoriteVideoId),
+            url: useFavoriteVideoDetailEndpoint(videoId),
             select: (res: FavoriteVideoDetailResponseType) => {
                 return res.data
             },
@@ -65,7 +67,7 @@ export function useFavoriteVideoDetail() {
         videoDetail,
         errMessage,
         backPage,
-        favoriteVideoId,
-        setFavoriteVideoId,
+        // favoriteVideoId,
+        // setFavoriteVideoId,
     };
 }

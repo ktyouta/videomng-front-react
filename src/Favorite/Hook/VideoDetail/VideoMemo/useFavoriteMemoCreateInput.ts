@@ -12,25 +12,25 @@ import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useQueryClient } from "react-query";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 export function useFavoriteMemoCreateInput() {
 
     // メモ入力情報
     const [inputMemo, setInputMemo] = useState(``);
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    // 動画ID
+    const videoId = useVideoId();
     // メモ再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(favoriteVideoId));
+    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(videoId));
 
     /**
      * お気に入り動画メモ登録リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteMemoEndpoint(favoriteVideoId),
+        url: useFavoriteMemoEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {

@@ -7,21 +7,21 @@ import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoResponseType";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteVideoIdContext } from "../../../Component/VideoDetail/FavoriteVideoDetail";
+import { useVideoId } from "../useVideoId";
 
 
 export function useFavoriteMemoList() {
 
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // お気に入り動画ID
-    const favoriteVideoId = FavoriteVideoIdContext.useCtx();
+    // 動画ID
+    const videoId = useVideoId();
 
 
     // メモ情報を取得
     const { data: favoriteVideoMemoList, isLoading } = useQueryWrapper<FavoriteVideoMemoResponseType, FavoriteVideoMemoType[]>(
         {
-            url: useFavoriteMemoEndpoint(favoriteVideoId),
+            url: useFavoriteMemoEndpoint(videoId),
             afErrorFn: (res) => {
                 setErrMessage(`メモの取得に失敗しました。`);
             },
