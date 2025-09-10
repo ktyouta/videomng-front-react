@@ -7,6 +7,7 @@ import { VideoListResponseType } from "../../../Home/Type/VideoList/VideoListRes
 import { FavoriteVideoListMergedType } from "../../Type/VideoList/FavoriteVideoListMergedType";
 import { MEDIA } from "../../../Common/Const/MediaConst";
 import Loading from "../../../Common/Component/Loading";
+import { FlexSpaceDiv } from "../../../Common/StyledComponent/FlexSpaceDiv";
 
 const Parent = styled.div`
   width: 100%;
@@ -19,11 +20,23 @@ const LoadingParent = styled.div`
   transform: translate(-50%, -50%); 
 `;
 
+const ResultNumDiv = styled.div`
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 5%;
+  color: rgb(158, 158, 158);
+  margin-top: 13px;
+`;
+
+const ResultNumSpan = styled.span`
+`;
+
 const VideoUl = styled.ul`
   display: grid;
   color: rgb(255, 255, 255);
   margin: 0px;
-  padding: 4% 5% 0px;
+  padding: 2% 5% 0px;
   width: 100%;
   box-sizing: border-box;
   gap: 38px 4%;
@@ -109,6 +122,12 @@ export function FavoriteVideoArea() {
 
   return (
     <Parent>
+      <ResultNumDiv>
+        <FlexSpaceDiv />
+        <ResultNumSpan>
+          検索結果：{videoListItem.length}件
+        </ResultNumSpan>
+      </ResultNumDiv>
       <VideoUl>
         {
           videoListItem.map((e: FavoriteVideoListMergedType) => {

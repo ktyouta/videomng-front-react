@@ -5,7 +5,6 @@ import ENV from '../../../env.json';
 import { useNavigate, useParams } from "react-router-dom";
 import useSwitch from "../../../Common/Hook/useSwitch";
 import { useState } from "react";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { AddToFavoriteRequestType } from "../../Type/VideoDetail/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../../Type/VideoDetail/AddToFavoriteResponseType";
 import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
@@ -15,6 +14,7 @@ import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
+import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 
 
 
@@ -77,12 +77,11 @@ export function useHomeVideoDetailInfo() {
     function play() {
 
         if (!videoId) {
-            throw Error(`動画IDが存在しません。`);
+            toast.error(`動画を再生できません。`);
+            return;
         }
 
-        // 動画URL
-        const videoUrlModel = new VideoUrlModel(videoId);
-        window.open(`${videoUrlModel.videoUrl}`, `_blank`);
+        window.open(useVideoPlayUrl(videoId), `_blank`);
     }
 
 

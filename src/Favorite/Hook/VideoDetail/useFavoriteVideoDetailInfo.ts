@@ -4,12 +4,12 @@ import ENV from '../../../env.json';
 import { useNavigate } from "react-router-dom";
 import useSwitch from "../../../Common/Hook/useSwitch";
 import { useState } from "react";
-import { VideoUrlModel } from "../../../Common/Model/VideoUrlModel";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
+import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 
 
 
@@ -62,9 +62,12 @@ export function useFavoriteVideoDetailInfo() {
      */
     function play() {
 
-        // 動画URL
-        const videoUrlModel = new VideoUrlModel(videoId);
-        window.open(`${videoUrlModel.videoUrl}`, `_blank`);
+        if (!videoId) {
+            toast.error(`動画を再生できません。`);
+            return;
+        }
+
+        window.open(useVideoPlayUrl(videoId), `_blank`);
     }
 
     /**
