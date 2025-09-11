@@ -58,6 +58,14 @@ const BackHomeP = styled.p`
   cursor: pointer;
 `;
 
+function VideoLoading() {
+
+  return (
+    <LoadingParent>
+      <Loading />
+    </LoadingParent>
+  );
+}
 
 export function HomeVideoDetail() {
 
@@ -66,14 +74,14 @@ export function HomeVideoDetail() {
   const {
     isLoading,
     videoDetail,
-    errMessage,
+    isError,
     backHome, } = useHomeVideoDetail();
 
-  if (errMessage) {
+  if (isError) {
     return (
       <MessageDiv>
         <p>
-          {errMessage}
+          動画情報の取得に失敗しました。
         </p>
         <BackHomeP
           onClick={backHome}
@@ -85,20 +93,12 @@ export function HomeVideoDetail() {
   }
 
   if (!videoDetail) {
-    return (
-      <LoadingParent>
-        <Loading />
-      </LoadingParent>
-    );
+    return <VideoLoading />;
   }
 
   // ローディング
   if (isLoading) {
-    return (
-      <LoadingParent>
-        <Loading />
-      </LoadingParent>
-    );
+    return <VideoLoading />;
   }
 
   return (

@@ -1,9 +1,10 @@
 import React from "react";
-import { FavoriteSearchArea } from "./FavoriteSearchArea";
+import { FavoriteSearchAreaPc } from "./FavoriteSearchAreaPc";
 import { FavoriteVideoArea } from "./FavoriteVideoArea";
 import styled from "styled-components";
 import { useFavoriteVideoList } from "../../Hook/VideoList/useFavoriteVideoList";
 import { FavoriteSearchAreaMobile } from "./FavoriteSearchAreaMobile";
+import { FavoriteSearchArea } from "./FavoriteSearchArea";
 
 
 const Parent = styled.div`
@@ -17,18 +18,12 @@ export function FavoriteVideoList() {
 
     console.log("FavoriteVideoList render");
 
-    const { isMobile } = useFavoriteVideoList();
+    useFavoriteVideoList();
 
     return (
         <Parent>
             {/* 検索条件エリア */}
-            {
-                isMobile
-                    ?
-                    <FavoriteSearchAreaMobile />
-                    :
-                    <FavoriteSearchArea />
-            }
+            <FavoriteSearchArea />
             {/* 動画表示エリア */}
             <FavoriteVideoArea />
         </Parent>

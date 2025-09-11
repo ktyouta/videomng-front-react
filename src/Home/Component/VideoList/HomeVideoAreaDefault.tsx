@@ -1,5 +1,5 @@
 import React from "react";
-import { HomeRecentKeywod } from "./HomeRecentKeywod";
+import { HomeRecentKeywords } from "./HomeRecentKeywords";
 import { HomeFrequentKeywords } from "./HomeFrequentKeywords";
 import { HomeFavoriteKeywords } from "./HomeFavoriteKeywords";
 import styled from "styled-components";
@@ -38,7 +38,7 @@ export function HomeVideoAreaDefault() {
         キーワードを入力して動画を検索
       </MessageDiv>
       {/* 最近の検索 */}
-      <HomeRecentKeywod />
+      <HomeRecentKeywords />
       {/* あなたがよく検索するワード */}
       <HomeFrequentKeywords />
       {/* お気に入りワード */}

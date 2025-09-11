@@ -6,7 +6,7 @@ import { useRecentKeyword } from "./useRecentKeyword";
 import { useHomeVideoSearchConditionValue } from "./useHomeVideoSearchConditionValue";
 import { useHomeVideoNowSearchConditionValue } from "../useHomeVideoNowSearchConditionValue";
 
-export function useHomeRecentKeyword() {
+export function useHomeRecentKeywords() {
 
     // 最近の検索リスト
     const [recentWordList, setRecentWordList] = useState<string[]>([]);

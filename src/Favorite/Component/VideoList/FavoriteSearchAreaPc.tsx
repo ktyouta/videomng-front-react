@@ -14,16 +14,12 @@ import { MEDIA } from "../../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
-  box-sizing: border-box;
-  padding-left: 6%;
-`;
-
-const SearchParentDiv = styled.div`
-  width: 100%;
   display:flex;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 4%;
+  padding-right: 13%;
+  padding-left: 9%;
 `;
 
 const ComboTitleSpan = styled.span`
@@ -57,13 +53,20 @@ const FilterIconAreaDiv = styled.div`
   color:#9e9e9e;
 `;
 
+const FilterTitleSpan = styled.span`
+  color: #9e9e9e;
+  font-size: 14px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 /**
  * 検索条件エリア
  */
-export function FavoriteSearchAreaMobile() {
+export function FavoriteSearchAreaPc() {
 
-  console.log("FavoriteSearchAreaMobile render");
+  console.log("FavoriteSearchArea render");
 
   const {
     isOpenFilterModal,
@@ -76,62 +79,6 @@ export function FavoriteSearchAreaMobile() {
 
   return (
     <Parent>
-      <SearchParentDiv>
-        {
-          sortList && sortList.length > 0 &&
-          <React.Fragment>
-            <ComboTitleSpan>
-              並べ替え：
-            </ComboTitleSpan>
-            <ComboComponent
-              combo={sortList}
-              initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
-              onChange={selectSort}
-              width="60%"
-              height="39px"
-              selectStyle={{
-                "backgroundColor": "rgb(24, 26, 30)",
-                "color": "white",
-                "marginRight": "3%",
-                "fontSize": "12px"
-              }}
-            />
-          </React.Fragment>
-        }
-        <FilterIconAreaDiv>
-          <IconComponent
-            icon={FaFilter}
-            onclick={openFilterModal}
-            size="45%"
-          />
-        </FilterIconAreaDiv>
-        {
-          // フィルターモーダル
-          isOpenFilterModal &&
-          <ModalComponent
-            modalIsOpen={isOpenFilterModal}
-            closeModal={closeFilterModal}
-            style={{
-              backgroundColor: "#181a1e",
-              borderRadius: "1%",
-              border: "solid 1px",
-              color: "white",
-              overflowY: "hidden",
-            }}
-            width="80%"
-            height="65%"
-            isPositionCenter={true}
-          >
-            <FavoriteSearchCondition
-              close={closeFilterModal}
-            />
-          </ModalComponent>
-        }
-        {
-          isOpenFilterModal &&
-          <OverlayDiv />
-        }
-      </SearchParentDiv>
       {
         selectedFavoriteVideoTag &&
         <TagButtonComponent
@@ -140,6 +87,65 @@ export function FavoriteSearchAreaMobile() {
             marginRight: "15px"
           }}
         />
+      }
+      <FlexSpaceDiv />
+      {
+        sortList && sortList.length > 0 &&
+        <React.Fragment>
+          <ComboTitleSpan>
+            並べ替え：
+          </ComboTitleSpan>
+          <ComboComponent
+            combo={sortList}
+            initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
+            onChange={selectSort}
+            width="23%"
+            height="39px"
+            selectStyle={{
+              "backgroundColor": "rgb(24, 26, 30)",
+              "color": "white",
+              "marginRight": "3%"
+            }}
+          />
+        </React.Fragment>
+      }
+      <FilterIconAreaDiv>
+        <IconComponent
+          icon={FaFilter}
+          onclick={openFilterModal}
+          size="45%"
+        />
+      </FilterIconAreaDiv>
+      <FilterTitleSpan
+        onClick={openFilterModal}
+      >
+        フィルター
+      </FilterTitleSpan>
+      {
+        // フィルターモーダル
+        isOpenFilterModal &&
+        <ModalComponent
+          modalIsOpen={isOpenFilterModal}
+          closeModal={closeFilterModal}
+          style={{
+            backgroundColor: "#181a1e",
+            borderRadius: "1%",
+            border: "solid 1px",
+            color: "white",
+            overflowY: "hidden",
+          }}
+          width="42%"
+          height="65%"
+          isPositionCenter={true}
+        >
+          <FavoriteSearchCondition
+            close={closeFilterModal}
+          />
+        </ModalComponent>
+      }
+      {
+        isOpenFilterModal &&
+        <OverlayDiv />
       }
     </Parent>
   );

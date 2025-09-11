@@ -15,8 +15,6 @@ export function useHomeVideoDetail() {
 
     //ルーティング用
     const navigate = useNavigate();
-    // エラーメッセージ
-    const [errMessage, setErrMessage] = useState(``);
     // 動画ID
     const videoId = useVideoId();
     // 一覧画面のクエリパラメータ
@@ -24,17 +22,13 @@ export function useHomeVideoDetail() {
 
 
     // 動画詳細を取得
-    const { data: videoDetail, isLoading } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
+    const { data: videoDetail, isLoading, isError } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
         {
             url: useHomeVideoDetailEndpoint(videoId),
             select: (res: VideoDetailResponseType) => {
                 return res.data.items;
             },
             afErrorFn: (res) => {
-                const errRes = res as errResType;
-                if (errRes.response.data.message) {
-                    setErrMessage(`${errRes.response.data.message}`);
-                }
             }
         }
     );
@@ -52,8 +46,7 @@ export function useHomeVideoDetail() {
         isLoading,
         videoDetail,
         videoId,
-        errMessage,
         backHome,
-        //setVideoId,
+        isError
     };
 }

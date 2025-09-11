@@ -24,7 +24,7 @@ const ResultNumDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 5%;
+  padding-right: 6%;
   color: rgb(158, 158, 158);
   margin-top: 13px;
 `;
@@ -125,7 +125,7 @@ export function FavoriteVideoArea() {
       <ResultNumDiv>
         <FlexSpaceDiv />
         <ResultNumSpan>
-          検索結果：{videoListItem.length}件
+          全{videoListItem.length}件
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>

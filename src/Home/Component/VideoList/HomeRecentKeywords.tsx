@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useHomeRecentKeyword } from "../../Hook/VideoList/useHomeRecentKeyword";
+import { useHomeRecentKeywords } from "../../Hook/VideoList/useHomeRecentKeywords";
 import { RxCross1 } from "react-icons/rx";
 import { IconComponent } from "../../../Common/Component/IconComponent";
 import { MEDIA } from "../../../Common/Const/MediaConst";
@@ -71,13 +71,13 @@ const WordAreaDiv = styled.div`
 `;
 
 
-export function HomeRecentKeywod() {
+export function HomeRecentKeywords() {
 
   const {
     recentWordList,
     clickKeyWord,
     deleteKeyWord,
-  } = useHomeRecentKeyword();
+  } = useHomeRecentKeywords();
 
   return (
     <Parent>

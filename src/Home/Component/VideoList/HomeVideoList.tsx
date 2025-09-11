@@ -15,25 +15,15 @@ export function HomeVideoList() {
 
     console.log("HomeVideoList render");
 
-    const { nowSearchCondition } = useHomeVideoList();
-
-    const searchKeyword = nowSearchCondition.keyword;
+    useHomeVideoList();
 
     return (
         <HomeVideoSearchConditionValueProvider>
             <Parent>
                 {/* 検索条件エリア */}
                 <HomeSearchArea />
-                {
-                    // 検索前後で表示を切り替える
-                    searchKeyword
-                        ?
-                        // 検索結果表示
-                        <HomeVideoArea />
-                        :
-                        // 初期表示
-                        <HomeVideoAreaDefault />
-                }
+                {/* 動画表示エリア */}
+                <HomeVideoArea />
             </Parent>
         </HomeVideoSearchConditionValueProvider>
     );
