@@ -10,6 +10,7 @@ import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
+import { useCreateFavoriteVideoListQuery } from "../VideoList/useCreateFavoriteVideoListQuery";
 
 
 
@@ -23,6 +24,8 @@ export function useFavoriteVideoDetailInfo() {
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
+    // 動画一覧画面のクエリパラメータ
+    const { query } = useCreateFavoriteVideoListQuery();
 
 
     /**
@@ -38,7 +41,7 @@ export function useFavoriteVideoDetailInfo() {
             if (message) {
                 toast.success(message);
             }
-            navigate(ROUTER_PATH.FAVORITE.ROOT);
+            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${query}`);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

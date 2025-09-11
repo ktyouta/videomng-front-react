@@ -18,8 +18,6 @@ export function useFavoriteSearchAreaLogic() {
 
     // 条件指定モーダルの表示フラグ
     const { flag: isOpenFilterModal, on: openFilterModal, off: closeFilterModal } = useSwitch();
-    // ソートリスト
-    const [sortList, setSortList] = useState<comboType[]>([]);
     // 検索条件
     const {
         selectedFavoriteVideoTag,
@@ -30,19 +28,19 @@ export function useFavoriteSearchAreaLogic() {
 
 
     // ソートリストを取得
-    const { isLoading, isFetching } = useQueryWrapper<FavoriteVideoSortListResponseType>(
+    const { data: sortList, isLoading, isFetching } = useQueryWrapper<FavoriteVideoSortListResponseType, comboType[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_SORT}`,
-            afSuccessFn: (response: FavoriteVideoSortListResponseType) => {
-                setSortList(response.data.map((e: FavoriteVideoSortType) => {
+            select: (res: FavoriteVideoSortListResponseType) => {
+
+                return res.data.map((e: FavoriteVideoSortType) => {
                     return {
                         label: e.label,
                         value: e.id,
                     }
-                }));
+                });
             },
             afErrorFn: (res) => {
-                const errRes = res as errResType;
             }
         }
     );

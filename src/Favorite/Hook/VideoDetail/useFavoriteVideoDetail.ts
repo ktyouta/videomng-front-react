@@ -22,25 +22,6 @@ export function useFavoriteVideoDetail() {
     const videoId = useVideoId();
 
 
-    // // URL直打ち対応
-    // useEffect(() => {
-
-    //     const pathArray = window.location.pathname.split("/");
-
-    //     if (pathArray.length !== 4) {
-    //         throw Error(`動画IDが存在しません。`);
-    //     }
-
-    //     // ID部分を取得
-    //     const videoId = pathArray[3];
-
-    //     if (!videoId) {
-    //         throw Error(`動画IDが存在しません。`);
-    //     }
-
-    //     setFavoriteVideoId(videoId);
-    // }, []);
-
     // 動画詳細を取得
     const { data: videoDetail, isLoading } = useQueryWrapper<FavoriteVideoDetailResponseType, FavoriteVideoDetailDataType>(
         {
