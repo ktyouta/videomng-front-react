@@ -4,7 +4,7 @@ import { HomeVideoArea } from "./VideoArea/HomeVideoArea";
 import styled from "styled-components";
 import { useHomeVideoList } from "../../Hook/VideoList/useHomeVideoList";
 import { HomeVideoSearchConditionValueProvider } from "./HomeVideoSearchConditionValueProvider";
-import { HomeVideoAreaDefault } from "./VideoArea/HomeVideoAreaDefault";
+import { HomeVideoAreaDefault } from "./VideoArea/Default/HomeVideoAreaDefault";
 
 
 const Parent = styled.div`

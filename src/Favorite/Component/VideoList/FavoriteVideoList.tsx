@@ -1,10 +1,10 @@
 import React from "react";
-import { FavoriteSearchAreaPc } from "./FavoriteSearchAreaPc";
-import { FavoriteVideoArea } from "./FavoriteVideoArea";
+import { FavoriteSearchAreaPc } from "./SearchArea/FavoriteSearchAreaPc";
+import { FavoriteVideoArea } from "./VideoArea/FavoriteVideoArea";
 import styled from "styled-components";
 import { useFavoriteVideoList } from "../../Hook/VideoList/useFavoriteVideoList";
-import { FavoriteSearchAreaMobile } from "./FavoriteSearchAreaMobile";
-import { FavoriteSearchArea } from "./FavoriteSearchArea";
+import { FavoriteSearchAreaMobile } from "./SearchArea/FavoriteSearchAreaMobile";
+import { FavoriteSearchArea } from "./SearchArea/FavoriteSearchArea";
 
 
 const Parent = styled.div`

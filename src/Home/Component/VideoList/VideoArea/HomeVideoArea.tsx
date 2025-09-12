@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useHomeVideoArea } from "../../../Hook/VideoList/VideoArea/useHomeVideoArea";
-import { HomeVideoAreaDefault } from "./HomeVideoAreaDefault";
+import { HomeVideoAreaDefault } from "./Default/HomeVideoAreaDefault";
 import Loading from "../../../../Common/Component/Loading";
-import { HomeVideoListResult } from "./HomeVideoListResult";
-import { HomeVideoSearchWord } from "./HomeVideoSearchWord";
-import { HomeVideoAreaResult } from "./HomeVideoAreaResult";
+import { HomeVideoListResult } from "./Result/HomeVideoListResult";
+import { HomeVideoSearchWord } from "./Result/HomeVideoSearchWord";
+import { HomeVideoAreaResult } from "./Result/HomeVideoAreaResult";
 
 
 export function HomeVideoArea() {

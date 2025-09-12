@@ -7,13 +7,13 @@ import { isEqual } from "lodash";
 import { ShowMoreDataType } from "../../../Type/VideoList/ShowMoreDataType";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { useFavoriteKeyword } from "./useFavoriteKeyword";
+import { useFavoriteKeyword } from "./Default/useFavoriteKeyword";
 import { FAVORITE_KEYWORD } from "../../../Const/HomeConst";
 import { useLocation } from "react-router-dom";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
 import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
-import { useHomeVideoListEndpoint } from "./useHomeVideoListEndpoint";
+import { useHomeVideoListEndpoint } from "./Result/useHomeVideoListEndpoint";
 
 
 export function useHomeVideoArea() {

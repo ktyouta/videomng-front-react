@@ -1,14 +1,19 @@
-import React from "react";
 import styled from "styled-components";
-import { useHomeSearchConditionModal } from "../../../Hook/VideoList/SearchArea/useHomeSearchConditionModal";
+import ButtonComponent from "../../../../Common/Component/ButtonComponent";
 import ModalComponent from "../../../../Common/Component/ModalComponent";
-import { HomeSearchCondition } from "./HomeSearchCondition";
 import { OverlayDiv } from "../../../../Common/StyledComponent/OverlayDiv";
+import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
+import TagButtonComponent from "../../../../Common/Component/TagButtonComponent";
+import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
+import ComboComponent from "../../../../Common/Component/ComboComponent";
+import React from "react";
+import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../Common/Component/IconComponent";
-import { MdTune } from 'react-icons/md';
+import { MEDIA } from "../../../../Common/Const/MediaConst";
+import { useFavoriteSearchFilterModal } from "../../../Hook/VideoList/SearchArea/useFavoriteSearchFilterModal";
 
 
-const SearchConditionIconAreaDiv = styled.div`
+const FilterIconAreaDiv = styled.div`
   width: 46px;
   height: 99%;
   border-top-left-radius: 0;
@@ -21,7 +26,7 @@ const SearchConditionIconAreaDiv = styled.div`
   color:#9e9e9e;
 `;
 
-const SearchConditionTitleSpan = styled.span`
+const FilterTitleSpan = styled.span`
   color: #9e9e9e;
   font-size: 14px;
   &:hover {
@@ -29,37 +34,39 @@ const SearchConditionTitleSpan = styled.span`
   }
 `;
 
-export function HomeSearchConditionModal() {
+/**
+ * 検索条件エリア
+ */
+export function FavoriteSearchFilterModal() {
 
-    console.log("HomeSearchConditionModal render");
+    console.log("FavoriteSearchFilterModal render");
 
     const {
         isOpenFilterModal,
         openFilterModal,
         closeFilterModal,
-        isMobile } = useHomeSearchConditionModal();
+        isMobile } = useFavoriteSearchFilterModal();
 
 
     return (
         <React.Fragment>
-            {/* 検索条件展開用ボタン */}
-            <SearchConditionIconAreaDiv>
+            <FilterIconAreaDiv>
                 <IconComponent
-                    icon={MdTune}
+                    icon={FaFilter}
                     onclick={openFilterModal}
-                    size="85%"
+                    size="45%"
                 />
-            </SearchConditionIconAreaDiv>
+            </FilterIconAreaDiv>
             {
                 !isMobile &&
-                <SearchConditionTitleSpan
+                <FilterTitleSpan
                     onClick={openFilterModal}
                 >
-                    条件を指定
-                </SearchConditionTitleSpan>
+                    フィルター
+                </FilterTitleSpan>
             }
             {
-                // 検索条件指定モーダル
+                // フィルターモーダル
                 isOpenFilterModal &&
                 <ModalComponent
                     modalIsOpen={isOpenFilterModal}
@@ -68,13 +75,14 @@ export function HomeSearchConditionModal() {
                         backgroundColor: "#181a1e",
                         borderRadius: "1%",
                         border: "solid 1px",
-                        color: "white"
+                        color: "white",
+                        overflowY: "hidden",
                     }}
-                    width={isMobile ? "80%" : "42%"}
-                    height="50%"
+                    width={isMobile ? `80%` : `42%`}
+                    height="65%"
                     isPositionCenter={true}
                 >
-                    <HomeSearchCondition
+                    <FavoriteSearchCondition
                         close={closeFilterModal}
                     />
                 </ModalComponent>
