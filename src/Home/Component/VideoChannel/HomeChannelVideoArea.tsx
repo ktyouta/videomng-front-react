@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import LoadingBase from "../../../Common/Component/LoadingBase";
 import { YouTubeDataApiVideoListItemType } from "../../Type/VideoList/YouTubeDataApiVideoListItemType";
-import { HomeVideoContent } from "../VideoList/HomeVideoContent";
+import { HomeVideoContent } from "../VideoList/VideoArea/HomeVideoContent";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
 import { VideoListItemType } from "../../Type/VideoList/VideoListItemType";
 import { HomeChannelVideoContent } from "./HomeChannelVideoContent";

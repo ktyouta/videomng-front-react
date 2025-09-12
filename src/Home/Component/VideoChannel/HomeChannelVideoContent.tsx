@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { YouTubeDataApiVideoListItemType } from "../../Type/VideoList/YouTubeDataApiVideoListItemType";
-import { useHomeVideoContent } from "../../Hook/VideoList/useHomeVideoContent";
+import { useHomeVideoContent } from "../../Hook/VideoList/VideoArea/useHomeVideoContent";
 import { VideoListItemType } from "../../Type/VideoList/VideoListItemType";
 import { IconComponent } from "../../../Common/Component/IconComponent";
 import { FaStar } from "react-icons/fa";
 import { FLG } from "../../../Common/Const/CommonConst";
-import { HomeVideoContentFavoriteIconArea } from "../VideoList/HomeFavoriteIconArea";
+import { HomeVideoContentFavoriteIconArea } from "../VideoList/VideoArea/HomeFavoriteIconArea";
 import { useHomeChannelVideoContent } from "../../Hook/VideoChannel/useHomeChannelVideoContent";
 
 
