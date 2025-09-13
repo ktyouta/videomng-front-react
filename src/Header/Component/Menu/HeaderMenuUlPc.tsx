@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useHeaderMenuUl } from "../Hook/useHeaderMenuUl";
-import { ROUTER_PATH } from "../../Common/Const/RouterPath";
-import { MEDIA } from "../../Common/Const/MediaConst";
+import { useHeaderMenuUl } from "../../Hook/Menu/useHeaderMenuUl";
+import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
+import { MEDIA } from "../../../Common/Const/MediaConst";
+import { useHeaderMenuUlPc } from "../../Hook/Menu/useHeaderMenuUlPc";
 
 
 const NavUl = styled.ul`
@@ -48,13 +49,13 @@ const NavLi = styled.li<{ isActive: boolean }>`
   }
 `;
 
-export function HeaderMenuUl() {
+export function HeaderMenuUlPc() {
 
-    console.log(`HeaderMenuUl render`);
+    console.log(`HeaderMenuUlPc render`);
 
     const {
         nowPath,
-        isLogin } = useHeaderMenuUl();
+        isLogin } = useHeaderMenuUlPc();
 
     return (
         <NavUl>

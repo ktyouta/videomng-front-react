@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { useGlobalAtomValue } from "../../Common/Hook/useGlobalAtom";
-import { IsLoginContext } from "../../QueryApp";
-import { ROUTER_PATH } from "../../Common/Const/RouterPath";
-import { comboType } from "../../Common/Component/ComboComponent";
-import { useGetNowPath } from "./useGetNowPath";
+import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
+import { IsLoginContext } from "../../../QueryApp";
+import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
+import { comboType } from "../../../Common/Component/ComboComponent";
+import { useGetNowPath } from "../useGetNowPath";
 
 export function useHeaderMenuUlMobile() {
 
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
-    // メニューリスト
-    const [menuList, setMenuList] = useState<comboType[]>([]);
     //ルーティング用
     const navigate = useNavigate();
     // 現在のパス
     const { nowPath } = useGetNowPath();
 
-    useEffect(() => {
+
+    // メニューリスト
+    const menuList = useMemo(() => {
 
         let list = [{
             label: `ホーム`,
@@ -32,7 +32,7 @@ export function useHeaderMenuUlMobile() {
             });
         }
 
-        setMenuList(list);
+        return list;
     }, [isLogin]);
 
     /**

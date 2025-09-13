@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ComboComponent, { comboType } from "../../Common/Component/ComboComponent";
-import { VideoCategoryItemType } from "../../Main/Type/VideoCategoryItemType";
+import ComboComponent, { comboType } from "../../../../Common/Component/ComboComponent";
+import { VideoCategoryItemType } from "../../../../Main/Type/VideoCategoryItemType";
 
 
 const Parent = styled.div`

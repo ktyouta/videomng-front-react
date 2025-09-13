@@ -1,7 +1,7 @@
-import { IsLoginContext } from "../../QueryApp";
-import { useGetNowPath } from "./useGetNowPath";
+import { IsLoginContext } from "../../../QueryApp";
+import { useGetNowPath } from "../useGetNowPath";
 
-export function useHeaderMenuUl() {
+export function useHeaderMenuUlPc() {
 
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();

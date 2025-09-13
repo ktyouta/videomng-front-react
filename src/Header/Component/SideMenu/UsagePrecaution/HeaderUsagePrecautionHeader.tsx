@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { IconComponent } from "../../Common/Component/IconComponent";
+import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { RxCross1 } from "react-icons/rx";
-import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
+import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
 
 
 //ヘッダータイトルのスタイル

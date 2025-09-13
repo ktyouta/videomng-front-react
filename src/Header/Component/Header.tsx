@@ -1,21 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
-import { inherits } from "util";
-import { useHeader } from "../Hook/useHeader";
-import ButtonComponent from "../../Common/Component/ButtonComponent";
-import { HeaderMenuUl } from "./HeaderMenuUl";
-import { HeaderUserMenu } from "./HeaderUserMenu";
+import { HeaderMenuUl } from "./Menu/HeaderMenuUl";
+import { HeaderUserMenu } from "./UserMenu/HeaderUserMenu";
 import { FlexSpaceDiv } from "../../Common/StyledComponent/FlexSpaceDiv";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IconComponent } from "../../Common/Component/IconComponent";
-import { HeaderSideMenu } from "./HeaderSideMenu";
-import ModalComponent from "../../Common/Component/ModalComponent";
-import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
-import { HeaderHowToUse } from "./HeaderHowToUse";
+import { HeaderSideMenu } from "./SideMenu/HeaderSideMenu";
 import { MEDIA } from "../../Common/Const/MediaConst";
-import { HeaderMenuUlMobile } from "./HeaderMenuUlMobile";
-import { HeaderUsagePrecaution } from "./HeaderUsagePrecaution";
 
 
 const Parent = styled.div`
@@ -51,130 +39,22 @@ const MenuNav = styled.nav`
   }
 `;
 
-const BurgerIconDiv = styled.div`
-  margin-right: 5%;
-  width: 20px;
-  height: 25%;
-  display: flex;
-  align-items: center;
-`;
-
-export const OverlaySimeMenuDiv = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    opacity: 0.9;
-    z-index: 999
-`;
-
 
 export function Header() {
 
   console.log(`Header render`);
 
-  const {
-    openSideMenu,
-    closeSideMenu,
-    isOpenSideMenu,
-    isOpenHowToUseModal,
-    openHowToUseModal,
-    closeHowToUseModal,
-    isMobile,
-    openUsagePrecautionModal,
-    closeUsagePrecautionModal,
-    isOpenUsagePrecautionModal,
-  } = useHeader();
-
-  const howToUseModalWidth = isMobile ? "73%" : "42%";
-  const usagePrecautionModalWidth = isMobile ? "73%" : "47%";
-
   return (
     <Parent>
       <MenuNav>
-        {/* ハンバーガーメニューアイコン */}
-        <BurgerIconDiv>
-          <IconComponent
-            icon={RxHamburgerMenu}
-            onclick={openSideMenu}
-            style={{ color: "white" }}
-            size="95%"
-          />
-        </BurgerIconDiv>
-        {/* ハンバーガーメニュー */}
-        {
-          isOpenSideMenu &&
-          <React.Fragment>
-            <HeaderSideMenu
-              closeSideMenu={closeSideMenu}
-              openHowToUseModal={openHowToUseModal}
-              openUsagePrecautionModal={openUsagePrecautionModal}
-            />
-            <OverlaySimeMenuDiv />
-          </React.Fragment>
-        }
+        {/* サイドメニュー */}
+        <HeaderSideMenu />
         {/* メニュー */}
-        {
-          isMobile
-            ?
-            <HeaderMenuUlMobile />
-            :
-            <HeaderMenuUl />
-        }
+        <HeaderMenuUl />
         <FlexSpaceDiv />
         {/* ユーザーメニュー */}
         <HeaderUserMenu />
       </MenuNav>
-      {
-        // 使い方を見るモーダル
-        isOpenHowToUseModal &&
-        <ModalComponent
-          modalIsOpen={isOpenHowToUseModal}
-          closeModal={closeHowToUseModal}
-          style={{
-            backgroundColor: "#181a1e",
-            borderRadius: "1%",
-            border: "solid 1px",
-            color: "white",
-            overflowY: "hidden",
-          }}
-          width={howToUseModalWidth}
-          height="65%"
-          isPositionCenter={true}
-        >
-          <HeaderHowToUse
-            close={closeHowToUseModal}
-          />
-        </ModalComponent>
-      }
-      {
-        // 使用上の注意モーダル
-        isOpenUsagePrecautionModal &&
-        <ModalComponent
-          modalIsOpen={isOpenUsagePrecautionModal}
-          closeModal={closeUsagePrecautionModal}
-          style={{
-            backgroundColor: "#181a1e",
-            borderRadius: "1%",
-            border: "solid 1px",
-            color: "white",
-            overflowY: "hidden",
-          }}
-          width={usagePrecautionModalWidth}
-          height="65%"
-          isPositionCenter={true}
-        >
-          <HeaderUsagePrecaution
-            close={closeUsagePrecautionModal}
-          />
-        </ModalComponent>
-      }
-      {
-        (isOpenHowToUseModal || isOpenUsagePrecautionModal) &&
-        <OverlayDiv />
-      }
     </Parent>
   );
 }

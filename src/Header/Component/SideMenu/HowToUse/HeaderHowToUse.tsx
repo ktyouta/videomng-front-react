@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { HeaderHowToUseHeader } from "./HeaderHowToUseHeader";
 import { HeaderHowToUseMain } from "./HeaderHowToUseMain";
-import { MEDIA } from "../../Common/Const/MediaConst";
-import { HeaderUsagePrecautionHeader } from "./HeaderUsagePrecautionHeader";
-import { HeaderUsagePrecautionMain } from "./HeaderUsagePrecautionMain";
+import { MEDIA } from "../../../../Common/Const/MediaConst";
 
 const Parent = styled.div`
   box-sizing:border-box;
@@ -28,16 +26,16 @@ type propsType = {
   close: () => void;
 }
 
-export function HeaderUsagePrecaution(props: propsType) {
+export function HeaderHowToUse(props: propsType) {
 
-  console.log("HeaderUsagePrecaution render");
+  console.log("HeaderHowToUse render");
 
   return (
     <Parent>
-      <HeaderUsagePrecautionHeader
+      <HeaderHowToUseHeader
         close={props.close}
       />
-      <HeaderUsagePrecautionMain />
+      <HeaderHowToUseMain />
     </Parent>
   );
 }
