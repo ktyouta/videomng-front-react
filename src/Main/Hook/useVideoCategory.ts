@@ -43,10 +43,10 @@ export function useVideoCategory() {
                 ]
             },
             afErrorFn: (res) => {
-                const errRes = res as errResType;
-                if (errRes.response.data.message) {
-                    toast.error(errRes.response.data.message);
-                }
+            },
+            options: {
+                // 初回に読み込んだカテゴリを使いまわす
+                staleTime: Infinity
             }
         }
     );

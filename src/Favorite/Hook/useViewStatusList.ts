@@ -19,14 +19,24 @@ export function useViewStatusList() {
         {
             url: `${VIDEO_MNG_PATH}${ENV.VIEW_STATUS}`,
             select: (res: ViewStatusResponseType) => {
-                return res.data.map((e) => {
-                    return {
-                        value: e.id,
-                        label: e.label,
-                    }
-                });
+                return [
+                    {
+                        label: `すべて`,
+                        value: ``,
+                    },
+                    ...res.data.map((e) => {
+                        return {
+                            value: e.id,
+                            label: e.label,
+                        }
+                    })
+                ]
             },
             afErrorFn: (res) => {
+            },
+            options: {
+                // 初回に読み込んだカテゴリを使いまわす
+                staleTime: Infinity
             }
         }
     );

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import ComboComponent, { comboType } from "../../../../Common/Component/ComboComponent";
-import { VideoCategoryItemType } from "../../../../Main/Type/VideoCategoryItemType";
-import { useFavoriteSearchConditionMain } from "../../../Hook/VideoList/SearchArea/useFavoriteSearchConditionMain";
+import ComboComponent, { comboType } from "../../../../../Common/Component/ComboComponent";
+import { VideoCategoryItemType } from "../../../../../Main/Type/VideoCategoryItemType";
+import { useFavoriteSearchConditionMain } from "../../../../Hook/VideoList/SearchArea/Filter/useFavoriteSearchConditionMain";
 
 
 const Parent = styled.div`
@@ -53,7 +53,7 @@ export function FavoriteSearchConditionMain(props: propsType) {
     const {
         videoCategory,
         selectedFavoriteVideoCategory,
-        viewStatusSelectList,
+        viewStatusList,
         selectedFavoriteVideoViewStatus,
         changeVideoCategory,
         changeViewStatus,
@@ -85,14 +85,14 @@ export function FavoriteSearchConditionMain(props: propsType) {
                     </InputDiv>
                 }
                 {
-                    viewStatusSelectList && viewStatusSelectList.length > 0 &&
+                    viewStatusList && viewStatusList.length > 0 &&
                     <InputDiv>
                         <InputLabel>
                             視聴状況
                         </InputLabel>
                         <ComboComponent
-                            combo={viewStatusSelectList}
-                            initValue={selectedFavoriteVideoViewStatus ?? viewStatusSelectList[0].value}
+                            combo={viewStatusList}
+                            initValue={selectedFavoriteVideoViewStatus ?? viewStatusList[0].value}
                             onChange={changeViewStatus}
                             width="68%"
                             minWidth="8%"

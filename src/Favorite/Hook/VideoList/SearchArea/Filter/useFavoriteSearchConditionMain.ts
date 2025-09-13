@@ -1,20 +1,20 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
-import { comboType } from "../../../../Common/Component/ComboComponent";
-import { objectDeepCopy } from "../../../../Common/Function/CommonFunction";
-import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
-import { FavoriteVideoTagResponseType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
-import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
-import { tagType } from "../../../../Common/Component/TagsComponent";
-import ENV from "../../../../env.json";
-import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
-import { errResType } from "../../../../Common/Hook/useMutationWrapperBase";
-import { useGlobalAtomValue } from "../../../../Common/Hook/useGlobalAtom";
+import { comboType } from "../../../../../Common/Component/ComboComponent";
+import { objectDeepCopy } from "../../../../../Common/Function/CommonFunction";
+import useQueryWrapper from "../../../../../Common/Hook/useQueryWrapper";
+import { FavoriteVideoTagResponseType } from "../../../../Type/VideoDetail/VideoTag/FavoriteVideoTagResponseType";
+import { VIDEO_MNG_PATH } from "../../../../../Common/Const/CommonConst";
+import { tagType } from "../../../../../Common/Component/TagsComponent";
+import ENV from "../../../../../env.json";
+import { FavoriteVideoTagType } from "../../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
+import { errResType } from "../../../../../Common/Hook/useMutationWrapperBase";
+import { useGlobalAtomValue } from "../../../../../Common/Hook/useGlobalAtom";
 import { useNavigate } from "react-router-dom";
-import { FAVORITE_LEVEL_SETTING_LIST } from "../../../Const/FavoriteConst";
-import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
-import { useViewStatusList } from "../../useViewStatusList";
-import { useVideoCategory } from "../../../../Main/Hook/useVideoCategory";
+import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../Const/FavoriteConst";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
+import { useViewStatusList } from "../../../useViewStatusList";
+import { useVideoCategory } from "../../../../../Main/Hook/useVideoCategory";
 
 
 type propsType = {
@@ -27,15 +27,6 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const { data: videoCategory } = useVideoCategory();
     // 視聴状況リストを取得
     const { data: viewStatusList } = useViewStatusList();
-    // 視聴状況選択リスト
-    const [viewStatusSelectList, setViewStatusSelectList] = useState<comboType[]>();
-    // タグマスタリスト
-    const [tagMasterList, setTagMasterList] = useState<comboType[]>([
-        {
-            value: ``,
-            label: `すべて`,
-        }
-    ]);
     // 検索条件
     const {
         selectedFavoriteVideoCategory,
@@ -46,30 +37,6 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
         setSelectedFavoriteVideoFavoriteLevel, } = useFavoriteVideoSearchConditionValue();
-
-    /**
-     * 画面表示用の視聴状況リストを作成
-     */
-    useEffect(() => {
-
-        // 視聴状況選択リストが作成されている場合はスキップ
-        if (viewStatusSelectList && viewStatusSelectList.length > 0) {
-            return;
-        }
-
-        if (!viewStatusList || viewStatusList.length === 0) {
-            return;
-        }
-
-        const copyViewStatusList = objectDeepCopy(viewStatusList);
-        const newViewStatusSelectList = [{
-            value: ``,
-            label: `すべて`,
-        }, ...copyViewStatusList];
-
-        setViewStatusSelectList(newViewStatusSelectList);
-
-    }, viewStatusList);
 
 
     // お気に入り度リスト
@@ -93,27 +60,27 @@ export function useFavoriteSearchConditionMain(props: propsType) {
 
 
     // タグマスタリストを取得
-    useQueryWrapper<FavoriteVideoTagResponseType>(
+    const { data: tagMasterList } = useQueryWrapper<FavoriteVideoTagResponseType, comboType[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
-            afSuccessFn: (response: FavoriteVideoTagResponseType) => {
+            select: (res: FavoriteVideoTagResponseType) => {
 
-                const tagComboList = response.data.map((e: FavoriteVideoTagType) => {
-                    return {
-                        value: e.tagName,
-                        label: e.tagName,
-                    }
-                });
+                const tagComboList = res.data;
 
-                setTagMasterList((e) => {
-                    return [
-                        ...e,
-                        ...tagComboList
-                    ];
-                })
+                return [
+                    {
+                        value: ``,
+                        label: `すべて`,
+                    },
+                    ...tagComboList.map((e) => {
+                        return {
+                            value: e.tagName,
+                            label: e.tagName,
+                        }
+                    })
+                ]
             },
             afErrorFn: (res) => {
-                const errRes = res as errResType;
             }
         }
     );
@@ -162,7 +129,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     return {
         videoCategory,
         selectedFavoriteVideoCategory,
-        viewStatusSelectList,
+        viewStatusList,
         selectedFavoriteVideoViewStatus,
         changeVideoCategory,
         changeViewStatus,

@@ -1,10 +1,10 @@
 import React from "react";
-import { IconComponent } from "../../../../Common/Component/IconComponent";
+import { IconComponent } from "../../../../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
 import { FavoriteSearchConditionHeader } from "./FavoriteSearchConditionHeader";
 import { FavoriteSearchConditionMain } from "./FavoriteSearchConditionMain";
-import { MEDIA } from "../../../../Common/Const/MediaConst";
+import { MEDIA } from "../../../../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
