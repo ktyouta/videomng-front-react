@@ -12,7 +12,7 @@ const MessageDiv = styled.div`
   justify-content: center;
   box-sizing: border-box;
   margin-top: 11%;
-  font-size: 13px;
+  font-size: 15px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 15px;

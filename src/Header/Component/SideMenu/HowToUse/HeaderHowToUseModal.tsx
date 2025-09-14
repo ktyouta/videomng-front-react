@@ -14,15 +14,12 @@ export function HeaderHowToUseModal(props: propsType) {
 
     console.log(`HeaderSideMenuList render`);
 
-    const {
-        closeHowToUseModal,
-        isMobile, } = useHeaderHowToUseModal();
+    const { isMobile } = useHeaderHowToUseModal();
 
     return (
         <React.Fragment>
             <ModalComponent
                 modalIsOpen={true}
-                closeModal={closeHowToUseModal}
                 style={{
                     backgroundColor: "#181a1e",
                     borderRadius: "1%",

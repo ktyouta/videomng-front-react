@@ -14,15 +14,12 @@ export function HeaderUsagePrecautionModal(props: propsType) {
 
     console.log(`HeaderUsagePrecautionModal render`);
 
-    const {
-        isMobile,
-        closeUsagePrecautionModal, } = useHeaderUsagePrecautionModal();
+    const { isMobile } = useHeaderUsagePrecautionModal();
 
     return (
         <React.Fragment>
             <ModalComponent
                 modalIsOpen={true}
-                closeModal={closeUsagePrecautionModal}
                 style={{
                     backgroundColor: "#181a1e",
                     borderRadius: "1%",

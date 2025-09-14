@@ -20,41 +20,8 @@ export function useHeaderUserMenu() {
     const navigate = useNavigate();
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
-    const setIsLogin = SetIsLoginContext.useCtx();
-    //ナビゲーション表示フラグ
-    const { flag: isOpenUserMenu,
-        on: oepnUserMenu,
-        off: closeUserMenu } = useSwitch();
-    // ログインユーザー情報
-    const loginUserInfo = LoginUserInfoContext.useCtx();
-    // ログインユーザー情報(setter)
-    const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // 認証チェック済みフラグ
-    const isCheckedAuth = IsCheckedAuthContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-    // 遷移元パス
-    const previousPath = useGetPreviousPath();
-
-    /**
-     * ログアウトリクエスト
-     */
-    const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_LOGOUT}`,
-        method: "POST",
-        // 正常終了後の処理
-        afSuccessFn: () => {
-
-            setLoginUserInfo(LOGIN_USER_INFO_INIT);
-            setIsLogin(false);
-            navigate(ROUTER_PATH.HOME.ROOT);
-        },
-        // 失敗後の処理
-        afErrorFn: (res: errResType) => {
-            toast.error(`ログアウトに失敗しました。再度お試しください。`);
-        },
-    });
-
 
     /**
      * ログインボタン押下イベント
@@ -63,38 +30,9 @@ export function useHeaderUserMenu() {
         navigate(ROUTER_PATH.LOGIN);
     }
 
-    /**
-     * ログアウト
-     */
-    function clickLogout() {
-        postMutation.mutate();
-    }
-
-    /**
-     * ユーザー情報更新画面遷移
-     */
-    function clickUpdateUserInfo() {
-        navigate(`${ROUTER_PATH.UPDATE_USER_INFO}?previouspath=${previousPath}`);
-    }
-
-    /**
-     * ユーザーパスワード更新画面遷移
-     */
-    function clickUpdateUserPassword() {
-        navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}?previouspath=${previousPath}`);
-    }
-
     return {
         clickLogin,
         isLogin,
-        isOpenUserMenu,
-        oepnUserMenu,
-        closeUserMenu,
-        clickLogout,
-        loginUserInfo,
-        clickUpdateUserInfo,
-        clickUpdateUserPassword,
-        isCheckedAuth,
         isMobile,
     }
 }
