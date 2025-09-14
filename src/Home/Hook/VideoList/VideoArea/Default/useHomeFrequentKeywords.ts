@@ -3,9 +3,11 @@ import { FREQUENT_KEYWORD, REACENT_KEYWORD } from "../../../../Const/HomeConst";
 import { useEffect, useState } from "react";
 import { FrequentWordType } from "../../../../Type/VideoList/FrequentWordType";
 import { useFrequentKeywords } from "./useFrequentKeywords";
-import { useRecentKeyword } from "../useRecentKeyword";
+import { useRecentKeyword } from "./useRecentKeyword";
 import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
+import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
+import { useNavigate } from "react-router-dom";
 
 export function useHomeFrequentKeywords() {
 
@@ -19,6 +21,10 @@ export function useHomeFrequentKeywords() {
     const { setInputKeyword } = useHomeVideoSearchConditionValue();
     // 現在の検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
+    // クエリ作成用
+    const { create } = useCreateHomeVideoListQuery();
+    //ルーティング用
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -44,10 +50,17 @@ export function useHomeFrequentKeywords() {
         // 現在の検索条件を更新
         setNowSearchCondition((e) => {
 
-            return {
+            const newCondition = {
                 ...e,
-                keyword
+                keyword,
             }
+
+            const newQuery = create(newCondition);
+
+            // クエリパラメータを更新
+            navigate(newQuery);
+
+            return newCondition;
         });
 
         // ローカルストレージの検索ワード(最近の検索)を保存

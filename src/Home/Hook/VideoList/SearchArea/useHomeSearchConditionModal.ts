@@ -1,7 +1,7 @@
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import { useNavigate } from "react-router-dom";
 import { useFrequentKeywords } from "../VideoArea/Default/useFrequentKeywords";
-import { useRecentKeyword } from "../VideoArea/useRecentKeyword";
+import { useRecentKeyword } from "../VideoArea/Default/useRecentKeyword";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
 import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";

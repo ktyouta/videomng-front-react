@@ -62,16 +62,16 @@ export function useHomeVideoAreaResult() {
     );
 
     // クエリパラメータが存在しない場合はホーム画面を初期化する
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (prevSearch.current && !location.search) {
+    //     if (prevSearch.current && !location.search) {
 
-            resetNowCondition();
-            setVideoListData(undefined);
-        }
+    //         resetNowCondition();
+    //         setVideoListData(undefined);
+    //     }
 
-        prevSearch.current = location.search;
-    }, [location.search]);
+    //     prevSearch.current = location.search;
+    // }, [location.search]);
 
     return {
         videoListData,

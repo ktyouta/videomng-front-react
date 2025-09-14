@@ -1,4 +1,4 @@
-import { REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../../../Const/HomeConst";
+import { REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../../../../Const/HomeConst";
 
 export function useRecentKeyword() {
 

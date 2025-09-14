@@ -1,11 +1,12 @@
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import { useNavigate } from "react-router-dom";
 import { useFrequentKeywords } from "../VideoArea/Default/useFrequentKeywords";
-import { useRecentKeyword } from "../VideoArea/useRecentKeyword";
+import { useRecentKeyword } from "../VideoArea/Default/useRecentKeyword";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
 import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
 import { toast } from "react-toastify";
+import { useCreateHomeVideoListQuery } from "../useCreateHomeVideoListQuery";
 
 
 export function useHomeSearchText() {
@@ -24,6 +25,10 @@ export function useHomeSearchText() {
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 現在の検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
+    // クエリ作成用
+    const { create } = useCreateHomeVideoListQuery();
+    //ルーティング用
+    const navigate = useNavigate();
 
     /**
      * 検索ボタン押下イベント
@@ -45,6 +50,16 @@ export function useHomeSearchText() {
                 nextPageToken: ``,
             };
         });
+
+        // クエリパラメータを作成
+        const newQuery = create({
+            keyword: inputKeyword,
+            videocategory: selectedVideoCategory,
+            videotype: selectedVideoType,
+            nextPageToken: ``,
+        });
+
+        navigate(newQuery);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
         saveRecentKeyword(inputKeyword);
