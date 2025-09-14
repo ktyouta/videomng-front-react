@@ -6,55 +6,38 @@ import { OverlayDiv } from "../../../../Common/StyledComponent/OverlayDiv";
 import { useHeaderHowToUseModal } from "../../../Hook/SideMenu/HowToUse/useHeaderHowToUseModal";
 
 
-const MenuLi = styled.li`
-  cursor:pointer;
-`;
+type propsType = {
+    closeMenu: () => void
+}
 
-
-export function HeaderHowToUseModal() {
+export function HeaderHowToUseModal(props: propsType) {
 
     console.log(`HeaderSideMenuList render`);
 
     const {
-        isOpenHowToUseModal,
-        openHowToUseModal,
         closeHowToUseModal,
         isMobile, } = useHeaderHowToUseModal();
 
-
     return (
         <React.Fragment>
-            <MenuLi
-                onClick={openHowToUseModal}
+            <ModalComponent
+                modalIsOpen={true}
+                closeModal={closeHowToUseModal}
+                style={{
+                    backgroundColor: "#181a1e",
+                    borderRadius: "1%",
+                    border: "solid 1px",
+                    color: "white",
+                    overflowY: "hidden",
+                }}
+                width={isMobile ? "73%" : "42%"}
+                height="65%"
+                isPositionCenter={true}
             >
-                使い方を見る
-            </MenuLi>
-            {
-                // 使い方を見るモーダル
-                isOpenHowToUseModal &&
-                <ModalComponent
-                    modalIsOpen={isOpenHowToUseModal}
-                    closeModal={closeHowToUseModal}
-                    style={{
-                        backgroundColor: "#181a1e",
-                        borderRadius: "1%",
-                        border: "solid 1px",
-                        color: "white",
-                        overflowY: "hidden",
-                    }}
-                    width={isMobile ? "73%" : "42%"}
-                    height="65%"
-                    isPositionCenter={true}
-                >
-                    <HeaderHowToUse
-                        close={closeHowToUseModal}
-                    />
-                </ModalComponent>
-            }
-            {
-                isOpenHowToUseModal &&
-                <OverlayDiv />
-            }
+                <HeaderHowToUse
+                    close={props.closeMenu}
+                />
+            </ModalComponent>
         </React.Fragment>
     );
 }

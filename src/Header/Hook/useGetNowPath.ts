@@ -18,7 +18,13 @@ export function useGetNowPath() {
             return;
         }
 
-        setNowPath(`/${pathArray[1]}`);
+        const newPath = pathArray[1];
+
+        if (nowPath === newPath) {
+            return;
+        }
+
+        setNowPath(`/${newPath}`);
     }, [location]);
 
     return {
