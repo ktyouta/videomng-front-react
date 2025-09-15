@@ -7,6 +7,7 @@ import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchCondit
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
 import { useNavigate } from "react-router-dom";
+import { useReplaceQuery } from "../../../../../Common/Hook/useReplaceQuery";
 
 export function useHomeFavoriteKeywords() {
 
@@ -22,8 +23,8 @@ export function useHomeFavoriteKeywords() {
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
     const { create } = useCreateHomeVideoListQuery();
-    //ルーティング用
-    const navigate = useNavigate();
+    // クエリパラメータ変更用
+    const { replace } = useReplaceQuery();
 
 
     useEffect(() => {
@@ -51,7 +52,7 @@ export function useHomeFavoriteKeywords() {
             const newQuery = create(newCondition);
 
             // クエリパラメータを更新
-            navigate(newQuery);
+            replace(newQuery);
 
             return newCondition;
         });

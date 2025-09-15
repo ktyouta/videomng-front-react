@@ -11,7 +11,8 @@ import { comboType } from "../../../../Common/Component/ComboComponent";
 import { useNavigate } from "react-router-dom";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
 import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
-import { useSyncFavoriteVideoListUrl } from "../useSyncFavoriteVideoListUrl";
+import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
+import { useReplaceQuery } from "../../../../Common/Hook/useReplaceQuery";
 
 
 export function useFavoriteSearchSortArea() {
@@ -22,7 +23,10 @@ export function useFavoriteSearchSortArea() {
         setSelectedFavoriteVideoSortKey, } = useFavoriteVideoSearchConditionValue();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-
+    // クエリ作成用
+    const { create } = useCreateFavoriteVideoListQuery();
+    // クエリパラメータ変更用
+    const { replace } = useReplaceQuery();
 
     // ソートリストを取得
     const { data: sortList } = useQueryWrapper<FavoriteVideoSortListResponseType, comboType[]>(
@@ -47,6 +51,13 @@ export function useFavoriteSearchSortArea() {
      * @param value 
      */
     function selectSort(value: string) {
+
+        const newQuery = create({
+            sortKey: value
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
 
         setSelectedFavoriteVideoSortKey(value);
     }

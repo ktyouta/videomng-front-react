@@ -15,6 +15,8 @@ import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../Const/FavoriteConst";
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
 import { useVideoCategory } from "../../../../../Main/Hook/useVideoCategory";
+import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
+import { useReplaceQuery } from "../../../../../Common/Hook/useReplaceQuery";
 
 
 type propsType = {
@@ -37,6 +39,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
         setSelectedFavoriteVideoFavoriteLevel, } = useFavoriteVideoSearchConditionValue();
+    // クエリ作成用
+    const { create } = useCreateFavoriteVideoListQuery();
+    // クエリパラメータ変更用
+    const { replace } = useReplaceQuery();
 
 
     // お気に入り度リスト
@@ -57,7 +63,6 @@ export function useFavoriteSearchConditionMain(props: propsType) {
             label: `すべて`,
         }, ...favoriteLevelList];
     }, []);
-
 
     // タグマスタリストを取得
     const { data: tagMasterList } = useQueryWrapper<FavoriteVideoTagResponseType, comboType[]>(
@@ -85,12 +90,18 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
     );
 
-
     /**
      * カテゴリ選択イベント
      * @param selectedcCategory 
      */
     function changeVideoCategory(selectedCategory: string,) {
+
+        const newQuery = create({
+            videoCategory: selectedCategory
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
 
         setSelectedFavoriteVideoCategory(selectedCategory);
         props.close();
@@ -102,6 +113,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeViewStatus(selectedViewStatus: string,) {
 
+        const newQuery = create({
+            viewStatus: selectedViewStatus
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
+
         setSelectedFavoriteVideoViewStatus(selectedViewStatus);
         props.close();
     }
@@ -112,6 +130,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      */
     function changeVideoTag(selectedVideoTag: string,) {
 
+        const newQuery = create({
+            videoTag: selectedVideoTag
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
+
         setSelectedFavoriteVideoTag(selectedVideoTag);
         props.close();
     }
@@ -121,6 +146,13 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * @param selectedcCategory 
      */
     function changeFavoriteLevel(selectedFavoriteLevel: string,) {
+
+        const newQuery = create({
+            favoriteLevel: selectedFavoriteLevel
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
 
         setSelectedFavoriteVideoFavoriteLevel(selectedFavoriteLevel);
         props.close();

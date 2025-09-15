@@ -2,7 +2,6 @@ import React from "react";
 import { FavoriteSearchAreaPc } from "./SearchArea/FavoriteSearchAreaPc";
 import { FavoriteVideoArea } from "./VideoArea/FavoriteVideoArea";
 import styled from "styled-components";
-import { useFavoriteVideoList } from "../../Hook/VideoList/useFavoriteVideoList";
 import { FavoriteSearchAreaMobile } from "./SearchArea/FavoriteSearchAreaMobile";
 import { FavoriteSearchArea } from "./SearchArea/FavoriteSearchArea";
 
@@ -17,8 +16,6 @@ const Parent = styled.div`
 export function FavoriteVideoList() {
 
     console.log("FavoriteVideoList render");
-
-    useFavoriteVideoList();
 
     return (
         <Parent>

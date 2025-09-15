@@ -7,6 +7,7 @@ import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchCondition
 import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
 import { toast } from "react-toastify";
 import { useCreateHomeVideoListQuery } from "../useCreateHomeVideoListQuery";
+import { useReplaceQuery } from "../../../../Common/Hook/useReplaceQuery";
 
 
 export function useHomeSearchText() {
@@ -27,8 +28,8 @@ export function useHomeSearchText() {
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
     const { create } = useCreateHomeVideoListQuery();
-    //ルーティング用
-    const navigate = useNavigate();
+    // クエリパラメータ変更用
+    const { replace } = useReplaceQuery();
 
     /**
      * 検索ボタン押下イベント
@@ -59,7 +60,7 @@ export function useHomeSearchText() {
             nextPageToken: ``,
         });
 
-        navigate(newQuery);
+        replace(newQuery);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
         saveRecentKeyword(inputKeyword);
