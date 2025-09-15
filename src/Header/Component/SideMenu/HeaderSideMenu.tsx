@@ -9,9 +9,12 @@ import { MENU_NO } from "../../Const/HeaderConst";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useHeaderSideMenu } from "../../Hook/SideMenu/useHeaderSideMenu";
 import { OverlayDiv } from "../../../Common/StyledComponent/OverlayDiv";
+import { HeaderSideMenuLi } from "./HeaderSideMenuLi";
+import { HeaderSideMenuModal } from "./HeaderSideMenuModal";
 
 
-const SideMenuAside = styled.aside`
+const SideMenuAside = styled.aside<{ isDisplay: boolean }>`
+  display:${({ isDisplay }) => (isDisplay ? `` : "none")};
   position: fixed;
   top: 0;
   left: 0;
@@ -75,7 +78,8 @@ const CloseIconAreaDiv = styled.div`
   background-color: #1e1e1e;
 `;
 
-const OverlaySimeMenuDiv = styled.div`
+const OverlaySimeMenuDiv = styled.div<{ isDisplay: boolean }>`
+    display:${({ isDisplay }) => (isDisplay ? `` : "none")};
     position: fixed;
     top: 0;
     left: 0;
@@ -84,10 +88,6 @@ const OverlaySimeMenuDiv = styled.div`
     background-color: black;
     opacity: 0.9;
     z-index: 999
-`;
-
-const MenuLi = styled.li`
-  cursor:pointer;
 `;
 
 const BurgerIconDiv = styled.div`
@@ -122,59 +122,44 @@ export function HeaderSideMenu() {
           size="95%"
         />
       </BurgerIconDiv>
-      {
-        isOpenSideMenu &&
-        <React.Fragment>
-          <SideMenuAside>
-            {/* 閉じるアイコン */}
-            <CloseIconAreaDiv>
-              <IconComponent
-                icon={RxCross1}
-                onclick={closeSideMenu}
-                style={{
-                  color: "white"
-                }}
-                size="17px"
-              />
-            </CloseIconAreaDiv>
-            <MenuUl>
-              <MenuLi
-                onClick={() => {
-                  openInnerMenu(MENU_NO.HOW_TO_USE);
-                }}
-              >
-                使い方を見る
-              </MenuLi>
-              <MenuLi
-                onClick={() => {
-                  openInnerMenu(MENU_NO.USE_PRECAUTION);
-                }}
-              >
-                使用上の注意
-              </MenuLi>
-            </MenuUl>
-          </SideMenuAside>
-          <OverlaySimeMenuDiv />
-        </React.Fragment>
-      }
-      {
-        // 使い方を見る
-        openMenuNo === MENU_NO.HOW_TO_USE &&
-        <HeaderHowToUseModal
-          closeMenu={closeInnerMenu}
-        />
-      }
-      {
-        // 使用上の注意
-        openMenuNo === MENU_NO.USE_PRECAUTION &&
-        <HeaderUsagePrecautionModal
-          closeMenu={closeInnerMenu}
-        />
-      }
-      {
-        openMenuNo !== MENU_NO.NONE &&
-        <OverlayDiv />
-      }
+      <SideMenuAside
+        isDisplay={isOpenSideMenu}
+      >
+        {/* 閉じるアイコン */}
+        <CloseIconAreaDiv>
+          <IconComponent
+            icon={RxCross1}
+            onclick={closeSideMenu}
+            style={{
+              color: "white"
+            }}
+            size="17px"
+          />
+        </CloseIconAreaDiv>
+        <MenuUl>
+          <HeaderSideMenuLi
+            title="使い方を見る"
+            onClick={() => {
+              openInnerMenu(MENU_NO.HOW_TO_USE);
+            }}
+          />
+          <HeaderSideMenuLi
+            title="使用上の注意"
+            onClick={() => {
+              openInnerMenu(MENU_NO.USE_PRECAUTION);
+            }}
+          />
+        </MenuUl>
+      </SideMenuAside>
+      <OverlaySimeMenuDiv
+        isDisplay={isOpenSideMenu}
+        onClick={closeSideMenu}
+      />
+      {/* モーダルメニュー */}
+      <HeaderSideMenuModal
+        openMenuNo={openMenuNo}
+        closeMenu={closeInnerMenu}
+      />
     </React.Fragment>
   );
 }

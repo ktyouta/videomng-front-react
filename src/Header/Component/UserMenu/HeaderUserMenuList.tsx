@@ -7,10 +7,11 @@ import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../../../Common/Const/CommonConst";
 import { MEDIA } from "../../../Common/Const/MediaConst";
 import { useHeaderUserMenuList } from "../../Hook/UserMenu/useHeaderUserMenuList";
+import { HeaderUserMenuContent } from "./HeaderUserMenuContent";
 
 
-//ボタンのスタイル
-const BtnDiv = styled.div`
+// アイコンのスタイル
+const IconDiv = styled.div`
   margin-left: 1%;
   margin-right: 5%;
   position:relative;
@@ -19,7 +20,7 @@ const BtnDiv = styled.div`
   display: flex
 `;
 
-//ナビゲーション
+// ナビゲーション
 const NavDiv = styled.div<{ isDisplay: boolean }>`
   position: absolute;
   left: -201px;
@@ -59,20 +60,7 @@ const NavDiv = styled.div<{ isDisplay: boolean }>`
   }
 `;
 
-//コンテンツのスタイル
-const ContentDiv = styled.div`
-    cursor:pointer;
-    &:hover {
-        text-decoration: underline;
-    }
-    min-height: 29px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    margin-bottom: 2px;
-`;
-
-//アイコンクリック時の背景のスタイル
+// アイコンクリック時の背景のスタイル
 const OverlayDiv = styled.div`
   position: absolute;
   opacity: 0.9;
@@ -116,7 +104,7 @@ export function HeaderUserMenuList() {
                     {loginUserInfo.userName}
                 </UserNameSpan>
             }
-            <BtnDiv>
+            <IconDiv>
                 <IconComponent
                     icon={IoPersonCircleOutline}
                     onclick={clickUserIcon}
@@ -125,29 +113,25 @@ export function HeaderUserMenuList() {
                 <NavDiv
                     isDisplay={isOpenUserMenu}
                 >
-                    <ContentDiv
+                    <HeaderUserMenuContent
+                        title="ユーザー情報更新"
                         onClick={clickUpdateUserInfo}
-                    >
-                        ユーザー情報更新
-                    </ContentDiv>
-                    <ContentDiv
+                    />
+                    <HeaderUserMenuContent
+                        title="パスワードの変更"
                         onClick={clickUpdateUserPassword}
-                    >
-                        パスワードの変更
-                    </ContentDiv>
-                    <ContentDiv
+                    />
+                    <HeaderUserMenuContent
+                        title="ログアウト"
                         onClick={clickLogout}
-                    >
-                        ログアウト
-                    </ContentDiv>
+                    />
                 </NavDiv>
-            </BtnDiv>
+            </IconDiv>
             {
                 isOpenUserMenu &&
                 <OverlayDiv
                     onClick={closeUserMenu}
-                >
-                </OverlayDiv>
+                />
             }
         </React.Fragment>
     );

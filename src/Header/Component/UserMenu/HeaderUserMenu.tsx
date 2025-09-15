@@ -21,7 +21,8 @@ export function HeaderUserMenu() {
     return (
         <React.Fragment>
             {
-                isLogin ?
+                isLogin
+                    ?
                     // ログイン時メニュー
                     <HeaderUserMenuList />
                     :
