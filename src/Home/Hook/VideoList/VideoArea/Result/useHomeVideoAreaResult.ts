@@ -20,14 +20,8 @@ export function useHomeVideoAreaResult() {
 
     // 動画リスト
     const [videoListData, setVideoListData] = useState<VideoListDataType>();
-    // URL情報
-    const location = useLocation();
-    // 前回のクエリパラメータを保持用
-    const prevSearch = useRef(location.search);
     // 現在の動画検索条件
-    const {
-        nowSearchCondition,
-        reset: resetNowCondition } = useHomeVideoNowSearchConditionValue();
+    const { nowSearchCondition } = useHomeVideoNowSearchConditionValue();
 
     // 動画一覧を取得
     const { isLoading, isFetching, isError } = useQueryWrapper<VideoListResponseType>(
@@ -60,18 +54,6 @@ export function useHomeVideoAreaResult() {
             }
         }
     );
-
-    // クエリパラメータが存在しない場合はホーム画面を初期化する
-    useEffect(() => {
-
-        if (prevSearch.current && !location.search) {
-
-            resetNowCondition();
-            setVideoListData(undefined);
-        }
-
-        prevSearch.current = location.search;
-    }, [location.search]);
 
     return {
         videoListData,
