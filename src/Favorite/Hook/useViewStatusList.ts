@@ -7,8 +7,6 @@ import { errResType } from "../../Common/Hook/useMutationWrapperBase";
 import { useState } from "react";
 import { comboType } from "../../Common/Component/ComboComponent";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
-import { useFavoriteVideoSearchConditionValue } from "./VideoList/useFavoriteVideoSearchConditionValue";
-import { useSyncFavoriteVideoListUrl } from "./VideoList/useSyncFavoriteVideoListUrl";
 
 
 export function useViewStatusList() {

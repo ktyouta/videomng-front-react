@@ -6,8 +6,8 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import ENV from "../../../../env.json"
 import { useState } from "react";
 import { FavoriteVideoListMergedType } from "../../../Type/VideoList/FavoriteVideoListMergedType";
-import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
-import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
+import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 

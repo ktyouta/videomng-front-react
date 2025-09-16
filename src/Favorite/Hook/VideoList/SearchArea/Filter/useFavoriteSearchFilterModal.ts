@@ -10,7 +10,7 @@ import { FavoriteVideoSortType } from "../../../../Type/VideoList/FavoriteVideoS
 import { comboType } from "../../../../../Common/Component/ComboComponent";
 import { useNavigate } from "react-router-dom";
 import { mediaQuery, useMediaQuery } from "../../../../../Common/Hook/useMediaQuery";
-import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
+import { useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useSyncFavoriteVideoListUrl } from "../../useSyncFavoriteVideoListUrl";
 
 

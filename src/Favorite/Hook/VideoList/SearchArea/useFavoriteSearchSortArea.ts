@@ -10,8 +10,8 @@ import { FavoriteVideoSortType } from "../../../Type/VideoList/FavoriteVideoSort
 import { comboType } from "../../../../Common/Component/ComboComponent";
 import { useNavigate } from "react-router-dom";
 import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery";
-import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
-import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
+import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { useReplaceQuery } from "../../../../Common/Hook/useReplaceQuery";
 
 

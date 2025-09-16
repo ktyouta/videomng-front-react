@@ -12,10 +12,10 @@ import { errResType } from "../../../../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtomValue } from "../../../../../Common/Hook/useGlobalAtom";
 import { useNavigate } from "react-router-dom";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../Const/FavoriteConst";
-import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
+import { useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
 import { useVideoCategory } from "../../../../../Main/Hook/useVideoCategory";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
+import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
 import { useReplaceQuery } from "../../../../../Common/Hook/useReplaceQuery";
 
 

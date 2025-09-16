@@ -1,8 +1,8 @@
-import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
+import { VIDEO_MNG_PATH } from "../../Common/Const/CommonConst";
 import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
-import ENV from "../../../env.json";
+import ENV from "../../env.json";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { SEARCH_CONDITION } from "../../Const/FavoriteConst";
+import { SEARCH_CONDITION } from "../Const/FavoriteConst";
 
 
 type createNewQueryType = {

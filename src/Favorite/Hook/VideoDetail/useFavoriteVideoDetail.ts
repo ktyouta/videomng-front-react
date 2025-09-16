@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
 import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
-import { useCreateFavoriteVideoListQuery } from "../VideoList/useCreateFavoriteVideoListQuery";
+import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
 import { useVideoId } from "./useVideoId";
 
 export function useFavoriteVideoDetail() {

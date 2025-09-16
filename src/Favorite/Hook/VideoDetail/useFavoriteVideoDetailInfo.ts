@@ -10,7 +10,7 @@ import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
-import { useCreateFavoriteVideoListQuery } from "../VideoList/useCreateFavoriteVideoListQuery";
+import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
 
 
 

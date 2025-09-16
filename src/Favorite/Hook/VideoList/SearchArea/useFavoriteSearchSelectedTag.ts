@@ -1,4 +1,4 @@
-import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 
 
 export function useFavoriteSearchSelectedTag() {

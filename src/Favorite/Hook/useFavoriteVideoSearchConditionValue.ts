@@ -1,4 +1,4 @@
-import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../../Component/FavoriteVideoSearchConditionValueProvider";
+import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../Component/FavoriteVideoSearchConditionValueProvider";
 
 
 export function useFavoriteVideoSearchConditionValue() {
@@ -24,6 +24,18 @@ export function useFavoriteVideoSearchConditionValue() {
     // 動画一覧検索ソートキー setter
     const setSelectedFavoriteVideoSortKey = SetSelectedFavoriteVideoSortKeyContext.useCtx();
 
+
+    /**
+     * 検索条件をリセット
+     */
+    function reset() {
+        setSelectedFavoriteVideoCategory(``);
+        setSelectedFavoriteVideoViewStatus(``);
+        setSelectedFavoriteVideoTag(``);
+        setSelectedFavoriteVideoFavoriteLevel(``);
+        setSelectedFavoriteVideoSortKey(``);
+    }
+
     return {
         selectedFavoriteVideoCategory,
         setSelectedFavoriteVideoCategory,
@@ -35,5 +47,6 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey,
         setSelectedFavoriteVideoSortKey,
+        reset,
     };
 }
