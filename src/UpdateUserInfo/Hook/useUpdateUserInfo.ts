@@ -18,6 +18,7 @@ import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
 import { toast } from 'react-toastify';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
+import { useQueryParams } from '../../Common/Hook/useQueryParams';
 
 
 export function useUpdateUserInfo() {
@@ -42,21 +43,9 @@ export function useUpdateUserInfo() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // 遷移元パス
-    const [previousPath, setPreviousPath] = useState(``);
+    // クエリパラメータ(遷移元)
+    const { previouspath } = useQueryParams();
 
-    // 遷移元パス取得
-    useEffect(() => {
-
-        const params = new URLSearchParams(window.location.search);
-        const previousPathValue = params.get(`previouspath`);
-
-        if (!previousPathValue) {
-            return;
-        }
-
-        setPreviousPath(previousPathValue);
-    }, []);
 
     /**
      * 更新リクエスト
@@ -71,7 +60,7 @@ export function useUpdateUserInfo() {
 
             toast.success("ユーザー情報を更新しました。");
             setLoginUserInfo(loginUserInfo);
-            navigate(previousPath ?? ROUTER_PATH.HOME.ROOT);
+            navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -119,7 +108,7 @@ export function useUpdateUserInfo() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(previousPath ?? ROUTER_PATH.HOME.ROOT);
+        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
     }
 
     /**

@@ -16,6 +16,7 @@ import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
+import { useQueryParams } from '../../Common/Hook/useQueryParams';
 
 
 export function useSiginup() {
@@ -44,24 +45,9 @@ export function useSiginup() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // 遷移元
-    const [previousPath, setPreviousPath] = useState(``);
+    // クエリパラメータ(遷移元)
+    const { previouspath } = useQueryParams();
 
-    useEffect(() => {
-
-        const query = window.location.search;
-
-        if (query && query.length > 0 && query.charAt(0) === `?`) {
-
-            const params = new URLSearchParams(query);
-            const previousPathValue = params.get(`previouspath`);
-
-            if (previousPathValue) {
-
-                setPreviousPath(previousPathValue);
-            }
-        }
-    }, []);
 
     /**
      * 登録リクエスト
@@ -76,7 +62,7 @@ export function useSiginup() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(previousPath);
+            navigate(previouspath);
 
         },
         // 失敗後の処理
@@ -154,8 +140,8 @@ export function useSiginup() {
 
         let query = ``;
 
-        if (previousPath) {
-            query = `?previouspath=${previousPath}`;
+        if (previouspath) {
+            query = `?previouspath=${previouspath}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${query}`);

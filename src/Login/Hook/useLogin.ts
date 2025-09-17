@@ -14,6 +14,7 @@ import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
+import { useQueryParams } from '../../Common/Hook/useQueryParams';
 
 
 export function useLogin() {
@@ -30,26 +31,8 @@ export function useLogin() {
     const [errMessage, setErrMessage] = useState(``);
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // 遷移元
-    const [previousPath, setPreviousPath] = useState(``);
-
-
-    useEffect(() => {
-
-        const query = window.location.search;
-
-        if (query && query.length > 0 && query.charAt(0) === `?`) {
-
-            const params = new URLSearchParams(query);
-            const previousPathValue = params.get(`previouspath`);
-
-            if (previousPathValue) {
-
-                setPreviousPath(previousPathValue);
-            }
-        }
-
-    }, []);
+    // クエリパラメータ(遷移元)
+    const { previouspath } = useQueryParams();
 
     /**
      * ログインリクエスト
@@ -64,7 +47,7 @@ export function useLogin() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(previousPath);
+            navigate(previouspath);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -127,8 +110,8 @@ export function useLogin() {
 
         let query = ``;
 
-        if (previousPath) {
-            query = `?previouspath=${previousPath}`;
+        if (previouspath) {
+            query = `?previouspath=${previouspath}`;
         }
 
         navigate(`${ROUTER_PATH.SIGNUP}${query}`);
@@ -141,8 +124,8 @@ export function useLogin() {
 
         let backPagePath = ROUTER_PATH.HOME.ROOT;
 
-        if (previousPath) {
-            backPagePath = previousPath;
+        if (previouspath) {
+            backPagePath = previouspath;
         }
 
         navigate(backPagePath);
