@@ -2,6 +2,7 @@ import { ReactNode, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createCtx } from "../../Common/Function/createCtx";
 import { SEARCH_CONDITION } from "../Const/HomeConst";
+import { useQueryParams } from "../../Common/Hook/useQueryParams";
 
 
 // 現在の検索条件
@@ -25,13 +26,14 @@ export type nowSearchConditionType = {
 
 export function HomeVideoNowSearchConditionValueProvider(props: propsType) {
 
-    const searchParams = new URLSearchParams(window.location.search);
+    // クエリパラメータ
+    const params = useQueryParams();
 
     // 現在の検索条件
     const [nowSearchCondition, setNowSearchCondition] = useState<nowSearchConditionType>({
-        category: searchParams.get(SEARCH_CONDITION.QUERY_KEY_CATEGORY) ?? ``,
-        keyword: searchParams.get(SEARCH_CONDITION.QUERY_KEY_KEYWORD) ?? ``,
-        type: searchParams.get(SEARCH_CONDITION.QUERY_KEY_TYPE) ?? ``,
+        category: params[SEARCH_CONDITION.QUERY_KEY_CATEGORY],
+        keyword: params[SEARCH_CONDITION.QUERY_KEY_KEYWORD],
+        type: params[SEARCH_CONDITION.QUERY_KEY_TYPE],
         nextPageToken: ``,
     });
 

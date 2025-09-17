@@ -12,5 +12,11 @@ export function useQueryParams() {
         });
     }
 
-    return paramsRef.current;
+    return new Proxy(paramsRef.current, {
+        get(target, key: string) {
+
+            // 存在しないクエリキーが指定された際は空文字を返す
+            return target[key] ?? ``;
+        },
+    });
 }
