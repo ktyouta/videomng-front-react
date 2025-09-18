@@ -50,13 +50,15 @@ export function useHomeRecentKeywords() {
                 keyword,
             }
 
-            const newQuery = create(newCondition);
-
-            // クエリパラメータを更新
-            replace(newQuery);
-
             return newCondition;
         });
+
+        const newQuery = create({
+            q: keyword,
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
         saveRecentKeyword(keyword);

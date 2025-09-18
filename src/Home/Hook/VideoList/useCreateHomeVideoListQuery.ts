@@ -3,16 +3,12 @@ import ENV from "../../../env.json";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SEARCH_CONDITION } from "../../Const/HomeConst";
 import { useHomeVideoNowSearchConditionValue } from "../useHomeVideoNowSearchConditionValue";
+import { hasKey } from "../../../Common/Function/CommonFunction";
 
-type createNewQueryType = {
-    keyword?: string,
-    // クエリパラメータのキー(カテゴリ)
-    videocategory?: string,
-    // クエリパラメータのキー(種別)
-    videotype?: string,
-    // クエリパラメータのキー(次データ取得用トークン)
-    nextPageToken?: string
-}
+
+// 更新用クエリ作成時の引数
+type createNewQueryType = { [key in (typeof SEARCH_CONDITION)[keyof typeof SEARCH_CONDITION]]?: string };
+
 
 export function useCreateHomeVideoListQuery() {
 
@@ -20,33 +16,43 @@ export function useCreateHomeVideoListQuery() {
         nowSearchCondition,
     } = useHomeVideoNowSearchConditionValue();
 
+
+    /**
+     * 更新用のクエリを作成
+     * @param props 
+     * @returns 
+     */
     function createNewQuery(props: createNewQueryType) {
 
         let queryParam = ``;
 
-        if (props.videocategory) {
+        // カテゴリ
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videocategory);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, nowSearchCondition.category);
         }
 
-        if (props.keyword) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_KEYWORD, props.keyword);
+        // キーワード
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_KEYWORD)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_KEYWORD, props.q);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_KEYWORD, nowSearchCondition.keyword);
         }
 
-        if (props.videotype) {
+        // 種別
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_TYPE)) {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, props.videotype);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, nowSearchCondition.type);
         }
 
-        if (props.nextPageToken) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, props.nextPageToken);
+        // 次データ取得トークン
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, props.nextpagetoken);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, nowSearchCondition.nextPageToken);
@@ -66,7 +72,6 @@ export function useCreateHomeVideoListQuery() {
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, nowSearchCondition.category);
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_KEYWORD, nowSearchCondition.keyword);
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, nowSearchCondition.type);
-        queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, nowSearchCondition.nextPageToken);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;
@@ -78,7 +83,7 @@ export function useCreateHomeVideoListQuery() {
     function appendQuery(
         query: string,
         key: string,
-        value: string,
+        value: string | undefined,
     ) {
 
         return value ? `${query}&${key}=${value}` : query;

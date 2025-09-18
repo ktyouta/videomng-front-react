@@ -52,14 +52,14 @@ export function useHomeSearchText() {
             };
         });
 
-        // クエリパラメータを作成
         const newQuery = create({
-            keyword: inputKeyword,
+            q: inputKeyword,
             videocategory: selectedVideoCategory,
             videotype: selectedVideoType,
-            nextPageToken: ``,
+            nextpagetoken: ``,
         });
 
+        // クエリパラメータを更新
         replace(newQuery);
 
         // ローカルストレージの検索ワード(最近の検索)を保存
