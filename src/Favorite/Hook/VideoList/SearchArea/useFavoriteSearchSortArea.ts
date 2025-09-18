@@ -53,7 +53,7 @@ export function useFavoriteSearchSortArea() {
     function selectSort(value: string) {
 
         const newQuery = create({
-            sortKey: value
+            sortkey: value
         });
 
         // クエリパラメータを更新

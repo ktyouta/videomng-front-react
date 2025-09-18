@@ -97,7 +97,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeVideoCategory(selectedCategory: string,) {
 
         const newQuery = create({
-            videoCategory: selectedCategory
+            videocategory: selectedCategory
         });
 
         // クエリパラメータを更新
@@ -114,7 +114,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeViewStatus(selectedViewStatus: string,) {
 
         const newQuery = create({
-            viewStatus: selectedViewStatus
+            viewstatus: selectedViewStatus
         });
 
         // クエリパラメータを更新
@@ -131,7 +131,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeVideoTag(selectedVideoTag: string,) {
 
         const newQuery = create({
-            videoTag: selectedVideoTag
+            videotag: selectedVideoTag
         });
 
         // クエリパラメータを更新
@@ -148,7 +148,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeFavoriteLevel(selectedFavoriteLevel: string,) {
 
         const newQuery = create({
-            favoriteLevel: selectedFavoriteLevel
+            favoritelevel: selectedFavoriteLevel
         });
 
         // クエリパラメータを更新

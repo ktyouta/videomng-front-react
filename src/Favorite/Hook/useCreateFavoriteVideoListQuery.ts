@@ -3,15 +3,11 @@ import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchCo
 import ENV from "../../env.json";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SEARCH_CONDITION } from "../Const/FavoriteConst";
+import { hasKey } from "../../Common/Function/CommonFunction";
 
 
-type createNewQueryType = {
-    viewStatus?: string,
-    videoCategory?: string,
-    videoTag?: string,
-    sortKey?: string,
-    favoriteLevel?: string,
-}
+// 更新用クエリ作成時の引数
+type createNewQueryType = { [key in (typeof SEARCH_CONDITION)[keyof typeof SEARCH_CONDITION]]?: string };
 
 
 export function useCreateFavoriteVideoListQuery() {
@@ -34,36 +30,41 @@ export function useCreateFavoriteVideoListQuery() {
 
         let queryParam = ``;
 
-        if (props.videoCategory) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videoCategory);
+        // カテゴリ
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videocategory);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
         }
 
-        if (props.viewStatus) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.viewStatus);
+        // 視聴状況
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.viewstatus);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
         }
 
-        if (props.videoTag) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TAG, props.videoTag);
+        // タグ
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_TAG)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TAG, props.videotag);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
         }
 
-        if (props.sortKey) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, props.sortKey);
+        // ソート
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_SORT)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, props.sortkey);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
         }
 
-        if (props.favoriteLevel) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.favoriteLevel);
+        // お気に入り度
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.favoritelevel);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
@@ -96,7 +97,7 @@ export function useCreateFavoriteVideoListQuery() {
     function appendQuery(
         query: string,
         key: string,
-        value: string,
+        value: string | undefined,
     ) {
 
         return value ? `${query}&${key}=${value}` : query;

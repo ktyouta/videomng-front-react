@@ -75,4 +75,4 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_SORT: `sortkey`,
     // クエリパラメータのキー(お気に入り度)
     QUERY_KEY_FAVORITE_LEVEL: `favoritelevel`,
-}
+} as const;
