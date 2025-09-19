@@ -9,16 +9,25 @@ import { FavoriteVideoListMergedType } from "../../../Type/VideoList/FavoriteVid
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
+import { DisplayVideoListContext, SetDisplayVideoListContext } from "../../../Component/VideoList/FavoriteVideoDisplayVideoListProvider";
 
 
 export function useFavoriteVideoArea() {
 
+    // 画面表示用の動画リスト(setter)
+    const setDisplayVideoList = SetDisplayVideoListContext.useCtx();
+    // 画面表示用の動画リスト
+    const displayVideoList = DisplayVideoListContext.useCtx();
+
     // 動画一覧を取得
-    const { data: videoListItem, isLoading, isError } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListMergedType[]>(
+    const { isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListMergedType[]>(
         {
             url: useFavoriteVideoListEndpoint(),
             select: (res: FavoriteVideoListResponseType) => {
                 return res.data;
+            },
+            afSuccessFn: (res: FavoriteVideoListMergedType[]) => {
+                setDisplayVideoList(res);
             },
             afErrorFn: (res) => {
             }
@@ -26,8 +35,9 @@ export function useFavoriteVideoArea() {
     );
 
     return {
-        videoListItem,
         isLoading,
-        isError
+        isError,
+        displayVideoList,
+        isFetching
     }
 }

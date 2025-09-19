@@ -15,6 +15,7 @@ type propsType = {
     placeholder?: string,
     autoComplete?: boolean,
     style?: CSSProperties,
+    onBlur?: () => void,
 }
 
 //参照の型
@@ -80,6 +81,7 @@ const BaseTextbox = forwardRef<refType, propsType>((props, ref) => {
             placeholder={props.placeholder}
             autoComplete={props.autoComplete ? "on" : "off"}
             style={props.style}
+            onBlur={props.onBlur}
         />
     );
 })

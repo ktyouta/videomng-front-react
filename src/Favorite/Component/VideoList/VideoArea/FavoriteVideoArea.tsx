@@ -36,7 +36,7 @@ const VideoUl = styled.ul`
   display: grid;
   color: rgb(255, 255, 255);
   margin: 0px;
-  padding: 2% 5% 0px;
+  padding: 1% 5% 0px;
   width: 100%;
   box-sizing: border-box;
   gap: 38px 4%;
@@ -82,11 +82,12 @@ export function FavoriteVideoArea() {
   console.log("FavoriteVideoArea render");
 
   const {
-    videoListItem,
+    displayVideoList,
     isLoading,
-    isError, } = useFavoriteVideoArea();
+    isError,
+    isFetching, } = useFavoriteVideoArea();
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <LoadingParent>
         <Loading />
@@ -102,7 +103,7 @@ export function FavoriteVideoArea() {
     );
   }
 
-  if (!videoListItem || videoListItem.length === 0) {
+  if (!displayVideoList || displayVideoList.length === 0) {
     return (
       <MessageDiv>
         お気に入り動画が存在しません。
@@ -115,12 +116,12 @@ export function FavoriteVideoArea() {
       <ResultNumDiv>
         <FlexSpaceDiv />
         <ResultNumSpan>
-          全{videoListItem.length}件
+          全{displayVideoList.length}件
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>
         {
-          videoListItem.map((e: FavoriteVideoListMergedType) => {
+          displayVideoList.map((e: FavoriteVideoListMergedType) => {
             return (
               <FavoriteVideoContent
                 data={e}

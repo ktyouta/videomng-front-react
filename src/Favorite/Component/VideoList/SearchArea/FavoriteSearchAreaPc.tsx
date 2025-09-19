@@ -13,6 +13,7 @@ import { MEDIA } from "../../../../Common/Const/MediaConst";
 import { FavoriteSearchFilterModal } from "./Filter/FavoriteSearchFilterModal";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
+import { FavoriteSearchText } from "./FavoriteSearchText";
 
 const Parent = styled.div`
   width: 100%;
@@ -24,6 +25,16 @@ const Parent = styled.div`
   padding-left: 9%;
 `;
 
+const SearchParentDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 9%;
+  margin-top:1%;
+`;
+
 
 /**
  * 検索条件エリア
@@ -33,14 +44,20 @@ export function FavoriteSearchAreaPc() {
   console.log("FavoriteSearchArea render");
 
   return (
-    <Parent>
-      {/* 選択中のタグ */}
-      <FavoriteSearchSelectedTag />
-      <FlexSpaceDiv />
-      {/* 並び替えリスト */}
-      <FavoriteSearchSortArea />
-      {/* フィルター用モーダル */}
-      <FavoriteSearchFilterModal />
-    </Parent>
+    <React.Fragment>
+      <Parent>
+        <FlexSpaceDiv />
+        {/* タイトルフィルター */}
+        <FavoriteSearchText />
+        {/* 並び替えリスト */}
+        <FavoriteSearchSortArea />
+        {/* フィルター用モーダル */}
+        <FavoriteSearchFilterModal />
+      </Parent>
+      <SearchParentDiv>
+        {/* 選択中のタグ */}
+        <FavoriteSearchSelectedTag />
+      </SearchParentDiv>
+    </React.Fragment>
   );
 }

@@ -22,6 +22,7 @@ type propsType = {
     height?: string,
     style?: CSSProperties,
     clear: () => void,
+    onBlur?: () => void,
 }
 
 const OuterDiv = styled.div<{ width?: string, height?: string, bgColor?: string, }>`
@@ -68,6 +69,7 @@ export function ClearableTextbox(props: propsType) {
                     flex: "1",
                     boxSizing: "border-box",
                 }}
+                onBlur={props.onBlur}
             />
             <IconDiv
                 iconHeight={props.height}

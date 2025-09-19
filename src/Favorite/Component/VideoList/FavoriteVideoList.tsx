@@ -4,6 +4,7 @@ import { FavoriteVideoArea } from "./VideoArea/FavoriteVideoArea";
 import styled from "styled-components";
 import { FavoriteSearchAreaMobile } from "./SearchArea/FavoriteSearchAreaMobile";
 import { FavoriteSearchArea } from "./SearchArea/FavoriteSearchArea";
+import { FavoriteVideoDisplayVideoListProvider } from "./FavoriteVideoDisplayVideoListProvider";
 
 
 const Parent = styled.div`
@@ -19,10 +20,12 @@ export function FavoriteVideoList() {
 
     return (
         <Parent>
-            {/* 検索条件エリア */}
-            <FavoriteSearchArea />
-            {/* 動画表示エリア */}
-            <FavoriteVideoArea />
+            <FavoriteVideoDisplayVideoListProvider>
+                {/* 検索条件エリア */}
+                <FavoriteSearchArea />
+                {/* 動画表示エリア */}
+                <FavoriteVideoArea />
+            </FavoriteVideoDisplayVideoListProvider>
         </Parent>
     );
 }
