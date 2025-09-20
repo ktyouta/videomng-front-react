@@ -6,33 +6,29 @@ import { useCookies } from "react-cookie";
 import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
 import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
-import { LoginRequestType } from '../Type/LoginRequestType';
-import { useSetAtom } from 'jotai';
-import { LoginResponseType } from '../Type/LoginResponseType';
-import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
+import { useLoginForm } from './useLoginForm';
+import { LoginFormType } from '../Type/LoginFormType';
 
 
 export function useLogin() {
 
-    // ユーザー名参照用
-    const userNameRef: RefObject<refType> = useRef(null);
-    // パスワード参照用
-    const userPasswordRef: RefObject<refType> = useRef(null);
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
     const setIsLogin = SetIsLoginContext.useCtx();
-    // エラーメッセージ
-    const [errMessage, setErrMessage] = useState(``);
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // クエリパラメータ(遷移元)
     const { previouspath } = useQueryParams();
+    // ログインフォーム
+    const form = useLoginForm({
+        onSubmit: submit
+    });
 
     /**
      * ログインリクエスト
@@ -51,10 +47,7 @@ export function useLogin() {
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
-
-            //エラーメッセージを表示
-            setErrMessage(`ログインに失敗しました。`);
-            userPasswordRef.current?.clearValue();
+            form.setFieldValue(`password`, ``);
         },
     });
 
@@ -63,44 +56,21 @@ export function useLogin() {
      */
     function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
         if (event.key === 'Enter') {
-            clickLoginBtn();
+            form.handleSubmit();
         }
     };
 
     /**
-     * ログインボタン押下
+     * form送信
      */
-    function clickLoginBtn() {
+    function submit(value: LoginFormType) {
 
-        // ユーザーID未入力
-        if (!userNameRef.current?.refValue) {
-            setErrMessage(`ユーザー名が未入力です。`);
-            return;
-        }
-
-        // パスワード未入力
-        if (!userPasswordRef.current?.refValue) {
-            setErrMessage(`パスワードが未入力です。`);
-            return;
-        }
-
-        const userName = userNameRef.current?.refValue as string;
-        const password = userPasswordRef.current?.refValue as string;
-        const body: LoginRequestType = {
-            userName,
-            password
+        const body: LoginFormType = {
+            userName: value.userName,
+            password: value.password,
         };
 
-        //認証API呼び出し
         postMutation.mutate(body);
-    }
-
-    /**
-     * 入力値のクリア
-     */
-    function clickClearBtn() {
-        userNameRef.current?.clearValue();
-        userPasswordRef.current?.clearValue();
     }
 
     /**
@@ -132,14 +102,11 @@ export function useLogin() {
     }
 
     return {
-        userNameRef,
-        userPasswordRef,
-        clickLoginBtn,
-        clickClearBtn,
         handleKeyPress,
-        errMessage,
         clickSignup,
         clickBack,
         isLoading: postMutation.isLoading,
+        form,
+        isError: postMutation.isError,
     }
 }

@@ -7,7 +7,7 @@ import { MEDIA } from "../../Common/Const/MediaConst";
 import Loading from "../../Common/Component/Loading";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { LoadingCenter } from "../../Common/Component/LoadingCenter";
-
+import { loginSchema } from "../Schema/loginSchema";
 
 const Parent = styled.div`
   width: 100%;
@@ -57,6 +57,7 @@ const TitleDiv = styled.div`
 const ErrMessageDiv = styled.div`
     text-align: center;
     font-size: 15px;
+    margin-top:3%;
     margin-bottom: 6%;
     color: red;
 `;
@@ -73,6 +74,7 @@ const SignUpSpan = styled.span`
 `;
 
 const InputRowDiv = styled.div`
+  margin-bottom:7%;
 `;
 
 const InputTitleDiv = styled.div`
@@ -84,14 +86,12 @@ export function Login() {
   console.log("Login render");
 
   const {
-    userNameRef,
-    userPasswordRef,
-    clickLoginBtn,
     handleKeyPress,
     clickSignup,
-    errMessage,
     clickBack,
-    isLoading } = useLogin();
+    isLoading,
+    form,
+    isError } = useLogin();
 
   return (
     <Parent>
@@ -109,53 +109,71 @@ export function Login() {
           ログイン
         </TitleDiv>
         {
-          errMessage &&
+          isError &&
           <ErrMessageDiv>
-            {errMessage}
+            ログインに失敗しました。
           </ErrMessageDiv>
         }
-        <InputRowDiv>
-          <InputTitleDiv>
-            ユーザー名
-          </InputTitleDiv>
-          <BaseTextbox
-            value={""}
-            length={100}
-            disabled={false}
-            ref={userNameRef}
-            textWidth='100%'
-            onKeyDown={handleKeyPress}
-            placeholder='UserName'
-            autoComplete={true}
-            style={{
-              marginBottom: "7%",
-              boxSizing: "border-box",
-              height: "37px",
-            }}
-          />
-        </InputRowDiv>
-        <InputRowDiv>
-          <InputTitleDiv>
-            パスワード
-          </InputTitleDiv>
-          <BaseTextbox
-            type="password"
-            value={""}
-            length={100}
-            disabled={false}
-            ref={userPasswordRef}
-            textWidth='100%'
-            onKeyDown={handleKeyPress}
-            placeholder='Password'
-            style={{
-              boxSizing: "border-box",
-              height: "37px",
-            }}
-          />
-        </InputRowDiv>
-        <SignUpDiv
-          onClick={clickSignup}
-        >
+        {/* ユーザー名 */}
+        <form.Field
+          name="userName"
+          children={(field) => (
+            <InputRowDiv>
+              <InputTitleDiv>
+                ユーザー名
+              </InputTitleDiv>
+              <BaseTextbox
+                value={field.state.value}
+                onChange={field.handleChange}
+                placeholder="UserName"
+                textWidth="100%"
+                style={{
+                  boxSizing: "border-box",
+                  height: "37px"
+                }}
+                onKeyDown={handleKeyPress}
+              />
+              {!field.state.meta.isValid && (
+                <ErrMessageDiv>
+                  {field.state.meta.errors.map((e) => {
+                    return e?.message
+                  }).join(",")}
+                </ErrMessageDiv>
+              )}
+            </InputRowDiv>
+          )}
+        />
+        {/* パスワード */}
+        <form.Field
+          name="password"
+          children={(field) => (
+            <InputRowDiv>
+              <InputTitleDiv>
+                パスワード
+              </InputTitleDiv>
+              <BaseTextbox
+                type="password"
+                value={field.state.value}
+                onChange={field.handleChange}
+                placeholder="Password"
+                textWidth="100%"
+                style={{
+                  boxSizing: "border-box",
+                  height: "37px"
+                }}
+                onKeyDown={handleKeyPress}
+              />
+              {!field.state.meta.isValid && (
+                <ErrMessageDiv>
+                  {field.state.meta.errors.map((e) => {
+                    return e?.message
+                  }).join(",")}
+                </ErrMessageDiv>
+              )}
+            </InputRowDiv>
+          )}
+        />
+        <SignUpDiv onClick={clickSignup}>
           <SignUpSpan>
             アカウント作成はこちらから
           </SignUpSpan>
@@ -163,23 +181,23 @@ export function Login() {
         <LoginButtonDiv>
           <ButtonComponent
             styleTypeNumber="RUN"
-            title={"戻る"}
+            title="戻る"
             onclick={clickBack}
             style={{
-              "borderRadius": "23px",
-              "background": "black",
-              "fontSize": "1rem",
+              borderRadius: "23px",
+              background: "black",
+              fontSize: "1rem"
             }}
           />
           <ButtonComponent
             styleTypeNumber="RUN"
-            title={"ログイン"}
-            onclick={clickLoginBtn}
+            title="ログイン"
+            onclick={form.handleSubmit}
             style={{
-              "borderRadius": "23px",
-              "background": "black",
-              "fontSize": "1rem",
-              "marginLeft": "5%",
+              borderRadius: "23px",
+              background: "black",
+              fontSize: "1rem",
+              marginLeft: "5%",
             }}
           />
         </LoginButtonDiv>
