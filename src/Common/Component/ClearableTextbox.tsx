@@ -70,6 +70,7 @@ export function ClearableTextbox(props: propsType) {
                     boxSizing: "border-box",
                 }}
                 onBlur={props.onBlur}
+                textWidth={props.textWidth}
             />
             <IconDiv
                 iconHeight={props.height}

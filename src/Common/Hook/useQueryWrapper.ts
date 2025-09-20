@@ -9,7 +9,7 @@ type propsType<TData, RData, PData> = {
     queryKey?: [string, (Record<string, unknown> | string)?],
     options?: Omit<
         UseQueryOptions<TData, unknown, RData, QueryKey>,
-        "queryKey" | "queryFn" | "enabled" | "notifyOnChangeProps" | "select" | "initialData"
+        "queryKey" | "queryFn" | "notifyOnChangeProps" | "select" | "initialData"
     >,
     init?: TData,
     select?: (data: TData) => RData,

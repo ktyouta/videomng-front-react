@@ -13,6 +13,7 @@ import { MEDIA } from "../../../../Common/Const/MediaConst";
 import { FavoriteSearchFilterModal } from "./Filter/FavoriteSearchFilterModal";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
+import { FavoriteSearchText } from "./FavoriteSearchText";
 
 const Parent = styled.div`
   width: 100%;
@@ -26,6 +27,7 @@ const SearchParentDiv = styled.div`
   align-items: center;
   box-sizing: border-box;
   margin-bottom: 4%;
+  margin-top: 10px;
 `;
 
 
@@ -38,6 +40,10 @@ export function FavoriteSearchAreaMobile() {
 
   return (
     <Parent>
+      {/* タイトルフィルター */}
+      <FavoriteSearchText
+        width="70%"
+      />
       <SearchParentDiv>
         {/* 並び替えリスト */}
         <FavoriteSearchSortArea />

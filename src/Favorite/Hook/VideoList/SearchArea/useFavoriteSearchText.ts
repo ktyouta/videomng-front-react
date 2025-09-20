@@ -17,6 +17,9 @@ export function useFavoriteSearchText() {
             url: useFavoriteVideoListEndpoint(),
             select: (res: FavoriteVideoListResponseType) => {
                 return res.data;
+            },
+            options: {
+                enabled: false
             }
         }
     );

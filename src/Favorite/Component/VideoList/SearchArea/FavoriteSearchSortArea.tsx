@@ -18,6 +18,7 @@ const ComboTitleSpan = styled.span`
   margin-right:7px;
   color: white;
   font-size: 12px;
+  white-space: nowrap;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 13px;

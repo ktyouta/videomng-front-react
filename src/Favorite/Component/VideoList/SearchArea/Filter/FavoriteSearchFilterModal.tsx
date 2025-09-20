@@ -32,6 +32,7 @@ const FilterTitleSpan = styled.span`
   &:hover {
     cursor: pointer;
   }
+  white-space: nowrap;
 `;
 
 /**

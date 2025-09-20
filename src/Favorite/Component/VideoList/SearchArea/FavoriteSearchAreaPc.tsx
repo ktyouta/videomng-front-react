@@ -48,7 +48,9 @@ export function FavoriteSearchAreaPc() {
       <Parent>
         <FlexSpaceDiv />
         {/* タイトルフィルター */}
-        <FavoriteSearchText />
+        <FavoriteSearchText
+          width="90%"
+        />
         {/* 並び替えリスト */}
         <FavoriteSearchSortArea />
         {/* フィルター用モーダル */}

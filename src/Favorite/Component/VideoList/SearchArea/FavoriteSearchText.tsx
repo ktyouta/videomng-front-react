@@ -5,10 +5,19 @@ import { MEDIA } from "../../../../Common/Const/MediaConst";
 import React from "react";
 
 
+const Parent = styled.div`
+  flex: 0 1 660px;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-right:3%;
+`;
+
 const TitleSpan = styled.span`
   margin-right:7px;
   color: white;
   font-size: 12px;
+  white-space: nowrap;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 13px;
@@ -23,34 +32,38 @@ const TitleSpan = styled.span`
   }
 `;
 
-export function FavoriteSearchText() {
+type propsType = {
+  width: string,
+}
 
-    const {
-        inputKeyword,
-        setInputKeyword,
-        clearInput,
-        filterVideoList,
-        handleKeyPress } = useFavoriteSearchText();
+export function FavoriteSearchText(props: propsType) {
 
-    return (
-        <React.Fragment>
-            <TitleSpan>
-                タイトル：
-            </TitleSpan>
-            <ClearableTextbox
-                width="50%"
-                height="99%"
-                placeholder=""
-                value={inputKeyword}
-                onChange={setInputKeyword}
-                style={{
-                    borderRadius: 6,
-                    marginRight: `3%`
-                }}
-                clear={clearInput}
-                onBlur={filterVideoList}
-                onKeyDown={handleKeyPress}
-            />
-        </React.Fragment>
-    );
+  const {
+    inputKeyword,
+    setInputKeyword,
+    clearInput,
+    filterVideoList,
+    handleKeyPress } = useFavoriteSearchText();
+
+  return (
+    <Parent>
+      <TitleSpan>
+        タイトル：
+      </TitleSpan>
+      <ClearableTextbox
+        width={props.width}
+        height="99%"
+        textWidth="90%"
+        placeholder=""
+        value={inputKeyword}
+        onChange={setInputKeyword}
+        style={{
+          borderRadius: 6,
+        }}
+        clear={clearInput}
+        onBlur={filterVideoList}
+        onKeyDown={handleKeyPress}
+      />
+    </Parent>
+  );
 }
