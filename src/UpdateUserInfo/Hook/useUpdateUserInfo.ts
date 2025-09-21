@@ -44,7 +44,10 @@ export function useUpdateUserInfo() {
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // クエリパラメータ(遷移元)
-    const { previouspath } = useQueryParams();
+    const previouspath = (() => {
+        const { previouspath } = useQueryParams();
+        return decodeURIComponent(previouspath);
+    })();
 
 
     /**

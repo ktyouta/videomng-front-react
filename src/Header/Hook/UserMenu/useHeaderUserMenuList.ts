@@ -63,14 +63,14 @@ export function useHeaderUserMenuList() {
      * ユーザー情報更新画面遷移
      */
     function clickUpdateUserInfo() {
-        navigate(`${ROUTER_PATH.UPDATE_USER_INFO}?previouspath=${previousPath}`);
+        navigate(`${ROUTER_PATH.UPDATE_USER_INFO}?previouspath=${encodeURIComponent(previousPath)}`);
     }
 
     /**
      * ユーザーパスワード更新画面遷移
      */
     function clickUpdateUserPassword() {
-        navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}?previouspath=${previousPath}`);
+        navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}?previouspath=${encodeURIComponent(previousPath)}`);
     }
 
     return {
