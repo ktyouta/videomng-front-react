@@ -11,6 +11,7 @@ type propsType = {
   onMouseLeave?: () => void,
   style?: CSSProperties,
   disabled?: boolean,
+  type?: "button" | "submit" | "reset",
 }
 
 //ボタンの種類
@@ -145,6 +146,7 @@ const ButtonComponent = (props: propsType) => {
     onMouseLeave={() => { if (props.onMouseLeave) props.onMouseLeave() }}
     style={props.style}
     disabled={props.disabled}
+    type={props.type ?? "button"}
   >
     {props.title}
   </Component>;

@@ -19,28 +19,21 @@ import useSwitch from '../../Common/Hook/useSwitch';
 import { toast } from 'react-toastify';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
+import { useUpdateUserInfoForm } from './useUpdateUserInfoForm';
 
 
 export function useUpdateUserInfo() {
 
-    // ユーザー名参照用
-    const userNameRef: RefObject<refType> = useRef(null);
-    // 生年月日(年)参照用
-    const userBirthdayYearRef: RefObject<refType> = useRef(null);
-    // 生年月日(月)参照用
-    const userBirthdayMonthRef: RefObject<refType> = useRef(null);
-    // 生年月日(日)参照用
-    const userBirthdayDayRef: RefObject<refType> = useRef(null);
     // ルーティング用
     const navigate = useNavigate();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
+    // ログインユーザー情報
+    const loginUserInfo = LoginUserInfoContext.useCtx();
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // 年リスト
     const yearCoomboList = useCreateYearList();
-    // 更新前ユーザー情報
-    const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // クエリパラメータ(遷移元)
@@ -48,6 +41,8 @@ export function useUpdateUserInfo() {
         const { previouspath } = useQueryParams();
         return decodeURIComponent(previouspath);
     })();
+    // フォーム
+    const { register, handleSubmit, formState: { errors } } = useUpdateUserInfoForm(loginUserInfo);
 
 
     /**
@@ -77,50 +72,17 @@ export function useUpdateUserInfo() {
     });
 
 
-    /**
-     * 保存ボタン押下
-     */
-    function clickUpdateUserInfoBtn() {
-
-        const userName = userNameRef.current?.refValue as string;
-        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
-
-        // ユーザーIDが存在しない
-        if (!loginUserInfo.userId) {
-            setErrMessage(`ユーザー情報を更新できません。`);
-            return;
-        }
-
-        // ユーザーID未入力
-        if (!userName) {
-            setErrMessage(`ユーザー名が未入力です。`);
-            return;
-        }
-
-        // 生年月日未選択
-        if (!userBirthday) {
-            setErrMessage(`生年月日が未選択です。`);
-            return;
-        }
-
-        // 確認用モーダルを展開する
+    // 保存ボタンクリック時
+    const handleSaveClick = handleSubmit((data) => {
         openModal();
-    }
+    });
 
-    /**
-     * キャンセルボタン押下
-     */
-    function clickCancel() {
-        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
-    }
 
-    /**
-     * ユーザー情報更新実行
-     */
-    function executeUpdate() {
+    // ユーザー情報更新実行
+    const handleConfirm = handleSubmit((data) => {
 
-        const userName = userNameRef.current?.refValue as string;
-        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
+        const userName = data.userName;
+        const userBirthday = `${data.birthday.year}${data.birthday.month}${data.birthday.day}`;
 
         const body: UpdateUserInfoRequestType = {
             userName,
@@ -129,21 +91,26 @@ export function useUpdateUserInfo() {
 
         // 更新リクエスト呼び出し
         postMutation.mutate(body);
+    });
+
+
+    /**
+     * キャンセルボタン押下
+     */
+    function clickCancel() {
+        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
     }
 
     return {
-        userNameRef,
-        clickUpdateUserInfoBtn,
         errMessage,
-        userBirthdayYearRef,
-        userBirthdayMonthRef,
-        userBirthdayDayRef,
         yearCoomboList,
-        loginUserInfo,
         clickCancel,
         isOpenModal,
         closeModal,
-        executeUpdate,
         isLoading: postMutation.isLoading,
+        register,
+        handleSaveClick,
+        handleConfirm,
+        errors
     }
 }

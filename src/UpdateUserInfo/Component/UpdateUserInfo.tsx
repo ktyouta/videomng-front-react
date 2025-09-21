@@ -10,6 +10,7 @@ import { MEDIA } from "../../Common/Const/MediaConst";
 import Loading from "../../Common/Component/Loading";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { LoadingCenter } from "../../Common/Component/LoadingCenter";
+import { Combobox } from "../../Common/Component/Combobox";
 
 
 const Parent = styled.div`
@@ -89,6 +90,7 @@ const TitleDiv = styled.div`
 
 const ErrMessageDiv = styled.div`
     font-size: 15px;
+    margin-top:3%;
     margin-bottom: 6%;
     color: red;
     white-space: pre-line;
@@ -106,11 +108,25 @@ const BirthDayLabelDiv = styled.div`
 `;
 
 const InputRowDiv = styled.div`
+    margin-bottom: 8%;
 `;
 
 const InputTitleDiv = styled.div`
 `;
 
+const Select = styled.select`
+  text-align:center;
+  border-radius: 5px;
+  width: 68%;
+  height: 39px;
+`;
+
+const InputText = styled.input`
+  height: 33px;
+  border-radius: 5px;
+  border: solid 1px rgb(118, 118, 118);
+  width: 98%;
+`;
 
 
 export function UpdateUserInfo() {
@@ -118,132 +134,143 @@ export function UpdateUserInfo() {
     console.log("UpdateUserInfo render");
 
     const {
-        userNameRef,
-        clickUpdateUserInfoBtn,
         errMessage,
-        userBirthdayYearRef,
-        userBirthdayMonthRef,
-        userBirthdayDayRef,
         yearCoomboList,
-        loginUserInfo,
         clickCancel,
         isOpenModal,
         closeModal,
-        executeUpdate,
-        isLoading, } = useUpdateUserInfo();
+        isLoading,
+        register,
+        handleSaveClick,
+        handleConfirm,
+        errors } = useUpdateUserInfo();
 
     return (
-        <Parent>
-            {
-                isLoading &&
-                <React.Fragment>
-                    <LoadingCenter />
-                    <OverlayDiv
-                        bgColor="rgba(0, 0, 0, 0.1)"
-                    />
-                </React.Fragment>
-            }
-            <UpdateUserInfoFormDiv>
-                <TitleDiv>
-                    ユーザー情報更新
-                </TitleDiv>
+        <form>
+            <Parent>
                 {
-                    errMessage &&
-                    <ErrMessageDiv>
-                        {errMessage}
-                    </ErrMessageDiv>
+                    isLoading &&
+                    <React.Fragment>
+                        <LoadingCenter />
+                        <OverlayDiv
+                            bgColor="rgba(0, 0, 0, 0.1)"
+                        />
+                    </React.Fragment>
                 }
-                {
-                    loginUserInfo.userName &&
+                <UpdateUserInfoFormDiv>
+                    <TitleDiv>
+                        ユーザー情報更新
+                    </TitleDiv>
+                    {
+                        errMessage &&
+                        <ErrMessageDiv>
+                            {errMessage}
+                        </ErrMessageDiv>
+                    }
                     <InputRowDiv>
                         <InputTitleDiv>
                             ユーザー名(3～30文字)
                         </InputTitleDiv>
-                        <BaseTextbox
-                            value={loginUserInfo.userName}
-                            length={30}
-                            disabled={false}
-                            ref={userNameRef}
-                            textWidth='98%'
+                        <InputText
+                            type="text"
+                            maxLength={30}
                             placeholder='UserName'
-                            autoComplete={true}
-                            style={{ marginBottom: "8%" }}
+                            autoComplete="off"
+                            {...register("userName")}
                         />
+                        {
+                            errors.userName &&
+                            <ErrMessageDiv>
+                                {errors.userName.message}
+                            </ErrMessageDiv>
+                        }
                     </InputRowDiv>
-                }
-                {
-                    yearCoomboList &&
-                    yearCoomboList.length > 0 &&
-                    loginUserInfo.birthday &&
                     <InputRowDiv>
                         <InputTitleDiv>
                             生年月日
                         </InputTitleDiv>
                         <BirthDayDiv>
-                            <ComboComponent
-                                combo={yearCoomboList}
-                                initValue={loginUserInfo.birthday.slice(0, 4)}
-                                width="68%"
-                                minWidth="8%"
-                                height="39px"
-                                ref={userBirthdayYearRef}
-                            />
+                            <Select
+                                {...register("birthday.year")}
+                            >
+                                {yearCoomboList.map((e) => {
+                                    return (
+                                        <option key={e.value} value={e.value}>
+                                            {e.label}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
                             <BirthDayLabelDiv>
                                 年
                             </BirthDayLabelDiv>
-                            <ComboComponent
-                                combo={MONTH_LIST}
-                                initValue={loginUserInfo.birthday.slice(4, 6)}
-                                width="68%"
-                                minWidth="8%"
-                                height="39px"
-                                ref={userBirthdayMonthRef}
-                            />
+                            <Select
+                                {...register("birthday.month")}
+                            >
+                                {MONTH_LIST.map((e) => {
+                                    return (
+                                        <option key={e.value} value={e.value}>
+                                            {e.label}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
                             <BirthDayLabelDiv>
                                 月
                             </BirthDayLabelDiv>
-                            <ComboComponent
-                                combo={DAY_LIST}
-                                initValue={loginUserInfo.birthday.slice(6, 8)}
-                                width="68%"
-                                minWidth="8%"
-                                height="39px"
-                                ref={userBirthdayDayRef}
-                            />
+                            <Select
+                                {...register("birthday.day")}
+                            >
+                                {DAY_LIST.map((e) => {
+                                    return (
+                                        <option key={e.value} value={e.value}>
+                                            {e.label}
+                                        </option>
+                                    );
+                                })}
+                            </Select>
                             日
                         </BirthDayDiv>
+                        {
+                            errors.birthday?.message && (
+                                <ErrMessageDiv>{errors.birthday.message}</ErrMessageDiv>
+                            )
+                        }
                     </InputRowDiv>
-                }
-                <UpdateUserInfoButtonDiv>
-                    <ButtonComponent
-                        styleTypeNumber="RUN"
-                        title={"キャンセル"}
-                        onclick={clickCancel}
-                        style={{
-                            "borderRadius": "23px",
-                            "background": "black",
-                            "fontSize": "1rem",
-                        }}
-                    />
-                    <ButtonComponent
-                        styleTypeNumber="RUN"
-                        title={"保存"}
-                        onclick={clickUpdateUserInfoBtn}
-                        style={{
-                            "borderRadius": "23px",
-                            "background": "black",
-                            "fontSize": "1rem",
-                            "marginLeft": "5%",
-                        }}
-                    />
-                </UpdateUserInfoButtonDiv>
-            </UpdateUserInfoFormDiv>
-            <ConfirmModalComponent
-                isOpenModal={isOpenModal}
-                closeModal={closeModal}
-                titleMessage={`入力した内容でユーザー情報を更新しますか？`}
-                clickOk={executeUpdate}
-            />
-        </Parent>
+                    <UpdateUserInfoButtonDiv>
+                        <ButtonComponent
+                            styleTypeNumber="RUN"
+                            title={"キャンセル"}
+                            onclick={clickCancel}
+                            style={{
+                                "borderRadius": "23px",
+                                "background": "black",
+                                "fontSize": "1rem",
+                            }}
+                            type="button"
+                        />
+                        <ButtonComponent
+                            styleTypeNumber="RUN"
+                            title={"保存"}
+                            onclick={handleSaveClick}
+                            style={{
+                                "borderRadius": "23px",
+                                "background": "black",
+                                "fontSize": "1rem",
+                                "marginLeft": "5%",
+                            }}
+                            type="button"
+                        />
+                    </UpdateUserInfoButtonDiv>
+                </UpdateUserInfoFormDiv>
+                {/* 更新確認用モーダル */}
+                <ConfirmModalComponent
+                    isOpenModal={isOpenModal}
+                    closeModal={closeModal}
+                    titleMessage={`入力した内容でユーザー情報を更新しますか？`}
+                    clickOk={handleConfirm}
+                />
+            </Parent>
+        </form>
     );
 }
