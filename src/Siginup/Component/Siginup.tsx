@@ -9,6 +9,9 @@ import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalCompon
 import { MEDIA } from "../../Common/Const/MediaConst";
 import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { RhfTextbox } from "../../Common/StyledComponent/RhfTextbox";
+import { ErrorMessageField } from "../../Common/Component/ErrorMessageField";
+import { RhfSelect } from "../../Common/StyledComponent/RhfSelect";
 
 
 const Parent = styled.div`
@@ -77,7 +80,6 @@ const BirthDayDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom:6%;
 `;
 
 const BirthDayLabelDiv = styled.div`
@@ -85,6 +87,7 @@ const BirthDayLabelDiv = styled.div`
 `;
 
 const InputRowDiv = styled.div`
+  margin-bottom: 8%;
 `;
 
 const InputTitleDiv = styled.div`
@@ -97,21 +100,16 @@ export function Siginup() {
   console.log("Siginup render");
 
   const {
-    userNameRef,
-    userPasswordRef,
-    clickSiginupBtn,
-    handleKeyPress,
     errMessage,
-    userBirthdayYearRef,
-    userBirthdayMonthRef,
-    userBirthdayDayRef,
     yearCoomboList,
     clickBack,
     isOpenModal,
     closeModal,
-    executeSiginup,
-    confirmPasswordRef,
-    isLoading } = useSiginup();
+    isLoading,
+    register,
+    errors,
+    handleSiginupClick,
+    handleConfirm } = useSiginup();
 
   return (
     <Parent>
@@ -138,89 +136,130 @@ export function Siginup() {
           <InputTitleDiv>
             ユーザー名(3～30文字)
           </InputTitleDiv>
-          <BaseTextbox
-            value={""}
-            length={30}
-            disabled={false}
-            ref={userNameRef}
-            textWidth='98%'
-            onKeyDown={handleKeyPress}
+          <RhfTextbox
+            width="98%"
+            height="33px"
+            type="text"
+            maxLength={30}
             placeholder='UserName'
-            autoComplete={true}
-            style={{ marginBottom: "8%" }}
+            autoComplete="off"
+            {...register("userName")}
+          />
+          <ErrorMessageField
+            message={errors.userName?.message}
+            style={{
+              marginBottom: `6%`,
+              marginTop: `3%`,
+            }}
           />
         </InputRowDiv>
-        {
-          yearCoomboList && yearCoomboList.length > 0 &&
-          <InputRowDiv>
-            <InputTitleDiv>
-              生年月日
-            </InputTitleDiv>
-            <BirthDayDiv>
-              <ComboComponent
-                combo={yearCoomboList}
-                initValue={yearCoomboList[0].value}
-                width="68%"
-                minWidth="8%"
-                height="39px"
-                ref={userBirthdayYearRef}
-              />
-              <BirthDayLabelDiv>
-                年
-              </BirthDayLabelDiv>
-              <ComboComponent
-                combo={MONTH_LIST}
-                initValue={MONTH_LIST && MONTH_LIST.length > 0 ? MONTH_LIST[0].value : ``}
-                width="68%"
-                minWidth="8%"
-                height="39px"
-                ref={userBirthdayMonthRef}
-              />
-              <BirthDayLabelDiv>
-                月
-              </BirthDayLabelDiv>
-              <ComboComponent
-                combo={DAY_LIST}
-                initValue={DAY_LIST && DAY_LIST.length > 0 ? DAY_LIST[0].value : ``}
-                width="68%"
-                minWidth="8%"
-                height="39px"
-                ref={userBirthdayDayRef}
-              />
-              日
-            </BirthDayDiv>
-          </InputRowDiv>
-        }
         <InputRowDiv>
           <InputTitleDiv>
-            パスワード(3～30文字)
+            生年月日
           </InputTitleDiv>
-          <BaseTextbox
-            type={"password"}
-            value={""}
-            length={30}
-            disabled={false}
-            ref={userPasswordRef}
-            textWidth='98%'
-            onKeyDown={handleKeyPress}
-            placeholder='Password'
-            style={{ marginBottom: "8%" }}
+          <BirthDayDiv>
+            <RhfSelect
+              width="68%"
+              height="39px"
+              {...register("birthday.year")}
+            >
+              {yearCoomboList.map((e) => {
+                return (
+                  <option
+                    key={e.value}
+                    value={e.value}
+                  >
+                    {e.label}
+                  </option>
+                );
+              })}
+            </RhfSelect>
+            <BirthDayLabelDiv>
+              年
+            </BirthDayLabelDiv>
+            <RhfSelect
+              width="68%"
+              height="39px"
+              {...register("birthday.month")}
+            >
+              {MONTH_LIST.map((e) => {
+                return (
+                  <option
+                    key={e.value}
+                    value={e.value}
+                  >
+                    {e.label}
+                  </option>
+                );
+              })}
+            </RhfSelect>
+            <BirthDayLabelDiv>
+              月
+            </BirthDayLabelDiv>
+            <RhfSelect
+              width="68%"
+              height="39px"
+              {...register("birthday.day")}
+            >
+              {DAY_LIST.map((e) => {
+                return (
+                  <option
+                    key={e.value}
+                    value={e.value}
+                  >
+                    {e.label}
+                  </option>
+                );
+              })}
+            </RhfSelect>
+            日
+          </BirthDayDiv>
+          <ErrorMessageField
+            message={errors.birthday?.message}
+            style={{
+              marginBottom: `6%`,
+              marginTop: `3%`,
+            }}
+          />
+        </InputRowDiv>
+        <InputRowDiv>
+          <InputTitleDiv>
+            パスワード
+          </InputTitleDiv>
+          <RhfTextbox
+            width="98%"
+            height="33px"
+            type="password"
+            maxLength={30}
+            autoComplete="off"
+            {...register("password")}
+          />
+          <ErrorMessageField
+            message={errors.password?.message}
+            style={{
+              marginBottom: `6%`,
+              marginTop: `3%`,
+            }}
           />
         </InputRowDiv>
         <InputRowDiv>
           <InputTitleDiv>
             確認用パスワード
           </InputTitleDiv>
-          <BaseTextbox
-            value={``}
+          <RhfTextbox
+            width="98%"
+            height="33px"
             type="password"
-            length={30}
-            disabled={false}
-            ref={confirmPasswordRef}
-            textWidth='98%'
-            placeholder='UserName'
-            autoComplete={true}
-            style={{ marginBottom: "8%" }}
+            maxLength={30}
+            autoComplete="off"
+            {...register("confirmPassword")}
+          />
+          <ErrorMessageField
+            message={errors.confirmPassword?.message}
+            style={{
+              marginBottom: `6%`,
+              marginTop: `3%`,
+            }}
           />
         </InputRowDiv>
         <SiginupButtonDiv>
@@ -237,7 +276,7 @@ export function Siginup() {
           <ButtonComponent
             styleTypeNumber="RUN"
             title={"登録"}
-            onclick={clickSiginupBtn}
+            onclick={handleSiginupClick}
             style={{
               "borderRadius": "23px",
               "background": "black",
@@ -251,7 +290,7 @@ export function Siginup() {
         isOpenModal={isOpenModal}
         closeModal={closeModal}
         titleMessage={`入力した内容でアカウントを作成しますか？`}
-        clickOk={executeSiginup}
+        clickOk={handleConfirm}
       />
     </Parent>
   );

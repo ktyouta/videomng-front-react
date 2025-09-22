@@ -35,7 +35,7 @@ export function useUpdateUserPassword() {
     // クエリパラメータ(遷移元)
     const { previouspath } = useQueryParams();
     // フォーム
-    const { register, handleSubmit, formState: { errors } } = useUpdateUserPasswordForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useUpdateUserPasswordForm();
 
     /**
      * 更新リクエスト
@@ -57,6 +57,12 @@ export function useUpdateUserPassword() {
             closeModal();
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
+
+            reset({
+                currentPassword: ``,
+                newPassword: ``,
+                confirmPassword: ``,
+            });
         },
     });
 

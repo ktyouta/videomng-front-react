@@ -17,22 +17,11 @@ import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
+import { useSignupForm } from './useSignupForm';
 
 
 export function useSiginup() {
 
-    // ユーザー名参照用
-    const userNameRef: RefObject<refType> = useRef(null);
-    // パスワード参照用
-    const userPasswordRef: RefObject<refType> = useRef(null);
-    // 確認用パスワード参照用
-    const confirmPasswordRef: RefObject<refType> = useRef(null);
-    // 生年月日(年)参照用
-    const userBirthdayYearRef: RefObject<refType> = useRef(null);
-    // 生年月日(月)参照用
-    const userBirthdayMonthRef: RefObject<refType> = useRef(null);
-    // 生年月日(日)参照用
-    const userBirthdayDayRef: RefObject<refType> = useRef(null);
     // ルーティング用
     const navigate = useNavigate();
     // ログインフラグ
@@ -47,6 +36,8 @@ export function useSiginup() {
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // クエリパラメータ(遷移元)
     const { previouspath } = useQueryParams();
+    // フォーム
+    const { register, handleSubmit, formState: { errors }, reset } = useSignupForm();
 
 
     /**
@@ -73,65 +64,43 @@ export function useSiginup() {
             closeModal();
             //エラーメッセージを表示
             setErrMessage(`${errMessage}`);
-            userPasswordRef.current?.clearValue();
-            confirmPasswordRef.current?.clearValue();
+
+            reset({
+                password: ``,
+                confirmPassword: ``,
+            });
         },
     });
 
-    /**
-     * エンターキー押下時イベント
-     */
-    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.key === 'Enter') {
-            clickSiginupBtn();
-        }
-    };
-
-    /**
-     * 登録ボタン押下
-     */
-    function clickSiginupBtn() {
-
-        const userName = userNameRef.current?.refValue as string;
-        const password = userPasswordRef.current?.refValue as string;
-        const confirmPassword = confirmPasswordRef.current?.refValue as string;
-        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
-
-        // ユーザーID未入力
-        if (!userName) {
-            setErrMessage(`ユーザー名が未入力です。`);
-            return;
-        }
-
-        // パスワード未入力
-        if (!password) {
-            setErrMessage(`パスワードが未入力です。`);
-            return;
-        }
-
-        // 確認用パスワード未入力
-        if (!confirmPassword) {
-            setErrMessage(`確認用パスワードが未入力です。`);
-            return;
-        }
-
-        // 生年月日未選択
-        if (!userBirthday) {
-            setErrMessage(`生年月日が未選択です。`);
-            return;
-        }
-
-        // 登録確認用モーダルを展開
+    // 登録ボタンクリック時
+    const handleSiginupClick = handleSubmit((data) => {
         openModal();
-    }
+    });
 
-    /**
-     * 入力値のクリア
-     */
-    function clickClearBtn() {
-        userNameRef.current?.clearValue();
-        userPasswordRef.current?.clearValue();
-    }
+
+    // ユーザー登録実行
+    const handleConfirm = handleSubmit((data) => {
+
+        const userName = data.userName;
+        const password = data.password
+        const confirmPassword = data.confirmPassword;
+        const userBirthday = `${data.birthday.year}${data.birthday.month}${data.birthday.day}`;
+
+
+        const body: SiginupRequestType = {
+            userName,
+            password,
+            userBirthday,
+            confirmPassword
+        };
+
+        // 登録リクエスト呼び出し
+        postMutation.mutate(body);
+    },
+        () => {
+            closeModal();
+        }
+    );
 
     /**
      * 戻るボタン押下
@@ -147,43 +116,16 @@ export function useSiginup() {
         navigate(`${ROUTER_PATH.LOGIN}${query}`);
     }
 
-    /**
-     * アカウント登録実行
-     */
-    function executeSiginup() {
-
-        const userName = userNameRef.current?.refValue as string;
-        const password = userPasswordRef.current?.refValue as string;
-        const userBirthday = `${userBirthdayYearRef.current?.refValue}${userBirthdayMonthRef.current?.refValue}${userBirthdayDayRef.current?.refValue}`;
-        const confirmPassword = confirmPasswordRef.current?.refValue as string;
-
-        const body: SiginupRequestType = {
-            userName,
-            password,
-            userBirthday,
-            confirmPassword
-        };
-
-        // 登録リクエスト呼び出し
-        postMutation.mutate(body);
-    }
-
     return {
-        userNameRef,
-        userPasswordRef,
-        clickSiginupBtn,
-        clickClearBtn,
-        handleKeyPress,
         errMessage,
-        userBirthdayYearRef,
-        userBirthdayMonthRef,
-        userBirthdayDayRef,
         yearCoomboList,
         clickBack,
         isOpenModal,
         closeModal,
-        executeSiginup,
-        confirmPasswordRef,
         isLoading: postMutation.isLoading,
+        register,
+        errors,
+        handleSiginupClick,
+        handleConfirm,
     }
 }
