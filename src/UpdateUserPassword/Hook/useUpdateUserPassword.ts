@@ -19,16 +19,11 @@ import { UpdateUserPasswordRequestType } from '../Type/UpdateUserPasswordRequest
 import { toast } from 'react-toastify';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
+import { useUpdateUserPasswordForm } from './useUpdateUserPasswordForm';
 
 
 export function useUpdateUserPassword() {
 
-    // 現在のパスワード参照用
-    const currentPasswordRef: RefObject<refType> = useRef(null);
-    // 新しいパスワード参照用
-    const newPasswordRef: RefObject<refType> = useRef(null);
-    // 確認用パスワード参照用
-    const confirmPasswordRef: RefObject<refType> = useRef(null);
     // ルーティング用
     const navigate = useNavigate();
     // エラーメッセージ
@@ -39,7 +34,8 @@ export function useUpdateUserPassword() {
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // クエリパラメータ(遷移元)
     const { previouspath } = useQueryParams();
-
+    // フォーム
+    const { register, handleSubmit, formState: { errors } } = useUpdateUserPasswordForm();
 
     /**
      * 更新リクエスト
@@ -65,58 +61,18 @@ export function useUpdateUserPassword() {
     });
 
 
-    /**
-     * 保存ボタン押下
-     */
-    function clickUpdateUserInfoBtn() {
-
-        const currentPassword = currentPasswordRef.current?.refValue as string;
-        const newPassword = newPasswordRef.current?.refValue as string;
-        const confirmPassword = confirmPasswordRef.current?.refValue as string;
-
-        // ユーザーIDが存在しない
-        if (!loginUserInfo.userId) {
-            setErrMessage(`パスワードを更新できません。再度ログインし直してください。`);
-            return;
-        }
-
-        // 現在のパスワード未入力
-        if (!currentPassword) {
-            setErrMessage(`現在のパスワードが未入力です。`);
-            return;
-        }
-
-        // 新しいパスワード未入力
-        if (!newPassword) {
-            setErrMessage(`新しいパスワードが未入力です。`);
-            return;
-        }
-
-        // 確認用パスワード未入力
-        if (!confirmPassword) {
-            setErrMessage(`確認用パスワードが未入力です。`);
-            return;
-        }
-
-        // 確認用モーダル展開
+    // 保存ボタンクリック時
+    const handleSaveClick = handleSubmit((data) => {
         openModal();
-    }
+    });
 
-    /**
-     * キャンセルボタン押下
-     */
-    function clickCancel() {
-        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
-    }
 
-    /**
-     * 更新処理実行
-     */
-    function executeUpdate() {
+    // パスワード更新実行
+    const handleConfirm = handleSubmit((data) => {
 
-        const currentPassword = currentPasswordRef.current?.refValue as string;
-        const newPassword = newPasswordRef.current?.refValue as string;
-        const confirmPassword = confirmPasswordRef.current?.refValue as string;
+        const currentPassword = data.currentPassword;
+        const newPassword = data.newPassword;
+        const confirmPassword = data.confirmPassword;
 
         const body: UpdateUserPasswordRequestType = {
             currentPassword,
@@ -127,18 +83,28 @@ export function useUpdateUserPassword() {
 
         // 更新リクエスト呼び出し
         postMutation.mutate(body);
+    },
+        () => {
+            closeModal();
+        }
+    );
+
+    /**
+     * キャンセルボタン押下
+     */
+    function clickCancel() {
+        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
     }
 
     return {
-        currentPasswordRef,
-        newPasswordRef,
-        confirmPasswordRef,
-        clickUpdateUserInfoBtn,
         errMessage,
         clickCancel,
         isOpenModal,
         closeModal,
-        executeUpdate,
         isLoading: postMutation.isLoading,
+        register,
+        errors,
+        handleSaveClick,
+        handleConfirm,
     }
 }

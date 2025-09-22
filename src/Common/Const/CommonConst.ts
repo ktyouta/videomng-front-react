@@ -34,7 +34,6 @@ export const MONTH_LIST = [
 
 // 日
 export const DAY_LIST = [
-    { label: ``, value: `` },
     { label: `1`, value: `01` },
     { label: `2`, value: `02` },
     { label: `3`, value: `03` },

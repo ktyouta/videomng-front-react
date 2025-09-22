@@ -11,6 +11,9 @@ import Loading from "../../Common/Component/Loading";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 import { Combobox } from "../../Common/Component/Combobox";
+import { RhfTextbox } from "../../Common/StyledComponent/RhfTextbox";
+import { RhfSelect } from "../../Common/StyledComponent/RhfSelect";
+import { ErrorMessageField } from "../../Common/Component/ErrorMessageField";
 
 
 const Parent = styled.div`
@@ -100,7 +103,6 @@ const BirthDayDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom:6%;
 `;
 
 const BirthDayLabelDiv = styled.div`
@@ -112,20 +114,6 @@ const InputRowDiv = styled.div`
 `;
 
 const InputTitleDiv = styled.div`
-`;
-
-const Select = styled.select`
-  text-align:center;
-  border-radius: 5px;
-  width: 68%;
-  height: 39px;
-`;
-
-const InputText = styled.input`
-  height: 33px;
-  border-radius: 5px;
-  border: solid 1px rgb(118, 118, 118);
-  width: 98%;
 `;
 
 
@@ -146,131 +134,147 @@ export function UpdateUserInfo() {
         errors } = useUpdateUserInfo();
 
     return (
-        <form>
-            <Parent>
+        <Parent>
+            {
+                isLoading &&
+                <React.Fragment>
+                    <LoadingCenter />
+                    <OverlayDiv
+                        bgColor="rgba(0, 0, 0, 0.1)"
+                    />
+                </React.Fragment>
+            }
+            <UpdateUserInfoFormDiv>
+                <TitleDiv>
+                    ユーザー情報更新
+                </TitleDiv>
                 {
-                    isLoading &&
-                    <React.Fragment>
-                        <LoadingCenter />
-                        <OverlayDiv
-                            bgColor="rgba(0, 0, 0, 0.1)"
-                        />
-                    </React.Fragment>
+                    errMessage &&
+                    <ErrMessageDiv>
+                        {errMessage}
+                    </ErrMessageDiv>
                 }
-                <UpdateUserInfoFormDiv>
-                    <TitleDiv>
-                        ユーザー情報更新
-                    </TitleDiv>
-                    {
-                        errMessage &&
-                        <ErrMessageDiv>
-                            {errMessage}
-                        </ErrMessageDiv>
-                    }
-                    <InputRowDiv>
-                        <InputTitleDiv>
-                            ユーザー名(3～30文字)
-                        </InputTitleDiv>
-                        <InputText
-                            type="text"
-                            maxLength={30}
-                            placeholder='UserName'
-                            autoComplete="off"
-                            {...register("userName")}
-                        />
-                        {
-                            errors.userName &&
-                            <ErrMessageDiv>
-                                {errors.userName.message}
-                            </ErrMessageDiv>
-                        }
-                    </InputRowDiv>
-                    <InputRowDiv>
-                        <InputTitleDiv>
-                            生年月日
-                        </InputTitleDiv>
-                        <BirthDayDiv>
-                            <Select
-                                {...register("birthday.year")}
-                            >
-                                {yearCoomboList.map((e) => {
-                                    return (
-                                        <option key={e.value} value={e.value}>
-                                            {e.label}
-                                        </option>
-                                    );
-                                })}
-                            </Select>
-                            <BirthDayLabelDiv>
-                                年
-                            </BirthDayLabelDiv>
-                            <Select
-                                {...register("birthday.month")}
-                            >
-                                {MONTH_LIST.map((e) => {
-                                    return (
-                                        <option key={e.value} value={e.value}>
-                                            {e.label}
-                                        </option>
-                                    );
-                                })}
-                            </Select>
-                            <BirthDayLabelDiv>
-                                月
-                            </BirthDayLabelDiv>
-                            <Select
-                                {...register("birthday.day")}
-                            >
-                                {DAY_LIST.map((e) => {
-                                    return (
-                                        <option key={e.value} value={e.value}>
-                                            {e.label}
-                                        </option>
-                                    );
-                                })}
-                            </Select>
-                            日
-                        </BirthDayDiv>
-                        {
-                            errors.birthday?.message && (
-                                <ErrMessageDiv>{errors.birthday.message}</ErrMessageDiv>
-                            )
-                        }
-                    </InputRowDiv>
-                    <UpdateUserInfoButtonDiv>
-                        <ButtonComponent
-                            styleTypeNumber="RUN"
-                            title={"キャンセル"}
-                            onclick={clickCancel}
-                            style={{
-                                "borderRadius": "23px",
-                                "background": "black",
-                                "fontSize": "1rem",
-                            }}
-                            type="button"
-                        />
-                        <ButtonComponent
-                            styleTypeNumber="RUN"
-                            title={"保存"}
-                            onclick={handleSaveClick}
-                            style={{
-                                "borderRadius": "23px",
-                                "background": "black",
-                                "fontSize": "1rem",
-                                "marginLeft": "5%",
-                            }}
-                            type="button"
-                        />
-                    </UpdateUserInfoButtonDiv>
-                </UpdateUserInfoFormDiv>
-                {/* 更新確認用モーダル */}
-                <ConfirmModalComponent
-                    isOpenModal={isOpenModal}
-                    closeModal={closeModal}
-                    titleMessage={`入力した内容でユーザー情報を更新しますか？`}
-                    clickOk={handleConfirm}
-                />
-            </Parent>
-        </form>
+                <InputRowDiv>
+                    <InputTitleDiv>
+                        ユーザー名(3～30文字)
+                    </InputTitleDiv>
+                    <RhfTextbox
+                        width="98%"
+                        height="33px"
+                        type="text"
+                        maxLength={30}
+                        placeholder='UserName'
+                        autoComplete="off"
+                        {...register("userName")}
+                    />
+                    <ErrorMessageField
+                        message={errors.userName?.message}
+                        style={{
+                            marginBottom: `6%`,
+                            marginTop: `3%`,
+                        }}
+                    />
+                </InputRowDiv>
+                <InputRowDiv>
+                    <InputTitleDiv>
+                        生年月日
+                    </InputTitleDiv>
+                    <BirthDayDiv>
+                        <RhfSelect
+                            width="68%"
+                            height="39px"
+                            {...register("birthday.year")}
+                        >
+                            {yearCoomboList.map((e) => {
+                                return (
+                                    <option
+                                        key={e.value}
+                                        value={e.value}
+                                    >
+                                        {e.label}
+                                    </option>
+                                );
+                            })}
+                        </RhfSelect>
+                        <BirthDayLabelDiv>
+                            年
+                        </BirthDayLabelDiv>
+                        <RhfSelect
+                            width="68%"
+                            height="39px"
+                            {...register("birthday.month")}
+                        >
+                            {MONTH_LIST.map((e) => {
+                                return (
+                                    <option
+                                        key={e.value}
+                                        value={e.value}
+                                    >
+                                        {e.label}
+                                    </option>
+                                );
+                            })}
+                        </RhfSelect>
+                        <BirthDayLabelDiv>
+                            月
+                        </BirthDayLabelDiv>
+                        <RhfSelect
+                            width="68%"
+                            height="39px"
+                            {...register("birthday.day")}
+                        >
+                            {DAY_LIST.map((e) => {
+                                return (
+                                    <option
+                                        key={e.value}
+                                        value={e.value}
+                                    >
+                                        {e.label}
+                                    </option>
+                                );
+                            })}
+                        </RhfSelect>
+                        日
+                    </BirthDayDiv>
+                    <ErrorMessageField
+                        message={errors.birthday?.message}
+                        style={{
+                            marginBottom: `6%`,
+                            marginTop: `3%`,
+                        }}
+                    />
+                </InputRowDiv>
+                <UpdateUserInfoButtonDiv>
+                    <ButtonComponent
+                        styleTypeNumber="RUN"
+                        title={"キャンセル"}
+                        onclick={clickCancel}
+                        style={{
+                            "borderRadius": "23px",
+                            "background": "black",
+                            "fontSize": "1rem",
+                        }}
+                    />
+                    <ButtonComponent
+                        styleTypeNumber="RUN"
+                        title={"保存"}
+                        onclick={handleSaveClick}
+                        style={{
+                            "borderRadius": "23px",
+                            "background": "black",
+                            "fontSize": "1rem",
+                            "marginLeft": "5%",
+                        }}
+                    />
+                </UpdateUserInfoButtonDiv>
+            </UpdateUserInfoFormDiv>
+            {/* 更新確認用モーダル */}
+            <ConfirmModalComponent
+                isOpenModal={isOpenModal}
+                closeModal={closeModal}
+                titleMessage={`入力した内容でユーザー情報を更新しますか？`}
+                clickOk={handleConfirm}
+            />
+        </Parent>
     );
 }

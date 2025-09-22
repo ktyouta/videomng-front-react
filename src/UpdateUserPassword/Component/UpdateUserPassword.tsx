@@ -9,6 +9,8 @@ import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalCompon
 import { MEDIA } from "../../Common/Const/MediaConst";
 import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
+import { RhfTextbox } from "../../Common/StyledComponent/RhfTextbox";
+import { ErrorMessageField } from "../../Common/Component/ErrorMessageField";
 
 
 const Parent = styled.div`
@@ -74,6 +76,7 @@ const ErrMessageDiv = styled.div`
 `;
 
 const InputRowDiv = styled.div`
+    margin-bottom: 8%;
 `;
 
 const InputTitleDiv = styled.div`
@@ -86,16 +89,15 @@ export function UpdateUserPassword() {
     console.log("UpdateUserPassword render");
 
     const {
-        currentPasswordRef,
-        newPasswordRef,
-        confirmPasswordRef,
-        clickUpdateUserInfoBtn,
         errMessage,
         clickCancel,
         isOpenModal,
         closeModal,
-        executeUpdate,
-        isLoading } = useUpdateUserPassword();
+        isLoading,
+        register,
+        errors,
+        handleSaveClick,
+        handleConfirm, } = useUpdateUserPassword();
 
     return (
         <Parent>
@@ -122,48 +124,60 @@ export function UpdateUserPassword() {
                     <InputTitleDiv>
                         現在のパスワード
                     </InputTitleDiv>
-                    <BaseTextbox
-                        value={``}
+                    <RhfTextbox
+                        width="98%"
+                        height="33px"
                         type="password"
-                        length={30}
-                        disabled={false}
-                        ref={currentPasswordRef}
-                        textWidth='98%'
-                        placeholder='UserName'
-                        autoComplete={true}
-                        style={{ marginBottom: "8%" }}
+                        maxLength={30}
+                        autoComplete="off"
+                        {...register("currentPassword")}
+                    />
+                    <ErrorMessageField
+                        message={errors.currentPassword?.message}
+                        style={{
+                            marginBottom: `6%`,
+                            marginTop: `3%`,
+                        }}
                     />
                 </InputRowDiv>
                 <InputRowDiv>
                     <InputTitleDiv>
                         新しいパスワード(3～30文字)
                     </InputTitleDiv>
-                    <BaseTextbox
-                        value={``}
+                    <RhfTextbox
+                        width="98%"
+                        height="33px"
                         type="password"
-                        length={30}
-                        disabled={false}
-                        ref={newPasswordRef}
-                        textWidth='98%'
-                        placeholder='UserName'
-                        autoComplete={true}
-                        style={{ marginBottom: "8%" }}
+                        maxLength={30}
+                        autoComplete="off"
+                        {...register("newPassword")}
+                    />
+                    <ErrorMessageField
+                        message={errors.newPassword?.message}
+                        style={{
+                            marginBottom: `6%`,
+                            marginTop: `3%`,
+                        }}
                     />
                 </InputRowDiv>
                 <InputRowDiv>
                     <InputTitleDiv>
                         確認用パスワード
                     </InputTitleDiv>
-                    <BaseTextbox
-                        value={``}
+                    <RhfTextbox
+                        width="98%"
+                        height="33px"
                         type="password"
-                        length={30}
-                        disabled={false}
-                        ref={confirmPasswordRef}
-                        textWidth='98%'
-                        placeholder='UserName'
-                        autoComplete={true}
-                        style={{ marginBottom: "8%" }}
+                        maxLength={30}
+                        autoComplete="off"
+                        {...register("confirmPassword")}
+                    />
+                    <ErrorMessageField
+                        message={errors.confirmPassword?.message}
+                        style={{
+                            marginBottom: `6%`,
+                            marginTop: `3%`,
+                        }}
                     />
                 </InputRowDiv>
                 <FormButtonDiv>
@@ -180,7 +194,7 @@ export function UpdateUserPassword() {
                     <ButtonComponent
                         styleTypeNumber="RUN"
                         title={"保存"}
-                        onclick={clickUpdateUserInfoBtn}
+                        onclick={handleSaveClick}
                         style={{
                             "borderRadius": "23px",
                             "background": "black",
@@ -194,7 +208,7 @@ export function UpdateUserPassword() {
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
                 titleMessage={`入力した内容でパスワードを更新しますか？`}
-                clickOk={executeUpdate}
+                clickOk={handleConfirm}
             />
         </Parent>
     );
