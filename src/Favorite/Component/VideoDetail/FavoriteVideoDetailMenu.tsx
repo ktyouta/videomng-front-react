@@ -81,80 +81,80 @@ const ComboTitleSpan = styled.span`
 `;
 
 type propsType = {
-    videoDetail: FavoriteVideoDetailDataType | undefined,
+  videoDetail: FavoriteVideoDetailDataType
 }
 
 
 export function FavoriteVideoDetailMenu(props: propsType) {
 
-    console.log("FavoriteVideoDetailMenu render");
+  console.log("FavoriteVideoDetailMenu render");
 
-    const {
-        openMenuNo,
-        setOpenMenuNo,
-        isMobile } = useFavoriteVideoDetailMenu();
+  const {
+    openMenuNo,
+    setOpenMenuNo,
+    isMobile } = useFavoriteVideoDetailMenu();
 
-    const videoDetail = props.videoDetail;
-    const menuWidth = isMobile ? "75%" : "50%";
-    const menuComboFontSize = isMobile ? "11px" : "13px";
+  const videoDetail = props.videoDetail;
+  const menuWidth = isMobile ? "75%" : "50%";
+  const menuComboFontSize = isMobile ? "11px" : "13px";
 
-    return (
-        <React.Fragment>
-            <MenuParentDiv>
-                <ComboAreaDiv>
-                    <ComboTitleSpan>
-                        メニュー：
-                    </ComboTitleSpan>
-                    <ComboComponent
-                        combo={VIDEO_DETIAL_MENU_LIST}
-                        initValue={VIDEO_DETIAL_MENU_LIST[0].value}
-                        onChange={setOpenMenuNo}
-                        width={menuWidth}
-                        minWidth="8%"
-                        height="39px"
-                        selectStyle={{
-                            "backgroundColor": "rgb(24, 26, 30)",
-                            "color": "white",
-                            "fontSize": `${menuComboFontSize}`
-                        }}
-                    />
-                </ComboAreaDiv>
-                {
-                    // 動画情報
-                    openMenuNo === MENU_NO.INFO &&
-                    <FavoriteMetaInfo
-                        videoDetail={videoDetail}
-                    />
-                }
-                {
-                    // メモ
-                    openMenuNo === MENU_NO.MEMO &&
-                    <FavoriteMemo />
-                }
-                {
-                    // 公開コメント
-                    openMenuNo === MENU_NO.COMMENT &&
-                    <FavoriteComment />
-                }
-                {
-                    // キーワード検索(コメント)
-                    openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-                    <FavoriteSearchKeywordComment />
-                }
-                {
-                    // 動画詳細設定
-                    openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
-                    videoDetail &&
-                    <FavoriteDetailSetting
-                        videoDetail={videoDetail}
-                    />
-                }
-                {
-                    // タグ
-                    openMenuNo === MENU_NO.TAG &&
-                    <FavoriteTag />
-                }
-            </MenuParentDiv>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <MenuParentDiv>
+        <ComboAreaDiv>
+          <ComboTitleSpan>
+            メニュー：
+          </ComboTitleSpan>
+          <ComboComponent
+            combo={VIDEO_DETIAL_MENU_LIST}
+            initValue={VIDEO_DETIAL_MENU_LIST[0].value}
+            onChange={setOpenMenuNo}
+            width={menuWidth}
+            minWidth="8%"
+            height="39px"
+            selectStyle={{
+              "backgroundColor": "rgb(24, 26, 30)",
+              "color": "white",
+              "fontSize": `${menuComboFontSize}`
+            }}
+          />
+        </ComboAreaDiv>
+        {
+          // 動画情報
+          openMenuNo === MENU_NO.INFO &&
+          <FavoriteMetaInfo
+            videoDetail={videoDetail}
+          />
+        }
+        {
+          // メモ
+          openMenuNo === MENU_NO.MEMO &&
+          <FavoriteMemo />
+        }
+        {
+          // 公開コメント
+          openMenuNo === MENU_NO.COMMENT &&
+          <FavoriteComment />
+        }
+        {
+          // キーワード検索(コメント)
+          openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
+          <FavoriteSearchKeywordComment />
+        }
+        {
+          // 動画詳細設定
+          openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
+          videoDetail &&
+          <FavoriteDetailSetting
+            videoDetail={videoDetail}
+          />
+        }
+        {
+          // タグ
+          openMenuNo === MENU_NO.TAG &&
+          <FavoriteTag />
+        }
+      </MenuParentDiv>
+    </React.Fragment>
+  );
 }

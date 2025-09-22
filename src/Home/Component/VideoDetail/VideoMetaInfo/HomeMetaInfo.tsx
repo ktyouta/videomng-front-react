@@ -4,6 +4,7 @@ import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
 import AccordionComponent from "../../../../Common/Component/AccordionComponent";
 import { YouTubeDataApiVideoDetailItemType } from "../../../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
+import { formatDateJP } from "../../../../Common/Function/CommonFunction";
 
 
 const Parent = styled.div`
@@ -26,13 +27,13 @@ const TitleDiv = styled.div`
 
 const MetaDiv = styled.div`
   box-sizing:border-box;
-  margin-bottom: 37px;
+  margin-bottom: 34px;
 `;
 
 
 type propsType = {
     videoId: string,
-    videoDetail: YouTubeDataApiVideoDetailItemType | undefined,
+    videoDetail: YouTubeDataApiVideoDetailItemType,
 }
 
 export function HomeMetaInfo(props: propsType) {
@@ -42,19 +43,21 @@ export function HomeMetaInfo(props: propsType) {
     const videoDetail = props.videoDetail;
     const item = videoDetail;
     // 動画基本情報
-    const snippet = item?.snippet;
+    const snippet = item.snippet;
     // タイトル
-    const title = snippet?.title;
+    const title = snippet.title;
     // チャンネル名
-    const channelTitle = snippet?.channelTitle;
+    const channelTitle = snippet.channelTitle;
     // 動画説明
-    const description = snippet?.description;
+    const description = snippet.description;
     // 動画統計情報
-    const statistics = item?.statistics;
+    const statistics = item.statistics;
     // 再生回数
     const viewCount = statistics?.viewCount;
     // 高評価数
     const likeCount = statistics?.likeCount;
+    // 投稿日
+    const publishedDate = formatDateJP(snippet.publishedAt);
 
     return (
         <Parent>
@@ -70,6 +73,12 @@ export function HomeMetaInfo(props: propsType) {
                 </TitleDiv>
                 <MetaDiv>
                     {channelTitle}
+                </MetaDiv>
+                <TitleDiv>
+                    【投稿日】
+                </TitleDiv>
+                <MetaDiv>
+                    {publishedDate}
                 </MetaDiv>
                 <TitleDiv>
                     【再生回数】

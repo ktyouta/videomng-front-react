@@ -66,7 +66,7 @@ const BtnDiv = styled.div`
 
 
 type propsType = {
-    videoDetail: FavoriteVideoDetailDataType | undefined,
+    videoDetail: FavoriteVideoDetailDataType
 }
 
 
@@ -84,12 +84,12 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     } = useFavoriteVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
-    const item = videoDetail?.item;
-    const snippet = item?.snippet;
+    const item = videoDetail.item;
+    const snippet = item.snippet;
     // サムネイルURL
-    const imgUrl = snippet?.thumbnails.high?.url;
+    const imgUrl = snippet.thumbnails.high?.url;
     // タイトル
-    const title = snippet?.title;
+    const title = snippet.title;
     // ボタン幅
     const buttonWidth = isMobile ? "50%" : "90%";
 

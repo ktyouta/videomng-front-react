@@ -23,6 +23,8 @@ type propsType = {
     style?: CSSProperties,
     clear: () => void,
     onBlur?: () => void,
+    textStyle?: CSSProperties,
+    iconStyle?: CSSProperties,
 }
 
 const OuterDiv = styled.div<{ width?: string, height?: string, bgColor?: string, }>`
@@ -68,6 +70,7 @@ export function ClearableTextbox(props: propsType) {
                     outline: "none",
                     flex: "1",
                     boxSizing: "border-box",
+                    ...props.textStyle
                 }}
                 onBlur={props.onBlur}
                 textWidth={props.textWidth}
@@ -75,6 +78,7 @@ export function ClearableTextbox(props: propsType) {
             <IconDiv
                 iconHeight={props.height}
                 iconWidth={props.iconWidth}
+                style={props.iconStyle}
             >
                 {
                     props.value && props.value.length > 0 &&

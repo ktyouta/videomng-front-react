@@ -13,6 +13,7 @@ import { FavoriteCommentHeader } from "../VideoComment/FavoriteCommentHeader";
 import { FavoriteCommentList } from "../VideoComment/FavoriteCommentList";
 import { FavoriteVideoDetailDataType } from "../../../Type/VideoDetail/FavoriteVideoDetailDataType";
 import AccordionComponent from "../../../../Common/Component/AccordionComponent";
+import { formatDateJP } from "../../../../Common/Function/CommonFunction";
 
 
 const Parent = styled.div`
@@ -35,12 +36,12 @@ const TitleDiv = styled.div`
 
 const MetaDiv = styled.div`
   box-sizing:border-box;
-  margin-bottom: 37px;
+  margin-bottom: 34px;
 `;
 
 
 type propsType = {
-    videoDetail: FavoriteVideoDetailDataType | undefined,
+    videoDetail: FavoriteVideoDetailDataType
 }
 
 export function FavoriteMetaInfo(props: propsType) {
@@ -48,21 +49,23 @@ export function FavoriteMetaInfo(props: propsType) {
     console.log("FavoriteMetaInfo render");
 
     const videoDetail = props.videoDetail;
-    const item = videoDetail?.item;
+    const item = videoDetail.item;
     // 動画基本情報
-    const snippet = item?.snippet;
+    const snippet = item.snippet;
     // タイトル
-    const title = snippet?.title;
+    const title = snippet.title;
     // チャンネル名
-    const channelTitle = snippet?.channelTitle;
+    const channelTitle = snippet.channelTitle;
     // 動画説明
-    const description = snippet?.description;
+    const description = snippet.description;
     // 動画統計情報
-    const statistics = item?.statistics;
+    const statistics = item.statistics;
     // 再生回数
     const viewCount = statistics?.viewCount;
     // 高評価数
     const likeCount = statistics?.likeCount;
+    // 投稿日
+    const publishedDate = formatDateJP(snippet.publishedAt);
 
     return (
         <Parent>
@@ -78,6 +81,12 @@ export function FavoriteMetaInfo(props: propsType) {
                 </TitleDiv>
                 <MetaDiv>
                     {channelTitle}
+                </MetaDiv>
+                <TitleDiv>
+                    【投稿日】
+                </TitleDiv>
+                <MetaDiv>
+                    {publishedDate}
                 </MetaDiv>
                 <TitleDiv>
                     【再生回数】

@@ -59,6 +59,10 @@ export function FavoriteSearchText(props: propsType) {
         onChange={setInputKeyword}
         style={{
           borderRadius: 6,
+          backgroundColor: `#ececec`
+        }}
+        textStyle={{
+          backgroundColor: `#ececec`
         }}
         clear={clearInput}
         onBlur={filterVideoList}

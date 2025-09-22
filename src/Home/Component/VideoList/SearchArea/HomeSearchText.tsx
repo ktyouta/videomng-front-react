@@ -50,39 +50,43 @@ const SearchIconAreaDiv = styled.div`
  */
 export function HomeSearchText() {
 
-    console.log("HomeSearchText render");
+  console.log("HomeSearchText render");
 
-    const {
-        clickSearchBtn,
-        clearInput,
-        isMobile,
-        handleKeyPress,
-        inputKeyword,
-        setInputKeyword, } = useHomeSearchText();
+  const {
+    clickSearchBtn,
+    clearInput,
+    isMobile,
+    handleKeyPress,
+    inputKeyword,
+    setInputKeyword, } = useHomeSearchText();
 
-    return (
-        <TextBoxAreaDiv>
-            <ClearableTextbox
-                width={isMobile ? "85%" : "89%"}
-                height="99%"
-                placeholder="キーワード"
-                value={inputKeyword}
-                onChange={setInputKeyword}
-                style={{
-                    borderBottomLeftRadius: 6,
-                    borderTopLeftRadius: 6,
-                }}
-                clear={clearInput}
-                onKeyDown={handleKeyPress}
-            />
-            {/* 検索ボタン */}
-            <SearchIconAreaDiv>
-                <IconComponent
-                    icon={IoSearch}
-                    onclick={clickSearchBtn}
-                    size="75%"
-                />
-            </SearchIconAreaDiv>
-        </TextBoxAreaDiv>
-    );
+  return (
+    <TextBoxAreaDiv>
+      <ClearableTextbox
+        width={isMobile ? "85%" : "89%"}
+        height="99%"
+        placeholder="キーワード"
+        value={inputKeyword}
+        onChange={setInputKeyword}
+        style={{
+          borderBottomLeftRadius: 6,
+          borderTopLeftRadius: 6,
+          backgroundColor: `#ececec`
+        }}
+        textStyle={{
+          backgroundColor: `#ececec`
+        }}
+        clear={clearInput}
+        onKeyDown={handleKeyPress}
+      />
+      {/* 検索ボタン */}
+      <SearchIconAreaDiv>
+        <IconComponent
+          icon={IoSearch}
+          onclick={clickSearchBtn}
+          size="75%"
+        />
+      </SearchIconAreaDiv>
+    </TextBoxAreaDiv>
+  );
 }
