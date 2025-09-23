@@ -39,6 +39,18 @@ const MetaDiv = styled.div`
   margin-bottom: 34px;
 `;
 
+const StatisticsAreaDiv = styled.div`
+  display: flex;
+  margin-bottom: 34px;
+  gap: 48px;
+  flex-wrap: wrap;
+`;
+
+const StatisticsDiv = styled.div`
+`;
+
+const StatisticsDataDiv = styled.div`
+`;
 
 type propsType = {
     videoDetail: FavoriteVideoDetailDataType
@@ -82,24 +94,32 @@ export function FavoriteMetaInfo(props: propsType) {
                 <MetaDiv>
                     {channelTitle}
                 </MetaDiv>
-                <TitleDiv>
-                    【投稿日】
-                </TitleDiv>
-                <MetaDiv>
-                    {publishedDate}
-                </MetaDiv>
-                <TitleDiv>
-                    【再生回数】
-                </TitleDiv>
-                <MetaDiv>
-                    {viewCount ? `${viewCount} 回` : ``}
-                </MetaDiv>
-                <TitleDiv>
-                    【高評価数】
-                </TitleDiv>
-                <MetaDiv>
-                    {likeCount}
-                </MetaDiv>
+                <StatisticsAreaDiv>
+                    <StatisticsDiv>
+                        <TitleDiv>
+                            【【投稿日】
+                        </TitleDiv>
+                        <StatisticsDataDiv>
+                            {publishedDate}
+                        </StatisticsDataDiv>
+                    </StatisticsDiv>
+                    <StatisticsDiv>
+                        <TitleDiv>
+                            【再生回数】
+                        </TitleDiv>
+                        <StatisticsDataDiv>
+                            {viewCount ? `${viewCount} 回` : ``}
+                        </StatisticsDataDiv>
+                    </StatisticsDiv>
+                    <StatisticsDiv>
+                        <TitleDiv>
+                            【高評価数】
+                        </TitleDiv>
+                        <StatisticsDataDiv>
+                            {likeCount}
+                        </StatisticsDataDiv>
+                    </StatisticsDiv>
+                </StatisticsAreaDiv>
                 <TitleDiv>
                     【動画説明】
                 </TitleDiv>
