@@ -26,7 +26,7 @@ export function FavoriteSearchCsvImportFooter(props: propsType) {
 
     console.log("FavoriteSearchCsvImportFooter render");
 
-    const { download } = useFavoriteSearchCsvImportFooter();
+    const { download } = useFavoriteSearchCsvImportFooter({ ...props });
 
     return (
         <Parent
