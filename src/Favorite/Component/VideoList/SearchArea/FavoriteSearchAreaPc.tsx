@@ -14,6 +14,8 @@ import { FavoriteSearchFilterModal } from "./Filter/FavoriteSearchFilterModal";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchText } from "./FavoriteSearchText";
+import { FavoriteSearchCsvImportModal } from "./Csv/Import/FavoriteSearchCsvImportModal";
+import { FavoriteSearchCsvArea } from "./Csv/FavoriteSearchCsvArea";
 
 const Parent = styled.div`
   width: 100%;
@@ -46,7 +48,6 @@ export function FavoriteSearchAreaPc() {
   return (
     <React.Fragment>
       <Parent>
-        <FlexSpaceDiv />
         {/* タイトルフィルター */}
         <FavoriteSearchText
           width="90%"
@@ -55,6 +56,8 @@ export function FavoriteSearchAreaPc() {
         <FavoriteSearchSortArea />
         {/* フィルター用モーダル */}
         <FavoriteSearchFilterModal />
+        {/* CSV保存取込 */}
+        <FavoriteSearchCsvArea />
       </Parent>
       <SearchParentDiv>
         {/* 選択中のタグ */}

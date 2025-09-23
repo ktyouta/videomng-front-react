@@ -71,11 +71,8 @@ export function HomeSearchText() {
         style={{
           borderBottomLeftRadius: 6,
           borderTopLeftRadius: 6,
-          backgroundColor: `#ececec`
         }}
-        textStyle={{
-          backgroundColor: `#ececec`
-        }}
+        backgroundColor="#ececec"
         clear={clearInput}
         onKeyDown={handleKeyPress}
       />

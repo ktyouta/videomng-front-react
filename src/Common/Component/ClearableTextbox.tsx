@@ -23,8 +23,8 @@ type propsType = {
     style?: CSSProperties,
     clear: () => void,
     onBlur?: () => void,
-    textStyle?: CSSProperties,
     iconStyle?: CSSProperties,
+    backgroundColor?: string,
 }
 
 const OuterDiv = styled.div<{ width?: string, height?: string, bgColor?: string, }>`
@@ -53,7 +53,10 @@ export function ClearableTextbox(props: propsType) {
         <OuterDiv
             width={props.width}
             height={props.height}
-            style={props.style}
+            style={{
+                backgroundColor: props.backgroundColor ?? ``,
+                ...props.style,
+            }}
         >
             <BaseTextbox
                 length={props.length}
@@ -65,12 +68,12 @@ export function ClearableTextbox(props: propsType) {
                 placeholder={props.placeholder}
                 autoComplete={props.autoComplete}
                 style={{
-                    ...props.textboxStyle,
                     border: "none",
                     outline: "none",
                     flex: "1",
                     boxSizing: "border-box",
-                    ...props.textStyle
+                    backgroundColor: props.backgroundColor ?? ``,
+                    ...props.textboxStyle,
                 }}
                 onBlur={props.onBlur}
                 textWidth={props.textWidth}

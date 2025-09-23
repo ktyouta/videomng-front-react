@@ -6,7 +6,7 @@ import React from "react";
 
 
 const Parent = styled.div`
-  flex: 0 1 660px;
+  flex: 0 1 500px;
   display:flex;
   align-items: center;
   box-sizing: border-box;
@@ -59,11 +59,8 @@ export function FavoriteSearchText(props: propsType) {
         onChange={setInputKeyword}
         style={{
           borderRadius: 6,
-          backgroundColor: `#ececec`
         }}
-        textStyle={{
-          backgroundColor: `#ececec`
-        }}
+        backgroundColor="#ececec"
         clear={clearInput}
         onBlur={filterVideoList}
         onKeyDown={handleKeyPress}

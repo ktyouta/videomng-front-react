@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import ButtonComponent from "../../../../../Common/Component/ButtonComponent";
-import ModalComponent from "../../../../../Common/Component/ModalComponent";
-import { OverlayDiv } from "../../../../../Common/StyledComponent/OverlayDiv";
-import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
-import TagButtonComponent from "../../../../../Common/Component/TagButtonComponent";
-import { FlexSpaceDiv } from "../../../../../Common/StyledComponent/FlexSpaceDiv";
-import ComboComponent from "../../../../../Common/Component/ComboComponent";
+import ButtonComponent from "../../../../../../Common/Component/ButtonComponent";
+import ModalComponent from "../../../../../../Common/Component/ModalComponent";
+import { OverlayDiv } from "../../../../../../Common/StyledComponent/OverlayDiv";
+import TagButtonComponent from "../../../../../../Common/Component/TagButtonComponent";
+import { FlexSpaceDiv } from "../../../../../../Common/StyledComponent/FlexSpaceDiv";
+import ComboComponent from "../../../../../../Common/Component/ComboComponent";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
-import { IconComponent } from "../../../../../Common/Component/IconComponent";
-import { MEDIA } from "../../../../../Common/Const/MediaConst";
-import { useFavoriteSearchFilterModal } from "../../../../Hook/VideoList/SearchArea/Filter/useFavoriteSearchFilterModal";
+import { IconComponent } from "../../../../../../Common/Component/IconComponent";
+import { MEDIA } from "../../../../../../Common/Const/MediaConst";
+import { useFavoriteSearchFilterModal } from "../../../../../Hook/VideoList/SearchArea/Filter/useFavoriteSearchFilterModal";
+import { FiDownload } from "react-icons/fi";
+import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -33,15 +34,14 @@ const FilterTitleSpan = styled.span`
     cursor: pointer;
   }
   white-space: nowrap;
-  margin-right: 3%;
 `;
 
 /**
- * 検索条件エリア
+ * CSV出力モーダル
  */
-export function FavoriteSearchFilterModal() {
+export function FavoriteSearchCsvImportModal() {
 
-    console.log("FavoriteSearchFilterModal render");
+    console.log("FavoriteSearchCsvImportModal render");
 
     const {
         isOpenFilterModal,
@@ -54,21 +54,13 @@ export function FavoriteSearchFilterModal() {
         <React.Fragment>
             <FilterIconAreaDiv>
                 <IconComponent
-                    icon={FaFilter}
+                    icon={FiDownload}
                     onclick={openFilterModal}
                     size="45%"
                 />
             </FilterIconAreaDiv>
             {
-                !isMobile &&
-                <FilterTitleSpan
-                    onClick={openFilterModal}
-                >
-                    フィルター
-                </FilterTitleSpan>
-            }
-            {
-                // フィルターモーダル
+                // 確認モーダル
                 isOpenFilterModal &&
                 <ModalComponent
                     modalIsOpen={isOpenFilterModal}
@@ -81,10 +73,10 @@ export function FavoriteSearchFilterModal() {
                         overflowY: "hidden",
                     }}
                     width={isMobile ? `80%` : `42%`}
-                    height="65%"
+                    height="47%"
                     isPositionCenter={true}
                 >
-                    <FavoriteSearchCondition
+                    <FavoriteSearchCsvImport
                         close={closeFilterModal}
                     />
                 </ModalComponent>

@@ -14,6 +14,7 @@ import { FavoriteSearchFilterModal } from "./Filter/FavoriteSearchFilterModal";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchText } from "./FavoriteSearchText";
+import { FavoriteSearchCsvArea } from "./Csv/FavoriteSearchCsvArea";
 
 const Parent = styled.div`
   width: 100%;
@@ -49,6 +50,8 @@ export function FavoriteSearchAreaMobile() {
         <FavoriteSearchSortArea />
         {/* フィルター用モーダル */}
         <FavoriteSearchFilterModal />
+        {/* CSV保存取込 */}
+        <FavoriteSearchCsvArea />
       </SearchParentDiv>
       {/* 選択中のタグ */}
       <FavoriteSearchSelectedTag />
