@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useFavoriteSearchCsvArea } from "../../../../Hook/VideoList/SearchArea/Csv/useFavoriteSearchCsvArea";
 import { FavoriteSearchCsvImportModal } from "./Import/FavoriteSearchCsvImportModal";
+import { FavoriteSearchCsvExportModal } from "./Export/FavoriteSearchCsvExportModal";
 
 
 const FilterTitleSpan = styled.span`
@@ -27,7 +28,10 @@ export function FavoriteSearchCsvArea() {
                     保存・取込：
                 </FilterTitleSpan>
             }
+            {/* 保存 */}
             <FavoriteSearchCsvImportModal />
+            {/* 取込 */}
+            <FavoriteSearchCsvExportModal />
         </React.Fragment>
     );
 }

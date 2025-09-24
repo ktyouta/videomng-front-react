@@ -10,9 +10,9 @@ import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../../Common/Component/IconComponent";
 import { MEDIA } from "../../../../../../Common/Const/MediaConst";
 import { useFavoriteSearchFilterModal } from "../../../../../Hook/VideoList/SearchArea/Filter/useFavoriteSearchFilterModal";
-import { FiDownload } from "react-icons/fi";
-import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
-import { useFavoriteSearchCsvImportModal } from "../../../../../Hook/VideoList/SearchArea/Csv/Import/useFavoriteSearchCsvImportModal";
+import { FiUpload } from "react-icons/fi";
+import { FavoriteSearchCsvExport } from "./FavoriteSearchCsvExport";
+import { useFavoriteSearchCsvExportModal } from "../../../../../Hook/VideoList/SearchArea/Csv/Export/useFavoriteSearchCsvExportModal";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -28,30 +28,30 @@ const FilterIconAreaDiv = styled.div`
   color:#9e9e9e;
 `;
 
-
 /**
  * CSV出力モーダル
  */
-export function FavoriteSearchCsvImportModal() {
+export function FavoriteSearchCsvExportModal() {
 
-    console.log("FavoriteSearchCsvImportModal render");
+    console.log("FavoriteSearchCsvExportModal render");
 
     const {
         isOpenModal,
         openModal,
         closeModal,
-        isMobile } = useFavoriteSearchCsvImportModal();
+        isMobile, } = useFavoriteSearchCsvExportModal();
 
 
     return (
         <React.Fragment>
             <FilterIconAreaDiv>
                 <IconComponent
-                    icon={FiDownload}
+                    icon={FiUpload}
                     onclick={openModal}
                     size="45%"
                 />
             </FilterIconAreaDiv>
+            {/* 確認モーダル */}
             <ModalComponent
                 modalIsOpen={isOpenModal}
                 closeModal={closeModal}
@@ -61,15 +61,16 @@ export function FavoriteSearchCsvImportModal() {
                     border: "solid 1px",
                     color: "white",
                     overflowY: "hidden",
+                    minHeight: "350px",
                     display: "flex",
                     flexDirection: "column",
                     fontSize: isMobile ? "12px" : "15px",
                 }}
                 width={isMobile ? `80%` : `42%`}
-                height="47%"
+                height=""
                 isPositionCenter={true}
             >
-                <FavoriteSearchCsvImport
+                <FavoriteSearchCsvExport
                     close={closeModal}
                 />
             </ModalComponent>

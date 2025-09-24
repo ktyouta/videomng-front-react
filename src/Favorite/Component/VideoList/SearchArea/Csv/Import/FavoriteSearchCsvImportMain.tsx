@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-const Parent = styled.div<{ height: string }>`
+const Parent = styled.div`
     width: 100%;
-    height: ${({ height }) => (height)};
     box-sizing: border-box;
     color: white;
     overflow-y: auto;
@@ -11,20 +10,16 @@ const Parent = styled.div<{ height: string }>`
     justify-content: center;
     padding: 0 5%;
     line-height: 2.0;
+    flex: 1;
 `;
 
-type propsType = {
-    height: string
-}
 
-export function FavoriteSearchCsvImportMain(props: propsType) {
+export function FavoriteSearchCsvImportMain() {
 
     console.log("FavoriteSearchCsvImportMain render");
 
     return (
-        <Parent
-            height={props.height}
-        >
+        <Parent>
             ダウンロードボタンを押下すると、現在登録されているお気に入り動画のデータをCSVファイルとしてダウンロードできます。<br />
             ダウンロードしたファイルを使うと、お気に入りに一括登録することができます。<br />
             ダウンロードしたCSVには動画タイトルなどの情報は含まれず、動画IDのみが保存されます。<br />

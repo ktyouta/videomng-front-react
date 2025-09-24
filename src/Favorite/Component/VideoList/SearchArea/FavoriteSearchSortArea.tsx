@@ -59,12 +59,13 @@ export function FavoriteSearchSortArea() {
                         combo={sortList}
                         initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
                         onChange={selectSort}
-                        width={isMobile ? `60%` : `23%`}
+                        width={isMobile ? `48%` : `23%`}
                         height="39px"
                         selectStyle={{
-                            "backgroundColor": "rgb(24, 26, 30)",
-                            "color": "white",
-                            "marginRight": "3%"
+                            backgroundColor: "rgb(24, 26, 30)",
+                            color: "white",
+                            marginRight: "3%",
+                            fontSize: isMobile ? "12px" : "13px"
                         }}
                     />
                 </React.Fragment>

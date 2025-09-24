@@ -56,7 +56,7 @@ export function FavoriteSearchFilterModal() {
                 <IconComponent
                     icon={FaFilter}
                     onclick={openFilterModal}
-                    size="45%"
+                    size="40%"
                 />
             </FilterIconAreaDiv>
             {
@@ -67,28 +67,25 @@ export function FavoriteSearchFilterModal() {
                     フィルター
                 </FilterTitleSpan>
             }
-            {
-                // フィルターモーダル
-                isOpenFilterModal &&
-                <ModalComponent
-                    modalIsOpen={isOpenFilterModal}
-                    closeModal={closeFilterModal}
-                    style={{
-                        backgroundColor: "#181a1e",
-                        borderRadius: "1%",
-                        border: "solid 1px",
-                        color: "white",
-                        overflowY: "hidden",
-                    }}
-                    width={isMobile ? `80%` : `42%`}
-                    height="65%"
-                    isPositionCenter={true}
-                >
-                    <FavoriteSearchCondition
-                        close={closeFilterModal}
-                    />
-                </ModalComponent>
-            }
+            {/* フィルターモーダル */}
+            <ModalComponent
+                modalIsOpen={isOpenFilterModal}
+                closeModal={closeFilterModal}
+                style={{
+                    backgroundColor: "#181a1e",
+                    borderRadius: "1%",
+                    border: "solid 1px",
+                    color: "white",
+                    overflowY: "hidden",
+                }}
+                width={isMobile ? `80%` : `42%`}
+                height="65%"
+                isPositionCenter={true}
+            >
+                <FavoriteSearchCondition
+                    close={closeFilterModal}
+                />
+            </ModalComponent>
             {
                 isOpenFilterModal &&
                 <OverlayDiv />

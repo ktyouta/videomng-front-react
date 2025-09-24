@@ -9,21 +9,22 @@ type propsType = {
 }
 
 
-export function useFavoriteSearchCsvImportFooter(props: propsType) {
+export function useFavoriteSearchCsvExportFooter(props: propsType) {
 
     /**
-     * CSVをダウンロードする
+     * CSVをアップロードする
      */
-    function download() {
+    function upload() {
 
+        alert(`実装中`);
         // 現在日付
-        const nowDate = getNowDatetime(`yyyyMMddHHmmss`);
-        downloadCsv(`${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_CSV}`, `favorite_video_${nowDate}.csv`);
+        const nowDate = getNowDatetime(`yyyy-MM-dd HH:mm:ss`);
+        //downloadCsv(`${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_CSV}`, `favorite_video_${nowDate}.csv`);
 
         props.close();
     }
 
     return {
-        download
+        upload
     }
 }

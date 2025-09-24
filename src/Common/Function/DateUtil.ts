@@ -1,4 +1,4 @@
-type DateFormat = 'yyyy-MM-dd HH:mm:ss' | 'yyyy/MM/dd' | 'HH:mm:ss' | 'dd-MM-yyyy HH:mm' | 'yyyyMMdd';
+type DateFormat = 'yyyy-MM-dd HH:mm:ss' | 'yyyy/MM/dd' | 'HH:mm:ss' | 'dd-MM-yyyy HH:mm' | 'yyyyMMdd' | 'yyyyMMddHHmmss';
 
 /**
  * 現在日時を取得

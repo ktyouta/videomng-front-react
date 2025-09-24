@@ -11,7 +11,7 @@ const Parent = styled.div`
   align-items: center;
   color: white;
   padding-left: 1%;
-  margin-bottom: 6%;
+  margin-bottom:6%;
 `;
 
 const BlockIconDiv = styled.div`
@@ -27,14 +27,14 @@ type propsType = {
     close: () => void;
 }
 
-export function FavoriteSearchCsvImportHeader(props: propsType) {
+export function FavoriteSearchCsvExportHeader(props: propsType) {
 
-    console.log("FavoriteSearchCsvImportHeader render");
+    console.log("FavoriteSearchCsvExportHeader render");
 
     return (
         <Parent>
             <TitleSpan>
-                お気に入りのインポート
+                お気に入りの取込
             </TitleSpan>
             <FlexSpaceDiv />
             <BlockIconDiv>

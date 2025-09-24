@@ -3,15 +3,17 @@ import { IconComponent } from "../../../../../../Common/Component/IconComponent"
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
 import { MEDIA } from "../../../../../../Common/Const/MediaConst";
-import { FavoriteSearchCsvImportHeader } from "./FavoriteSearchCsvImportHeader";
-import { FavoriteSearchCsvImportMain } from "./FavoriteSearchCsvImportMain";
-import { FavoriteSearchCsvImportFooter } from "./FavoriteSearchCsvImportFooter";
+import { FavoriteSearchCsvExportHeader } from "./FavoriteSearchCsvExportHeader";
+import { FavoriteSearchCsvExportMain } from "./FavoriteSearchCsvExportMain";
+import { FavoriteSearchCsvExportFooter } from "./FavoriteSearchCsvExportFooter";
+import { useFavoriteSearchCsvExport } from "../../../../../Hook/VideoList/SearchArea/Csv/Export/useFavoriteSearchCsvExport";
 
 
 const Parent = styled.div`
+  display: flex;
+  flex-direction: column;
   box-sizing:border-box;
   padding-top:1%;
-  height:100%;
   font-size: 12px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -31,22 +33,30 @@ type propsType = {
   close: () => void;
 }
 
-export function FavoriteSearchCsvImport(props: propsType) {
+export function FavoriteSearchCsvExport(props: propsType) {
 
-  console.log("FavoriteSearchCsvImport render");
+  console.log("FavoriteSearchCsvExport render");
+
+  const {
+    selectedFile,
+    handleFileChange } = useFavoriteSearchCsvExport();
 
   return (
     <React.Fragment>
       {/* ヘッダー */}
-      <FavoriteSearchCsvImportHeader
+      <FavoriteSearchCsvExportHeader
         close={props.close}
       />
       {/* 説明文 */}
-      <FavoriteSearchCsvImportMain />
+      <FavoriteSearchCsvExportMain
+        handleFileChange={handleFileChange}
+        selectedFile={selectedFile}
+      />
       {/* フッター */}
-      <FavoriteSearchCsvImportFooter
+      <FavoriteSearchCsvExportFooter
         close={props.close}
         height={"45px"}
+        selectedFile={selectedFile}
       />
     </React.Fragment>
   );

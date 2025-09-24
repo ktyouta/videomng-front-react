@@ -112,7 +112,6 @@ export function HomeMetaInfo(props: propsType) {
                         </StatisticsDataDiv>
                     </StatisticsDiv>
                 </StatisticsAreaDiv>
-
                 <TitleDiv>
                     【動画説明】
                 </TitleDiv>
