@@ -61,7 +61,7 @@ export function FavoriteSearchCsvExportModal() {
                     border: "solid 1px",
                     color: "white",
                     overflowY: "hidden",
-                    minHeight: "350px",
+                    minHeight: "364px",
                     display: "flex",
                     flexDirection: "column",
                     fontSize: isMobile ? "12px" : "15px",

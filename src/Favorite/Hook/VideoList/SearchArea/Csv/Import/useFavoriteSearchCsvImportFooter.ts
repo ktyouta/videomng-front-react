@@ -1,6 +1,6 @@
 import { VIDEO_MNG_PATH } from "../../../../../../Common/Const/CommonConst";
 import { getNowDatetime } from "../../../../../../Common/Function/DateUtil";
-import { downloadCsv } from "../../../../../../Common/Function/downloadCsv";
+import { downloadFile } from "../../../../../../Common/Function/downloadFile";
 import ENV from "../../../../../../env.json";
 
 
@@ -18,7 +18,7 @@ export function useFavoriteSearchCsvImportFooter(props: propsType) {
 
         // 現在日付
         const nowDate = getNowDatetime(`yyyyMMddHHmmss`);
-        downloadCsv(`${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_CSV}`, `favorite_video_${nowDate}.csv`);
+        downloadFile(`${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_CSV_DOWNLOAD}`, `favorite_video_${nowDate}.csv`);
 
         props.close();
     }

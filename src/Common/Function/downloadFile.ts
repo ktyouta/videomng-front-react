@@ -1,13 +1,14 @@
 import axios from "axios";
 
-export async function downloadCsv(url: string, fileName: string) {
+export async function downloadFile(url: string, fileName: string) {
 
     const res = await axios.get(url, {
         withCredentials: true,
         responseType: "blob",
     });
 
-    const blob = new Blob([res.data], { type: "text/csv" });
+    const contentType = res.headers["content-type"] || "text/csv";
+    const blob = new Blob([res.data], { type: contentType });
 
     const link = document.createElement("a");
 
