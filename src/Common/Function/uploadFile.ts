@@ -3,7 +3,7 @@ import axios, { AxiosProgressEvent } from "axios";
 type propsType = {
     url: string,
     fileData: File,
-    onUploadProgress?: ((progressEvent: AxiosProgressEvent) => void),
+    onUploadProgress?: (progressEvent: AxiosProgressEvent) => void,
 }
 
 export async function uploadFile(props: propsType) {

@@ -45,7 +45,7 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
     const {
         selectedFile,
         handleFileChange,
-        upload } = useFavoriteSearchCsvExportMain({ ...props });
+        uploadCsv } = useFavoriteSearchCsvExportMain({ ...props });
 
     return (
         <React.Fragment>
@@ -77,7 +77,7 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
                 <ButtonComponent
                     styleTypeNumber="RUN"
                     title={"アップロード"}
-                    onclick={upload}
+                    onclick={uploadCsv}
                     style={{
                         borderRadius: "23px",
                         background: "#3a3d42",
