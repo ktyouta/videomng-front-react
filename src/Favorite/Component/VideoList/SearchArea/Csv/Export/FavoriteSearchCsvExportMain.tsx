@@ -45,7 +45,7 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
     const {
         selectedFile,
         handleFileChange,
-        uploadCsv } = useFavoriteSearchCsvExportMain({ ...props });
+        uploadCsv } = useFavoriteSearchCsvExportMain();
 
     return (
         <React.Fragment>

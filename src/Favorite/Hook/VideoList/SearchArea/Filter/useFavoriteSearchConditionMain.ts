@@ -17,6 +17,7 @@ import { useViewStatusList } from "../../../useViewStatusList";
 import { useVideoCategory } from "../../../../../Main/Hook/useVideoCategory";
 import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
 import { useReplaceQuery } from "../../../../../Common/Hook/useReplaceQuery";
+import { useTagMasterList } from "../../useTagMasterList";
 
 
 type propsType = {
@@ -43,7 +44,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const { create } = useCreateFavoriteVideoListQuery();
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
-
+    // タグマスタリストを取得
+    const { data: tagMasterList } = useTagMasterList({
+        isGetChache: true
+    });
 
     // お気に入り度リスト
     const favoriteLevelList = useMemo(() => {
@@ -63,32 +67,6 @@ export function useFavoriteSearchConditionMain(props: propsType) {
             label: `すべて`,
         }, ...favoriteLevelList];
     }, []);
-
-    // タグマスタリストを取得
-    const { data: tagMasterList } = useQueryWrapper<FavoriteVideoTagResponseType, comboType[]>(
-        {
-            url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
-            select: (res: FavoriteVideoTagResponseType) => {
-
-                const tagComboList = res.data;
-
-                return [
-                    {
-                        value: ``,
-                        label: `すべて`,
-                    },
-                    ...tagComboList.map((e) => {
-                        return {
-                            value: e.tagName,
-                            label: e.tagName,
-                        }
-                    })
-                ]
-            },
-            afErrorFn: (res) => {
-            }
-        }
-    );
 
     /**
      * カテゴリ選択イベント

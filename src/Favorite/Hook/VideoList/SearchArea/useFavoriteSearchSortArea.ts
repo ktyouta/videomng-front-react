@@ -13,6 +13,7 @@ import { mediaQuery, useMediaQuery } from "../../../../Common/Hook/useMediaQuery
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { useReplaceQuery } from "../../../../Common/Hook/useReplaceQuery";
+import { useSortList } from "../../../../Content/Hook/useSortList";
 
 
 export function useFavoriteSearchSortArea() {
@@ -27,24 +28,10 @@ export function useFavoriteSearchSortArea() {
     const { create } = useCreateFavoriteVideoListQuery();
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
-
     // ソートリストを取得
-    const { data: sortList } = useQueryWrapper<FavoriteVideoSortListResponseType, comboType[]>(
-        {
-            url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_SORT}`,
-            select: (res: FavoriteVideoSortListResponseType) => {
-
-                return res.data.map((e: FavoriteVideoSortType) => {
-                    return {
-                        label: e.label,
-                        value: e.id,
-                    }
-                });
-            },
-            afErrorFn: (res) => {
-            }
-        }
-    );
+    const { data: sortList } = useSortList({
+        isGetChache: true
+    });
 
     /**
      * ソートリスト選択

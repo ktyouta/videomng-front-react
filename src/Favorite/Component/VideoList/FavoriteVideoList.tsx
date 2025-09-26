@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FavoriteSearchAreaMobile } from "./SearchArea/FavoriteSearchAreaMobile";
 import { FavoriteSearchArea } from "./SearchArea/FavoriteSearchArea";
 import { FavoriteVideoDisplayVideoListProvider } from "./FavoriteVideoDisplayVideoListProvider";
+import { useFavoriteVideoList } from "../../Hook/VideoList/useFavoriteVideoList";
 
 
 const Parent = styled.div`
@@ -17,6 +18,8 @@ const Parent = styled.div`
 export function FavoriteVideoList() {
 
     console.log("FavoriteVideoList render");
+
+    useFavoriteVideoList();
 
     return (
         <Parent>

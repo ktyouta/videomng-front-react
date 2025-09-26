@@ -7,11 +7,8 @@ import ENV from "../../../../../../env.json";
 import { AxiosProgressEvent } from "axios";
 import { useUploadFile } from "../../../../../../Common/Hook/useUploadFile";
 
-type propsType = {
-    close: () => void;
-}
 
-export function useFavoriteSearchCsvExportMain(props: propsType) {
+export function useFavoriteSearchCsvExportMain() {
 
     // 選択したファイル
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -41,8 +38,6 @@ export function useFavoriteSearchCsvExportMain(props: propsType) {
      */
     function onSuccessUpload() {
         toast.success(`お気に入り動画の登録が完了しました。`);
-
-        props.close();
     }
 
     /**

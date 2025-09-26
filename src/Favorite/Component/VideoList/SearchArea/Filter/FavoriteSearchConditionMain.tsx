@@ -117,7 +117,7 @@ export function FavoriteSearchConditionMain(props: propsType) {
                     </InputDiv>
                 }
                 {
-                    favoriteLevelList && favoriteLevelList.length > 0 &&
+                    favoriteLevelList &&
                     <InputDiv>
                         <InputLabel>
                             お気に入り度
