@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { getNowDatetime } from "../../../../../../Common/Function/DateUtil";
-import { uploadFile } from "../../../../../../Common/Function/uploadFile";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../../../Common/Const/CommonConst";
 import ENV from "../../../../../../env.json";
@@ -91,10 +89,8 @@ export function useFavoriteSearchCsvExportMain() {
             return;
         }
 
-        alert(`実装中`);
-
         // アップロード
-        const res = await upload(selectedFile);
+        await upload(selectedFile);
     }
 
     return {

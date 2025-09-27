@@ -27,7 +27,7 @@ export function useFavoriteVideoArea() {
                 return res.data;
             },
             afSuccessFn: (res: FavoriteVideoListMergedType[]) => {
-                setDisplayVideoList(res);
+                setDisplayVideoList(res ?? []);
             },
             afErrorFn: (res) => {
             }

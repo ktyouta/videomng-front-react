@@ -3,6 +3,7 @@ import { FileUploadButton } from "../../../../../../Common/Component/FileUploadB
 import { useFavoriteSearchCsvExportMain } from "../../../../../Hook/VideoList/SearchArea/Csv/Export/useFavoriteSearchCsvExportMain";
 import React from "react";
 import ButtonComponent from "../../../../../../Common/Component/ButtonComponent";
+import { LinearProgress } from "@mui/material";
 
 const MessageArea = styled.div`
     width: 100%;
@@ -17,6 +18,16 @@ const UploadBtnArea = styled.div`
     margin-top: 25px;
     display:flex;
     align-items: center;
+    margin-bottom: 29px;
+`;
+
+const ProgressArea = styled.div`
+`;
+
+const ProgressMesageDiv = styled.div`
+    margin-bottom: 3px;
+    font-size: 13px;
+    color: #4FC3F7;
 `;
 
 const UploadFileNameSpan = styled.span`
@@ -45,7 +56,9 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
     const {
         selectedFile,
         handleFileChange,
-        uploadCsv } = useFavoriteSearchCsvExportMain();
+        uploadCsv,
+        progress,
+        isLoading } = useFavoriteSearchCsvExportMain();
 
     return (
         <React.Fragment>
@@ -62,6 +75,18 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
                         {selectedFile?.name}
                     </UploadFileNameSpan>
                 </UploadBtnArea>
+                {
+                    progress > 0 &&
+                    <ProgressArea>
+                        <ProgressMesageDiv>
+                            {`CSVファイル送信中：${progress}%`}
+                        </ProgressMesageDiv>
+                        <LinearProgress
+                            variant="determinate"
+                            value={progress}
+                        />
+                    </ProgressArea>
+                }
             </MessageArea>
             <FooterDiv >
                 <ButtonComponent
@@ -80,10 +105,11 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
                     onclick={uploadCsv}
                     style={{
                         borderRadius: "23px",
-                        background: "#3a3d42",
+                        background: isLoading ? "#2c2f33" : "#3a3d42",
                         fontSize: "1rem",
                         marginLeft: "5%",
                     }}
+                    disabled={isLoading}
                 />
             </FooterDiv>
         </React.Fragment>

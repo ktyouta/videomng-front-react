@@ -26,9 +26,7 @@ export function useUploadFile(props: propsType) {
             formData.append("file", fileData);
 
             const res = await axios.post(`${props.url}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
+                withCredentials: true,
                 onUploadProgress: props.onUploadProgress,
             });
 
