@@ -8,6 +8,7 @@ import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSea
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
 import { useNavigate } from "react-router-dom";
 import { useReplaceQuery } from "../../../../../Common/Hook/useReplaceQuery";
+import { nowSearchConditionType } from "../../../../Component/HomeVideoNowSearchConditionValueProvider";
 
 export function useHomeFavoriteKeywords() {
 
@@ -18,7 +19,9 @@ export function useHomeFavoriteKeywords() {
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
     // 動画検索条件
-    const { setInputKeyword } = useHomeVideoSearchConditionValue();
+    const { setInputKeyword,
+        selectedVideoCategory,
+        selectedVideoType } = useHomeVideoSearchConditionValue();
     // 現在の検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
@@ -42,11 +45,13 @@ export function useHomeFavoriteKeywords() {
         setInputKeyword(keyword);
 
         // 現在の検索条件を更新
-        setNowSearchCondition((e) => {
+        setNowSearchCondition((e: nowSearchConditionType) => {
 
             const newCondition = {
                 ...e,
                 keyword,
+                type: selectedVideoType,
+                catetory: selectedVideoCategory,
             }
 
             return newCondition;
@@ -54,6 +59,8 @@ export function useHomeFavoriteKeywords() {
 
         const newQuery = create({
             q: keyword,
+            videocategory: selectedVideoCategory,
+            videotype: selectedVideoType
         });
 
         // クエリパラメータを更新

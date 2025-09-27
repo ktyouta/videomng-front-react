@@ -19,7 +19,9 @@ export function useHomeFrequentKeywords() {
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
     // 動画検索条件
-    const { setInputKeyword } = useHomeVideoSearchConditionValue();
+    const { setInputKeyword,
+        selectedVideoCategory,
+        selectedVideoType } = useHomeVideoSearchConditionValue();
     // 現在の検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
@@ -54,6 +56,8 @@ export function useHomeFrequentKeywords() {
             const newCondition = {
                 ...e,
                 keyword,
+                type: selectedVideoType,
+                catetory: selectedVideoCategory,
             }
 
             return newCondition;
@@ -61,6 +65,8 @@ export function useHomeFrequentKeywords() {
 
         const newQuery = create({
             q: keyword,
+            videocategory: selectedVideoCategory,
+            videotype: selectedVideoType
         });
 
         // クエリパラメータを更新
