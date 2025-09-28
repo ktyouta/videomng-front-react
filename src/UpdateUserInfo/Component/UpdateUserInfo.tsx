@@ -14,6 +14,7 @@ import { Combobox } from "../../Common/Component/Combobox";
 import { RhfTextbox } from "../../Common/StyledComponent/RhfTextbox";
 import { RhfSelect } from "../../Common/StyledComponent/RhfSelect";
 import { ErrorMessageField } from "../../Common/Component/ErrorMessageField";
+import { ModalPortalConfirm } from "../../Common/Component/ModalPortalConfirm";
 
 
 const Parent = styled.div`
@@ -269,7 +270,7 @@ export function UpdateUserInfo() {
                 </UpdateUserInfoButtonDiv>
             </UpdateUserInfoFormDiv>
             {/* 更新確認用モーダル */}
-            <ConfirmModalComponent
+            <ModalPortalConfirm
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
                 titleMessage={`入力した内容でユーザー情報を更新しますか？`}

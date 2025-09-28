@@ -63,7 +63,7 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
     return (
         <React.Fragment>
             <MessageArea>
-                CSVファイルを選択してアップロードボタンを押すと、動画IDをもとにお気に入りへ一括登録できます。 <br />
+                お気に入りのインポートでダウンロードしたCSVファイルを選択してアップロードボタンを押すと、動画IDをもとにお気に入りへ一括登録できます。 <br />
                 CSVには動画タイトルなどの情報は含まれません。<br />
                 登録済みの動画がある場合は重複して登録されません。<br />
                 <UploadBtnArea>

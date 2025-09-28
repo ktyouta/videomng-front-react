@@ -11,6 +11,7 @@ import { LoadingCenter } from "../../Common/Component/LoadingCenter";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { RhfTextbox } from "../../Common/StyledComponent/RhfTextbox";
 import { ErrorMessageField } from "../../Common/Component/ErrorMessageField";
+import { ModalPortalConfirm } from "../../Common/Component/ModalPortalConfirm";
 
 
 const Parent = styled.div`
@@ -204,7 +205,7 @@ export function UpdateUserPassword() {
                     />
                 </FormButtonDiv>
             </FormDiv>
-            <ConfirmModalComponent
+            <ModalPortalConfirm
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
                 titleMessage={`入力した内容でパスワードを更新しますか？`}

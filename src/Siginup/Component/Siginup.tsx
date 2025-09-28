@@ -12,6 +12,7 @@ import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";
 import { RhfTextbox } from "../../Common/StyledComponent/RhfTextbox";
 import { ErrorMessageField } from "../../Common/Component/ErrorMessageField";
 import { RhfSelect } from "../../Common/StyledComponent/RhfSelect";
+import { ModalPortalConfirm } from "../../Common/Component/ModalPortalConfirm";
 
 
 const Parent = styled.div`
@@ -286,7 +287,7 @@ export function Siginup() {
           />
         </SiginupButtonDiv>
       </SiginupFormDiv>
-      <ConfirmModalComponent
+      <ModalPortalConfirm
         isOpenModal={isOpenModal}
         closeModal={closeModal}
         titleMessage={`入力した内容でアカウントを作成しますか？`}

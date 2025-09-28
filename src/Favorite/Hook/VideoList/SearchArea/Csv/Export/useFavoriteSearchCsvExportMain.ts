@@ -22,6 +22,8 @@ export function useFavoriteSearchCsvExportMain() {
         // アップロード中
         onUploadProgress: onUploadProgress,
     });
+    // アップロード確認用モーダル表示フラグ
+    const [isOpenConfirm, setIsOpenConfirm] = useState(false);
 
     /**
      * ファイル選択
@@ -93,11 +95,28 @@ export function useFavoriteSearchCsvExportMain() {
         await upload(selectedFile);
     }
 
+    /**
+     * CSVアップロード確認モーダル表示
+     */
+    function openConfirmModal() {
+        setIsOpenConfirm(true);
+    }
+
+    /**
+     * CSVアップロード確認モーダル非表示
+     */
+    function closeConfirmModal() {
+        setIsOpenConfirm(false);
+    }
+
     return {
         selectedFile,
         handleFileChange,
         uploadCsv,
         progress,
-        isLoading
+        isLoading,
+        isOpenConfirm,
+        openConfirmModal,
+        closeConfirmModal,
     }
 }
