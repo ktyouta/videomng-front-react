@@ -21,7 +21,7 @@ const Overlay = styled.div<{ zIndex?: number }>`
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.9);
-  z-index: ${({ zIndex }) => zIndex || Z_INDEX_PARAM.MODAL_OVERLAY};
+  z-index: ${({ zIndex }) => zIndex ?? Z_INDEX_PARAM.MODAL_OVERLAY};
 `;
 
 const ModalContainer = styled.div<{ modalHeight?: string, modalWidth?: string, }>`
@@ -29,8 +29,9 @@ const ModalContainer = styled.div<{ modalHeight?: string, modalWidth?: string, }
   background-color: #181a1e;
   border-radius: 12px;
   padding: 20px;
-  height: ${({ modalHeight }) => modalHeight || `500px`};
-  width: ${({ modalWidth }) => modalWidth || `500px`};
+  height: ${({ modalHeight }) => modalHeight ?? `500px`};
+  width: ${({ modalWidth }) => modalWidth ?? `500px`};
+  border: 1px solid white;
 `;
 
 export function ModalPortal(props: propsType) {

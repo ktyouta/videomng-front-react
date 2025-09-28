@@ -14,6 +14,7 @@ export const Z_INDEX_PARAM = {
     HEAD_NAV: 2001,
     MODAL: 2002,
     MODAL_OVERLAY: 2000,
+    CONFIRM_MODAL_OVERLAY: 2001,
 }
 
 // 月

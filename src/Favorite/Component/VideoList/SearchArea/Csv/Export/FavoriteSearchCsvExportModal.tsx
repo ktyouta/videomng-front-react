@@ -13,6 +13,7 @@ import { useFavoriteSearchFilterModal } from "../../../../../Hook/VideoList/Sear
 import { FiUpload } from "react-icons/fi";
 import { FavoriteSearchCsvExport } from "./FavoriteSearchCsvExport";
 import { useFavoriteSearchCsvExportModal } from "../../../../../Hook/VideoList/SearchArea/Csv/Export/useFavoriteSearchCsvExportModal";
+import { ModalPortal } from "../../../../../../Common/Component/ModalPortal";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -51,33 +52,22 @@ export function FavoriteSearchCsvExportModal() {
                     size="45%"
                 />
             </FilterIconAreaDiv>
-            {/* 確認モーダル */}
-            <ModalComponent
-                modalIsOpen={isOpenModal}
-                closeModal={closeModal}
-                style={{
-                    backgroundColor: "#181a1e",
-                    borderRadius: "1%",
-                    border: "solid 1px",
-                    color: "white",
-                    overflowY: "hidden",
-                    minHeight: "364px",
-                    display: "flex",
-                    flexDirection: "column",
+            {/* アップロードモーダル */}
+            <ModalPortal
+                isOpen={isOpenModal}
+                modalWidth={isMobile ? `80%` : `42%`}
+                containerStyle={{
+                    minHeight: `364px`,
                     fontSize: isMobile ? "12px" : "15px",
+                    display: "flex",
+                    flexDirection: "column"
                 }}
-                width={isMobile ? `80%` : `42%`}
-                height=""
-                isPositionCenter={true}
+                modalHeight=""
             >
                 <FavoriteSearchCsvExport
                     close={closeModal}
                 />
-            </ModalComponent>
-            {
-                isOpenModal &&
-                <OverlayDiv />
-            }
+            </ModalPortal>
         </React.Fragment>
     );
 }

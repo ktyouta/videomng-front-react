@@ -91,6 +91,8 @@ export function useFavoriteSearchCsvExportMain() {
             return;
         }
 
+        closeConfirmModal();
+
         // アップロード
         await upload(selectedFile);
     }
@@ -99,6 +101,12 @@ export function useFavoriteSearchCsvExportMain() {
      * CSVアップロード確認モーダル表示
      */
     function openConfirmModal() {
+
+        if (!selectedFile) {
+            toast.warn(`アップロードするファイルを選択してください。`);
+            return;
+        }
+
         setIsOpenConfirm(true);
     }
 

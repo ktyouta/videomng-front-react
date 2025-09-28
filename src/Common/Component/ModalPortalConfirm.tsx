@@ -8,6 +8,7 @@ import React from "react";
 import { OverlayDiv } from "../StyledComponent/OverlayDiv";
 import { ModalPortal } from "./ModalPortal";
 import { mediaQuery, useMediaQuery } from "../Hook/useMediaQuery";
+import { Z_INDEX_PARAM } from "../Const/CommonConst";
 
 
 const Parent = styled.div`
@@ -65,6 +66,7 @@ export function ModalPortalConfirm(props: propsType) {
             }}
             modalWidth={modalWidth}
             modalHeight="25%"
+            zindex={Z_INDEX_PARAM.CONFIRM_MODAL_OVERLAY}
         >
             <Parent>
                 <HeaderDiv>

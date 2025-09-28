@@ -4,6 +4,7 @@ import { useFavoriteSearchCsvExportMain } from "../../../../../Hook/VideoList/Se
 import React from "react";
 import ButtonComponent from "../../../../../../Common/Component/ButtonComponent";
 import { LinearProgress } from "@mui/material";
+import { ModalPortalConfirm } from "../../../../../../Common/Component/ModalPortalConfirm";
 
 const MessageArea = styled.div`
     width: 100%;
@@ -22,6 +23,7 @@ const UploadBtnArea = styled.div`
 `;
 
 const ProgressArea = styled.div`
+    margin-bottom: 27px;
 `;
 
 const ProgressMesageDiv = styled.div`
@@ -58,7 +60,10 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
         handleFileChange,
         uploadCsv,
         progress,
-        isLoading } = useFavoriteSearchCsvExportMain();
+        isLoading,
+        isOpenConfirm,
+        openConfirmModal,
+        closeConfirmModal, } = useFavoriteSearchCsvExportMain();
 
     return (
         <React.Fragment>
@@ -102,7 +107,7 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
                 <ButtonComponent
                     styleTypeNumber="RUN"
                     title={"アップロード"}
-                    onclick={uploadCsv}
+                    onclick={openConfirmModal}
                     style={{
                         borderRadius: "23px",
                         background: isLoading ? "#2c2f33" : "#3a3d42",
@@ -112,6 +117,13 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
                     disabled={isLoading}
                 />
             </FooterDiv>
+            {/* アップロード確認用モーダル */}
+            <ModalPortalConfirm
+                isOpenModal={isOpenConfirm}
+                closeModal={closeConfirmModal}
+                titleMessage={`アップロードします。よろしいですか？`}
+                clickOk={uploadCsv}
+            />
         </React.Fragment>
     );
 }

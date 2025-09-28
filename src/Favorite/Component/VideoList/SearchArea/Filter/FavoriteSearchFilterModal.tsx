@@ -11,6 +11,7 @@ import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../Common/Component/IconComponent";
 import { MEDIA } from "../../../../../Common/Const/MediaConst";
 import { useFavoriteSearchFilterModal } from "../../../../Hook/VideoList/SearchArea/Filter/useFavoriteSearchFilterModal";
+import { ModalPortal } from "../../../../../Common/Component/ModalPortal";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -68,28 +69,15 @@ export function FavoriteSearchFilterModal() {
                 </FilterTitleSpan>
             }
             {/* フィルターモーダル */}
-            <ModalComponent
-                modalIsOpen={isOpenFilterModal}
-                closeModal={closeFilterModal}
-                style={{
-                    backgroundColor: "#181a1e",
-                    borderRadius: "1%",
-                    border: "solid 1px",
-                    color: "white",
-                    overflowY: "hidden",
-                }}
-                width={isMobile ? `80%` : `42%`}
-                height="65%"
-                isPositionCenter={true}
+            <ModalPortal
+                isOpen={isOpenFilterModal}
+                modalWidth={isMobile ? `80%` : `42%`}
+                modalHeight="65%"
             >
                 <FavoriteSearchCondition
                     close={closeFilterModal}
                 />
-            </ModalComponent>
-            {
-                isOpenFilterModal &&
-                <OverlayDiv />
-            }
+            </ModalPortal>
         </React.Fragment>
     );
 }
