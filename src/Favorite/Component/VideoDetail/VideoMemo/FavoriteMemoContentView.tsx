@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
-import { ConfirmModalComponent } from "../../../../Common/Component/ConfirmModalComponent";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { format } from "date-fns";
 import { FavoriteMemoContentViewDeleteArea } from "./FavoriteMemoContentViewDeleteArea";

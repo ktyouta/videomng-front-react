@@ -38,10 +38,6 @@ export function HeaderSideMenuModal(props: propsType) {
                     closeMenu={props.closeMenu}
                 />
             }
-            {
-                props.openMenuNo !== MENU_NO.NONE &&
-                <OverlayDiv />
-            }
         </React.Fragment>
     );
 }

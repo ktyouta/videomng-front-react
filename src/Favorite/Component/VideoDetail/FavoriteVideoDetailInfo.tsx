@@ -9,8 +9,8 @@ import AccordionComponent from "../../../Common/Component/AccordionComponent";
 import { useFavoriteVideoDetailInfo } from "../../Hook/VideoDetail/useFavoriteVideoDetailInfo";
 import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../../Common/Component/IconComponent";
-import { ConfirmModalComponent } from "../../../Common/Component/ConfirmModalComponent";
 import { MEDIA } from "../../../Common/Const/MediaConst";
+import { ModalPortalConfirm } from "../../../Common/Component/ModalPortalConfirm";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -140,7 +140,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     }}
                 />
             </VideoMetaDiv>
-            <ConfirmModalComponent
+            <ModalPortalConfirm
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
                 titleMessage={`この動画をお気に入りから外してもよろしいですか？`}

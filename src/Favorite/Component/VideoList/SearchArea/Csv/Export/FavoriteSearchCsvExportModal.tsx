@@ -1,10 +1,4 @@
 import styled from "styled-components";
-import ButtonComponent from "../../../../../../Common/Component/ButtonComponent";
-import ModalComponent from "../../../../../../Common/Component/ModalComponent";
-import { OverlayDiv } from "../../../../../../Common/StyledComponent/OverlayDiv";
-import TagButtonComponent from "../../../../../../Common/Component/TagButtonComponent";
-import { FlexSpaceDiv } from "../../../../../../Common/StyledComponent/FlexSpaceDiv";
-import ComboComponent from "../../../../../../Common/Component/ComboComponent";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../../Common/Component/IconComponent";
@@ -55,9 +49,9 @@ export function FavoriteSearchCsvExportModal() {
             {/* アップロードモーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
-                modalWidth={isMobile ? `80%` : `42%`}
+                modalWidth={isMobile ? `80%` : `45%`}
                 containerStyle={{
-                    minHeight: `364px`,
+                    minHeight: `405px`,
                     fontSize: isMobile ? "12px" : "15px",
                     display: "flex",
                     flexDirection: "column"

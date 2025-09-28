@@ -3,13 +3,13 @@ import { IconComponent } from "../../../../../Common/Component/IconComponent";
 import { HiOutlineInbox } from 'react-icons/hi';
 import { useFavoriteBlockCommentModalIcon } from "../../../../Hook/VideoDetail/VideoComment/VideoBlockComment/useFavoriteBlockCommentModalIcon";
 import React from "react";
-import ModalComponent from "../../../../../Common/Component/ModalComponent";
 import { FavoriteBlockComment } from "../VideoBlockComment/FavoriteBlockComment";
 import { OverlayDiv } from "../../../../../Common/StyledComponent/OverlayDiv";
 import { useFavoriteFavoriteCommentModalIcon } from "../../../../Hook/VideoDetail/VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentModalIcon";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
 import { MEDIA } from "../../../../../Common/Const/MediaConst";
+import { ModalPortal } from "../../../../../Common/Component/ModalPortal";
 
 
 const IconDiv = styled.div`
@@ -85,30 +85,14 @@ export function FavoriteFavoriteCommentModalIcon() {
                     お気に入りリスト
                 </BlockNavDiv>
             </IconDiv>
-            {
-                // お気に入りコメントリスト
-                isOpenFavoriteListModal &&
-                <ModalComponent
-                    modalIsOpen={isOpenFavoriteListModal}
-                    closeModal={closeFavoriteListModal}
-                    style={{
-                        backgroundColor: "#181a1e",
-                        borderRadius: "1%",
-                        border: "solid 1px",
-                    }}
-                    isPositionCenter={true}
-                    width={modalWidth}
-                >
-                    <FavoriteFavoriteComment
-                        close={closeFavoriteListModal}
-                    />
-                </ModalComponent>
-            }
-            {
-                isOpenFavoriteListModal &&
-                <OverlayDiv />
-            }
+            {/* お気に入りコメントリスト */}
+            <ModalPortal
+                isOpen={isOpenFavoriteListModal}
+            >
+                <FavoriteFavoriteComment
+                    close={closeFavoriteListModal}
+                />
+            </ModalPortal>
         </React.Fragment>
-
     );
 }

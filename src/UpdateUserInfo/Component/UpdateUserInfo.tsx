@@ -5,7 +5,6 @@ import ButtonComponent from "../../Common/Component/ButtonComponent";
 import ComboComponent from "../../Common/Component/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../Common/Const/CommonConst";
 import { useUpdateUserInfo } from "../Hook/useUpdateUserInfo";
-import { ConfirmModalComponent } from "../../Common/Component/ConfirmModalComponent";
 import { MEDIA } from "../../Common/Const/MediaConst";
 import Loading from "../../Common/Component/Loading";
 import { OverlayDiv } from "../../Common/StyledComponent/OverlayDiv";

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useHomeSearchConditionModal } from "../../../Hook/VideoList/SearchArea/useHomeSearchConditionModal";
-import ModalComponent from "../../../../Common/Component/ModalComponent";
 import { HomeSearchCondition } from "./HomeSearchCondition";
 import { OverlayDiv } from "../../../../Common/StyledComponent/OverlayDiv";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { MdTune } from 'react-icons/md';
+import { ModalPortal } from "../../../../Common/Component/ModalPortal";
 
 
 const SearchConditionIconAreaDiv = styled.div`
@@ -58,31 +58,16 @@ export function HomeSearchConditionModal() {
                     条件を指定
                 </SearchConditionTitleSpan>
             }
-            {
-                // 検索条件指定モーダル
-                isOpenFilterModal &&
-                <ModalComponent
-                    modalIsOpen={isOpenFilterModal}
-                    closeModal={closeFilterModal}
-                    style={{
-                        backgroundColor: "#181a1e",
-                        borderRadius: "1%",
-                        border: "solid 1px",
-                        color: "white"
-                    }}
-                    width={isMobile ? "80%" : "42%"}
-                    height="50%"
-                    isPositionCenter={true}
-                >
-                    <HomeSearchCondition
-                        close={closeFilterModal}
-                    />
-                </ModalComponent>
-            }
-            {
-                isOpenFilterModal &&
-                <OverlayDiv />
-            }
+            {/* 検索条件指定モーダル */}
+            <ModalPortal
+                isOpen={isOpenFilterModal}
+                modalWidth={isMobile ? `80%` : `45%`}
+                modalHeight="55%"
+            >
+                <HomeSearchCondition
+                    close={closeFilterModal}
+                />
+            </ModalPortal>
         </React.Fragment>
     );
 }

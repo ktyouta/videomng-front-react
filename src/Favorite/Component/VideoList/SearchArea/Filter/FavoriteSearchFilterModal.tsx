@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import ButtonComponent from "../../../../../Common/Component/ButtonComponent";
-import ModalComponent from "../../../../../Common/Component/ModalComponent";
-import { OverlayDiv } from "../../../../../Common/StyledComponent/OverlayDiv";
 import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 import TagButtonComponent from "../../../../../Common/Component/TagButtonComponent";
 import { FlexSpaceDiv } from "../../../../../Common/StyledComponent/FlexSpaceDiv";
@@ -71,8 +68,8 @@ export function FavoriteSearchFilterModal() {
             {/* フィルターモーダル */}
             <ModalPortal
                 isOpen={isOpenFilterModal}
-                modalWidth={isMobile ? `80%` : `42%`}
-                modalHeight="65%"
+                modalWidth={isMobile ? `80%` : `45%`}
+                modalHeight="70%"
             >
                 <FavoriteSearchCondition
                     close={closeFilterModal}

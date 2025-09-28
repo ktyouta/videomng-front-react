@@ -117,13 +117,16 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
                     disabled={isLoading}
                 />
             </FooterDiv>
-            {/* アップロード確認用モーダル */}
-            <ModalPortalConfirm
-                isOpenModal={isOpenConfirm}
-                closeModal={closeConfirmModal}
-                titleMessage={`アップロードします。よろしいですか？`}
-                clickOk={uploadCsv}
-            />
+            {
+                // アップロード確認用モーダル
+                isOpenConfirm &&
+                <ModalPortalConfirm
+                    isOpenModal={isOpenConfirm}
+                    closeModal={closeConfirmModal}
+                    titleMessage={`アップロードします。よろしいですか？`}
+                    clickOk={uploadCsv}
+                />
+            }
         </React.Fragment>
     );
 }

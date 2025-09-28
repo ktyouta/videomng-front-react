@@ -27,11 +27,12 @@ const Overlay = styled.div<{ zIndex?: number }>`
 const ModalContainer = styled.div<{ modalHeight?: string, modalWidth?: string, }>`
   position: relative;
   background-color: #181a1e;
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 20px;
-  height: ${({ modalHeight }) => modalHeight ?? `500px`};
-  width: ${({ modalWidth }) => modalWidth ?? `500px`};
+  height: ${({ modalHeight }) => modalHeight ?? `90%`};
+  width: ${({ modalWidth }) => modalWidth ?? `73%`};
   border: 1px solid white;
+  box-sizing: border-box;
 `;
 
 export function ModalPortal(props: propsType) {

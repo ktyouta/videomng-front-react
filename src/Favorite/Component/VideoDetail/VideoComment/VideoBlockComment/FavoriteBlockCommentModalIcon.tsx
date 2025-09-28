@@ -3,10 +3,10 @@ import { IconComponent } from "../../../../../Common/Component/IconComponent";
 import { HiOutlineInbox } from 'react-icons/hi';
 import { useFavoriteBlockCommentModalIcon } from "../../../../Hook/VideoDetail/VideoComment/VideoBlockComment/useFavoriteBlockCommentModalIcon";
 import React from "react";
-import ModalComponent from "../../../../../Common/Component/ModalComponent";
 import { FavoriteBlockComment } from "./FavoriteBlockComment";
 import { OverlayDiv } from "../../../../../Common/StyledComponent/OverlayDiv";
 import { MEDIA } from "../../../../../Common/Const/MediaConst";
+import { ModalPortal } from "../../../../../Common/Component/ModalPortal";
 
 
 const IconDiv = styled.div`
@@ -83,29 +83,14 @@ export function FavoriteBlockCommentModalIcon() {
                     非表示リスト
                 </BlockNavDiv>
             </IconDiv>
-            {
-                // 非表示コメントリスト
-                isOpenBlockListModal &&
-                <ModalComponent
-                    modalIsOpen={isOpenBlockListModal}
-                    closeModal={closeBlockListModal}
-                    style={{
-                        backgroundColor: "#181a1e",
-                        borderRadius: "1%",
-                        border: "solid 1px",
-                    }}
-                    isPositionCenter={true}
-                    width={modalWidth}
-                >
-                    <FavoriteBlockComment
-                        close={closeBlockListModal}
-                    />
-                </ModalComponent>
-            }
-            {
-                isOpenBlockListModal &&
-                <OverlayDiv />
-            }
+            {/* 非表示コメントリスト */}
+            <ModalPortal
+                isOpen={isOpenBlockListModal}
+            >
+                <FavoriteBlockComment
+                    close={closeBlockListModal}
+                />
+            </ModalPortal>
         </React.Fragment>
     );
 }

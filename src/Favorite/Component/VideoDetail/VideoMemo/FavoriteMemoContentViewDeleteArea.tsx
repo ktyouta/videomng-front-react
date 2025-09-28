@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
-import { ConfirmModalComponent } from "../../../../Common/Component/ConfirmModalComponent";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { format } from "date-fns";
 import { useFavoriteMemoContentViewDeleteArea } from "../../../Hook/VideoDetail/VideoMemo/useFavoriteMemoContentViewDeleteArea";
+import { ModalPortalConfirm } from "../../../../Common/Component/ModalPortalConfirm";
 
 
 type propsType = {
@@ -27,7 +27,7 @@ export function FavoriteMemoContentViewDeleteArea(props: propsType) {
             <FavoriteMemoDeleteIconArea
                 deleteMemo={deleteMemo}
             />
-            <ConfirmModalComponent
+            <ModalPortalConfirm
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
                 titleMessage={`メモを削除しますか？`}

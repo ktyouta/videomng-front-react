@@ -1,18 +1,6 @@
 import styled from "styled-components";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
-import { HiOutlineInbox } from 'react-icons/hi';
-import { useFavoriteBlockCommentModalIcon } from "../../../Hook/VideoDetail/VideoComment/VideoBlockComment/useFavoriteBlockCommentModalIcon";
-import React from "react";
-import ModalComponent from "../../../../Common/Component/ModalComponent";
-import { FavoriteBlockComment } from "../VideoComment/VideoBlockComment/FavoriteBlockComment";
-import { OverlayDiv } from "../../../../Common/StyledComponent/OverlayDiv";
-import { useFavoriteFavoriteCommentModalIcon } from "../../../Hook/VideoDetail/VideoComment/VideoFavoriteComment/useFavoriteFavoriteCommentModalIcon";
-import { IoNewspaperOutline } from "react-icons/io5";
-import { FavoriteFavoriteComment } from "../VideoComment/VideoFavoriteComment/FavoriteFavoriteComment";
-import { useFavoriteDetailSettingEditIcon } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSettingEditIcon";
-import { MdEdit } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
-import { useFavoriteDetailSettingCloseIcon } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSettingCloseIcon";
 import { useFavoriteTagEditCloseIcon } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagEditCloseIcon";
 import { MEDIA } from "../../../../Common/Const/MediaConst";
 

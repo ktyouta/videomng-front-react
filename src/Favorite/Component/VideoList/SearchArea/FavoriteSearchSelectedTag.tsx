@@ -1,8 +1,3 @@
-import styled from "styled-components";
-import ButtonComponent from "../../../../Common/Component/ButtonComponent";
-import ModalComponent from "../../../../Common/Component/ModalComponent";
-import { OverlayDiv } from "../../../../Common/StyledComponent/OverlayDiv";
-import { FavoriteSearchCondition } from "./Filter/FavoriteSearchCondition";
 import TagButtonComponent from "../../../../Common/Component/TagButtonComponent";
 import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
 import ComboComponent from "../../../../Common/Component/ComboComponent";

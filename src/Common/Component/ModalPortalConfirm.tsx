@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useConfirmModalComponent } from "../Hook/useConfirmModalComponent";
-import ModalComponent from "./ModalComponent";
 import { FlexSpaceDiv } from "../StyledComponent/FlexSpaceDiv";
 import { IconComponent } from "./IconComponent";
 import ButtonComponent from "./ButtonComponent";
@@ -53,7 +52,7 @@ export function ModalPortalConfirm(props: propsType) {
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
 
-    const modalWidth = isMobile ? "73%" : "26%";
+    const modalWidth = isMobile ? "82%" : "29%";
 
     return (
         <ModalPortal
@@ -65,7 +64,7 @@ export function ModalPortalConfirm(props: propsType) {
                 color: "black",
             }}
             modalWidth={modalWidth}
-            modalHeight="25%"
+            modalHeight="30%"
             zindex={Z_INDEX_PARAM.CONFIRM_MODAL_OVERLAY}
         >
             <Parent>

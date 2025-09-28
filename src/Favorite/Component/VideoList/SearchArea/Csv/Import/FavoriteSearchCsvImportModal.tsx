@@ -1,10 +1,4 @@
 import styled from "styled-components";
-import ButtonComponent from "../../../../../../Common/Component/ButtonComponent";
-import ModalComponent from "../../../../../../Common/Component/ModalComponent";
-import { OverlayDiv } from "../../../../../../Common/StyledComponent/OverlayDiv";
-import TagButtonComponent from "../../../../../../Common/Component/TagButtonComponent";
-import { FlexSpaceDiv } from "../../../../../../Common/StyledComponent/FlexSpaceDiv";
-import ComboComponent from "../../../../../../Common/Component/ComboComponent";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../../Common/Component/IconComponent";
@@ -13,6 +7,7 @@ import { useFavoriteSearchFilterModal } from "../../../../../Hook/VideoList/Sear
 import { FiDownload } from "react-icons/fi";
 import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
 import { useFavoriteSearchCsvImportModal } from "../../../../../Hook/VideoList/SearchArea/Csv/Import/useFavoriteSearchCsvImportModal";
+import { ModalPortal } from "../../../../../../Common/Component/ModalPortal";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -52,31 +47,22 @@ export function FavoriteSearchCsvImportModal() {
                     size="45%"
                 />
             </FilterIconAreaDiv>
-            <ModalComponent
-                modalIsOpen={isOpenModal}
-                closeModal={closeModal}
-                style={{
-                    backgroundColor: "#181a1e",
-                    borderRadius: "1%",
-                    border: "solid 1px",
-                    color: "white",
-                    overflowY: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
+            {/*ダウンロードモーダル */}
+            <ModalPortal
+                isOpen={isOpenModal}
+                modalWidth={isMobile ? `80%` : `45%`}
+                containerStyle={{
+                    minHeight: `384px`,
                     fontSize: isMobile ? "12px" : "15px",
+                    display: "flex",
+                    flexDirection: "column"
                 }}
-                width={isMobile ? `80%` : `42%`}
-                height="47%"
-                isPositionCenter={true}
+                modalHeight=""
             >
                 <FavoriteSearchCsvImport
                     close={closeModal}
                 />
-            </ModalComponent>
-            {
-                isOpenModal &&
-                <OverlayDiv />
-            }
+            </ModalPortal>
         </React.Fragment>
     );
 }

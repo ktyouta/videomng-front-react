@@ -6,7 +6,6 @@ import React from "react";
 import { FavoriteMemoEditInput } from "./FavoriteMemoEditInput";
 import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
-import { ConfirmModalComponent } from "../../../../Common/Component/ConfirmModalComponent";
 import { FavoriteMemoContentView } from "./FavoriteMemoContentView";
 
 
