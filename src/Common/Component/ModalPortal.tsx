@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../Const/CommonConst";
 import React from "react";
+import "../css/ModalPortal.css";
 
 type propsType = {
     children: ReactNode,
