@@ -63,6 +63,8 @@ export function HomeSearchConditionModal() {
                 isOpen={isOpenFilterModal}
                 modalWidth={isMobile ? `80%` : `45%`}
                 modalHeight="55%"
+                isCloseOuter={true}
+                close={closeFilterModal}
             >
                 <HomeSearchCondition
                     close={closeFilterModal}

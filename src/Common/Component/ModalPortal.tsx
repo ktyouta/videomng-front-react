@@ -5,7 +5,8 @@ import { Z_INDEX_PARAM } from "../Const/CommonConst";
 import React from "react";
 import "../css/ModalPortal.css";
 
-type propsType = {
+
+type basePropsType = {
     children: ReactNode,
     orverlayStyle?: CSSProperties,
     containerStyle?: CSSProperties,
@@ -13,7 +14,16 @@ type propsType = {
     isOpen: boolean,
     modalHeight?: string,
     modalWidth?: string,
-};
+}
+
+type CloseableProps = {
+    isCloseOuter: true;
+    close: () => void;
+} & basePropsType;
+
+type NonCloseableProps = {
+    isCloseOuter?: false;
+} & basePropsType;
 
 const Overlay = styled.div<{ zIndex?: number }>`
   position: fixed;
@@ -36,7 +46,7 @@ const ModalContainer = styled.div<{ modalHeight?: string, modalWidth?: string, }
   box-sizing: border-box;
 `;
 
-export function ModalPortal(props: propsType) {
+export function ModalPortal(props: CloseableProps | NonCloseableProps) {
 
     const modalRoot = document.getElementById("modal-root");
 
@@ -67,11 +77,17 @@ export function ModalPortal(props: propsType) {
                     <Overlay
                         style={props.orverlayStyle}
                         zIndex={props.zindex}
+                        onClick={() => {
+                            if (props.isCloseOuter) {
+                                props.close();
+                            }
+                        }}
                     >
                         <ModalContainer
                             style={props.containerStyle}
                             modalHeight={props.modalHeight}
                             modalWidth={props.modalWidth}
+                            onClick={(e) => e.stopPropagation()}
                         >
                             {props.children}
                         </ModalContainer>

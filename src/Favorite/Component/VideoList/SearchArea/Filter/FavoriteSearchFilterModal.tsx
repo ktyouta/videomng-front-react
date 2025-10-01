@@ -70,6 +70,8 @@ export function FavoriteSearchFilterModal() {
                 isOpen={isOpenFilterModal}
                 modalWidth={isMobile ? `80%` : `45%`}
                 modalHeight="70%"
+                isCloseOuter={true}
+                close={closeFilterModal}
             >
                 <FavoriteSearchCondition
                     close={closeFilterModal}
