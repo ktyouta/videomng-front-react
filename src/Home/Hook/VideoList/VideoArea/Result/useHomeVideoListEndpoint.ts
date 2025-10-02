@@ -8,7 +8,7 @@ const VIDEO_INFO_PATH = `${VIDEO_MNG_PATH}${ENV.VIDEO_INFO}`;
 
 export function useHomeVideoListEndpoint() {
 
-    const { query } = useCreateHomeVideoListQuery();
+    const { create } = useCreateHomeVideoListQuery();
 
-    return query ? `${VIDEO_INFO_PATH}${query}` : ``;
+    return `${VIDEO_INFO_PATH}${create({})}`;
 }
