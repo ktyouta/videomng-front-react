@@ -1,7 +1,21 @@
 import { QueryKey, useMutation, useQuery, useQueryClient, UseQueryOptions } from 'react-query';
 import axios from "axios";
 import { useMemo } from 'react';
+import z from 'zod';
 
+
+/**
+ * レスポンスのスキーマを取得
+ * @param dataSchema 
+ * @returns 
+ */
+export function resSchema<T extends z.ZodTypeAny>(dataSchema: T) {
+    return z.object({
+        status: z.number(),
+        message: z.string(),
+        data: dataSchema,
+    });
+}
 
 //レスポンスの型
 export type resType<T> = {

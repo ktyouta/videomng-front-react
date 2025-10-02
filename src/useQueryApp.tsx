@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { LoginResponseType } from './Login/Type/LoginResponseType';
 import { LoginUserInfoType } from './Common/Type/LoginUserInfoType';
 import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from './Common/Const/CommonConst';
 import { TOAST_INIT } from './Common/Component/ToastComponent';
