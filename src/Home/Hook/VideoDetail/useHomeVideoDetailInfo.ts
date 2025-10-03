@@ -17,6 +17,7 @@ import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
+import { LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
 
 
 
@@ -31,9 +32,9 @@ export function useHomeVideoDetailInfo() {
     // 動画ID
     const videoId = useVideoId();
     // クエリパラメータ(遷移元)
-    const previouspath = (() => {
-        const { previouspath } = useQueryParams();
-        return decodeURIComponent(previouspath);
+    const listSearchConditionKey = (() => {
+        const queryParams = useQueryParams();
+        return decodeURIComponent(queryParams[LIST_SEARCH_CONDITION_KEY]);
     })();
 
 
@@ -51,7 +52,7 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(`${ROUTER_PATH.HOME.ROOT}${previouspath}`);
+            navigate(`${ROUTER_PATH.HOME.ROOT}${listSearchConditionKey}`);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -101,7 +102,7 @@ export function useHomeVideoDetailInfo() {
 
         if (videoId) {
             const transitionPath = `${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${videoId}`;
-            query = `?previouspath=${transitionPath}`;
+            query = `?previouspath=${encodeURIComponent(`${transitionPath}?${LIST_SEARCH_CONDITION_KEY}=${listSearchConditionKey}`)}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${query}`);

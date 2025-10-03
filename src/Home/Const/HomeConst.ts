@@ -69,3 +69,6 @@ export const SEARCH_CONDITION = {
     // クエリパラメータのキー(次データ取得用トークン)
     QUERY_KEY_NEXT_PAGE_TOKEN: `nextpagetoken`
 } as const;
+
+// 検索条件一式をURLクエリで保持するためのキー
+export const LIST_SEARCH_CONDITION_KEY = `criteria`;

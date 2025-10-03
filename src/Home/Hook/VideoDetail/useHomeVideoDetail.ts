@@ -11,7 +11,7 @@ import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
 import { useVideoId } from "./useVideoId";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
-import { SEARCH_CONDITION } from "../../Const/HomeConst";
+import { LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
 
 export function useHomeVideoDetail() {
 
@@ -21,8 +21,8 @@ export function useHomeVideoDetail() {
     const videoId = useVideoId();
     // クエリパラメータ(遷移元)
     const previouspath = (() => {
-        const { previouspath } = useQueryParams();
-        return decodeURIComponent(previouspath);
+        const queryParams = useQueryParams();
+        return decodeURIComponent(queryParams[LIST_SEARCH_CONDITION_KEY]);
     })();
 
 

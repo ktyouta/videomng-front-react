@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ROUTER_PATH } from "../../../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
+import { LIST_SEARCH_CONDITION_KEY } from "../../../../Const/HomeConst";
 
 
 export function useHomeVideoContent() {
@@ -25,7 +26,7 @@ export function useHomeVideoContent() {
         let prevQuery = ``;
 
         if (query) {
-            prevQuery = `?previouspath=${encodeURIComponent(query)}`;
+            prevQuery = `?${LIST_SEARCH_CONDITION_KEY}=${encodeURIComponent(query)}`;
         }
 
         navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}${prevQuery}`);
@@ -44,7 +45,7 @@ export function useHomeVideoContent() {
         let prevQuery = ``;
 
         if (query) {
-            prevQuery = `?previouspath=${encodeURIComponent(query)}`;
+            prevQuery = `?${LIST_SEARCH_CONDITION_KEY}=${encodeURIComponent(query)}`;
         }
 
         navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}${prevQuery}`);

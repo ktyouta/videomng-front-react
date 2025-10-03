@@ -25,8 +25,16 @@ export function useLogin() {
     const setIsLogin = SetIsLoginContext.useCtx();
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // クエリパラメータ(遷移元)
-    const { previouspath } = useQueryParams();
+    // クエリパラメータ(遷移元パス)
+    const previouspath = (() => {
+        const { previouspath } = useQueryParams();
+        return decodeURIComponent(previouspath);
+    })();
+    // クエリパラメータ(遷移元クエリパラメータ)
+    const previousquerykey = (() => {
+        const { previousquerykey } = useQueryParams();
+        return decodeURIComponent(previousquerykey);
+    })();
     // ログインフォーム
     const form = useLoginForm({
         onSubmit: submit
