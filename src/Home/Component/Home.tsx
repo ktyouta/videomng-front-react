@@ -8,7 +8,6 @@ import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { NotFound } from "../../NotFound/Component/NotFound";
 import { HomeChannel } from "./VideoChannel/HomeChannel";
 import { HomeVideoNowSearchConditionValueProvider } from "./HomeVideoNowSearchConditionValueProvider";
-import { HomeRouter } from "./HomeRouter";
 
 
 export function Home() {
@@ -16,8 +15,42 @@ export function Home() {
     console.log("Home render");
 
     return (
-        <HomeVideoNowSearchConditionValueProvider>
-            <HomeRouter />
-        </HomeVideoNowSearchConditionValueProvider>
+        <Routes>
+            {/* 動画一覧 */}
+            <Route
+                path={`/`}
+                element={
+                    <HomeVideoNowSearchConditionValueProvider>
+                        <HomeVideoList />
+                    </HomeVideoNowSearchConditionValueProvider>
+                }
+            />
+            {/* 動画詳細 */}
+            <Route
+                path={`${ROUTER_PATH.HOME.DETAIL}/:videoId/*`}
+                element={
+                    <HomeVideoDetail />
+                }
+            />
+            {/* チャンネル動画一覧 */}
+            <Route
+                path={`${ROUTER_PATH.HOME.CHANNEL}/:channelId/*`}
+                element={
+                    <HomeChannel />
+                }
+            />
+            {
+                // Not Found
+                <Route
+                    key={"*"}
+                    path="*"
+                    element={
+                        <NotFound
+                            backUrl={`${ROUTER_PATH.HOME.ROOT}`}
+                        />
+                    }
+                />
+            }
+        </Routes>
     );
 }

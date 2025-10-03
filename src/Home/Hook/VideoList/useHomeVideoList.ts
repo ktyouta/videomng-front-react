@@ -1,11 +1,11 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useHomeVideoNowSearchConditionValue } from "./useHomeVideoNowSearchConditionValue";
-import { ROUTER_PATH } from "../../Common/Const/RouterPath";
+import { useHomeVideoNowSearchConditionValue } from "../useHomeVideoNowSearchConditionValue";
+import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 
 
-export function useHomeRouter() {
+export function useHomeVideoList() {
 
     // URL情報
     const location = useLocation();

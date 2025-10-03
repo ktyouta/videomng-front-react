@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useHomeChannelEndpoint } from "./useHomeChannelEndpoint";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useChannelId } from "./useChannelId";
+import { useQueryParams } from "../../../Common/Hook/useQueryParams";
 
 
 export function useHomeChannel() {
@@ -26,10 +27,13 @@ export function useHomeChannel() {
     const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
     //ルーティング用
     const navigate = useNavigate();
-    // 一覧画面のクエリパラメータ
-    const { query } = useCreateHomeVideoListQuery();
     // チャンネルID
     const channelId = useChannelId();
+    // クエリパラメータ(遷移元)
+    const previouspath = (() => {
+        const { previouspath } = useQueryParams();
+        return decodeURIComponent(previouspath);
+    })();
 
 
     // チャンネル動画一覧を取得
@@ -72,7 +76,7 @@ export function useHomeChannel() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${query}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${previouspath}`);
     }
 
     return {

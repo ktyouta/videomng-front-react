@@ -10,15 +10,20 @@ import { VideoDetailItemType } from "../../Type/VideoDetail/VideoDetailItemType"
 import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
 import { useVideoId } from "./useVideoId";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
+import { useQueryParams } from "../../../Common/Hook/useQueryParams";
+import { SEARCH_CONDITION } from "../../Const/HomeConst";
 
 export function useHomeVideoDetail() {
 
-    //ルーティング用
+    // ルーティング用
     const navigate = useNavigate();
     // 動画ID
     const videoId = useVideoId();
-    // 一覧画面のクエリパラメータ
-    const { query } = useCreateHomeVideoListQuery();
+    // クエリパラメータ(遷移元)
+    const previouspath = (() => {
+        const { previouspath } = useQueryParams();
+        return decodeURIComponent(previouspath);
+    })();
 
 
     // 動画詳細を取得
@@ -39,7 +44,7 @@ export function useHomeVideoDetail() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${query}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${previouspath}`);
     }
 
     return {

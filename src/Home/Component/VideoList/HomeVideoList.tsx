@@ -4,6 +4,7 @@ import { HomeVideoArea } from "./VideoArea/HomeVideoArea";
 import styled from "styled-components";
 import { HomeVideoSearchConditionValueProvider } from "./HomeVideoSearchConditionValueProvider";
 import { HomeVideoAreaDefault } from "./VideoArea/Default/HomeVideoAreaDefault";
+import { useHomeVideoList } from "../../Hook/VideoList/useHomeVideoList";
 
 
 const Parent = styled.div`
@@ -13,6 +14,8 @@ const Parent = styled.div`
 export function HomeVideoList() {
 
     console.log("HomeVideoList render");
+
+    useHomeVideoList();
 
     return (
         <HomeVideoSearchConditionValueProvider>

@@ -10,5 +10,7 @@ export function useHomeVideoListEndpoint() {
 
     const { create } = useCreateHomeVideoListQuery();
 
-    return `${VIDEO_INFO_PATH}${create({})}`;
+    const newQuery = create({});
+
+    return newQuery ? `${VIDEO_INFO_PATH}${newQuery}` : ``;
 }

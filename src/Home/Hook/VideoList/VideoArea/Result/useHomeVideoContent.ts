@@ -2,12 +2,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ROUTER_PATH } from "../../../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
+import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
 
 
 export function useHomeVideoContent() {
 
     //ルーティング用
     const navigate = useNavigate();
+    // クエリ作成用
+    const { query } = useCreateHomeVideoListQuery();
 
     /**
      * 動画サムネイル、タイトルのクリックイベント
@@ -19,7 +22,13 @@ export function useHomeVideoContent() {
             return;
         }
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}`);
+        let prevQuery = ``;
+
+        if (query) {
+            prevQuery = `?previouspath=${encodeURIComponent(query)}`;
+        }
+
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}${prevQuery}`);
     }
 
     /**
@@ -32,7 +41,13 @@ export function useHomeVideoContent() {
             return;
         }
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}`);
+        let prevQuery = ``;
+
+        if (query) {
+            prevQuery = `?previouspath=${encodeURIComponent(query)}`;
+        }
+
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}${prevQuery}`);
     }
 
     return {
