@@ -20,11 +20,7 @@ export function useHomeVideoDetail() {
     // 動画ID
     const videoId = useVideoId();
     // クエリパラメータ(遷移元)
-    const previouspath = (() => {
-        const queryParams = useQueryParams();
-        return decodeURIComponent(queryParams[LIST_SEARCH_CONDITION_KEY]);
-    })();
-
+    const queryParam = window.location.search;
 
     // 動画詳細を取得
     const { data: videoDetail, isLoading, isError } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
@@ -44,7 +40,7 @@ export function useHomeVideoDetail() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${previouspath}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${queryParam}`);
     }
 
     return {

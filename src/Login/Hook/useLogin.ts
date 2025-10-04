@@ -15,6 +15,7 @@ import { useLoginForm } from './useLoginForm';
 import { LoginFormType } from '../Type/LoginFormType';
 import { loginUserInfoSchema } from '../Schema/loginUserInfoSchema';
 import { toast } from 'react-toastify';
+import { LOGIN_PREV_KEY } from '../Const/LoginConst';
 
 
 export function useLogin() {
@@ -25,16 +26,8 @@ export function useLogin() {
     const setIsLogin = SetIsLoginContext.useCtx();
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // クエリパラメータ(遷移元パス)
-    const previouspath = (() => {
-        const { previouspath } = useQueryParams();
-        return decodeURIComponent(previouspath);
-    })();
-    // クエリパラメータ(遷移元クエリパラメータ)
-    const previousquerykey = (() => {
-        const { previousquerykey } = useQueryParams();
-        return decodeURIComponent(previousquerykey);
-    })();
+    // クエリパラメータ
+    const { previouspath, previousquerykey } = useQueryParams();
     // ログインフォーム
     const form = useLoginForm({
         onSubmit: submit
@@ -62,7 +55,14 @@ export function useLogin() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(previouspath);
+
+            let backPagePath = ROUTER_PATH.HOME.ROOT;
+
+            if (previouspath) {
+                backPagePath = `${previouspath}${previousquerykey}`;
+            }
+
+            navigate(backPagePath);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -100,7 +100,7 @@ export function useLogin() {
         let query = ``;
 
         if (previouspath) {
-            query = `?previouspath=${previouspath}`;
+            query = `?${LOGIN_PREV_KEY.PATH}=${previouspath}&${LOGIN_PREV_KEY.QUERY}=${encodeURIComponent(`${previousquerykey}`)}`;
         }
 
         navigate(`${ROUTER_PATH.SIGNUP}${query}`);
@@ -114,7 +114,7 @@ export function useLogin() {
         let backPagePath = ROUTER_PATH.HOME.ROOT;
 
         if (previouspath) {
-            backPagePath = previouspath;
+            backPagePath = `${previouspath}${previousquerykey}`;
         }
 
         navigate(backPagePath);

@@ -18,6 +18,7 @@ import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
 import { LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
+import { LOGIN_PREV_KEY } from "../../../Login/Const/LoginConst";
 
 
 
@@ -32,11 +33,7 @@ export function useHomeVideoDetailInfo() {
     // 動画ID
     const videoId = useVideoId();
     // クエリパラメータ(遷移元)
-    const listSearchConditionKey = (() => {
-        const queryParams = useQueryParams();
-        return decodeURIComponent(queryParams[LIST_SEARCH_CONDITION_KEY]);
-    })();
-
+    const queryParam = window.location.search;
 
     /**
      * お気に入り登録リクエスト
@@ -52,7 +49,7 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(`${ROUTER_PATH.HOME.ROOT}${listSearchConditionKey}`);
+            navigate(`${ROUTER_PATH.HOME.ROOT}${queryParam}`);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -98,14 +95,17 @@ export function useHomeVideoDetailInfo() {
      */
     function moveLogin() {
 
-        let query = ``;
+        let nowQuery = ``;
 
         if (videoId) {
             const transitionPath = `${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${videoId}`;
-            query = `?previouspath=${encodeURIComponent(`${transitionPath}?${LIST_SEARCH_CONDITION_KEY}=${listSearchConditionKey}`)}`;
+            const path = `?${LOGIN_PREV_KEY.PATH}=${transitionPath}`;
+            const query = `&${LOGIN_PREV_KEY.QUERY}=${encodeURIComponent(`${queryParam}`)}`;
+
+            nowQuery = `${path}${query}`;
         }
 
-        navigate(`${ROUTER_PATH.LOGIN}${query}`);
+        navigate(`${ROUTER_PATH.LOGIN}${nowQuery}`);
     }
 
     return {

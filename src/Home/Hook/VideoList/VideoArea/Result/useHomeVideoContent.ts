@@ -23,17 +23,11 @@ export function useHomeVideoContent() {
             return;
         }
 
-        let prevQuery = ``;
-
-        if (query) {
-            prevQuery = `?${LIST_SEARCH_CONDITION_KEY}=${encodeURIComponent(query)}`;
-        }
-
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}${prevQuery}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}${query}`);
     }
 
     /**
-     * 動画サムネイル、タイトルのクリックイベント
+     * チャンネル名のクリックイベント
      */
     function clickChannel(id: string) {
 
@@ -42,13 +36,7 @@ export function useHomeVideoContent() {
             return;
         }
 
-        let prevQuery = ``;
-
-        if (query) {
-            prevQuery = `?${LIST_SEARCH_CONDITION_KEY}=${encodeURIComponent(query)}`;
-        }
-
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}${prevQuery}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}${query}`);
     }
 
     return {
