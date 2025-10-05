@@ -1,5 +1,5 @@
 import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useUpdateUserInfoForm } from './useUpdateUserInfoForm';
+import { UPDATEUSERINFO_PREV_PATH_KEY } from '../Const/UpdateUserInfoConst';
 
 
 export function useUpdateUserInfo() {
@@ -36,11 +37,10 @@ export function useUpdateUserInfo() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // クエリパラメータ(遷移元)
-    const previouspath = (() => {
-        const { previouspath } = useQueryParams();
-        return decodeURIComponent(previouspath);
-    })();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search.replace(`?${UPDATEUSERINFO_PREV_PATH_KEY}=`, ``);
     // フォーム
     const { register, handleSubmit, formState: { errors } } = useUpdateUserInfoForm(loginUserInfo);
 
@@ -58,7 +58,7 @@ export function useUpdateUserInfo() {
 
             toast.success("ユーザー情報を更新しました。");
             setLoginUserInfo(loginUserInfo);
-            navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
+            navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -102,7 +102,7 @@ export function useUpdateUserInfo() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
+        navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
     }
 
     return {

@@ -1,5 +1,5 @@
 import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useUpdateUserPasswordForm } from './useUpdateUserPasswordForm';
+import { UPDATEUSERPASSWORD_PREV_PATH_KEY } from '../Const/UpdateUserPasswordConst';
 
 
 export function useUpdateUserPassword() {
@@ -32,8 +33,10 @@ export function useUpdateUserPassword() {
     const loginUserInfo = LoginUserInfoContext.useCtx();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // クエリパラメータ(遷移元)
-    const { previouspath } = useQueryParams();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search.replace(`?${UPDATEUSERPASSWORD_PREV_PATH_KEY}=`, ``);
     // フォーム
     const { register, handleSubmit, formState: { errors }, reset } = useUpdateUserPasswordForm();
 
@@ -47,7 +50,7 @@ export function useUpdateUserPassword() {
         afSuccessFn: (res: resType<LoginUserInfoType>) => {
 
             toast.success("パスワードを更新しました。");
-            navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
+            navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -99,7 +102,7 @@ export function useUpdateUserPassword() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(previouspath ?? ROUTER_PATH.HOME.ROOT);
+        navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
     }
 
     return {

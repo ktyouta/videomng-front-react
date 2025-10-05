@@ -12,6 +12,8 @@ import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useGetPreviousPath } from "../../../Common/Hook/useGetPreviousPath";
+import { UPDATEUSERINFO_PREV_PATH_KEY } from "../../../UpdateUserInfo/Const/UpdateUserInfoConst";
+import { UPDATEUSERPASSWORD_PREV_PATH_KEY } from "../../../UpdateUserPassword/Const/UpdateUserPasswordConst";
 
 
 export function useHeaderUserMenuList() {
@@ -30,8 +32,12 @@ export function useHeaderUserMenuList() {
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
-    // 遷移元パス
-    const previousPath = useGetPreviousPath();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
+    // パス
+    const pathName = location.pathname;
 
     /**
      * ログアウトリクエスト
@@ -63,14 +69,28 @@ export function useHeaderUserMenuList() {
      * ユーザー情報更新画面遷移
      */
     function clickUpdateUserInfo() {
-        navigate(`${ROUTER_PATH.UPDATE_USER_INFO}?previouspath=${encodeURIComponent(previousPath)}`);
+
+        let path = ``;
+
+        if (pathName) {
+            path = `?${UPDATEUSERINFO_PREV_PATH_KEY}=${pathName}${queryParam}`;
+        }
+
+        navigate(`${ROUTER_PATH.UPDATE_USER_INFO}${path}`);
     }
 
     /**
      * ユーザーパスワード更新画面遷移
      */
     function clickUpdateUserPassword() {
-        navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}?previouspath=${encodeURIComponent(previousPath)}`);
+
+        let path = ``;
+
+        if (pathName) {
+            path = `?${UPDATEUSERPASSWORD_PREV_PATH_KEY}=${pathName}${queryParam}`;
+        }
+
+        navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}${path}`);
     }
 
     return {
