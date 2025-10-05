@@ -1,9 +1,9 @@
 import { useAtom, useAtomValue } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
 import { VideoDetailResponseType } from "../../Type/VideoDetail/VideoDetailResponseType";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { VideoDetailItemType } from "../../Type/VideoDetail/VideoDetailItemType";
@@ -19,8 +19,11 @@ export function useHomeVideoDetail() {
     const navigate = useNavigate();
     // 動画ID
     const videoId = useVideoId();
-    // クエリパラメータ(遷移元)
-    const queryParam = window.location.search;
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
+
 
     // 動画詳細を取得
     const { data: videoDetail, isLoading, isError } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
@@ -33,7 +36,6 @@ export function useHomeVideoDetail() {
             }
         }
     );
-
 
     /**
      * ホーム画面に戻る

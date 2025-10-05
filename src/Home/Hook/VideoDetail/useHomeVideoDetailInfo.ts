@@ -2,9 +2,9 @@ import { useAtom, useAtomValue } from "jotai";
 import useMutationWrapper from "../../../Common/Hook/useMutationWrapper";
 import { errResType, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../../env.json';
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSwitch from "../../../Common/Hook/useSwitch";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AddToFavoriteRequestType } from "../../Type/VideoDetail/AddToFavoriteRequestType";
 import { AddToFavoriteResponseType } from "../../Type/VideoDetail/AddToFavoriteResponseType";
 import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
@@ -18,8 +18,7 @@ import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
 import { LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
-import { LOGIN_PREV_KEY } from "../../../Login/Const/LoginConst";
-
+import { LOGIN_PREV_PATH_KEY } from "../../../Login/Const/LoginConst";
 
 
 export function useHomeVideoDetailInfo() {
@@ -32,8 +31,12 @@ export function useHomeVideoDetailInfo() {
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
-    // クエリパラメータ(遷移元)
-    const queryParam = window.location.search;
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
+    // パス
+    const pathName = location.pathname;
 
     /**
      * お気に入り登録リクエスト
@@ -89,23 +92,18 @@ export function useHomeVideoDetailInfo() {
         window.open(useVideoPlayUrl(videoId), `_blank`);
     }
 
-
     /**
      * ログイン画面に遷移
      */
     function moveLogin() {
 
-        let nowQuery = ``;
+        let path = ``;
 
         if (videoId) {
-            const transitionPath = `${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${videoId}`;
-            const path = `?${LOGIN_PREV_KEY.PATH}=${transitionPath}`;
-            const query = `&${LOGIN_PREV_KEY.QUERY}=${encodeURIComponent(`${queryParam}`)}`;
-
-            nowQuery = `${path}${query}`;
+            path = `?${LOGIN_PREV_PATH_KEY}=${pathName}${queryParam}`;
         }
 
-        navigate(`${ROUTER_PATH.LOGIN}${nowQuery}`);
+        navigate(`${ROUTER_PATH.LOGIN}${path}`);
     }
 
     return {

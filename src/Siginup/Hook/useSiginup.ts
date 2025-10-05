@@ -1,5 +1,5 @@
 import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -18,6 +18,8 @@ import useSwitch from '../../Common/Hook/useSwitch';
 import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useSignupForm } from './useSignupForm';
+import { LOGIN_PREV_PATH_KEY } from '../../Login/Const/LoginConst';
+import { SIGNUP_PREV_PATH_KEY } from '../Const/SignupConst';
 
 
 export function useSiginup() {
@@ -34,8 +36,10 @@ export function useSiginup() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // クエリパラメータ(遷移元)
-    const { previouspath } = useQueryParams();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search.replace(`?${SIGNUP_PREV_PATH_KEY}=`, ``);
     // フォーム
     const { register, handleSubmit, formState: { errors }, reset } = useSignupForm();
 
@@ -53,7 +57,7 @@ export function useSiginup() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(previouspath);
+            navigate(queryParam);
 
         },
         // 失敗後の処理
@@ -109,8 +113,8 @@ export function useSiginup() {
 
         let query = ``;
 
-        if (previouspath) {
-            query = `?previouspath=${previouspath}`;
+        if (queryParam) {
+            query = `?${LOGIN_PREV_PATH_KEY}=${queryParam}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${query}`);

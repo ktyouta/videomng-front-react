@@ -1,5 +1,5 @@
 import React, { RefObject, useContext, useEffect, useRef, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ENV from '../../env.json';
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -15,7 +15,8 @@ import { useLoginForm } from './useLoginForm';
 import { LoginFormType } from '../Type/LoginFormType';
 import { loginUserInfoSchema } from '../Schema/loginUserInfoSchema';
 import { toast } from 'react-toastify';
-import { LOGIN_PREV_KEY } from '../Const/LoginConst';
+import { LOGIN_PREV_PATH_KEY } from '../Const/LoginConst';
+import { SIGNUP_PREV_PATH_KEY } from '../../Siginup/Const/SignupConst';
 
 
 export function useLogin() {
@@ -26,8 +27,10 @@ export function useLogin() {
     const setIsLogin = SetIsLoginContext.useCtx();
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // クエリパラメータ
-    const { previouspath, previousquerykey } = useQueryParams();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search.replace(`?${LOGIN_PREV_PATH_KEY}=`, ``);
     // ログインフォーム
     const form = useLoginForm({
         onSubmit: submit
@@ -58,8 +61,8 @@ export function useLogin() {
 
             let backPagePath = ROUTER_PATH.HOME.ROOT;
 
-            if (previouspath) {
-                backPagePath = `${previouspath}${previousquerykey}`;
+            if (queryParam) {
+                backPagePath = queryParam;
             }
 
             navigate(backPagePath);
@@ -99,8 +102,8 @@ export function useLogin() {
 
         let query = ``;
 
-        if (previouspath) {
-            query = `?${LOGIN_PREV_KEY.PATH}=${previouspath}&${LOGIN_PREV_KEY.QUERY}=${encodeURIComponent(`${previousquerykey}`)}`;
+        if (queryParam) {
+            query = `?${SIGNUP_PREV_PATH_KEY}=${queryParam}`;
         }
 
         navigate(`${ROUTER_PATH.SIGNUP}${query}`);
@@ -113,8 +116,8 @@ export function useLogin() {
 
         let backPagePath = ROUTER_PATH.HOME.ROOT;
 
-        if (previouspath) {
-            backPagePath = `${previouspath}${previousquerykey}`;
+        if (queryParam) {
+            backPagePath = queryParam;
         }
 
         navigate(backPagePath);
