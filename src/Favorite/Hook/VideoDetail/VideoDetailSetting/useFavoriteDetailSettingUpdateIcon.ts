@@ -1,4 +1,3 @@
-import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import ENV from "../../../../env.json";

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import { COMMENT_FAVORITE_STATUS } from "../../../Const/FavoriteConst";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";

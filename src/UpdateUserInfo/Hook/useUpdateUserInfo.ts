@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
-import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
+import { errResType, resSchema, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
@@ -21,6 +21,7 @@ import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useUpdateUserInfoForm } from './useUpdateUserInfoForm';
 import { UPDATEUSERINFO_PREV_PATH_KEY } from '../Const/UpdateUserInfoConst';
+import { loginUserInfoSchema } from '../../Login/Schema/loginUserInfoSchema';
 
 
 export function useUpdateUserInfo() {
@@ -52,9 +53,18 @@ export function useUpdateUserInfo() {
         url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_INFO}/${loginUserInfo.userId}`,
         method: "PUT",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<LoginUserInfoType>) => {
+        afSuccessFn: (res: unknown) => {
 
-            const loginUserInfo = res.data;
+            // レスポンスの型チェック
+            const resParsed = resSchema(loginUserInfoSchema).safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`ユーザー情報を更新できませんでした。時間をおいて再度お試しください。`);
+                closeModal();
+                return;
+            }
+
+            const loginUserInfo = resParsed.data.data;
 
             toast.success("ユーザー情報を更新しました。");
             setLoginUserInfo(loginUserInfo);

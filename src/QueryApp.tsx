@@ -6,7 +6,6 @@ import useQueryApp from './useQueryApp';
 import { Login } from './Login/Component/Login';
 import { createCtx } from './Common/Function/createCtx';
 import { Siginup } from './Siginup/Component/Siginup';
-import { LoginResponseType } from './Login/Type/LoginResponseType';
 import { LoginUserInfoType } from './Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from './Common/Const/RouterPath';
 import { TOAST_INIT, ToastComponent, toastStatusType } from './Common/Component/ToastComponent';

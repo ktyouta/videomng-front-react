@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
-import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
+import { errResType, resSchema, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
@@ -20,6 +20,8 @@ import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useSignupForm } from './useSignupForm';
 import { LOGIN_PREV_PATH_KEY } from '../../Login/Const/LoginConst';
 import { SIGNUP_PREV_PATH_KEY } from '../Const/SignupConst';
+import { loginUserInfoSchema } from '../../Login/Schema/loginUserInfoSchema';
+import { toast } from 'react-toastify';
 
 
 export function useSiginup() {
@@ -51,14 +53,22 @@ export function useSiginup() {
         url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_INFO}`,
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<LoginUserInfoType>) => {
+        afSuccessFn: (res: unknown) => {
 
-            const loginUserInfo = res.data;
+            // レスポンスの型チェック
+            const resParsed = resSchema(loginUserInfoSchema).safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`アカウントの作成に失敗しました。時間をおいて再度お試しください。`);
+                closeModal();
+                return;
+            }
+
+            const loginUserInfo = resParsed.data.data;
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
             navigate(queryParam);
-
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

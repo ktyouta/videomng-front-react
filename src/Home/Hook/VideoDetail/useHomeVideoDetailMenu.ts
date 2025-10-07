@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue } from "jotai";
-import useMutationWrapper from "../../../Common/Hook/useMutationWrapper";
 import { errResType, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../../env.json';
 import { AddToFavoriteRequestType } from "../../Type/VideoDetail/AddToFavoriteRequestType";

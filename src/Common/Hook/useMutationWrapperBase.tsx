@@ -5,16 +5,33 @@ import z from 'zod';
 
 
 /**
- * レスポンスのスキーマを取得
+ * スキーマが存在する
  * @param dataSchema 
- * @returns 
  */
-export function resSchema<T extends z.ZodTypeAny>(dataSchema: T) {
+export function resSchema<T extends z.ZodTypeAny>(dataSchema: T): z.ZodObject<{
+    status: z.ZodNumber
+    message: z.ZodOptional<z.ZodString>
+    data: T
+}>;
+
+/**
+ * スキーマが存在しない
+ */
+export function resSchema(): z.ZodObject<{
+    status: z.ZodNumber
+    message: z.ZodOptional<z.ZodString>
+    data: z.ZodOptional<z.ZodUndefined>
+}>;
+
+/**
+ * レスポンスのスキーマを取得
+ */
+export function resSchema<T extends z.ZodTypeAny>(dataSchema?: T) {
     return z.object({
         status: z.number(),
-        message: z.string(),
-        data: dataSchema,
-    });
+        message: z.string().optional(),
+        data: dataSchema ? dataSchema : z.undefined().optional(),
+    })
 }
 
 //レスポンスの型

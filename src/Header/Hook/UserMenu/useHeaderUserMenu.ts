@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAtom, useAtomValue } from "jotai";
 import useSwitch from "../../../Common/Hook/useSwitch";
 import { useCookies } from "react-cookie";
-import useMutationWrapper from "../../../Common/Hook/useMutationWrapper";
 import ENV from '../../../env.json';
 import { errResType, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../../Common/Hook/useGlobalAtom";

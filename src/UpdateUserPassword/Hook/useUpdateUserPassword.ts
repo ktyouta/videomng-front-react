@@ -5,13 +5,12 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { refType } from '../../Common/Component/BaseTextbox';
 import useMutationWrapper from '../../Common/Hook/useMutationWrapper';
-import { errResType, resType } from '../../Common/Hook/useMutationWrapperBase';
+import { errResType, resSchema, resType } from '../../Common/Hook/useMutationWrapperBase';
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../Common/Hook/useGlobalAtom';
 import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { comboType } from '../../Common/Component/ComboComponent';
 import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
-import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import { UpdateUserInfoRequestType } from '../../UpdateUserInfo/Type/UpdateUserInfoRequestType';
 import useSwitch from '../../Common/Hook/useSwitch';
@@ -47,7 +46,16 @@ export function useUpdateUserPassword() {
         url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_PASSWORD_ID}/${loginUserInfo.userId}`,
         method: "PUT",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<LoginUserInfoType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`パスワードの更新に失敗しました。時間をおいて再度お試しください。`);
+                closeModal();
+                return;
+            }
 
             toast.success("パスワードを更新しました。");
             navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
