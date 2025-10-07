@@ -30,7 +30,7 @@ export function resSchema<T extends z.ZodTypeAny>(dataSchema?: T) {
     return z.object({
         status: z.number(),
         message: z.string().optional(),
-        data: dataSchema ? dataSchema : z.undefined().optional(),
+        data: dataSchema ? dataSchema : z.unknown().optional(),
     })
 }
 

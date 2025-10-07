@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import ENV from "../../../../env.json";
 import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
@@ -36,7 +36,16 @@ export function useFavoriteTagEditUpdateIcon() {
         url: useFavoriteTagEndpoint(videoId),
         method: "PUT",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoTagType[]>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`タグの設定に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
             toast.success(`タグを設定しました。`);
             // 閲覧画面に遷移する
             changeView();

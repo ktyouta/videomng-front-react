@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from "jotai";
 import useMutationWrapper from "../../../Common/Hook/useMutationWrapper";
-import { errResType, resType } from "../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../../env.json';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSwitch from "../../../Common/Hook/useSwitch";
@@ -45,9 +45,17 @@ export function useHomeVideoDetailInfo() {
         url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}`,
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<AddToFavoriteResponseType>) => {
+        afSuccessFn: (res: unknown) => {
 
-            const message = res.message;
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`お気に入り登録に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
+            const message = resParsed.data.message;
             if (message) {
                 toast.success(message);
             }
