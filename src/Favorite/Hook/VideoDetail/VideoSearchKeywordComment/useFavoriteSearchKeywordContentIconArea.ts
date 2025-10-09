@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
@@ -44,7 +44,16 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
         url: useFavoriteBlockCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`ブロックに失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
             // コメント再取得
             invalidate();
         },
@@ -83,7 +92,16 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
         url: useFavoriteFavoriteCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`お気に入り登録に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
             setFavoriteStatus(COMMENT_FAVORITE_STATUS.FAVORITE);
         },
         // 失敗後の処理
@@ -124,6 +142,15 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`削除に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
             setFavoriteStatus(COMMENT_FAVORITE_STATUS.NONE);
         },
         // 失敗後の処理

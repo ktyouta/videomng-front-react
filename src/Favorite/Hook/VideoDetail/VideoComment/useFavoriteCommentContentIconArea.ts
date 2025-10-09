@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/AddToFavoriteVideoFavoriteCommentReqestType";
@@ -43,6 +43,15 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`コメントの非表示に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
             // コメント再取得
             invalidate();
         },
@@ -81,7 +90,15 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         url: useFavoriteFavoriteCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`お気に入り登録に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
 
             // アイコンを強調表示
             setFavoriteStatus(COMMENT_FAVORITE_STATUS.FAVORITE);
@@ -126,7 +143,15 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
         }),
         method: "DELETE",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`削除に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
 
             // アイコン強調表示解除
             setFavoriteStatus(COMMENT_FAVORITE_STATUS.NONE);

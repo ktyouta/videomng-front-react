@@ -3,7 +3,7 @@ import { useState } from "react";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import ENV from "../../../../env.json";
 import { AddToFavoriteVideoMemoResponseType } from "../../../Type/VideoDetail/VideoMemo/AddToFavoriteVideoMemoResponseType";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { AddToFavoriteVideoMemoReqestType } from "../../../Type/VideoDetail/VideoMemo/AddToFavoriteVideoMemoReqestType";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { toast } from "react-toastify";
@@ -33,7 +33,15 @@ export function useFavoriteMemoCreateInput() {
         url: useFavoriteMemoEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`メモの登録に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
 
             // メモを再取得
             invalidate();

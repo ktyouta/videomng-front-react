@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
 import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { useInvalidateQuery } from "../../../../Common/Hook/useInvalidateQuery";
@@ -33,7 +33,15 @@ export function useFavoriteMemoContentViewDeleteArea(props: propsType) {
         }),
         method: "DELETE",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoMemoType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`メモの削除に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
 
             // メモを再取得
             invalidate();

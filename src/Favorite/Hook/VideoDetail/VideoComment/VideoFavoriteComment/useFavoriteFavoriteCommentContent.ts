@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import useMutationWrapper from "../../../../../Common/Hook/useMutationWrapper";
-import { errResType, resType } from "../../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoFavoriteCommentType } from "../../../../Type/VideoDetail/VideoComment/VideoFavoriteComment/FavoriteVideoFavoriteCommentType";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailItemType";
 import { toast } from "react-toastify";
@@ -34,7 +34,15 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
         }),
         method: "DELETE",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`削除に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
 
             // 公開コメント再取得
             invalidataPublic();

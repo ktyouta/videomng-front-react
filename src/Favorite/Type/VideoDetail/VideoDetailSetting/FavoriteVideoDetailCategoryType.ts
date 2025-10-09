@@ -1,9 +1,4 @@
+import z from "zod";
+import { FavoriteVideoDetailCategorySchema } from "../../../Schema/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategorySchema";
 
-export type FavoriteVideoDetailCategoryType = {
-    userId: number;
-    videoId: string;
-    createDate: Date;
-    updateDate: Date;
-    deleteFlg: string;
-    categoryId: string;
-}
+export type FavoriteVideoDetailCategoryType = z.infer<typeof FavoriteVideoDetailCategorySchema>;

@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import useMutationWrapper from "../../../../../Common/Hook/useMutationWrapper";
-import { errResType, resType } from "../../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoBlockCommentType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/FavoriteVideoBlockCommentType";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../Type/VideoDetail/VideoComment/YouTubeDataApiCommentDetailItemType";
 import { DeleteToFavoriteVideoBlockCommentReqestType } from "../../../../Type/VideoDetail/VideoComment/VideoBlockComment/DeleteToFavoriteVideoBlockCommentReqestType";
@@ -27,7 +27,7 @@ export function useFavoriteBlockCommentContent(props: propsType) {
 
 
     /**
-     * コメントブロックリクエスト
+     * 再表示リクエスト
      */
     const postMutation = useMutationWrapper({
         url: useFavoriteBlockCommentIdEndpoint({
@@ -36,7 +36,15 @@ export function useFavoriteBlockCommentContent(props: propsType) {
         }),
         method: "DELETE",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
+        afSuccessFn: (res: unknown) => {
+
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`再表示に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
 
             // 非表示コメント再取得
             invalidateBlock();

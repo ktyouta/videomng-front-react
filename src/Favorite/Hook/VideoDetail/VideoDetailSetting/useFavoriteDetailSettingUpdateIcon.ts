@@ -1,9 +1,4 @@
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import useSwitch from "../../../../Common/Hook/useSwitch";
-import ENV from "../../../../env.json";
-import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
-import { UpdateFavoriteVideoResponseDataType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateFavoriteVideoResponseDataType";
-
 
 export function useFavoriteDetailSettingUpdateIcon() {
 

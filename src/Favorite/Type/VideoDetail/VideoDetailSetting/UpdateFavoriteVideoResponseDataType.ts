@@ -1,7 +1,4 @@
-import { FavoriteVideoDetailCategoryType } from "./FavoriteVideoDetailCategoryType";
-import { FavoriteVideoVideoMngApiDataType } from "../FavoriteVideoVideoMngApiDataType";
+import z from "zod";
+import { UpdateFavoriteVideoResponseDataSchema } from "../../../Schema/VideoDetail/VideoDetailSetting/UpdateFavoriteVideoResponseDataSchema";
 
-export type UpdateFavoriteVideoResponseDataType = {
-    readonly detail: FavoriteVideoVideoMngApiDataType,
-    readonly category: FavoriteVideoDetailCategoryType[],
-}
+export type UpdateFavoriteVideoResponseDataType = z.infer<typeof UpdateFavoriteVideoResponseDataSchema>;

@@ -6,13 +6,14 @@ import { comboType } from "../../../../Common/Component/ComboComponent";
 import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
 import useMutationWrapper from "../../../../Common/Hook/useMutationWrapper";
 import { UpdateFavoriteVideoResponseDataType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateFavoriteVideoResponseDataType";
-import { errResType, resType } from "../../../../Common/Hook/useMutationWrapperBase";
+import { errResType, resSchema, resType } from "../../../../Common/Hook/useMutationWrapperBase";
 import ENV from "../../../../env.json";
 import { UpdateToFavoriteVideoReqestType } from "../../../Type/VideoDetail/VideoDetailSetting/UpdateToFavoriteVideoReqestType";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useViewStatusList } from "../../useViewStatusList";
 import { useVideoId } from "../useVideoId";
+import { UpdateFavoriteVideoResponseDataSchema } from "../../../Schema/VideoDetail/VideoDetailSetting/UpdateFavoriteVideoResponseDataSchema";
 
 
 type propsType = {
@@ -54,9 +55,17 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${videoId}`,
         method: "PUT",
         // 正常終了後の処理
-        afSuccessFn: (res: resType<UpdateFavoriteVideoResponseDataType>) => {
+        afSuccessFn: (res: unknown) => {
 
-            const data = res.data;
+            // レスポンスの型チェック
+            const resParsed = resSchema(UpdateFavoriteVideoResponseDataSchema).safeParse(res);
+
+            if (!resParsed.success) {
+                toast.error(`動画情報の更新に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+
+            const data = resParsed.data.data;
             const detail = data.detail;
 
             props.setSummary(detail.summary);
