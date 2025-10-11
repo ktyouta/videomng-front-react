@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Pagenatetion } from "../../../../Common/Component/Pagenation";
+import { Pagenation } from "../../../../Common/Component/Pagenation";
 import { useFavoriteVideoAreaFooter } from "../../../Hook/VideoList/VideoArea/useFavoriteVideoAreaFooter";
 
 const Parent = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-top: 32px;
+  margin-top: 44px;
   justify-content: center;
 `;
 
@@ -14,13 +14,15 @@ export function FavoriteVideoAreaFooter() {
 
     const {
         changePage,
-        totalPage } = useFavoriteVideoAreaFooter();
+        totalPage,
+        selectPage } = useFavoriteVideoAreaFooter();
 
     return (
         <Parent>
-            <Pagenatetion
+            <Pagenation
                 changePage={changePage}
                 totalPage={totalPage}
+                selectedPage={selectPage}
             />
         </Parent>
     );

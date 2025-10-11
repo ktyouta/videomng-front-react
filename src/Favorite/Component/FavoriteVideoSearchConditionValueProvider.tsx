@@ -56,29 +56,31 @@ export function FavoriteVideoSearchConditionValueProvider(props: propsType) {
     const [selectedFavoriteVideoPage, setSelectedFavoriteVideoPage] = useState(params[SEARCH_CONDITION.QUERY_KEY_PAGE]);
 
 
-    return <SelectedFavoriteVideoCategoryContext.Provider value={selectedFavoriteVideoCategory}>
-        <SetSelectedFavoriteVideoCategoryContext.Provider value={setSelectedFavoriteVideoCategory}>
-            <SelectedFavoriteVideoViewStatusContext.Provider value={selectedFavoriteVideoViewStatus}>
-                <SetselectedFavoriteVideoViewStatusContext.Provider value={setSelectedFavoriteVideoViewStatus}>
-                    <SelectedFavoriteVideoTagContext.Provider value={selectedFavoriteVideoTag}>
-                        <SetselectedFavoriteVideoTagContext.Provider value={setSelectedFavoriteVideoTag}>
-                            <SelectedFavoriteVideoFavoriteLevelContext.Provider value={selectedFavoriteVideoFavoriteLevel}>
-                                <SetSelectedFavoriteVideoFavoriteLevelContext.Provider value={setSelectedFavoriteVideoFavoriteLevel}>
-                                    <SelectedFavoriteVideoSortKeyContext.Provider value={selectedFavoriteVideoSortKey}>
-                                        <SetSelectedFavoriteVideoSortKeyContext.Provider value={setSelectedFavoriteVideoSortKey}>
-                                            <SelectedFavoriteVideoPageContext.Provider value={selectedFavoriteVideoPage}>
-                                                <SetSelectedFavoriteVideoPageContext.Provider value={setSelectedFavoriteVideoPage}>
-                                                    {props.children}
-                                                </SetSelectedFavoriteVideoPageContext.Provider>
-                                            </SelectedFavoriteVideoPageContext.Provider>
-                                        </SetSelectedFavoriteVideoSortKeyContext.Provider>
-                                    </SelectedFavoriteVideoSortKeyContext.Provider>
-                                </SetSelectedFavoriteVideoFavoriteLevelContext.Provider>
-                            </SelectedFavoriteVideoFavoriteLevelContext.Provider>
-                        </SetselectedFavoriteVideoTagContext.Provider>
-                    </SelectedFavoriteVideoTagContext.Provider>
-                </SetselectedFavoriteVideoViewStatusContext.Provider>
-            </SelectedFavoriteVideoViewStatusContext.Provider>
-        </SetSelectedFavoriteVideoCategoryContext.Provider>
-    </SelectedFavoriteVideoCategoryContext.Provider>
+    return (
+        <SelectedFavoriteVideoCategoryContext.Provider value={selectedFavoriteVideoCategory}>
+            <SetSelectedFavoriteVideoCategoryContext.Provider value={setSelectedFavoriteVideoCategory}>
+                <SelectedFavoriteVideoViewStatusContext.Provider value={selectedFavoriteVideoViewStatus}>
+                    <SetselectedFavoriteVideoViewStatusContext.Provider value={setSelectedFavoriteVideoViewStatus}>
+                        <SelectedFavoriteVideoTagContext.Provider value={selectedFavoriteVideoTag}>
+                            <SetselectedFavoriteVideoTagContext.Provider value={setSelectedFavoriteVideoTag}>
+                                <SelectedFavoriteVideoFavoriteLevelContext.Provider value={selectedFavoriteVideoFavoriteLevel}>
+                                    <SetSelectedFavoriteVideoFavoriteLevelContext.Provider value={setSelectedFavoriteVideoFavoriteLevel}>
+                                        <SelectedFavoriteVideoSortKeyContext.Provider value={selectedFavoriteVideoSortKey}>
+                                            <SetSelectedFavoriteVideoSortKeyContext.Provider value={setSelectedFavoriteVideoSortKey}>
+                                                <SelectedFavoriteVideoPageContext.Provider value={selectedFavoriteVideoPage}>
+                                                    <SetSelectedFavoriteVideoPageContext.Provider value={setSelectedFavoriteVideoPage}>
+                                                        {props.children}
+                                                    </SetSelectedFavoriteVideoPageContext.Provider>
+                                                </SelectedFavoriteVideoPageContext.Provider>
+                                            </SetSelectedFavoriteVideoSortKeyContext.Provider>
+                                        </SelectedFavoriteVideoSortKeyContext.Provider>
+                                    </SetSelectedFavoriteVideoFavoriteLevelContext.Provider>
+                                </SelectedFavoriteVideoFavoriteLevelContext.Provider>
+                            </SetselectedFavoriteVideoTagContext.Provider>
+                        </SelectedFavoriteVideoTagContext.Provider>
+                    </SetselectedFavoriteVideoViewStatusContext.Provider>
+                </SelectedFavoriteVideoViewStatusContext.Provider>
+            </SetSelectedFavoriteVideoCategoryContext.Provider>
+        </SelectedFavoriteVideoCategoryContext.Provider>
+    )
 }

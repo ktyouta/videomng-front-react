@@ -2,9 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 5px;
+    gap: 13px;
+    padding: 0;
+    margin: 20px 0;
 }
 
 .page-item,
@@ -14,13 +14,15 @@
     justify-content: center;
     font-weight: 700;
     font-size: 16px;
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: 42px;
     cursor: pointer;
     color: rgb(158, 158, 158);
-    width: 55px;
 }
 
-.active{
+.page-item.active .page-link {
     font-weight: bold;
+    color: rgb(0, 5, 13);
+    background-color: rgb(158, 158, 158);
+    border-radius: 4px;
 }

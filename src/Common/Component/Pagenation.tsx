@@ -5,9 +5,10 @@ import React from 'react';
 type propsType = {
     changePage: (nowPage: number) => void,
     totalPage: number,
+    selectedPage: number,
 }
 
-export function Pagenatetion(props: propsType) {
+export function Pagenation(props: propsType) {
 
     return (
         <React.Fragment>
@@ -22,6 +23,7 @@ export function Pagenatetion(props: propsType) {
                     }) => {
                         props.changePage(selectedItem.selected + 1);
                     }}
+                    forcePage={props.selectedPage - 1}
                     containerClassName='pagination'
                     pageClassName='page-item'
                     pageLinkClassName='page-link'

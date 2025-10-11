@@ -12,7 +12,7 @@ import { errResType } from "../../../../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtomValue } from "../../../../../Common/Hook/useGlobalAtom";
 import { useNavigate } from "react-router-dom";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../Const/FavoriteConst";
-import { useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
+import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
 import { useVideoCategory } from "../../../../../Main/Hook/useVideoCategory";
 import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
@@ -39,7 +39,8 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         selectedFavoriteVideoTag,
         setSelectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
-        setSelectedFavoriteVideoFavoriteLevel, } = useFavoriteVideoSearchConditionValue();
+        setSelectedFavoriteVideoFavoriteLevel,
+        resetPage, } = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
     const { create } = useCreateFavoriteVideoListQuery();
     // クエリパラメータ変更用
@@ -75,13 +76,16 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeVideoCategory(selectedCategory: string,) {
 
         const newQuery = create({
-            videocategory: selectedCategory
+            videocategory: selectedCategory,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
         setSelectedFavoriteVideoCategory(selectedCategory);
+        resetPage();
+
         props.close();
     }
 
@@ -92,13 +96,16 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeViewStatus(selectedViewStatus: string,) {
 
         const newQuery = create({
-            viewstatus: selectedViewStatus
+            viewstatus: selectedViewStatus,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
         setSelectedFavoriteVideoViewStatus(selectedViewStatus);
+        resetPage();
+
         props.close();
     }
 
@@ -109,13 +116,16 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeVideoTag(selectedVideoTag: string,) {
 
         const newQuery = create({
-            videotag: selectedVideoTag
+            videotag: selectedVideoTag,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
         setSelectedFavoriteVideoTag(selectedVideoTag);
+        resetPage();
+
         props.close();
     }
 
@@ -126,13 +136,16 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     function changeFavoriteLevel(selectedFavoriteLevel: string,) {
 
         const newQuery = create({
-            favoritelevel: selectedFavoriteLevel
+            favoritelevel: selectedFavoriteLevel,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
         setSelectedFavoriteVideoFavoriteLevel(selectedFavoriteLevel);
+        resetPage();
+
         props.close();
     }
 

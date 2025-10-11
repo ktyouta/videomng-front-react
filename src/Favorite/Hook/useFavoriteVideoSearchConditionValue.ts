@@ -1,5 +1,6 @@
 import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../Component/FavoriteVideoSearchConditionValueProvider";
 
+export const INIT_PAGE = `1`;
 
 export function useFavoriteVideoSearchConditionValue() {
 
@@ -41,6 +42,13 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoPage(``);
     }
 
+    /**
+     * ページ情報をリセット
+     */
+    function resetPage() {
+        setSelectedFavoriteVideoPage(INIT_PAGE);
+    }
+
     return {
         selectedFavoriteVideoCategory,
         setSelectedFavoriteVideoCategory,
@@ -55,5 +63,6 @@ export function useFavoriteVideoSearchConditionValue() {
         selectedFavoriteVideoPage,
         setSelectedFavoriteVideoPage,
         reset,
+        resetPage,
     };
 }
