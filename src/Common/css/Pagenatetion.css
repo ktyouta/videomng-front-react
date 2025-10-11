@@ -4,13 +4,8 @@
     justify-content: center;
     padding: 0 !important;
     margin: 0 !important;
-    border: solid 2px #4169e1;
     border-radius: 5px;
 }
-
-.pagination > * + * {
-    border-left: solid 2px #4169e1;
-  }
 
 .page-item,
 .page-link {
@@ -22,10 +17,10 @@
     height: 40px;
     width: 40px;
     cursor: pointer;
-    color: #4169e1;
+    color: rgb(158, 158, 158);
     width: 55px;
 }
 
 .active{
-    background-color: #afeeee;
+    font-weight: bold;
 }

@@ -6,20 +6,21 @@ const Parent = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 6%;
-  color: rgb(158, 158, 158);
-  margin-top: 13px;
+  margin-top: 32px;
+  justify-content: center;
 `;
 
 export function FavoriteVideoAreaFooter() {
 
-    const { changePage } = useFavoriteVideoAreaFooter();
+    const {
+        changePage,
+        totalPage } = useFavoriteVideoAreaFooter();
 
     return (
         <Parent>
             <Pagenatetion
                 changePage={changePage}
-                totalPage={0}
+                totalPage={totalPage}
             />
         </Parent>
     );

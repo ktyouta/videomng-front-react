@@ -8,6 +8,7 @@ import { FavoriteVideoListMergedType } from "../../../Type/VideoList/FavoriteVid
 import { MEDIA } from "../../../../Common/Const/MediaConst";
 import Loading from "../../../../Common/Component/Loading";
 import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
+import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";
 
 const Parent = styled.div`
   width: 100%;
@@ -85,7 +86,8 @@ export function FavoriteVideoArea() {
     displayVideoList,
     isLoading,
     isError,
-    isFetching, } = useFavoriteVideoArea();
+    isFetching,
+    total } = useFavoriteVideoArea();
 
   if (isLoading || isFetching) {
     return (
@@ -116,7 +118,7 @@ export function FavoriteVideoArea() {
       <ResultNumDiv>
         <FlexSpaceDiv />
         <ResultNumSpan>
-          全{displayVideoList.length}件
+          全{total}件
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>
@@ -131,6 +133,7 @@ export function FavoriteVideoArea() {
           })
         }
       </VideoUl>
+      <FavoriteVideoAreaFooter />
     </Parent>
   );
 }

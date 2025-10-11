@@ -21,7 +21,7 @@ export function useFavoriteVideoArea() {
     const displayVideoList = DisplayVideoListContext.useCtx();
 
     // 動画一覧を取得
-    const { isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
+    const { data, isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
             url: useFavoriteVideoListEndpoint(),
             select: (res: FavoriteVideoListResponseType) => {
@@ -39,6 +39,7 @@ export function useFavoriteVideoArea() {
         isLoading,
         isError,
         displayVideoList,
-        isFetching
+        isFetching,
+        total: data?.total,
     }
 }

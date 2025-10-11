@@ -4,6 +4,7 @@ import { FavoriteVideoListMergedType } from "../../../Type/VideoList/FavoriteVid
 import { FavoriteVideoListResponseDataType } from "../../../Type/VideoList/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../Type/VideoList/FavoriteVideoListResponseType";
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 export function useFavoriteVideoAreaFooter() {
@@ -12,6 +13,8 @@ export function useFavoriteVideoAreaFooter() {
     const { create } = useCreateFavoriteVideoListQuery();
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
+    // 検索条件
+    const { setSelectedFavoriteVideoPage } = useFavoriteVideoSearchConditionValue();
 
     // 動画一覧
     const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
@@ -37,9 +40,12 @@ export function useFavoriteVideoAreaFooter() {
 
         // クエリパラメータを更新
         replace(newQuery);
+
+        setSelectedFavoriteVideoPage(page.toString());
     }
 
     return {
-        changePage
+        changePage,
+        totalPage: data?.page ?? 0,
     }
 }

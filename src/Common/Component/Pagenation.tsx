@@ -1,5 +1,5 @@
 import ReactPaginate from 'react-paginate';
-import './css/Pagenatetion.css';
+import '../css/Pagenatetion.css';
 import React from 'react';
 
 type propsType = {
@@ -20,7 +20,7 @@ export function Pagenatetion(props: propsType) {
                     onPageChange={(selectedItem: {
                         selected: number;
                     }) => {
-                        props.changePage(selectedItem.selected);
+                        props.changePage(selectedItem.selected + 1);
                     }}
                     containerClassName='pagination'
                     pageClassName='page-item'
