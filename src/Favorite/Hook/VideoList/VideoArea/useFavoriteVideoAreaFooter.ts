@@ -16,7 +16,6 @@ export function useFavoriteVideoAreaFooter() {
     // 検索条件
     const { selectedFavoriteVideoPage,
         setSelectedFavoriteVideoPage } = useFavoriteVideoSearchConditionValue();
-
     // 動画一覧
     const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
@@ -29,12 +28,14 @@ export function useFavoriteVideoAreaFooter() {
             }
         }
     );
+    // 選択中のページ
+    const selectPage = parseInt(selectedFavoriteVideoPage);
 
     /**
      * ページリンク選択
      */
     function changePage(page: number) {
-        console.log(`page:${page}`);
+
         const newQuery = create({
             page: page.toString()
         });
@@ -48,6 +49,6 @@ export function useFavoriteVideoAreaFooter() {
     return {
         changePage,
         totalPage: data?.page ?? 0,
-        selectPage: parseInt(selectedFavoriteVideoPage),
+        selectPage: Number.isNaN(selectPage) ? 1 : selectPage,
     }
 }
