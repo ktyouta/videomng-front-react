@@ -10,6 +10,7 @@ import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoLis
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 import { DisplayVideoListContext, SetDisplayVideoListContext } from "../../../Component/VideoList/FavoriteVideoDisplayVideoListProvider";
+import { FavoriteVideoListResponseDataType } from "../../../Type/VideoList/FavoriteVideoListResponseDataType";
 
 
 export function useFavoriteVideoArea() {
@@ -20,14 +21,14 @@ export function useFavoriteVideoArea() {
     const displayVideoList = DisplayVideoListContext.useCtx();
 
     // 動画一覧を取得
-    const { isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListMergedType[]>(
+    const { isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
             url: useFavoriteVideoListEndpoint(),
             select: (res: FavoriteVideoListResponseType) => {
                 return res.data;
             },
-            afSuccessFn: (res: FavoriteVideoListMergedType[]) => {
-                setDisplayVideoList(res ?? []);
+            afSuccessFn: (res: FavoriteVideoListResponseDataType) => {
+                setDisplayVideoList(res.item ?? []);
             },
             afErrorFn: (res) => {
             }

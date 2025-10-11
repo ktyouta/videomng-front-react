@@ -4,6 +4,7 @@ import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
 import { useFavoriteVideoListEndpoint } from "../VideoArea/useFavoriteVideoListEndpoint";
 import { FavoriteVideoListResponseType } from "../../../Type/VideoList/FavoriteVideoListResponseType";
 import { FavoriteVideoListMergedType } from "../../../Type/VideoList/FavoriteVideoListMergedType";
+import { FavoriteVideoListResponseDataType } from "../../../Type/VideoList/FavoriteVideoListResponseDataType";
 
 export function useFavoriteSearchText() {
 
@@ -12,7 +13,7 @@ export function useFavoriteSearchText() {
     // 画面表示用の動画リスト(setter)
     const setDisplayVideoList = SetDisplayVideoListContext.useCtx();
     // 動画一覧
-    const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListMergedType[]>(
+    const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
             url: useFavoriteVideoListEndpoint(),
             select: (res: FavoriteVideoListResponseType) => {
@@ -34,7 +35,7 @@ export function useFavoriteSearchText() {
             return;
         }
 
-        setDisplayVideoList(data);
+        setDisplayVideoList(data.item);
     }
 
 
@@ -49,14 +50,14 @@ export function useFavoriteSearchText() {
 
         // 入力欄が空の場合は動画情報をリセット
         if (!inputKeyword) {
-            setDisplayVideoList(data);
+            setDisplayVideoList(data.item);
             return;
         }
 
         setDisplayVideoList((e) => {
 
             // 入力したタイトルに一致する動画を取得
-            const filterdVideList = data.filter((e1) => {
+            const filterdVideList = data.item.filter((e1) => {
 
                 const title = e1.snippet.title;
                 return title.includes(inputKeyword);

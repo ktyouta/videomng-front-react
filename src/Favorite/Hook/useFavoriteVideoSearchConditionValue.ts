@@ -1,4 +1,4 @@
-import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../Component/FavoriteVideoSearchConditionValueProvider";
+import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../Component/FavoriteVideoSearchConditionValueProvider";
 
 
 export function useFavoriteVideoSearchConditionValue() {
@@ -23,6 +23,10 @@ export function useFavoriteVideoSearchConditionValue() {
     const selectedFavoriteVideoSortKey = SelectedFavoriteVideoSortKeyContext.useCtx();
     // 動画一覧検索ソートキー setter
     const setSelectedFavoriteVideoSortKey = SetSelectedFavoriteVideoSortKeyContext.useCtx();
+    // 動画一覧検索ページ
+    const selectedFavoriteVideoPage = SelectedFavoriteVideoPageContext.useCtx();
+    // 動画一覧検索ページ setter
+    const setSelectedFavoriteVideoPage = SetSelectedFavoriteVideoPageContext.useCtx();
 
 
     /**
@@ -34,6 +38,7 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoTag(``);
         setSelectedFavoriteVideoFavoriteLevel(``);
         setSelectedFavoriteVideoSortKey(``);
+        setSelectedFavoriteVideoPage(``);
     }
 
     return {
@@ -47,6 +52,8 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey,
         setSelectedFavoriteVideoSortKey,
+        selectedFavoriteVideoPage,
+        setSelectedFavoriteVideoPage,
         reset,
     };
 }

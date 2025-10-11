@@ -72,6 +72,8 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
             props.setViewStatus(detail.viewStatus);
             props.setCategorys(data.category);
             props.setFavoriteLevel(detail.favoriteLevel);
+
+            toast.success(`動画情報を更新しました。`);
             props.changeView();
         },
         // 失敗後の処理
