@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import useQueryWrapper from "../../../Common/Hook/useQueryWrapper";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { errResType } from "../../../Common/Hook/useMutationWrapperBase";
 import { FavoriteVideoDetailResponseType } from "../../Type/VideoDetail/FavoriteVideoDetailResponseType";
 import { useEffect, useState } from "react";
@@ -14,12 +14,14 @@ export function useFavoriteVideoDetail() {
 
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    // 動画一覧画面のクエリパラメータ
-    const { query } = useCreateFavoriteVideoListQuery();
     //ルーティング用
     const navigate = useNavigate();
     // 動画ID
     const videoId = useVideoId();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
 
 
     // 動画詳細を取得
@@ -40,7 +42,7 @@ export function useFavoriteVideoDetail() {
      */
     function backPage() {
 
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${query}`);
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${queryParam}`);
     }
 
     return {
@@ -48,7 +50,5 @@ export function useFavoriteVideoDetail() {
         videoDetail,
         errMessage,
         backPage,
-        // favoriteVideoId,
-        // setFavoriteVideoId,
     };
 }

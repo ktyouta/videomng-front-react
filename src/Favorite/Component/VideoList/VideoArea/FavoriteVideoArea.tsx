@@ -87,7 +87,7 @@ export function FavoriteVideoArea() {
     isLoading,
     isError,
     isFetching,
-    total } = useFavoriteVideoArea();
+    total, } = useFavoriteVideoArea();
 
   if (isLoading || isFetching) {
     return (

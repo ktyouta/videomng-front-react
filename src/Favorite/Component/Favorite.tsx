@@ -8,7 +8,6 @@ import { comboType } from "../../Common/Component/ComboComponent";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 import { NotFound } from "../../NotFound/Component/NotFound";
 import { FavoriteVideoSearchConditionValueProvider } from "./FavoriteVideoSearchConditionValueProvider";
-import { FavoriteRouter } from "./FavoriteRouter";
 
 
 export function Favorite() {
@@ -16,8 +15,34 @@ export function Favorite() {
     console.log("Favorite render");
 
     return (
-        <FavoriteVideoSearchConditionValueProvider>
-            <FavoriteRouter />
-        </FavoriteVideoSearchConditionValueProvider>
+        <Routes>
+            {/* お気に入り動画一覧 */}
+            <Route
+                path={`/`}
+                element={
+                    <FavoriteVideoSearchConditionValueProvider>
+                        <FavoriteVideoList />
+                    </FavoriteVideoSearchConditionValueProvider>
+                }
+            >
+            </Route>
+            {/* お気に入り動画詳細 */}
+            <Route
+                path={`${ROUTER_PATH.FAVORITE.DETAIL}/:videoId/*`}
+                element={
+                    <FavoriteVideoDetail />
+                } >
+            </Route>
+            {/* Not Found */}
+            <Route
+                key={"*"}
+                path="*"
+                element={
+                    <NotFound
+                        backUrl={`${ROUTER_PATH.FAVORITE.ROOT}`}
+                    />
+                }
+            />
+        </Routes>
     );
 }

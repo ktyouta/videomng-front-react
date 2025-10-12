@@ -1,7 +1,7 @@
 import useMutationWrapper from "../../../Common/Hook/useMutationWrapper";
 import { errResType, resSchema, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import ENV from '../../../env.json';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useSwitch from "../../../Common/Hook/useSwitch";
 import { useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
@@ -24,8 +24,10 @@ export function useFavoriteVideoDetailInfo() {
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
-    // 動画一覧画面のクエリパラメータ
-    const { query } = useCreateFavoriteVideoListQuery();
+    // URL情報
+    const location = useLocation();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
 
 
     /**
@@ -52,7 +54,7 @@ export function useFavoriteVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${query}`);
+            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${queryParam}`);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
