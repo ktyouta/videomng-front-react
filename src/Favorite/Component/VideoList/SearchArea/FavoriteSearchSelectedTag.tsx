@@ -17,7 +17,9 @@ export function FavoriteSearchSelectedTag() {
 
   console.log("FavoriteSearchSelectedTag render");
 
-  const { selectedFavoriteVideoTag } = useFavoriteSearchSelectedTag();
+  const {
+    selectedFavoriteVideoTag,
+    resetTag } = useFavoriteSearchSelectedTag();
 
   return (
     <React.Fragment>
@@ -29,6 +31,8 @@ export function FavoriteSearchSelectedTag() {
           btnStyle={{
             marginRight: "15px"
           }}
+          isDispCross={true}
+          onclick={resetTag}
         />
       }
     </React.Fragment>
