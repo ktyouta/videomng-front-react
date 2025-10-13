@@ -7,6 +7,7 @@ import { GoTriangleDown } from "react-icons/go";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { GoTriangleRight } from "react-icons/go";
 import { useFavoriteTagEditExistingList } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagEditExistingList";
+import { ClearableTextbox } from "../../../../Common/Component/ClearableTextbox";
 
 
 const TagMasterAreaDiv = styled.div`
@@ -67,16 +68,60 @@ const NoTagListTitleDiv = styled.div`
     }
 `;
 
+const FilterInputAreaDiv = styled.div`
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-right:3%;
+  margin-bottom: 20px;
+  width: 85%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 85%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 55%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 55%;
+  }
+`;
+
+const TitleSpan = styled.span`
+  margin-right:7px;
+  color: white;
+  font-size: 12px;
+  white-space: nowrap;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 13px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 16px;
+  }
+`;
 
 export function FavoriteTagEditExistingList() {
 
     console.log("FavoriteTagEditExistingList render");
 
     const {
-        tagMasterList,
+        displayTagMaster,
         addTagEditList,
         isOpenTagMasterList,
-        switchTagMasterList, } = useFavoriteTagEditExistingList();
+        switchTagMasterList,
+        inputKeyword,
+        setInputKeyword,
+        filterTagMasterList,
+        clearInput,
+        handleKeyPress, } = useFavoriteTagEditExistingList();
 
     return (
         <TagMasterAreaDiv>
@@ -92,14 +137,34 @@ export function FavoriteTagEditExistingList() {
                 </OpenTagIconDiv>
             </TagMasterListTitleDiv>
             {
-                tagMasterList && isOpenTagMasterList &&
+                isOpenTagMasterList &&
                 <React.Fragment>
                     {
-                        tagMasterList.length > 0
+                        displayTagMaster && displayTagMaster.length > 0
                             ?
                             <TagMasterListAreaDiv>
+                                <FilterInputAreaDiv>
+                                    <TitleSpan>
+                                        タグ検索：
+                                    </TitleSpan>
+                                    <ClearableTextbox
+                                        height="99%"
+                                        textWidth="90%"
+                                        placeholder=""
+                                        value={inputKeyword}
+                                        onChange={setInputKeyword}
+                                        style={{
+                                            borderRadius: 6,
+                                            flex: 1,
+                                        }}
+                                        backgroundColor="#ececec"
+                                        clear={clearInput}
+                                        onBlur={filterTagMasterList}
+                                        onKeyDown={handleKeyPress}
+                                    />
+                                </FilterInputAreaDiv>
                                 {
-                                    tagMasterList.map((e: tagType) => {
+                                    displayTagMaster.map((e: tagType) => {
 
                                         const tagKey = e.label;
 

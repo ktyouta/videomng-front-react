@@ -11,6 +11,7 @@ import { tagType } from "../../../../Common/Component/TagsComponent";
 import { toast } from "react-toastify";
 import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../Component/VideoDetail/VideoTag/FavoriteVideoTagEditListProvider";
+import { comboType } from "../../../../Common/Component/ComboComponent";
 
 
 
@@ -22,8 +23,10 @@ export function useFavoriteTagEditExistingList() {
     const favoriteVideoTagEditList = FavoriteVideoTagEditListContext.useCtx();
     // タグ編集リスト(setter)
     const setFavoriteVideoTagEditList = SetFavoriteVideoTagEditListContext.useCtx();
-
-
+    // セクション表示用タグマスタリスト
+    const [displayTagMaster, setDisplayTagMaster] = useState<tagType[]>([]);
+    // 入力中のキーワード
+    const [inputKeyword, setInputKeyword] = useState(``);
     // タグマスタリストを取得
     const { data: tagMasterList } = useQueryWrapper<FavoriteVideoTagResponseType, tagType[]>(
         {
@@ -38,6 +41,9 @@ export function useFavoriteTagEditExistingList() {
                 });
 
                 return tagComboList;
+            },
+            afSuccessFn: (res: tagType[]) => {
+                setDisplayTagMaster(res);
             },
             afErrorFn: (res) => {
                 const errRes = res as errResType;
@@ -66,7 +72,6 @@ export function useFavoriteTagEditExistingList() {
         });
     }
 
-
     /**
      * タグマスタリスト表示切り替え
      */
@@ -74,10 +79,66 @@ export function useFavoriteTagEditExistingList() {
         setIsOpenTagMasterList(!isOpenTagMasterList);
     }
 
+    /**
+     * 入力値初期化
+     */
+    function clearInput() {
+
+        setInputKeyword(``);
+
+        if (!tagMasterList) {
+            return;
+        }
+
+        setDisplayTagMaster(tagMasterList);
+    }
+
+    /**
+     * タグマスタリストのフィルター
+     */
+    function filterTagMasterList() {
+
+        if (!tagMasterList) {
+            return;
+        }
+
+        // 入力欄が空の場合は動画情報をリセット
+        if (!inputKeyword) {
+            setDisplayTagMaster(tagMasterList);
+            return;
+        }
+
+        setDisplayTagMaster((e) => {
+
+            // 入力したタイトルに一致するタグを取得
+            const filterdTagList = tagMasterList.filter((e1) => {
+
+                const title = e1.label;
+                return title.includes(inputKeyword);
+            });
+
+            return filterdTagList;
+        });
+    }
+
+    /**
+     * エンターキー押下時イベント
+     */
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            filterTagMasterList();
+        }
+    };
+
     return {
-        tagMasterList,
+        displayTagMaster,
         addTagEditList,
         isOpenTagMasterList,
         switchTagMasterList,
+        inputKeyword,
+        setInputKeyword,
+        filterTagMasterList,
+        clearInput,
+        handleKeyPress,
     }
 }
