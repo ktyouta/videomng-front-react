@@ -45,14 +45,13 @@ const VideoUl = styled.ul`
   }
 `;
 
-const NextGetBtnAreaDiv = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  width:100%;
-  box-sizing: border-box;
-  margin-top: 3%;
+const NextGetAreaDiv = styled.div`
+  margin-top: 55px;
   position: relative;
+`;
+
+const InfiniteScrollAreaDiv = styled.div`
+  heigth: 50px;
 `;
 
 type propsType = {
@@ -64,9 +63,7 @@ export function HomeVideoListResult(props: propsType) {
 
   console.log("HomeVideoListResult render");
 
-  const {
-    isMobile,
-    clickShowMore } = useHomeVideoListResult();
+  const { ref } = useHomeVideoListResult({ ...props });
 
   // 動画リスト
   const videoListItems = props.videoListData.items;
@@ -88,30 +85,23 @@ export function HomeVideoListResult(props: propsType) {
         }
       </VideoUl>
       {
+        // 無限スクロール
         nextPageToken &&
-        <NextGetBtnAreaDiv>
+        <React.Fragment>
           {
-            props.isLoading &&
-            <LoadingParentNext>
-              <Loading />
-            </LoadingParentNext>
+            props.isLoading
+              ?
+              <NextGetAreaDiv>
+                <LoadingParentNext>
+                  <Loading />
+                </LoadingParentNext>
+              </NextGetAreaDiv>
+              :
+              <InfiniteScrollAreaDiv
+                ref={ref}
+              />
           }
-          <ButtonComponent
-            styleTypeNumber="GRAD_GRAY"
-            title={"もっと見る"}
-            onclick={() => {
-              clickShowMore(nextPageToken);
-            }}
-            style={{
-              fontSize: isMobile ? "12px" : "13px",
-              width: isMobile ? "82px" : "100px",
-              minWidth: "82px",
-              height: "36px",
-              boxShadow: "none",
-              background: "rgb(41, 50, 60)"
-            }}
-          />
-        </NextGetBtnAreaDiv>
+        </React.Fragment>
       }
     </React.Fragment>
   );

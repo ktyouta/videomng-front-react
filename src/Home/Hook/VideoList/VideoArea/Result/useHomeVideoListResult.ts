@@ -14,14 +14,24 @@ import { mediaQuery, useMediaQuery } from "../../../../../Common/Hook/useMediaQu
 import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useHomeVideoListEndpoint } from "./useHomeVideoListEndpoint";
+import { useInView } from 'react-intersection-observer';
 
 
-export function useHomeVideoListResult() {
+type propsType = {
+    videoListData: VideoListDataType,
+    isLoading: boolean,
+}
+
+export function useHomeVideoListResult(props: propsType) {
 
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 現在の動画検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
+    // 無限スクロール用
+    const { ref, inView } = useInView({
+        threshold: 0.3,
+    });
 
     /**
      * もっと見るボタン押下
@@ -39,8 +49,29 @@ export function useHomeVideoListResult() {
         });
     }
 
+    /**
+     * 画面下までスクロールしたら次データを取得する
+     */
+    useEffect(() => {
+
+        if (!inView) {
+            return;
+        }
+
+        if (props.isLoading) {
+            return;
+        }
+
+        if (!props.videoListData.nextPageToken) {
+            return;
+        }
+
+        clickShowMore(props.videoListData.nextPageToken);
+    }, [inView]);
+
     return {
         isMobile,
         clickShowMore,
+        ref,
     }
 }
