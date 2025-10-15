@@ -7,6 +7,7 @@ import { useFavoriteCommentList } from "../../../Hook/VideoDetail/VideoComment/u
 import { FavoriteCommentContent } from "./FavoriteCommentContent";
 import Loading from "../../../../Common/Component/Loading";
 import { FavoriteVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoComment/FavoriteVideoCommentThreadItemType";
+import React from "react";
 
 
 const Parent = styled.div`
@@ -33,6 +34,21 @@ const CommentListAreaDiv = styled.div`
   padding-right: 1%;
 `;
 
+const LoadingParentNext = styled.div`
+  position: absolute;
+  top: -125%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`;
+
+const NextGetAreaDiv = styled.div`
+  margin-top: 55px;
+  position: relative;
+`;
+
+const InfiniteScrollAreaDiv = styled.div`
+  heigth: 60px;
+`;
 
 export function FavoriteCommentList() {
 
@@ -41,9 +57,11 @@ export function FavoriteCommentList() {
     const {
         isLoading,
         errMessage,
-        favoriteVideoCommentList, } = useFavoriteCommentList();
+        displayCommentList,
+        nextPageToken,
+        ref, } = useFavoriteCommentList();
 
-    if (isLoading) {
+    if (isLoading && !nextPageToken) {
         return (
             <LoadingParent>
                 <Loading />
@@ -59,7 +77,7 @@ export function FavoriteCommentList() {
         );
     }
 
-    if (!favoriteVideoCommentList) {
+    if (!displayCommentList) {
         return (
             <LoadingParent>
                 <Loading />
@@ -70,17 +88,39 @@ export function FavoriteCommentList() {
     return (
         <Parent>
             {
-                favoriteVideoCommentList.length > 0 ?
+                displayCommentList.length > 0 ?
                     <CommentListAreaDiv>
                         {
-                            favoriteVideoCommentList.map((e: FavoriteVideoCommentThreadItemType) => {
+                            displayCommentList.map((e: FavoriteVideoCommentThreadItemType, index) => {
 
                                 const key = e.id;
                                 return (
-                                    <FavoriteCommentContent
-                                        favoriteVideoComment={e}
-                                        key={`${key}-commentid`}
-                                    />
+                                    <React.Fragment>
+                                        <FavoriteCommentContent
+                                            favoriteVideoComment={e}
+                                            key={`${key}-commentid`}
+                                        />
+                                        {
+                                            // 無限スクロール
+                                            index === displayCommentList.length - 1 &&
+                                            nextPageToken &&
+                                            <React.Fragment>
+                                                {
+                                                    isLoading
+                                                        ?
+                                                        <NextGetAreaDiv>
+                                                            <LoadingParentNext>
+                                                                <Loading />
+                                                            </LoadingParentNext>
+                                                        </NextGetAreaDiv>
+                                                        :
+                                                        <InfiniteScrollAreaDiv
+                                                            ref={ref}
+                                                        />
+                                                }
+                                            </React.Fragment>
+                                        }
+                                    </React.Fragment>
                                 )
                             })
                         }

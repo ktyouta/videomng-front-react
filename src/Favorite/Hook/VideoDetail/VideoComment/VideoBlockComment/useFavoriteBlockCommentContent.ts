@@ -21,7 +21,9 @@ export function useFavoriteBlockCommentContent(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // 公開コメント再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint(videoId));
+    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint({
+        videoId
+    }));
     // 非表示コメント再取得用
     const { invalidate: invalidateBlock } = useInvalidateQuery(useFavoriteBlockCommentEndpoint(videoId));
 

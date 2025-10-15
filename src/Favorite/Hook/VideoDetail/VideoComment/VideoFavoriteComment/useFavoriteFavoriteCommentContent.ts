@@ -20,7 +20,9 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // 公開コメント再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint(videoId));
+    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint({
+        videoId
+    }));
     // お気に入りコメント再取得用
     const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteFavoriteCommentEndpoint(videoId));
 

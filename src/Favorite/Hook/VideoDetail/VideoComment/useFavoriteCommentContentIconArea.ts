@@ -28,7 +28,9 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // コメント再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteCommentEndpoint(videoId));
+    const { invalidate } = useInvalidateQuery(useFavoriteCommentEndpoint({
+        videoId
+    }));
 
     // コメント情報再取得時にアイコン状態を変更する
     useEffect(() => {
