@@ -4,6 +4,7 @@ import { useHomeCommentList } from "../../../Hook/VideoDetail/VideoComment/useHo
 import { HomeVideoCommentThreadItemType } from "../../../Type/VideoDetail/VideoComment/HomeVideoCommentThreadItemType";
 import { HomeCommentContent } from "./HomeCommentContent";
 import Loading from "../../../../Common/Component/Loading";
+import React from "react";
 
 
 const Parent = styled.div`
@@ -32,6 +33,22 @@ const CommentListAreaDiv = styled.div`
 `;
 
 
+const LoadingParentNext = styled.div`
+  position: absolute;
+  top: -125%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`;
+
+const NextGetAreaDiv = styled.div`
+  margin-top: 55px;
+  position: relative;
+`;
+
+const InfiniteScrollAreaDiv = styled.div`
+  heigth: 60px;
+`;
+
 export function HomeCommentList() {
 
     console.log("HomeCommentList render");
@@ -39,9 +56,11 @@ export function HomeCommentList() {
     const {
         isLoading,
         errMessage,
-        homeVideoCommentList, } = useHomeCommentList();
+        displayCommentList,
+        ref,
+        nextPageToken, } = useHomeCommentList();
 
-    if (isLoading) {
+    if (isLoading && !nextPageToken) {
         return (
             <LoadingParent>
                 <Loading />
@@ -57,7 +76,7 @@ export function HomeCommentList() {
         );
     }
 
-    if (!homeVideoCommentList) {
+    if (!displayCommentList) {
         return (
             <LoadingParent>
                 <Loading />
@@ -68,18 +87,41 @@ export function HomeCommentList() {
     return (
         <Parent>
             {
-                homeVideoCommentList && homeVideoCommentList.length > 0 ?
+                displayCommentList && displayCommentList.length > 0 ?
                     <CommentListAreaDiv>
                         {
-                            homeVideoCommentList.map((e: HomeVideoCommentThreadItemType) => {
+                            displayCommentList.map((e: HomeVideoCommentThreadItemType, index) => {
 
                                 const commentId = e.snippet.topLevelComment.id;
 
                                 return (
-                                    <HomeCommentContent
-                                        homeVideoComment={e}
-                                        key={commentId}
-                                    />
+                                    <React.Fragment>
+                                        <HomeCommentContent
+                                            homeVideoComment={e}
+                                            key={commentId}
+                                        />
+                                        {
+                                            // 無限スクロール
+                                            index === displayCommentList.length - 1 &&
+                                            nextPageToken &&
+                                            <React.Fragment>
+                                                {
+                                                    isLoading
+                                                        ?
+                                                        <NextGetAreaDiv>
+                                                            <LoadingParentNext>
+                                                                <Loading />
+                                                            </LoadingParentNext>
+                                                        </NextGetAreaDiv>
+                                                        :
+                                                        <InfiniteScrollAreaDiv
+                                                            ref={ref}
+                                                        />
+                                                }
+                                            </React.Fragment>
+                                        }
+                                    </React.Fragment>
+
                                 )
                             })
                         }

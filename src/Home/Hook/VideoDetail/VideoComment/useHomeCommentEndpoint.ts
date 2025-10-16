@@ -1,9 +1,16 @@
 import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import ENV from "../../../../env.json";
 
-export function useHomeCommentEndpoint(videoId: string) {
+type propsType = {
+    videoId: string,
+    nextPageToken?: string,
+}
 
-    const endpoint = videoId ? `${VIDEO_MNG_PATH}${ENV.VIDEO_COMMENT_ID}`.replace(`:videoId`, videoId) : ``;
+export function useHomeCommentEndpoint(props: propsType) {
+
+    const nextPageTokenQuery = props.nextPageToken ? `?nextpagetoken=${props.nextPageToken}` : ``;
+
+    const endpoint = props.videoId ? `${VIDEO_MNG_PATH}${ENV.VIDEO_COMMENT_ID}${nextPageTokenQuery}`.replace(`:videoId`, props.videoId) : ``;
 
     return endpoint;
 }
