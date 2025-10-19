@@ -31,28 +31,15 @@ const Parent = styled.div`
 `;
 
 
-type propsType = {
-    videoDetail: FavoriteVideoDetailDataType,
-}
-
-export function FavoriteDetailSetting(props: propsType) {
+export function FavoriteDetailSetting() {
 
     console.log("FavoriteDetailSetting render");
 
     const {
-        videoCategory,
         editMode,
         changeEdit,
         changeView,
-        summary,
-        setSummary,
-        categorys,
-        setCategorys,
-        viewStatus,
-        setViewStatus,
-        favoriteLevel,
-        setFavoriteLevel,
-    } = useFavoriteDetailSetting({ ...props });
+    } = useFavoriteDetailSetting();
 
     return (
         <Parent>
@@ -60,28 +47,14 @@ export function FavoriteDetailSetting(props: propsType) {
                 // 閲覧
                 editMode === EDIT_MODE.VIEW &&
                 <FavoriteDetailSettingView
-                    categoryList={videoCategory}
                     changeEdit={changeEdit}
-                    summary={summary}
-                    categorys={categorys}
-                    viewStatus={viewStatus}
-                    favoriteLevel={favoriteLevel}
                 />
             }
             {
                 // 編集
                 editMode === EDIT_MODE.EDIT &&
                 <FavoriteDetailSettingEdit
-                    categoryList={videoCategory}
-                    summary={summary}
-                    categorys={categorys}
-                    viewStatus={viewStatus}
-                    favoriteLevel={favoriteLevel}
                     changeView={changeView}
-                    setSummary={setSummary}
-                    setCategorys={setCategorys}
-                    setViewStatus={setViewStatus}
-                    setFavoriteLevel={setFavoriteLevel}
                 />
             }
         </Parent>

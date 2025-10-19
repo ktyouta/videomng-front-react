@@ -69,16 +69,7 @@ const FavoriteLevelAreaDiv = styled.div`
 
 
 type propsType = {
-    categoryList: comboType[] | undefined,
-    summary: string,
-    categorys: FavoriteVideoDetailCategoryType[],
-    viewStatus: string,
-    favoriteLevel: number,
     changeView: () => void,
-    setSummary: React.Dispatch<React.SetStateAction<string>>,
-    setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
-    setViewStatus: React.Dispatch<React.SetStateAction<string>>,
-    setFavoriteLevel: React.Dispatch<React.SetStateAction<number>>,
 }
 
 export function FavoriteDetailSettingEdit(props: propsType) {
@@ -96,9 +87,8 @@ export function FavoriteDetailSettingEdit(props: propsType) {
         updateFavoriteVideo,
         favoriteLevel,
         clickFavoriteLevelIcon,
+        videoCategory,
     } = useFavoriteDetailSettingEdit({ ...props });
-
-    const cateogryList = props.categoryList;
 
     return (
         <React.Fragment>
@@ -122,10 +112,10 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                 </TitleDiv>
                 <MetaDiv>
                     {
-                        cateogryList && cateogryList.length > 0 &&
+                        videoCategory && videoCategory.length > 0 &&
                         <CategoryAreaDiv>
                             {
-                                cateogryList.map((e) => {
+                                videoCategory.map((e) => {
 
                                     const htmlId = e.value;
                                     const checked = !!categorys.find((e1) => {

@@ -29,7 +29,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     // 動画カテゴリ
     const { data: videoCategory } = useVideoCategory();
     // 視聴状況リストを取得
-    const { data: viewStatusList } = useViewStatusList();
+    const { data: viewStatusList } = useViewStatusList({});
     // 検索条件
     const {
         selectedFavoriteVideoCategory,

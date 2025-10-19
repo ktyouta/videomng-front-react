@@ -141,9 +141,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // 動画詳細設定
           openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
-          <FavoriteDetailSetting
-            videoDetail={videoDetail}
-          />
+          <FavoriteDetailSetting />
         }
         {
           // タグ

@@ -14,39 +14,58 @@ import { VIDEO_MNG_PATH } from "../../../../Common/Const/CommonConst";
 import { useViewStatusList } from "../../useViewStatusList";
 import { useVideoId } from "../useVideoId";
 import { UpdateFavoriteVideoResponseDataSchema } from "../../../Schema/VideoDetail/VideoDetailSetting/UpdateFavoriteVideoResponseDataSchema";
+import useQueryWrapper from "../../../../Common/Hook/useQueryWrapper";
+import { FavoriteVideoCustomResponseType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoCustomResponseType";
+import { FavoriteVideoCustomDataType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoCustomDataType";
+import { useFavoriteDetailSettingEndpoint } from "./useFavoriteDetailSettingEndpoint";
+import { useVideoCategory } from "../../../../Main/Hook/useVideoCategory";
 
 
 type propsType = {
-    categoryList: comboType[] | undefined,
-    summary: string,
-    categorys: FavoriteVideoDetailCategoryType[],
-    viewStatus: string,
-    favoriteLevel: number,
     changeView: () => void,
-    setSummary: React.Dispatch<React.SetStateAction<string>>,
-    setCategorys: React.Dispatch<React.SetStateAction<FavoriteVideoDetailCategoryType[]>>,
-    setViewStatus: React.Dispatch<React.SetStateAction<string>>,
-    setFavoriteLevel: React.Dispatch<React.SetStateAction<number>>,
 }
 
 
 export function useFavoriteDetailSettingEdit(props: propsType) {
 
+    // 動画カテゴリ
+    const { data: videoCategory } = useVideoCategory();
     // 要約
-    const [summary, setSummary] = useState(props.summary);
+    const [summary, setSummary] = useState(``);
     // カテゴリ
-    const [categorys, setCategorys] = useState(props.categorys.map((e: FavoriteVideoDetailCategoryType) => {
-        return e.categoryId;
-    }));
+    const [categorys, setCategorys] = useState<string[]>([]);
     // 視聴状況
-    const [viewStatus, setViewStatus] = useState(props.viewStatus);
+    const [viewStatus, setViewStatus] = useState(``);
     // 視聴状況リスト
-    const { data: viewStatusList } = useViewStatusList();
+    const { data: viewStatusList } = useViewStatusList({ isExcludeAll: true });
     // お気に入り度
-    const [favoriteLevel, setFavoriteLevel] = useState(props.favoriteLevel);
+    const [favoriteLevel, setFavoriteLevel] = useState(0);
     // 動画ID
     const videoId = useVideoId();
 
+    // カスタム情報を取得
+    useQueryWrapper<FavoriteVideoCustomResponseType, FavoriteVideoCustomDataType>(
+        {
+            url: useFavoriteDetailSettingEndpoint(videoId),
+            select: (res: FavoriteVideoCustomResponseType) => {
+                return res.data;
+            },
+            afSuccessFn: (res: FavoriteVideoCustomDataType) => {
+
+                const detail = res.detail;
+                const categorys = res.categorys;
+
+                setSummary(detail.summary);
+                setCategorys(categorys.map((e: FavoriteVideoDetailCategoryType) => {
+                    return e.categoryId;
+                }));
+                setViewStatus(detail.viewStatus);
+                setFavoriteLevel(detail.favoriteLevel);
+            },
+            afErrorFn: (res) => {
+            }
+        }
+    );
 
     /**
      * お気に入り動画更新リクエスト
@@ -64,14 +83,6 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
                 toast.error(`動画情報の更新に失敗しました。時間をおいて再度お試しください。`);
                 return;
             }
-
-            const data = resParsed.data.data;
-            const detail = data.detail;
-
-            props.setSummary(detail.summary);
-            props.setViewStatus(detail.viewStatus);
-            props.setCategorys(data.category);
-            props.setFavoriteLevel(detail.favoriteLevel);
 
             toast.success(`動画情報を更新しました。`);
             props.changeView();
@@ -145,5 +156,6 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         favoriteLevel,
         setFavoriteLevel,
         clickFavoriteLevelIcon,
+        videoCategory,
     };
 }

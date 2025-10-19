@@ -4,7 +4,6 @@ import { Home } from "../../Home/Component/Home";
 import { Content } from "../../Content/Component/Content";
 import { Footer } from "../../Footer/Component/Footer";
 import { Header } from "../../Header/Component/Header";
-import { useVideoCategory } from "../Hook/useVideoCategory";
 import { useMain } from "../Hook/useMain";
 
 //アプリケーション全体のスタイル

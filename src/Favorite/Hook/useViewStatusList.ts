@@ -9,7 +9,11 @@ import { comboType } from "../../Common/Component/ComboComponent";
 import { ROUTER_PATH } from "../../Common/Const/RouterPath";
 
 
-export function useViewStatusList() {
+type propsType = {
+    isExcludeAll?: boolean;
+}
+
+export function useViewStatusList(props: propsType) {
 
 
     // 視聴状況リストを取得
@@ -17,18 +21,17 @@ export function useViewStatusList() {
         {
             url: `${VIDEO_MNG_PATH}${ENV.VIEW_STATUS}`,
             select: (res: ViewStatusResponseType) => {
-                return [
-                    {
-                        label: `すべて`,
-                        value: ``,
-                    },
-                    ...res.data.map((e) => {
-                        return {
-                            value: e.id,
-                            label: e.label,
-                        }
-                    })
-                ]
+
+                const items = res.data.map((e) => {
+                    return {
+                        value: e.id,
+                        label: e.label,
+                    }
+                });
+
+                const list = props.isExcludeAll ? items : [{ label: `すべて`, value: ``, }, ...items];
+
+                return list;
             },
             afErrorFn: (res) => {
             },

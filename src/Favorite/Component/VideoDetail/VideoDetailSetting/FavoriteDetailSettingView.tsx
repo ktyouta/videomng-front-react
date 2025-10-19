@@ -19,7 +19,12 @@ import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHead
 import { useFavoriteDetailSettingView } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSettingView";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../Const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
+import Loading from "../../../../Common/Component/Loading";
 
+
+const Parent = styled.div`
+  display:flex;
+`;
 
 const ContentDiv = styled.div`
     color:white;
@@ -50,6 +55,12 @@ const CategoryDiv = styled.div`
   align-items: center;
 `;
 
+const LoadingParent = styled(Parent)`
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+`;
+
 const FavoriteLevelAreaDiv = styled.div`
   box-sizing:border-box;
   align-items: center;
@@ -60,19 +71,46 @@ const FavoriteLevelAreaDiv = styled.div`
 
 
 type propsType = {
-    categoryList: comboType[] | undefined,
     changeEdit: () => void,
-    summary: string,
-    categorys: FavoriteVideoDetailCategoryType[],
-    viewStatus: string,
-    favoriteLevel: number,
 }
 
 export function FavoriteDetailSettingView(props: propsType) {
 
     console.log("FavoriteDetailSettingView render");
 
-    const { viewStatusList } = useFavoriteDetailSettingView();
+    const {
+        viewStatusList,
+        data,
+        isLoading,
+        errMessage,
+        videoCategory } = useFavoriteDetailSettingView();
+
+    if (!data) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
+        );
+    }
+
+    if (errMessage) {
+        return (
+            <React.Fragment>
+                {errMessage}
+            </React.Fragment>
+        );
+    }
+
+    const detail = data.detail;
+    const categorys = data.categorys;
 
     return (
         <React.Fragment>
@@ -84,19 +122,19 @@ export function FavoriteDetailSettingView(props: propsType) {
                     【要約】
                 </TitleDiv>
                 <MetaDiv>
-                    {props.summary ?? `なし`}
+                    {detail.summary ?? `なし`}
                 </MetaDiv>
                 <TitleDiv>
                     【カテゴリ】
                 </TitleDiv>
                 <MetaDiv>
                     {
-                        props.categorys && props.categorys.length > 0 ?
+                        categorys && categorys.length > 0 ?
                             <CategoryAreaDiv>
                                 {
-                                    props.categorys && props.categorys.reduce((prev: ReactNode[], current: FavoriteVideoDetailCategoryType) => {
+                                    categorys && categorys.reduce((prev: ReactNode[], current: FavoriteVideoDetailCategoryType) => {
 
-                                        const category = props.categoryList?.find((e1: comboType) => {
+                                        const category = videoCategory?.find((e1: comboType) => {
                                             return e1.value === current.categoryId;
                                         });
 
@@ -128,9 +166,9 @@ export function FavoriteDetailSettingView(props: propsType) {
                             【視聴状況】
                         </TitleDiv>
                         <MetaDiv>
-                            {props.viewStatus ?
+                            {detail.viewStatus ?
                                 viewStatusList.find((e) => {
-                                    return e.value === props.viewStatus
+                                    return e.value === detail.viewStatus
                                 })?.label
                                 : `未設定`}
                         </MetaDiv>
@@ -144,7 +182,7 @@ export function FavoriteDetailSettingView(props: propsType) {
                         [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
 
                             const favoriteLevel = index + 1;
-                            const color = props.favoriteLevel >= favoriteLevel ? `yellow` : ``;
+                            const color = detail.favoriteLevel >= favoriteLevel ? `yellow` : ``;
 
                             return (
                                 <IconComponent
