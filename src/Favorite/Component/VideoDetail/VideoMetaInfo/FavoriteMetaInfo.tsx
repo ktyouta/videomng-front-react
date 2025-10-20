@@ -97,7 +97,7 @@ export function FavoriteMetaInfo(props: propsType) {
                 <StatisticsAreaDiv>
                     <StatisticsDiv>
                         <TitleDiv>
-                            【【投稿日】
+                            【投稿日】
                         </TitleDiv>
                         <StatisticsDataDiv>
                             {publishedDate}

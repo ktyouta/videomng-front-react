@@ -89,7 +89,7 @@ export function HomeMetaInfo(props: propsType) {
                 <StatisticsAreaDiv>
                     <StatisticsDiv>
                         <TitleDiv>
-                            【【投稿日】
+                            【投稿日】
                         </TitleDiv>
                         <StatisticsDataDiv>
                             {publishedDate}

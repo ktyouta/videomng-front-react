@@ -71,7 +71,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
      * お気に入り動画更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}/${videoId}`,
+        url: useFavoriteDetailSettingEndpoint(videoId),
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {
