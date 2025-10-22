@@ -11,9 +11,9 @@ import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
 import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagEditFooter } from "./FavoriteTagEditFooter";
-import { FavoriteTagEditList } from "./FavoriteTagEditList";
 import { FavoriteVideoTagEditListProvider } from "./FavoriteVideoTagEditListProvider";
-
+import { FavoriteTagEditExistingList } from "./FavoriteTagEditExistingList";
+import { FavoriteTagEditAssignedList } from "./FavoriteTagEditAssignedList";
 
 
 export function FavoriteTagEdit() {
@@ -22,10 +22,12 @@ export function FavoriteTagEdit() {
 
   return (
     <FavoriteVideoTagEditListProvider>
+      {/* 設定されているタグ */}
+      <FavoriteTagEditAssignedList />
       {/* 入力欄 */}
       <FavoriteTagCreateInput />
-      {/* タグリスト */}
-      <FavoriteTagEditList />
+      {/* 既存タグから設定 */}
+      <FavoriteTagEditExistingList />
       {/* タグフッター */}
       <FavoriteTagEditFooter />
     </FavoriteVideoTagEditListProvider>

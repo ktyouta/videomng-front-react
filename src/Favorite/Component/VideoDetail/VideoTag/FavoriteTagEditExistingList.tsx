@@ -10,6 +10,16 @@ import { useFavoriteTagEditExistingList } from "../../../Hook/VideoDetail/VideoT
 import { ClearableTextbox } from "../../../../Common/Component/ClearableTextbox";
 
 
+const Parent = styled.div`
+  flex:1;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-right: 2%;
+  color:white;
+`;
+
 const TagMasterAreaDiv = styled.div`
     margin-bottom: 30px
 `;
@@ -124,73 +134,75 @@ export function FavoriteTagEditExistingList() {
         handleKeyPress, } = useFavoriteTagEditExistingList();
 
     return (
-        <TagMasterAreaDiv>
-            <TagMasterListTitleDiv>
-                既存タグから設定
-                <OpenTagIconDiv>
-                    <IconComponent
-                        icon={isOpenTagMasterList ? GoTriangleDown : GoTriangleRight}
-                        size="100%"
-                        style={{ color: "white" }}
-                        onclick={switchTagMasterList}
-                    />
-                </OpenTagIconDiv>
-            </TagMasterListTitleDiv>
-            {
-                isOpenTagMasterList &&
-                <React.Fragment>
-                    {
-                        displayTagMaster && displayTagMaster.length > 0
-                            ?
-                            <TagMasterListAreaDiv>
-                                <FilterInputAreaDiv>
-                                    <TitleSpan>
-                                        タグ検索：
-                                    </TitleSpan>
-                                    <ClearableTextbox
-                                        height="99%"
-                                        textWidth="90%"
-                                        placeholder=""
-                                        value={inputKeyword}
-                                        onChange={setInputKeyword}
-                                        style={{
-                                            borderRadius: 6,
-                                            flex: 1,
-                                        }}
-                                        backgroundColor="#ececec"
-                                        clear={clearInput}
-                                        onBlur={filterTagMasterList}
-                                        onKeyDown={handleKeyPress}
-                                    />
-                                </FilterInputAreaDiv>
-                                {
-                                    displayTagMaster.map((e: tagType) => {
+        <Parent>
+            <TagMasterAreaDiv>
+                <TagMasterListTitleDiv>
+                    既存タグから設定
+                    <OpenTagIconDiv>
+                        <IconComponent
+                            icon={isOpenTagMasterList ? GoTriangleDown : GoTriangleRight}
+                            size="100%"
+                            style={{ color: "white" }}
+                            onclick={switchTagMasterList}
+                        />
+                    </OpenTagIconDiv>
+                </TagMasterListTitleDiv>
+                {
+                    isOpenTagMasterList &&
+                    <React.Fragment>
+                        {
+                            displayTagMaster && displayTagMaster.length > 0
+                                ?
+                                <TagMasterListAreaDiv>
+                                    <FilterInputAreaDiv>
+                                        <TitleSpan>
+                                            タグ検索：
+                                        </TitleSpan>
+                                        <ClearableTextbox
+                                            height="99%"
+                                            textWidth="90%"
+                                            placeholder=""
+                                            value={inputKeyword}
+                                            onChange={setInputKeyword}
+                                            style={{
+                                                borderRadius: 6,
+                                                flex: 1,
+                                            }}
+                                            backgroundColor="#ececec"
+                                            clear={clearInput}
+                                            onBlur={filterTagMasterList}
+                                            onKeyDown={handleKeyPress}
+                                        />
+                                    </FilterInputAreaDiv>
+                                    {
+                                        displayTagMaster.map((e: tagType) => {
 
-                                        const tagKey = e.label;
+                                            const tagKey = e.label;
 
-                                        return (
-                                            <TagButtonComponent
-                                                title={tagKey}
-                                                btnStyle={{
-                                                    marginRight: "15px",
-                                                    marginBottom: "10px"
-                                                }}
-                                                onclick={() => {
-                                                    addTagEditList(e);
-                                                }}
-                                                key={`${tagKey}-tagmst`}
-                                            />
-                                        )
-                                    })
-                                }
-                            </TagMasterListAreaDiv>
-                            :
-                            <NoTagListTitleDiv>
-                                既存タグが存在しません。
-                            </NoTagListTitleDiv>
-                    }
-                </React.Fragment>
-            }
-        </TagMasterAreaDiv>
+                                            return (
+                                                <TagButtonComponent
+                                                    title={tagKey}
+                                                    btnStyle={{
+                                                        marginRight: "15px",
+                                                        marginBottom: "10px"
+                                                    }}
+                                                    onclick={() => {
+                                                        addTagEditList(e);
+                                                    }}
+                                                    key={`${tagKey}-tagmst`}
+                                                />
+                                            )
+                                        })
+                                    }
+                                </TagMasterListAreaDiv>
+                                :
+                                <NoTagListTitleDiv>
+                                    既存タグが存在しません。
+                                </NoTagListTitleDiv>
+                        }
+                    </React.Fragment>
+                }
+            </TagMasterAreaDiv>
+        </Parent>
     );
 }

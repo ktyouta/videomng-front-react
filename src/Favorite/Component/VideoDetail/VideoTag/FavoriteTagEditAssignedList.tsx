@@ -6,8 +6,18 @@ import { MEDIA } from "../../../../Common/Const/MediaConst";
 import { useFavoriteTagEditAssignedList } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagEditAssignedList";
 
 
+const Parent = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-right: 2%;
+  color:white;
+`;
+
 const TagEditAreaDiv = styled.div`
-    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 15px;
 `;
 
 const TagListTitleDiv = styled.div`
@@ -41,7 +51,7 @@ const TagListAreaDiv = styled.div`
 `;
 
 const NoTagListTitleDiv = styled.div`
-    margin-top: 3%;
+    margin-top: 2%;
     margin-left: 1%;
     margin-bottom: 30px;
     font-size: 12px;
@@ -69,45 +79,48 @@ export function FavoriteTagEditAssignedList() {
         favoriteVideoTagEditList } = useFavoriteTagEditAssignedList();
 
     return (
-        <TagEditAreaDiv>
-            <TagListTitleDiv>
-                設定されているタグ
-            </TagListTitleDiv>
-            {
-                favoriteVideoTagEditList &&
-                <React.Fragment>
-                    {
-                        favoriteVideoTagEditList.length > 0 ?
-                            <TagListAreaDiv>
-                                {
-                                    favoriteVideoTagEditList.map((e: tagType, index: number) => {
+        <Parent>
+            <TagEditAreaDiv>
+                <TagListTitleDiv>
+                    設定されているタグ
+                </TagListTitleDiv>
+                {
+                    favoriteVideoTagEditList &&
+                    <React.Fragment>
+                        {
+                            favoriteVideoTagEditList.length > 0 ?
+                                <TagListAreaDiv>
+                                    {
+                                        favoriteVideoTagEditList.map((e: tagType, index: number) => {
 
-                                        const tagKey = e.label;
+                                            const tagKey = e.label;
 
-                                        return (
-                                            <TagButtonComponent
-                                                title={e.label}
-                                                btnStyle={{
-                                                    marginRight: "15px",
-                                                    marginBottom: "10px"
-                                                }}
-                                                isDispCross={true}
-                                                onclick={() => {
-                                                    deleteTag(index);
-                                                }}
-                                                key={`${tagKey}-tagedit`}
-                                            />
-                                        )
-                                    })
-                                }
-                            </TagListAreaDiv>
-                            :
-                            <NoTagListTitleDiv>
-                                タグが設定されていません。
-                            </NoTagListTitleDiv>
-                    }
-                </React.Fragment>
-            }
-        </TagEditAreaDiv>
+                                            return (
+                                                <TagButtonComponent
+                                                    title={e.label}
+                                                    btnStyle={{
+                                                        marginRight: "15px",
+                                                        marginBottom: "10px"
+                                                    }}
+                                                    isDispCross={true}
+                                                    onclick={() => {
+                                                        deleteTag(index);
+                                                    }}
+                                                    key={`${tagKey}-tagedit`}
+                                                />
+                                            )
+                                        })
+                                    }
+                                </TagListAreaDiv>
+                                :
+                                <NoTagListTitleDiv>
+                                    タグが設定されていません。<br />
+                                    「タグを入力して追加」または「既存タグ」から設定可能です。
+                                </NoTagListTitleDiv>
+                        }
+                    </React.Fragment>
+                }
+            </TagEditAreaDiv>
+        </Parent>
     );
 }

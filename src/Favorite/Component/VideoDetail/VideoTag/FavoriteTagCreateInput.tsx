@@ -18,8 +18,9 @@ const Parent = styled.div`
     box-sizing: border-box;
     padding-left: 3%;
     display: flex;
-    padding-top: 22px;
+    padding-top: 17px;
     padding-right: 4%;
+    margin-bottom: 12px;
     align-items: center;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
