@@ -29,11 +29,8 @@ export function useHomeChannel() {
     const navigate = useNavigate();
     // チャンネルID
     const channelId = useChannelId();
-    // クエリパラメータ(遷移元)
-    const previouspath = (() => {
-        const { previouspath } = useQueryParams();
-        return decodeURIComponent(previouspath);
-    })();
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
 
 
     // チャンネル動画一覧を取得
@@ -76,7 +73,8 @@ export function useHomeChannel() {
      */
     function backHome() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${previouspath}`);
+        const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.HOME.ROOT;
+        navigate(prev);
     }
 
     return {

@@ -60,7 +60,8 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(`${ROUTER_PATH.HOME.ROOT}${queryParam}`);
+            const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.HOME.ROOT;
+            navigate(prev);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

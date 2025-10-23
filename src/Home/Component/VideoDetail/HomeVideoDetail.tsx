@@ -75,7 +75,7 @@ export function HomeVideoDetail() {
     isLoading,
     videoDetail,
     isError,
-    backHome, } = useHomeVideoDetail();
+    backScreen, } = useHomeVideoDetail();
 
   if (isError) {
     return (
@@ -84,7 +84,7 @@ export function HomeVideoDetail() {
           動画情報の取得に失敗しました。
         </p>
         <BackHomeP
-          onClick={backHome}
+          onClick={backScreen}
         >
           一覧に戻る
         </BackHomeP>
@@ -112,7 +112,7 @@ export function HomeVideoDetail() {
           "top": "18%",
           "left": "3%",
         }}
-        onclick={backHome}
+        onclick={backScreen}
       />
       <VideoContentDiv>
         {/* 動画情報 */}

@@ -38,18 +38,19 @@ export function useHomeVideoDetail() {
     );
 
     /**
-     * ホーム画面に戻る
+     * 前画面に戻る
      */
-    function backHome() {
+    function backScreen() {
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${queryParam}`);
+        const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.HOME.ROOT;
+        navigate(prev);
     }
 
     return {
         isLoading,
         videoDetail,
         videoId,
-        backHome,
+        backScreen,
         isError
     };
 }
