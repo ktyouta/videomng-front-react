@@ -39,3 +39,19 @@ export function formatDateJP(strDate: string) {
 
     return publishedDate;
 }
+
+/**
+ * 前画面のパスを取得
+ */
+export function getPrevPath(key: string, defaultPath: string) {
+
+    // クエリパラメータ(遷移元情報)
+    const queryParam = location.search;
+    const prefix = `?${key}=`;
+
+    if (!queryParam.startsWith(prefix)) {
+        return defaultPath;
+    }
+
+    return queryParam.slice(prefix.length);
+};

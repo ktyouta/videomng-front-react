@@ -17,8 +17,9 @@ import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
-import { LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
+import { HOME_PREV_PATH_KEY, LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
 import { LOGIN_PREV_PATH_KEY } from "../../../Login/Const/LoginConst";
+import { getPrevPath } from "../../../Common/Function/CommonFunction";
 
 
 export function useHomeVideoDetailInfo() {
@@ -60,7 +61,8 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.HOME.ROOT;
+            // 前画面のパスを取得
+            const prev = getPrevPath(HOME_PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
             navigate(prev);
         },
         // 失敗後の処理

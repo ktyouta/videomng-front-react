@@ -11,6 +11,8 @@ import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
+import { getPrevPath } from "../../../Common/Function/CommonFunction";
+import { FAVORITE_PREV_PATH_KEY } from "../../Const/FavoriteConst";
 
 
 
@@ -24,11 +26,6 @@ export function useFavoriteVideoDetailInfo() {
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
-    // URL情報
-    const location = useLocation();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search;
-
 
     /**
      * お気に入り動画削除リクエスト
@@ -54,7 +51,9 @@ export function useFavoriteVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${queryParam}`);
+            // 前画面のパスを取得
+            const prev = getPrevPath(FAVORITE_PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
+            navigate(prev);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

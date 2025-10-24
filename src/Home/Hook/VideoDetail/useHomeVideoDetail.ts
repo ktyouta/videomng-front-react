@@ -11,7 +11,8 @@ import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
 import { useVideoId } from "./useVideoId";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
-import { LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
+import { HOME_PREV_PATH_KEY, LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
+import { getPrevPath } from "../../../Common/Function/CommonFunction";
 
 export function useHomeVideoDetail() {
 
@@ -19,10 +20,6 @@ export function useHomeVideoDetail() {
     const navigate = useNavigate();
     // 動画ID
     const videoId = useVideoId();
-    // URL情報
-    const location = useLocation();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search;
 
 
     // 動画詳細を取得
@@ -42,7 +39,8 @@ export function useHomeVideoDetail() {
      */
     function backScreen() {
 
-        const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.HOME.ROOT;
+        // 前画面のパスを取得
+        const prev = getPrevPath(HOME_PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
         navigate(prev);
     }
 
