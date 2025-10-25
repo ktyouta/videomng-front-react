@@ -6,14 +6,12 @@ import useSwitch from "../../../Common/Hook/useSwitch";
 import { useState } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
 import { getPrevPath } from "../../../Common/Function/CommonFunction";
-import { FAVORITE_PREV_PATH_KEY } from "../../Const/FavoriteConst";
-
 
 
 export function useFavoriteVideoDetailInfo() {
@@ -26,6 +24,8 @@ export function useFavoriteVideoDetailInfo() {
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
 
     /**
      * お気に入り動画削除リクエスト
@@ -51,8 +51,6 @@ export function useFavoriteVideoDetailInfo() {
                 toast.success(message);
             }
 
-            // 前画面のパスを取得
-            const prev = getPrevPath(FAVORITE_PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
             navigate(prev);
         },
         // 失敗後の処理

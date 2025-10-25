@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ROUTER_PATH } from "../../../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
-import { HOME_PREV_PATH_KEY, LIST_SEARCH_CONDITION_KEY } from "../../../../Const/HomeConst";
+import { PREV_PATH_KEY } from "../../../../../Common/Const/CommonConst";
 
 
 export function useHomeVideoContent() {
@@ -25,7 +25,7 @@ export function useHomeVideoContent() {
             return;
         }
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}?${HOME_PREV_PATH_KEY}=${pathName}${query}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
     }
 
     /**
@@ -38,7 +38,7 @@ export function useHomeVideoContent() {
             return;
         }
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}?${HOME_PREV_PATH_KEY}=${pathName}${query}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.CHANNEL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
     }
 
     return {

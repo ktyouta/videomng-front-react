@@ -72,5 +72,3 @@ export const SEARCH_CONDITION = {
 
 // 検索条件一式をURLクエリで保持するためのキー
 export const LIST_SEARCH_CONDITION_KEY = `criteria`;
-// 前画面のパスキー
-export const HOME_PREV_PATH_KEY = `previouspath`;

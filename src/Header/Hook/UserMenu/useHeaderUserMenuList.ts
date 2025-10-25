@@ -7,13 +7,11 @@ import ENV from '../../../env.json';
 import { errResType, resType } from "../../../Common/Hook/useMutationWrapperBase";
 import { useGlobalAtom } from "../../../Common/Hook/useGlobalAtom";
 import { IsCheckedAuthContext, IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../../QueryApp";
-import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
+import { LOGIN_USER_INFO_INIT, PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useGetPreviousPath } from "../../../Common/Hook/useGetPreviousPath";
-import { UPDATEUSERINFO_PREV_PATH_KEY } from "../../../UpdateUserInfo/Const/UpdateUserInfoConst";
-import { UPDATEUSERPASSWORD_PREV_PATH_KEY } from "../../../UpdateUserPassword/Const/UpdateUserPasswordConst";
 
 
 export function useHeaderUserMenuList() {
@@ -38,6 +36,7 @@ export function useHeaderUserMenuList() {
     const queryParam = location.search;
     // パス
     const pathName = location.pathname;
+
 
     /**
      * ログアウトリクエスト
@@ -73,7 +72,7 @@ export function useHeaderUserMenuList() {
         let path = ``;
 
         if (pathName) {
-            path = `?${UPDATEUSERINFO_PREV_PATH_KEY}=${pathName}${queryParam}`;
+            path = `?${PREV_PATH_KEY}=${pathName}${queryParam}`;
         }
 
         navigate(`${ROUTER_PATH.UPDATE_USER_INFO}${path}`);
@@ -87,7 +86,7 @@ export function useHeaderUserMenuList() {
         let path = ``;
 
         if (pathName) {
-            path = `?${UPDATEUSERPASSWORD_PREV_PATH_KEY}=${pathName}${queryParam}`;
+            path = `?${PREV_PATH_KEY}=${pathName}${queryParam}`;
         }
 
         navigate(`${ROUTER_PATH.UPDATE_USER_PASSWORD}${path}`);

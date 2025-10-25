@@ -17,11 +17,11 @@ import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
 import { toast } from 'react-toastify';
-import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useUpdateUserInfoForm } from './useUpdateUserInfoForm';
-import { UPDATEUSERINFO_PREV_PATH_KEY } from '../Const/UpdateUserInfoConst';
 import { loginUserInfoSchema } from '../../Login/Schema/loginUserInfoSchema';
+import { getPrevPath } from '../../Common/Function/CommonFunction';
 
 
 export function useUpdateUserInfo() {
@@ -38,12 +38,10 @@ export function useUpdateUserInfo() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // URL情報
-    const location = useLocation();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search.replace(`?${UPDATEUSERINFO_PREV_PATH_KEY}=`, ``);
     // フォーム
     const { register, handleSubmit, formState: { errors } } = useUpdateUserInfoForm(loginUserInfo);
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
 
 
     /**
@@ -68,7 +66,7 @@ export function useUpdateUserInfo() {
 
             toast.success("ユーザー情報を更新しました。");
             setLoginUserInfo(loginUserInfo);
-            navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
+            navigate(prev);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -112,7 +110,7 @@ export function useUpdateUserInfo() {
      * キャンセルボタン押下
      */
     function clickCancel() {
-        navigate(queryParam ?? ROUTER_PATH.HOME.ROOT);
+        navigate(prev);
     }
 
     return {

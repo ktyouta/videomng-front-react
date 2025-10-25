@@ -9,8 +9,8 @@ import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVide
 import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
 import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
 import { useVideoId } from "./useVideoId";
-import { FAVORITE_PREV_PATH_KEY } from "../../Const/FavoriteConst";
 import { getPrevPath } from "../../../Common/Function/CommonFunction";
+import { PREV_PATH_KEY } from "../../../Common/Const/CommonConst";
 
 export function useFavoriteVideoDetail() {
 
@@ -20,6 +20,8 @@ export function useFavoriteVideoDetail() {
     const navigate = useNavigate();
     // 動画ID
     const videoId = useVideoId();
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
 
 
     // 動画詳細を取得
@@ -39,9 +41,6 @@ export function useFavoriteVideoDetail() {
      * お気に入り動画一覧画面に戻る
      */
     function backPage() {
-
-        // 前画面のパスを取得
-        const prev = getPrevPath(FAVORITE_PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
         navigate(prev);
     }
 

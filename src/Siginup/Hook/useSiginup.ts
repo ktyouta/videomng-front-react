@@ -15,13 +15,13 @@ import { useCreateYearList } from '../../Common/Hook/useCreateYearList';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
 import useSwitch from '../../Common/Hook/useSwitch';
-import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useSignupForm } from './useSignupForm';
-import { LOGIN_PREV_PATH_KEY } from '../../Login/Const/LoginConst';
-import { SIGNUP_PREV_PATH_KEY } from '../Const/SignupConst';
 import { loginUserInfoSchema } from '../../Login/Schema/loginUserInfoSchema';
 import { toast } from 'react-toastify';
+import { getPrevPath } from '../../Common/Function/CommonFunction';
+import { SIGINUP_PATH_KEY } from '../Const/SiginupConst';
 
 
 export function useSiginup() {
@@ -38,13 +38,12 @@ export function useSiginup() {
     const yearCoomboList = useCreateYearList();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // URL情報
-    const location = useLocation();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search.replace(`?${SIGNUP_PREV_PATH_KEY}=`, ``);
     // フォーム
     const { register, handleSubmit, formState: { errors }, reset } = useSignupForm();
-
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.LOGIN);
+    // 登録後のパスを取得
+    const next = getPrevPath(SIGINUP_PATH_KEY, ROUTER_PATH.HOME.ROOT);
 
     /**
      * 登録リクエスト
@@ -68,7 +67,7 @@ export function useSiginup() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-            navigate(queryParam);
+            navigate(next);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -120,14 +119,7 @@ export function useSiginup() {
      * 戻るボタン押下
      */
     function clickBack() {
-
-        let query = ``;
-
-        if (queryParam) {
-            query = `?${LOGIN_PREV_PATH_KEY}=${queryParam}`;
-        }
-
-        navigate(`${ROUTER_PATH.LOGIN}${query}`);
+        navigate(prev);
     }
 
     return {

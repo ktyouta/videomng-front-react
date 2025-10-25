@@ -82,3 +82,6 @@ export const FLG = {
     OFF: `0`,
     ON: `1`,
 }
+
+// 前画面のパスキー
+export const PREV_PATH_KEY = `previouspath`;

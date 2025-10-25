@@ -11,14 +11,12 @@ import { useGlobalAtomValue } from "../../../Common/Hook/useGlobalAtom";
 import { IsLoginContext } from "../../../QueryApp";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../Common/Const/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../Common/Hook/useMediaQuery";
 import { useVideoId } from "./useVideoId";
 import { useVideoPlayUrl } from "../../../Common/Hook/useVideoPlayUrl";
 import { useCreateHomeVideoListQuery } from "../VideoList/useCreateHomeVideoListQuery";
 import { useQueryParams } from "../../../Common/Hook/useQueryParams";
-import { HOME_PREV_PATH_KEY, LIST_SEARCH_CONDITION_KEY } from "../../Const/HomeConst";
-import { LOGIN_PREV_PATH_KEY } from "../../../Login/Const/LoginConst";
 import { getPrevPath } from "../../../Common/Function/CommonFunction";
 
 
@@ -38,6 +36,8 @@ export function useHomeVideoDetailInfo() {
     const queryParam = location.search;
     // パス
     const pathName = location.pathname;
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
 
     /**
      * お気に入り登録リクエスト
@@ -61,8 +61,6 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            // 前画面のパスを取得
-            const prev = getPrevPath(HOME_PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
             navigate(prev);
         },
         // 失敗後の処理
@@ -111,7 +109,7 @@ export function useHomeVideoDetailInfo() {
         let path = ``;
 
         if (videoId) {
-            path = `?${LOGIN_PREV_PATH_KEY}=${pathName}${queryParam}`;
+            path = `?${PREV_PATH_KEY}=${pathName}${queryParam}`;
         }
 
         navigate(`${ROUTER_PATH.LOGIN}${path}`);

@@ -78,6 +78,3 @@ export const SEARCH_CONDITION = {
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `page`,
 } as const;
-
-// 前画面のパスキー
-export const FAVORITE_PREV_PATH_KEY = `previouspath`;

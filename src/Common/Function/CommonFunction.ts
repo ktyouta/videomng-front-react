@@ -47,11 +47,14 @@ export function getPrevPath(key: string, defaultPath: string) {
 
     // クエリパラメータ(遷移元情報)
     const queryParam = location.search;
-    const prefix = `?${key}=`;
 
-    if (!queryParam.startsWith(prefix)) {
+    const keyIndex = queryParam.indexOf(`${key}=`);
+
+    if (keyIndex === -1) {
         return defaultPath;
     }
 
-    return queryParam.slice(prefix.length);
+    const start = keyIndex + `${key}=`.length;
+
+    return queryParam.slice(start) || defaultPath;
 };

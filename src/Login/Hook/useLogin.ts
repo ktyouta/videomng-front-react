@@ -9,14 +9,14 @@ import { errResType, resSchema, resType } from '../../Common/Hook/useMutationWra
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../QueryApp';
 import { LoginUserInfoType } from '../../Common/Type/LoginUserInfoType';
 import { ROUTER_PATH } from '../../Common/Const/RouterPath';
-import { VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../Common/Const/CommonConst';
 import { useQueryParams } from '../../Common/Hook/useQueryParams';
 import { useLoginForm } from './useLoginForm';
 import { LoginFormType } from '../Type/LoginFormType';
 import { loginUserInfoSchema } from '../Schema/loginUserInfoSchema';
 import { toast } from 'react-toastify';
-import { LOGIN_PREV_PATH_KEY } from '../Const/LoginConst';
-import { SIGNUP_PREV_PATH_KEY } from '../../Siginup/Const/SignupConst';
+import { getPrevPath } from '../../Common/Function/CommonFunction';
+import { SIGINUP_PATH_KEY } from '../../Siginup/Const/SiginupConst';
 
 
 export function useLogin() {
@@ -27,14 +27,14 @@ export function useLogin() {
     const setIsLogin = SetIsLoginContext.useCtx();
     // ログインユーザー情報(setter)
     const setLoginUserInfo = SetLoginUserInfoContext.useCtx();
-    // URL情報
-    const location = useLocation();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search.replace(`?${LOGIN_PREV_PATH_KEY}=`, ``);
     // ログインフォーム
     const form = useLoginForm({
         onSubmit: submit
     });
+    // パス
+    const pathName = location.pathname;
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
 
     /**
      * ログインリクエスト
@@ -58,14 +58,7 @@ export function useLogin() {
 
             setLoginUserInfo(loginUserInfo);
             setIsLogin(true);
-
-            let backPagePath = ROUTER_PATH.HOME.ROOT;
-
-            if (queryParam) {
-                backPagePath = queryParam;
-            }
-
-            navigate(backPagePath);
+            navigate(prev);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -99,28 +92,14 @@ export function useLogin() {
      * 会員登録画面遷移
      */
     function clickSignup() {
-
-        let query = ``;
-
-        if (queryParam) {
-            query = `?${SIGNUP_PREV_PATH_KEY}=${queryParam}`;
-        }
-
-        navigate(`${ROUTER_PATH.SIGNUP}${query}`);
+        navigate(`${ROUTER_PATH.SIGNUP}?${PREV_PATH_KEY}=${pathName}?${SIGINUP_PATH_KEY}=${prev}`);
     }
 
     /**
      * 戻るボタン
      */
     function clickBack() {
-
-        let backPagePath = ROUTER_PATH.HOME.ROOT;
-
-        if (queryParam) {
-            backPagePath = queryParam;
-        }
-
-        navigate(backPagePath);
+        navigate(prev);
     }
 
     return {

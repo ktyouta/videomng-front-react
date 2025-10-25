@@ -2,8 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ROUTER_PATH } from "../../../Common/Const/RouterPath";
 import { toast } from "react-toastify";
-import { HOME_PREV_PATH_KEY } from "../../Const/HomeConst";
 import { useChannelId } from "./useChannelId";
+import { PREV_PATH_KEY } from "../../../Common/Const/CommonConst";
 
 
 export function useHomeChannelVideoContent() {
@@ -25,7 +25,7 @@ export function useHomeChannelVideoContent() {
             return;
         }
 
-        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}?${HOME_PREV_PATH_KEY}=${pathName}${queryParam}`);
+        navigate(`${ROUTER_PATH.HOME.ROOT}${ROUTER_PATH.HOME.DETAIL}/${id}?${PREV_PATH_KEY}=${pathName}${queryParam}`);
     }
 
     return {
