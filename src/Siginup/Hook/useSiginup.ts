@@ -119,7 +119,16 @@ export function useSiginup() {
      * 戻るボタン押下
      */
     function clickBack() {
-        navigate(prev);
+
+        let prevPath = prev;
+
+        const nextIndex = prev.indexOf(`&${SIGINUP_PATH_KEY}`);
+
+        if (nextIndex !== -1) {
+            prevPath = prev.slice(0, nextIndex);
+        }
+
+        navigate(prevPath);
     }
 
     return {

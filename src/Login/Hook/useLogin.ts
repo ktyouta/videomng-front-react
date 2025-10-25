@@ -92,7 +92,7 @@ export function useLogin() {
      * 会員登録画面遷移
      */
     function clickSignup() {
-        navigate(`${ROUTER_PATH.SIGNUP}?${PREV_PATH_KEY}=${pathName}?${SIGINUP_PATH_KEY}=${prev}`);
+        navigate(`${ROUTER_PATH.SIGNUP}?${PREV_PATH_KEY}=${pathName}?${PREV_PATH_KEY}=${prev}&${SIGINUP_PATH_KEY}=${prev}`);
     }
 
     /**
