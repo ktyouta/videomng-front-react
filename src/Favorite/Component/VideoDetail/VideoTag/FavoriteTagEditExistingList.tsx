@@ -63,6 +63,9 @@ const NoTagListTitleDiv = styled.div`
     margin-top: 3%;
     margin-left: 1%;
     margin-bottom: 30px;
+`;
+
+const TagEditAreaMessageSpan = styled.span`
     font-size: 12px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -131,7 +134,8 @@ export function FavoriteTagEditExistingList() {
         setInputKeyword,
         filterTagMasterList,
         clearInput,
-        handleKeyPress, } = useFavoriteTagEditExistingList();
+        handleKeyPress,
+        tagMasterList, } = useFavoriteTagEditExistingList();
 
     return (
         <Parent>
@@ -151,7 +155,7 @@ export function FavoriteTagEditExistingList() {
                     isOpenTagMasterList &&
                     <React.Fragment>
                         {
-                            displayTagMaster && displayTagMaster.length > 0
+                            tagMasterList && tagMasterList.length > 0
                                 ?
                                 <TagMasterListAreaDiv>
                                     <FilterInputAreaDiv>
@@ -175,29 +179,41 @@ export function FavoriteTagEditExistingList() {
                                         />
                                     </FilterInputAreaDiv>
                                     {
-                                        displayTagMaster.map((e: tagType) => {
+                                        displayTagMaster && displayTagMaster.length > 0
+                                            ?
+                                            <React.Fragment>
+                                                {
+                                                    displayTagMaster.map((e: tagType) => {
 
-                                            const tagKey = e.label;
+                                                        const tagKey = e.label;
 
-                                            return (
-                                                <TagButtonComponent
-                                                    title={tagKey}
-                                                    btnStyle={{
-                                                        marginRight: "15px",
-                                                        marginBottom: "10px"
-                                                    }}
-                                                    onclick={() => {
-                                                        addTagEditList(e);
-                                                    }}
-                                                    key={`${tagKey}-tagmst`}
-                                                />
-                                            )
-                                        })
+                                                        return (
+                                                            <TagButtonComponent
+                                                                title={tagKey}
+                                                                btnStyle={{
+                                                                    marginRight: "15px",
+                                                                    marginBottom: "10px"
+                                                                }}
+                                                                onclick={() => {
+                                                                    addTagEditList(e);
+                                                                }}
+                                                                key={`${tagKey}-tagmst`}
+                                                            />
+                                                        )
+                                                    })
+                                                }
+                                            </React.Fragment>
+                                            :
+                                            <TagEditAreaMessageSpan>
+                                                タグが存在しません。
+                                            </TagEditAreaMessageSpan>
                                     }
                                 </TagMasterListAreaDiv>
                                 :
                                 <NoTagListTitleDiv>
-                                    既存タグが存在しません。
+                                    <TagEditAreaMessageSpan>
+                                        既存タグが存在しません。
+                                    </TagEditAreaMessageSpan>
                                 </NoTagListTitleDiv>
                         }
                     </React.Fragment>

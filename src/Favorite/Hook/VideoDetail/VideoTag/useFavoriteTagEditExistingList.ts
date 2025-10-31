@@ -140,5 +140,6 @@ export function useFavoriteTagEditExistingList() {
         filterTagMasterList,
         clearInput,
         handleKeyPress,
+        tagMasterList,
     }
 }
