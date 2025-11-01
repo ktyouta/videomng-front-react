@@ -1,18 +1,6 @@
 import React, { ReactNode } from "react";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../VideoMemo/FavoriteMemoContent";
-import BaseTextbox from "../../../../Common/Component/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "../VideoMemo/FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
-import { FavoriteMemoList } from "../VideoMemo/FavoriteMemoList";
-import { FavoriteCommentHeader } from "../VideoComment/FavoriteCommentHeader";
-import { FavoriteCommentList } from "../VideoComment/FavoriteCommentList";
-import { FavoriteVideoDetailDataType } from "../../../Type/VideoDetail/FavoriteVideoDetailDataType";
-import AccordionComponent from "../../../../Common/Component/AccordionComponent";
 import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
 import { comboType } from "../../../../Common/Component/ComboComponent";
 import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHeader";
@@ -20,6 +8,9 @@ import { useFavoriteDetailSettingView } from "../../../Hook/VideoDetail/VideoDet
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../Const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
 import Loading from "../../../../Common/Component/Loading";
+import { AccordionComponent } from "../../../../Common/Component/AccordionComponent";
+import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/FavoriteVideoTagType";
+import TagButtonComponent from "../../../../Common/Component/TagButtonComponent";
 
 
 const Parent = styled.div`
@@ -28,16 +19,27 @@ const Parent = styled.div`
 
 const ContentDiv = styled.div`
     color:white;
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+`;
+
+const MetaContentDiv = styled.div`
 `;
 
 const TitleDiv = styled.div`
   box-sizing:border-box;
-  margin-bottom:1%;
+  margin-bottom: 10px;
 `;
 
 const MetaDiv = styled.div`
   box-sizing:border-box;
-  margin-bottom: 37px;
+`;
+
+const FlexDiv = styled.div`
+  align-items: center;
+  display:flex;
+  gap: 50px;
 `;
 
 const CategoryAreaDiv = styled.div`
@@ -66,7 +68,7 @@ const FavoriteLevelAreaDiv = styled.div`
   align-items: center;
   display:flex;
   flex-wrap: wrap;
-  grid-column-gap: 2%;
+  grid-column-gap: 15px;
 `;
 
 
@@ -111,6 +113,7 @@ export function FavoriteDetailSettingView(props: propsType) {
 
     const detail = data.detail;
     const categorys = data.categorys;
+    const tags = data.tags;
 
     return (
         <React.Fragment>
@@ -118,85 +121,124 @@ export function FavoriteDetailSettingView(props: propsType) {
                 changeEdit={props.changeEdit}
             />
             <ContentDiv>
-                <TitleDiv>
-                    【要約】
-                </TitleDiv>
-                <MetaDiv>
-                    {detail.summary ?? `なし`}
-                </MetaDiv>
-                <TitleDiv>
-                    【カテゴリ】
-                </TitleDiv>
-                <MetaDiv>
-                    {
-                        categorys && categorys.length > 0 ?
-                            <CategoryAreaDiv>
-                                {
-                                    categorys && categorys.reduce((prev: ReactNode[], current: FavoriteVideoDetailCategoryType) => {
+                <MetaContentDiv>
+                    <TitleDiv>
+                        【要約】
+                    </TitleDiv>
+                    <AccordionComponent
+                        defaultHeight={'70px'}
+                        outerStyle={{
+                            border: "solid 1px",
+                            boxSizing: "border-box",
+                            padding: "1%",
+                            borderRadius: "6px",
+                            width: "90%",
+                        }}
+                    >
+                        {detail.summary || `未設定`}
+                    </AccordionComponent>
+                </MetaContentDiv>
+                <MetaContentDiv>
+                    <TitleDiv>
+                        【カテゴリ】
+                    </TitleDiv>
+                    <MetaDiv>
+                        {
+                            categorys && categorys.length > 0 ?
+                                <CategoryAreaDiv>
+                                    {
+                                        categorys && categorys.reduce((prev: ReactNode[], current: FavoriteVideoDetailCategoryType) => {
 
-                                        const category = videoCategory?.find((e1: comboType) => {
-                                            return e1.value === current.categoryId;
-                                        });
+                                            const category = videoCategory?.find((e1: comboType) => {
+                                                return e1.value === current.categoryId;
+                                            });
 
-                                        if (!category) {
+                                            if (!category) {
+                                                return prev;
+                                            }
+
+                                            const categoryId = current.categoryId;
+
+                                            prev.push(
+                                                <CategoryDiv
+                                                    key={categoryId}
+                                                >
+                                                    {category.label}
+                                                </CategoryDiv>
+                                            );
                                             return prev;
-                                        }
-
-                                        const categoryId = current.categoryId;
-
-                                        prev.push(
-                                            <CategoryDiv
-                                                key={categoryId}
-                                            >
-                                                {category.label}
-                                            </CategoryDiv>
-                                        );
-                                        return prev;
-                                    }, [])
-                                }
-                            </CategoryAreaDiv>
-                            :
-                            `未設定`
-                    }
-                </MetaDiv>
-                {
-                    viewStatusList &&
-                    <React.Fragment>
-                        <TitleDiv>
-                            【視聴状況】
-                        </TitleDiv>
-                        <MetaDiv>
-                            {detail.viewStatus ?
-                                viewStatusList.find((e) => {
-                                    return e.value === detail.viewStatus
-                                })?.label
-                                : `未設定`}
-                        </MetaDiv>
-                    </React.Fragment>
-                }
-                <TitleDiv>
-                    【お気に入り度】
-                </TitleDiv>
-                <FavoriteLevelAreaDiv>
+                                        }, [])
+                                    }
+                                </CategoryAreaDiv>
+                                :
+                                `未設定`
+                        }
+                    </MetaDiv>
+                </MetaContentDiv>
+                <FlexDiv>
                     {
-                        [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
-
-                            const favoriteLevel = index + 1;
-                            const color = detail.favoriteLevel >= favoriteLevel ? `yellow` : ``;
-
-                            return (
-                                <IconComponent
-                                    icon={FaStar}
-                                    size="25px"
-                                    style={{
-                                        color,
-                                    }}
-                                    key={favoriteLevel}
-                                />
-                            )
-                        })
+                        viewStatusList &&
+                        <MetaContentDiv>
+                            <TitleDiv>
+                                【視聴状況】
+                            </TitleDiv>
+                            <MetaDiv>
+                                {detail.viewStatus ?
+                                    viewStatusList.find((e) => {
+                                        return e.value === detail.viewStatus
+                                    })?.label
+                                    : `未設定`}
+                            </MetaDiv>
+                        </MetaContentDiv>
                     }
-                </FavoriteLevelAreaDiv>
+                    <MetaContentDiv>
+                        <TitleDiv>
+                            【お気に入り度】
+                        </TitleDiv>
+                        <FavoriteLevelAreaDiv>
+                            {
+                                [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
+
+                                    const favoriteLevel = index + 1;
+                                    const color = detail.favoriteLevel >= favoriteLevel ? `yellow` : ``;
+
+                                    return (
+                                        <IconComponent
+                                            icon={FaStar}
+                                            size="25px"
+                                            style={{
+                                                color,
+                                            }}
+                                            key={favoriteLevel}
+                                        />
+                                    )
+                                })
+                            }
+                        </FavoriteLevelAreaDiv>
+                    </MetaContentDiv>
+                </FlexDiv>
+                <MetaContentDiv>
+                    <TitleDiv>
+                        【タグ】
+                    </TitleDiv>
+                    <MetaDiv
+                        style={{ marginBottom: "25px" }}
+                    >
+                        {
+                            tags.map((e: FavoriteVideoTagType) => {
+                                return (
+                                    <TagButtonComponent
+                                        title={e.tagName}
+                                        btnStyle={{
+                                            marginRight: "15px"
+                                        }}
+                                        key={e.tagId}
+                                    />
+                                )
+                            })
+                        }
+                    </MetaDiv>
+                </MetaContentDiv>
             </ContentDiv>
         </React.Fragment>
     );

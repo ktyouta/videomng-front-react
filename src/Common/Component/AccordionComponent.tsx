@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -11,6 +11,10 @@ type propsType = {
     outerStyle?: CSSProperties,
 }
 
+const Parent = styled.div`
+    padding: 2% 1% 1% 1%;
+`;
+
 //続きを読むボタンのスタイル
 const ShowMoreButton = styled.button`
     cursor: pointer;
@@ -18,6 +22,14 @@ const ShowMoreButton = styled.button`
     border: none;
     background: none;
     outline: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
 `;
 
 //テキスト表示エリアのスタイル
@@ -25,6 +37,7 @@ const AccordionTextAreaDiv = styled.div<{ isShowMore: boolean, defaultHeight: st
     height: ${({ isShowMore, defaultHeight }) => (isShowMore ? "100%" : defaultHeight)};
     overflow: hidden;
     transition: max-height 0.1s ease;
+    margin-bottom: 10px;
 `;
 
 /**
@@ -32,30 +45,45 @@ const AccordionTextAreaDiv = styled.div<{ isShowMore: boolean, defaultHeight: st
  * @param props 
  * @returns 
  */
-const AccordionComponent = (props: propsType) => {
+export function AccordionComponent(props: propsType) {
 
-    //続きを読むボタン表示フラグ
+    // 続きを読むボタン表示フラグ
     const [showMore, setShowMore] = useState(false);
-    //ボタンテキスト
+    // ボタンテキスト
     const { closeWord = "閉じる", openWord = "続きを読む" } = props;
+    // ボタンテキスト表示フラグ
+    const [isOverflowing, setIsOverflowing] = useState(false);
+    // 要素の高さ取得用
+    const contentRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const element = contentRef.current;
+
+        if (element) {
+            setIsOverflowing(element.scrollHeight > element.clientHeight);
+        }
+
+    }, [props.children, props.defaultHeight]);
 
     return (
-        <div
+        <Parent
             style={props.outerStyle}
         >
             <AccordionTextAreaDiv
                 isShowMore={showMore}
                 defaultHeight={props.defaultHeight}
+                ref={contentRef}
             >
-                <p>
+                <div>
                     {props.children}
-                </p>
+                </div>
             </AccordionTextAreaDiv>
-            <ShowMoreButton onClick={() => setShowMore(!showMore)}>
-                {showMore ? closeWord : openWord}
-            </ShowMoreButton>
-        </div>
+            {
+                isOverflowing &&
+                <ShowMoreButton onClick={() => setShowMore(!showMore)}>
+                    {showMore ? closeWord : openWord}
+                </ShowMoreButton>
+            }
+        </Parent>
     );
 };
-
-export default AccordionComponent;

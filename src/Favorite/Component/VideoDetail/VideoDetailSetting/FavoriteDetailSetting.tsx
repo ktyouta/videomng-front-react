@@ -1,18 +1,4 @@
-import React from "react";
-import { IconComponent } from "../../../../Common/Component/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../VideoMemo/FavoriteMemoContent";
-import BaseTextbox from "../../../../Common/Component/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "../VideoMemo/FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
-import { FavoriteMemoList } from "../VideoMemo/FavoriteMemoList";
-import { FavoriteCommentHeader } from "../VideoComment/FavoriteCommentHeader";
-import { FavoriteCommentList } from "../VideoComment/FavoriteCommentList";
-import { FavoriteVideoDetailDataType } from "../../../Type/VideoDetail/FavoriteVideoDetailDataType";
-import AccordionComponent from "../../../../Common/Component/AccordionComponent";
 import { useFavoriteDetailSetting } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSetting";
 import { EDIT_MODE } from "../../../Const/FavoriteConst";
 import { FavoriteDetailSettingView } from "./FavoriteDetailSettingView";
@@ -25,7 +11,7 @@ const Parent = styled.div`
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;
-  padding:2%;
+  padding: 18px;
   display:flex;
   flex-direction: column;
 `;

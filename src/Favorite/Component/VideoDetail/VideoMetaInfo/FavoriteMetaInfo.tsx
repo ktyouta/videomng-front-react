@@ -12,7 +12,7 @@ import { FavoriteMemoList } from "../VideoMemo/FavoriteMemoList";
 import { FavoriteCommentHeader } from "../VideoComment/FavoriteCommentHeader";
 import { FavoriteCommentList } from "../VideoComment/FavoriteCommentList";
 import { FavoriteVideoDetailDataType } from "../../../Type/VideoDetail/FavoriteVideoDetailDataType";
-import AccordionComponent from "../../../../Common/Component/AccordionComponent";
+import { AccordionComponent } from "../../../../Common/Component/AccordionComponent";
 import { formatDateJP } from "../../../../Common/Function/CommonFunction";
 
 
@@ -131,7 +131,6 @@ export function FavoriteMetaInfo(props: propsType) {
                             outerStyle={{
                                 border: "solid 1px",
                                 boxSizing: "border-box",
-                                padding: "1%",
                                 borderRadius: "6px"
                             }}
                         >

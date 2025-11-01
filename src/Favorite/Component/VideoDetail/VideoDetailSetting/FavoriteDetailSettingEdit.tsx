@@ -2,22 +2,9 @@ import React from "react";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../Type/VideoDetail/VideoMemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../VideoMemo/FavoriteMemoContent";
-import BaseTextbox from "../../../../Common/Component/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "../VideoMemo/FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
-import { FavoriteMemoList } from "../VideoMemo/FavoriteMemoList";
-import { FavoriteCommentHeader } from "../VideoComment/FavoriteCommentHeader";
-import { FavoriteCommentList } from "../VideoComment/FavoriteCommentList";
-import { FavoriteVideoDetailDataType } from "../../../Type/VideoDetail/FavoriteVideoDetailDataType";
-import AccordionComponent from "../../../../Common/Component/AccordionComponent";
-import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
 import ComboComponent, { comboType } from "../../../../Common/Component/ComboComponent";
 import { useFavoriteDetailSettingEdit } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSettingEdit";
 import BaseTextAreaComponent from "../../../../Common/Component/BaseTextAreaComponent";
-import LabelCheckBoxListComponent from "../../../../Common/Component/LabelCheckBoxListComponent";
 import CheckBoxComponent from "../../../../Common/Component/CheckBoxComponent";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../Const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
@@ -64,7 +51,7 @@ const FavoriteLevelAreaDiv = styled.div`
   display:flex;
   flex-wrap: wrap;
   grid-column-gap: 2%;
-  margin-bottom: 4%;
+  margin-bottom: 37px;
 `;
 
 
@@ -192,6 +179,12 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                         })
                     }
                 </FavoriteLevelAreaDiv>
+                <TitleDiv>
+                    【タグ】
+                </TitleDiv>
+                <MetaDiv>
+                    ※タグの設定はメニューの「タグ」から行えます。
+                </MetaDiv>
             </ContentDiv>
             <FavoriteDetailSettingEditFooter
                 changeView={props.changeView}

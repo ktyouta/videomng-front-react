@@ -5,7 +5,6 @@ import styled from "styled-components";
 import ButtonComponent from "../../../Common/Component/ButtonComponent";
 import { YouTubeDataApiVideoDetailItemType } from "../../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
 import { FavoriteVideoDetailDataType } from "../../Type/VideoDetail/FavoriteVideoDetailDataType";
-import AccordionComponent from "../../../Common/Component/AccordionComponent";
 import { useFavoriteVideoDetailInfo } from "../../Hook/VideoDetail/useFavoriteVideoDetailInfo";
 import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../../Common/Component/IconComponent";

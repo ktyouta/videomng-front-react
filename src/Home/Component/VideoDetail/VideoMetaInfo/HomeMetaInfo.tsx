@@ -2,7 +2,7 @@ import React from "react";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import AccordionComponent from "../../../../Common/Component/AccordionComponent";
+import { AccordionComponent } from "../../../../Common/Component/AccordionComponent";
 import { YouTubeDataApiVideoDetailItemType } from "../../../Type/VideoDetail/YouTubeDataApiVideoDetailItemType";
 import { formatDateJP } from "../../../../Common/Function/CommonFunction";
 
@@ -123,7 +123,6 @@ export function HomeMetaInfo(props: propsType) {
                             outerStyle={{
                                 border: "solid 1px",
                                 boxSizing: "border-box",
-                                padding: "1%",
                                 borderRadius: "6px"
                             }}
                         >
