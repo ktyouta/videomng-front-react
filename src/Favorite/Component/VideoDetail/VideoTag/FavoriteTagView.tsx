@@ -11,6 +11,7 @@ import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
 import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
 import { FavoriteTagViewHeader } from "./FavoriteTagViewHeader";
+import { FavoriteTagGuide } from "./FavoriteTagGuide";
 
 
 export function FavoriteTagView() {
@@ -23,6 +24,8 @@ export function FavoriteTagView() {
       <FavoriteTagViewHeader />
       {/* タグリスト */}
       <FavoriteTagList />
+      {/* ガイド */}
+      <FavoriteTagGuide />
     </React.Fragment>
   );
 }

@@ -21,7 +21,7 @@ import { createCtx } from "../../../../Common/Function/createCtx";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  min-height: 502px;
+  min-height: 365px;
   background-color: #181a1e;
   border-radius: 1%;
   border: solid 1px;

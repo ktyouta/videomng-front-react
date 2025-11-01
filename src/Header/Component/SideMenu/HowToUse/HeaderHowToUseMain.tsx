@@ -11,7 +11,6 @@ const Parent = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
-    justify-content: center;
 `;
 
 const MessageOl = styled.ol`

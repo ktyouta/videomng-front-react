@@ -21,6 +21,8 @@ export function HeaderHowToUseModal(props: propsType) {
             isOpen={true}
             modalWidth={isMobile ? "86%" : "45%"}
             modalHeight="70%"
+            isCloseOuter={true}
+            close={props.closeMenu}
         >
             <HeaderHowToUse
                 close={props.closeMenu}
