@@ -4,8 +4,6 @@ import { FavoriteBlockCommentModalIcon } from "../VideoComment/VideoBlockComment
 import { FlexSpaceDiv } from "../../../../Common/StyledComponent/FlexSpaceDiv";
 import { FavoriteDetailSettingEditIcon } from "./FavoriteDetailSettingEditIcon";
 import { EDIT_MODE } from "../../../Const/FavoriteConst";
-import { FavoriteDetailSettingCloseIcon } from "./FavoriteDetailSettingCloseIcon";
-import { FavoriteDetailSettingUpdateIcon } from "./FavoriteDetailSettingUpdateIcon";
 
 
 //ヘッダータイトルのスタイル
@@ -15,30 +13,24 @@ const HeaderDiv = styled.div`
   display: flex;
   align-items: center;
   color: white;
-  padding-left: 1%;
-  height: 25px;
-  padding-right: 2%;
+  height: 22px;
+  padding-right: 7px;
 `;
 
 type propsType = {
-  changeView: () => void,
-  updateFavoriteVideo: () => void,
+  changeEdit: () => void,
 }
 
-export function FavoriteDetailSettingEditFooter(props: propsType) {
+export function FavoriteDetailSettingViewActions(props: propsType) {
 
-  console.log("FavoriteDetailSettingEditFooter render");
+  console.log("FavoriteDetailSettingViewActions render");
 
   return (
     <HeaderDiv>
       <FlexSpaceDiv />
-      {/* 閉じるアイコン */}
-      <FavoriteDetailSettingCloseIcon
-        changeView={props.changeView}
-      />
-      {/* 更新アイコン */}
-      <FavoriteDetailSettingUpdateIcon
-        updateFavoriteVideo={props.updateFavoriteVideo}
+      {/* 編集アイコン */}
+      <FavoriteDetailSettingEditIcon
+        changeEdit={props.changeEdit}
       />
     </HeaderDiv>
   );

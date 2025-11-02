@@ -7,20 +7,18 @@ import { EDIT_MODE } from "../../../Const/FavoriteConst";
 import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { MdEdit } from "react-icons/md";
 import { useFavoriteDetailSettingEditIcon } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSettingEditIcon";
-import { useFavoriteTagViewHeader } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagViewHeader";
+import { useFavoriteTagViewActions } from "../../../Hook/VideoDetail/VideoTag/useFavoriteTagViewActions";
 import { MEDIA } from "../../../../Common/Const/MediaConst";
 
 
-//ヘッダータイトルのスタイル
-const HeaderDiv = styled.div`
+const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   color: white;
-  padding-left: 1%;
-  height: 40px;
-  padding-right: 2%;
+  height: 22px;
+  padding-right: 7px;
 `;
 
 const EditIconDiv = styled.div`
@@ -66,19 +64,19 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
 `;
 
 
-export function FavoriteTagViewHeader() {
+export function FavoriteTagViewActions() {
 
-  console.log("FavoriteTagViewHeader render");
+  console.log("FavoriteTagViewActions render");
 
   const {
     isOpenEditNav,
     openEditNav,
     closeEditNav,
     changeEdit,
-  } = useFavoriteTagViewHeader();
+  } = useFavoriteTagViewActions();
 
   return (
-    <HeaderDiv>
+    <Parent>
       <FlexSpaceDiv />
       <EditIconDiv>
         <IconComponent
@@ -95,6 +93,6 @@ export function FavoriteTagViewHeader() {
           編集
         </BlockNavDiv>
       </EditIconDiv>
-    </HeaderDiv>
+    </Parent>
   );
 }

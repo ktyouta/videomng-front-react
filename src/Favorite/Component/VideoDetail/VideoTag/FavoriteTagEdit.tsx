@@ -10,7 +10,7 @@ import { FavoriteMemoCreateInput } from "../VideoMemo/FavoriteMemoCreateInput";
 import { FavoriteMemoHeader } from "../VideoMemo/FavoriteMemoHeader";
 import { FavoriteTagCreateInput } from "./FavoriteTagCreateInput";
 import { FavoriteTagList } from "./FavoriteTagList";
-import { FavoriteTagEditFooter } from "./FavoriteTagEditFooter";
+import { FavoriteTagEditActions } from "./FavoriteTagEditActions";
 import { FavoriteVideoTagEditListProvider } from "./FavoriteVideoTagEditListProvider";
 import { FavoriteTagEditExistingList } from "./FavoriteTagEditExistingList";
 import { FavoriteTagEditAssignedList } from "./FavoriteTagEditAssignedList";
@@ -22,14 +22,14 @@ export function FavoriteTagEdit() {
 
   return (
     <FavoriteVideoTagEditListProvider>
+      {/* タグアクションアイコン */}
+      <FavoriteTagEditActions />
       {/* 設定されているタグ */}
       <FavoriteTagEditAssignedList />
       {/* 入力欄 */}
       <FavoriteTagCreateInput />
       {/* 既存タグから設定 */}
       <FavoriteTagEditExistingList />
-      {/* タグフッター */}
-      <FavoriteTagEditFooter />
     </FavoriteVideoTagEditListProvider>
   );
 }

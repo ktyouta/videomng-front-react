@@ -16,7 +16,7 @@ const Parent = styled.div`
     left: 0px;
     width: 100%;
     box-sizing: border-box;
-    padding-left: 3%;
+    padding-left: 1%;
     display: flex;
     padding-top: 17px;
     padding-right: 4%;

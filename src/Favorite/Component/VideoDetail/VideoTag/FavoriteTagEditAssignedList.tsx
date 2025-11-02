@@ -9,9 +9,6 @@ import { useFavoriteTagEditAssignedList } from "../../../Hook/VideoDetail/VideoT
 const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-left: 2%;
-  padding-top: 2%;
-  padding-right: 2%;
   color:white;
 `;
 
@@ -26,7 +23,6 @@ const TagListTitleDiv = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
-    margin-top: 10px;
     font-size: 14px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {

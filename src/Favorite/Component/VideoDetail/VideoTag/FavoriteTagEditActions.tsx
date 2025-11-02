@@ -12,17 +12,16 @@ import { tagType } from "../../../../Common/Component/TagsComponent";
 const MemoInputAreaDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-left: 3%;
   display:flex;
   align-items: center;
-  height: 45px;
-  padding-right: 2%;
+  height: 22px;
+  padding-right: 7px;
 `;
 
 
-export function FavoriteTagEditFooter() {
+export function FavoriteTagEditActions() {
 
-    console.log("FavoriteTagEditFooter render");
+    console.log("FavoriteTagEditActions render");
 
     return (
         <MemoInputAreaDiv>

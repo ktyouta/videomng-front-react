@@ -3,7 +3,7 @@ import { IconComponent } from "../../../../Common/Component/IconComponent";
 import styled from "styled-components";
 import { FavoriteVideoDetailCategoryType } from "../../../Type/VideoDetail/VideoDetailSetting/FavoriteVideoDetailCategoryType";
 import { comboType } from "../../../../Common/Component/ComboComponent";
-import { FavoriteDetailSettingViewHeader } from "./FavoriteDetailSettingViewHeader";
+import { FavoriteDetailSettingViewActions } from "./FavoriteDetailSettingViewActions";
 import { useFavoriteDetailSettingView } from "../../../Hook/VideoDetail/VideoDetailSetting/useFavoriteDetailSettingView";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../Const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
@@ -117,7 +117,7 @@ export function FavoriteDetailSettingView(props: propsType) {
 
     return (
         <React.Fragment>
-            <FavoriteDetailSettingViewHeader
+            <FavoriteDetailSettingViewActions
                 changeEdit={props.changeEdit}
             />
             <ContentDiv>

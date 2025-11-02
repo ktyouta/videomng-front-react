@@ -27,6 +27,7 @@ const Parent = styled.div`
   border: solid 1px;
   display: flex;
   flex-direction: column;
+  padding: 18px;
 `;
 
 // 編集画面遷移

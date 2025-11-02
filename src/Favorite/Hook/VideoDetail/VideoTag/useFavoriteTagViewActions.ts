@@ -1,7 +1,7 @@
 import useSwitch from "../../../../Common/Hook/useSwitch";
 import { ChangeEditContext } from "../../../Component/VideoDetail/VideoTag/FavoriteTag";
 
-export function useFavoriteTagViewHeader() {
+export function useFavoriteTagViewActions() {
 
     // 編集ナビゲーション表示フラグ
     const { flag: isOpenEditNav, on: openEditNav, off: closeEditNav } = useSwitch();

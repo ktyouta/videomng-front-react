@@ -44,7 +44,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const videoId = useVideoId();
 
     // カスタム情報を取得
-    useQueryWrapper<FavoriteVideoCustomResponseType, FavoriteVideoCustomDataType>(
+    const { data } = useQueryWrapper<FavoriteVideoCustomResponseType, FavoriteVideoCustomDataType>(
         {
             url: useFavoriteDetailSettingEndpoint(videoId),
             select: (res: FavoriteVideoCustomResponseType) => {
@@ -157,5 +157,6 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         setFavoriteLevel,
         clickFavoriteLevelIcon,
         videoCategory,
+        tags: data?.tags,
     };
 }

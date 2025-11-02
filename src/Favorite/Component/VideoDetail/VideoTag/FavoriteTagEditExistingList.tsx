@@ -14,7 +14,7 @@ const Parent = styled.div`
   flex:1;
   width: 100%;
   box-sizing: border-box;
-  padding-left: 2%;
+  padding-left: 1%;
   padding-top: 2%;
   padding-right: 2%;
   color:white;
@@ -26,7 +26,6 @@ const TagMasterAreaDiv = styled.div`
 
 const TagMasterListTitleDiv = styled.div`
     box-sizing: border-box;
-    padding-left: 1%;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -55,7 +54,7 @@ const TagMasterListAreaDiv = styled.div`
     overflow: auto;
     overflow-x: hidden;
     box-sizing: border-box;
-    padding: 2% 1% 1% 1%;
+    padding: 2% 1% 1% 0%;
     margin-bottom: 14px;
 `;
 

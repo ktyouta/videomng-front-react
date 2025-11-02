@@ -8,14 +8,13 @@ import { FavoriteVideoTagType } from "../../../Type/VideoDetail/VideoTag/Favorit
 import React from "react";
 import TagButtonComponent from "../../../../Common/Component/TagButtonComponent";
 import Loading from "../../../../Common/Component/Loading";
+import { MEDIA } from "../../../../Common/Const/MediaConst";
 
 
 const Parent = styled.div`
   width: 100%;
   flex: 1;
   box-sizing: border-box;
-  padding-left: 2%;
-  padding-right: 2%;
   color:white;
   display: flex;
   flex-direction: column;
@@ -37,9 +36,26 @@ const TagListAreaDiv = styled.div`
 `;
 
 const TagListAreaTitleDiv = styled.div`
-  box-sizing: border-box;
-  margin-bottom: 2%;
+    box-sizing: border-box;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    font-size: 14px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 17px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 17px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 17px;
+    }
 `;
+
 
 export function FavoriteTagList() {
 
@@ -80,7 +96,7 @@ export function FavoriteTagList() {
                 favoriteVideoTagList.length > 0 ?
                     <TagListAreaDiv>
                         <TagListAreaTitleDiv>
-                            設定タグ
+                            設定されているタグ
                         </TagListAreaTitleDiv>
                         {
                             favoriteVideoTagList.map((e: FavoriteVideoTagType) => {
