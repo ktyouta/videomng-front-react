@@ -16,7 +16,7 @@ type propsType = {
 
 
 //ボタンの基本スタイル
-const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?: boolean, }>`
+const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?: boolean, isCursorPointer: boolean }>`
     width:${({ width }) => (width ?? "")};
     heght:${({ heght }) => (heght ?? "")};
     padding: .375rem .5rem;
@@ -29,13 +29,17 @@ const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?:
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-align: left;
-    &:hover {
-        color: #fff;
-        background: linear-gradient(135deg, #1e40af, #1d4ed8);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    }
+    cursor:${({ isCursorPointer }) => (isCursorPointer ? "pointer" : "default")};
     min-width: 82px;
     text-align: center;
+
+        &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
 `;
 
 //spanの基本スタイル
@@ -66,6 +70,7 @@ const TagButtonComponent = (props: propsType) => {
             isDispCross={props.isDispCross}
             style={props.btnStyle}
             onClick={props.onclick}
+            isCursorPointer={!!props.onclick}
         >
             <TitleSpan
                 style={props.spanStyle}
