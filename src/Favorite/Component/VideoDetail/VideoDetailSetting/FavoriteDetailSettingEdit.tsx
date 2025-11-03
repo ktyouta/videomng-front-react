@@ -225,9 +225,9 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                     )
                                 })
                                 :
-                                <MetaDiv>
+                                <span>
                                     タグが設定されていません。
-                                </MetaDiv>
+                                </span>
                         }
                     </MetaDiv>
                     <TagGuideDiv>

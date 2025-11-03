@@ -19,7 +19,7 @@ function Loading(props: propsType) {
     return (
         <ClipLoader
             cssOverride={override}
-            size={100}
+            size={85}
             aria-label="Loading Spinner"
             data-testid="loader"
         />

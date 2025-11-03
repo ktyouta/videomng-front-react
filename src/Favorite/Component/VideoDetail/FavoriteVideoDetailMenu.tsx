@@ -18,6 +18,7 @@ import { FavoriteDetailSetting } from "./VideoDetailSetting/FavoriteDetailSettin
 import { FavoriteTag } from "./VideoTag/FavoriteTag";
 import { Provider } from "jotai";
 import { MEDIA } from "../../../Common/Const/MediaConst";
+import { FavoriteVideoDetailPanel } from "./FavoriteVideoDetailPanel";
 
 
 const MenuParentDiv = styled.div`
@@ -119,9 +120,11 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // 動画情報
           openMenuNo === MENU_NO.INFO &&
-          <FavoriteMetaInfo
-            videoDetail={videoDetail}
-          />
+          <FavoriteVideoDetailPanel>
+            <FavoriteMetaInfo
+              videoDetail={videoDetail}
+            />
+          </FavoriteVideoDetailPanel>
         }
         {
           // メモ
@@ -141,12 +144,18 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // 動画詳細設定
           openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
-          <FavoriteDetailSetting />
+          <FavoriteVideoDetailPanel>
+            <FavoriteDetailSetting />
+          </FavoriteVideoDetailPanel>
         }
         {
           // タグ
           openMenuNo === MENU_NO.TAG &&
-          <FavoriteTag />
+          <FavoriteVideoDetailPanel
+            style={{ minHeight: "365px" }}
+          >
+            <FavoriteTag />
+          </FavoriteVideoDetailPanel>
         }
       </MenuParentDiv>
     </React.Fragment>

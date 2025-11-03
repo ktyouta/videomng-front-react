@@ -3,18 +3,7 @@ import { useFavoriteDetailSetting } from "../../../Hook/VideoDetail/VideoDetailS
 import { EDIT_MODE } from "../../../Const/FavoriteConst";
 import { FavoriteDetailSettingView } from "./FavoriteDetailSettingView";
 import { FavoriteDetailSettingEdit } from "./FavoriteDetailSettingEdit";
-
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  min-height: 502px;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  padding: 18px;
-  display:flex;
-  flex-direction: column;
-`;
+import React from "react";
 
 
 export function FavoriteDetailSetting() {
@@ -28,7 +17,7 @@ export function FavoriteDetailSetting() {
     } = useFavoriteDetailSetting();
 
     return (
-        <Parent>
+        <React.Fragment>
             {
                 // 閲覧
                 editMode === EDIT_MODE.VIEW &&
@@ -43,6 +32,6 @@ export function FavoriteDetailSetting() {
                     changeView={changeView}
                 />
             }
-        </Parent>
+        </React.Fragment>
     );
 }

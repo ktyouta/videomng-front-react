@@ -56,6 +56,23 @@ const TagListAreaTitleDiv = styled.div`
     }
 `;
 
+const NoTagListTitleDiv = styled.div`
+    margin-top: 2%;
+    margin-bottom: 30px;
+    font-size: 12px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 15px;
+    }
+`;
 
 export function FavoriteTagList() {
 
@@ -92,32 +109,33 @@ export function FavoriteTagList() {
 
     return (
         <Parent>
-            {
-                favoriteVideoTagList.length > 0 ?
-                    <TagListAreaDiv>
-                        <TagListAreaTitleDiv>
-                            設定されているタグ
-                        </TagListAreaTitleDiv>
-                        {
-                            favoriteVideoTagList.map((e: FavoriteVideoTagType) => {
+            <TagListAreaDiv>
+                <TagListAreaTitleDiv>
+                    設定されているタグ
+                </TagListAreaTitleDiv>
+                {
+                    favoriteVideoTagList && favoriteVideoTagList.length > 0
+                        ?
+                        favoriteVideoTagList.map((e: FavoriteVideoTagType) => {
 
-                                const tagId = e.tagId;
+                            const tagId = e.tagId;
 
-                                return (
-                                    <TagButtonComponent
-                                        title={e.tagName}
-                                        btnStyle={{
-                                            marginRight: "15px"
-                                        }}
-                                        key={tagId}
-                                    />
-                                )
-                            })
-                        }
-                    </TagListAreaDiv>
-                    :
-                    `タグが設定されていません。`
-            }
+                            return (
+                                <TagButtonComponent
+                                    title={e.tagName}
+                                    btnStyle={{
+                                        marginRight: "15px"
+                                    }}
+                                    key={tagId}
+                                />
+                            )
+                        })
+                        :
+                        <NoTagListTitleDiv>
+                            タグが設定されていません。
+                        </NoTagListTitleDiv>
+                }
+            </TagListAreaDiv>
         </Parent>
     );
 }

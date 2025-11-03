@@ -225,17 +225,23 @@ export function FavoriteDetailSettingView(props: propsType) {
                         style={{ marginBottom: "25px" }}
                     >
                         {
-                            tags.map((e: FavoriteVideoTagType) => {
-                                return (
-                                    <TagButtonComponent
-                                        title={e.tagName}
-                                        btnStyle={{
-                                            marginRight: "15px"
-                                        }}
-                                        key={e.tagId}
-                                    />
-                                )
-                            })
+                            tags && tags.length > 0
+                                ?
+                                tags.map((e: FavoriteVideoTagType) => {
+                                    return (
+                                        <TagButtonComponent
+                                            title={e.tagName}
+                                            btnStyle={{
+                                                marginRight: "15px"
+                                            }}
+                                            key={e.tagId}
+                                        />
+                                    )
+                                })
+                                :
+                                <span>
+                                    タグが設定されていません。
+                                </span>
                         }
                     </MetaDiv>
                 </MetaContentDiv>

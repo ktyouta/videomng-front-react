@@ -19,17 +19,6 @@ import Loading from "../../../../Common/Component/Loading";
 import { createCtx } from "../../../../Common/Function/createCtx";
 
 
-const Parent = styled.div`
-  box-sizing:border-box;
-  min-height: 365px;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  display: flex;
-  flex-direction: column;
-  padding: 18px;
-`;
-
 // 編集画面遷移
 export const ChangeEditContext = createCtx<() => void>();
 // 閲覧画面遷移
@@ -46,7 +35,7 @@ export function FavoriteTag() {
     changeView, } = useFavoriteTag();
 
   return (
-    <Parent>
+    <React.Fragment>
       {
         // 閲覧
         editMode === TAG_EDIT_MODE.VIEW &&
@@ -61,6 +50,6 @@ export function FavoriteTag() {
           <FavoriteTagEdit />
         </ChangeViewContext.Provider>
       }
-    </Parent>
+    </React.Fragment>
   );
 }
