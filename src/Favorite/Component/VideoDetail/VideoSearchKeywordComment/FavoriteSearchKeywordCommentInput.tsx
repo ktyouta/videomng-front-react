@@ -10,14 +10,12 @@ import { MEDIA } from "../../../../Common/Const/MediaConst";
 
 
 const MemoInputAreaDiv = styled.div`
-  position: absolute;
-  bottom: 12px;
-  left: 0;
   width: 100%;
   box-sizing: border-box;
-  padding-left: 3%;
   display:flex;
   height: 38px;
+  align-items: center;
+  justify-content: center;  
 `;
 
 const SearchIconAreaDiv = styled.div`
@@ -45,8 +43,6 @@ const SearchIconAreaDiv = styled.div`
     width: 37px;
   }
 `;
-
-
 
 export function FavoriteSearchKeywordCommentInput() {
 

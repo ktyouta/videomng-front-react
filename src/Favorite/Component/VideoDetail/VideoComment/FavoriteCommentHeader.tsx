@@ -12,8 +12,8 @@ const HeaderDiv = styled.div`
   align-items: center;
   color: white;
   padding-left: 1%;
-  height:4%;
-  padding-right: 5%;
+  height: 22px;
+  padding-right: 20px;
 `;
 
 export function FavoriteCommentHeader() {

@@ -12,26 +12,32 @@ import React from "react";
 
 const Parent = styled.div`
   width: 100%;
-  height: 90%;
+  flex: 1;
   box-sizing: border-box;
   color:white;
   padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 `;
 
 const LoadingParent = styled(Parent)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
   width: 99%;
-  height: 100%;
+  flex: 1;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
   padding-left: 1%;
   padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 `;
 
 const LoadingParentNext = styled.div`
@@ -47,7 +53,8 @@ const NextGetAreaDiv = styled.div`
 `;
 
 const InfiniteScrollAreaDiv = styled.div`
-  heigth: 100px;
+  heigth: 30px;
+  flex-shrink: 0;
 `;
 
 export function FavoriteCommentList() {

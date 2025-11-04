@@ -22,7 +22,7 @@ export function useFavoriteCommentList() {
     const [displayCommentList, setDisplayCommentList] = useState<FavoriteVideoCommentThreadItemType[]>();
     // 無限スクロール用
     const { ref, inView } = useInView({
-        threshold: 0.2,
+        threshold: 0.1,
     });
 
 

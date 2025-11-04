@@ -136,6 +136,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           openMenuNo === MENU_NO.MEMO &&
           <FavoriteVideoDetailPanel
             style={{
+              height: "505px",
               display: "flex",
               flexDirection: "column",
             }}
@@ -147,7 +148,11 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           // 公開コメント
           openMenuNo === MENU_NO.COMMENT &&
           <FavoriteVideoDetailPanel
-            style={{ height: "505px" }}
+            style={{
+              height: "505px",
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
             <FavoriteComment />
           </FavoriteVideoDetailPanel>
@@ -155,7 +160,15 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // キーワード検索(コメント)
           openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-          <FavoriteSearchKeywordComment />
+          <FavoriteVideoDetailPanel
+            style={{
+              height: "505px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <FavoriteSearchKeywordComment />
+          </FavoriteVideoDetailPanel>
         }
         {
           // 動画詳細設定

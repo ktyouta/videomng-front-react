@@ -3,16 +3,8 @@ import { FavoriteSearchKeywordCommentList } from "./FavoriteSearchKeywordComment
 import { FavoriteSearchKeywordCommentInput } from "./FavoriteSearchKeywordCommentInput";
 import { useFavoriteSearchKeywordComment } from "../../../Hook/VideoDetail/VideoSearchKeywordComment/useFavoriteSearchKeywordComment";
 import { createCtx } from "../../../../Common/Function/createCtx";
+import React from "react";
 
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  height: 502px;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  position:relative;
-`;
 
 // 検索用キーワード
 export const SearchKeywordCommentKeywordContext = createCtx<string>();
@@ -29,7 +21,7 @@ export function FavoriteSearchKeywordComment() {
     setSearchKeywordCommentKeyword, } = useFavoriteSearchKeywordComment();
 
   return (
-    <Parent>
+    <React.Fragment>
       <SearchKeywordCommentKeywordContext.Provider value={searchKeywordCommentKeyword}>
         {/* コメントリスト */}
         <FavoriteSearchKeywordCommentList />
@@ -38,6 +30,6 @@ export function FavoriteSearchKeywordComment() {
           <FavoriteSearchKeywordCommentInput />
         </SetSearchKeywordCommentKeywordContext.Provider>
       </SearchKeywordCommentKeywordContext.Provider>
-    </Parent>
+    </React.Fragment>
   );
 }

@@ -11,21 +11,25 @@ const Parent = styled.div`
   flex: 1;
   box-sizing: border-box;
   color:white;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-top: 20px;
 `;
 
 const LoadingParent = styled(Parent)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const MemoListAreaDiv = styled.div`
-  width: 97%;
-  height: 90%;
+  width: 99%;
+  height: 95%;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 2% 1% 1% 1%;
+  padding: 0 20px 0 9px;
 `;
 
 

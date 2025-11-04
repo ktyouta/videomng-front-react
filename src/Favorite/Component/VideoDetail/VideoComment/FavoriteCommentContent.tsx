@@ -10,7 +10,6 @@ import { FavoriteVideoCommentThreadItemType } from "../../../Type/VideoDetail/Vi
 const Parent = styled.div`
     height: auto;
     box-sizing: border-box;
-    margin-bottom: 5%;
     border-bottom: solid 1px;
 `;
 

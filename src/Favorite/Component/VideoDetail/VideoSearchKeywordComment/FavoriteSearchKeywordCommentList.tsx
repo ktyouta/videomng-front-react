@@ -11,27 +11,28 @@ import Loading from "../../../../Common/Component/Loading";
 
 const Parent = styled.div`
   width: 100%;
-  height: 90%;
+  flex: 1;
   box-sizing: border-box;
-  padding-left: 19px;
-  padding-top: 19px;
-  padding-right: 19px;
   color:white;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-top: 20px;
 `;
 
 const LoadingParent = styled(Parent)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
   width: 99%;
-  height: 90%;
+  height: 95%;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 2% 1% 1% 1%;
+  padding: 0 20px 0 9px;
 `;
 
 
