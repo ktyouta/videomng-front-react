@@ -8,12 +8,9 @@ import { MEDIA } from "../../../../Common/Const/MediaConst";
 
 
 const MemoInputAreaDiv = styled.div`
-  position: absolute;
-  bottom: 12px;
-  left: 0;
   width: 100%;
   box-sizing: border-box;
-  padding-left: 3%;
+  justify-content: center;  
   display: flex;
   align-items: center;
   height: 37px;

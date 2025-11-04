@@ -13,27 +13,16 @@ import { FavoriteCommentHeader } from "./FavoriteCommentHeader";
 import { FavoriteCommentList } from "./FavoriteCommentList";
 
 
-const Parent = styled.div`
-  box-sizing:border-box;
-  height: 502px;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  padding-left: 19px;
-  padding-top: 23px;
-`;
-
-
 export function FavoriteComment() {
 
     console.log("FavoriteComment render");
 
     return (
-        <Parent>
+        <React.Fragment>
             {/* コメントヘッダ */}
             <FavoriteCommentHeader />
             {/* コメントリスト */}
             <FavoriteCommentList />
-        </Parent>
+        </React.Fragment>
     );
 }

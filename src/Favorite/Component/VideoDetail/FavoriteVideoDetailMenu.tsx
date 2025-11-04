@@ -120,7 +120,12 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // 動画情報
           openMenuNo === MENU_NO.INFO &&
-          <FavoriteVideoDetailPanel>
+          <FavoriteVideoDetailPanel
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <FavoriteMetaInfo
               videoDetail={videoDetail}
             />
@@ -129,12 +134,23 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // メモ
           openMenuNo === MENU_NO.MEMO &&
-          <FavoriteMemo />
+          <FavoriteVideoDetailPanel
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <FavoriteMemo />
+          </FavoriteVideoDetailPanel>
         }
         {
           // 公開コメント
           openMenuNo === MENU_NO.COMMENT &&
-          <FavoriteComment />
+          <FavoriteVideoDetailPanel
+            style={{ height: "505px" }}
+          >
+            <FavoriteComment />
+          </FavoriteVideoDetailPanel>
         }
         {
           // キーワード検索(コメント)
@@ -144,7 +160,12 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         {
           // 動画詳細設定
           openMenuNo === MENU_NO.VIDEO_DETAIL_SETTING &&
-          <FavoriteVideoDetailPanel>
+          <FavoriteVideoDetailPanel
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <FavoriteDetailSetting />
           </FavoriteVideoDetailPanel>
         }
@@ -152,7 +173,11 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           // タグ
           openMenuNo === MENU_NO.TAG &&
           <FavoriteVideoDetailPanel
-            style={{ minHeight: "365px" }}
+            style={{
+              minHeight: "365px",
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
             <FavoriteTag />
           </FavoriteVideoDetailPanel>

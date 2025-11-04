@@ -8,11 +8,8 @@ import Loading from "../../../../Common/Component/Loading";
 
 const Parent = styled.div`
   width: 100%;
-  height: 90%;
+  flex: 1;
   box-sizing: border-box;
-  padding-left: 19px;
-  padding-top: 19px;
-  padding-right: 19px;
   color:white;
 `;
 

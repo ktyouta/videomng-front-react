@@ -15,7 +15,7 @@ const Parent = styled.div`
   height: 90%;
   box-sizing: border-box;
   color:white;
-  padding-top: 1%;
+  padding-top: 20px;
 `;
 
 const LoadingParent = styled(Parent)`
@@ -25,13 +25,13 @@ const LoadingParent = styled(Parent)`
 `;
 
 const CommentListAreaDiv = styled.div`
-  width: 97%;
+  width: 99%;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
   padding-left: 1%;
-  padding-right: 1%;
+  padding-right: 20px;
 `;
 
 const LoadingParentNext = styled.div`
@@ -47,7 +47,7 @@ const NextGetAreaDiv = styled.div`
 `;
 
 const InfiniteScrollAreaDiv = styled.div`
-  heigth: 60px;
+  heigth: 100px;
 `;
 
 export function FavoriteCommentList() {
