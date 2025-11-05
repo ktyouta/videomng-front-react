@@ -7,7 +7,6 @@ import { HomeReplyCommentList } from "./HomeReplyCommentList";
 const Parent = styled.div`
     height: auto;
     box-sizing: border-box;
-    margin-bottom: 5%;
     border-bottom: solid 1px;
 `;
 
@@ -32,7 +31,6 @@ const MetaDiv = styled.div`
     display: flex;
     align-items: center;
 `;
-
 
 
 type propsType = {

@@ -9,29 +9,33 @@ import React from "react";
 
 const Parent = styled.div`
   width: 100%;
-  height: 100%;
+  flex: 1;
   box-sizing: border-box;
-  padding-left: 19px;
-  padding-top: 30px;
   color:white;
-  position: relative;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 `;
 
 const LoadingParent = styled(Parent)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const CommentListAreaDiv = styled.div`
-  width: 97%;
-  height: 90%;
+  width: 99%;
+  flex: 1;
   overflow: auto;
   overflow-x: hidden;
   box-sizing: border-box;
-  padding: 2% 1% 1% 1%;
+  padding-left: 1%;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 `;
-
 
 const LoadingParentNext = styled.div`
   position: absolute;
@@ -46,7 +50,8 @@ const NextGetAreaDiv = styled.div`
 `;
 
 const InfiniteScrollAreaDiv = styled.div`
-  heigth: 60px;
+  height: 60px;
+  flex-shrink: 0;
 `;
 
 export function HomeCommentList() {

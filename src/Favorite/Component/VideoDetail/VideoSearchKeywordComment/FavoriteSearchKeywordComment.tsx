@@ -21,15 +21,13 @@ export function FavoriteSearchKeywordComment() {
     setSearchKeywordCommentKeyword, } = useFavoriteSearchKeywordComment();
 
   return (
-    <React.Fragment>
-      <SearchKeywordCommentKeywordContext.Provider value={searchKeywordCommentKeyword}>
-        {/* コメントリスト */}
-        <FavoriteSearchKeywordCommentList />
-        <SetSearchKeywordCommentKeywordContext.Provider value={setSearchKeywordCommentKeyword}>
-          {/* 入力欄 */}
-          <FavoriteSearchKeywordCommentInput />
-        </SetSearchKeywordCommentKeywordContext.Provider>
-      </SearchKeywordCommentKeywordContext.Provider>
-    </React.Fragment>
+    <SearchKeywordCommentKeywordContext.Provider value={searchKeywordCommentKeyword}>
+      {/* コメントリスト */}
+      <FavoriteSearchKeywordCommentList />
+      <SetSearchKeywordCommentKeywordContext.Provider value={setSearchKeywordCommentKeyword}>
+        {/* 入力欄 */}
+        <FavoriteSearchKeywordCommentInput />
+      </SetSearchKeywordCommentKeywordContext.Provider>
+    </SearchKeywordCommentKeywordContext.Provider>
   );
 }

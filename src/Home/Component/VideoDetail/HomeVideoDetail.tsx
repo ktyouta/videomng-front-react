@@ -16,7 +16,7 @@ const Parent = styled.div`
   width: 100%;
   box-sizing:border-box;
   padding-top:1%;
-  position-relative;
+  position:relative;
 `;
 
 const LoadingParent = styled.div`
@@ -109,7 +109,7 @@ export function HomeVideoDetail() {
         style={{
           "color": "white",
           "position": "absolute",
-          "top": "18%",
+          "top": "0",
           "left": "3%",
         }}
         onclick={backScreen}

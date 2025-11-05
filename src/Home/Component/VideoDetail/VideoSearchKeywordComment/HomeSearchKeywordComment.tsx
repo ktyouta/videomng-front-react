@@ -32,15 +32,13 @@ export function HomeSearchKeywordComment() {
     setSearchKeyword } = useHomeSearchKeywordComment();
 
   return (
-    <Parent>
-      <SetSearchKeywordContext.Provider value={setSearchKeyword}>
-        <SearchKeywordContext.Provider value={searchKeyword}>
-          {/* コメントリスト */}
-          <HomeSearchKeywordCommentList />
-        </SearchKeywordContext.Provider>
-        {/* 入力欄 */}
-        <HomeSearchKeywordCommentInput />
-      </SetSearchKeywordContext.Provider>
-    </Parent>
+    <SetSearchKeywordContext.Provider value={setSearchKeyword}>
+      <SearchKeywordContext.Provider value={searchKeyword}>
+        {/* コメントリスト */}
+        <HomeSearchKeywordCommentList />
+      </SearchKeywordContext.Provider>
+      {/* 入力欄 */}
+      <HomeSearchKeywordCommentInput />
+    </SetSearchKeywordContext.Provider>
   );
 }

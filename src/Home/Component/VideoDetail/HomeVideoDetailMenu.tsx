@@ -8,6 +8,7 @@ import { useHomeVideoDetailMenu } from "../../Hook/VideoDetail/useHomeVideoDetai
 import { HomeComment } from "./VideoComment/HomeComment";
 import { HomeSearchKeywordComment } from "./VideoSearchKeywordComment/HomeSearchKeywordComment";
 import { MEDIA } from "../../../Common/Const/MediaConst";
+import { HomeVideoDetailPanel } from "./HomeVideoDetailPanel";
 
 
 const MenuParentDiv = styled.div`
@@ -111,20 +112,43 @@ export function HomeVideoDetailMenu(props: propsType) {
         {
           // 動画情報
           openMenuNo === MENU_NO.INFO &&
-          <HomeMetaInfo
-            videoId={videoId}
-            videoDetail={videoDetail}
-          />
+          <HomeVideoDetailPanel
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <HomeMetaInfo
+              videoId={videoId}
+              videoDetail={videoDetail}
+            />
+          </HomeVideoDetailPanel>
         }
         {
           // 公開コメント
           openMenuNo === MENU_NO.COMMENT &&
-          <HomeComment />
+          <HomeVideoDetailPanel
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "505px",
+            }}
+          >
+            <HomeComment />
+          </HomeVideoDetailPanel>
         }
         {
           // キーワード検索(コメント)
           openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-          <HomeSearchKeywordComment />
+          <HomeVideoDetailPanel
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "505px",
+            }}
+          >
+            <HomeSearchKeywordComment />
+          </HomeVideoDetailPanel>
         }
       </MenuParentDiv>
     </React.Fragment>

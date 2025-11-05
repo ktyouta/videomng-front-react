@@ -53,7 +53,7 @@ const NextGetAreaDiv = styled.div`
 `;
 
 const InfiniteScrollAreaDiv = styled.div`
-  heigth: 30px;
+  height: 60px;
   flex-shrink: 0;
 `;
 

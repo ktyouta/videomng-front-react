@@ -7,14 +7,6 @@ import { YouTubeDataApiVideoDetailItemType } from "../../../Type/VideoDetail/You
 import { formatDateJP } from "../../../../Common/Function/CommonFunction";
 
 
-const Parent = styled.div`
-  box-sizing:border-box;
-  min-height: 502px;
-  background-color: #181a1e;
-  border-radius: 1%;
-  border: solid 1px;
-  padding: 19px;
-`;
 
 const ContentDiv = styled.div`
     color:white;
@@ -72,65 +64,63 @@ export function HomeMetaInfo(props: propsType) {
     const publishedDate = formatDateJP(snippet.publishedAt);
 
     return (
-        <Parent>
-            <ContentDiv>
-                <TitleDiv>
-                    【タイトル】
-                </TitleDiv>
-                <MetaDiv>
-                    {title}
-                </MetaDiv>
-                <TitleDiv>
-                    【チャンネル】
-                </TitleDiv>
-                <MetaDiv>
-                    {channelTitle}
-                </MetaDiv>
-                <StatisticsAreaDiv>
-                    <StatisticsDiv>
-                        <TitleDiv>
-                            【投稿日】
-                        </TitleDiv>
-                        <StatisticsDataDiv>
-                            {publishedDate}
-                        </StatisticsDataDiv>
-                    </StatisticsDiv>
-                    <StatisticsDiv>
-                        <TitleDiv>
-                            【再生回数】
-                        </TitleDiv>
-                        <StatisticsDataDiv>
-                            {viewCount ? `${viewCount} 回` : ``}
-                        </StatisticsDataDiv>
-                    </StatisticsDiv>
-                    <StatisticsDiv>
-                        <TitleDiv>
-                            【高評価数】
-                        </TitleDiv>
-                        <StatisticsDataDiv>
-                            {likeCount}
-                        </StatisticsDataDiv>
-                    </StatisticsDiv>
-                </StatisticsAreaDiv>
-                <TitleDiv>
-                    【動画説明】
-                </TitleDiv>
-                <MetaDiv>
-                    {
-                        description &&
-                        <AccordionComponent
-                            defaultHeight={'70px'}
-                            outerStyle={{
-                                border: "solid 1px",
-                                boxSizing: "border-box",
-                                borderRadius: "6px"
-                            }}
-                        >
-                            {description}
-                        </AccordionComponent>
-                    }
-                </MetaDiv>
-            </ContentDiv>
-        </Parent>
+        <ContentDiv>
+            <TitleDiv>
+                【タイトル】
+            </TitleDiv>
+            <MetaDiv>
+                {title}
+            </MetaDiv>
+            <TitleDiv>
+                【チャンネル】
+            </TitleDiv>
+            <MetaDiv>
+                {channelTitle}
+            </MetaDiv>
+            <StatisticsAreaDiv>
+                <StatisticsDiv>
+                    <TitleDiv>
+                        【投稿日】
+                    </TitleDiv>
+                    <StatisticsDataDiv>
+                        {publishedDate}
+                    </StatisticsDataDiv>
+                </StatisticsDiv>
+                <StatisticsDiv>
+                    <TitleDiv>
+                        【再生回数】
+                    </TitleDiv>
+                    <StatisticsDataDiv>
+                        {viewCount ? `${viewCount} 回` : ``}
+                    </StatisticsDataDiv>
+                </StatisticsDiv>
+                <StatisticsDiv>
+                    <TitleDiv>
+                        【高評価数】
+                    </TitleDiv>
+                    <StatisticsDataDiv>
+                        {likeCount}
+                    </StatisticsDataDiv>
+                </StatisticsDiv>
+            </StatisticsAreaDiv>
+            <TitleDiv>
+                【動画説明】
+            </TitleDiv>
+            <MetaDiv>
+                {
+                    description &&
+                    <AccordionComponent
+                        defaultHeight={'70px'}
+                        outerStyle={{
+                            border: "solid 1px",
+                            boxSizing: "border-box",
+                            borderRadius: "6px"
+                        }}
+                    >
+                        {description}
+                    </AccordionComponent>
+                }
+            </MetaDiv>
+        </ContentDiv>
     );
 }
