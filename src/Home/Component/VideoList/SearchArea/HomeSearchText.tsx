@@ -4,6 +4,9 @@ import { IconComponent } from "../../../../Common/Component/IconComponent";
 import { ClearableTextbox } from "../../../../Common/Component/ClearableTextbox";
 import { MEDIA } from "../../../../Common/Const/MediaConst";
 import { useHomeSearchText } from "../../../Hook/VideoList/SearchArea/useHomeSearchText";
+import { TextboxWithButton } from "../../../../Common/Component/TextboxWithButton";
+import React from "react";
+import { IconBaseProps } from "react-icons";
 
 
 const TextBoxAreaDiv = styled.div`
@@ -61,29 +64,42 @@ export function HomeSearchText() {
     setInputKeyword, } = useHomeSearchText();
 
   return (
-    <TextBoxAreaDiv>
-      <ClearableTextbox
-        width={isMobile ? "85%" : "89%"}
-        height="99%"
-        placeholder="キーワード"
+    <React.Fragment>
+      {/* <TextboxWithButton
+        clear={clearInput}
+        icon={IoSearch}
+        onClick={clickSearchBtn}
+        backgroundColor="#ececec"
         value={inputKeyword}
         onChange={setInputKeyword}
-        style={{
-          borderBottomLeftRadius: 6,
-          borderTopLeftRadius: 6,
-        }}
-        backgroundColor="#ececec"
-        clear={clearInput}
-        onKeyDown={handleKeyPress}
-      />
-      {/* 検索ボタン */}
-      <SearchIconAreaDiv>
-        <IconComponent
-          icon={IoSearch}
-          onclick={clickSearchBtn}
-          size="75%"
+        placeholder="キーワード"
+        width={isMobile ? "71%" : "74%"}
+        height="99%"
+      /> */}
+      <TextBoxAreaDiv>
+        <ClearableTextbox
+          width={isMobile ? "85%" : "89%"}
+          height="99%"
+          placeholder="キーワード"
+          value={inputKeyword}
+          onChange={setInputKeyword}
+          style={{
+            borderBottomLeftRadius: 6,
+            borderTopLeftRadius: 6,
+          }}
+          backgroundColor="#ececec"
+          clear={clearInput}
+          onKeyDown={handleKeyPress}
         />
-      </SearchIconAreaDiv>
-    </TextBoxAreaDiv>
+        {/* 検索ボタン */}
+        <SearchIconAreaDiv>
+          <IconComponent
+            icon={IoSearch}
+            onclick={clickSearchBtn}
+            size="75%"
+          />
+        </SearchIconAreaDiv>
+      </TextBoxAreaDiv>
+    </React.Fragment>
   );
 }
