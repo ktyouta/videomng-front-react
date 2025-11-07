@@ -58,48 +58,26 @@ export function HomeSearchText() {
   const {
     clickSearchBtn,
     clearInput,
-    isMobile,
-    handleKeyPress,
     inputKeyword,
     setInputKeyword, } = useHomeSearchText();
 
   return (
-    <React.Fragment>
-      {/* <TextboxWithButton
-        clear={clearInput}
-        icon={IoSearch}
-        onClick={clickSearchBtn}
-        backgroundColor="#ececec"
-        value={inputKeyword}
-        onChange={setInputKeyword}
-        placeholder="キーワード"
-        width={isMobile ? "71%" : "74%"}
-        height="99%"
-      /> */}
-      <TextBoxAreaDiv>
-        <ClearableTextbox
-          width={isMobile ? "85%" : "89%"}
-          height="99%"
-          placeholder="キーワード"
-          value={inputKeyword}
-          onChange={setInputKeyword}
-          style={{
-            borderBottomLeftRadius: 6,
-            borderTopLeftRadius: 6,
-          }}
-          backgroundColor="#ececec"
-          clear={clearInput}
-          onKeyDown={handleKeyPress}
-        />
-        {/* 検索ボタン */}
-        <SearchIconAreaDiv>
-          <IconComponent
-            icon={IoSearch}
-            onclick={clickSearchBtn}
-            size="75%"
-          />
-        </SearchIconAreaDiv>
-      </TextBoxAreaDiv>
-    </React.Fragment>
+    <TextboxWithButton
+      clear={clearInput}
+      icon={IoSearch}
+      onClick={clickSearchBtn}
+      backgroundColor="#ececec"
+      value={inputKeyword}
+      onChange={setInputKeyword}
+      placeholder="キーワード"
+      outerWidth="75%"
+      outerMobileWidth="72%"
+      iconWidth="47px"
+      iconMobileWidth="38px"
+      outerHeight="99%"
+      style={{
+        marginRight: "3%"
+      }}
+    />
   );
 }

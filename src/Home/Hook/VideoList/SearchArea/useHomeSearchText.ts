@@ -22,8 +22,6 @@ export function useHomeSearchText() {
     const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
     const { saveFrequentKeyword } = useFrequentKeywords();
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 現在の検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
@@ -76,20 +74,9 @@ export function useHomeSearchText() {
         setInputKeyword(``);
     }
 
-    /**
-     * エンターキー押下時イベント
-     */
-    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.key === 'Enter') {
-            clickSearchBtn();
-        }
-    };
-
     return {
         clickSearchBtn,
         clearInput,
-        isMobile,
-        handleKeyPress,
         inputKeyword,
         setInputKeyword,
     }

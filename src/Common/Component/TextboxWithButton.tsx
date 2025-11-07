@@ -4,25 +4,34 @@ import { ClearableTextbox } from "./ClearableTextbox";
 import { MEDIA } from "../Const/MediaConst";
 import { IconComponent } from "./IconComponent";
 import { IconType } from "react-icons";
-import { useMediaQuery } from "@mui/material";
-import { mediaQuery } from "../Hook/useMediaQuery";
 
 
 const RADIUS_DEFAULT = "6px";
 
-const Parent = styled.div < { width: string, height: string, bgColor?: string, radius?: string, } > `
+const Parent = styled.div < { width: string, mobileWidth: string, height: string, bgColor?: string, radius?: string, } > `
   background-color:${({ bgColor }) => (bgColor ?? "white")};
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  width:${({ width }) => (width)};
   height:${({ height }) => (height)};
   border-radius: ${({ radius }) => (radius ?? RADIUS_DEFAULT)};
+  width:${({ mobileWidth }) => (mobileWidth)};
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: ${({ mobileWidth }) => (mobileWidth)};
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: ${({ width }) => (width)};
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: ${({ width }) => (width)};
+  }
 `;
 
-const SearchIconAreaDiv = styled.div<{ width: string, radius: string, }>`
+const SearchIconAreaDiv = styled.div<{ width: string, mobileWidth: string, radius: string, }>`
   background-color:#FF9900;
-  width:${({ width }) => (width)};
   height: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -31,9 +40,10 @@ const SearchIconAreaDiv = styled.div<{ width: string, radius: string, }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  width:${({ mobileWidth }) => (mobileWidth)};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    width: ${({ width }) => (width)};
+    width: ${({ mobileWidth }) => (mobileWidth)};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
@@ -63,21 +73,23 @@ type propsType = {
     backgroundColor?: string,
     icon: IconType,
     onClick: () => void,
-    width: string,
-    height: string,
+    outerWidth: string,
+    outerMobileWidth: string,
+    outerHeight: string,
+    iconWidth: string,
+    iconMobileWidth: string,
     radius?: string,
 }
 
 export function TextboxWithButton(props: propsType) {
 
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
-
     return (
         <Parent
-            width={props.width}
-            height={props.height}
+            width={props.outerWidth}
+            mobileWidth={props.outerMobileWidth}
+            height={props.outerHeight}
             radius={props.radius}
+            style={props.style}
         >
             {/* テキストボックス */}
             <ClearableTextbox
@@ -93,9 +105,14 @@ export function TextboxWithButton(props: propsType) {
                     borderBottomLeftRadius: props.radius ?? RADIUS_DEFAULT,
                     borderTopLeftRadius: props.radius ?? RADIUS_DEFAULT,
                     border: "none",
+                    backgroundColor: props.backgroundColor,
+                    minWidth: 0,
+                    boxSizing: "border-box",
                 }}
                 textboxStyle={{
                     flex: "1",
+                    paddingLeft: "7px",
+                    paddingRight: "7px",
                 }}
                 iconStyle={{
                     width: "20px",
@@ -104,7 +121,8 @@ export function TextboxWithButton(props: propsType) {
             />
             {/* 検索ボタン */}
             <SearchIconAreaDiv
-                width={isMobile ? "38px" : "47px"}
+                width={props.iconWidth}
+                mobileWidth={props.iconMobileWidth}
                 radius={props.radius ?? RADIUS_DEFAULT}
             >
                 <IconComponent

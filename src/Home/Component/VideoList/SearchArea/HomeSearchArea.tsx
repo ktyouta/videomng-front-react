@@ -17,19 +17,19 @@ const Parent = styled.div`
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     height: 41px;
     padding-right: 12%;
-    padding-left: 17%;
+    padding-left: 18%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     height: 41px;
     padding-right: 12%;
-    padding-left: 17%;
+    padding-left: 18%;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     height: 41px;
     padding-right: 12%;
-    padding-left: 17%;
+    padding-left: 18%;
   }
 `;
 
