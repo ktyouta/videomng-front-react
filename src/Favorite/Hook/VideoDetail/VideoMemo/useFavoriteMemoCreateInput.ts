@@ -19,8 +19,6 @@ export function useFavoriteMemoCreateInput() {
 
     // メモ入力情報
     const [inputMemo, setInputMemo] = useState(``);
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
     // メモ再取得用
@@ -79,22 +77,10 @@ export function useFavoriteMemoCreateInput() {
         setInputMemo(``);
     }
 
-    /**
-     * エンターキー押下時イベント
-     * @param event 
-     */
-    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.key === 'Enter') {
-            addToMemo();
-        }
-    };
-
     return {
         inputMemo,
         setInputMemo,
         addToMemo,
         clearInputMemo,
-        isMobile,
-        handleKeyPress,
     }
 }

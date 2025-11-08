@@ -57,80 +57,82 @@ const SearchIconAreaDiv = styled.div<{ width: string, mobileWidth: string, radiu
 
 //引数の型
 type propsType = {
-    value?: string,
-    length?: number,
-    bgColor?: string,
-    disabled?: boolean,
-    onChange?: (e: string) => void,
-    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void,
-    placeholder?: string,
-    autoComplete?: boolean,
-    textboxStyle?: CSSProperties,
-    style?: CSSProperties,
-    clear: () => void,
-    onBlur?: () => void,
-    iconStyle?: CSSProperties,
-    backgroundColor?: string,
-    icon: IconType,
-    onClick: () => void,
-    outerWidth: string,
-    outerMobileWidth: string,
-    outerHeight: string,
-    iconWidth: string,
-    iconMobileWidth: string,
-    radius?: string,
+  value?: string,
+  length?: number,
+  bgColor?: string,
+  disabled?: boolean,
+  onChange?: (e: string) => void,
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void,
+  placeholder?: string,
+  autoComplete?: boolean,
+  textboxStyle?: CSSProperties,
+  style?: CSSProperties,
+  clear: () => void,
+  onBlur?: () => void,
+  iconStyle?: CSSProperties,
+  backgroundColor?: string,
+  icon: IconType,
+  iconSize?: string,
+  onClick: () => void,
+  outerWidth: string,
+  outerMobileWidth: string,
+  outerHeight: string,
+  iconWidth: string,
+  iconMobileWidth: string,
+  radius?: string,
 }
+
 
 export function TextboxWithButton(props: propsType) {
 
-    return (
-        <Parent
-            width={props.outerWidth}
-            mobileWidth={props.outerMobileWidth}
-            height={props.outerHeight}
-            radius={props.radius}
-            style={props.style}
-        >
-            {/* テキストボックス */}
-            <ClearableTextbox
-                {...props}
-                onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-                    if (event.key === 'Enter') {
-                        props.onClick();
-                    }
-                }}
-                style={{
-                    flex: "1",
-                    height: "100%",
-                    borderBottomLeftRadius: props.radius ?? RADIUS_DEFAULT,
-                    borderTopLeftRadius: props.radius ?? RADIUS_DEFAULT,
-                    border: "none",
-                    backgroundColor: props.backgroundColor,
-                    minWidth: 0,
-                    boxSizing: "border-box",
-                }}
-                textboxStyle={{
-                    flex: "1",
-                    paddingLeft: "7px",
-                    paddingRight: "7px",
-                }}
-                iconStyle={{
-                    width: "20px",
-                    marginRight: "7px"
-                }}
-            />
-            {/* 検索ボタン */}
-            <SearchIconAreaDiv
-                width={props.iconWidth}
-                mobileWidth={props.iconMobileWidth}
-                radius={props.radius ?? RADIUS_DEFAULT}
-            >
-                <IconComponent
-                    icon={props.icon}
-                    onclick={props.onClick}
-                    size="75%"
-                />
-            </SearchIconAreaDiv>
-        </Parent>
-    );
+  return (
+    <Parent
+      width={props.outerWidth}
+      mobileWidth={props.outerMobileWidth}
+      height={props.outerHeight}
+      radius={props.radius}
+      style={props.style}
+    >
+      {/* テキストボックス */}
+      <ClearableTextbox
+        {...props}
+        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
+          if (event.key === 'Enter' && props.onClick) {
+            props.onClick();
+          }
+        }}
+        style={{
+          flex: "1",
+          height: "100%",
+          borderBottomLeftRadius: props.radius ?? RADIUS_DEFAULT,
+          borderTopLeftRadius: props.radius ?? RADIUS_DEFAULT,
+          border: "none",
+          backgroundColor: props.backgroundColor,
+          minWidth: 0,
+          boxSizing: "border-box",
+        }}
+        textboxStyle={{
+          flex: "1",
+          paddingLeft: "7px",
+          paddingRight: "7px",
+        }}
+        iconStyle={{
+          width: "20px",
+          marginRight: "7px"
+        }}
+      />
+      {/* 検索ボタン */}
+      <SearchIconAreaDiv
+        width={props.iconWidth}
+        mobileWidth={props.iconMobileWidth}
+        radius={props.radius ?? RADIUS_DEFAULT}
+      >
+        <IconComponent
+          icon={props.icon}
+          onclick={props.onClick}
+          size={props.iconSize || "75%"}
+        />
+      </SearchIconAreaDiv>
+    </Parent>
+  );
 }

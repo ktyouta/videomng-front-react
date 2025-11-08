@@ -6,8 +6,6 @@ import { SetSearchKeywordContext } from "../../../Component/VideoDetail/VideoSea
 
 export function useHomeSearchKeywordCommentInput() {
 
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 入力用キーワード
     const [inputKeyword, setInputKeyword] = useState(``);
     // 検索用キーワード(setter)
@@ -28,16 +26,6 @@ export function useHomeSearchKeywordCommentInput() {
     }
 
     /**
-     * エンターキー押下時イベント
-     * @param event 
-     */
-    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.key === 'Enter') {
-            clickSearchBtn();
-        }
-    };
-
-    /**
      * 入力中のキーワードをクリアする
      */
     function clearInputKeyword() {
@@ -47,8 +35,6 @@ export function useHomeSearchKeywordCommentInput() {
     return {
         clickSearchBtn,
         clearInputKeyword,
-        isMobile,
-        handleKeyPress,
         inputKeyword,
         setInputKeyword,
     }

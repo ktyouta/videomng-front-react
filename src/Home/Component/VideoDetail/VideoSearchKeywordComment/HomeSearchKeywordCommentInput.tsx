@@ -6,43 +6,8 @@ import { IoSearch } from "react-icons/io5";
 import { ClearableTextbox } from "../../../../Common/Component/ClearableTextbox";
 import { useHomeSearchKeywordCommentInput } from "../../../Hook/VideoDetail/VideoSearchKeywordComment/useHomeSearchKeywordCommentInput";
 import { MEDIA } from "../../../../Common/Const/MediaConst";
-
-
-const MemoInputAreaDiv = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display:flex;
-  height: 38px;
-  align-items: center;
-  justify-content: center;  
-`;
-
-const SearchIconAreaDiv = styled.div`
-  background-color:#FF9900;
-  height: 100%;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 15%;
-  border-bottom-right-radius: 15%;
-  color:#213547;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    width: 34px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    width: 37px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    width: 37px;
-  }
-`;
-
+import React from "react";
+import { TextboxWithButton } from "../../../../Common/Component/TextboxWithButton";
 
 
 export function HomeSearchKeywordCommentInput() {
@@ -52,35 +17,27 @@ export function HomeSearchKeywordCommentInput() {
   const {
     clickSearchBtn,
     clearInputKeyword,
-    isMobile,
-    handleKeyPress,
     inputKeyword,
     setInputKeyword, } = useHomeSearchKeywordCommentInput();
 
-  const inputWidth = isMobile ? "88%" : "92%";
-
   return (
-    <MemoInputAreaDiv>
-      <ClearableTextbox
-        width={inputWidth}
-        height="100%"
-        placeholder="キーワード"
-        value={inputKeyword}
-        onChange={setInputKeyword}
-        style={{
-          borderBottomLeftRadius: 5,
-          borderTopLeftRadius: 5,
-        }}
-        clear={clearInputKeyword}
-        onKeyDown={handleKeyPress}
-      />
-      <SearchIconAreaDiv>
-        <IconComponent
-          icon={IoSearch}
-          onclick={() => { clickSearchBtn() }}
-          size="70%"
-        />
-      </SearchIconAreaDiv>
-    </MemoInputAreaDiv>
+    <TextboxWithButton
+      clear={clearInputKeyword}
+      icon={IoSearch}
+      onClick={clickSearchBtn}
+      backgroundColor="#ececec"
+      value={inputKeyword}
+      onChange={setInputKeyword}
+      placeholder="キーワード"
+      outerWidth="96%"
+      outerMobileWidth="96%"
+      iconWidth="37px"
+      iconMobileWidth="34px"
+      outerHeight="37px"
+      style={{
+        marginRight: "auto",
+        marginLeft: "auto",
+      }}
+    />
   );
 }
