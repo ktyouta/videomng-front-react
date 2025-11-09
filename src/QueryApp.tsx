@@ -1,22 +1,22 @@
 import React from 'react';
-import { Home } from './Home/Component/Home';
-import { Main } from './Main/Component/Main';
+import { Home } from './features/home/components/Home';
+import { Main } from './features/main/components/Main';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import useQueryApp from './useQueryApp';
-import { Login } from './Login/Component/Login';
-import { createCtx } from './Common/Function/createCtx';
-import { Siginup } from './Siginup/Component/Siginup';
-import { LoginUserInfoType } from './Common/Type/LoginUserInfoType';
-import { ROUTER_PATH } from './Common/Const/RouterPath';
-import { TOAST_INIT, ToastComponent, toastStatusType } from './Common/Component/ToastComponent';
+import { Login } from './features/login/components/Login';
+import { createCtx } from './utils/createCtx';
+import { Siginup } from './features/signup/components/Siginup';
+import { LoginUserInfoType } from './types/LoginUserInfoType';
+import { ROUTER_PATH } from './consts/RouterPath';
+import { TOAST_INIT, ToastComponent, toastStatusType } from './components/ToastComponent';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { TOAST_DISPLAY_TIME } from './Common/Const/CommonConst';
-import { UpdateUserInfo } from './UpdateUserInfo/Component/UpdateUserInfo';
-import { UpdateUserPassword } from './UpdateUserPassword/Component/UpdateUserPassword';
+import { TOAST_DISPLAY_TIME } from './consts/CommonConst';
+import { UpdateUserInfo } from './features/updateuserinfo/components/UpdateUserInfo';
+import { UpdateUserPassword } from './features/updateuserpassword/components/UpdateUserPassword';
 import styled from 'styled-components';
-import LoadingBase from './Common/Component/LoadingBase';
-import Loading from './Common/Component/Loading';
+import LoadingBase from './components/LoadingBase';
+import Loading from './components/Loading';
 
 
 const LoadingScreenDiv = styled.div`

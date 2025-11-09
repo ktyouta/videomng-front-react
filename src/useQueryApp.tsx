@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { LoginUserInfoType } from './Common/Type/LoginUserInfoType';
-import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from './Common/Const/CommonConst';
-import { TOAST_INIT } from './Common/Component/ToastComponent';
-import { resType } from './Common/Hook/useMutationWrapperBase';
-import useQueryWrapper from './Common/Hook/useQueryWrapper';
+import { LoginUserInfoType } from './types/LoginUserInfoType';
+import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from './consts/CommonConst';
+import { TOAST_INIT } from './components/ToastComponent';
+import { resType } from './hooks/useMutationWrapperBase';
+import useQueryWrapper from './hooks/useQueryWrapper';
 import ENV from "./env.json";
 
 
