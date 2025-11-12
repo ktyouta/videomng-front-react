@@ -78,21 +78,21 @@ export function ClearableTextbox(props: propsType) {
                 onBlur={props.onBlur}
                 textWidth={props.textWidth}
             />
-            <IconDiv
-                iconHeight={props.height}
-                iconWidth={props.iconWidth}
-                style={props.iconStyle}
-            >
-                {
-                    props.value && props.value.length > 0 &&
+            {
+                props.value && props.value.length > 0 &&
+                <IconDiv
+                    iconHeight={props.height}
+                    iconWidth={props.iconWidth}
+                    style={props.iconStyle}
+                >
                     <IconComponent
                         icon={RxCross1}
                         onclick={props.clear}
                         size="100%"
                         style={{ color: "#2C3E50" }}
                     />
-                }
-            </IconDiv>
+                </IconDiv>
+            }
         </OuterDiv>
     );
 }
