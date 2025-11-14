@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import ComboComponent, { comboType } from "../../../../../../components/ComboComponent";
-import { VideoCategoryItemType } from "../../../../../main/types/VideoCategoryItemType";
 import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchConditionMain";
+import { Selectbox } from "../../../../../../components/Selectbox";
 
 
 const Parent = styled.div`
@@ -74,9 +73,9 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             カテゴリ
                         </InputLabel>
-                        <ComboComponent
-                            combo={videoCategory}
-                            initValue={selectedFavoriteVideoCategory ?? videoCategory[0].value}
+                        <Selectbox
+                            options={videoCategory}
+                            value={selectedFavoriteVideoCategory ?? videoCategory[0].value}
                             onChange={changeVideoCategory}
                             width="68%"
                             minWidth="8%"
@@ -90,9 +89,9 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             視聴状況
                         </InputLabel>
-                        <ComboComponent
-                            combo={viewStatusList}
-                            initValue={selectedFavoriteVideoViewStatus ?? viewStatusList[0].value}
+                        <Selectbox
+                            options={viewStatusList}
+                            value={selectedFavoriteVideoViewStatus ?? viewStatusList[0].value}
                             onChange={changeViewStatus}
                             width="68%"
                             minWidth="8%"
@@ -106,9 +105,9 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             タグ
                         </InputLabel>
-                        <ComboComponent
-                            combo={tagMasterList}
-                            initValue={selectedFavoriteVideoTag ?? tagMasterList[0].value}
+                        <Selectbox
+                            options={tagMasterList}
+                            value={selectedFavoriteVideoTag ?? tagMasterList[0].value}
                             onChange={changeVideoTag}
                             width="68%"
                             minWidth="8%"
@@ -122,10 +121,10 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             お気に入り度
                         </InputLabel>
-                        <ComboComponent
-                            combo={favoriteLevelList}
-                            initValue={selectedFavoriteVideoFavoriteLevel ?? favoriteLevelList[0].value}
-                            onChange={changeFavoriteLevel}
+                        <Selectbox
+                            options={favoriteLevelList}
+                            value={selectedFavoriteVideoFavoriteLevel ?? favoriteLevelList[0].value}
+                            onChange={changeVideoCategory}
                             width="68%"
                             minWidth="8%"
                             height="39px"

@@ -1,8 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useMemo, useState } from "react";
-import { EDIT_MODE } from "../../../const/FavoriteConst";
-import { FavoriteVideoDetailDataType } from "../../../types/videodetail/FavoriteVideoDetailDataType";
-import { comboType } from "../../../../../components/ComboComponent";
 import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { UpdateFavoriteVideoResponseDataType } from "../../../types/videodetail/videodetailsetting/UpdateFavoriteVideoResponseDataType";

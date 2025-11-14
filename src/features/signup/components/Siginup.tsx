@@ -3,7 +3,6 @@ import styled from "styled-components";
 import BaseTextbox from "../../../components/BaseTextbox";
 import ButtonComponent from "../../../components/ButtonComponent";
 import { useSiginup } from "../hooks/useSiginup";
-import ComboComponent from "../../../components/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../../consts/CommonConst";
 import { MEDIA } from "../../../consts/MediaConst";
 import { LoadingCenter } from "../../../components/LoadingCenter";

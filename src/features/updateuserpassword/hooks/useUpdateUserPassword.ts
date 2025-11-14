@@ -9,7 +9,6 @@ import { errResType, resSchema, resType } from '../../../hooks/useMutationWrappe
 import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../../hooks/useGlobalAtom';
 import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../../QueryApp';
-import { comboType } from '../../../components/ComboComponent';
 import { useCreateYearList } from '../../../hooks/useCreateYearList';
 import { ROUTER_PATH } from '../../../consts/RouterPath';
 import { UpdateUserInfoRequestType } from '../../updateuserinfo/types/UpdateUserInfoRequestType';

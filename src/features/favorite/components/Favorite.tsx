@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from
 import { FavoriteVideoDetail } from "./videodetail/FavoriteVideoDetail";
 import { createCtx } from "../../../utils/createCtx";
 import { Provider } from "jotai";
-import { comboType } from "../../../components/ComboComponent";
 import { ROUTER_PATH } from "../../../consts/RouterPath";
 import { NotFound } from "../../notfound/components/NotFound";
 import { FavoriteVideoSearchConditionValueProvider } from "./FavoriteVideoSearchConditionValueProvider";

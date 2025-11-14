@@ -10,7 +10,6 @@ import { useSetAtom } from 'jotai';
 import { useSetGlobalAtom } from '../../../hooks/useGlobalAtom';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../../QueryApp';
 import { SiginupRequestType } from '../types/SiginupRequestType';
-import { comboType } from '../../../components/ComboComponent';
 import { useCreateYearList } from '../../../hooks/useCreateYearList';
 import { LoginUserInfoType } from '../../../types/LoginUserInfoType';
 import { ROUTER_PATH } from '../../../consts/RouterPath';

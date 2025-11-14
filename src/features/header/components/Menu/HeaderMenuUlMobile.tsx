@@ -4,7 +4,7 @@ import { useHeaderMenuUl } from "../../hooks/Menu/useHeaderMenuUl";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { useHeaderMenuUlMobile } from "../../hooks/Menu/useHeaderMenuUlMobile";
-import ComboComponent from "../../../../components/ComboComponent";
+import { Selectbox } from "../../../../components/Selectbox";
 
 
 const Parent = styled.div`
@@ -34,18 +34,16 @@ export function HeaderMenuUlMobile() {
             <MenuTitleSpan>
                 画面切替：
             </MenuTitleSpan>
-            <ComboComponent
-                combo={menuList}
-                initValue={nowPath ?? ``}
-                selectStyle={{
-                    "backgroundColor": "rgb(24, 26, 30)",
-                    "color": "white",
-                    "fontSize": "11px"
-                }}
+            <Selectbox
+                options={menuList}
+                value={nowPath ?? ``}
+                onChange={selectMenu}
+                width="65%"
                 minWidth="150px"
                 height="37px"
-                width="65%"
-                onChange={selectMenu}
+                backgroundColor="rgb(24, 26, 30)"
+                color="white"
+                fontSize="11px"
             />
         </Parent>
     );

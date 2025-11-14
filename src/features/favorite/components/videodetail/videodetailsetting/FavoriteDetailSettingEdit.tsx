@@ -2,7 +2,6 @@ import React from "react";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import ComboComponent, { comboType } from "../../../../../components/ComboComponent";
 import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEdit";
 import BaseTextAreaComponent from "../../../../../components/BaseTextAreaComponent";
 import CheckBoxComponent from "../../../../../components/CheckBoxComponent";
@@ -11,6 +10,7 @@ import { FaStar } from "react-icons/fa";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { FavoriteDetailSettingEditActions } from "./FavoriteDetailSettingEditActions";
+import { Selectbox } from "../../../../../components/Selectbox";
 
 
 const ContentDiv = styled.div`
@@ -159,16 +159,14 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                 【視聴状況】
                             </TitleDiv>
                             <MetaDiv>
-                                <ComboComponent
-                                    combo={viewStatusList}
-                                    initValue={viewStatus}
+                                <Selectbox
+                                    options={viewStatusList}
+                                    value={viewStatus}
                                     onChange={setViewStatus}
                                     width="25%"
                                     height="39px"
-                                    selectStyle={{
-                                        "backgroundColor": "rgb(44, 47, 54)",
-                                        "color": "white",
-                                    }}
+                                    backgroundColor="rgb(44, 47, 54)"
+                                    color="white"
                                 />
                             </MetaDiv>
                         </React.Fragment>

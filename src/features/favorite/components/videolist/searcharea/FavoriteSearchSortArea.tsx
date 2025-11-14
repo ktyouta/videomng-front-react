@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import ComboComponent from "../../../../../components/ComboComponent";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
 import { useFavoriteSearchSortArea } from "../../../hooks/videolist/searcharea/useFavoriteSearchSortArea";
+import { Selectbox } from "../../../../../components/Selectbox";
 
 
 const ComboTitleSpan = styled.span`
@@ -49,17 +49,17 @@ export function FavoriteSearchSortArea() {
                     <ComboTitleSpan>
                         並べ替え：
                     </ComboTitleSpan>
-                    <ComboComponent
-                        combo={sortList}
-                        initValue={selectedFavoriteVideoSortKey ?? sortList[0].value}
+                    <Selectbox
+                        options={sortList}
+                        value={selectedFavoriteVideoSortKey || sortList[0].value}
                         onChange={selectSort}
                         width={isMobile ? `48%` : `23%`}
                         height="39px"
-                        selectStyle={{
-                            backgroundColor: "rgb(24, 26, 30)",
-                            color: "white",
-                            marginRight: "3%",
-                            fontSize: isMobile ? "12px" : "13px"
+                        backgroundColor="rgb(24, 26, 30)"
+                        color="white"
+                        fontSize={isMobile ? "12px" : "13px"}
+                        outerStyle={{
+                            marginRight: "2%",
                         }}
                     />
                 </React.Fragment>

@@ -4,7 +4,6 @@ import { useAtomValue } from "jotai";
 import { useGlobalAtomValue } from "../../../../hooks/useGlobalAtom";
 import { IsLoginContext } from "../../../../QueryApp";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { comboType } from "../../../../components/ComboComponent";
 import { useGetNowPath } from "../useGetNowPath";
 
 export function useHeaderMenuUlMobile() {

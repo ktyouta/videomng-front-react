@@ -1,4 +1,4 @@
-import { comboType } from "../../../components/ComboComponent";
+import { Option } from "../../../components/Selectbox";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
 
@@ -14,7 +14,7 @@ export enum MENU_NO {
 }
 
 // お気に入り動画詳細画面メニューリスト
-export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
+export const VIDEO_DETIAL_MENU_LIST: Option[] = [
     {
         label: `動画情報`,
         value: `1`,

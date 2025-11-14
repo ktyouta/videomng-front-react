@@ -1,9 +1,7 @@
-import { comboType } from "../../../components/ComboComponent";
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
-import ENV from "../../../env.json";
+import { Option } from "../../../components/Selectbox";
 
 // 動画種別リスト
-export const VIDEO_TYPE_LIST: comboType[] = [
+export const VIDEO_TYPE_LIST: Option[] = [
     {
         label: `すべて`,
         value: `all`,
@@ -22,7 +20,7 @@ export enum MENU_NO {
 }
 
 // 動画詳細画面メニューリスト
-export const VIDEO_DETIAL_MENU_LIST: comboType[] = [
+export const VIDEO_DETIAL_MENU_LIST: Option[] = [
     {
         label: `動画情報`,
         value: `1`,

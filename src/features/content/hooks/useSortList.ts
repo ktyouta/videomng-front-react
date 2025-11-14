@@ -1,4 +1,4 @@
-import { comboType } from "../../../components/ComboComponent";
+import { Option } from "../../../components/Selectbox";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import useQueryWrapper from "../../../hooks/useQueryWrapper";
 import { FavoriteVideoSortListResponseType } from "../../favorite/types/videolist/FavoriteVideoSortListResponseType";
@@ -11,7 +11,7 @@ type porpsType = {
 
 export function useSortList(props: porpsType) {
 
-    return useQueryWrapper<FavoriteVideoSortListResponseType, comboType[]>(
+    return useQueryWrapper<FavoriteVideoSortListResponseType, Option[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_SORT}`,
             select: (res: FavoriteVideoSortListResponseType) => {

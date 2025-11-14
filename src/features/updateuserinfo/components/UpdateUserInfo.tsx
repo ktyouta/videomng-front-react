@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import BaseTextbox from "../../../components/BaseTextbox";
 import ButtonComponent from "../../../components/ButtonComponent";
-import ComboComponent from "../../../components/ComboComponent";
 import { DAY_LIST, MONTH_LIST, } from "../../../consts/CommonConst";
 import { useUpdateUserInfo } from "../hooks/useUpdateUserInfo";
 import { MEDIA } from "../../../consts/MediaConst";

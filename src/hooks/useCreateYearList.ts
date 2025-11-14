@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { comboType } from "../components/ComboComponent";
+import { Option } from "../components/Selectbox";
 
 // 年の最小値
 export const MIN_YEAR = 1900;
@@ -14,7 +14,7 @@ export function useCreateYearList() {
         // 現在年を取得
         const nowYear = new Date().getFullYear();
 
-        let yearList: comboType[] = [];
+        let yearList: Option[] = [];
 
         for (let i = MIN_YEAR; i <= nowYear; i++) {
 

@@ -1,14 +1,3 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import useSwitch from "../../../../../hooks/useSwitch";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { FavoriteVideoSortListResponseType } from "../../../types/videolist/FavoriteVideoSortListResponseType";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json";
-import { errResType } from "../../../../../hooks/useMutationWrapperBase";
-import { useState } from "react";
-import { FavoriteVideoSortType } from "../../../types/videolist/FavoriteVideoSortType";
-import { comboType } from "../../../../../components/ComboComponent";
-import { useNavigate } from "react-router-dom";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";

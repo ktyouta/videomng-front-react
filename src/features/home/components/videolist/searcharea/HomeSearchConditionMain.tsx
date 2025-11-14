@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import ComboComponent, { comboType } from "../../../../../components/ComboComponent";
 import { VIDEO_TYPE_LIST } from "../../../const/HomeConst";
 import { useHomeSearchConditionMain } from "../../../hooks/videolist/searcharea/useHomeSearchConditionMain";
 import { VideoCategoryItemType } from "../../../../main/types/VideoCategoryItemType";
+import { Selectbox } from "../../../../../components/Selectbox";
 
 
 const Parent = styled.div`
@@ -34,7 +34,7 @@ const InputDiv = styled.div`
 
 const InputLabel = styled.label`
   display: inline-block;
-  width: 55px;
+  width: 17%;
   margin-right: 10px;
   white-space: normal;
   word-wrap: break-word;
@@ -59,9 +59,9 @@ export function HomeSearchConditionMain() {
                     <InputLabel>
                         種別
                     </InputLabel>
-                    <ComboComponent
-                        combo={VIDEO_TYPE_LIST}
-                        initValue={selectedVideoType ?? VIDEO_TYPE_LIST[0].value}
+                    <Selectbox
+                        options={VIDEO_TYPE_LIST}
+                        value={selectedVideoType ?? VIDEO_TYPE_LIST[0].value}
                         onChange={setSelectedVideoType}
                         width="68%"
                         minWidth="8%"
@@ -74,9 +74,9 @@ export function HomeSearchConditionMain() {
                         <InputLabel>
                             カテゴリ
                         </InputLabel>
-                        <ComboComponent
-                            combo={videoCategory}
-                            initValue={selectedVideoCategory ?? videoCategory[0].value}
+                        <Selectbox
+                            options={videoCategory}
+                            value={selectedVideoCategory ?? videoCategory[0].value}
                             onChange={setSelectedVideoCategory}
                             width="68%"
                             minWidth="8%"

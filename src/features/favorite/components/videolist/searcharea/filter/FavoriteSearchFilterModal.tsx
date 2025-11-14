@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
-import TagButtonComponent from "../../../../../../components/TagButtonComponent";
-import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
-import ComboComponent from "../../../../../../components/ComboComponent";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../../components/IconComponent";

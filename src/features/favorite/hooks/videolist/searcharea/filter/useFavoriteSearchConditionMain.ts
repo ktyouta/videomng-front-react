@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
-import { comboType } from "../../../../../../components/ComboComponent";
+import { Option } from "../../../../../../components/Selectbox";
 import { objectDeepCopy } from "../../../../../../utils/CommonFunction";
 import useQueryWrapper from "../../../../../../hooks/useQueryWrapper";
 import { FavoriteVideoTagResponseType } from "../../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
@@ -53,7 +53,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     // お気に入り度リスト
     const favoriteLevelList = useMemo(() => {
 
-        const favoriteLevelList: comboType[] = [...Array(FAVORITE_LEVEL_SETTING_LIST + 1)].map((_, index) => {
+        const favoriteLevelList: Option[] = [...Array(FAVORITE_LEVEL_SETTING_LIST + 1)].map((_, index) => {
 
             const label = index === 0 ? `未設定` : index.toString();
 

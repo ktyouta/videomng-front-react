@@ -12,13 +12,13 @@ import { Z_INDEX_PARAM } from "../../../../consts/CommonConst";
 import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/FavoriteConst";
 import { FavoriteComment } from "./videocomment/FavoriteComment";
 import { FavoriteSearchKeywordComment } from "./videosearchkeywordcomment/FavoriteSearchKeywordComment";
-import ComboComponent, { comboType } from "../../../../components/ComboComponent";
 import { FavoriteMetaInfo } from "./videometainfo/FavoriteMetaInfo";
 import { FavoriteDetailSetting } from "./videodetailsetting/FavoriteDetailSetting";
 import { FavoriteTag } from "./videotag/FavoriteTag";
 import { Provider } from "jotai";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { FavoriteVideoDetailPanel } from "./FavoriteVideoDetailPanel";
+import { Selectbox } from "../../../../components/Selectbox";
 
 
 const MenuParentDiv = styled.div`
@@ -103,18 +103,16 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           <ComboTitleSpan>
             メニュー：
           </ComboTitleSpan>
-          <ComboComponent
-            combo={VIDEO_DETIAL_MENU_LIST}
-            initValue={VIDEO_DETIAL_MENU_LIST[0].value}
+          <Selectbox
+            options={VIDEO_DETIAL_MENU_LIST}
+            value={openMenuNo || VIDEO_DETIAL_MENU_LIST[0].value}
             onChange={setOpenMenuNo}
             width={menuWidth}
             minWidth="8%"
             height="39px"
-            selectStyle={{
-              "backgroundColor": "rgb(24, 26, 30)",
-              "color": "white",
-              "fontSize": `${menuComboFontSize}`
-            }}
+            backgroundColor="rgb(24, 26, 30)"
+            color="white"
+            fontSize={menuComboFontSize}
           />
         </ComboAreaDiv>
         {

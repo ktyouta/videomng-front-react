@@ -3,10 +3,7 @@ import { ViewStatusResponseType } from "../types/videolist/ViewStatusResponseTyp
 import useQueryWrapper from "../../../hooks/useQueryWrapper";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
-import { errResType } from "../../../hooks/useMutationWrapperBase";
-import { useState } from "react";
-import { comboType } from "../../../components/ComboComponent";
-import { ROUTER_PATH } from "../../../consts/RouterPath";
+import { Option } from "../../../components/Selectbox";
 
 
 type propsType = {
@@ -17,7 +14,7 @@ export function useViewStatusList(props: propsType) {
 
 
     // 視聴状況リストを取得
-    return useQueryWrapper<ViewStatusResponseType, comboType[]>(
+    return useQueryWrapper<ViewStatusResponseType, Option[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.VIEW_STATUS}`,
             select: (res: ViewStatusResponseType) => {

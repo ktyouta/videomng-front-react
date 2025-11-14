@@ -1,4 +1,4 @@
-import { comboType } from "../../../../components/ComboComponent";
+import { Option } from "../../../../components/Selectbox";
 import { VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
 import useQueryWrapper from "../../../../hooks/useQueryWrapper";
 import { FavoriteVideoTagResponseType } from "../../types/videodetail/videotag/FavoriteVideoTagResponseType";
@@ -12,7 +12,7 @@ type porpsType = {
 export function useTagMasterList(props: porpsType) {
 
     // タグマスタリストを取得
-    return useQueryWrapper<FavoriteVideoTagResponseType, comboType[]>(
+    return useQueryWrapper<FavoriteVideoTagResponseType, Option[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
             select: (res: FavoriteVideoTagResponseType) => {

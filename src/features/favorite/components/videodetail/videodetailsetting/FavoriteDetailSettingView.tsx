@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { IconComponent } from "../../../../../components/IconComponent";
 import styled from "styled-components";
 import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
-import { comboType } from "../../../../../components/ComboComponent";
+import { Option } from "../../../../../components/Selectbox";
 import { FavoriteDetailSettingViewActions } from "./FavoriteDetailSettingViewActions";
 import { useFavoriteDetailSettingView } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingView";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../const/FavoriteConst";
@@ -149,7 +149,7 @@ export function FavoriteDetailSettingView(props: propsType) {
                                     {
                                         categorys && categorys.reduce((prev: ReactNode[], current: FavoriteVideoDetailCategoryType) => {
 
-                                            const category = videoCategory?.find((e1: comboType) => {
+                                            const category = videoCategory?.find((e1: Option) => {
                                                 return e1.value === current.categoryId;
                                             });
 

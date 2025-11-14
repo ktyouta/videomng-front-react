@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { HomeMetaInfo } from "./videometainfo/HomeMetaInfo";
 import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
-import ComboComponent from "../../../../components/ComboComponent";
 import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/HomeConst";
 import { useHomeVideoDetailMenu } from "../../hooks/videodetail/useHomeVideoDetailMenu";
 import { HomeComment } from "./videocomment/HomeComment";
 import { HomeSearchKeywordComment } from "./videosearchkeywordcomment/HomeSearchKeywordComment";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { HomeVideoDetailPanel } from "./HomeVideoDetailPanel";
+import { Selectbox } from "../../../../components/Selectbox";
 
 
 const MenuParentDiv = styled.div`
@@ -95,18 +95,16 @@ export function HomeVideoDetailMenu(props: propsType) {
           <ComboTitleSpan>
             メニュー：
           </ComboTitleSpan>
-          <ComboComponent
-            combo={VIDEO_DETIAL_MENU_LIST}
-            initValue={VIDEO_DETIAL_MENU_LIST[0].value}
+          <Selectbox
+            options={VIDEO_DETIAL_MENU_LIST}
+            value={openMenuNo || VIDEO_DETIAL_MENU_LIST[0].value}
             onChange={setOpenMenuNo}
             width={menuWidth}
             minWidth="8%"
             height="39px"
-            selectStyle={{
-              "backgroundColor": "rgb(24, 26, 30)",
-              "color": "white",
-              "fontSize": `${menuComboFontSize}`
-            }}
+            backgroundColor="rgb(24, 26, 30)"
+            color="white"
+            fontSize={menuComboFontSize}
           />
         </ComboAreaDiv>
         {

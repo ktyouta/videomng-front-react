@@ -3,21 +3,13 @@ import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import useQueryWrapper from "../../../hooks/useQueryWrapper";
 import ENV from "../../../env.json";
 import { VideoCategoryResponseType } from "../types/VideoCategoryResponseType";
-import { errResType, resType } from "../../../hooks/useMutationWrapperBase";
-import { VideoCategoryItemType } from "../types/VideoCategoryItemType";
-import { useSetGlobalAtom } from "../../../hooks/useGlobalAtom";
-import { SetIsLoginContext, SetLoginUserInfoContext } from "../../../QueryApp";
-import { toast } from "react-toastify";
-import { LoginUserInfoType } from "../../../types/LoginUserInfoType";
-import { useState } from "react";
-import { VideoCategoryDataType } from "../types/VideoCategoryDataType";
-import { comboType } from "../../../components/ComboComponent";
+import { Option } from "../../../components/Selectbox";
 
 
 export function useVideoCategory() {
 
     // 動画カテゴリを取得
-    return useQueryWrapper<VideoCategoryResponseType, comboType[]>(
+    return useQueryWrapper<VideoCategoryResponseType, Option[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.VIDEO_CATEGORY}`,
             select: (res: VideoCategoryResponseType) => {

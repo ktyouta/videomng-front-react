@@ -1,26 +1,33 @@
-import Select, { SingleValue } from "react-select";
+import { CSSProperties } from "react";
+import Select, { defaultTheme, SingleValue } from "react-select";
 import styled from "styled-components";
 
-const Parent = styled.div<{ width: string, minWidth?: string, height: string, }>`
+const Parent = styled.div<{ width: string, minWidth?: string, height: string }>`
   width: ${({ width }) => (width)};
   minWidth: ${({ minWidth }) => (minWidth)};
-  background:${({ height }) => (height)};
+  height: ${({ height }) => (height)};
 `;
 
+// コンボボックスの型
 export type Option = {
-    value: string;
-    label: string;
+    value: string,
+    label: string,
 };
 
 type Props = {
-    options: Option[];
-    value: string;
-    onChange?: (value: string) => void;
-    placeholder?: string;
-    disabled?: boolean;
-    width: string;
-    minWidth: string;
-    height: string;
+    options: Option[],
+    value: string,
+    onChange: (value: string) => void,
+    placeholder?: string,
+    disabled?: boolean,
+    width: string,
+    minWidth?: string,
+    height: string,
+    separatorColor?: string,
+    color?: string,
+    fontSize?: string,
+    backgroundColor?: string,
+    outerStyle?: CSSProperties,
 };
 
 export function Selectbox(props: Props) {
@@ -38,6 +45,7 @@ export function Selectbox(props: Props) {
             width={props.width}
             minWidth={props.minWidth}
             height={props.height}
+            style={props.outerStyle}
         >
             <Select
                 value={selectedOption}
@@ -45,37 +53,43 @@ export function Selectbox(props: Props) {
                 options={props.options}
                 placeholder={props.placeholder}
                 isDisabled={props.disabled}
+                menuPlacement="auto"
+                menuPosition="fixed"
                 styles={{
                     control: (base) => ({
                         ...base,
                         boxShadow: `none`,
                         textAlign: `center`,
+                        backgroundColor: props.backgroundColor || `white`,
                     }),
                     menu: (base) => ({
                         ...base,
                         textAlign: `center`,
                         zIndex: 9999,
+                        backgroundColor: props.backgroundColor || `white`,
                     }),
-                    option: (base) => ({
+                    option: (base, state) => ({
                         ...base,
-                        color: `black`,
+                        color: props.color || `black`,
                         textAlign: `center`,
-                        fontSize: `14px`,
+                        fontSize: props.fontSize || `14px`,
+                        backgroundColor: state.isFocused ? defaultTheme.colors.primary75 : props.backgroundColor || "white",
                     }),
                     dropdownIndicator: (base) => ({
                         ...base,
-                        color: `black`,
+                        color: props.color || `black`,
                     }),
                     indicatorSeparator: (base) => ({
                         ...base,
-                        backgroundColor: `#999`,
+                        backgroundColor: props.separatorColor || `#999`,
                     }),
                     singleValue: (base) => ({
                         ...base,
-                        color: `black`,
-                        fontSize: `14px`,
+                        color: props.color || `black`,
+                        fontSize: props.fontSize || `14px`,
                         textAlign: `center`,
                     }),
+                    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
                 }}
             />
         </Parent>
