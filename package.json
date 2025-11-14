@@ -43,6 +43,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.26.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.10.2",
     "react-spinners": "^0.13.8",
     "react-tag-autocomplete": "^7.2.0",
     "react-toastify": "^11.0.5",
