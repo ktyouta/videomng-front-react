@@ -1,16 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
 import { Option } from "../../../../../../components/Selectbox";
-import { objectDeepCopy } from "../../../../../../utils/CommonFunction";
-import useQueryWrapper from "../../../../../../hooks/useQueryWrapper";
-import { FavoriteVideoTagResponseType } from "../../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
-import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
-import { tagType } from "../../../../../../components/TagsComponent";
-import ENV from "../../../../../../env.json";
-import { FavoriteVideoTagType } from "../../../../types/videodetail/videotag/FavoriteVideoTagType";
-import { errResType } from "../../../../../../hooks/useMutationWrapperBase";
-import { useGlobalAtomValue } from "../../../../../../hooks/useGlobalAtom";
-import { useNavigate } from "react-router-dom";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
@@ -18,6 +8,7 @@ import { useVideoCategory } from "../../../../../main/hooks/useVideoCategory";
 import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { useTagMasterList } from "../../useTagMasterList";
+import { MultiValue } from "react-select";
 
 
 type propsType = {
@@ -113,20 +104,24 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * タグ選択イベント
      * @param selectedcCategory 
      */
-    function changeVideoTag(selectedVideoTag: string,) {
+    function changeVideoTag(selectedVideoTag: MultiValue<Option>,) {
+
+        const selectedTagValues = selectedVideoTag.map((e) => e.value).join(`,`);
 
         const newQuery = create({
-            videotag: selectedVideoTag,
+            videotag: selectedTagValues,
             page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoTag(selectedVideoTag);
+        setSelectedFavoriteVideoTag(selectedTagValues);
         resetPage();
 
-        props.close();
+        if (selectedFavoriteVideoTag !== selectedTagValues) {
+            props.close();
+        }
     }
 
     /**

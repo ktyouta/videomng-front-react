@@ -14,19 +14,29 @@ export function FavoriteSearchSelectedTag() {
     selectedFavoriteVideoTag,
     resetTag } = useFavoriteSearchSelectedTag();
 
+  const tagList = selectedFavoriteVideoTag ? selectedFavoriteVideoTag.split(`,`) : [];
+
   return (
     <React.Fragment>
       {
         // 選択中のタグ
-        selectedFavoriteVideoTag &&
-        <TagButtonComponent
-          title={selectedFavoriteVideoTag}
-          btnStyle={{
-            marginRight: "15px"
-          }}
-          isDispCross={true}
-          onclick={resetTag}
-        />
+        tagList && tagList.length > 0 &&
+        tagList.map((e) => {
+          return (
+            <TagButtonComponent
+              title={e}
+              key={e}
+              btnStyle={{
+                marginRight: "15px",
+                marginBottom: "5px"
+              }}
+              isDispCross={true}
+              onclick={() => {
+                resetTag(e);
+              }}
+            />
+          )
+        })
       }
     </React.Fragment>
   );

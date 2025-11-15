@@ -18,17 +18,20 @@ export function useFavoriteSearchSelectedTag() {
     /**
      * 選択中のタグをリセット
      */
-    function resetTag() {
+    function resetTag(value: string) {
+
+        const tagList = selectedFavoriteVideoTag.split(`,`);
+        const newTagValue = tagList.filter((e) => e !== value).join(`,`);
 
         const newQuery = create({
-            videotag: ``,
+            videotag: newTagValue,
             page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoTag(``);
+        setSelectedFavoriteVideoTag(newTagValue);
     }
 
     return {

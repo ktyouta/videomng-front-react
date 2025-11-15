@@ -20,10 +20,6 @@ export function useTagMasterList(props: porpsType) {
                 const tagComboList = res.data;
 
                 return [
-                    {
-                        value: ``,
-                        label: `すべて`,
-                    },
                     ...tagComboList.map((e) => {
                         return {
                             value: e.tagName,

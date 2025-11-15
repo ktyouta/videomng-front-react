@@ -41,6 +41,7 @@ const CheckboxOption = (props: OptionProps<Option>) => {
     return (
         <components.Option
             {...props}
+            className="custom-checkbox-option"
         >
             <input
                 type="checkbox"
@@ -114,34 +115,34 @@ export function MultiSelectbox(props: Props) {
                 onChange={handleChange}
                 onMenuClose={onMenuClose}
                 options={props.options}
-                placeholder={props.placeholder}
+                placeholder={props.placeholder || `選択してください`}
                 isDisabled={props.disabled}
                 menuPlacement="auto"
                 menuPosition="fixed"
                 styles={{
                     control: (base) => ({
                         ...base,
-                        boxShadow: "none",
-                        textAlign: "center",
-                        backgroundColor: props.backgroundColor || "white",
+                        boxShadow: `none`,
+                        textAlign: `center`,
+                        backgroundColor: props.backgroundColor || `white`,
                     }),
                     menu: (base) => ({
                         ...base,
-                        textAlign: "center",
+                        textAlign: `center`,
                         zIndex: 9999,
-                        backgroundColor: props.backgroundColor || "white",
+                        backgroundColor: props.backgroundColor || `white`,
                     }),
                     option: (base, state) => ({
                         ...base,
-                        color: props.color || "black",
-                        fontSize: props.fontSize || "14px",
+                        color: props.color || `black`,
+                        fontSize: props.fontSize || `14px`,
                         backgroundColor: state.isFocused
                             ? defaultTheme.colors.primary75
-                            : props.backgroundColor || "white",
+                            : props.backgroundColor || `white`,
                     }),
                     dropdownIndicator: (base) => ({
                         ...base,
-                        color: props.color || "black",
+                        color: props.color || `black`,
                     }),
                     indicatorSeparator: (base) => ({
                         ...base,
@@ -149,10 +150,41 @@ export function MultiSelectbox(props: Props) {
                     }),
                     singleValue: (base) => ({
                         ...base,
-                        color: props.color || "black",
+                        color: props.color || `black`,
                         fontSize: props.fontSize || "14px",
                     }),
+                    placeholder: (base) => ({
+                        ...base,
+                        color: `black`,
+                        fontSize: props.fontSize || `14px`,
+                    }),
                     menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                    clearIndicator: (base) => ({
+                        ...base,
+                        color: `#666`,
+                        cursor: `pointer`,
+                        ":hover": {
+                            backgroundColor: `transparent`,
+                            color: `#666`,
+                        },
+                        svg: {
+                            fill: `#666`,
+                            color: `#666`,
+                        },
+                    }),
+                    multiValue: (base) => ({
+                        ...base,
+                        backgroundColor: `#c2c2c2`,
+                    }),
+                    multiValueRemove: (base) => ({
+                        ...base,
+                        color: `#666`,
+                        cursor: `pointer`,
+                        ":hover": {
+                            backgroundColor: `transparent`,
+                            color: `#666`,
+                        },
+                    }),
                 }}
             />
         </Parent>

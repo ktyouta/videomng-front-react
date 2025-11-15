@@ -106,13 +106,14 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             タグ
                         </InputLabel>
-                        <Selectbox
+                        <MultiSelectbox
                             options={tagMasterList}
-                            value={selectedFavoriteVideoTag ?? tagMasterList[0].value}
-                            onChange={changeVideoTag}
+                            value={selectedFavoriteVideoTag.split(`,`) ?? tagMasterList[0].value}
+                            onMenuClose={changeVideoTag}
                             width="68%"
                             minWidth="8%"
                             height="39px"
+                            placeholder="すべて"
                         />
                     </InputDiv>
                 }
