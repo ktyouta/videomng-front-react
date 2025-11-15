@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchConditionMain";
 import { Selectbox } from "../../../../../../components/Selectbox";
+import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
 
 
 const Parent = styled.div`
@@ -124,7 +125,7 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <Selectbox
                             options={favoriteLevelList}
                             value={selectedFavoriteVideoFavoriteLevel ?? favoriteLevelList[0].value}
-                            onChange={changeVideoCategory}
+                            onChange={changeFavoriteLevel}
                             width="68%"
                             minWidth="8%"
                             height="39px"
