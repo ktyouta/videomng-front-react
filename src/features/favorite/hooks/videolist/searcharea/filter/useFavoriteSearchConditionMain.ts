@@ -108,6 +108,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
 
         const selectedTagValues = selectedVideoTag.map((e) => e.value).join(`,`);
 
+        if (!selectedFavoriteVideoTag && !selectedTagValues) {
+            return;
+        }
+
         const newQuery = create({
             videotag: selectedTagValues,
             page: INIT_PAGE
