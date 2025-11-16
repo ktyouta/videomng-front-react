@@ -74,13 +74,14 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             カテゴリ
                         </InputLabel>
-                        <Selectbox
+                        <MultiSelectbox
                             options={videoCategory}
-                            value={selectedFavoriteVideoCategory ?? videoCategory[0].value}
-                            onChange={changeVideoCategory}
+                            value={selectedFavoriteVideoCategory.split(`,`) ?? videoCategory[0].value}
+                            onMenuClose={changeVideoCategory}
                             width="68%"
                             minWidth="8%"
                             height="39px"
+                            placeholder="すべて"
                         />
                     </InputDiv>
                 }
@@ -90,13 +91,14 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             視聴状況
                         </InputLabel>
-                        <Selectbox
+                        <MultiSelectbox
                             options={viewStatusList}
-                            value={selectedFavoriteVideoViewStatus ?? viewStatusList[0].value}
-                            onChange={changeViewStatus}
+                            value={selectedFavoriteVideoViewStatus.split(`,`) ?? viewStatusList[0].value}
+                            onMenuClose={changeViewStatus}
                             width="68%"
                             minWidth="8%"
                             height="39px"
+                            placeholder="すべて"
                         />
                     </InputDiv>
                 }
@@ -123,13 +125,14 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         <InputLabel>
                             お気に入り度
                         </InputLabel>
-                        <Selectbox
+                        <MultiSelectbox
                             options={favoriteLevelList}
-                            value={selectedFavoriteVideoFavoriteLevel ?? favoriteLevelList[0].value}
-                            onChange={changeFavoriteLevel}
+                            value={selectedFavoriteVideoFavoriteLevel.split(`,`) ?? favoriteLevelList[0].value}
+                            onMenuClose={changeFavoriteLevel}
                             width="68%"
                             minWidth="8%"
                             height="39px"
+                            placeholder="すべて"
                         />
                     </InputDiv>
                 }

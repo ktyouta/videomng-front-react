@@ -14,7 +14,7 @@ export function useFavoriteDetailSettingView() {
     // 動画カテゴリ
     const { data: videoCategory } = useVideoCategory();
     // 視聴状況リストを取得
-    const { data: viewStatusList } = useViewStatusList({ isExcludeAll: true });
+    const { data: viewStatusList } = useViewStatusList();
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
     // 動画ID

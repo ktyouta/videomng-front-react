@@ -46,7 +46,7 @@ export function HomeSearchConditionMain() {
     console.log("HomeSearchConditionMain render");
 
     const {
-        videoCategory,
+        selectVideoCategory,
         selectedVideoType,
         setSelectedVideoType,
         selectedVideoCategory,
@@ -69,14 +69,14 @@ export function HomeSearchConditionMain() {
                     />
                 </InputDiv>
                 {
-                    videoCategory && videoCategory.length > 0 &&
+                    selectVideoCategory && selectVideoCategory.length > 0 &&
                     <InputDiv>
                         <InputLabel>
                             カテゴリ
                         </InputLabel>
                         <Selectbox
-                            options={videoCategory}
-                            value={selectedVideoCategory ?? videoCategory[0].value}
+                            options={selectVideoCategory}
+                            value={selectedVideoCategory ?? selectVideoCategory[0].value}
                             onChange={setSelectedVideoCategory}
                             width="68%"
                             minWidth="8%"

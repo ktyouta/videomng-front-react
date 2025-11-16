@@ -2,6 +2,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useGlobalAtomValue } from "../../../../../hooks/useGlobalAtom";
 import { useVideoCategory } from "../../../../main/hooks/useVideoCategory";
 import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
+import { useMemo } from "react";
 
 export function useHomeSearchConditionMain() {
 
@@ -14,8 +15,23 @@ export function useHomeSearchConditionMain() {
         selectedVideoType,
         setSelectedVideoType, } = useHomeVideoSearchConditionValue();
 
+    const selectVideoCategory = useMemo(() => {
+
+        if (!videoCategory) {
+            return;
+        }
+
+        return [
+            {
+                label: `すべて`,
+                value: ``,
+            }, ...videoCategory
+        ];
+
+    }, [videoCategory]);
+
     return {
-        videoCategory,
+        selectVideoCategory,
         selectedVideoType,
         setSelectedVideoType,
         selectedVideoCategory,

@@ -13,7 +13,7 @@ export function useFavoriteVideoList() {
     });
 
     // マウント時に視聴状況を取得
-    useViewStatusList({});
+    useViewStatusList();
 
     // URL情報
     const location = useLocation();

@@ -26,13 +26,7 @@ export function useVideoCategory() {
                     }
                 });
 
-                return [
-                    {
-                        label: `すべて`,
-                        value: ``,
-                    },
-                    ...items
-                ]
+                return items;
             },
             afErrorFn: (res) => {
             },

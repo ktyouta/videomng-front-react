@@ -50,11 +50,7 @@ const CheckboxOption = (props: OptionProps<Option>) => {
                 id={`${props.selectProps.instanceId}-${props.data.value}`}
                 style={{ marginRight: 8 }}
             />
-            <label
-                htmlFor={`${props.selectProps.instanceId}-${props.data.value}`}
-            >
-                {props.label}
-            </label>
+            {props.label}
         </components.Option>
     );
 };
@@ -128,7 +124,6 @@ export function MultiSelectbox(props: Props) {
                     }),
                     menu: (base) => ({
                         ...base,
-                        textAlign: `center`,
                         zIndex: 9999,
                         backgroundColor: props.backgroundColor || `white`,
                     }),

@@ -34,7 +34,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     // 視聴状況
     const [viewStatus, setViewStatus] = useState(``);
     // 視聴状況リスト
-    const { data: viewStatusList } = useViewStatusList({ isExcludeAll: true });
+    const { data: viewStatusList } = useViewStatusList();
     // お気に入り度
     const [favoriteLevel, setFavoriteLevel] = useState(0);
     // 動画ID

@@ -6,11 +6,7 @@ import ENV from "../../../env.json";
 import { Option } from "../../../components/Selectbox";
 
 
-type propsType = {
-    isExcludeAll?: boolean;
-}
-
-export function useViewStatusList(props: propsType) {
+export function useViewStatusList() {
 
 
     // 視聴状況リストを取得
@@ -26,9 +22,7 @@ export function useViewStatusList(props: propsType) {
                     }
                 });
 
-                const list = props.isExcludeAll ? items : [{ label: `すべて`, value: ``, }, ...items];
-
-                return list;
+                return items;
             },
             afErrorFn: (res) => {
             },

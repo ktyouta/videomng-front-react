@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
-import { Option } from "../../../../../../components/Selectbox";
+import { Option } from "../../../../../../components/MultiSelectbox";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
@@ -20,7 +20,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     // 動画カテゴリ
     const { data: videoCategory } = useVideoCategory();
     // 視聴状況リストを取得
-    const { data: viewStatusList } = useViewStatusList({});
+    const { data: viewStatusList } = useViewStatusList();
     // 検索条件
     const {
         selectedFavoriteVideoCategory,
@@ -54,27 +54,34 @@ export function useFavoriteSearchConditionMain(props: propsType) {
             }
         });
 
-        return [{
-            value: ``,
-            label: `すべて`,
-        }, ...favoriteLevelList];
+        return favoriteLevelList;
     }, []);
 
     /**
      * カテゴリ選択イベント
      * @param selectedcCategory 
      */
-    function changeVideoCategory(selectedCategory: string,) {
+    function changeVideoCategory(selectedCategorys: MultiValue<Option>,) {
+
+        const selectedValues = selectedCategorys.map((e) => e.value).join(`,`);
+
+        if (!selectedFavoriteVideoCategory && !selectedValues) {
+            return;
+        }
+
+        if (selectedFavoriteVideoCategory === selectedValues) {
+            return;
+        }
 
         const newQuery = create({
-            videocategory: selectedCategory,
+            videocategory: selectedValues,
             page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoCategory(selectedCategory);
+        setSelectedFavoriteVideoCategory(selectedValues);
         resetPage();
 
         props.close();
@@ -84,17 +91,27 @@ export function useFavoriteSearchConditionMain(props: propsType) {
      * 視聴状況選択イベント
      * @param selectedcCategory 
      */
-    function changeViewStatus(selectedViewStatus: string,) {
+    function changeViewStatus(selectedStatuses: MultiValue<Option>,) {
+
+        const selectedValues = selectedStatuses.map((e) => e.value).join(`,`);
+
+        if (!selectedFavoriteVideoViewStatus && !selectedValues) {
+            return;
+        }
+
+        if (selectedFavoriteVideoViewStatus === selectedValues) {
+            return;
+        }
 
         const newQuery = create({
-            viewstatus: selectedViewStatus,
+            viewstatus: selectedValues,
             page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoViewStatus(selectedViewStatus);
+        setSelectedFavoriteVideoViewStatus(selectedValues);
         resetPage();
 
         props.close();
@@ -112,6 +129,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
             return;
         }
 
+        if (selectedFavoriteVideoTag === selectedTagValues) {
+            return;
+        }
+
         const newQuery = create({
             videotag: selectedTagValues,
             page: INIT_PAGE
@@ -122,29 +143,35 @@ export function useFavoriteSearchConditionMain(props: propsType) {
 
         setSelectedFavoriteVideoTag(selectedTagValues);
         resetPage();
-
-        if (selectedFavoriteVideoTag !== selectedTagValues) {
-            props.close();
-        }
+        props.close();
     }
 
     /**
      * お気に入り度選択イベント
      * @param selectedcCategory 
      */
-    function changeFavoriteLevel(selectedFavoriteLevel: string,) {
+    function changeFavoriteLevel(selectedFavoriteLevel: MultiValue<Option>,) {
+
+        const selectedValues = selectedFavoriteLevel.map((e) => e.value).join(`,`);
+
+        if (!selectedFavoriteVideoFavoriteLevel && !selectedValues) {
+            return;
+        }
+
+        if (selectedFavoriteVideoFavoriteLevel === selectedValues) {
+            return;
+        }
 
         const newQuery = create({
-            favoritelevel: selectedFavoriteLevel,
+            favoritelevel: selectedValues,
             page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoFavoriteLevel(selectedFavoriteLevel);
+        setSelectedFavoriteVideoFavoriteLevel(selectedValues);
         resetPage();
-
         props.close();
     }
 
