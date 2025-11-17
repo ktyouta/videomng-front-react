@@ -33,6 +33,11 @@ const VideoTitleDiv = styled.div`
     cursor:pointer;
     word-break: break-word;
     font-size: 11px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 12px;
