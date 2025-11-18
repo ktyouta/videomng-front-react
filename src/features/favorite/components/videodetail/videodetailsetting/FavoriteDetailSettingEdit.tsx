@@ -11,6 +11,7 @@ import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/Favori
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { FavoriteDetailSettingEditActions } from "./FavoriteDetailSettingEditActions";
 import { Selectbox } from "../../../../../components/Selectbox";
+import { Checkbox } from "../../../../../components/Checkbox";
 
 
 const ContentDiv = styled.div`
@@ -137,11 +138,12 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                                 >
                                                     {e.label}
                                                 </CategoryLabel>
-                                                <CheckBoxComponent
+                                                <Checkbox
                                                     value={e.value}
                                                     htmlForId={htmlId}
-                                                    initValue={checked}
+                                                    isChecked={checked}
                                                     onChange={selectCategory}
+                                                    key={categoryId}
                                                 />
                                             </CategoryDiv>
                                         )
