@@ -5,14 +5,14 @@ import { FavoriteSearchAreaPc } from "./FavoriteSearchAreaPc";
 
 export function FavoriteSearchArea() {
 
-    const { isMobile } = useFavoriteSearchArea();
+    const { isPcLess } = useFavoriteSearchArea();
 
     return (
         <React.Fragment>
             {
-                isMobile
+                isPcLess
                     ?
-                    // モバイル
+                    // PCサイズ以下
                     <FavoriteSearchAreaMobile />
                     :
                     // PC

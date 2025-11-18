@@ -3,9 +3,9 @@ import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 export function useFavoriteSearchArea() {
 
     // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
     return {
-        isMobile
+        isPcLess
     };
 }
