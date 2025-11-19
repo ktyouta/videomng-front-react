@@ -102,32 +102,28 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     {title}
                 </VideoTitle>
                 <ButtonComponent
-                    styleTypeNumber="BASE"
-                    title={
-                        <BtnDiv>
-                            <IconComponent
-                                icon={MdPlayArrow}
-                                size="10%"
-                            />
-                            再生
-                        </BtnDiv>
-                    }
-                    onclick={play}
+                    variant="green"
+                    onClick={play}
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
                         "width": `${buttonWidth}`,
-                        "background": "rgb(34, 139, 84)",
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": isMobile ? "7%" : "10%",
                         "display": "block",
                     }}
-                />
+                >
+                    <BtnDiv>
+                        <IconComponent
+                            icon={MdPlayArrow}
+                            size="10%"
+                        />
+                        再生
+                    </BtnDiv>
+                </ButtonComponent>
                 <ButtonComponent
-                    styleTypeNumber="BASE"
-                    title={"お気に入りから外す"}
-                    onclick={clickDeleteFavoriteVide}
+                    onClick={clickDeleteFavoriteVide}
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
@@ -137,7 +133,9 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                         "borderRadius": "8px",
                         "display": "block",
                     }}
-                />
+                >
+                    お気に入りから外す
+                </ButtonComponent>
             </VideoMetaDiv>
             <ModalPortalConfirm
                 isOpenModal={isOpenModal}

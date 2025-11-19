@@ -180,26 +180,26 @@ export function Login() {
         </SignUpDiv>
         <LoginButtonDiv>
           <ButtonComponent
-            styleTypeNumber="RUN"
-            title="戻る"
-            onclick={clickBack}
+            variant="black"
+            onClick={clickBack}
+            shape="rounded"
             style={{
-              borderRadius: "23px",
-              background: "black",
-              fontSize: "1rem"
+              minWidth: "100px",
             }}
-          />
+          >
+            戻る
+          </ButtonComponent>
           <ButtonComponent
-            styleTypeNumber="RUN"
-            title="ログイン"
-            onclick={form.handleSubmit}
+            variant="black"
+            onClick={form.handleSubmit}
+            shape="rounded"
             style={{
-              borderRadius: "23px",
-              background: "black",
-              fontSize: "1rem",
               marginLeft: "5%",
+              minWidth: "100px",
             }}
-          />
+          >
+            ログイン
+          </ButtonComponent>
         </LoginButtonDiv>
       </LoginFormDiv>
     </Parent>

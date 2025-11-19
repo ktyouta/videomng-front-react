@@ -180,26 +180,26 @@ export function UpdateUserPassword() {
                 </InputRowDiv>
                 <FormButtonDiv>
                     <ButtonComponent
-                        styleTypeNumber="RUN"
-                        title={"キャンセル"}
-                        onclick={clickCancel}
+                        variant="black"
+                        shape="rounded"
+                        onClick={clickCancel}
                         style={{
-                            "borderRadius": "23px",
-                            "background": "black",
-                            "fontSize": "1rem",
+                            minWidth: "100px"
                         }}
-                    />
+                    >
+                        キャンセル
+                    </ButtonComponent>
                     <ButtonComponent
-                        styleTypeNumber="RUN"
-                        title={"保存"}
-                        onclick={handleSaveClick}
+                        variant="black"
+                        shape="rounded"
+                        onClick={handleSaveClick}
                         style={{
-                            "borderRadius": "23px",
-                            "background": "black",
-                            "fontSize": "1rem",
-                            "marginLeft": "5%",
+                            marginLeft: "5%",
+                            minWidth: "100px",
                         }}
-                    />
+                    >
+                        保存
+                    </ButtonComponent>
                 </FormButtonDiv>
             </FormDiv>
             <ModalPortalConfirm

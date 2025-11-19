@@ -95,27 +95,27 @@ export function FavoriteSearchCsvExportMain(props: propsType) {
             </MessageArea>
             <FooterDiv >
                 <ButtonComponent
-                    styleTypeNumber="RUN"
-                    title={"キャンセル"}
-                    onclick={props.close}
+                    shape="rounded"
+                    onClick={props.close}
                     style={{
-                        borderRadius: "23px",
                         background: "#3a3d42",
-                        fontSize: "1rem",
+                        color: "white"
                     }}
-                />
+                >
+                    キャンセル
+                </ButtonComponent>
                 <ButtonComponent
-                    styleTypeNumber="RUN"
-                    title={"アップロード"}
-                    onclick={openConfirmModal}
+                    shape="rounded"
+                    onClick={openConfirmModal}
                     style={{
-                        borderRadius: "23px",
                         background: isLoading ? "#2c2f33" : "#3a3d42",
-                        fontSize: "1rem",
                         marginLeft: "5%",
+                        color: "white"
                     }}
                     disabled={isLoading}
-                />
+                >
+                    アップロード
+                </ButtonComponent>
             </FooterDiv>
             {
                 // アップロード確認用モーダル

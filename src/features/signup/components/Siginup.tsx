@@ -263,26 +263,26 @@ export function Siginup() {
         </InputRowDiv>
         <SiginupButtonDiv>
           <ButtonComponent
-            styleTypeNumber="RUN"
-            title={"戻る"}
-            onclick={clickBack}
+            variant="black"
+            shape="rounded"
+            onClick={clickBack}
             style={{
-              "borderRadius": "23px",
-              "background": "black",
-              "fontSize": "1rem",
+              minWidth: "100px"
             }}
-          />
+          >
+            戻る
+          </ButtonComponent>
           <ButtonComponent
-            styleTypeNumber="RUN"
-            title={"登録"}
-            onclick={handleSiginupClick}
+            variant="black"
+            shape="rounded"
+            onClick={handleSiginupClick}
             style={{
-              "borderRadius": "23px",
-              "background": "black",
-              "fontSize": "1rem",
-              "marginLeft": "5%",
+              marginLeft: "5%",
+              minWidth: "100px"
             }}
-          />
+          >
+            登録
+          </ButtonComponent>
         </SiginupButtonDiv>
       </SiginupFormDiv>
       <ModalPortalConfirm

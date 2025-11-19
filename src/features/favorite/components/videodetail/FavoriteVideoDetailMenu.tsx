@@ -2,7 +2,6 @@ import React from "react";
 import { useFavoriteVideoDetail } from "../../hooks/videodetail/useFavoriteVideoDetail";
 import LoadingBase from "../../../../components/LoadingBase";
 import styled from "styled-components";
-import ButtonComponent from "../../../../components/ButtonComponent";
 import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
 import { useFavoriteVideoDetailMenu } from "../../hooks/videodetail/useFavoriteVideoDetailMenu";

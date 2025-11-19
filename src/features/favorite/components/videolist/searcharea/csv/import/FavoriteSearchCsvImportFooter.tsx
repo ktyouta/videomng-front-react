@@ -33,26 +33,26 @@ export function FavoriteSearchCsvImportFooter(props: propsType) {
             height={props.height}
         >
             <ButtonComponent
-                styleTypeNumber="RUN"
-                title={"キャンセル"}
-                onclick={props.close}
+                shape="rounded"
+                onClick={props.close}
                 style={{
-                    borderRadius: "23px",
                     background: "#3a3d42",
-                    fontSize: "1rem",
+                    color: "white"
                 }}
-            />
+            >
+                キャンセル
+            </ButtonComponent>
             <ButtonComponent
-                styleTypeNumber="RUN"
-                title={"ダウンロード"}
-                onclick={download}
+                shape="rounded"
+                onClick={download}
                 style={{
-                    borderRadius: "23px",
                     background: "#3a3d42",
-                    fontSize: "1rem",
                     marginLeft: "5%",
+                    color: "white"
                 }}
-            />
+            >
+                ダウンロード
+            </ButtonComponent>
         </Parent>
     );
 }

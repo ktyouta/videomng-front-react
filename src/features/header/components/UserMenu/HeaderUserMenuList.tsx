@@ -1,6 +1,4 @@
 import React from "react";
-import ButtonComponent from "../../../../components/ButtonComponent";
-import { useHeaderUserMenu } from "../../hooks/UserMenu/useHeaderUserMenu";
 import { IconComponent } from "../../../../components/IconComponent";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import styled from "styled-components";

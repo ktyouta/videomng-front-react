@@ -2,7 +2,6 @@ import React from "react";
 import { useFavoriteVideoDetail } from "../../hooks/videodetail/useFavoriteVideoDetail";
 import LoadingBase from "../../../../components/LoadingBase";
 import styled from "styled-components";
-import ButtonComponent from "../../../../components/ButtonComponent";
 import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IconComponent } from "../../../../components/IconComponent";

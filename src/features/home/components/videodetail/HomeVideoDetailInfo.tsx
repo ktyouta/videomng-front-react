@@ -102,28 +102,26 @@ export function HomeVideoDetailInfo(props: propsType) {
                     {title}
                 </VideoTitle>
                 <ButtonComponent
-                    styleTypeNumber="BASE"
-                    title={
-                        <BtnDiv>
-                            <IconComponent
-                                icon={MdPlayArrow}
-                                size="10%"
-                            />
-                            再生
-                        </BtnDiv>
-                    }
-                    onclick={play}
+                    variant="green"
+                    onClick={play}
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
                         "width": `${buttonWidth}`,
-                        "background": "rgb(34, 139, 84)",
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": isMobile ? "7%" : "10%",
                         "display": "block",
                     }}
-                />
+                >
+                    <BtnDiv>
+                        <IconComponent
+                            icon={MdPlayArrow}
+                            size="10%"
+                        />
+                        再生
+                    </BtnDiv>
+                </ButtonComponent>
                 {
                     isLogin ?
                         <React.Fragment>
@@ -132,9 +130,6 @@ export function HomeVideoDetailInfo(props: propsType) {
                                     ?
                                     // お気に入り登録済み
                                     <ButtonComponent
-                                        styleTypeNumber="BASE"
-                                        title={"お気に入り登録済み"}
-                                        onclick={() => { }}
                                         style={{
                                             "fontSize": "0.9rem",
                                             "height": "50px",
@@ -144,41 +139,41 @@ export function HomeVideoDetailInfo(props: propsType) {
                                             "borderRadius": "8px",
                                             "display": "block",
                                         }}
-                                    />
+                                    >
+                                        お気に入り登録済み
+                                    </ButtonComponent>
                                     :
                                     // お気に入り未登録
                                     <ButtonComponent
-                                        styleTypeNumber="BASE"
-                                        title={"お気に入りに登録する"}
-                                        onclick={addToFavorite}
+                                        variant="orange"
+                                        onClick={addToFavorite}
                                         style={{
                                             "fontSize": "0.9rem",
                                             "height": "50px",
                                             "width": `${buttonWidth}`,
-                                            "background": "#ff9f00",
-                                            "color": "white",
                                             "borderRadius": "8px",
                                             "display": "block",
                                         }}
-                                    />
+                                    >
+                                        お気に入りに登録する
+                                    </ButtonComponent>
                             }
                         </React.Fragment>
                         :
                         // ログイン画面遷移ボタン
                         <ButtonComponent
-                            styleTypeNumber="BASE"
-                            title={"ログインしてお気に入りに登録"}
-                            onclick={moveLogin}
+                            variant="blue"
+                            onClick={moveLogin}
                             style={{
                                 "fontSize": "0.9rem",
                                 "height": "50px",
                                 "width": `${buttonWidth}`,
-                                "background": "rgb(30, 90, 170)",
-                                "color": "white",
                                 "borderRadius": "8px",
                                 "display": "block",
                             }}
-                        />
+                        >
+                            ログインしてお気に入りに登録
+                        </ButtonComponent>
                 }
             </VideoMetaDiv>
         </VideoInfoDiv>

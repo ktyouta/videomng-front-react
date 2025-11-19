@@ -112,16 +112,17 @@ export function HomeChannelVideoArea(props: propsType) {
                         </LoadingParentNext>
                     }
                     <ButtonComponent
-                        styleTypeNumber="GRAD_GRAY"
-                        title={"もっと見る"}
-                        onclick={() => {
+                        variant="grad-gray"
+                        onClick={() => {
                             clickShowMore(nextPageToken);
                         }}
                         style={{
                             "fontSize": "0.9rem",
                             "height": "7%",
                         }}
-                    />
+                    >
+                        もっと見る
+                    </ButtonComponent>
                 </NextGetBtnAreaDiv>
             }
         </Parent>

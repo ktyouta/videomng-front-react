@@ -28,18 +28,15 @@ export function HeaderUserMenu() {
                     :
                     // 未ログイン
                     <ButtonComponent
-                        styleTypeNumber="GRAD_RED"
-                        title={"ログイン"}
-                        onclick={clickLogin}
+                        variant="red"
+                        onClick={clickLogin}
+                        size={isMobile ? "small" : "medium"}
                         style={{
-                            fontSize: isMobile ? "12px" : "14px",
-                            width: isMobile ? "82px" : "100px",
-                            minWidth: "82px",
-                            height: isMobile ? "38%" : "35%",
-                            background: "#eb3941",
                             boxShadow: "none",
                         }}
-                    />
+                    >
+                        ログイン
+                    </ButtonComponent>
             }
         </React.Fragment>
     );

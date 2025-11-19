@@ -95,29 +95,24 @@ export function FavoriteTagCreateInput() {
                     </AddIconAreaDiv>
                     :
                     <ButtonComponent
-                        styleTypeNumber="BASE"
-                        title={
-                            <BtnDiv>
-                                <IconComponent
-                                    icon={GoPlus}
-                                    size="20px"
-                                />
-                                追加
-                            </BtnDiv>
-                        }
-                        onclick={addTagEditList}
+                        size="small"
+                        onClick={addTagEditList}
                         style={{
-                            fontSize: "14px",
                             height: "34px",
-                            width: `86px`,
                             background: "rgb(41, 50, 60)",
                             color: "white",
-                            borderRadius: "8px",
                             display: "flex",
-                            minWidth: `86px`,
                             marginLeft: "12px"
                         }}
-                    />
+                    >
+                        <BtnDiv>
+                            <IconComponent
+                                icon={GoPlus}
+                                size="20px"
+                            />
+                            追加
+                        </BtnDiv>
+                    </ButtonComponent>
             }
         </Parent>
     );

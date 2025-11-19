@@ -2,7 +2,6 @@ import React from "react";
 import { useHomeVideoDetail } from "../../hooks/videodetail/useHomeVideoDetail";
 import LoadingBase from "../../../../components/LoadingBase";
 import styled from "styled-components";
-import ButtonComponent from "../../../../components/ButtonComponent";
 import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
 import { FaArrowLeft } from "react-icons/fa6";

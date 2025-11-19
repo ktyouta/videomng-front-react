@@ -9,9 +9,6 @@ import { HomeVideoContent } from "./HomeVideoContent";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { IconComponent } from "../../../../../../components/IconComponent";
 import Loading from "../../../../../../components/Loading";
-import ButtonComponent from "../../../../../../components/ButtonComponent";
-import { FaCheck } from "react-icons/fa6";
-import { FaBookmark } from "react-icons/fa";
 
 
 const LoadingParentNext = styled.div`

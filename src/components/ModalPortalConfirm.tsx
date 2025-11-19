@@ -76,26 +76,26 @@ export function ModalPortalConfirm(props: propsType) {
                 </HeaderDiv>
                 <BtnAreaDiv>
                     <ButtonComponent
-                        styleTypeNumber="RUN"
-                        title={"キャンセル"}
-                        onclick={props.closeModal}
+                        variant="black"
+                        shape="rounded"
+                        onClick={props.closeModal}
                         style={{
-                            "borderRadius": "23px",
-                            "background": "black",
-                            "fontSize": "1rem",
+                            minWidth: "100px",
                         }}
-                    />
+                    >
+                        キャンセル
+                    </ButtonComponent>
                     <ButtonComponent
-                        styleTypeNumber="RUN"
-                        title={"OK"}
-                        onclick={props.clickOk}
+                        variant="black"
+                        shape="rounded"
+                        onClick={props.clickOk}
                         style={{
-                            "borderRadius": "23px",
-                            "background": "black",
-                            "fontSize": "1rem",
-                            "marginLeft": "5%",
+                            marginLeft: "5%",
+                            minWidth: "100px",
                         }}
-                    />
+                    >
+                        OK
+                    </ButtonComponent>
                 </BtnAreaDiv>
             </Parent>
         </ModalPortal>
