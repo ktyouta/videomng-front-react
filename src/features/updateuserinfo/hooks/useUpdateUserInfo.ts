@@ -98,11 +98,8 @@ export function useUpdateUserInfo() {
 
         // 更新リクエスト呼び出し
         postMutation.mutate(body);
-    },
-        () => {
-            closeModal();
-        }
-    );
+        closeModal();
+    });
 
 
     /**

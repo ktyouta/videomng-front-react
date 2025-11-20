@@ -99,11 +99,8 @@ export function useUpdateUserPassword() {
 
         // 更新リクエスト呼び出し
         postMutation.mutate(body);
-    },
-        () => {
-            closeModal();
-        }
-    );
+        closeModal();
+    });
 
     /**
      * キャンセルボタン押下

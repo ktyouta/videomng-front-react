@@ -108,11 +108,8 @@ export function useSiginup() {
 
         // 登録リクエスト呼び出し
         postMutation.mutate(body);
-    },
-        () => {
-            closeModal();
-        }
-    );
+        closeModal();
+    });
 
     /**
      * 戻るボタン押下
