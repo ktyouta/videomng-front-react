@@ -155,5 +155,6 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         clickFavoriteLevelIcon,
         videoCategory,
         tags: data?.tags,
+        data,
     };
 }

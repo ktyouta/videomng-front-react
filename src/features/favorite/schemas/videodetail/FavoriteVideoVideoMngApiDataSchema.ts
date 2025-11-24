@@ -6,4 +6,6 @@ export const FavoriteVideoVideoMngApiDataSchema = z.object({
     summary: z.string(),
     viewStatus: z.string(),
     favoriteLevel: z.number(),
+    createDate:z.string(),
+    updateDate:z.string(),
 });

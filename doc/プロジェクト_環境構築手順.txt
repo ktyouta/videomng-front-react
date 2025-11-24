@@ -8,5 +8,17 @@ git clone https://github.com/GitHubユーザー名/リポジトリ名.git
 cd リポジトリ名
 npm install
 
-③アプリケーションを起動する
+
+③vscodeの設定を追加
+VSCodeを開いて、Ctrl + Shift + P
+「Open Settings (JSON)」を選択し以下を貼り付ける
+
+{
+  "files.hotExit": "off",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "vscode.typescript-language-features",
+}
+
+
+④アプリケーションを起動する
 npm start

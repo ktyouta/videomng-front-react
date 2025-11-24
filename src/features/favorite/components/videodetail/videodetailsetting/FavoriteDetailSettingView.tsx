@@ -11,6 +11,7 @@ import Loading from "../../../../../components/Loading";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
+import { formatDateJP } from "../../../../../utils/CommonFunction";
 
 
 const Parent = styled.div`
@@ -22,6 +23,10 @@ const ContentDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 37px;
+`;
+
+const ErrorMessageSpan = styled.span`
+    color:white;
 `;
 
 const MetaContentDiv = styled.div`
@@ -105,9 +110,9 @@ export function FavoriteDetailSettingView(props: propsType) {
 
     if (errMessage) {
         return (
-            <React.Fragment>
+            <ErrorMessageSpan>
                 {errMessage}
-            </React.Fragment>
+            </ErrorMessageSpan>
         );
     }
 
@@ -217,13 +222,13 @@ export function FavoriteDetailSettingView(props: propsType) {
                         </FavoriteLevelAreaDiv>
                     </MetaContentDiv>
                 </FlexDiv>
-                <MetaContentDiv>
+                <MetaContentDiv
+                    style={{ marginBottom: "15px" }}
+                >
                     <TitleDiv>
                         【タグ】
                     </TitleDiv>
-                    <MetaDiv
-                        style={{ marginBottom: "25px" }}
-                    >
+                    <MetaDiv>
                         {
                             tags && tags.length > 0
                                 ?
@@ -245,6 +250,26 @@ export function FavoriteDetailSettingView(props: propsType) {
                         }
                     </MetaDiv>
                 </MetaContentDiv>
+                <FlexDiv
+                    style={{ marginBottom: "25px" }}
+                >
+                    <MetaContentDiv>
+                        <TitleDiv>
+                            【お気に入り登録日時】
+                        </TitleDiv>
+                        <MetaDiv>
+                            {formatDateJP(detail.createDate)}
+                        </MetaDiv>
+                    </MetaContentDiv>
+                    <MetaContentDiv>
+                        <TitleDiv>
+                            【お気に入り設定更新日時】
+                        </TitleDiv>
+                        <MetaDiv>
+                            {formatDateJP(detail.updateDate)}
+                        </MetaDiv>
+                    </MetaContentDiv>
+                </FlexDiv>
             </ContentDiv>
         </React.Fragment>
     );
