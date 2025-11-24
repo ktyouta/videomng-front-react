@@ -23,6 +23,12 @@ const FilterIconAreaDiv = styled.div`
   color:#9e9e9e;
 `;
 
+const FilterTitleSpan = styled.span`
+  color: #9e9e9e;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: 1%;
+`;
 
 /**
  * CSV出力モーダル
@@ -47,6 +53,12 @@ export function FavoriteSearchCsvImportModal() {
                     size="45%"
                 />
             </FilterIconAreaDiv>
+            {
+                !isMobile &&
+                <FilterTitleSpan >
+                    保存
+                </FilterTitleSpan>
+            }
             {/*ダウンロードモーダル */}
             <ModalPortal
                 isOpen={isOpenModal}

@@ -1,14 +1,16 @@
 import styled from "styled-components";
-import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { FavoriteCreateFolder } from "./FavoriteCreateFolder";
+import { FaFolder } from 'react-icons/fa';
+import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
+import { minLength } from "zod";
 
-
-const FilterIconAreaDiv = styled.div`
+const IconAreaDiv = styled.div`
   width: 46px;
   height: 99%;
   border-top-left-radius: 0;
@@ -21,7 +23,7 @@ const FilterIconAreaDiv = styled.div`
   color:#9e9e9e;
 `;
 
-const FilterTitleSpan = styled.span`
+const TitleSpan = styled.span`
   color: #9e9e9e;
   font-size: 14px;
   &:hover {
@@ -34,44 +36,47 @@ const FilterTitleSpan = styled.span`
 /**
  * 検索条件エリア
  */
-export function FavoriteSearchFilterModal() {
+export function FavoriteCreateFolderModal() {
 
-    console.log("FavoriteSearchFilterModal render");
+    console.log("FavoriteCreateFolderModal render");
 
     const {
-        isOpenFilterModal,
-        openFilterModal,
-        closeFilterModal,
-        isMobile } = useFavoriteSearchFilterModal();
+        isOpenModal,
+        openModal,
+        closeModal,
+        isMobile, } = useFavoriteCreateFolderModal();
 
 
     return (
         <React.Fragment>
-            <FilterIconAreaDiv>
+            <IconAreaDiv>
                 <IconComponent
-                    icon={FaFilter}
-                    onclick={openFilterModal}
+                    icon={FaFolder}
+                    onclick={openModal}
                     size="40%"
                 />
-            </FilterIconAreaDiv>
+            </IconAreaDiv>
             {
                 !isMobile &&
-                <FilterTitleSpan
-                    onClick={openFilterModal}
+                <TitleSpan
+                    onClick={openModal}
                 >
-                    フィルター
-                </FilterTitleSpan>
+                    フォルダ作成
+                </TitleSpan>
             }
             {/* フィルターモーダル */}
             <ModalPortal
-                isOpen={isOpenFilterModal}
+                isOpen={isOpenModal}
                 modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight="70%"
+                modalHeight=""
                 isCloseOuter={true}
-                close={closeFilterModal}
+                close={closeModal}
+                containerStyle={{
+                    minHeight: "55%"
+                }}
             >
-                <FavoriteSearchCondition
-                    close={closeFilterModal}
+                <FavoriteCreateFolder
+                    close={closeModal}
                 />
             </ModalPortal>
         </React.Fragment>

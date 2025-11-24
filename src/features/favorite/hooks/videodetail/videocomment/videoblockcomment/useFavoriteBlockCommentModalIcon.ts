@@ -7,8 +7,6 @@ export function useFavoriteBlockCommentModalIcon() {
     const { flag: isOpenBlockListNav, on: openBlockListNav, off: closeBlockListNav } = useSwitch();
     // 非表示リストモーダル表示フラグ
     const { flag: isOpenBlockListModal, on: openBlockListModal, off: closeBlockListModal } = useSwitch();
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     return {
@@ -18,6 +16,5 @@ export function useFavoriteBlockCommentModalIcon() {
         isOpenBlockListModal,
         openBlockListModal,
         closeBlockListModal,
-        isMobile,
     }
 }

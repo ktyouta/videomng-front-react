@@ -59,10 +59,7 @@ export function FavoriteBlockCommentModalIcon() {
         isOpenBlockListModal,
         openBlockListModal,
         closeBlockListModal,
-        isMobile,
     } = useFavoriteBlockCommentModalIcon();
-
-    const modalWidth = isMobile ? "84%" : "70%";
 
     return (
         <React.Fragment>

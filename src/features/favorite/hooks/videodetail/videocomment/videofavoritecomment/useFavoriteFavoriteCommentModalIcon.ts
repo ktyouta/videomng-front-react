@@ -7,8 +7,6 @@ export function useFavoriteFavoriteCommentModalIcon() {
     const { flag: isOpenFavoriteListNav, on: openFavoriteListNav, off: closeFavoriteListNav } = useSwitch();
     // お気に入りリストモーダル表示フラグ
     const { flag: isOpenFavoriteListModal, on: openFavoriteListModal, off: closeFavoriteListModal } = useSwitch();
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
 
 
     return {
@@ -18,6 +16,5 @@ export function useFavoriteFavoriteCommentModalIcon() {
         isOpenFavoriteListModal,
         openFavoriteListModal,
         closeFavoriteListModal,
-        isMobile,
     }
 }
