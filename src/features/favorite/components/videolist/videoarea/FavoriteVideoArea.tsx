@@ -9,6 +9,9 @@ import { MEDIA } from "../../../../../consts/MediaConst";
 import Loading from "../../../../../components/Loading";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";
+import { FavoriteVideoFolder } from "./FavoriteVideoFolder";
+import { FolderType } from "../../../types/videolist/FolderType";
+import { DndContext } from "@dnd-kit/core";
 
 const Parent = styled.div`
   width: 100%;
@@ -87,7 +90,9 @@ export function FavoriteVideoArea() {
     isLoading,
     isError,
     isFetching,
-    total, } = useFavoriteVideoArea();
+    total,
+    displayFolderList,
+    handleDragEnd, } = useFavoriteVideoArea();
 
   if (isLoading || isFetching) {
     return (
@@ -105,7 +110,7 @@ export function FavoriteVideoArea() {
     );
   }
 
-  if (!displayVideoList || displayVideoList.length === 0) {
+  if ((!displayVideoList || displayVideoList.length === 0) && (!displayFolderList || displayFolderList.length === 0)) {
     return (
       <MessageDiv>
         お気に入り動画が存在しません。
@@ -122,16 +127,29 @@ export function FavoriteVideoArea() {
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>
-        {
-          displayVideoList.map((e: FavoriteVideoListMergedType) => {
-            return (
-              <FavoriteVideoContent
-                data={e}
-                key={e.videoId}
-              />
-            )
-          })
-        }
+        <DndContext
+          onDragEnd={handleDragEnd}
+        >
+          {
+            displayFolderList.map((e: FolderType) => {
+              return (
+                <FavoriteVideoFolder
+                  data={e}
+                />
+              )
+            })
+          }
+          {
+            displayVideoList.map((e: FavoriteVideoListMergedType) => {
+              return (
+                <FavoriteVideoContent
+                  data={e}
+                  key={e.videoId}
+                />
+              )
+            })
+          }
+        </DndContext>
       </VideoUl>
       <FavoriteVideoAreaFooter />
     </Parent>

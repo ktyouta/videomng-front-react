@@ -82,7 +82,12 @@ export function FavoriteVideoContent(props: propsType) {
 
     console.log("FavoriteVideoContent render");
 
-    const { clickVideo } = useFavoriteVideoContent();
+    const {
+        clickVideo,
+        attributes,
+        listeners,
+        setNodeRef,
+        draggingStyle, } = useFavoriteVideoContent({ ...props });
 
     const data = props.data
     const snipet = data.snippet;
@@ -99,7 +104,12 @@ export function FavoriteVideoContent(props: propsType) {
     const publishedDate = dateList.length > 0 ? dateList[0] : ``;
 
     return (
-        <VideoArticle>
+        <VideoArticle
+            ref={setNodeRef}
+            {...listeners}
+            {...attributes}
+            style={draggingStyle}
+        >
             <VideoSection>
                 <VideoImg
                     src={imgUrl}

@@ -3,14 +3,30 @@ import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import { toast } from "react-toastify";
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
+import { useDraggable } from "@dnd-kit/core";
+import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { CSSProperties } from "react";
 
 
-export function useFavoriteVideoContent() {
+type propsType = {
+    data: FavoriteVideoListMergedType,
+}
+
+export function useFavoriteVideoContent(props: propsType) {
 
     //ルーティング用
     const navigate = useNavigate();
     // クエリ作成用
     const { query } = useCreateFavoriteVideoListQuery();
+    // ドラッグ用
+    const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+        id: props.data.videoId,
+    });
+    // ドラッグ時スタイル
+    const draggingStyle: CSSProperties = {
+        transform: transform ? `translate(${transform.x}px, ${transform.y}px) scale(0.7)` : undefined,
+        opacity: isDragging ? 0.8 : 1,
+    };
 
     /**
      * 動画サムネイル、タイトルのクリックイベント
@@ -26,6 +42,11 @@ export function useFavoriteVideoContent() {
     }
 
     return {
-        clickVideo
+        clickVideo,
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        draggingStyle,
     }
 }
