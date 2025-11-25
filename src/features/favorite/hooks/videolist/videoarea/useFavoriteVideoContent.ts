@@ -50,7 +50,7 @@ export function useFavoriteVideoContent(props: propsType) {
         const diffX = Math.abs(e.clientX - dragStartX.current);
         const diffY = Math.abs(e.clientY - dragStartY.current);
 
-        if (diffX < 5 && diffY < 5) {
+        if (diffX < 3 && diffY < 3) {
             navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}?${PREV_PATH_KEY}=${ROUTER_PATH.FAVORITE.ROOT}${query}`);
         }
     };

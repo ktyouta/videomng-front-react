@@ -28,6 +28,7 @@ const FilterTitleSpan = styled.span`
   font-size: 14px;
   white-space: nowrap;
   margin-right: 1%;
+  cursor: pointer;
 `;
 
 /**
@@ -55,7 +56,9 @@ export function FavoriteSearchCsvImportModal() {
             </FilterIconAreaDiv>
             {
                 !isMobile &&
-                <FilterTitleSpan >
+                <FilterTitleSpan
+                    onClick={openModal}
+                >
                     保存
                 </FilterTitleSpan>
             }

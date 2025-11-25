@@ -46,30 +46,6 @@ export function useFavoriteVideoArea() {
     );
 
     /**
-     * 動画のフォルダ登録
-     */
-    const postMutation = useMutationWrapper({
-        url: ``,
-        method: "POST",
-        // 正常終了後の処理
-        afSuccessFn: (res: unknown) => {
-
-            // レスポンスの型チェック
-            const resParsed = resSchema().safeParse(res);
-
-            if (!resParsed.success) {
-                toast.error(`フォルダの登録に失敗しました。時間をおいて再度お試しください。`);
-                return;
-            }
-
-        },
-        // 失敗後の処理
-        afErrorFn: (res: errResType) => {
-            toast.error(`フォルダの登録に失敗しました。`);
-        },
-    });
-
-    /**
      * 動画をフォルダに登録
      */
     function handleDragEnd(event: DragEndEvent) {
@@ -90,15 +66,7 @@ export function useFavoriteVideoArea() {
             return;
         }
 
-        // 一覧から動画を削除
-        // setDisplayVideoList((prev) => prev.filter((v) => v.id !== videoId));
-
-        // // リクエスト送信
-        // postMutation.mutate({
-        //     url: getFavoriteVideoFolderEndpoint(folderId),
-        //     body: { videoId },
-        // });
-
+        // リクエスト送信
         callApi({
             method: `POST`,
             url: getFavoriteVideoFolderEndpoint(folderId),
@@ -107,7 +75,25 @@ export function useFavoriteVideoArea() {
             },
             onSuccess: (res: unknown) => {
 
-            }
+                // レスポンスの型チェック
+                const resParsed = resSchema().safeParse(res);
+
+                if (!resParsed.success) {
+                    toast.error(`フォルダの登録に失敗しました。時間をおいて再度お試しください。`);
+                    return;
+                }
+
+                // フォルダ登録後に一覧から非表示にする
+                setDisplayVideoList((e) => {
+
+                    const newList = e.filter((e1) => e1.id !== videoId);
+                    return newList;
+                });
+            },
+            // 失敗後の処理
+            onError: (res: unknown) => {
+                toast.error(`フォルダの登録に失敗しました。`);
+            },
         });
     }
 

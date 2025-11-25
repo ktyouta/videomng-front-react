@@ -18,7 +18,7 @@ const MessageArea = styled.div`
 const InputArea = styled.div`
     padding: 0 5%;
     box-sizing: border-box;
-    margin: 30px 10px 30px 0;
+    margin: 30px 0px;
     display: flex;
     align-items: center;
     flex: 1;
