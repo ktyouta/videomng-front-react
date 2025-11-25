@@ -5,7 +5,7 @@ import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoLis
 import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
 import { useDraggable } from "@dnd-kit/core";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { CSSProperties } from "react";
+import { CSSProperties, useRef } from "react";
 
 
 type propsType = {
@@ -24,29 +24,45 @@ export function useFavoriteVideoContent(props: propsType) {
     });
     // ドラッグ時スタイル
     const draggingStyle: CSSProperties = {
-        transform: transform ? `translate(${transform.x}px, ${transform.y}px) scale(0.7)` : undefined,
+        transform: transform ? `translate(${transform.x}px, ${transform.y}px) scale(0.99)` : undefined,
         opacity: isDragging ? 0.8 : 1,
+    };
+    // 動画コンテンツの位置
+    const dragStartX = useRef(0);
+    const dragStartY = useRef(0);
+
+    /**
+     * ドラッグ開始位置を記録
+     * @param e 
+     */
+    function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+        dragStartX.current = e.clientX;
+        dragStartY.current = e.clientY;
     };
 
     /**
-     * 動画サムネイル、タイトルのクリックイベント
+     * ドラッグ終了／クリック処理
+     * @param id 
+     * @param e 
      */
-    function clickVideo(id: string) {
+    function handleMouseUp(id: string, e: React.MouseEvent<HTMLDivElement>) {
 
-        if (!id) {
-            toast.error(`動画情報を取得できませんでした。`);
-            return;
+        const diffX = Math.abs(e.clientX - dragStartX.current);
+        const diffY = Math.abs(e.clientY - dragStartY.current);
+
+        if (diffX < 5 && diffY < 5) {
+            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}?${PREV_PATH_KEY}=${ROUTER_PATH.FAVORITE.ROOT}${query}`);
         }
+    };
 
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}?${PREV_PATH_KEY}=${ROUTER_PATH.FAVORITE.ROOT}${query}`);
-    }
 
     return {
-        clickVideo,
         attributes,
         listeners,
         setNodeRef,
         transform,
         draggingStyle,
+        handleMouseDown,
+        handleMouseUp,
     }
 }

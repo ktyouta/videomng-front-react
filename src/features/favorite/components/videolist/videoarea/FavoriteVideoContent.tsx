@@ -83,11 +83,12 @@ export function FavoriteVideoContent(props: propsType) {
     console.log("FavoriteVideoContent render");
 
     const {
-        clickVideo,
         attributes,
         listeners,
         setNodeRef,
-        draggingStyle, } = useFavoriteVideoContent({ ...props });
+        draggingStyle,
+        handleMouseDown,
+        handleMouseUp, } = useFavoriteVideoContent({ ...props });
 
     const data = props.data
     const snipet = data.snippet;
@@ -113,13 +114,15 @@ export function FavoriteVideoContent(props: propsType) {
             <VideoSection>
                 <VideoImg
                     src={imgUrl}
-                    onClick={() => {
-                        clickVideo(videoId)
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={(e) => {
+                        handleMouseUp(videoId, e);
                     }}
                 />
                 <VideoTitleDiv
-                    onClick={() => {
-                        clickVideo(videoId)
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={(e) => {
+                        handleMouseUp(videoId, e);
                     }}
                 >
                     {title}
