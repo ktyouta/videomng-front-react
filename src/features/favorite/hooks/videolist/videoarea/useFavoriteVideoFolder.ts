@@ -26,10 +26,32 @@ export function useFavoriteVideoFolder(props: propsType) {
         border: isOver ? `1px solid rgb(144, 202, 249)` : undefined,
         transform: isOver ? `scale(1.05)` : undefined,
     };
+    //ルーティング用
+    const navigate = useNavigate();
+    // クエリ作成用
+    const { query } = useCreateFavoriteVideoListQuery();
+    // パス
+    const pathName = location.pathname;
 
+
+    /**
+     * フォルダ名のクリックイベント
+     * @param id 
+     * @returns 
+     */
+    function clickFolder(id: number) {
+
+        if (!id) {
+            toast.error(`フォルダを開けません。`);
+            return;
+        }
+
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.FOLDER}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
+    }
 
     return {
         setNodeRef,
-        draggingStyle
+        draggingStyle,
+        clickFolder
     }
 }

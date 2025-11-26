@@ -10,6 +10,7 @@ export const ROUTER_PATH = {
     FAVORITE: {
         ROOT: `/favorite`,
         DETAIL: `/detail`,
+        FOLDER: `/folder`,
     },
     // ログイン
     LOGIN: `/login`,

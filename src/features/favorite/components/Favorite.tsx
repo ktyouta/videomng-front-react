@@ -7,6 +7,7 @@ import { Provider } from "jotai";
 import { ROUTER_PATH } from "../../../consts/RouterPath";
 import { NotFound } from "../../notfound/components/NotFound";
 import { FavoriteVideoSearchConditionValueProvider } from "./FavoriteVideoSearchConditionValueProvider";
+import { FavoriteVideoFolder } from "./videofolder/FavoriteVideoFolder";
 
 
 export function Favorite() {
@@ -30,6 +31,13 @@ export function Favorite() {
                 path={`${ROUTER_PATH.FAVORITE.DETAIL}/:videoId/*`}
                 element={
                     <FavoriteVideoDetail />
+                } >
+            </Route>
+            {/* お気に入り動画フォルダー */}
+            <Route
+                path={`${ROUTER_PATH.FAVORITE.FOLDER}/:folderId/*`}
+                element={
+                    <FavoriteVideoFolder />
                 } >
             </Route>
             {/* Not Found */}

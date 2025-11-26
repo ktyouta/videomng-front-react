@@ -92,7 +92,17 @@ export function useFavoriteVideoArea() {
             },
             // 失敗後の処理
             onError: (res: unknown) => {
-                toast.error(`フォルダの登録に失敗しました。`);
+
+                const errRes = res as errResType;
+                const message = errRes.response.data.message;
+
+                if (message) {
+                    toast.error(message);
+                }
+                else {
+                    toast.error(`フォルダの登録に失敗しました。`);
+                }
+
             },
         });
     }

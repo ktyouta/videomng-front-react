@@ -61,10 +61,14 @@ export function FavoriteVideoFolder(props: propsType) {
 
     console.log("FavoriteVideoFolder render");
 
-    const { setNodeRef, draggingStyle } = useFavoriteVideoFolder({ ...props });
+    const {
+        setNodeRef,
+        draggingStyle,
+        clickFolder, } = useFavoriteVideoFolder({ ...props });
 
     const data = props.data
     const name = data.name;
+    const id = data.folderId;
 
     return (
         <Parent
@@ -78,10 +82,14 @@ export function FavoriteVideoFolder(props: propsType) {
                         icon={FaFolder}
                         size="100%"
                         bgColor="rgb(144, 202, 249)"
+                        onclick={() => {
+                            clickFolder(id);
+                        }}
                     />
                 </IconAreaDiv>
                 <TitleDiv
                     onClick={() => {
+                        clickFolder(id);
                     }}
                 >
                     {name}
