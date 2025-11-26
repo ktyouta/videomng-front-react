@@ -4,6 +4,11 @@ import ENV from "../../../env.json";
 export function getFavoriteVideoFolderEndpoint(folderId: string) {
 
     const endpoint = folderId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_FOLDER}`.replace(`:folderId`, folderId) : ``;
+    return endpoint;
+}
 
+export function getFolderEndpoint(folderId: string) {
+
+    const endpoint = folderId ? `${VIDEO_MNG_PATH}${ENV.FOLDER_ID}`.replace(`:folderId`, folderId) : ``;
     return endpoint;
 }

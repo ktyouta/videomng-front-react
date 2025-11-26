@@ -8,7 +8,7 @@ import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImpo
 import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
 import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExportModal";
 
-const Parent = styled.div`
+const FilterAreaDiv = styled.div`
   width: 100%;
   display:flex;
   justify-content: center;
@@ -18,7 +18,7 @@ const Parent = styled.div`
   padding-left: 9%;
 `;
 
-const SearchParentDiv = styled.div`
+const SelectedTagAreaDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
@@ -38,7 +38,7 @@ export function FavoriteSearchAreaPc() {
 
   return (
     <React.Fragment>
-      <Parent>
+      <FilterAreaDiv>
         {/* タイトルフィルター */}
         <FavoriteSearchText
           width="85%"
@@ -53,11 +53,11 @@ export function FavoriteSearchAreaPc() {
         <FavoriteSearchCsvImportModal />
         {/* 取込 */}
         <FavoriteSearchCsvExportModal />
-      </Parent>
-      <SearchParentDiv>
+      </FilterAreaDiv>
+      <SelectedTagAreaDiv>
         {/* 選択中のタグ */}
         <FavoriteSearchSelectedTag />
-      </SearchParentDiv>
+      </SelectedTagAreaDiv>
     </React.Fragment>
   );
 }

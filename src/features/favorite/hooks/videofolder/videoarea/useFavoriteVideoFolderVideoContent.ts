@@ -15,13 +15,15 @@ export function useFavoriteVideoFolderVideoContent() {
     const navigate = useNavigate();
     // クエリ作成用
     const { query } = useCreateFavoriteVideoFolderVideoListQuery();
+    // パス
+    const pathName = location.pathname;
 
     /**
      * 動画クリック処理
      * @param id 
      */
     function clickVideo(id: string) {
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}?${PREV_PATH_KEY}=${ROUTER_PATH.FAVORITE.ROOT}${query}`);
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
     };
 
 

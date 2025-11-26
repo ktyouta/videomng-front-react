@@ -6,7 +6,7 @@ import { useFavoriteVideoFolderSearchArea } from "../../../hooks/videofolder/sea
 
 export function FavoriteSearchArea() {
 
-    const { isPcLess } = useFavoriteVideoFolderSearchArea();
+    const { isPcLess, data } = useFavoriteVideoFolderSearchArea();
 
     return (
         <React.Fragment>
@@ -14,10 +14,14 @@ export function FavoriteSearchArea() {
                 isPcLess
                     ?
                     // PCサイズ以下
-                    <FavoriteVideoFolderSearchAreaMobile />
+                    <FavoriteVideoFolderSearchAreaMobile
+                        folder={data}
+                    />
                     :
                     // PC
-                    <FavoriteVideoFolderSearchAreaPc />
+                    <FavoriteVideoFolderSearchAreaPc
+                        folder={data}
+                    />
             }
         </React.Fragment>
     );
