@@ -21,7 +21,7 @@ type propsType = {
     close: () => void,
 }
 
-export function useFavoriteDeleteFolderMain(props: propsType) {
+export function useFavoriteDeleteFolder(props: propsType) {
 
     // フォルダID
     const folderId = useFolderId();
@@ -92,7 +92,7 @@ export function useFavoriteDeleteFolderMain(props: propsType) {
     function execute() {
 
         const body: DeleteFolderRequestType = {
-            deleteVideos: deleteVideoFlg ? `1` : `0`
+            deleteVideos: deleteVideoFlg === `1`
         }
 
         // リクエスト送信

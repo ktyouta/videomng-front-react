@@ -1,3 +1,3 @@
 export type DeleteFolderRequestType = {
-    deleteVideos: string,
+    deleteVideos: boolean,
 }

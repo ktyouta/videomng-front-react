@@ -89,6 +89,8 @@ export function useFavoriteVideoArea() {
                     const newList = e.filter((e1) => e1.id !== videoId);
                     return newList;
                 });
+
+                toast.success(`フォルダに登録しました。`);
             },
             // 失敗後の処理
             onError: (res: unknown) => {

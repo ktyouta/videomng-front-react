@@ -101,16 +101,13 @@ export function FavoriteCreateFolderMain(props: propsType) {
                     作成
                 </ButtonComponent>
             </FooterDiv>
-            {
-                // 確認用モーダル
-                isOpenConfirm &&
-                <ModalPortalConfirm
-                    isOpenModal={isOpenConfirm}
-                    closeModal={closeConfirmModal}
-                    titleMessage={`フォルダを作成します。よろしいですか？`}
-                    clickOk={execute}
-                />
-            }
+            {/* 確認用モーダル */}
+            <ModalPortalConfirm
+                isOpenModal={isOpenConfirm}
+                closeModal={closeConfirmModal}
+                titleMessage={`フォルダを作成します。よろしいですか？`}
+                clickOk={execute}
+            />
         </React.Fragment>
     );
 }

@@ -49,6 +49,7 @@ export function FavoriteUpdateFolderModal(props: propsType) {
                 }}
                 width="20px"
                 height="100%"
+                onclick={openModal}
             />
             {
                 !isMobile &&

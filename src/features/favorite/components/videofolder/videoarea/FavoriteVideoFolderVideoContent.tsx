@@ -4,12 +4,17 @@ import { useFavoriteVideoContent } from "../../../hooks/videolist/videoarea/useF
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteVideoFolderVideoContent } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderVideoContent";
+import { Icon } from "../../../../../components/Icon";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { ModalPortalConfirm } from "../../../../../components/ModalPortalConfirm";
+
 
 const VideoArticle = styled.article`
 `;
 
 const VideoSection = styled.section`
-    width:100%;
+    width: 100%;
+    position: relative;
 `;
 
 const VideoImg = styled.img`
@@ -83,7 +88,12 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
 
     console.log("FavoriteVideoFolderVideoContent render");
 
-    const { clickVideo } = useFavoriteVideoFolderVideoContent();
+    const {
+        clickVideo,
+        deleteVideo,
+        isOpenModal,
+        openModal,
+        closeModal, } = useFavoriteVideoFolderVideoContent({ ...props });
 
     const data = props.data
     const snipet = data.snippet;
@@ -115,6 +125,19 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
                 >
                     {title}
                 </VideoTitleDiv>
+                {/* 動画削除アイコン */}
+                <Icon
+                    icon={FaRegTrashAlt}
+                    bgColor="rgb(200, 200, 200)"
+                    style={{
+                        position: `absolute`,
+                        top: `1%`,
+                        right: `1%`
+                    }}
+                    width="20px"
+                    height="20px"
+                    onclick={openModal}
+                />
                 <DateDiv>
                     {publishedDate}
                 </DateDiv>
@@ -122,6 +145,13 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
                     {channelTitle}
                 </ChennelTitleDiv>
             </VideoSection>
+            {/* 確認用モーダル */}
+            <ModalPortalConfirm
+                isOpenModal={isOpenModal}
+                closeModal={closeModal}
+                titleMessage={`選択した動画をフォルダから削除します。よろしいですか？`}
+                clickOk={deleteVideo}
+            />
         </VideoArticle>
     );
 }

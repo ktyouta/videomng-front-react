@@ -48,6 +48,7 @@ export function FavoriteDeleteFolderModal() {
                 }}
                 width="20px"
                 height="100%"
+                onclick={openModal}
             />
             {
                 !isMobile &&
@@ -65,6 +66,10 @@ export function FavoriteDeleteFolderModal() {
                 isCloseOuter={true}
                 close={closeModal}
                 containerStyle={{
+                    backgroundColor: "#e0e0e0",
+                    borderRadius: "20px",
+                    border: "solid 1px",
+                    color: "black",
                     minHeight: "30%"
                 }}
             >
