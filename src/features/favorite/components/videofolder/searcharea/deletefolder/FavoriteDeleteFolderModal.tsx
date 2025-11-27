@@ -13,6 +13,7 @@ import { useFavoriteUpdateFolderModal } from "../../../../hooks/videofolder/sear
 import { FolderType } from "../../../../types/videolist/FolderType";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
+import { FavoriteDeleteFolder } from "./FavoriteDeleteFolder";
 
 
 const TitleSpan = styled.span`
@@ -56,6 +57,21 @@ export function FavoriteDeleteFolderModal() {
                     フォルダ削除
                 </TitleSpan>
             }
+            {/* フォルダ削除確認モーダル */}
+            <ModalPortal
+                isOpen={isOpenModal}
+                modalWidth={isMobile ? `80%` : `45%`}
+                modalHeight=""
+                isCloseOuter={true}
+                close={closeModal}
+                containerStyle={{
+                    minHeight: "30%"
+                }}
+            >
+                <FavoriteDeleteFolder
+                    close={closeModal}
+                />
+            </ModalPortal>
         </React.Fragment>
     );
 }

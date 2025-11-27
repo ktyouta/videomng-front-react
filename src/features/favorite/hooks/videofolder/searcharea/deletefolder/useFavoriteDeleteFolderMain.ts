@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import ENV from "../../../../../../env.json";
 import { AxiosProgressEvent } from "axios";
 import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
-import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
 import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
 import { CreateFolderRequestType } from "../../../../types/videolist/searcharea/folder/CreateFolderRequestType";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
@@ -11,27 +11,40 @@ import { useFavoriteVideoListEndpoint } from "../../videoarea/useFavoriteVideoLi
 import { folderIdEndpoint } from "../../../../utils/endpoint";
 import { useFolderId } from "../../useFolderId";
 import { FolderType } from "../../../../types/videolist/FolderType";
-import { UpdateFolderRequestType } from "../../../../types/videofolder/searcharea/updatefolder/UpdateFolderRequestType";
+import { getPrevPath } from "../../../../../../utils/CommonFunction";
+import { ROUTER_PATH } from "../../../../../../consts/RouterPath";
+import { useNavigate } from "react-router-dom";
+import { DeleteFolderRequestType } from "../../../../types/videofolder/searcharea/deletefolder/DeleteFolderRequestType";
 
 
 type propsType = {
     close: () => void,
-    folder: FolderType,
 }
 
-export function useFavoriteUpdateFolderMain(props: propsType) {
+export function useFavoriteDeleteFolderMain(props: propsType) {
 
-    // フォルダ名
-    const [folderName, setFolderName] = useState(props.folder.name);
     // フォルダID
     const folderId = useFolderId();
+    // フォルダ内のお気に入り動画削除フラグ
+    const [deleteVideoFlg, setDeleteVideoFlg] = useState(`0`);
+    // 前画面のパスを取得
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
+    //ルーティング用
+    const navigate = useNavigate();
+
+    /**
+     * 前画面に遷移
+     */
+    function back() {
+        navigate(prev);
+    }
 
     /**
      * フォルダ名更新リクエスト
      */
     const postMutation = useMutationWrapper({
         url: folderIdEndpoint(folderId),
-        method: "PUT",
+        method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {
 
@@ -39,13 +52,13 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
             const resParsed = resSchema().safeParse(res);
 
             if (!resParsed.success) {
-                toast.error(`フォルダ名の更新に失敗しました。時間をおいて再度お試しください。`);
+                toast.error(`フォルダの削除に失敗しました。時間をおいて再度お試しください。`);
                 props.close();
                 return;
             }
 
-            toast.success("フォルダ名を更新しました。");
-            props.close();
+            toast.success("フォルダを削除しました。");
+            back();
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {
@@ -58,15 +71,28 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
         },
     });
 
+
     /**
-     * フォルダ名を更新する
+     * コンボボックスの切り替え
+     * @param value 
+     */
+    function changeSelect(value: string) {
+
+        setDeleteVideoFlg((e) => {
+
+            return e === value ? `0` : `1`;
+        });
+    }
+
+    /**
+     * フォルダ削除
      * @param videoId 
      * @returns 
      */
     function execute() {
 
-        const body: UpdateFolderRequestType = {
-            name: folderName
+        const body: DeleteFolderRequestType = {
+            deleteVideos: deleteVideoFlg ? `1` : `0`
         }
 
         // リクエスト送信
@@ -75,7 +101,7 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
 
     return {
         execute,
-        folderName,
-        setFolderName,
+        deleteVideoFlg,
+        changeSelect,
     }
 }

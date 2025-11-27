@@ -14,6 +14,7 @@ export function useFavoriteVideoSearchArea() {
     // フォルダID
     const folderId = useFolderId();
 
+    // フォルダ情報取得
     const { data } = useQueryWrapper<FolderResponseType, FolderType>(
         {
             url: folderIdEndpoint(folderId),
