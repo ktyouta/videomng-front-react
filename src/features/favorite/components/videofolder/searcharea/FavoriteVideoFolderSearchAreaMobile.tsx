@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { FolderType } from "../../../types/videolist/FolderType";
-import { IconComponent } from "../../../../../components/IconComponent";
 import { FaFolder } from 'react-icons/fa';
+import { MdEdit } from "react-icons/md";
+import { Icon } from "../../../../../components/Icon";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 
 const Parent = styled.div`
@@ -9,24 +11,9 @@ const Parent = styled.div`
   box-sizing: border-box;
   padding-left: 6%;
   color: white;
-  font-size: 17px;
 `;
 
-const IconAreaDiv = styled.div`
-  width: 46px;
-  height: 100%;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 15%;
-  border-bottom-right-radius: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color:#9e9e9e;
-  margin-right: 10px;
-`;
-
-const FilterAreaDiv = styled.div`
+const SecondRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
@@ -35,7 +22,12 @@ const FilterAreaDiv = styled.div`
   margin-top: 10px;
 `;
 
-const FolderNameDiv = styled.div`
+const FolderNameSpan = styled.span`
+  font-size: 17px;
+  margin-right: 23px;
+`;
+
+const FirstRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
@@ -59,20 +51,37 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
 
   return (
     <Parent>
-      <FolderNameDiv>
-        <IconAreaDiv>
-          <IconComponent
-            icon={FaFolder}
-            size="70%"
-            style={{
-              color: `rgb(144, 202, 249)`
-            }}
-          />
-        </IconAreaDiv>
-        {props.folder?.name}
-      </FolderNameDiv>
-      <FilterAreaDiv>
-      </FilterAreaDiv>
+      <FirstRowDiv>
+        <Icon
+          icon={FaFolder}
+          style={{
+            marginRight: `15px`,
+          }}
+          bgColor="rgb(144, 202, 249)"
+          width="30px"
+          height="100%"
+        />
+        <FolderNameSpan>
+          {props.folder?.name}
+        </FolderNameSpan>
+        <Icon
+          icon={MdEdit}
+          bgColor="rgb(158, 158, 158)"
+          style={{
+            marginRight: `15px`,
+          }}
+          width="20px"
+          height="100%"
+        />
+        <Icon
+          icon={FaRegTrashAlt}
+          bgColor="rgb(158, 158, 158)"
+          width="20px"
+          height="100%"
+        />
+      </FirstRowDiv>
+      <SecondRowDiv>
+      </SecondRowDiv>
     </Parent>
   );
 }

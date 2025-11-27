@@ -5,23 +5,14 @@ import { IconComponent } from "../../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
-import { FavoriteCreateFolder } from "./FavoriteCreateFolder";
-import { FaFolder } from 'react-icons/fa';
+import { FavoriteUpdateFolder } from "./FavoriteUpdateFolder";
+import { MdEdit } from "react-icons/md";
 import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
 import { minLength } from "zod";
+import { Icon } from "../../../../../../components/Icon";
+import { useFavoriteUpdateFolderModal } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderModal";
+import { FolderType } from "../../../../types/videolist/FolderType";
 
-const IconAreaDiv = styled.div`
-  width: 46px;
-  height: 99%;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 15%;
-  border-bottom-right-radius: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color:#9e9e9e;
-`;
 
 const TitleSpan = styled.span`
   color: #9e9e9e;
@@ -30,41 +21,44 @@ const TitleSpan = styled.span`
     cursor: pointer;
   }
   white-space: nowrap;
-  margin-right: 1%;
+  margin-right: 30px;
 `;
 
-/**
- * 検索条件エリア
- */
-export function FavoriteCreateFolderModal() {
+type propsType = {
+    folder: FolderType
+}
 
-    console.log("FavoriteCreateFolderModal render");
+export function FavoriteUpdateFolderModal(props: propsType) {
+
+    console.log("FavoriteUpdateFolderModal render");
 
     const {
         isOpenModal,
         openModal,
         closeModal,
-        isMobile, } = useFavoriteCreateFolderModal();
+        isMobile, } = useFavoriteUpdateFolderModal();
 
 
     return (
         <React.Fragment>
-            <IconAreaDiv>
-                <IconComponent
-                    icon={FaFolder}
-                    onclick={openModal}
-                    size="40%"
-                />
-            </IconAreaDiv>
+            <Icon
+                icon={MdEdit}
+                bgColor="rgb(158, 158, 158)"
+                style={{
+                    marginRight: `10px`,
+                }}
+                width="20px"
+                height="100%"
+            />
             {
                 !isMobile &&
                 <TitleSpan
                     onClick={openModal}
                 >
-                    フォルダ作成
+                    フォルダ名変更
                 </TitleSpan>
             }
-            {/* フォルダ作成モーダル */}
+            {/* フォルダ名変更モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
                 modalWidth={isMobile ? `80%` : `45%`}
@@ -72,10 +66,11 @@ export function FavoriteCreateFolderModal() {
                 isCloseOuter={true}
                 close={closeModal}
                 containerStyle={{
-                    minHeight: "55%"
+                    minHeight: "35%"
                 }}
             >
-                <FavoriteCreateFolder
+                <FavoriteUpdateFolder
+                    folder={props.folder}
                     close={closeModal}
                 />
             </ModalPortal>

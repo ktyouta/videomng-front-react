@@ -2,11 +2,11 @@ import React from "react";
 import { useFavoriteSearchArea } from "../../../hooks/videolist/searcharea/useFavoriteSearchArea";
 import { FavoriteVideoFolderSearchAreaMobile } from "./FavoriteVideoFolderSearchAreaMobile";
 import { FavoriteVideoFolderSearchAreaPc } from "./FavoriteVideoFolderSearchAreaPc";
-import { useFavoriteVideoFolderSearchArea } from "../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchArea";
+import { useFavoriteVideoSearchArea } from "../../../hooks/videofolder/searcharea/useFavoriteVideoSearchArea";
 
 export function FavoriteSearchArea() {
 
-    const { isPcLess, data } = useFavoriteVideoFolderSearchArea();
+    const { isPcLess, data } = useFavoriteVideoSearchArea();
 
     return (
         <React.Fragment>

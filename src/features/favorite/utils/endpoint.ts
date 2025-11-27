@@ -7,7 +7,7 @@ export function getFavoriteVideoFolderEndpoint(folderId: string) {
     return endpoint;
 }
 
-export function getFolderEndpoint(folderId: string) {
+export function folderIdEndpoint(folderId: string) {
 
     const endpoint = folderId ? `${VIDEO_MNG_PATH}${ENV.FOLDER_ID}`.replace(`:folderId`, folderId) : ``;
     return endpoint;
