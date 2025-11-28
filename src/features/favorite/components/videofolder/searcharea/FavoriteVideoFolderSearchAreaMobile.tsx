@@ -4,6 +4,8 @@ import { FaFolder } from 'react-icons/fa';
 import { MdEdit } from "react-icons/md";
 import { Icon } from "../../../../../components/Icon";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
+import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 
 
 const Parent = styled.div`
@@ -49,6 +51,10 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
 
   console.log("FavoriteVideoFolderSearchAreaMobile render");
 
+  if (!props.folder) {
+    return null;
+  }
+
   return (
     <Parent>
       <FirstRowDiv>
@@ -64,21 +70,12 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
         <FolderNameSpan>
           {props.folder?.name}
         </FolderNameSpan>
-        <Icon
-          icon={MdEdit}
-          bgColor="rgb(158, 158, 158)"
-          style={{
-            marginRight: `15px`,
-          }}
-          width="20px"
-          height="100%"
+        {/* フォルダ名変更モーダル */}
+        <FavoriteUpdateFolderModal
+          folder={props.folder}
         />
-        <Icon
-          icon={FaRegTrashAlt}
-          bgColor="rgb(158, 158, 158)"
-          width="20px"
-          height="100%"
-        />
+        {/* フォルダ削除モーダル */}
+        <FavoriteDeleteFolderModal />
       </FirstRowDiv>
       <SecondRowDiv>
       </SecondRowDiv>

@@ -24,6 +24,16 @@ const Section = styled.section`
 const IconAreaDiv = styled.div`
     height: 72%;
     margin-bottom: 6px;
+    position: relative;
+`;
+
+const VideoImg = styled.img`
+    position: absolute;
+    width: 72%;
+    height: 55%;
+    top: 28%;
+    left: 14%;
+    border-radius: 10px;
 `;
 
 const TitleDiv = styled.div`
@@ -69,12 +79,18 @@ export function FavoriteVideoFolder(props: propsType) {
     const data = props.data
     const name = data.name;
     const id = data.folderId;
+    const thumbnails = data.thumbnails;
+    const thumbnailUrl = thumbnails?.high?.url;
 
     return (
         <Parent
             ref={setNodeRef}
         >
-            <Section>
+            <Section
+                onClick={() => {
+                    clickFolder(id);
+                }}
+            >
                 <IconAreaDiv
                     style={draggingStyle}
                 >
@@ -82,16 +98,28 @@ export function FavoriteVideoFolder(props: propsType) {
                         icon={FaFolder}
                         size="100%"
                         bgColor="rgb(144, 202, 249)"
-                        onclick={() => {
-                            clickFolder(id);
-                        }}
                     />
+                    {
+                        thumbnailUrl &&
+                        <React.Fragment>
+                            <VideoImg
+                                src={thumbnailUrl}
+                            />
+                            <IconComponent
+                                icon={FaFolder}
+                                size="100%"
+                                bgColor="rgb(144, 202, 249)"
+                                style={{
+                                    position: `absolute`,
+                                    top: `18%`,
+                                    left: `0`,
+                                    transform: `scaleX(-0.95) scaleY(0.5)`
+                                }}
+                            />
+                        </React.Fragment>
+                    }
                 </IconAreaDiv>
-                <TitleDiv
-                    onClick={() => {
-                        clickFolder(id);
-                    }}
-                >
+                <TitleDiv>
                     {name}
                 </TitleDiv>
             </Section>
