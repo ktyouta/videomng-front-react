@@ -5,7 +5,7 @@ import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/vide
 import { Option } from "../../../../../components/Selectbox";
 import { FavoriteDetailSettingViewActions } from "./FavoriteDetailSettingViewActions";
 import { useFavoriteDetailSettingView } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingView";
-import { FAVORITE_LEVEL_SETTING_LIST } from "../../../const/FavoriteConst";
+import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
 import Loading from "../../../../../components/Loading";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
@@ -45,6 +45,7 @@ const FlexDiv = styled.div`
   align-items: center;
   display:flex;
   gap: 50px;
+  flex-wrap: wrap;
 `;
 
 const CategoryAreaDiv = styled.div`
@@ -220,6 +221,14 @@ export function FavoriteDetailSettingView(props: propsType) {
                                 })
                             }
                         </FavoriteLevelAreaDiv>
+                    </MetaContentDiv>
+                    <MetaContentDiv>
+                        <TitleDiv>
+                            【フォルダ追加後も一覧に表示する】
+                        </TitleDiv>
+                        <MetaDiv>
+                            {detail.isVisibleAfterFolderAdd === ISVISIBLEAFTERFOLDERADD.ON ? `表示する` : `表示しない`}
+                        </MetaDiv>
                     </MetaContentDiv>
                 </FlexDiv>
                 <MetaContentDiv

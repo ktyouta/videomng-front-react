@@ -16,6 +16,7 @@ import { FavoriteVideoCustomDataType } from "../../../types/videodetail/videodet
 import { useFavoriteDetailSettingEndpoint } from "./useFavoriteDetailSettingEndpoint";
 import { useVideoCategory } from "../../../../main/hooks/useVideoCategory";
 import { UpdateFavoriteVideoResponseDataSchema } from "../../../schemas/videodetail/videodetailsetting/UpdateFavoriteVideoResponseDataSchema";
+import { ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
 
 
 type propsType = {
@@ -37,6 +38,8 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const { data: viewStatusList } = useViewStatusList();
     // お気に入り度
     const [favoriteLevel, setFavoriteLevel] = useState(0);
+    // フォルダ内動画一覧画面表示フラグ
+    const [isVisibleAfterFolderAdd, setIsVisibleAfterFolderAdd] = useState<string>(ISVISIBLEAFTERFOLDERADD.OFF);
     // 動画ID
     const videoId = useVideoId();
 
@@ -58,6 +61,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
                 }));
                 setViewStatus(detail.viewStatus);
                 setFavoriteLevel(detail.favoriteLevel);
+                setIsVisibleAfterFolderAdd(detail.isVisibleAfterFolderAdd);
             },
             afErrorFn: (res) => {
             }
@@ -101,6 +105,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
             viewStatus: viewStatus,
             category: categorys,
             favoriteLevel: favoriteLevel,
+            isVisibleAfterFolderAdd,
         }
 
         // リクエスト送信
@@ -156,5 +161,7 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         videoCategory,
         tags: data?.tags,
         data,
+        isVisibleAfterFolderAdd,
+        setIsVisibleAfterFolderAdd,
     };
 }

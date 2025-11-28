@@ -7,7 +7,8 @@ import { useFavoriteVideoFolderVideoContent } from "../../../hooks/videofolder/v
 import { Icon } from "../../../../../components/Icon";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ModalPortalConfirm } from "../../../../../components/ModalPortalConfirm";
-
+import { BiExport } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
 
 const VideoArticle = styled.article`
 `;
@@ -127,15 +128,15 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
                 </VideoTitleDiv>
                 {/* 動画削除アイコン */}
                 <Icon
-                    icon={FaRegTrashAlt}
+                    icon={BiExport}
                     bgColor="rgb(200, 200, 200)"
                     style={{
                         position: `absolute`,
-                        top: `1%`,
+                        top: `0`,
                         right: `1%`
                     }}
-                    width="20px"
-                    height="20px"
+                    width="23px"
+                    height="23px"
                     onclick={openModal}
                 />
                 <DateDiv>
@@ -149,7 +150,7 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
             <ModalPortalConfirm
                 isOpenModal={isOpenModal}
                 closeModal={closeModal}
-                titleMessage={`選択した動画をフォルダから削除します。よろしいですか？`}
+                titleMessage={`選択した動画をフォルダから除外します。よろしいですか？`}
                 clickOk={deleteVideo}
             />
         </VideoArticle>

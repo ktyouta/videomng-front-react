@@ -50,9 +50,6 @@ export function FavoriteCreateFolderMain(props: propsType) {
 
     const {
         execute,
-        isOpenConfirm,
-        openConfirmModal,
-        closeConfirmModal,
         folderName,
         setFolderName, } = useFavoriteCreateFolderMain({ ...props });
 
@@ -62,8 +59,8 @@ export function FavoriteCreateFolderMain(props: propsType) {
                 フォルダ名を入力して「作成」ボタンを押すと、新しいフォルダを作成できます。<br />
                 作成したフォルダはお気に入り一覧画面に表示されます。<br />
                 お気に入りに登録した動画をドラッグ＆ドロップすると、フォルダに登録できます。<br />
-                フォルダに登録した動画を一覧画面にも表示したい場合は、動画の詳細画面にある
-                「フォルダ登録時も一覧に表示する」にチェックを入れてください。<br />
+                フォルダに登録した動画を一覧画面にも表示したい場合は、動画詳細画面の動画詳細設定メニューにある
+                「フォルダ追加後も一覧に表示する」にチェックを入れてください。<br />
             </MessageArea>
             <InputArea>
                 <InputTitleSpan>
@@ -91,7 +88,7 @@ export function FavoriteCreateFolderMain(props: propsType) {
                 </ButtonComponent>
                 <ButtonComponent
                     shape="rounded"
-                    onClick={openConfirmModal}
+                    onClick={execute}
                     style={{
                         marginLeft: "5%",
                         color: "white",
@@ -101,13 +98,6 @@ export function FavoriteCreateFolderMain(props: propsType) {
                     作成
                 </ButtonComponent>
             </FooterDiv>
-            {/* 確認用モーダル */}
-            <ModalPortalConfirm
-                isOpenModal={isOpenConfirm}
-                closeModal={closeConfirmModal}
-                titleMessage={`フォルダを作成します。よろしいですか？`}
-                clickOk={execute}
-            />
         </React.Fragment>
     );
 }

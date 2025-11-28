@@ -78,3 +78,21 @@ export const SEARCH_CONDITION = {
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `page`,
 } as const;
+
+// フォルダ内動画一覧画面表示フラグ
+export const ISVISIBLEAFTERFOLDERADD = {
+    ON: `1`,
+    OFF: `0`
+} as const;
+
+// フォルダ内動画一覧画面表示選択リスト
+export const ISVISIBLEAFTERFOLDERADDLIST = [
+    {
+        label: `表示しない`,
+        value: ISVISIBLEAFTERFOLDERADD.OFF,
+    },
+    {
+        label: `表示する`,
+        value: ISVISIBLEAFTERFOLDERADD.ON,
+    }
+]

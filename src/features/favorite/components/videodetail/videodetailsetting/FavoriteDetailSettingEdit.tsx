@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEdit";
 import BaseTextAreaComponent from "../../../../../components/BaseTextAreaComponent";
 import CheckBoxComponent from "../../../../../components/CheckBoxComponent";
-import { FAVORITE_LEVEL_SETTING_LIST } from "../../../const/FavoriteConst";
+import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADD, ISVISIBLEAFTERFOLDERADDLIST } from "../../../const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
@@ -69,6 +69,7 @@ const FlexDiv = styled.div`
   align-items: center;
   display:flex;
   gap: 50px;
+  flex-wrap: wrap;
 `;
 
 type propsType = {
@@ -93,6 +94,8 @@ export function FavoriteDetailSettingEdit(props: propsType) {
         videoCategory,
         tags,
         data,
+        isVisibleAfterFolderAdd,
+        setIsVisibleAfterFolderAdd,
     } = useFavoriteDetailSettingEdit({ ...props });
 
     const createDate = data?.detail.createDate;
@@ -210,6 +213,22 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                             })
                         }
                     </FavoriteLevelAreaDiv>
+                </MetaContentDiv>
+                <MetaContentDiv>
+                    <TitleDiv>
+                        【フォルダ追加後も一覧に表示する】
+                    </TitleDiv>
+                    <MetaDiv>
+                        <Selectbox
+                            options={ISVISIBLEAFTERFOLDERADDLIST}
+                            value={isVisibleAfterFolderAdd ?? ISVISIBLEAFTERFOLDERADDLIST[0].value}
+                            onChange={setIsVisibleAfterFolderAdd}
+                            width="25%"
+                            height="39px"
+                            backgroundColor="rgb(44, 47, 54)"
+                            color="white"
+                        />
+                    </MetaDiv>
                 </MetaContentDiv>
                 <MetaContentDiv
                     style={{ marginBottom: "15px" }}

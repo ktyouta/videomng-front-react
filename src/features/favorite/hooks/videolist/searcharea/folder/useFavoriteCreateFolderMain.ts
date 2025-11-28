@@ -18,8 +18,6 @@ export function useFavoriteCreateFolderMain(props: propsType) {
 
     // フォルダ名
     const [folderName, setFolderName] = useState(``);
-    // 確認用モーダル表示フラグ
-    const [isOpenConfirm, setIsOpenConfirm] = useState(false);
     // 動画一覧再取得用
     const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteVideoListEndpoint());
 
@@ -47,7 +45,6 @@ export function useFavoriteCreateFolderMain(props: propsType) {
 
             // 動画一覧再取得
             invalidataFavorite();
-            setIsOpenConfirm(false);
             props.close();
         },
         // 失敗後の処理
@@ -57,7 +54,6 @@ export function useFavoriteCreateFolderMain(props: propsType) {
             if (message) {
                 toast.error(message);
             }
-            setIsOpenConfirm(false);
         },
     });
 
@@ -76,31 +72,8 @@ export function useFavoriteCreateFolderMain(props: propsType) {
         postMutation.mutate(body);
     }
 
-    /**
-     * 確認モーダル表示
-     */
-    function openConfirmModal() {
-
-        if (!folderName) {
-            toast.warn(`フォルダ名を入力してください。`);
-            return;
-        }
-
-        setIsOpenConfirm(true);
-    }
-
-    /**
-     * 確認モーダル非表示
-     */
-    function closeConfirmModal() {
-        setIsOpenConfirm(false);
-    }
-
     return {
         execute,
-        isOpenConfirm,
-        openConfirmModal,
-        closeConfirmModal,
         folderName,
         setFolderName,
     }

@@ -84,11 +84,14 @@ export function FavoriteDeleteFolder(props: propsType) {
           htmlForId="delete-folder-check-id"
           onChange={changeSelect}
           isChecked={deleteVideoFlg === "1"}
+          style={{
+            transform: `scale(1.2)`
+          }}
         />
         <SelectLabel
           htmlFor="delete-folder-check-id"
         >
-          フォルダ内の動画も削除する
+          フォルダ内の動画をお気に入りから削除する
         </SelectLabel>
       </InputArea>
       <FooterDiv >
