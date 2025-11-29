@@ -16,6 +16,7 @@ import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { toast } from "react-toastify";
 import { getFavoriteVideoFolderEndpoint } from "../../../utils/endpoint";
 import { callApi } from "../../../../../utils/callApi";
+import { FolderType } from "../../../types/videolist/FolderType";
 
 
 export function useFavoriteVideoArea() {
@@ -82,6 +83,37 @@ export function useFavoriteVideoArea() {
                     toast.error(`フォルダの登録に失敗しました。時間をおいて再度お試しください。`);
                     return;
                 }
+
+                // フォルダにサムネをオーバーレイ表示する
+                setDisplayFolderList((e: FolderType[]) => {
+
+                    // フォルダに登録した動画
+                    const folderdVideo = displayVideoList.find((e1) => {
+                        return e1.videoId === videoId;
+                    });
+
+                    if (!folderdVideo) {
+                        return e;
+                    }
+
+                    if (Number.isNaN(folderId)) {
+                        return e;
+                    }
+
+                    const thumbnails = folderdVideo.snippet.thumbnails;
+
+                    return e.map((e1: FolderType) => {
+
+                        if (e1.folderId !== parseInt(folderId)) {
+                            return e1;
+                        }
+
+                        return {
+                            ...e1,
+                            thumbnails
+                        }
+                    });
+                });
 
                 // フォルダ登録後に一覧から非表示にする
                 setDisplayVideoList((e) => {

@@ -6,17 +6,17 @@ export type FolderType = {
     folderId: number;
     latestVideoId: string,
     thumbnails?: {
-        readonly default: {
+        default: {
             url: string;
             width: number;
             height: number;
         };
-        readonly medium?: {
+        medium?: {
             url: string;
             width: number;
             height: number;
         } | undefined;
-        readonly high?: {
+        high?: {
             url: string;
             width: number;
             height: number;
