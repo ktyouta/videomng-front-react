@@ -62,7 +62,7 @@ const FavoriteLevelAreaDiv = styled.div`
   align-items: center;
   display:flex;
   flex-wrap: wrap;
-  grid-column-gap: 2%;
+  grid-column-gap: 15px;
 `;
 
 const FlexDiv = styled.div`
@@ -166,54 +166,56 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                         }
                     </MetaDiv>
                 </MetaContentDiv>
-                <MetaContentDiv>
-                    {
-                        viewStatusList &&
-                        <React.Fragment>
-                            <TitleDiv>
-                                【視聴状況】
-                            </TitleDiv>
-                            <MetaDiv>
-                                <Selectbox
-                                    options={viewStatusList}
-                                    value={viewStatus}
-                                    onChange={setViewStatus}
-                                    width="25%"
-                                    height="39px"
-                                    backgroundColor="rgb(44, 47, 54)"
-                                    color="white"
-                                />
-                            </MetaDiv>
-                        </React.Fragment>
-                    }
-                </MetaContentDiv>
-                <MetaContentDiv>
-                    <TitleDiv>
-                        【お気に入り度】
-                    </TitleDiv>
-                    <FavoriteLevelAreaDiv>
+                <FlexDiv>
+                    <MetaContentDiv>
                         {
-                            [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
-
-                                const favoriteLevelId = index + 1;
-                                const color = favoriteLevel >= favoriteLevelId ? `yellow` : ``;
-
-                                return (
-                                    <IconComponent
-                                        icon={FaStar}
-                                        size="25px"
-                                        style={{
-                                            color,
-                                        }}
-                                        onclick={() => {
-                                            clickFavoriteLevelIcon(favoriteLevelId);
-                                        }}
+                            viewStatusList &&
+                            <React.Fragment>
+                                <TitleDiv>
+                                    【視聴状況】
+                                </TitleDiv>
+                                <MetaDiv>
+                                    <Selectbox
+                                        options={viewStatusList}
+                                        value={viewStatus}
+                                        onChange={setViewStatus}
+                                        width="237px"
+                                        height="39px"
+                                        backgroundColor="rgb(44, 47, 54)"
+                                        color="white"
                                     />
-                                )
-                            })
+                                </MetaDiv>
+                            </React.Fragment>
                         }
-                    </FavoriteLevelAreaDiv>
-                </MetaContentDiv>
+                    </MetaContentDiv>
+                    <MetaContentDiv>
+                        <TitleDiv>
+                            【お気に入り度】
+                        </TitleDiv>
+                        <FavoriteLevelAreaDiv>
+                            {
+                                [...Array(FAVORITE_LEVEL_SETTING_LIST)].map((_, index) => {
+
+                                    const favoriteLevelId = index + 1;
+                                    const color = favoriteLevel >= favoriteLevelId ? `yellow` : ``;
+
+                                    return (
+                                        <IconComponent
+                                            icon={FaStar}
+                                            size="25px"
+                                            style={{
+                                                color,
+                                            }}
+                                            onclick={() => {
+                                                clickFavoriteLevelIcon(favoriteLevelId);
+                                            }}
+                                        />
+                                    )
+                                })
+                            }
+                        </FavoriteLevelAreaDiv>
+                    </MetaContentDiv>
+                </FlexDiv>
                 <MetaContentDiv>
                     <TitleDiv>
                         【フォルダ追加後も一覧に表示する】
@@ -223,7 +225,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                             options={ISVISIBLEAFTERFOLDERADDLIST}
                             value={isVisibleAfterFolderAdd ?? ISVISIBLEAFTERFOLDERADDLIST[0].value}
                             onChange={setIsVisibleAfterFolderAdd}
-                            width="25%"
+                            width="237px"
                             height="39px"
                             backgroundColor="rgb(44, 47, 54)"
                             color="white"
