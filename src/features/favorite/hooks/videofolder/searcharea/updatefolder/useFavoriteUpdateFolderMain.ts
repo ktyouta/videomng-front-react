@@ -25,6 +25,8 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
     const [folderName, setFolderName] = useState(props.folder.name);
     // フォルダID
     const folderId = useFolderId();
+    // フォルダ情報再取得用
+    const { invalidate: invalidataFavorite } = useInvalidateQuery(folderIdEndpoint(folderId));
 
     /**
      * フォルダ名更新リクエスト
@@ -44,6 +46,8 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
                 return;
             }
 
+            // フォルダ情報再取得
+            invalidataFavorite();
             toast.success("フォルダ名を更新しました。");
             props.close();
         },
