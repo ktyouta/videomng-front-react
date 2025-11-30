@@ -3,7 +3,7 @@ import { useConfirmModalComponent } from "../hooks/useConfirmModalComponent";
 import { FlexSpaceDiv } from "../styles/styledcomponent/FlexSpaceDiv";
 import { IconComponent } from "./IconComponent";
 import ButtonComponent from "./ButtonComponent";
-import React from "react";
+import React, { CSSProperties, ReactNode } from "react";
 import { OverlayDiv } from "../styles/styledcomponent/OverlayDiv";
 import { ModalPortal } from "./ModalPortal";
 import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
@@ -43,8 +43,9 @@ const BtnAreaDiv = styled.div`
 type propsType = {
     isOpenModal: boolean,
     closeModal: () => void,
-    titleMessage: string,
+    titleMessage: ReactNode,
     clickOk: () => void,
+    style?: CSSProperties,
 }
 
 export function ModalPortalConfirm(props: propsType) {
@@ -62,6 +63,7 @@ export function ModalPortalConfirm(props: propsType) {
                 borderRadius: "20px",
                 border: "solid 1px",
                 color: "black",
+                ...props.style,
             }}
             modalWidth={modalWidth}
             modalHeight="30%"

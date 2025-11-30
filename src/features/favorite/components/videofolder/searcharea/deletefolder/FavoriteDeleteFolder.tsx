@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { Checkbox } from "../../../../../../components/Checkbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
-import { useFavoriteDeleteFolder } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolder";
+import { DELETEFAVORITEVIDEOINFOLDER } from "../../../../const/FavoriteConst";
 
 
 const Parent = styled.div`
@@ -62,16 +62,14 @@ const FooterDiv = styled.div`
 
 type propsType = {
   close: () => void,
+  deleteVideoFlg: string,
+  changeSelect: (value: string) => void,
+  clickDelete: () => void,
 }
 
 export function FavoriteDeleteFolder(props: propsType) {
 
   console.log("FavoriteDeleteFolder render");
-
-  const {
-    execute,
-    deleteVideoFlg,
-    changeSelect, } = useFavoriteDeleteFolder({ ...props });
 
   return (
     <Parent>
@@ -80,10 +78,10 @@ export function FavoriteDeleteFolder(props: propsType) {
       </MessageArea>
       <InputArea>
         <Checkbox
-          value={"1"}
+          value={DELETEFAVORITEVIDEOINFOLDER.ON}
           htmlForId="delete-folder-check-id"
-          onChange={changeSelect}
-          isChecked={deleteVideoFlg === "1"}
+          onChange={props.changeSelect}
+          isChecked={props.deleteVideoFlg === DELETEFAVORITEVIDEOINFOLDER.ON}
           style={{
             transform: `scale(1.2)`
           }}
@@ -105,7 +103,7 @@ export function FavoriteDeleteFolder(props: propsType) {
         <ButtonComponent
           variant="black"
           shape="rounded"
-          onClick={execute}
+          onClick={props.clickDelete}
           style={{
             marginLeft: "5%",
           }}

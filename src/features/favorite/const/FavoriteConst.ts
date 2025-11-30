@@ -81,6 +81,12 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_SHOW_FOLDER: `showfolder`,
 } as const;
 
+// フォルダ内の動画を削除するフラグ
+export const DELETEFAVORITEVIDEOINFOLDER = {
+    ON: `1`,
+    OFF: `0`
+} as const;
+
 // フォルダ内動画一覧画面表示フラグ
 export const ISVISIBLEAFTERFOLDERADD = {
     ON: `1`,

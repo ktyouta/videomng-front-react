@@ -14,6 +14,7 @@ import { FolderType } from "../../../../types/videolist/FolderType";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
 import { FavoriteDeleteFolder } from "./FavoriteDeleteFolder";
+import { ModalPortalConfirm } from "../../../../../../components/ModalPortalConfirm";
 
 
 const TitleSpan = styled.span`
@@ -33,9 +34,15 @@ export function FavoriteDeleteFolderModal() {
 
     const {
         isOpenModal,
-        openModal,
+        openDeleteModal,
         closeModal,
-        isMobile, } = useFavoriteDeleteFolderModal();
+        isMobile,
+        deleteVideoFlg,
+        changeSelect,
+        execute,
+        clickDelete,
+        isOpenConfirmModal,
+        closeConfirmModal, } = useFavoriteDeleteFolderModal();
 
 
     return (
@@ -48,12 +55,12 @@ export function FavoriteDeleteFolderModal() {
                 }}
                 width="20px"
                 height="100%"
-                onclick={openModal}
+                onclick={openDeleteModal}
             />
             {
                 !isMobile &&
                 <TitleSpan
-                    onClick={openModal}
+                    onClick={openDeleteModal}
                 >
                     フォルダ削除
                 </TitleSpan>
@@ -75,8 +82,20 @@ export function FavoriteDeleteFolderModal() {
             >
                 <FavoriteDeleteFolder
                     close={closeModal}
+                    deleteVideoFlg={deleteVideoFlg}
+                    changeSelect={changeSelect}
+                    clickDelete={clickDelete}
                 />
             </ModalPortal>
+            {/* フォルダ削除最終確認モーダル */}
+            <ModalPortalConfirm
+                isOpenModal={isOpenConfirmModal}
+                closeModal={closeConfirmModal}
+                titleMessage={<React.Fragment>
+                    「フォルダ内の動画をお気に入りから削除する」が有効です。<br />このフォルダを削除すると、お気に入り一覧からも動画が削除されます。削除してもよろしいですか？
+                </React.Fragment>}
+                clickOk={execute}
+            />
         </React.Fragment>
     );
 }
