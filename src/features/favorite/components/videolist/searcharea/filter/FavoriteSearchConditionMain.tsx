@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchConditionMain";
 import { Selectbox } from "../../../../../../components/Selectbox";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
+import { ISSHOWFOLDERFILTERLIST, ISVISIBLEAFTERFOLDERADDLIST } from "../../../../const/FavoriteConst";
 
 
 const Parent = styled.div`
@@ -62,7 +63,9 @@ export function FavoriteSearchConditionMain(props: propsType) {
         selectedFavoriteVideoTag,
         favoriteLevelList,
         selectedFavoriteVideoFavoriteLevel,
-        changeFavoriteLevel, } = useFavoriteSearchConditionMain({ ...props });
+        changeFavoriteLevel,
+        selectedFavoriteVideoShowFolder,
+        changeShowFolder, } = useFavoriteSearchConditionMain({ ...props });
 
 
     return (
@@ -136,6 +139,19 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         />
                     </InputDiv>
                 }
+                <InputDiv>
+                    <InputLabel>
+                        フォルダ表示
+                    </InputLabel>
+                    <Selectbox
+                        options={ISSHOWFOLDERFILTERLIST}
+                        value={selectedFavoriteVideoShowFolder || ISSHOWFOLDERFILTERLIST[0].value}
+                        onChange={changeShowFolder}
+                        width="68%"
+                        minWidth="8%"
+                        height="39px"
+                    />
+                </InputDiv>
             </ConditionAreaDiv>
         </Parent>
     );

@@ -77,6 +77,8 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_FAVORITE_LEVEL: `favoritelevel`,
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `page`,
+    // クエリパラメータのキー(フォルダ表示フラグ)
+    QUERY_KEY_SHOW_FOLDER: `showfolder`,
 } as const;
 
 // フォルダ内動画一覧画面表示フラグ
@@ -94,5 +96,17 @@ export const ISVISIBLEAFTERFOLDERADDLIST = [
     {
         label: `表示する`,
         value: ISVISIBLEAFTERFOLDERADD.ON,
+    }
+]
+
+// フォルダ内動画一覧画面表示選択リスト(フィルター)
+export const ISSHOWFOLDERFILTERLIST = [
+    {
+        label: `表示する`,
+        value: ISVISIBLEAFTERFOLDERADD.ON,
+    },
+    {
+        label: `表示しない`,
+        value: ISVISIBLEAFTERFOLDERADD.OFF,
     }
 ]

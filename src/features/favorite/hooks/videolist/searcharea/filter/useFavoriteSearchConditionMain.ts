@@ -31,6 +31,8 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
         setSelectedFavoriteVideoFavoriteLevel,
+        selectedFavoriteVideoShowFolder,
+        setSlectedFavoriteVideoShowFolder,
         resetPage, } = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
     const { create } = useCreateFavoriteVideoListQuery();
@@ -175,6 +177,25 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         props.close();
     }
 
+    /**
+     * フォルダ表示選択イベント
+     * @param selectedcCategory 
+     */
+    function changeShowFolder(value: string) {
+
+        const newQuery = create({
+            showfolder: value,
+            page: INIT_PAGE
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
+
+        setSlectedFavoriteVideoShowFolder(value);
+        resetPage();
+        props.close();
+    }
+
     return {
         videoCategory,
         selectedFavoriteVideoCategory,
@@ -188,5 +209,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         favoriteLevelList,
         selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel,
+        selectedFavoriteVideoShowFolder,
+        changeShowFolder,
     };
 }

@@ -61,7 +61,7 @@ export function HomeSearchConditionMain() {
                     </InputLabel>
                     <Selectbox
                         options={VIDEO_TYPE_LIST}
-                        value={selectedVideoType ?? VIDEO_TYPE_LIST[0].value}
+                        value={selectedVideoType || VIDEO_TYPE_LIST[0].value}
                         onChange={setSelectedVideoType}
                         width="68%"
                         minWidth="8%"
@@ -76,7 +76,7 @@ export function HomeSearchConditionMain() {
                         </InputLabel>
                         <Selectbox
                             options={selectVideoCategory}
-                            value={selectedVideoCategory ?? selectVideoCategory[0].value}
+                            value={selectedVideoCategory || selectVideoCategory[0].value}
                             onChange={setSelectedVideoCategory}
                             width="68%"
                             minWidth="8%"
