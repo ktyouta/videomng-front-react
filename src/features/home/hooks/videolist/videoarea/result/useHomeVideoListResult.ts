@@ -24,8 +24,6 @@ type propsType = {
 
 export function useHomeVideoListResult(props: propsType) {
 
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 現在の動画検索条件
     const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // 無限スクロール用
@@ -34,10 +32,10 @@ export function useHomeVideoListResult(props: propsType) {
     });
 
     /**
-     * もっと見るボタン押下
+     * 次データ取得
      * @param nextPageToken 
      */
-    function clickShowMore(nextPageToken: string) {
+    function getNextData(nextPageToken: string) {
 
         // 現在の検索条件を更新する
         setNowSearchCondition((e) => {
@@ -66,12 +64,10 @@ export function useHomeVideoListResult(props: propsType) {
             return;
         }
 
-        clickShowMore(props.videoListData.nextPageToken);
+        getNextData(props.videoListData.nextPageToken);
     }, [inView]);
 
     return {
-        isMobile,
-        clickShowMore,
         ref,
     }
 }

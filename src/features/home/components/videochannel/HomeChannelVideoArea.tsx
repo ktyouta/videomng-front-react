@@ -56,6 +56,15 @@ const NextGetBtnAreaDiv = styled.div`
   position: relative;
 `;
 
+const NextGetAreaDiv = styled.div`
+  margin-top: 55px;
+  position: relative;
+`;
+
+const InfiniteScrollAreaDiv = styled.div`
+  heigth: 50px;
+`;
+
 const LoadingParentNext = styled.div`
   position: absolute;
   top: -125%;
@@ -69,11 +78,12 @@ type propsType = {
     isLoading: boolean,
 }
 
+
 export function HomeChannelVideoArea(props: propsType) {
 
     console.log("HomeChannelVideoArea render");
 
-    const { clickShowMore } = useHomeChannelVideoArea({ ...props });
+    const { ref } = useHomeChannelVideoArea({ ...props });
 
     // 動画リスト
     const videoListItems = props.videoListData.items;
@@ -103,27 +113,23 @@ export function HomeChannelVideoArea(props: propsType) {
                 }
             </VideoUl>
             {
+                // 無限スクロール
                 nextPageToken &&
-                <NextGetBtnAreaDiv>
+                <React.Fragment>
                     {
-                        props.isLoading &&
-                        <LoadingParentNext>
-                            <Loading />
-                        </LoadingParentNext>
+                        props.isLoading
+                            ?
+                            <NextGetAreaDiv>
+                                <LoadingParentNext>
+                                    <Loading />
+                                </LoadingParentNext>
+                            </NextGetAreaDiv>
+                            :
+                            <InfiniteScrollAreaDiv
+                                ref={ref}
+                            />
                     }
-                    <ButtonComponent
-                        variant="grad-gray"
-                        onClick={() => {
-                            clickShowMore(nextPageToken);
-                        }}
-                        style={{
-                            "fontSize": "0.9rem",
-                            "height": "7%",
-                        }}
-                    >
-                        もっと見る
-                    </ButtonComponent>
-                </NextGetBtnAreaDiv>
+                </React.Fragment>
             }
         </Parent>
     );
