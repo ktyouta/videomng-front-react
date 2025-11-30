@@ -7,13 +7,12 @@ import { FolderType } from "../../../types/videolist/FolderType";
 import { FaFolder } from 'react-icons/fa';
 import { IconComponent } from "../../../../../components/IconComponent";
 import { useFavoriteVideoFolder } from "../../../hooks/videolist/videoarea/useFavoriteVideoFolder";
+import { Icon } from "../../../../../components/Icon";
+import { BiSolidFolder } from "react-icons/bi";
 
 
 const Parent = styled.div`
     height: 100%;
-    &:hover {
-        cursor: pointer;
-    }
 `;
 
 const Section = styled.section`
@@ -22,18 +21,30 @@ const Section = styled.section`
 `;
 
 const IconAreaDiv = styled.div`
-    height: 72%;
+    height: 73%;
     margin-bottom: 6px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 `;
 
 const VideoImg = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+`;
+
+const ThumbnailWrapper = styled.div`
     position: absolute;
-    width: 72%;
-    height: 55%;
-    top: 28%;
-    left: 14%;
+    width: 76%;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 10px;
+    overflow: hidden;
 `;
 
 const TitleDiv = styled.div`
@@ -60,6 +71,7 @@ const TitleDiv = styled.div`
     @media (min-width: ${MEDIA.PC}) {
         font-size: 14px;
     }
+    cursor: pointer;
 `;
 
 
@@ -86,40 +98,43 @@ export function FavoriteVideoFolder(props: propsType) {
         <Parent
             ref={setNodeRef}
         >
-            <Section
-                onClick={() => {
-                    clickFolder(id);
-                }}
-            >
+            <Section>
                 <IconAreaDiv
                     style={draggingStyle}
+                    onClick={() => {
+                        clickFolder(id);
+                    }}
                 >
-                    <IconComponent
-                        icon={FaFolder}
-                        size="100%"
+                    <Icon
+                        icon={BiSolidFolder}
+                        width="100%"
                         bgColor="rgb(144, 202, 249)"
                     />
                     {
                         thumbnailUrl &&
                         <React.Fragment>
-                            <VideoImg
-                                src={thumbnailUrl}
-                            />
-                            <IconComponent
+                            <ThumbnailWrapper>
+                                <VideoImg src={thumbnailUrl} />
+                            </ThumbnailWrapper>
+                            <Icon
                                 icon={FaFolder}
-                                size="100%"
+                                width="81%"
                                 bgColor="rgb(144, 202, 249)"
                                 style={{
                                     position: `absolute`,
-                                    top: `18%`,
-                                    left: `0`,
-                                    transform: `scaleX(-0.95) scaleY(0.5)`
+                                    top: `30%`,
+                                    left: `9%`,
+                                    transform: `scaleX(-1.0) scaleY(0.30)`,
                                 }}
                             />
                         </React.Fragment>
                     }
                 </IconAreaDiv>
-                <TitleDiv>
+                <TitleDiv
+                    onClick={() => {
+                        clickFolder(id);
+                    }}
+                >
                     {name}
                 </TitleDiv>
             </Section>
