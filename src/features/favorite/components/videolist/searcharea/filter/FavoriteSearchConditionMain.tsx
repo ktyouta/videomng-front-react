@@ -64,8 +64,9 @@ export function FavoriteSearchConditionMain(props: propsType) {
         favoriteLevelList,
         selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel,
-        selectedFavoriteVideoShowFolder,
-        changeShowFolder, } = useFavoriteSearchConditionMain({ ...props });
+        selectedFavoriteVideoFolder,
+        changeFolder,
+        folderList, } = useFavoriteSearchConditionMain({ ...props });
 
 
     return (
@@ -139,19 +140,23 @@ export function FavoriteSearchConditionMain(props: propsType) {
                         />
                     </InputDiv>
                 }
-                <InputDiv>
-                    <InputLabel>
-                        フォルダ表示
-                    </InputLabel>
-                    <Selectbox
-                        options={ISSHOWFOLDERFILTERLIST}
-                        value={selectedFavoriteVideoShowFolder || ISSHOWFOLDERFILTERLIST[0].value}
-                        onChange={changeShowFolder}
-                        width="68%"
-                        minWidth="8%"
-                        height="39px"
-                    />
-                </InputDiv>
+                {
+                    folderList && folderList.length > 0 &&
+                    <InputDiv>
+                        <InputLabel>
+                            フォルダ
+                        </InputLabel>
+                        <MultiSelectbox
+                            options={folderList}
+                            value={selectedFavoriteVideoFolder.split(`,`) ?? folderList[0].value}
+                            onMenuClose={changeFolder}
+                            width="68%"
+                            minWidth="8%"
+                            height="39px"
+                            placeholder="すべて"
+                        />
+                    </InputDiv>
+                }
             </ConditionAreaDiv>
         </Parent>
     );

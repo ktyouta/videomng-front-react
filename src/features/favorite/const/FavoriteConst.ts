@@ -77,8 +77,8 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_FAVORITE_LEVEL: `favoritelevel`,
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `page`,
-    // クエリパラメータのキー(フォルダ表示フラグ)
-    QUERY_KEY_SHOW_FOLDER: `showfolder`,
+    // クエリパラメータのキー(フォルダ)
+    QUERY_KEY_FOLDER: `folder`,
 } as const;
 
 // フォルダ内の動画を削除するフラグ

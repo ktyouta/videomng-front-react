@@ -19,7 +19,7 @@ export function useCreateFavoriteVideoListQuery() {
         selectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey,
         selectedFavoriteVideoPage,
-        selectedFavoriteVideoShowFolder,
+        selectedFavoriteVideoFolder,
     } = useFavoriteVideoSearchConditionValue();
 
 
@@ -81,8 +81,8 @@ export function useCreateFavoriteVideoListQuery() {
         }
 
         // フォルダ表示フラグ
-        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_SHOW_FOLDER)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SHOW_FOLDER, props.showfolder);
+        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_FOLDER)) {
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FOLDER, props.folder);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
@@ -105,7 +105,7 @@ export function useCreateFavoriteVideoListQuery() {
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
-        queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SHOW_FOLDER, selectedFavoriteVideoShowFolder);
+        queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FOLDER, selectedFavoriteVideoFolder);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;

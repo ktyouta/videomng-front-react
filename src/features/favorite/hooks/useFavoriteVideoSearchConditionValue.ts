@@ -1,4 +1,4 @@
-import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoShowFolderContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoPageContext, SetselectedFavoriteVideoShowFolderContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../components/FavoriteVideoSearchConditionValueProvider";
+import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoFolderContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoPageContext, SetselectedFavoriteVideoFolderContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../components/FavoriteVideoSearchConditionValueProvider";
 
 export const INIT_PAGE = `1`;
 
@@ -28,10 +28,10 @@ export function useFavoriteVideoSearchConditionValue() {
     const selectedFavoriteVideoPage = SelectedFavoriteVideoPageContext.useCtx();
     // 動画一覧検索ページ setter
     const setSelectedFavoriteVideoPage = SetSelectedFavoriteVideoPageContext.useCtx();
-    // 動画一覧検索ページ
-    const selectedFavoriteVideoShowFolder = SelectedFavoriteVideoShowFolderContext.useCtx();
-    // 動画一覧検索ページ setter
-    const setSlectedFavoriteVideoShowFolder = SetselectedFavoriteVideoShowFolderContext.useCtx();
+    // 動画一覧検索フォルダ
+    const selectedFavoriteVideoFolder = SelectedFavoriteVideoFolderContext.useCtx();
+    // 動画一覧検索フォルダ setter
+    const setSlectedFavoriteVideoFolder = SetselectedFavoriteVideoFolderContext.useCtx();
 
 
     /**
@@ -44,7 +44,7 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoFavoriteLevel(``);
         setSelectedFavoriteVideoSortKey(``);
         setSelectedFavoriteVideoPage(``);
-        setSlectedFavoriteVideoShowFolder(``);
+        setSlectedFavoriteVideoFolder(``);
     }
 
     /**
@@ -67,8 +67,8 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoSortKey,
         selectedFavoriteVideoPage,
         setSelectedFavoriteVideoPage,
-        selectedFavoriteVideoShowFolder,
-        setSlectedFavoriteVideoShowFolder,
+        selectedFavoriteVideoFolder,
+        setSlectedFavoriteVideoFolder,
         reset,
         resetPage,
     };

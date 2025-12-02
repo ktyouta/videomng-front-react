@@ -9,6 +9,10 @@ import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideo
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { useTagMasterList } from "../../useTagMasterList";
 import { MultiValue } from "react-select";
+import useQueryWrapper from "../../../../../../hooks/useQueryWrapper";
+import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
+import { FolderResponseType } from "../../../../types/videolist/searcharea/filter/FolderResponseType";
+import ENV from '../../../../../../env.json';
 
 
 type propsType = {
@@ -31,8 +35,8 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
         setSelectedFavoriteVideoFavoriteLevel,
-        selectedFavoriteVideoShowFolder,
-        setSlectedFavoriteVideoShowFolder,
+        selectedFavoriteVideoFolder,
+        setSlectedFavoriteVideoFolder,
         resetPage, } = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
     const { create } = useCreateFavoriteVideoListQuery();
@@ -42,6 +46,28 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const { data: tagMasterList } = useTagMasterList({
         isGetChache: true
     });
+
+    // フォルダリスト
+    const { data: folderList } = useQueryWrapper<FolderResponseType, Option[]>(
+        {
+            url: `${VIDEO_MNG_PATH}${ENV.FOLDER}`,
+            select: (res: FolderResponseType) => {
+
+                const folderList = res.data;
+
+                return [
+                    ...folderList.map((e) => {
+                        return {
+                            value: e.folderId.toString(),
+                            label: e.name,
+                        }
+                    })
+                ]
+            },
+            afErrorFn: (res) => {
+            },
+        }
+    );
 
     // お気に入り度リスト
     const favoriteLevelList = useMemo(() => {
@@ -179,19 +205,29 @@ export function useFavoriteSearchConditionMain(props: propsType) {
 
     /**
      * フォルダ表示選択イベント
-     * @param selectedcCategory 
+     * @param value 
      */
-    function changeShowFolder(value: string) {
+    function changeFolder(value: MultiValue<Option>) {
+
+        const selectedValues = value.map((e) => e.value).join(`,`);
+
+        if (!selectedFavoriteVideoFolder && !selectedValues) {
+            return;
+        }
+
+        if (selectedFavoriteVideoFolder === selectedValues) {
+            return;
+        }
 
         const newQuery = create({
-            showfolder: value,
+            folder: selectedValues,
             page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSlectedFavoriteVideoShowFolder(value);
+        setSlectedFavoriteVideoFolder(selectedValues);
         resetPage();
         props.close();
     }
@@ -209,7 +245,8 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         favoriteLevelList,
         selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel,
-        selectedFavoriteVideoShowFolder,
-        changeShowFolder,
+        selectedFavoriteVideoFolder,
+        changeFolder,
+        folderList,
     };
 }
