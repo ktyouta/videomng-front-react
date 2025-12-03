@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { HomeMetaInfo } from "./videometainfo/HomeMetaInfo";
-import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
+import { Selectbox } from "../../../../components/Selectbox";
+import { MEDIA } from "../../../../consts/MediaConst";
 import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/HomeConst";
 import { useHomeVideoDetailMenu } from "../../hooks/videodetail/useHomeVideoDetailMenu";
-import { HomeComment } from "./videocomment/HomeComment";
-import { HomeSearchKeywordComment } from "./videosearchkeywordcomment/HomeSearchKeywordComment";
-import { MEDIA } from "../../../../consts/MediaConst";
+import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
 import { HomeVideoDetailPanel } from "./HomeVideoDetailPanel";
-import { Selectbox } from "../../../../components/Selectbox";
+import { HomeComment } from "./videocomment/HomeComment";
+import { HomeMetaInfo } from "./videometainfo/HomeMetaInfo";
+import { HomeSearchKeywordComment } from "./videosearchkeywordcomment/HomeSearchKeywordComment";
 
 
 const MenuParentDiv = styled.div`
@@ -114,6 +114,7 @@ export function HomeVideoDetailMenu(props: propsType) {
             style={{
               display: "flex",
               flexDirection: "column",
+              minHeight: `505px`
             }}
           >
             <HomeMetaInfo

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  min-height: 505px;
+  min-height: 60vh;
   background-color: #181a1e;
   border-radius: 7px;
   border: solid 1px;

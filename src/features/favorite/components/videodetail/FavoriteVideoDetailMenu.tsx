@@ -1,23 +1,17 @@
 import React from "react";
-import { useFavoriteVideoDetail } from "../../hooks/videodetail/useFavoriteVideoDetail";
-import LoadingBase from "../../../../components/LoadingBase";
 import styled from "styled-components";
-import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
-import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
+import { Selectbox } from "../../../../components/Selectbox";
+import { MEDIA } from "../../../../consts/MediaConst";
+import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/FavoriteConst";
 import { useFavoriteVideoDetailMenu } from "../../hooks/videodetail/useFavoriteVideoDetailMenu";
 import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
-import { FavoriteMemo } from "./videomemo/FavoriteMemo";
-import { Z_INDEX_PARAM } from "../../../../consts/CommonConst";
-import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/FavoriteConst";
-import { FavoriteComment } from "./videocomment/FavoriteComment";
-import { FavoriteSearchKeywordComment } from "./videosearchkeywordcomment/FavoriteSearchKeywordComment";
-import { FavoriteMetaInfo } from "./videometainfo/FavoriteMetaInfo";
-import { FavoriteDetailSetting } from "./videodetailsetting/FavoriteDetailSetting";
-import { FavoriteTag } from "./videotag/FavoriteTag";
-import { Provider } from "jotai";
-import { MEDIA } from "../../../../consts/MediaConst";
 import { FavoriteVideoDetailPanel } from "./FavoriteVideoDetailPanel";
-import { Selectbox } from "../../../../components/Selectbox";
+import { FavoriteComment } from "./videocomment/FavoriteComment";
+import { FavoriteDetailSetting } from "./videodetailsetting/FavoriteDetailSetting";
+import { FavoriteMemo } from "./videomemo/FavoriteMemo";
+import { FavoriteMetaInfo } from "./videometainfo/FavoriteMetaInfo";
+import { FavoriteSearchKeywordComment } from "./videosearchkeywordcomment/FavoriteSearchKeywordComment";
+import { FavoriteTag } from "./videotag/FavoriteTag";
 
 
 const MenuParentDiv = styled.div`
@@ -121,6 +115,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
             style={{
               display: "flex",
               flexDirection: "column",
+              minHeight: `505px`
             }}
           >
             <FavoriteMetaInfo
@@ -133,7 +128,6 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           openMenuNo === MENU_NO.MEMO &&
           <FavoriteVideoDetailPanel
             style={{
-              height: "505px",
               display: "flex",
               flexDirection: "column",
             }}
@@ -146,9 +140,9 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           openMenuNo === MENU_NO.COMMENT &&
           <FavoriteVideoDetailPanel
             style={{
-              height: "505px",
               display: "flex",
               flexDirection: "column",
+              height: "60vh",
             }}
           >
             <FavoriteComment />
@@ -159,9 +153,9 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
           <FavoriteVideoDetailPanel
             style={{
-              height: "505px",
               display: "flex",
               flexDirection: "column",
+              height: "60vh",
             }}
           >
             <FavoriteSearchKeywordComment />
@@ -184,7 +178,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           openMenuNo === MENU_NO.TAG &&
           <FavoriteVideoDetailPanel
             style={{
-              minHeight: "365px",
+              minHeight: "45vh",
               display: "flex",
               flexDirection: "column",
             }}
