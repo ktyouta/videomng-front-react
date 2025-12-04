@@ -1,9 +1,10 @@
-import { useLocation } from "react-router-dom";
-import { useViewStatusList } from "../useViewStatusList";
-import { useTagMasterList } from "./useTagMasterList";
-import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
+import { useViewStatusList } from "../useViewStatusList";
+import { useFolderMasterList } from "./useFolderMasterList";
+import { useTagMasterList } from "./useTagMasterList";
 
 export function useFavoriteVideoList() {
 
@@ -11,6 +12,9 @@ export function useFavoriteVideoList() {
     useTagMasterList({
         isGetChache: false
     });
+
+    // マウント時にフォルダリストを取得
+    useFolderMasterList();
 
     // マウント時に視聴状況を取得
     useViewStatusList();

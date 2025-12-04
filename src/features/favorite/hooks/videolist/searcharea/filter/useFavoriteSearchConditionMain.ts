@@ -1,18 +1,14 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
+import { MultiValue } from "react-select";
 import { Option } from "../../../../../../components/MultiSelectbox";
+import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
+import { useVideoCategory } from "../../../../../main/hooks/useVideoCategory";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
+import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
-import { useVideoCategory } from "../../../../../main/hooks/useVideoCategory";
-import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
-import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
+import { useFolderMasterList } from "../../useFolderMasterList";
 import { useTagMasterList } from "../../useTagMasterList";
-import { MultiValue } from "react-select";
-import useQueryWrapper from "../../../../../../hooks/useQueryWrapper";
-import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
-import { FolderResponseType } from "../../../../types/videolist/searcharea/filter/FolderResponseType";
-import ENV from '../../../../../../env.json';
 
 
 type propsType = {
@@ -44,30 +40,10 @@ export function useFavoriteSearchConditionMain(props: propsType) {
     const { replace } = useReplaceQuery();
     // タグマスタリストを取得
     const { data: tagMasterList } = useTagMasterList({
-        isGetChache: true
+        isGetChache: false
     });
-
     // フォルダリスト
-    const { data: folderList } = useQueryWrapper<FolderResponseType, Option[]>(
-        {
-            url: `${VIDEO_MNG_PATH}${ENV.FOLDER}`,
-            select: (res: FolderResponseType) => {
-
-                const folderList = res.data;
-
-                return [
-                    ...folderList.map((e) => {
-                        return {
-                            value: e.folderId.toString(),
-                            label: e.name,
-                        }
-                    })
-                ]
-            },
-            afErrorFn: (res) => {
-            },
-        }
-    );
+    const { data: folderList } = useFolderMasterList();
 
     // お気に入り度リスト
     const favoriteLevelList = useMemo(() => {
