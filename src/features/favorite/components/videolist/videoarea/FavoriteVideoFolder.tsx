@@ -1,14 +1,11 @@
 import React from "react";
-import styled from "styled-components";
-import { useFavoriteVideoContent } from "../../../hooks/videolist/videoarea/useFavoriteVideoContent";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import { FolderType } from "../../../types/videolist/FolderType";
-import { FaFolder } from 'react-icons/fa';
-import { IconComponent } from "../../../../../components/IconComponent";
-import { useFavoriteVideoFolder } from "../../../hooks/videolist/videoarea/useFavoriteVideoFolder";
-import { Icon } from "../../../../../components/Icon";
 import { BiSolidFolder } from "react-icons/bi";
+import { FaFolder } from 'react-icons/fa';
+import styled from "styled-components";
+import { Icon } from "../../../../../components/Icon";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteVideoFolder } from "../../../hooks/videolist/videoarea/useFavoriteVideoFolder";
+import { FolderType } from "../../../types/videolist/FolderType";
 
 
 const Parent = styled.div`
@@ -22,12 +19,13 @@ const Section = styled.section`
 
 const IconAreaDiv = styled.div`
     height: 73%;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: filter 0.2s ease;
 `;
 
 const VideoImg = styled.img`
@@ -48,8 +46,8 @@ const ThumbnailWrapper = styled.div`
 `;
 
 const TitleDiv = styled.div`
-    color:white;
-    cursor:pointer;
+    color: white;
+    cursor: pointer;
     word-break: break-word;
     font-size: 11px;
     display: -webkit-box;
@@ -63,16 +61,14 @@ const TitleDiv = styled.div`
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 12px;
     }
-
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
         font-size: 14px;
     }
-
     @media (min-width: ${MEDIA.PC}) {
         font-size: 14px;
     }
-    cursor: pointer;
 `;
+
 
 
 type propsType = {
@@ -108,7 +104,7 @@ export function FavoriteVideoFolder(props: propsType) {
                     <Icon
                         icon={BiSolidFolder}
                         width="100%"
-                        bgColor="rgb(144, 202, 249)"
+                        bgColor="rgb(0, 168, 255)"
                     />
                     {
                         thumbnailUrl &&
@@ -119,7 +115,7 @@ export function FavoriteVideoFolder(props: propsType) {
                             <Icon
                                 icon={FaFolder}
                                 width="81%"
-                                bgColor="rgb(144, 202, 249)"
+                                bgColor="rgb(0, 168, 255)"
                                 style={{
                                     position: `absolute`,
                                     top: `30%`,
