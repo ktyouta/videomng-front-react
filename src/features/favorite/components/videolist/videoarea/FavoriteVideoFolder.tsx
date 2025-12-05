@@ -10,6 +10,7 @@ import { FolderType } from "../../../types/videolist/FolderType";
 
 const Parent = styled.div`
     height: 100%;
+    scale: 1.11;
 `;
 
 const Section = styled.section`
@@ -37,11 +38,11 @@ const VideoImg = styled.img`
 
 const ThumbnailWrapper = styled.div`
     position: absolute;
-    width: 76%;
+    width: 78%;
     top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
+    border-radius: 13px;
     overflow: hidden;
 `;
 
@@ -49,7 +50,7 @@ const TitleDiv = styled.div`
     color: white;
     cursor: pointer;
     word-break: break-word;
-    font-size: 11px;
+    font-size: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -59,17 +60,15 @@ const TitleDiv = styled.div`
     box-sizing: border-box;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        font-size: 12px;
+        font-size: 10px;
     }
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        font-size: 14px;
+        font-size: 12px;
     }
     @media (min-width: ${MEDIA.PC}) {
-        font-size: 14px;
+        font-size: 12px;
     }
 `;
-
-
 
 type propsType = {
     data: FolderType,
@@ -107,23 +106,24 @@ export function FavoriteVideoFolder(props: propsType) {
                         bgColor="rgb(0, 168, 255)"
                     />
                     {
-                        thumbnailUrl &&
-                        <React.Fragment>
-                            <ThumbnailWrapper>
-                                <VideoImg src={thumbnailUrl} />
-                            </ThumbnailWrapper>
-                            <Icon
-                                icon={FaFolder}
-                                width="81%"
-                                bgColor="rgb(0, 168, 255)"
-                                style={{
-                                    position: `absolute`,
-                                    top: `30%`,
-                                    left: `9%`,
-                                    transform: `scaleX(-1.0) scaleY(0.30)`,
-                                }}
-                            />
-                        </React.Fragment>
+                        thumbnailUrl && (
+                            <React.Fragment>
+                                <ThumbnailWrapper>
+                                    <VideoImg src={thumbnailUrl} />
+                                </ThumbnailWrapper>
+                                <Icon
+                                    icon={FaFolder}
+                                    width="81%"
+                                    bgColor="rgb(0, 168, 255)"
+                                    style={{
+                                        position: "absolute",
+                                        top: "36%",
+                                        left: "9%",
+                                        transform: "scaleX(-1.0) scaleY(0.18)",
+                                    }}
+                                />
+                            </React.Fragment>
+                        )
                     }
                 </IconAreaDiv>
                 <TitleDiv
