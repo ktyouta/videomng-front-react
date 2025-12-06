@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import ENV from "../../../../../../env.json";
-import { AxiosProgressEvent } from "axios";
-import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
-import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
-import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
-import { CreateFolderRequestType } from "../../../../types/videolist/searcharea/folder/CreateFolderRequestType";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
-import { useFavoriteVideoListEndpoint } from "../../videoarea/useFavoriteVideoListEndpoint";
+import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
+import { UpdateFolderRequestType } from "../../../../types/videofolder/searcharea/updatefolder/UpdateFolderRequestType";
+import { FolderType } from "../../../../types/videolist/FolderType";
 import { folderIdEndpoint } from "../../../../utils/endpoint";
 import { useFolderId } from "../../useFolderId";
-import { FolderType } from "../../../../types/videolist/FolderType";
-import { UpdateFolderRequestType } from "../../../../types/videofolder/searcharea/updatefolder/UpdateFolderRequestType";
 
 
 type propsType = {
@@ -27,6 +23,8 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
     const folderId = useFolderId();
     // フォルダ情報再取得用
     const { invalidate: invalidataFavorite } = useInvalidateQuery(folderIdEndpoint(folderId));
+    // フォルダカラー
+    const [folderColor, setFolderColor] = useState(props.folder.folderColor || DEFAULT_FOLDER_COLOR);
 
     /**
      * フォルダ名更新リクエスト
@@ -70,7 +68,8 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
     function execute() {
 
         const body: UpdateFolderRequestType = {
-            name: folderName
+            name: folderName,
+            folderColor
         }
 
         // リクエスト送信
@@ -81,5 +80,7 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
         execute,
         folderName,
         setFolderName,
+        folderColor,
+        setFolderColor,
     }
 }

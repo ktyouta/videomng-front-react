@@ -1,10 +1,10 @@
-import styled from "styled-components";
 import React from "react";
-import { LinearProgress } from "@mui/material";
-import ButtonComponent from "../../../../../../components/ButtonComponent";
-import { ModalPortalConfirm } from "../../../../../../components/ModalPortalConfirm";
-import { useFavoriteCreateFolderMain } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderMain";
+import styled from "styled-components";
 import BaseTextbox from "../../../../../../components/BaseTextbox";
+import ButtonComponent from "../../../../../../components/ButtonComponent";
+import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
+import { ColorPreview } from "../../../../../../components/ColorPreview";
+import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteUpdateFolderMain } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderMain";
 import { FolderType } from "../../../../types/videolist/FolderType";
 
@@ -12,7 +12,7 @@ import { FolderType } from "../../../../types/videolist/FolderType";
 const InputArea = styled.div`
     padding: 0 5%;
     box-sizing: border-box;
-    margin: 30px 0px 75px 10px;
+    margin: 30px 0px 75px 0;
     display: flex;
     align-items: center;
 `;
@@ -32,6 +32,37 @@ const FooterDiv = styled.div`
     padding-right:1%;
 `;
 
+const SelectColorTitleDiv = styled.div`
+    color: white;
+`;
+
+const SelectColorDiv = styled.div`
+    padding-left: 5%;
+    margin-bottom: 15px;
+`;
+
+const ColorHeader = styled.div`
+    padding-right: 5%;
+    margin-bottom: 11px;
+    color: white;
+`;
+
+const SelectedColor = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+`;
+
+const DefaultColorLink = styled.span`
+    color: #7abaff;
+    font-size: 15px;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
 type propsType = {
     close: () => void,
     folder: FolderType,
@@ -44,7 +75,9 @@ export function FavoriteUpdateFolderMain(props: propsType) {
     const {
         execute,
         folderName,
-        setFolderName, } = useFavoriteUpdateFolderMain({ ...props });
+        setFolderName,
+        folderColor,
+        setFolderColor, } = useFavoriteUpdateFolderMain({ ...props });
 
     return (
         <React.Fragment>
@@ -61,6 +94,34 @@ export function FavoriteUpdateFolderMain(props: propsType) {
                     }}
                 />
             </InputArea>
+            <SelectColorDiv>
+                <ColorHeader>
+                    <SelectedColor>
+                        <SelectColorTitleDiv>
+                            選択中のフォルダカラー
+                        </SelectColorTitleDiv>
+                        {/* プレビュー */}
+                        <ColorPreview
+                            color={folderColor}
+                            width="23px"
+                            height="23px"
+                        />
+                    </SelectedColor>
+                    <DefaultColorLink
+                        onClick={() => {
+                            setFolderColor(DEFAULT_FOLDER_COLOR)
+                        }}>
+                        デフォルトカラーを使う
+                    </DefaultColorLink>
+                </ColorHeader>
+                {/* カラーピッカー */}
+                <ColorPickerTwitter
+                    color={folderColor}
+                    changeColor={setFolderColor}
+                    triangle="hide"
+                    width="33%"
+                />
+            </SelectColorDiv>
             <FooterDiv >
                 <ButtonComponent
                     shape="rounded"

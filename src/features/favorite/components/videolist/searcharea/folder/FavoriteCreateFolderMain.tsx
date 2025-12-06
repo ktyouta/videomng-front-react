@@ -122,7 +122,10 @@ export function FavoriteCreateFolderMain(props: propsType) {
                             height="23px"
                         />
                     </SelectedColor>
-                    <DefaultColorLink onClick={() => setFolderColor(DEFAULT_FOLDER_COLOR)}>
+                    <DefaultColorLink
+                        onClick={() => {
+                            setFolderColor(DEFAULT_FOLDER_COLOR)
+                        }}>
                         デフォルトカラーを使う
                     </DefaultColorLink>
                 </ColorHeader>
