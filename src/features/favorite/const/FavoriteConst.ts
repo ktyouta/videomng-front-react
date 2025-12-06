@@ -1,6 +1,4 @@
 import { Option } from "../../../components/Selectbox";
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
-import ENV from "../../../env.json";
 
 
 // メニュー番号
@@ -116,3 +114,6 @@ export const ISSHOWFOLDERFILTERLIST = [
         value: ISVISIBLEAFTERFOLDERADD.OFF,
     }
 ]
+
+// デフォルトのフォルダカラー
+export const DEFAULT_FOLDER_COLOR = "#00A8FF";

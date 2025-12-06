@@ -4,6 +4,7 @@ import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolder } from "../../../hooks/videolist/videoarea/useFavoriteVideoFolder";
 import { FolderType } from "../../../types/videolist/FolderType";
 
@@ -88,6 +89,7 @@ export function FavoriteVideoFolder(props: propsType) {
     const id = data.folderId;
     const thumbnails = data.thumbnails;
     const thumbnailUrl = thumbnails?.high?.url;
+    const folderColor = data.folderColor || DEFAULT_FOLDER_COLOR;
 
     return (
         <Parent
@@ -103,7 +105,7 @@ export function FavoriteVideoFolder(props: propsType) {
                     <Icon
                         icon={BiSolidFolder}
                         width="100%"
-                        bgColor="rgb(0, 168, 255)"
+                        bgColor={folderColor}
                     />
                     {
                         thumbnailUrl && (
@@ -114,7 +116,7 @@ export function FavoriteVideoFolder(props: propsType) {
                                 <Icon
                                     icon={FaFolder}
                                     width="81%"
-                                    bgColor="rgb(0, 168, 255)"
+                                    bgColor={folderColor}
                                     style={{
                                         position: "absolute",
                                         top: "36%",

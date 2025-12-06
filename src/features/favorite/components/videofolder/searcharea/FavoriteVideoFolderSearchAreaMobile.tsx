@@ -1,11 +1,10 @@
-import styled from "styled-components";
-import { FolderType } from "../../../types/videolist/FolderType";
 import { FaFolder } from 'react-icons/fa';
-import { MdEdit } from "react-icons/md";
+import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
+import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
+import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
+import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
 
 const Parent = styled.div`
@@ -55,6 +54,8 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
     return null;
   }
 
+  const folderColor = props.folder.folderColor || DEFAULT_FOLDER_COLOR;
+
   return (
     <Parent>
       <FirstRowDiv>
@@ -63,7 +64,7 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
           style={{
             marginRight: `15px`,
           }}
-          bgColor="rgb(144, 202, 249)"
+          bgColor={folderColor}
           width="30px"
           height="100%"
         />

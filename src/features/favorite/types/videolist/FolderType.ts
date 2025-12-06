@@ -5,6 +5,7 @@ export type FolderType = {
     updateDate: Date;
     folderId: number;
     latestVideoId: string,
+    folderColor: string,
     thumbnails?: {
         default: {
             url: string;

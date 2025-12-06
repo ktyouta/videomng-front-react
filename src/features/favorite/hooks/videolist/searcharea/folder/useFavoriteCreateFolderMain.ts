@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import ENV from "../../../../../../env.json";
-import { AxiosProgressEvent } from "axios";
-import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
 import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
-import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
-import { CreateFolderRequestType } from "../../../../types/videolist/searcharea/folder/CreateFolderRequestType";
+import ENV from "../../../../../../env.json";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
+import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
+import { CreateFolderRequestType } from "../../../../types/videolist/searcharea/folder/CreateFolderRequestType";
 import { useFavoriteVideoListEndpoint } from "../../videoarea/useFavoriteVideoListEndpoint";
 
 
@@ -20,6 +20,8 @@ export function useFavoriteCreateFolderMain(props: propsType) {
     const [folderName, setFolderName] = useState(``);
     // 動画一覧再取得用
     const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteVideoListEndpoint());
+    // フォルダカラー
+    const [folderColor, setFolderColor] = useState(DEFAULT_FOLDER_COLOR);
 
     /**
      * フォルダ作成リクエスト
@@ -65,7 +67,8 @@ export function useFavoriteCreateFolderMain(props: propsType) {
     function execute() {
 
         const body: CreateFolderRequestType = {
-            name: folderName
+            name: folderName,
+            folderColor,
         }
 
         // リクエスト送信
@@ -76,5 +79,7 @@ export function useFavoriteCreateFolderMain(props: propsType) {
         execute,
         folderName,
         setFolderName,
+        folderColor,
+        setFolderColor,
     }
 }
