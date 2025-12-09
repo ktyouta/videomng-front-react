@@ -1,9 +1,10 @@
 import React from "react";
+import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
-import { ColorPreview } from "../../../../../../components/ColorPreview";
+import { IconComponent } from "../../../../../../components/IconComponent";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteUpdateFolderMain } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderMain";
 import { FolderType } from "../../../../types/videolist/FolderType";
@@ -101,10 +102,10 @@ export function FavoriteUpdateFolderMain(props: propsType) {
                             選択中のフォルダカラー
                         </SelectColorTitleDiv>
                         {/* プレビュー */}
-                        <ColorPreview
-                            color={folderColor}
-                            width="23px"
-                            height="23px"
+                        <IconComponent
+                            icon={FaFolder}
+                            bgColor={folderColor}
+                            size="35px"
                         />
                     </SelectedColor>
                     <DefaultColorLink

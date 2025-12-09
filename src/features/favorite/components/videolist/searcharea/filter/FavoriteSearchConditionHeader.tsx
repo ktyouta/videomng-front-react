@@ -1,6 +1,6 @@
+import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { RxCross1 } from "react-icons/rx";
 import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
 
 
@@ -13,7 +13,7 @@ const HeaderDiv = styled.div`
   color: white;
   padding-left: 1%;
   height:4%;
-  margin-bottom:7%;
+  margin-bottom: 4%;
 `;
 
 const BlockIconDiv = styled.div`

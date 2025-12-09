@@ -1,9 +1,6 @@
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
-import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
-import ENV from "../../../env.json";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { SEARCH_CONDITION } from "../const/FavoriteConst";
 import { hasKey } from "../../../utils/CommonFunction";
+import { SEARCH_CONDITION } from "../const/FavoriteConst";
+import { useFavoriteVideoSearchConditionValue } from "./useFavoriteVideoSearchConditionValue";
 
 
 // 更新用クエリ作成時の引数
@@ -85,7 +82,7 @@ export function useCreateFavoriteVideoListQuery() {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FOLDER, props.folder);
         }
         else {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FOLDER, selectedFavoriteVideoFolder);
         }
 
         if (queryParam) {

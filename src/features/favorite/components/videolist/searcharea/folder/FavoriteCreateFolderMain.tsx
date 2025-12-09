@@ -1,11 +1,13 @@
 import React from "react";
+import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
-import { ColorPreview } from "../../../../../../components/ColorPreview";
+import { IconComponent } from "../../../../../../components/IconComponent";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteCreateFolderMain } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderMain";
+
 
 const MessageArea = styled.div`
     width: 100%;
@@ -116,10 +118,10 @@ export function FavoriteCreateFolderMain(props: propsType) {
                             選択中のフォルダカラー
                         </SelectColorTitleDiv>
                         {/* プレビュー */}
-                        <ColorPreview
-                            color={folderColor}
-                            width="23px"
-                            height="23px"
+                        <IconComponent
+                            icon={FaFolder}
+                            bgColor={folderColor}
+                            size="35px"
                         />
                     </SelectedColor>
                     <DefaultColorLink

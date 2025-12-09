@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchConditionMain";
-import { Selectbox } from "../../../../../../components/Selectbox";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
-import { ISSHOWFOLDERFILTERLIST, ISVISIBLEAFTERFOLDERADDLIST } from "../../../../const/FavoriteConst";
+import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchConditionMain";
 
 
 const Parent = styled.div`
@@ -23,7 +21,7 @@ const ConditionAreaDiv = styled.div`
   box-sizing: border-box;
   padding-left: 1%;
   padding-right: 1%;
-  padding-top: 3%;
+  padding-top: 1%;
 `;
 
 const InputDiv = styled.div`
@@ -41,6 +39,15 @@ const InputLabel = styled.label`
   margin-right: 10px;
   white-space: normal;
   word-wrap: break-word;
+`;
+
+const DefaultColorLink = styled.div`
+    color: #7abaff;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+    margin-bottom: clamp(23px,7%,47px);
 `;
 
 type propsType = {
@@ -66,12 +73,17 @@ export function FavoriteSearchConditionMain(props: propsType) {
         changeFavoriteLevel,
         selectedFavoriteVideoFolder,
         changeFolder,
-        folderList, } = useFavoriteSearchConditionMain({ ...props });
+        folderList,
+        clearFilter, } = useFavoriteSearchConditionMain({ ...props });
 
 
     return (
         <Parent>
             <ConditionAreaDiv>
+                <DefaultColorLink
+                    onClick={clearFilter}>
+                    フィルター条件をクリア
+                </DefaultColorLink>
                 {
                     videoCategory && videoCategory.length > 0 &&
                     <InputDiv>
