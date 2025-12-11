@@ -1,16 +1,17 @@
 import { hasKey } from "../../../../utils/CommonFunction";
-import { SEARCH_CONDITION } from "../../const/FavoriteConst";
+import { FOLDER_SEARCH_CONDITION } from "../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchConditionValue } from "./useFavoriteVideoFolderSearchConditionValue";
 
 
 // 更新用クエリ作成時の引数
-type createNewQueryType = { [key in (typeof SEARCH_CONDITION)[keyof typeof SEARCH_CONDITION]]?: string };
+type createNewQueryType = { [key in (typeof FOLDER_SEARCH_CONDITION)[keyof typeof FOLDER_SEARCH_CONDITION]]?: string };
 
 
 export function useCreateFavoriteVideoFolderVideoListQuery() {
 
     const {
         selectedFavoriteVideoPage,
+        selectedFavoriteVideoSortKey,
     } = useFavoriteVideoFolderSearchConditionValue();
 
 
@@ -23,12 +24,20 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         let queryParam = ``;
 
-        // ページ
-        if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_PAGE)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, props.page);
+        // ソート
+        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.folderSortkey);
         }
         else {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
+        }
+
+        // ページ
+        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.folderPage);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
         }
 
         if (queryParam) {
@@ -42,7 +51,8 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         let queryParam = ``;
 
-        queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;

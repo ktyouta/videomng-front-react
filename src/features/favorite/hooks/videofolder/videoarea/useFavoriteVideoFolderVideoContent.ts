@@ -1,19 +1,16 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTER_PATH } from "../../../../../consts/RouterPath";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
-import { useDraggable } from "@dnd-kit/core";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { CSSProperties, useRef } from "react";
-import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
-import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
-import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
-import useSwitch from "../../../../../hooks/useSwitch";
-import { favoriteVideoFolderId } from "../../../utils/endpoint";
-import { useFolderId } from "../useFolderId";
+import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
-import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
+import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import useSwitch from "../../../../../hooks/useSwitch";
+import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { favoriteVideoFolderId } from "../../../utils/endpoint";
+import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
+import { useFolderId } from "../useFolderId";
+import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
 
 
 type propsType = {
@@ -33,7 +30,7 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
     // フォルダID
     const folderId = useFolderId();
     // 動画再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteVideoListEndpoint(folderId));
+    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteVideoFolderVideoListEndpoint(folderId));
 
     /**
      * 動画をフォルダから削除

@@ -4,6 +4,7 @@ import { Icon } from "../../../../../components/Icon";
 import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
+import { FavoriteVideoFolderSearchSortArea } from './FavoriteVideoFolderSearchSortArea';
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
 
@@ -21,6 +22,8 @@ const SecondRowDiv = styled.div`
   box-sizing: border-box;
   margin-bottom: 4%;
   margin-top: 10px;
+  padding-right: 13%;
+  padding-left: 9%;
 `;
 
 const FolderNameSpan = styled.span`
@@ -79,6 +82,8 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
         <FavoriteDeleteFolderModal />
       </FirstRowDiv>
       <SecondRowDiv>
+        {/* 並び替えリスト */}
+        <FavoriteVideoFolderSearchSortArea />
       </SecondRowDiv>
     </Parent>
   );

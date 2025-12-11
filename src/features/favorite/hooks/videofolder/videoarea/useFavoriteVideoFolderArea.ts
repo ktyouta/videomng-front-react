@@ -1,9 +1,9 @@
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
-import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
-import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { DisplayVideoListContext, SetDisplayVideoListContext } from "../../../components/videofolder/FavoriteVideoFolderDisplayVideoListProvider";
+import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
+import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { useFolderId } from "../useFolderId";
+import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
 
 
 export function useFavoriteVideoFolderArea() {
@@ -18,7 +18,7 @@ export function useFavoriteVideoFolderArea() {
     // 動画一覧を取得
     const { data, isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
-            url: useFavoriteVideoListEndpoint(folderId),
+            url: useFavoriteVideoFolderVideoListEndpoint(folderId),
             select: (res: FavoriteVideoListResponseType) => {
                 return res.data;
             },

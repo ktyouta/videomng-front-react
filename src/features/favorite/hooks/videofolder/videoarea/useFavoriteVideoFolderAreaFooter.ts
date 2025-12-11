@@ -1,13 +1,11 @@
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
 import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
 import { useFolderId } from "../useFolderId";
-import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
+import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
 
 export function useFavoriteVideoFolderAreaFooter() {
 
@@ -23,7 +21,7 @@ export function useFavoriteVideoFolderAreaFooter() {
     // 動画一覧
     const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
-            url: useFavoriteVideoListEndpoint(folderId),
+            url: useFavoriteVideoFolderVideoListEndpoint(folderId),
             select: (res: FavoriteVideoListResponseType) => {
                 return res.data;
             },
@@ -41,7 +39,7 @@ export function useFavoriteVideoFolderAreaFooter() {
     function changePage(page: number) {
 
         const newQuery = create({
-            page: page.toString()
+            folderPage: page.toString()
         });
 
         // クエリパラメータを更新

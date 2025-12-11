@@ -2,7 +2,7 @@ import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
 import { useSortList } from "../../../../content/hooks/useSortList";
 import { INIT_PAGE } from "../../useFavoriteVideoSearchConditionValue";
-import { useCreateFavoriteVideoFolderListQuery } from "../useCreateFavoriteVideoFolderListQuery";
+import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
 import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
 
 
@@ -16,7 +16,7 @@ export function useFavoriteVideoFolderSearchSortArea() {
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoFolderListQuery();
+    const { create } = useCreateFavoriteVideoFolderVideoListQuery();
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // ソートリストを取得

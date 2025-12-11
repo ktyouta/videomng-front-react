@@ -50,7 +50,7 @@ export function FavoriteVideoFolderSearchSortArea() {
                         options={sortList}
                         value={selectedFavoriteVideoSortKey || sortList[0].value}
                         onChange={selectSort}
-                        width={isMobile ? `48%` : `23%`}
+                        width={isMobile ? `65%` : `23%`}
                         height="39px"
                         backgroundColor="rgb(24, 26, 30)"
                         color="white"

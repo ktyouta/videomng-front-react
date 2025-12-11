@@ -3,7 +3,7 @@ import ENV from "../../../../../env.json";
 import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
 
 
-export function useFavoriteVideoListEndpoint(folderId: string) {
+export function useFavoriteVideoFolderVideoListEndpoint(folderId: string) {
 
     const { query } = useCreateFavoriteVideoFolderVideoListQuery();
 
