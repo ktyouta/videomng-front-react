@@ -5,6 +5,7 @@ import { Icon } from "../../../../../components/Icon";
 import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
+import { FavoriteVideoFolderSearchSortArea } from "./FavoriteVideoFolderSearchSortArea";
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
 
@@ -79,6 +80,8 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
+        {/* 並び替えリスト */}
+        <FavoriteVideoFolderSearchSortArea />
       </FirstRowDiv>
       <SecondRowDiv>
       </SecondRowDiv>

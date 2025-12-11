@@ -1,20 +1,11 @@
-import styled from "styled-components";
 import React from "react";
-import { FaFilter } from 'react-icons/fa';
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { MEDIA } from "../../../../../../consts/MediaConst";
-import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
-import { MdEdit } from "react-icons/md";
-import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
-import { minLength } from "zod";
-import { Icon } from "../../../../../../components/Icon";
-import { useFavoriteUpdateFolderModal } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderModal";
-import { FolderType } from "../../../../types/videolist/FolderType";
 import { FaRegTrashAlt } from "react-icons/fa";
+import styled from "styled-components";
+import { Icon } from "../../../../../../components/Icon";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { ModalPortalConfirm } from "../../../../../../components/ModalPortalConfirm";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
 import { FavoriteDeleteFolder } from "./FavoriteDeleteFolder";
-import { ModalPortalConfirm } from "../../../../../../components/ModalPortalConfirm";
 
 
 const TitleSpan = styled.span`
@@ -24,7 +15,7 @@ const TitleSpan = styled.span`
     cursor: pointer;
   }
   white-space: nowrap;
-  margin-right: 30px;
+  margin-right: 40px;
 `;
 
 

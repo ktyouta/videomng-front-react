@@ -1,4 +1,4 @@
-import { SelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoPageContext } from "../../components/videofolder/FavoriteVideoFolderSearchConditionValueProvider";
+import { SelectedFavoriteVideoPageContext, SelectedFavoriteVideoSortKeyContext, SetSelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoSortKeyContext } from "../../components/videofolder/FavoriteVideoFolderSearchConditionValueProvider";
 
 export const INIT_PAGE = `1`;
 
@@ -8,6 +8,10 @@ export function useFavoriteVideoFolderSearchConditionValue() {
     const selectedFavoriteVideoPage = SelectedFavoriteVideoPageContext.useCtx();
     // 動画一覧検索ページ setter
     const setSelectedFavoriteVideoPage = SetSelectedFavoriteVideoPageContext.useCtx();
+    // 動画一覧検索ソートキー
+    const selectedFavoriteVideoSortKey = SelectedFavoriteVideoSortKeyContext.useCtx();
+    // 動画一覧検索ソートキー setter
+    const setSelectedFavoriteVideoSortKey = SetSelectedFavoriteVideoSortKeyContext.useCtx();
 
 
     /**
@@ -15,6 +19,7 @@ export function useFavoriteVideoFolderSearchConditionValue() {
      */
     function reset() {
         setSelectedFavoriteVideoPage(``);
+        setSelectedFavoriteVideoSortKey(``);
     }
 
     /**
@@ -27,6 +32,8 @@ export function useFavoriteVideoFolderSearchConditionValue() {
     return {
         selectedFavoriteVideoPage,
         setSelectedFavoriteVideoPage,
+        selectedFavoriteVideoSortKey,
+        setSelectedFavoriteVideoSortKey,
         reset,
         resetPage,
     };

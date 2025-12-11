@@ -79,6 +79,14 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_FOLDER: `folder`,
 } as const;
 
+// フォルダ内動画一覧の検索条件
+export const FOLDER_SEARCH_CONDITION = {
+    // クエリパラメータのキー(ソート)
+    QUERY_KEY_SORT: `folderSortkey`,
+    // クエリパラメータのキー(ページ)
+    QUERY_KEY_PAGE: `folderPage`,
+} as const;
+
 // フォルダ内の動画を削除するフラグ
 export const DELETEFAVORITEVIDEOINFOLDER = {
     ON: `1`,
