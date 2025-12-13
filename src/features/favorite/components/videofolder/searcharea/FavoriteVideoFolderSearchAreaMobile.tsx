@@ -4,6 +4,7 @@ import { Icon } from "../../../../../components/Icon";
 import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
+import { FavoriteVideoFolderSearchSelectedTag } from './FavoriteVideoFolderSearchSelectedTag';
 import { FavoriteVideoFolderSearchSortArea } from './FavoriteVideoFolderSearchSortArea';
 import { FavoriteVideoFolderSearchFilterModal } from './filter/FavoriteVideoFolderSearchFilterModal';
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
@@ -66,6 +67,17 @@ const FourthRowDiv = styled.div`
   margin-top: 20px;
 `;
 
+const FifthRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 7%;
+  flex-wrap: wrap;
+  margin-top: 20px;
+`;
+
 type propsType = {
   folder: FolderType | undefined
 }
@@ -106,15 +118,17 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
+        {/* フィルター */}
+        <FavoriteVideoFolderSearchFilterModal />
       </SecondRowDiv>
       <ThirdRowDiv>
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
       </ThirdRowDiv>
-      <FourthRowDiv>
-        {/* フィルター */}
-        <FavoriteVideoFolderSearchFilterModal />
-      </FourthRowDiv>
+      <FifthRowDiv>
+        {/* 選択中のタグ */}
+        <FavoriteVideoFolderSearchSelectedTag />
+      </FifthRowDiv>
     </Parent>
   );
 }

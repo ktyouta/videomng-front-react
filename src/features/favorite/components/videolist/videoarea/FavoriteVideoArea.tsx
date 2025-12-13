@@ -1,17 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { useFavoriteVideoArea } from "../../../hooks/videolist/videoarea/useFavoriteVideoArea";
-import LoadingBase from "../../../../../components/LoadingBase";
-import { FavoriteVideoContent } from "./FavoriteVideoContent";
-import { VideoListResponseType } from "../../../../home/types/videolist/VideoListResponseType";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import Loading from "../../../../../components/Loading";
-import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
-import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";
-import { FavoriteVideoFolder } from "./FavoriteVideoFolder";
-import { FolderType } from "../../../types/videolist/FolderType";
 import { DndContext } from "@dnd-kit/core";
+import styled from "styled-components";
+import Loading from "../../../../../components/Loading";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { useFavoriteVideoArea } from "../../../hooks/videolist/videoarea/useFavoriteVideoArea";
+import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FolderType } from "../../../types/videolist/FolderType";
+import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";
+import { FavoriteVideoContent } from "./FavoriteVideoContent";
+import { FavoriteVideoFolder } from "./FavoriteVideoFolder";
 
 const Parent = styled.div`
   width: 100%;
@@ -113,7 +110,7 @@ export function FavoriteVideoArea() {
   if ((!displayVideoList || displayVideoList.length === 0) && (!displayFolderList || displayFolderList.length === 0)) {
     return (
       <MessageDiv>
-        お気に入り動画が存在しません。
+        動画が存在しません。
       </MessageDiv>
     );
   }

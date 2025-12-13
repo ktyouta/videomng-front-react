@@ -1,4 +1,6 @@
-import { hasKey } from "../../../../utils/CommonFunction";
+import { PREV_PATH_KEY } from "../../../../consts/CommonConst";
+import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { getPrevPath, hasKey } from "../../../../utils/CommonFunction";
 import { FOLDER_SEARCH_CONDITION } from "../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchConditionValue } from "./useFavoriteVideoFolderSearchConditionValue";
 
@@ -76,6 +78,9 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
         }
 
+        // 前画面のパスを取得
+        const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
+        queryParam = appendQuery(queryParam, PREV_PATH_KEY, prev);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;
@@ -88,7 +93,11 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         let queryParam = ``;
 
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
 
         if (queryParam) {
