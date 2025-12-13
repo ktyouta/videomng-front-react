@@ -1,8 +1,8 @@
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
-import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
 import { useSortList } from "../../../../content/hooks/useSortList";
+import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
+import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 
 
 export function useFavoriteSearchSortArea() {
@@ -13,7 +13,7 @@ export function useFavoriteSearchSortArea() {
         setSelectedFavoriteVideoSortKey,
         resetPage } = useFavoriteVideoSearchConditionValue();
     // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
     // クエリ作成用
     const { create } = useCreateFavoriteVideoListQuery();
     // クエリパラメータ変更用
@@ -45,6 +45,6 @@ export function useFavoriteSearchSortArea() {
         sortList,
         selectSort,
         selectedFavoriteVideoSortKey,
-        isMobile,
+        isPcLess,
     }
 }

@@ -45,14 +45,11 @@ export function FavoriteUpdateFolderModal(props: propsType) {
                 height="100%"
                 onclick={openModal}
             />
-            {
-                !isMobile &&
-                <TitleSpan
-                    onClick={openModal}
-                >
-                    フォルダ情報更新
-                </TitleSpan>
-            }
+            <TitleSpan
+                onClick={openModal}
+            >
+                フォルダ情報更新
+            </TitleSpan>
             {/* フォルダ名変更モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}

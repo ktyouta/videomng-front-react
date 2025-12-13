@@ -1,11 +1,8 @@
-import styled from "styled-components";
 import React from "react";
-import { FaFilter } from 'react-icons/fa';
-import { IconComponent } from "../../../../../components/IconComponent";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
-import { useFavoriteSearchSortArea } from "../../../hooks/videolist/searcharea/useFavoriteSearchSortArea";
+import styled from "styled-components";
 import { Selectbox } from "../../../../../components/Selectbox";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteSearchSortArea } from "../../../hooks/videolist/searcharea/useFavoriteSearchSortArea";
 
 
 const ComboTitleSpan = styled.span`
@@ -39,7 +36,7 @@ export function FavoriteSearchSortArea() {
         sortList,
         selectSort,
         selectedFavoriteVideoSortKey,
-        isMobile, } = useFavoriteSearchSortArea();
+        isPcLess, } = useFavoriteSearchSortArea();
 
     return (
         <React.Fragment>
@@ -53,11 +50,11 @@ export function FavoriteSearchSortArea() {
                         options={sortList}
                         value={selectedFavoriteVideoSortKey || sortList[0].value}
                         onChange={selectSort}
-                        width={isMobile ? `48%` : `23%`}
+                        width={isPcLess ? `65%` : `23%`}
                         height="39px"
                         backgroundColor="rgb(24, 26, 30)"
                         color="white"
-                        fontSize={isMobile ? "12px" : "13px"}
+                        fontSize={isPcLess ? "12px" : "13px"}
                         outerStyle={{
                             marginRight: "2%",
                         }}

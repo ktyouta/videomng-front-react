@@ -14,7 +14,7 @@ export function useFavoriteVideoFolderSearchSortArea() {
         setSelectedFavoriteVideoSortKey,
         resetPage } = useFavoriteVideoFolderSearchConditionValue();
     // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
+    const isMobile = useMediaQuery(mediaQuery.pcLess);
     // クエリ作成用
     const { create } = useCreateFavoriteVideoFolderVideoListQuery();
     // クエリパラメータ変更用

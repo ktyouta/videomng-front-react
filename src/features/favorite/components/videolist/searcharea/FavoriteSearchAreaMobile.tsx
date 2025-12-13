@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
-import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
-import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
-import { FavoriteSearchText } from "./FavoriteSearchText";
-import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
-import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
 import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExportModal";
+import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
+import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
+import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
+import { FavoriteSearchText } from "./FavoriteSearchText";
+import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
+import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
 
 const Parent = styled.div`
   width: 100%;
@@ -18,8 +18,8 @@ const FilterAreaDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 4%;
-  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 
@@ -39,6 +39,8 @@ export function FavoriteSearchAreaMobile() {
       <FilterAreaDiv>
         {/* 並び替えリスト */}
         <FavoriteSearchSortArea />
+      </FilterAreaDiv>
+      <FilterAreaDiv>
         {/* フィルター用モーダル */}
         <FavoriteSearchFilterModal />
         {/* フォルダ作成 */}

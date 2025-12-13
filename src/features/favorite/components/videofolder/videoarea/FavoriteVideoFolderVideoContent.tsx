@@ -1,14 +1,11 @@
-import React from "react";
+import { FaTrash } from "react-icons/fa";
 import styled from "styled-components";
-import { useFavoriteVideoContent } from "../../../hooks/videolist/videoarea/useFavoriteVideoContent";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { Icon } from "../../../../../components/Icon";
+import { ModalPortalConfirm } from "../../../../../components/ModalPortalConfirm";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteVideoFolderVideoContent } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderVideoContent";
-import { Icon } from "../../../../../components/Icon";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { ModalPortalConfirm } from "../../../../../components/ModalPortalConfirm";
-import { BiExport } from "react-icons/bi";
-import { FiLogOut } from "react-icons/fi";
+import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+
 
 const VideoArticle = styled.article`
 `;
@@ -128,15 +125,15 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
                 </VideoTitleDiv>
                 {/* 動画削除アイコン */}
                 <Icon
-                    icon={BiExport}
+                    icon={FaTrash}
                     bgColor="rgb(200, 200, 200)"
                     style={{
                         position: `absolute`,
                         top: `0`,
                         right: `1%`
                     }}
-                    width="23px"
-                    height="23px"
+                    width="20px"
+                    height="20px"
                     onclick={openModal}
                 />
                 <DateDiv>

@@ -1,16 +1,12 @@
-import React from "react";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { MEDIA } from "../../../../../../consts/MediaConst";
-import { Checkbox } from "../../../../../../components/Checkbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
+import { Checkbox } from "../../../../../../components/Checkbox";
+import { MEDIA } from "../../../../../../consts/MediaConst";
 import { DELETEFAVORITEVIDEOINFOLDER } from "../../../../const/FavoriteConst";
 
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:1%;
   height:100%;
   font-size: 12px;
 
@@ -27,6 +23,10 @@ const Parent = styled.div`
   }
 `;
 
+const MeainArea = styled.div`
+    height: 59%;
+`;
+
 const MessageArea = styled.div`
     width: 100%;
     box-sizing: border-box;
@@ -37,9 +37,9 @@ const MessageArea = styled.div`
 `;
 
 const InputArea = styled.div`
-    padding: 0 5%;
+    padding: 0 6%;
     box-sizing: border-box;
-    margin: 30px 0px 30px 10px;
+    margin: 30px 0px 0px 0px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -51,7 +51,7 @@ const SelectLabel = styled.label`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 45px;
+    height: 30%;
     box-sizing: border-box;
     color: black;
     display: flex;
@@ -73,25 +73,27 @@ export function FavoriteDeleteFolder(props: propsType) {
 
   return (
     <Parent>
-      <MessageArea>
-        ！フォルダを削除します
-      </MessageArea>
-      <InputArea>
-        <Checkbox
-          value={DELETEFAVORITEVIDEOINFOLDER.ON}
-          htmlForId="delete-folder-check-id"
-          onChange={props.changeSelect}
-          isChecked={props.deleteVideoFlg === DELETEFAVORITEVIDEOINFOLDER.ON}
-          style={{
-            transform: `scale(1.2)`
-          }}
-        />
-        <SelectLabel
-          htmlFor="delete-folder-check-id"
-        >
-          フォルダ内の動画をお気に入りから削除する
-        </SelectLabel>
-      </InputArea>
+      <MeainArea>
+        <MessageArea>
+          ！フォルダを削除します
+        </MessageArea>
+        <InputArea>
+          <Checkbox
+            value={DELETEFAVORITEVIDEOINFOLDER.ON}
+            htmlForId="delete-folder-check-id"
+            onChange={props.changeSelect}
+            isChecked={props.deleteVideoFlg === DELETEFAVORITEVIDEOINFOLDER.ON}
+            style={{
+              transform: `scale(1.2)`
+            }}
+          />
+          <SelectLabel
+            htmlFor="delete-folder-check-id"
+          >
+            フォルダ内の動画をお気に入りから削除する
+          </SelectLabel>
+        </InputArea>
+      </MeainArea>
       <FooterDiv >
         <ButtonComponent
           variant="black"

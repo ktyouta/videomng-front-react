@@ -15,8 +15,9 @@ const FirstRowDiv = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding-right: 13%;
-  padding-left: 9%;
+  padding-left: 8%;
   color: white;
+  flex-wrap: wrap;
 `;
 
 const SecondRowDiv = styled.div`
@@ -26,7 +27,8 @@ const SecondRowDiv = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding-right: 13%;
-  padding-left: 9%;
+  padding-left: 8%;
+  flex-wrap: wrap;
 `;
 
 const ThirdRowDiv = styled.div`
@@ -35,7 +37,8 @@ const ThirdRowDiv = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding-right: 13%;
-  padding-left: 9%;
+  padding-left: 8%;
+  flex-wrap: wrap;
 `;
 
 const FolderNameSpan = styled.span`

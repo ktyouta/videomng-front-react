@@ -1,14 +1,10 @@
-import styled from "styled-components";
 import React from "react";
-import { FaFilter } from 'react-icons/fa';
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { MEDIA } from "../../../../../../consts/MediaConst";
-import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
-import { FavoriteCreateFolder } from "./FavoriteCreateFolder";
 import { FaFolder } from 'react-icons/fa';
+import styled from "styled-components";
+import { IconComponent } from "../../../../../../components/IconComponent";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
-import { minLength } from "zod";
+import { FavoriteCreateFolder } from "./FavoriteCreateFolder";
 
 const IconAreaDiv = styled.div`
   width: 46px;
@@ -56,14 +52,11 @@ export function FavoriteCreateFolderModal() {
                     size="40%"
                 />
             </IconAreaDiv>
-            {
-                !isMobile &&
-                <TitleSpan
-                    onClick={openModal}
-                >
-                    フォルダ作成
-                </TitleSpan>
-            }
+            <TitleSpan
+                onClick={openModal}
+            >
+                フォルダ作成
+            </TitleSpan>
             {/* フォルダ作成モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}

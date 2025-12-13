@@ -1,11 +1,10 @@
-import styled from "styled-components";
-import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
+import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { MEDIA } from "../../../../../../consts/MediaConst";
-import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
+import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -54,14 +53,11 @@ export function FavoriteSearchFilterModal() {
                     size="40%"
                 />
             </FilterIconAreaDiv>
-            {
-                !isMobile &&
-                <FilterTitleSpan
-                    onClick={openFilterModal}
-                >
-                    フィルター
-                </FilterTitleSpan>
-            }
+            <FilterTitleSpan
+                onClick={openFilterModal}
+            >
+                フィルター
+            </FilterTitleSpan>
             {/* フィルターモーダル */}
             <ModalPortal
                 isOpen={isOpenFilterModal}

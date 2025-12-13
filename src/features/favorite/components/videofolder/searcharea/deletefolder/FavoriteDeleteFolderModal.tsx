@@ -48,19 +48,16 @@ export function FavoriteDeleteFolderModal() {
                 height="100%"
                 onclick={openDeleteModal}
             />
-            {
-                !isMobile &&
-                <TitleSpan
-                    onClick={openDeleteModal}
-                >
-                    フォルダ削除
-                </TitleSpan>
-            }
+            <TitleSpan
+                onClick={openDeleteModal}
+            >
+                フォルダ削除
+            </TitleSpan>
             {/* フォルダ削除確認モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
                 modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight=""
+                modalHeight="25%"
                 isCloseOuter={true}
                 close={closeModal}
                 containerStyle={{
@@ -68,7 +65,7 @@ export function FavoriteDeleteFolderModal() {
                     borderRadius: "20px",
                     border: "solid 1px",
                     color: "black",
-                    minHeight: "30%"
+                    minHeight: "23%"
                 }}
             >
                 <FavoriteDeleteFolder

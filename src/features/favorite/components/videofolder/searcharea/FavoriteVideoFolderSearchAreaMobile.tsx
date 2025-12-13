@@ -11,7 +11,7 @@ import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderMo
 const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-left: 6%;
+  padding-left: 3%;
   color: white;
 `;
 
@@ -20,10 +20,11 @@ const SecondRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 4%;
-  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   padding-right: 13%;
   padding-left: 9%;
+  flex-wrap: wrap;
 `;
 
 const FolderNameSpan = styled.span`
@@ -40,6 +41,17 @@ const FirstRowDiv = styled.div`
   padding-left: 9%;
   color: white;
   font-size: 24px;
+  flex-wrap: wrap;
+`;
+
+const ThirdRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 9%;
+  flex-wrap: wrap;
 `;
 
 type propsType = {
@@ -74,17 +86,19 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
         <FolderNameSpan>
           {props.folder?.name}
         </FolderNameSpan>
+      </FirstRowDiv>
+      <SecondRowDiv>
         {/* フォルダ名変更モーダル */}
         <FavoriteUpdateFolderModal
           folder={props.folder}
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
-      </FirstRowDiv>
-      <SecondRowDiv>
+      </SecondRowDiv>
+      <ThirdRowDiv>
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
-      </SecondRowDiv>
+      </ThirdRowDiv>
     </Parent>
   );
 }

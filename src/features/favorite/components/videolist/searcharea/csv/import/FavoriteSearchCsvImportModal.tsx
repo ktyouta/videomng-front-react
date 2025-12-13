@@ -1,13 +1,10 @@
-import styled from "styled-components";
 import React from "react";
-import { FaFilter } from 'react-icons/fa';
-import { IconComponent } from "../../../../../../../components/IconComponent";
-import { MEDIA } from "../../../../../../../consts/MediaConst";
-import { useFavoriteSearchFilterModal } from "../../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
 import { FiDownload } from "react-icons/fi";
-import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
-import { useFavoriteSearchCsvImportModal } from "../../../../../hooks/videolist/searcharea/csv/import/useFavoriteSearchCsvImportModal";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../../../components/IconComponent";
 import { ModalPortal } from "../../../../../../../components/ModalPortal";
+import { useFavoriteSearchCsvImportModal } from "../../../../../hooks/videolist/searcharea/csv/import/useFavoriteSearchCsvImportModal";
+import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
 
 
 const FilterIconAreaDiv = styled.div`
@@ -54,14 +51,11 @@ export function FavoriteSearchCsvImportModal() {
                     size="45%"
                 />
             </FilterIconAreaDiv>
-            {
-                !isMobile &&
-                <FilterTitleSpan
-                    onClick={openModal}
-                >
-                    保存
-                </FilterTitleSpan>
-            }
+            <FilterTitleSpan
+                onClick={openModal}
+            >
+                保存
+            </FilterTitleSpan>
             {/*ダウンロードモーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
