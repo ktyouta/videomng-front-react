@@ -5,6 +5,7 @@ import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSortArea } from './FavoriteVideoFolderSearchSortArea';
+import { FavoriteVideoFolderSearchFilterModal } from './filter/FavoriteVideoFolderSearchFilterModal';
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
 
@@ -20,7 +21,6 @@ const SecondRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 20px;
   margin-top: 20px;
   padding-right: 13%;
   padding-left: 9%;
@@ -52,6 +52,18 @@ const ThirdRowDiv = styled.div`
   padding-right: 13%;
   padding-left: 9%;
   flex-wrap: wrap;
+  margin-top: 20px;
+`;
+
+const FourthRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 7%;
+  flex-wrap: wrap;
+  margin-top: 20px;
 `;
 
 type propsType = {
@@ -99,6 +111,10 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
       </ThirdRowDiv>
+      <FourthRowDiv>
+        {/* フィルター */}
+        <FavoriteVideoFolderSearchFilterModal />
+      </FourthRowDiv>
     </Parent>
   );
 }

@@ -10,8 +10,12 @@ type createNewQueryType = { [key in (typeof FOLDER_SEARCH_CONDITION)[keyof typeo
 export function useCreateFavoriteVideoFolderVideoListQuery() {
 
     const {
-        selectedFavoriteVideoPage,
+        selectedFavoriteVideoCategory,
+        selectedFavoriteVideoViewStatus,
+        selectedFavoriteVideoTag,
+        selectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey,
+        selectedFavoriteVideoPage,
     } = useFavoriteVideoFolderSearchConditionValue();
 
 
@@ -24,12 +28,44 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         let queryParam = ``;
 
+        // カテゴリ
+        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.folderVideocategory);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
+        }
+
+        // 視聴状況
+        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.folderViewstatus);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
+        }
+
+        // タグ
+        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.folderVideotag);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
+        }
+
         // ソート
         if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT)) {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.folderSortkey);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
+        }
+
+        // お気に入り度
+        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.folderFavoritelevel);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
         }
 
         // ページ
@@ -39,6 +75,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
         }
+
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;

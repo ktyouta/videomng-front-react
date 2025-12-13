@@ -77,7 +77,7 @@ export function useCreateFavoriteVideoListQuery() {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
         }
 
-        // フォルダ表示フラグ
+        // フォルダ
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_FOLDER)) {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FOLDER, props.folder);
         }

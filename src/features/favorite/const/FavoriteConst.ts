@@ -81,6 +81,14 @@ export const SEARCH_CONDITION = {
 
 // フォルダ内動画一覧の検索条件
 export const FOLDER_SEARCH_CONDITION = {
+    // クエリパラメータのキー(視聴状況)
+    QUERY_KEY_VIEW_STATUS: `folderViewstatus`,
+    // クエリパラメータのキー(カテゴリ)
+    QUERY_KEY_CATEGORY: `folderVideocategory`,
+    // クエリパラメータのキー(タグ)
+    QUERY_KEY_TAG: `folderVideotag`,
+    // クエリパラメータのキー(お気に入り度)
+    QUERY_KEY_FAVORITE_LEVEL: `folderFavoritelevel`,
     // クエリパラメータのキー(ソート)
     QUERY_KEY_SORT: `folderSortkey`,
     // クエリパラメータのキー(ページ)

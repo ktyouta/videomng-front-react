@@ -1,10 +1,7 @@
-import { ReactNode, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ENV from "../../../env.json";
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
+import { ReactNode, useState } from "react";
+import { useQueryParams } from "../../../hooks/useQueryParams";
 import { createCtx } from "../../../utils/createCtx";
 import { SEARCH_CONDITION } from "../const/FavoriteConst";
-import { useQueryParams } from "../../../hooks/useQueryParams";
 
 
 // 動画一覧検索条件選択値(カテゴリ)
@@ -19,9 +16,9 @@ export const SetselectedFavoriteVideoViewStatusContext = createCtx<React.Dispatc
 export const SelectedFavoriteVideoTagContext = createCtx<string>();
 // 動画一覧検索条件選択値(タグ) setter
 export const SetselectedFavoriteVideoTagContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
-// 動画一覧検索条件選択値(タグ)
+// 動画一覧検索条件選択値(お気に入り度)
 export const SelectedFavoriteVideoFavoriteLevelContext = createCtx<string>();
-// 動画一覧検索条件選択値(タグ) setter
+// 動画一覧検索条件選択値(お気に入り度) setter
 export const SetSelectedFavoriteVideoFavoriteLevelContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
 // 動画一覧検索ソートキー
 export const SelectedFavoriteVideoSortKeyContext = createCtx<string>();
@@ -31,9 +28,9 @@ export const SetSelectedFavoriteVideoSortKeyContext = createCtx<React.Dispatch<R
 export const SelectedFavoriteVideoPageContext = createCtx<string>();
 // 動画一覧検索ページ setter
 export const SetSelectedFavoriteVideoPageContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
-// 動画一覧検索フォルダ表示フラグ
+// 動画一覧検索フォルダ
 export const SelectedFavoriteVideoFolderContext = createCtx<string>();
-// 動画一覧検索フォルダ表示フラグ setter
+// 動画一覧検索フォルダ setter
 export const SetselectedFavoriteVideoFolderContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
 
 // 引数の型
