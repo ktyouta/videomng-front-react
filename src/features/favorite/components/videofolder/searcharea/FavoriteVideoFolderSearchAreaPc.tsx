@@ -7,6 +7,7 @@ import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSelectedTag } from "./FavoriteVideoFolderSearchSelectedTag";
 import { FavoriteVideoFolderSearchSortArea } from "./FavoriteVideoFolderSearchSortArea";
+import { FavoriteVideoFolderSearchText } from "./FavoriteVideoFolderSearchText";
 import { FavoriteVideoFolderSearchFilterModal } from "./filter/FavoriteVideoFolderSearchFilterModal";
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
@@ -29,7 +30,7 @@ const SecondRowDiv = styled.div`
   box-sizing: border-box;
   padding-right: 13%;
   padding-left: 8%;
-  margin-top:1%;
+  margin-top: 40px;
 `;
 
 const ThirdRowDiv = styled.div`
@@ -84,16 +85,20 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
+      </FirstRowDiv>
+      <SecondRowDiv>
+        {/* タイトルフィルター */}
+        <FavoriteVideoFolderSearchText
+          width="85%"
+        />
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
         {/* フィルター */}
         <FavoriteVideoFolderSearchFilterModal />
-      </FirstRowDiv>
-      <SecondRowDiv>
-        {/* 選択中のタグ */}
-        <FavoriteVideoFolderSearchSelectedTag />
       </SecondRowDiv>
       <ThirdRowDiv>
+        {/* 選択中のタグ */}
+        <FavoriteVideoFolderSearchSelectedTag />
       </ThirdRowDiv>
     </React.Fragment>
   );

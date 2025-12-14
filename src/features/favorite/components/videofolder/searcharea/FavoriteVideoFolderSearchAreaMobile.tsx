@@ -6,6 +6,7 @@ import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSelectedTag } from './FavoriteVideoFolderSearchSelectedTag';
 import { FavoriteVideoFolderSearchSortArea } from './FavoriteVideoFolderSearchSortArea';
+import { FavoriteVideoFolderSearchText } from './FavoriteVideoFolderSearchText';
 import { FavoriteVideoFolderSearchFilterModal } from './filter/FavoriteVideoFolderSearchFilterModal';
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
@@ -51,7 +52,7 @@ const ThirdRowDiv = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding-right: 13%;
-  padding-left: 9%;
+  padding-left: 7%;
   flex-wrap: wrap;
   margin-top: 20px;
 `;
@@ -122,9 +123,15 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
         <FavoriteVideoFolderSearchFilterModal />
       </SecondRowDiv>
       <ThirdRowDiv>
+        {/* タイトルフィルター */}
+        <FavoriteVideoFolderSearchText
+          width="70%"
+        />
+      </ThirdRowDiv>
+      <FourthRowDiv>
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
-      </ThirdRowDiv>
+      </FourthRowDiv>
       <FifthRowDiv>
         {/* 選択中のタグ */}
         <FavoriteVideoFolderSearchSelectedTag />

@@ -1,8 +1,8 @@
-import React, { type CSSProperties, forwardRef, useEffect, useState } from 'react';
-import styled from "styled-components";
+import React, { type CSSProperties } from 'react';
 import { RxCross1 } from "react-icons/rx";
-import { IconComponent } from './IconComponent';
+import styled from "styled-components";
 import BaseTextbox from './BaseTextbox';
+import { IconComponent } from './IconComponent';
 
 
 //引数の型
@@ -83,7 +83,10 @@ export function ClearableTextbox(props: propsType) {
                 <IconDiv
                     iconHeight={props.height}
                     iconWidth={props.iconWidth}
-                    style={props.iconStyle}
+                    style={{
+                        marginRight: "7px",
+                        ...props.iconStyle
+                    }}
                 >
                     <IconComponent
                         icon={RxCross1}
