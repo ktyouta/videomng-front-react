@@ -1,14 +1,14 @@
-import styled from "styled-components";
 import React from "react";
-import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
-import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
+import styled from "styled-components";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
+import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchText } from "./FavoriteSearchText";
-import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
-import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
 import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExportModal";
+import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
+import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
+import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
 
-const FilterAreaDiv = styled.div`
+const OperationRowDiv = styled.div`
   width: 100%;
   display:flex;
   justify-content: center;
@@ -38,7 +38,7 @@ export function FavoriteSearchAreaPc() {
 
   return (
     <React.Fragment>
-      <FilterAreaDiv>
+      <OperationRowDiv>
         {/* タイトルフィルター */}
         <FavoriteSearchText
           width="85%"
@@ -53,7 +53,7 @@ export function FavoriteSearchAreaPc() {
         <FavoriteSearchCsvImportModal />
         {/* 取込 */}
         <FavoriteSearchCsvExportModal />
-      </FilterAreaDiv>
+      </OperationRowDiv>
       <SelectedTagAreaDiv>
         {/* 選択中のタグ */}
         <FavoriteSearchSelectedTag />

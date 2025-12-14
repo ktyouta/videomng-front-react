@@ -13,7 +13,7 @@ const Parent = styled.div`
   padding-left: 6%;
 `;
 
-const FilterAreaDiv = styled.div`
+const OperationRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
@@ -36,20 +36,22 @@ export function FavoriteSearchAreaMobile() {
       <FavoriteSearchText
         width="70%"
       />
-      <FilterAreaDiv>
+      <OperationRowDiv>
         {/* 並び替えリスト */}
         <FavoriteSearchSortArea />
-      </FilterAreaDiv>
-      <FilterAreaDiv>
+      </OperationRowDiv>
+      <OperationRowDiv>
         {/* フィルター用モーダル */}
         <FavoriteSearchFilterModal />
         {/* フォルダ作成 */}
         <FavoriteCreateFolderModal />
+      </OperationRowDiv>
+      <OperationRowDiv>
         {/* 保存 */}
         <FavoriteSearchCsvImportModal />
         {/* 取込 */}
         <FavoriteSearchCsvExportModal />
-      </FilterAreaDiv>
+      </OperationRowDiv>
       {/* 選択中のタグ */}
       <FavoriteSearchSelectedTag />
     </Parent>

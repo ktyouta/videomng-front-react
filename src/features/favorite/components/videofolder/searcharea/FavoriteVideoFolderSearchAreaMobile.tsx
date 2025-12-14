@@ -79,6 +79,17 @@ const FifthRowDiv = styled.div`
   margin-top: 20px;
 `;
 
+const OperationRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 7%;
+  flex-wrap: wrap;
+  margin-top: 20px;
+`;
+
 type propsType = {
   folder: FolderType | undefined
 }
@@ -112,30 +123,32 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
           {props.folder?.name}
         </FolderNameSpan>
       </FirstRowDiv>
-      <SecondRowDiv>
+      <OperationRowDiv>
         {/* フォルダ名変更モーダル */}
         <FavoriteUpdateFolderModal
           folder={props.folder}
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
-        {/* フィルター */}
-        <FavoriteVideoFolderSearchFilterModal />
-      </SecondRowDiv>
-      <ThirdRowDiv>
+      </OperationRowDiv>
+      <OperationRowDiv>
         {/* タイトルフィルター */}
         <FavoriteVideoFolderSearchText
           width="70%"
         />
-      </ThirdRowDiv>
-      <FourthRowDiv>
+      </OperationRowDiv>
+      <OperationRowDiv>
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
-      </FourthRowDiv>
-      <FifthRowDiv>
+      </OperationRowDiv>
+      <OperationRowDiv>
+        {/* フィルター */}
+        <FavoriteVideoFolderSearchFilterModal />
+      </OperationRowDiv>
+      <OperationRowDiv>
         {/* 選択中のタグ */}
         <FavoriteVideoFolderSearchSelectedTag />
-      </FifthRowDiv>
+      </OperationRowDiv>
     </Parent>
   );
 }

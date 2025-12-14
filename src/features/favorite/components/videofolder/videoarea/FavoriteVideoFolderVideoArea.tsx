@@ -24,7 +24,7 @@ const ResultNumDiv = styled.div`
   box-sizing: border-box;
   padding-right: 6%;
   color: rgb(158, 158, 158);
-  margin-top: 13px;
+  margin-top: 8px;
 `;
 
 const ResultNumSpan = styled.span`

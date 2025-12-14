@@ -1,11 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTER_PATH } from "../../../../../consts/RouterPath";
-import { toast } from "react-toastify";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
-import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
 import { useDraggable } from "@dnd-kit/core";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { CSSProperties, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
+import { ROUTER_PATH } from "../../../../../consts/RouterPath";
+import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 
 
 type propsType = {
@@ -46,6 +45,10 @@ export function useFavoriteVideoContent(props: propsType) {
      * @param e 
      */
     function handleMouseUp(id: string, e: React.MouseEvent<HTMLDivElement>) {
+
+        if (e.button !== 0) {
+            return;
+        }
 
         const diffX = Math.abs(e.clientX - dragStartX.current);
         const diffY = Math.abs(e.clientY - dragStartY.current);

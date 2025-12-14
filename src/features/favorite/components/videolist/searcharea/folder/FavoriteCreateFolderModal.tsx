@@ -3,6 +3,7 @@ import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
 import { FavoriteCreateFolder } from "./FavoriteCreateFolder";
 
@@ -21,12 +22,24 @@ const IconAreaDiv = styled.div`
 
 const TitleSpan = styled.span`
   color: #9e9e9e;
-  font-size: 14px;
   &:hover {
     cursor: pointer;
   }
   white-space: nowrap;
   margin-right: 1%;
+  font-size: 12px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 12px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 14px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 14px;
+  }
 `;
 
 /**

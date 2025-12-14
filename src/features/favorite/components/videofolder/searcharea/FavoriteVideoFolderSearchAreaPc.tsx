@@ -23,7 +23,7 @@ const FirstRowDiv = styled.div`
   flex-wrap: wrap;
 `;
 
-const SecondRowDiv = styled.div`
+const OperationRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
@@ -33,18 +33,12 @@ const SecondRowDiv = styled.div`
   margin-top: 40px;
 `;
 
-const ThirdRowDiv = styled.div`
-  width: 100%;
-  display:flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 8%;
-  flex-wrap: wrap;
+const TagRowDiv = styled(OperationRowDiv)`
+  margin-top: 20px;
 `;
 
 const FolderNameSpan = styled.span`
-  font-size: 24px;
+  font-size: 25px;
   margin-right: 35px;
 `;
 
@@ -86,7 +80,7 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
       </FirstRowDiv>
-      <SecondRowDiv>
+      <OperationRowDiv>
         {/* タイトルフィルター */}
         <FavoriteVideoFolderSearchText
           width="85%"
@@ -95,11 +89,11 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         <FavoriteVideoFolderSearchSortArea />
         {/* フィルター */}
         <FavoriteVideoFolderSearchFilterModal />
-      </SecondRowDiv>
-      <ThirdRowDiv>
+      </OperationRowDiv>
+      <TagRowDiv>
         {/* 選択中のタグ */}
         <FavoriteVideoFolderSearchSelectedTag />
-      </ThirdRowDiv>
+      </TagRowDiv>
     </React.Fragment>
   );
 }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Pagenation } from "../../../../../components/Pagenation";
-import { useFavoriteVideoAreaFooter } from "../../../hooks/videolist/videoarea/useFavoriteVideoAreaFooter";
 import { useFavoriteVideoFolderAreaFooter } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderAreaFooter";
 
 const Parent = styled.div`
@@ -20,11 +19,14 @@ export function FavoriteVideoFolderAreaFooter() {
 
     return (
         <Parent>
-            <Pagenation
-                changePage={changePage}
-                totalPage={totalPage}
-                selectedPage={selectPage}
-            />
+            {
+                totalPage > 1 &&
+                <Pagenation
+                    changePage={changePage}
+                    totalPage={totalPage}
+                    selectedPage={selectPage}
+                />
+            }
         </Parent>
     );
 }

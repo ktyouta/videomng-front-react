@@ -19,11 +19,14 @@ export function FavoriteVideoAreaFooter() {
 
     return (
         <Parent>
-            <Pagenation
-                changePage={changePage}
-                totalPage={totalPage}
-                selectedPage={selectPage}
-            />
+            {
+                totalPage > 1 &&
+                <Pagenation
+                    changePage={changePage}
+                    totalPage={totalPage}
+                    selectedPage={selectPage}
+                />
+            }
         </Parent>
     );
 }
