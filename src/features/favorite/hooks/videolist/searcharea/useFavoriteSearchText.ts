@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { DisplayVideoListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { useFavoriteVideoListEndpoint } from "../videoarea/useFavoriteVideoListEndpoint";
-import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
+import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
+import { useFavoriteVideoListEndpoint } from "../videoarea/useFavoriteVideoListEndpoint";
 
 export function useFavoriteSearchText() {
 
@@ -12,6 +11,8 @@ export function useFavoriteSearchText() {
     const [inputKeyword, setInputKeyword] = useState(``);
     // 画面表示用の動画リスト(setter)
     const setDisplayVideoList = SetDisplayVideoListContext.useCtx();
+    // 画面表示用のフォルダリスト(setter)
+    const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
     // 動画一覧
     const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
         {
@@ -36,6 +37,7 @@ export function useFavoriteSearchText() {
         }
 
         setDisplayVideoList(data.item);
+        setDisplayFolderList(data.folder);
     }
 
 
@@ -51,19 +53,32 @@ export function useFavoriteSearchText() {
         // 入力欄が空の場合は動画情報をリセット
         if (!inputKeyword) {
             setDisplayVideoList(data.item);
+            setDisplayFolderList(data.folder);
             return;
         }
 
         setDisplayVideoList((e) => {
 
             // 入力したタイトルに一致する動画を取得
-            const filterdVideList = data.item.filter((e1) => {
+            const filterdVideoList = data.item.filter((e1) => {
 
                 const title = e1.snippet.title;
                 return title.includes(inputKeyword);
             });
 
-            return filterdVideList;
+            return filterdVideoList;
+        });
+
+        setDisplayFolderList((e) => {
+
+            // 入力したタイトルに一致する動画を取得
+            const filterdFolderList = data.folder.filter((e1) => {
+
+                const title = e1.name;
+                return title.includes(inputKeyword);
+            });
+
+            return filterdFolderList;
         });
     }
 
