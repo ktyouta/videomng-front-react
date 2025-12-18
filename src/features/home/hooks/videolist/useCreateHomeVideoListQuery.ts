@@ -1,9 +1,6 @@
-import { VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
-import ENV from "../../../../env.json";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { hasKey } from "../../../../utils/CommonFunction";
 import { SEARCH_CONDITION } from "../../const/HomeConst";
 import { useHomeVideoNowSearchConditionValue } from "../useHomeVideoNowSearchConditionValue";
-import { hasKey } from "../../../../utils/CommonFunction";
 
 
 // 更新用クエリ作成時の引数
@@ -28,7 +25,7 @@ export function useCreateHomeVideoListQuery() {
 
         // カテゴリ
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videocategory);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videoCategory);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, nowSearchCondition.category);
@@ -44,7 +41,7 @@ export function useCreateHomeVideoListQuery() {
 
         // 種別
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_TYPE)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, props.videotype);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, props.videoType);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, nowSearchCondition.type);
@@ -52,7 +49,7 @@ export function useCreateHomeVideoListQuery() {
 
         // 次データ取得トークン
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, props.nextpagetoken);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, props.nextPageToken);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_NEXT_PAGE_TOKEN, nowSearchCondition.nextPageToken);

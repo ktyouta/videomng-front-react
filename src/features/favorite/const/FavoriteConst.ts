@@ -64,15 +64,15 @@ export const FAVORITE_LEVEL_SETTING_LIST = 5;
 // 動画一覧の検索条件
 export const SEARCH_CONDITION = {
     // クエリパラメータのキー(視聴状況)
-    QUERY_KEY_VIEW_STATUS: `viewstatus`,
+    QUERY_KEY_VIEW_STATUS: `viewStatus`,
     // クエリパラメータのキー(カテゴリ)
-    QUERY_KEY_CATEGORY: `videocategory`,
+    QUERY_KEY_CATEGORY: `videoCategory`,
     // クエリパラメータのキー(タグ)
-    QUERY_KEY_TAG: `videotag`,
+    QUERY_KEY_TAG: `videoTag`,
     // クエリパラメータのキー(ソート)
-    QUERY_KEY_SORT: `sortkey`,
+    QUERY_KEY_SORT: `sortKey`,
     // クエリパラメータのキー(お気に入り度)
-    QUERY_KEY_FAVORITE_LEVEL: `favoritelevel`,
+    QUERY_KEY_FAVORITE_LEVEL: `favoriteLevel`,
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `page`,
     // クエリパラメータのキー(フォルダ)
@@ -82,15 +82,15 @@ export const SEARCH_CONDITION = {
 // フォルダ内動画一覧の検索条件
 export const FOLDER_SEARCH_CONDITION = {
     // クエリパラメータのキー(視聴状況)
-    QUERY_KEY_VIEW_STATUS: `folderViewstatus`,
+    QUERY_KEY_VIEW_STATUS: `folderViewStatus`,
     // クエリパラメータのキー(カテゴリ)
-    QUERY_KEY_CATEGORY: `folderVideocategory`,
+    QUERY_KEY_CATEGORY: `folderVideoCategory`,
     // クエリパラメータのキー(タグ)
-    QUERY_KEY_TAG: `folderVideotag`,
+    QUERY_KEY_TAG: `folderVideoTag`,
     // クエリパラメータのキー(お気に入り度)
-    QUERY_KEY_FAVORITE_LEVEL: `folderFavoritelevel`,
+    QUERY_KEY_FAVORITE_LEVEL: `folderFavoriteLevel`,
     // クエリパラメータのキー(ソート)
-    QUERY_KEY_SORT: `folderSortkey`,
+    QUERY_KEY_SORT: `folderSortKey`,
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `folderPage`,
 } as const;

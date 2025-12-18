@@ -79,7 +79,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            videocategory: selectedValues,
+            videoCategory: selectedValues,
             page: INIT_PAGE
         });
 
@@ -109,7 +109,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            viewstatus: selectedValues,
+            viewStatus: selectedValues,
             page: INIT_PAGE
         });
 
@@ -139,7 +139,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            videotag: selectedTagValues,
+            videoTag: selectedTagValues,
             page: INIT_PAGE
         });
 
@@ -168,7 +168,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            favoritelevel: selectedValues,
+            favoriteLevel: selectedValues,
             page: INIT_PAGE
         });
 

@@ -30,7 +30,7 @@ export function useFavoriteSearchSortArea() {
     function selectSort(value: string) {
 
         const newQuery = create({
-            sortkey: value,
+            sortKey: value,
             page: INIT_PAGE
         });
 

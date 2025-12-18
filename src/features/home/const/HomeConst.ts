@@ -61,11 +61,11 @@ export const SEARCH_CONDITION = {
     // クエリパラメータのキー(検索キーワード)
     QUERY_KEY_KEYWORD: `q`,
     // クエリパラメータのキー(カテゴリ)
-    QUERY_KEY_CATEGORY: `videocategory`,
+    QUERY_KEY_CATEGORY: `videoCategory`,
     // クエリパラメータのキー(種別)
-    QUERY_KEY_TYPE: `videotype`,
+    QUERY_KEY_TYPE: `videoType`,
     // クエリパラメータのキー(次データ取得用トークン)
-    QUERY_KEY_NEXT_PAGE_TOKEN: `nextpagetoken`
+    QUERY_KEY_NEXT_PAGE_TOKEN: `nextPageToken`
 } as const;
 
 // 検索条件一式をURLクエリで保持するためのキー

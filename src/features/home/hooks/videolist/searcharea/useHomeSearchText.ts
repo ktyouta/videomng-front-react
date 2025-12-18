@@ -1,13 +1,10 @@
-import useSwitch from "../../../../../hooks/useSwitch";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
+import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
+import { useCreateHomeVideoListQuery } from "../useCreateHomeVideoListQuery";
+import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
 import { useFrequentKeywords } from "../videoarea/default/useFrequentKeywords";
 import { useRecentKeyword } from "../videoarea/default/useRecentKeyword";
-import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
-import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
-import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
-import { toast } from "react-toastify";
-import { useCreateHomeVideoListQuery } from "../useCreateHomeVideoListQuery";
-import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
 
 
 export function useHomeSearchText() {
@@ -52,9 +49,9 @@ export function useHomeSearchText() {
 
         const newQuery = create({
             q: inputKeyword,
-            videocategory: selectedVideoCategory,
-            videotype: selectedVideoType,
-            nextpagetoken: ``,
+            videoCategory: selectedVideoCategory,
+            videoType: selectedVideoType,
+            nextPageToken: ``,
         });
 
         // クエリパラメータを更新

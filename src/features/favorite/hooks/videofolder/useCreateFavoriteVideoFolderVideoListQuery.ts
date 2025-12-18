@@ -32,7 +32,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         // カテゴリ
         if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.folderVideocategory);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.folderVideoCategory);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
@@ -40,7 +40,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         // 視聴状況
         if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.folderViewstatus);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.folderViewStatus);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
@@ -48,7 +48,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         // タグ
         if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.folderVideotag);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.folderVideoTag);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
@@ -56,7 +56,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         // ソート
         if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.folderSortkey);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.folderSortKey);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
@@ -64,7 +64,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         // お気に入り度
         if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.folderFavoritelevel);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.folderFavoriteLevel);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);

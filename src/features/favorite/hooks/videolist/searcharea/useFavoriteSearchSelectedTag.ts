@@ -24,7 +24,7 @@ export function useFavoriteSearchSelectedTag() {
         const newTagValue = tagList.filter((e) => e !== value).join(`,`);
 
         const newQuery = create({
-            videotag: newTagValue,
+            videoTag: newTagValue,
             page: INIT_PAGE
         });
 

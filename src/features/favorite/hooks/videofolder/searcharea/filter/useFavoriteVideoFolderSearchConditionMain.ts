@@ -78,7 +78,7 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderVideocategory: selectedValues,
+            folderVideoCategory: selectedValues,
             folderPage: INIT_PAGE
         });
 
@@ -108,7 +108,7 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderViewstatus: selectedValues,
+            folderViewStatus: selectedValues,
             folderPage: INIT_PAGE
         });
 
@@ -138,7 +138,7 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderVideotag: selectedTagValues,
+            folderVideoTag: selectedTagValues,
             folderPage: INIT_PAGE
         });
 
@@ -167,7 +167,7 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderFavoritelevel: selectedValues,
+            folderFavoriteLevel: selectedValues,
             folderPage: INIT_PAGE
         });
 

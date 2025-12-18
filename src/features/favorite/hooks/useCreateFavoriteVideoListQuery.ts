@@ -31,7 +31,7 @@ export function useCreateFavoriteVideoListQuery() {
 
         // カテゴリ
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videocategory);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.videoCategory);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
@@ -39,7 +39,7 @@ export function useCreateFavoriteVideoListQuery() {
 
         // 視聴状況
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.viewstatus);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.viewStatus);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
@@ -47,7 +47,7 @@ export function useCreateFavoriteVideoListQuery() {
 
         // タグ
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_TAG)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TAG, props.videotag);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TAG, props.videoTag);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
@@ -55,7 +55,7 @@ export function useCreateFavoriteVideoListQuery() {
 
         // ソート
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_SORT)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, props.sortkey);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, props.sortKey);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
@@ -63,7 +63,7 @@ export function useCreateFavoriteVideoListQuery() {
 
         // お気に入り度
         if (hasKey(props, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
-            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.favoritelevel);
+            queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.favoriteLevel);
         }
         else {
             queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
