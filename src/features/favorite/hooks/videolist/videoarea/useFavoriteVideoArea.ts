@@ -1,22 +1,14 @@
-import { useAtom, useAtomValue } from "jotai";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
+import { DragEndEvent } from "@dnd-kit/core";
+import { toast } from "react-toastify";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json"
-import { useState } from "react";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
-import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
-import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
+import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { callApi } from "../../../../../utils/callApi";
 import { DisplayFolderListContext, DisplayVideoListContext, SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
-import { DragEndEvent } from "@dnd-kit/core";
-import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
-import { toast } from "react-toastify";
-import { getFavoriteVideoFolderEndpoint } from "../../../utils/endpoint";
-import { callApi } from "../../../../../utils/callApi";
+import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { FolderType } from "../../../types/videolist/FolderType";
+import { getFavoriteVideoFolderEndpoint } from "../../../utils/endpoint";
+import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 
 export function useFavoriteVideoArea() {
@@ -122,7 +114,13 @@ export function useFavoriteVideoArea() {
                     return newList;
                 });
 
-                toast.success(`フォルダに登録しました。`);
+                let folderName = ``;
+
+                if (!Number.isNaN(folderId)) {
+                    folderName = displayFolderList.find((e) => e.folderId === parseInt(folderId))?.name || ``;
+                }
+
+                toast.success(`${folderName}フォルダに登録しました。`);
             },
             // 失敗後の処理
             onError: (res: unknown) => {
