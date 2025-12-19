@@ -1,14 +1,12 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { FAVORITE_KEYWORD } from "../../../../const/HomeConst";
 import { useEffect, useState } from "react";
-import { useFrequentKeywords } from "./useFrequentKeywords";
-import { useRecentKeyword } from "./useRecentKeyword";
-import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
-import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
-import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
-import { useNavigate } from "react-router-dom";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { nowSearchConditionType } from "../../../../components/HomeVideoNowSearchConditionValueProvider";
+import { FAVORITE_KEYWORD } from "../../../../const/HomeConst";
+import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
+import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
+import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
+import { useFrequentKeywords } from "./useFrequentKeywords";
+import { useRecentKeyword } from "./useRecentKeyword";
 
 export function useHomeFavoriteKeywords() {
 
@@ -59,8 +57,8 @@ export function useHomeFavoriteKeywords() {
 
         const newQuery = create({
             q: keyword,
-            videocategory: selectedVideoCategory,
-            videotype: selectedVideoType
+            videoCategory: selectedVideoCategory,
+            videoType: selectedVideoType
         });
 
         // クエリパラメータを更新

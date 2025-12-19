@@ -1,10 +1,7 @@
-import React from "react";
-import { HomeSearchArea } from "./searcharea/HomeSearchArea";
-import { HomeVideoArea } from "./videoarea/HomeVideoArea";
 import styled from "styled-components";
 import { HomeVideoSearchConditionValueProvider } from "./HomeVideoSearchConditionValueProvider";
-import { HomeVideoAreaDefault } from "./videoarea/default/HomeVideoAreaDefault";
-import { useHomeVideoList } from "../../hooks/videolist/useHomeVideoList";
+import { HomeSearchArea } from "./searcharea/HomeSearchArea";
+import { HomeVideoArea } from "./videoarea/HomeVideoArea";
 
 
 const Parent = styled.div`
@@ -14,8 +11,6 @@ const Parent = styled.div`
 export function HomeVideoList() {
 
     console.log("HomeVideoList render");
-
-    useHomeVideoList();
 
     return (
         <HomeVideoSearchConditionValueProvider>

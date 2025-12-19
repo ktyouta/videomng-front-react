@@ -1,13 +1,11 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { REACENT_KEYWORD } from "../../../../const/HomeConst";
 import { useEffect, useState } from "react";
-import { useFrequentKeywords } from "./useFrequentKeywords";
-import { useRecentKeyword } from "./useRecentKeyword";
-import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
+import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
+import { REACENT_KEYWORD } from "../../../../const/HomeConst";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
-import { useNavigate } from "react-router-dom";
-import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
+import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
+import { useFrequentKeywords } from "./useFrequentKeywords";
+import { useRecentKeyword } from "./useRecentKeyword";
 
 export function useHomeRecentKeywords() {
 
@@ -59,8 +57,8 @@ export function useHomeRecentKeywords() {
 
         const newQuery = create({
             q: keyword,
-            videocategory: selectedVideoCategory,
-            videotype: selectedVideoType
+            videoCategory: selectedVideoCategory,
+            videoType: selectedVideoType
         });
 
         // クエリパラメータを更新

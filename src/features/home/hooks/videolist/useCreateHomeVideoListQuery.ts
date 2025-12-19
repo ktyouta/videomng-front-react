@@ -66,9 +66,9 @@ export function useCreateHomeVideoListQuery() {
 
         let queryParam = ``;
 
-        queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, nowSearchCondition.category);
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_KEYWORD, nowSearchCondition.keyword);
         queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_TYPE, nowSearchCondition.type);
+        queryParam = appendQuery(queryParam, SEARCH_CONDITION.QUERY_KEY_CATEGORY, nowSearchCondition.category);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;

@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useHomeSearchArea } from "../../../hooks/videolist/searcharea/useHomeSearchArea";
 import { HomeSearchConditionModal } from "./HomeSearchConditionModal";
 import { HomeSearchText } from "./HomeSearchText";
 
@@ -39,6 +39,8 @@ const Parent = styled.div`
 export function HomeSearchArea() {
 
   console.log("HomeSearchArea render");
+
+  useHomeSearchArea();
 
   return (
     <Parent>

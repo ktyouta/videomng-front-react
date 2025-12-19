@@ -1,10 +1,10 @@
 import {
+    InputKeywordContext,
     SelectedVideoCategoryContext,
     SelectedVideoTypeContext,
+    SetInputKeywordContext,
     SetSelectedVideoCategoryContext,
-    SetSelectedVideoTypeContext,
-    InputKeywordContext,
-    SetInputKeywordContext
+    SetSelectedVideoTypeContext
 } from "../../components/videolist/HomeVideoSearchConditionValueProvider";
 
 
@@ -23,6 +23,15 @@ export function useHomeVideoSearchConditionValue() {
     // 動画一覧検索条件選択値(種別) setter
     const setSelectedVideoType = SetSelectedVideoTypeContext.useCtx();
 
+    /**
+     * 入力値をリセット
+     */
+    function resetInput() {
+        setSelectedVideoCategory(``);
+        setInputKeyword(``);
+        setSelectedVideoType(``);
+    }
+
     return {
         selectedVideoCategory,
         setSelectedVideoCategory,
@@ -30,5 +39,6 @@ export function useHomeVideoSearchConditionValue() {
         setInputKeyword,
         selectedVideoType,
         setSelectedVideoType,
+        resetInput,
     };
 }
