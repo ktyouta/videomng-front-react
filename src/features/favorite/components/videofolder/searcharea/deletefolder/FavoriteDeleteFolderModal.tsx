@@ -3,10 +3,10 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { Icon } from "../../../../../../components/Icon";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
-import { ModalPortalConfirm } from "../../../../../../components/ModalPortalConfirm";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
 import { FavoriteDeleteFolder } from "./FavoriteDeleteFolder";
+import { FavoriteDeleteFolderConfirmModal } from "./FavoriteDeleteFolderConfirmModal";
 
 
 const TitleSpan = styled.span`
@@ -88,15 +88,15 @@ export function FavoriteDeleteFolderModal() {
                     clickDelete={clickDelete}
                 />
             </ModalPortal>
-            {/* フォルダ削除最終確認モーダル */}
-            <ModalPortalConfirm
-                isOpenModal={isOpenConfirmModal}
-                closeModal={closeConfirmModal}
-                titleMessage={<React.Fragment>
-                    「フォルダ内の動画をお気に入りから削除する」が有効です。<br />このフォルダを削除すると、お気に入り一覧からも動画が削除されます。削除してもよろしいですか？
-                </React.Fragment>}
-                clickOk={execute}
-            />
+            {
+                isOpenConfirmModal &&
+                // フォルダ削除最終確認モーダル
+                <FavoriteDeleteFolderConfirmModal
+                    isOpenModal={isOpenConfirmModal}
+                    closeConfirmModal={closeConfirmModal}
+                    execute={execute}
+                />
+            }
         </React.Fragment>
     );
 }

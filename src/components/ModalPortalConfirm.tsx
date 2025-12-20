@@ -1,13 +1,10 @@
+import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
-import { useConfirmModalComponent } from "../hooks/useConfirmModalComponent";
-import { FlexSpaceDiv } from "../styles/styledcomponent/FlexSpaceDiv";
-import { IconComponent } from "./IconComponent";
-import ButtonComponent from "./ButtonComponent";
-import React, { CSSProperties, ReactNode } from "react";
-import { OverlayDiv } from "../styles/styledcomponent/OverlayDiv";
-import { ModalPortal } from "./ModalPortal";
-import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
+import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
+import { FlexSpaceDiv } from "../styles/styledcomponent/FlexSpaceDiv";
+import ButtonComponent from "./ButtonComponent";
+import { ModalPortal } from "./ModalPortal";
 
 
 const Parent = styled.div`
@@ -51,9 +48,9 @@ type propsType = {
 export function ModalPortalConfirm(props: propsType) {
 
     // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
-    const modalWidth = isMobile ? "82%" : "29%";
+    const modalWidth = isPcLess ? "82%" : "29%";
 
     return (
         <ModalPortal

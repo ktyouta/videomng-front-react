@@ -22,3 +22,9 @@ export function favoriteVideoFolderId(props: {
 
     return endpoint;
 }
+
+export function folderShareVideosEndpoint(folderId: string) {
+
+    const endpoint = folderId ? `${VIDEO_MNG_PATH}${ENV.FOLDER_SHARE_VIDEOS}`.replace(`:folderId`, folderId) : ``;
+    return endpoint;
+}
