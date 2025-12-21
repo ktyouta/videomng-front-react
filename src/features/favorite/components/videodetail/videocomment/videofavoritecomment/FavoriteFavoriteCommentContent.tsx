@@ -1,13 +1,12 @@
-import styled from "styled-components";
 import { format } from "date-fns";
-import { FavoriteCommentBlockIconArea } from "../FavoriteCommentBlockIconArea";
-import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
-import { useFavoriteBlockCommentContent } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentContent";
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
-import { FavoriteVideoBlockCommentListResponseType } from "../../../../types/videodetail/videocomment/videoblockcomment/FavoriteVideoBlockCommentListResponseType";
 import parse from "html-react-parser";
-import { FavoriteFavoriteCommentDeleteIconArea } from "./FavoriteFavoriteCommentDeleteIconArea";
+import { IoIosThumbsUp } from "react-icons/io";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../../components/IconComponent";
+import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { useFavoriteFavoriteCommentContent } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentContent";
+import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
+import { FavoriteFavoriteCommentDeleteIconArea } from "./FavoriteFavoriteCommentDeleteIconArea";
 
 
 const Parent = styled.div`
@@ -33,13 +32,27 @@ const LowerDiv = styled.div`
     height: 33px;
     align-items: center;
     padding-right: 3px;
+    margin-top: 7px;
 `;
 
-const MetaDiv = styled.div`
+const PublishedDateSpan = styled.span`
     font-size:13px;
-    flex: 1;
+    display: inline-block;
+    margin-right: 10px;
+    word-break: break-word;
+`;
+
+const LikeCountSpan = styled.span`
+    font-size:13px;
     display: flex;
     align-items: center;
+    word-break: break-word;
+`;
+
+const LikeCountAraeDiv = styled.div`
+    display: flex;
+    align-items: center;
+    word-break: break-word;
 `;
 
 type propsType = {
@@ -63,6 +76,8 @@ export function FavoriteFavoriteCommentContent(props: propsType) {
     const publishedDate = format(new Date(snippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
     const authorDisplayName = snippet.authorDisplayName;
+    // 高評価数
+    const likeCount = snippet.likeCount;
 
     return (
         <Parent>
@@ -74,9 +89,18 @@ export function FavoriteFavoriteCommentContent(props: propsType) {
                 {parentCommentText}
             </CommentDiv>
             <LowerDiv>
-                <MetaDiv>
+                <PublishedDateSpan>
                     {publishedDate}
-                </MetaDiv>
+                </PublishedDateSpan>
+                <LikeCountAraeDiv>
+                    <IconComponent
+                        icon={IoIosThumbsUp}
+                    />
+                    <LikeCountSpan>
+                        {likeCount}
+                    </LikeCountSpan>
+                </LikeCountAraeDiv>
+                <FlexSpaceDiv />
                 {/* 削除 */}
                 <FavoriteFavoriteCommentDeleteIconArea
                     deleteComment={() => {

@@ -1,11 +1,12 @@
-import styled from "styled-components";
 import { format } from "date-fns";
-import { FavoriteCommentBlockIconArea } from "./FavoriteCommentBlockIconArea";
 import parse from "html-react-parser";
+import { IoIosThumbsUp } from "react-icons/io";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
-import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
-
 
 const Parent = styled.div`
     height: auto;
@@ -28,16 +29,28 @@ const LowerDiv = styled.div`
     overflow-wrap: break-word;
     align-items: center;
     padding-right: 1%;
+    margin-top: 7px;
 `;
 
-const MetaDiv = styled.div`
+const PublishedDateSpan = styled.span`
     font-size:13px;
-    flex:1;
+    display: inline-block;
+    margin-right: 10px;
+    word-break: break-word;
+`;
+
+const LikeCountSpan = styled.span`
+    font-size:13px;
     display: flex;
     align-items: center;
     word-break: break-word;
 `;
 
+const LikeCountAraeDiv = styled.div`
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+`;
 
 type propsType = {
     favoriteVideoComment: FavoriteVideoCommentThreadItemType,
@@ -67,6 +80,8 @@ export function FavoriteCommentContent(props: propsType) {
     const replys = favoriteVideoComment.replies;
     // 返信コメントの詳細情報
     const replyCommentList = replys?.comments;
+    // 高評価数
+    const likeCount = snippet.topLevelComment.snippet.likeCount;
 
     return (
         <Parent>
@@ -78,9 +93,18 @@ export function FavoriteCommentContent(props: propsType) {
                 {parentCommentText}
             </CommentDiv>
             <LowerDiv>
-                <MetaDiv>
+                <PublishedDateSpan>
                     {publishedDate}
-                </MetaDiv>
+                </PublishedDateSpan>
+                <LikeCountAraeDiv>
+                    <IconComponent
+                        icon={IoIosThumbsUp}
+                    />
+                    <LikeCountSpan>
+                        {likeCount}
+                    </LikeCountSpan>
+                </LikeCountAraeDiv>
+                <FlexSpaceDiv />
                 {/* アイコンエリア */}
                 <FavoriteCommentContentIconArea
                     commentId={commentId}

@@ -1,6 +1,9 @@
-import styled from "styled-components";
-import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
 import { format } from "date-fns";
+import { IoIosThumbsUp } from "react-icons/io";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
 import { HomeReplyCommentList } from "./HomeReplyCommentList";
 
 
@@ -23,13 +26,27 @@ const LowerDiv = styled.div`
     display:flex;
     text-align: left;
     overflow-wrap: break-word;
+    margin-top: 7px;
 `;
 
-const MetaDiv = styled.div`
+const PublishedDateSpan = styled.span`
     font-size:13px;
-    width:95%;
+    display: inline-block;
+    margin-right: 10px;
+    word-break: break-word;
+`;
+
+const LikeCountSpan = styled.span`
+    font-size:13px;
     display: flex;
     align-items: center;
+    word-break: break-word;
+`;
+
+const LikeCountAraeDiv = styled.div`
+    display: flex;
+    align-items: center;
+    word-break: break-word;
 `;
 
 
@@ -57,6 +74,8 @@ export function HomeCommentContent(props: propsType) {
     const replys = homeVideoComment.replies;
     // 返信コメントの詳細情報
     const replyCommentList = replys?.comments;
+    // 高評価数
+    const likeCount = snippet.topLevelComment.snippet.likeCount;
 
     return (
         <Parent>
@@ -68,9 +87,18 @@ export function HomeCommentContent(props: propsType) {
                 {parentCommentText}
             </CommentDiv>
             <LowerDiv>
-                <MetaDiv>
+                <PublishedDateSpan>
                     {publishedDate}
-                </MetaDiv>
+                </PublishedDateSpan>
+                <LikeCountAraeDiv>
+                    <IconComponent
+                        icon={IoIosThumbsUp}
+                    />
+                    <LikeCountSpan>
+                        {likeCount}
+                    </LikeCountSpan>
+                </LikeCountAraeDiv>
+                <FlexSpaceDiv />
             </LowerDiv>
             {
                 // 返信コメント

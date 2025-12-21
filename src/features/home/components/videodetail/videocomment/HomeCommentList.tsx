@@ -1,10 +1,9 @@
+import React from "react";
 import styled from "styled-components";
-import LoadingBase from "../../../../../components/LoadingBase";
+import Loading from "../../../../../components/Loading";
 import { useHomeCommentList } from "../../../hooks/videodetail/videocomment/useHomeCommentList";
 import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
 import { HomeCommentContent } from "./HomeCommentContent";
-import Loading from "../../../../../components/Loading";
-import React from "react";
 
 
 const Parent = styled.div`
@@ -126,7 +125,6 @@ export function HomeCommentList() {
                                             </React.Fragment>
                                         }
                                     </React.Fragment>
-
                                 )
                             })
                         }
