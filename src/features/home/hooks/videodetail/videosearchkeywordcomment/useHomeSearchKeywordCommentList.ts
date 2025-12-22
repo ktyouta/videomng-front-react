@@ -1,11 +1,10 @@
 import { useState } from "react";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { SearchKeywordCommentResponseType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
-import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
-import { useHomeSearchKeywordCommentEndpoint } from "./useHomeSearchKeywordCommentEndpoint";
 import { SearchKeywordContext, SetSearchKeywordContext } from "../../../components/videodetail/videosearchkeywordcomment/HomeSearchKeywordComment";
-import { useParams } from "react-router-dom";
+import { SearchKeywordCommentResponseDataType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseDataType";
+import { SearchKeywordCommentResponseType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
 import { useVideoId } from "../useVideoId";
+import { useHomeSearchKeywordCommentEndpoint } from "./useHomeSearchKeywordCommentEndpoint";
 
 
 export function useHomeSearchKeywordCommentList() {
@@ -21,7 +20,7 @@ export function useHomeSearchKeywordCommentList() {
 
 
     // コメント情報を取得
-    const { data: searchCommentList, isLoading } = useQueryWrapper<SearchKeywordCommentResponseType, SearchKeywordCommentType[]>(
+    const { data: searchCommentData, isLoading } = useQueryWrapper<SearchKeywordCommentResponseType, SearchKeywordCommentResponseDataType>(
         {
             url: useHomeSearchKeywordCommentEndpoint({
                 videoId,
@@ -39,7 +38,7 @@ export function useHomeSearchKeywordCommentList() {
 
     return {
         isLoading,
-        searchCommentList,
+        searchCommentData,
         errMessage,
     }
 }

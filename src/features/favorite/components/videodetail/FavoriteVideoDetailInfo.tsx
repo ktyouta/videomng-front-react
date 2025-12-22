@@ -1,15 +1,11 @@
-import React from "react";
-import { useFavoriteVideoDetail } from "../../hooks/videodetail/useFavoriteVideoDetail";
-import LoadingBase from "../../../../components/LoadingBase";
+import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import ButtonComponent from "../../../../components/ButtonComponent";
-import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
-import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
-import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
-import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../../../components/IconComponent";
-import { MEDIA } from "../../../../consts/MediaConst";
 import { ModalPortalConfirm } from "../../../../components/ModalPortalConfirm";
+import { MEDIA } from "../../../../consts/MediaConst";
+import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
+import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -111,7 +107,9 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": isMobile ? "7%" : "10%",
-                        "display": "block",
+                        "display": "flex",
+                        "alignItems": "center",
+                        "justifyContent": "center",
                     }}
                 >
                     <BtnDiv>

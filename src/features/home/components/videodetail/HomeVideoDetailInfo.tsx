@@ -1,14 +1,12 @@
 import React from "react";
-import LoadingBase from "../../../../components/LoadingBase";
+import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import ButtonComponent from "../../../../components/ButtonComponent";
-import { YouTubeDataApiVideoDetailItemType } from "../../types/videodetail/YouTubeDataApiVideoDetailItemType";
-import { MdPlayArrow } from 'react-icons/md';
 import { IconComponent } from "../../../../components/IconComponent";
-import { useHomeVideoDetailInfo } from "../../hooks/videodetail/useHomeVideoDetailInfo";
-import { VideoDetailItemType } from "../../types/videodetail/VideoDetailItemType";
 import { FLG } from "../../../../consts/CommonConst";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { useHomeVideoDetailInfo } from "../../hooks/videodetail/useHomeVideoDetailInfo";
+import { VideoDetailItemType } from "../../types/videodetail/VideoDetailItemType";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -111,7 +109,9 @@ export function HomeVideoDetailInfo(props: propsType) {
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": isMobile ? "7%" : "10%",
-                        "display": "block",
+                        "display": "flex",
+                        "alignItems": "center",
+                        "justifyContent": "center",
                     }}
                 >
                     <BtnDiv>

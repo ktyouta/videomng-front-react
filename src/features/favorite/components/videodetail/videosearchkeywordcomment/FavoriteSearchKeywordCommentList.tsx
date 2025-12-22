@@ -1,12 +1,8 @@
 import styled from "styled-components";
-import { useFavoriteMemoList } from "../../../hooks/videodetail/videomemo/useFavoriteMemoList";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../videomemo/FavoriteMemoContent";
-import LoadingBase from "../../../../../components/LoadingBase";
-import { FavoriteSearchKeywordCommentContent } from "./FavoriteSearchKeywordCommentContent";
+import Loading from "../../../../../components/Loading";
 import { useFavoriteSearchKeywordCommentList } from "../../../hooks/videodetail/videosearchkeywordcomment/useFavoriteSearchKeywordCommentList";
 import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
-import Loading from "../../../../../components/Loading";
+import { FavoriteSearchKeywordCommentContent } from "./FavoriteSearchKeywordCommentContent";
 
 
 const Parent = styled.div`
@@ -35,6 +31,9 @@ const CommentListAreaDiv = styled.div`
   padding: 0 20px 0 9px;
 `;
 
+const TotalCountDiv = styled.div`
+  margin-bottom: 12px;
+`;
 
 export function FavoriteSearchKeywordCommentList() {
 
@@ -42,7 +41,7 @@ export function FavoriteSearchKeywordCommentList() {
 
     const {
         isLoading,
-        searchCommentList,
+        searchCommentData,
         errMessage, } = useFavoriteSearchKeywordCommentList();
 
     if (isLoading) {
@@ -61,6 +60,9 @@ export function FavoriteSearchKeywordCommentList() {
         );
     }
 
+    const totalCount = searchCommentData?.totalCount;
+    const searchCommentList = searchCommentData?.items
+
     return (
         <Parent>
             {
@@ -69,6 +71,9 @@ export function FavoriteSearchKeywordCommentList() {
                     :
                     searchCommentList.length > 0 ?
                         <CommentListAreaDiv>
+                            <TotalCountDiv>
+                                全{totalCount}件
+                            </TotalCountDiv>
                             {
                                 searchCommentList.map((e: SearchKeywordCommentType) => {
 

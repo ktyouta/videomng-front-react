@@ -1,10 +1,8 @@
-import { FavoriteVideoDetailDataType } from "../FavoriteVideoDetailDataType";
-import { SearchKeywordCommentType } from "./SearchKeywordCommentType";
-import { YouTubeDataApiVideoDetailItemType } from "../YouTubeDataApiVideoDetailItemType";
+import { SearchKeywordCommentResponseDataType } from "./SearchKeywordCommentResponseDataType";
 
 export type SearchKeywordCommentResponseType = {
 
     readonly status: number,
     readonly message: string,
-    readonly data: SearchKeywordCommentType[],
+    readonly data: SearchKeywordCommentResponseDataType,
 }

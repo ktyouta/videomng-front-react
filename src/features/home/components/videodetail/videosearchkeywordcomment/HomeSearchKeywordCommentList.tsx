@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import LoadingBase from "../../../../../components/LoadingBase";
+import Loading from "../../../../../components/Loading";
 import { useHomeSearchKeywordCommentList } from "../../../hooks/videodetail/videosearchkeywordcomment/useHomeSearchKeywordCommentList";
 import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
-import Loading from "../../../../../components/Loading";
 import { HomeSearchKeywordCommentContent } from "./HomeSearchKeywordCommentContent";
 
 
@@ -32,6 +31,9 @@ const CommentListAreaDiv = styled.div`
   padding: 0 20px 0 9px;
 `;
 
+const TotalCountDiv = styled.div`
+  margin-bottom: 12px;
+`;
 
 export function HomeSearchKeywordCommentList() {
 
@@ -39,7 +41,7 @@ export function HomeSearchKeywordCommentList() {
 
     const {
         isLoading,
-        searchCommentList,
+        searchCommentData,
         errMessage, } = useHomeSearchKeywordCommentList();
 
     if (isLoading) {
@@ -58,6 +60,9 @@ export function HomeSearchKeywordCommentList() {
         );
     }
 
+    const totalCount = searchCommentData?.totalCount;
+    const searchCommentList = searchCommentData?.items
+
     return (
         <Parent>
             {
@@ -66,6 +71,9 @@ export function HomeSearchKeywordCommentList() {
                     :
                     searchCommentList.length > 0 ?
                         <CommentListAreaDiv>
+                            <TotalCountDiv>
+                                全{totalCount}件
+                            </TotalCountDiv>
                             {
                                 searchCommentList.map((e: SearchKeywordCommentType) => {
 
