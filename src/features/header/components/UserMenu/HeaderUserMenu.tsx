@@ -28,6 +28,10 @@ export function HeaderUserMenu() {
                         size={isMobile ? "small" : "medium"}
                         style={{
                             boxShadow: "none",
+                            ...isMobile ? {
+                                padding: "8px 14px",
+                                fontSize: "10px",
+                            } : {}
                         }}
                     >
                         ログイン

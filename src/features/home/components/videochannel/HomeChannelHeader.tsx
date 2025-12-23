@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { ChannelInfoType } from "../../types/videochannel/ChannelInfoType";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { ChannelInfoType } from "../../types/videochannel/ChannelInfoType";
 
 const Parent = styled.div`
   width: 100%;
-  height: 92px;
   display:flex;
   align-items: center;
   box-sizing: border-box;
