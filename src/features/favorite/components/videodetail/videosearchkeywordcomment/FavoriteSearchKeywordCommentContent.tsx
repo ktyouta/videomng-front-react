@@ -1,14 +1,8 @@
-import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
 import { format } from "date-fns";
-import { useFavoriteMemoContent } from "../../../hooks/videodetail/videomemo/useFavoriteMemoContent";
-import React from "react";
-import { FavoriteMemoEditInput } from "../videomemo/FavoriteMemoEditInput";
-import { FavoriteMemoEditIconArea } from "../videomemo/FavoriteMemoEditIconArea";
-import { FavoriteMemoDeleteIconArea } from "../videomemo/FavoriteMemoDeleteIconArea";
-import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
-import { useFavoriteSearchKeywordCommentContent } from "../../../hooks/videodetail/videosearchkeywordcomment/useFavoriteSearchKeywordCommentContent";
+import styled from "styled-components";
 import { HighlightTextComponent } from "../../../../../components/HighlightTextComponent";
+import { useFavoriteSearchKeywordCommentContent } from "../../../hooks/videodetail/videosearchkeywordcomment/useFavoriteSearchKeywordCommentContent";
+import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
 import { FavoriteSearchKeywordContentIconArea } from "./FavoriteSearchKeywordContentIconArea";
 
 

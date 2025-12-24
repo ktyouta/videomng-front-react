@@ -15,6 +15,15 @@ const Parent = styled.div`
 
 const AuthorNameDiv = styled.div`
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+`;
+
+const AuthorIconImg = styled.img`
+    border-radius: 50%;
+    width: 25px;
 `;
 
 const CommentDiv = styled.div`
@@ -76,11 +85,14 @@ export function HomeCommentContent(props: propsType) {
     const replyCommentList = replys?.comments;
     // 高評価数
     const likeCount = snippet.topLevelComment.snippet.likeCount;
+    // プロフィールアイコン
+    const profileIccon = snippet.topLevelComment.snippet.authorProfileImageUrl;
 
     return (
         <Parent>
             {/* 親コメント */}
             <AuthorNameDiv>
+                <AuthorIconImg src={profileIccon} />
                 {authorDisplayName}
             </AuthorNameDiv>
             <CommentDiv>
