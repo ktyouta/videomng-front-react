@@ -1,8 +1,8 @@
+import { format } from "date-fns";
 import styled from "styled-components";
 import { HighlightTextComponent } from "../../../../../components/HighlightTextComponent";
-import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
-import { format } from "date-fns";
 import { useHomeSearchKeywordCommentContent } from "../../../hooks/videodetail/videosearchkeywordcomment/useHomeSearchKeywordCommentContent";
+import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
 
 
 const Parent = styled.div`
@@ -14,6 +14,15 @@ const Parent = styled.div`
 
 const AuthorNameDiv = styled.div`
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+`;
+
+const AuthorIconImg = styled.img`
+    border-radius: 50%;
+    width: 25px;
 `;
 
 const CommentDiv = styled.div`
@@ -50,10 +59,12 @@ export function HomeSearchKeywordCommentContent(props: propsType) {
     const comment = data.textOriginal;
     const authorDisplayName = data.authorDisplayName;
     const publishedDate = format(new Date(data.publishedAt), "yyyy/MM/dd  HH:mm");
+    const profileIccon = data.authorProfileImageUrl;
 
     return (
         <Parent>
             <AuthorNameDiv>
+                <AuthorIconImg src={profileIccon} />
                 {authorDisplayName}
             </AuthorNameDiv>
             <CommentDiv>

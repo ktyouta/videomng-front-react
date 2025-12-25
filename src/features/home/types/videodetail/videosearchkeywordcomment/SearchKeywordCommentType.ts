@@ -1,4 +1,3 @@
-import { YouTubeDataApiVideoDetailItemType } from "../YouTubeDataApiVideoDetailItemType";
 
 export type SearchKeywordCommentType = {
 
@@ -12,4 +11,6 @@ export type SearchKeywordCommentType = {
     readonly commentId: string;
     // お気に入りステータス
     readonly favoriteStatus: string;
+    // コメント投稿者のプロフィール画像URL
+    readonly authorProfileImageUrl: string;
 }

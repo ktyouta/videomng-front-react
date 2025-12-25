@@ -15,6 +15,15 @@ const Parent = styled.div`
 
 const AuthorNameDiv = styled.div`
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+`;
+
+const AuthorIconImg = styled.img`
+    border-radius: 50%;
+    width: 25px;
 `;
 
 const CommentDiv = styled.div`
@@ -52,10 +61,12 @@ export function FavoriteSearchKeywordCommentContent(props: propsType) {
     const publishedDate = format(new Date(data.publishedAt), "yyyy/MM/dd  HH:mm");
     const commentId = data.commentId;
     const favoriteStatus = data.favoriteStatus;
+    const profileIccon = data.authorProfileImageUrl;
 
     return (
         <Parent>
             <AuthorNameDiv>
+                <AuthorIconImg src={profileIccon} />
                 {authorDisplayName}
             </AuthorNameDiv>
             <CommentDiv>
