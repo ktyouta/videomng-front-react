@@ -16,6 +16,15 @@ const Parent = styled.div`
 
 const AuthorNameDiv = styled.div`
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+`;
+
+const AuthorIconImg = styled.img`
+    border-radius: 50%;
+    width: 25px;
 `;
 
 const CommentDiv = styled.div`
@@ -82,10 +91,13 @@ export function FavoriteReplyCommentContent(props: propsType) {
     const favoriteStatus = commentThreadReply.favoriteStatus;
     // 高評価数
     const likeCount = commentThreadReplySnippet.likeCount;
+    // プロフィールアイコン
+    const profileIccon = commentThreadReplySnippet.authorProfileImageUrl;
 
     return (
         <Parent>
             <AuthorNameDiv>
+                <AuthorIconImg src={profileIccon} />
                 {authorDisplayName}
             </AuthorNameDiv>
             <CommentDiv>

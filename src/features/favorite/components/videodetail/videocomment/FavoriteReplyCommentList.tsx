@@ -1,8 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 import { useFavoriteReplyCommentList } from "../../../hooks/videodetail/videocomment/useFavoriteReplyCommentList";
-import React from "react";
-import { FavoriteReplyCommentContent } from "./FavoriteReplyCommentContent";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadReplyCommentType";
+import { FavoriteReplyCommentContent } from "./FavoriteReplyCommentContent";
 
 
 
@@ -10,6 +10,7 @@ const DisplayReplyDiv = styled.div`
     cursor:pointer;
     box-sizing: border-box;
     margin-top: 2%;
+    margin-bottom: 6px;
 `;
 
 const ReplyDiv = styled.div`
@@ -18,6 +19,13 @@ const ReplyDiv = styled.div`
     padding-left: 3%;
 `;
 
+const SwitchingSpan = styled.span`
+    cursor:pointer;
+    color: #2EA3F2;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
 
 type propsType = {
     replyCommentList: FavoriteVideoCommentThreadReplyCommentType[],
@@ -37,17 +45,17 @@ export function FavoriteReplyCommentList(props: propsType) {
             <DisplayReplyDiv>
                 {
                     isDisplayReply ?
-                        <span
+                        <SwitchingSpan
                             onClick={closeReply}
                         >
                             返信を閉じる
-                        </span>
+                        </SwitchingSpan>
                         :
-                        <span
+                        <SwitchingSpan
                             onClick={openReply}
                         >
                             返信を表示
-                        </span>
+                        </SwitchingSpan>
                 }
             </DisplayReplyDiv>
             {

@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import React from "react";
-import { HomeVideoCommentThreadReplyCommentType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadReplyCommentType";
+import styled from "styled-components";
 import { useHomeReplyCommentList } from "../../../hooks/videodetail/videocomment/useHomeReplyCommentList";
+import { HomeVideoCommentThreadReplyCommentType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadReplyCommentType";
 import { HomeReplyCommentContent } from "./HomeReplyCommentContent";
 
 
@@ -9,12 +9,21 @@ const DisplayReplyDiv = styled.div`
     cursor:pointer;
     box-sizing: border-box;
     margin-top: 2%;
+    margin-bottom: 6px;
 `;
 
 const ReplyDiv = styled.div`
     box-sizing: border-box;
     margin-top: 2%;
     padding-left: 3%;
+`;
+
+const SwitchingSpan = styled.span`
+    cursor:pointer;
+    color: #2EA3F2;
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 
@@ -36,17 +45,17 @@ export function HomeReplyCommentList(props: propsType) {
             <DisplayReplyDiv>
                 {
                     isDisplayReply ?
-                        <span
+                        <SwitchingSpan
                             onClick={closeReply}
                         >
                             返信を閉じる
-                        </span>
+                        </SwitchingSpan>
                         :
-                        <span
+                        <SwitchingSpan
                             onClick={openReply}
                         >
                             返信を表示
-                        </span>
+                        </SwitchingSpan>
                 }
             </DisplayReplyDiv>
             {
