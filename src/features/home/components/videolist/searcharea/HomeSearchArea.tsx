@@ -10,26 +10,18 @@ const Parent = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 3%;
-  padding-left: 4%;
   height: 36px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     height: 41px;
-    padding-right: 12%;
-    padding-left: 18%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     height: 41px;
-    padding-right: 12%;
-    padding-left: 18%;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     height: 41px;
-    padding-right: 12%;
-    padding-left: 18%;
   }
 `;
 

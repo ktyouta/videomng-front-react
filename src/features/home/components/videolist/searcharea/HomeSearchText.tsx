@@ -1,12 +1,6 @@
-import styled from "styled-components";
 import { IoSearch } from "react-icons/io5";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import { useHomeSearchText } from "../../../hooks/videolist/searcharea/useHomeSearchText";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
-import React from "react";
-import { IconBaseProps } from "react-icons";
+import { useHomeSearchText } from "../../../hooks/videolist/searcharea/useHomeSearchText";
 
 
 /**
@@ -31,13 +25,13 @@ export function HomeSearchText() {
       value={inputKeyword}
       onChange={setInputKeyword}
       placeholder="キーワード"
-      outerWidth="75%"
+      outerWidth="57%"
       outerMobileWidth="72%"
       iconWidth="47px"
       iconMobileWidth="38px"
       outerHeight="99%"
       style={{
-        marginRight: "3%"
+        marginRight: "30px"
       }}
     />
   );

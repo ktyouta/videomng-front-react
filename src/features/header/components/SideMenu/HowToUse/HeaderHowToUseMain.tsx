@@ -58,6 +58,12 @@ export function HeaderHowToUseMain() {
                     </StepSpan>
                     お気に入り登録後、「お気に入り」画面から設定の変更が可能です。
                 </MessageLi>
+                <MessageLi>
+                    <StepSpan>
+                        5
+                    </StepSpan>
+                    「お気に入り」画面でフォルダの作成ができます。フォルダを使うことで動画を目的ごとに整理し、より快適に管理できます。
+                </MessageLi>
             </MessageOl>
         </Parent>
     );

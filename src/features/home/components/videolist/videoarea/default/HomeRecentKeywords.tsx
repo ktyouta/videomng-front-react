@@ -1,39 +1,27 @@
-import React from "react";
 import styled from "styled-components";
-import { useHomeRecentKeywords } from "../../../../hooks/videolist/videoarea/default/useHomeRecentKeywords";
-import { RxCross1 } from "react-icons/rx";
-import { IconComponent } from "../../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../../consts/MediaConst";
+import { useHomeRecentKeywords } from "../../../../hooks/videolist/videoarea/default/useHomeRecentKeywords";
 import { HomeHistoryWord } from "./HomeHistoryWord";
 
 
 const Parent = styled.div`
   color:white;
   box-sizing: border-box;
-  margin-top: 8%;
-  padding-left: 23%;
-  width: 90%;
-  font-size: 13px;
+  width: 54%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 15px;
     display:flex;
     align-items: center;
-    margin-top: 3%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 17px;
     display:flex;
     align-items: center;
-    margin-top: 3%;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 17px;
     display:flex;
     align-items: center;
-    margin-top: 3%;
   }
 `;
 

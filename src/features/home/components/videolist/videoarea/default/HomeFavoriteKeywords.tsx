@@ -1,32 +1,25 @@
-import React from "react";
 import styled from "styled-components";
-import { useHomeFavoriteKeywords } from "../../../../hooks/videolist/videoarea/default/useHomeFavoriteKeywords";
 import { MEDIA } from "../../../../../../consts/MediaConst";
+import { useHomeFavoriteKeywords } from "../../../../hooks/videolist/videoarea/default/useHomeFavoriteKeywords";
 import { HomeHistoryWord } from "./HomeHistoryWord";
 
 
 const Parent = styled.div`
   color:white;
   box-sizing: border-box;
-  margin-top: 5%;
-  padding-left: 23%;
-  width: 90%;
-  font-size: 13px;
+  width: 54%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 15px;
     display:flex;
     align-items: center;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 17px;
     display:flex;
     align-items: center;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 17px;
     display:flex;
     align-items: center;
   }

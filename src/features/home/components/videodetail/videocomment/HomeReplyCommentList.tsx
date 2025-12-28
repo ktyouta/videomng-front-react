@@ -20,7 +20,7 @@ const ReplyDiv = styled.div`
 
 const SwitchingSpan = styled.span`
     cursor:pointer;
-    color: #2EA3F2;
+    color: #2563eb;
     &:hover {
         text-decoration: underline;
     }

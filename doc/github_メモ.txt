@@ -51,18 +51,15 @@ git push -f origin HEAD
 
 
 
-コミットメッセージの修正
-git commit –-amend
-上記コマンド入力後にメッセージを修正して保存する
-
-addの取り消し
-git reset HEAD file_name
-
-変更の破棄(addされていないファイル)
-git checkout file_name
-
-
 
 コミットメッセージの修正
 ①最新のコミットメッセージを修正: git commit --amend
 ②強制的にリモートへプッシュ: git push --force origin <ブランチ名>
+
+
+コミット取り消し + 修正してコミット
+①git reset --soft HEAD~1
+②ソース修正
+③git add .
+④git commit -m "修正後のコミット"
+⑤git push --force-with-lease
