@@ -1,4 +1,4 @@
-import { IsLoginContext } from "../../../../QueryApp";
+import { IsLoginContext } from "../../../../app/components/QueryApp";
 import { useGetNowPath } from "../useGetNowPath";
 
 export function useHeaderMenuUlPc() {

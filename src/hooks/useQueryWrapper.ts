@@ -1,6 +1,6 @@
 import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
-import axios from "axios";
-
+import { AccessTokenContext } from '../app/components/TokenProvider';
+import { api } from '../lib/apiClient';
 
 
 //引数の型
@@ -16,7 +16,7 @@ type propsType<TData, RData, PData> = {
     afSuccessFn?: (data: RData) => void,
     afErrorFn?: (res: unknown) => void,
     method?: methodType,
-    postData?: PData
+    postData?: PData,
 }
 
 //HTTPメソッド
@@ -28,15 +28,26 @@ const useQueryWrapper = <
     PData extends {} = {},
 >(props: propsType<TData, RData, PData>) => {
 
+    // アクセストークン
+    const accessToken = AccessTokenContext.useCtx();
+
     //GET
     const getQuery = async () => {
-        const { data } = await axios.get(props.url, { withCredentials: true });
+        const { data } = await api.get(props.url, {
+            headers: {
+                ...(accessToken && { Authorization: `${accessToken}` }),
+            }
+        });
         return data;
     }
 
     //POST
     const postQuery = async () => {
-        const { data } = await axios.post(props.url, props.postData ?? {}, { withCredentials: true },);
+        const { data } = await api.post(props.url, props.postData ?? {}, {
+            headers: {
+                ...(accessToken && { Authorization: `${accessToken}` }),
+            }
+        });
         return data;
     }
 

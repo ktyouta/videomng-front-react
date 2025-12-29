@@ -1,25 +1,17 @@
-import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useLocation } from "react-router-dom";
-import ENV from '../../../env.json';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { refType } from '../../../components/BaseTextbox';
-import useMutationWrapper from '../../../hooks/useMutationWrapper';
-import { errResType, resSchema, resType } from '../../../hooks/useMutationWrapperBase';
-import { useSetAtom } from 'jotai';
-import { useSetGlobalAtom } from '../../../hooks/useGlobalAtom';
-import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../../QueryApp';
-import { useCreateYearList } from '../../../hooks/useCreateYearList';
-import { UpdateUserInfoResponseType } from '../types/UpdateUserInfoResponseType';
-import { UpdateUserInfoRequestType } from '../types/UpdateUserInfoRequestType';
-import { LoginUserInfoType } from '../../../types/LoginUserInfoType';
-import { ROUTER_PATH } from '../../../consts/RouterPath';
-import useSwitch from '../../../hooks/useSwitch';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { LoginUserInfoContext, SetLoginUserInfoContext } from '../../../app/components/QueryApp';
 import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../../consts/CommonConst';
-import { useQueryParams } from '../../../hooks/useQueryParams';
-import { loginUserInfoSchema } from '../../login/schemas/loginUserInfoSchema';
+import { ROUTER_PATH } from '../../../consts/RouterPath';
+import ENV from '../../../env.json';
+import { useCreateYearList } from '../../../hooks/useCreateYearList';
+import useMutationWrapper from '../../../hooks/useMutationWrapper';
+import { errResType, resSchema } from '../../../hooks/useMutationWrapperBase';
+import useSwitch from '../../../hooks/useSwitch';
 import { getPrevPath } from '../../../utils/CommonFunction';
+import { loginResponseSchema } from '../../login/schemas/loginResponseSchema';
+import { UpdateUserInfoRequestType } from '../types/UpdateUserInfoRequestType';
 import { useUpdateUserInfoForm } from './useUpdateUserInfoForm';
 
 
@@ -53,7 +45,7 @@ export function useUpdateUserInfo() {
         afSuccessFn: (res: unknown) => {
 
             // レスポンスの型チェック
-            const resParsed = resSchema(loginUserInfoSchema).safeParse(res);
+            const resParsed = resSchema(loginResponseSchema).safeParse(res);
 
             if (!resParsed.success) {
                 toast.error(`ユーザー情報を更新できませんでした。時間をおいて再度お試しください。`);
@@ -61,10 +53,10 @@ export function useUpdateUserInfo() {
                 return;
             }
 
-            const loginUserInfo = resParsed.data.data;
+            const resData = resParsed.data.data;
 
             toast.success("ユーザー情報を更新しました。");
-            setLoginUserInfo(loginUserInfo);
+            setLoginUserInfo(resData.userInfo);
             navigate(prev);
         },
         // 失敗後の処理

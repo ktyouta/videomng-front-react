@@ -1,6 +1,4 @@
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { IsLoginContext } from "../../../../QueryApp";
-import { useGetNowPath } from "../useGetNowPath";
 
 export function useHeaderMenuUl() {
 

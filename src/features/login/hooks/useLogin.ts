@@ -1,22 +1,18 @@
-import React, { RefObject, useContext, useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from "react-router-dom";
-import ENV from '../../../env.json';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { refType } from '../../../components/BaseTextbox';
-import useMutationWrapper from '../../../hooks/useMutationWrapper';
-import { errResType, resSchema, resType } from '../../../hooks/useMutationWrapperBase';
-import { SetIsLoginContext, SetLoginUserInfoContext } from '../../../QueryApp';
-import { LoginUserInfoType } from '../../../types/LoginUserInfoType';
-import { ROUTER_PATH } from '../../../consts/RouterPath';
-import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../../consts/CommonConst';
-import { useQueryParams } from '../../../hooks/useQueryParams';
-import { useLoginForm } from './useLoginForm';
-import { LoginFormType } from '../types/LoginFormType';
-import { loginUserInfoSchema } from '../schemas/loginUserInfoSchema';
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { SetIsLoginContext, SetLoginUserInfoContext } from '../../../app/components/QueryApp';
+import { SetAccessTokenContext } from '../../../app/components/TokenProvider';
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../../consts/CommonConst';
+import { ROUTER_PATH } from '../../../consts/RouterPath';
+import ENV from '../../../env.json';
+import useMutationWrapper from '../../../hooks/useMutationWrapper';
+import { errResType, resSchema } from '../../../hooks/useMutationWrapperBase';
 import { getPrevPath } from '../../../utils/CommonFunction';
 import { SIGINUP_PATH_KEY } from '../../signup/const/SiginupConst';
+import { loginResponseSchema } from '../schemas/loginResponseSchema';
+import { LoginFormType } from '../types/LoginFormType';
+import { useLoginForm } from './useLoginForm';
 
 
 export function useLogin() {
@@ -35,6 +31,8 @@ export function useLogin() {
     const pathName = location.pathname;
     // 前画面のパスを取得
     const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
+    // アクセストークン(setter)
+    const setAccessToken = SetAccessTokenContext.useCtx();
 
     /**
      * ログインリクエスト
@@ -46,7 +44,7 @@ export function useLogin() {
         afSuccessFn: (res: unknown) => {
 
             // レスポンスの型チェック
-            const resParsed = resSchema(loginUserInfoSchema).safeParse(res);
+            const resParsed = resSchema(loginResponseSchema).safeParse(res);
 
             if (!resParsed.success) {
                 toast.error(`ログインできませんでした。時間をおいて再度お試しください。`);
@@ -54,9 +52,10 @@ export function useLogin() {
                 return;
             }
 
-            const loginUserInfo = resParsed.data.data;
+            const resData = resParsed.data.data;
 
-            setLoginUserInfo(loginUserInfo);
+            setLoginUserInfo(resData.userInfo);
+            setAccessToken(resData.accessToken);
             setIsLogin(true);
             navigate(prev);
         },

@@ -1,0 +1,59 @@
+import { useState } from 'react';
+import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from '../../consts/CommonConst';
+import ENV from "../../env.json";
+import { loginResponseSchema } from '../../features/login/schemas/loginResponseSchema';
+import { resSchema } from '../../hooks/useMutationWrapperBase';
+import useQueryWrapper from '../../hooks/useQueryWrapper';
+import { LoginUserInfoType } from '../../types/LoginUserInfoType';
+import { SetAccessTokenContext } from '../components/TokenProvider';
+
+
+function useQueryApp() {
+
+    // ログインフラグ
+    const [isLogin, setIsLogin] = useState(false);
+    // ログインユーザー情報
+    const [loginUserInfo, setLoginUserInfo] = useState<LoginUserInfoType>(LOGIN_USER_INFO_INIT);
+    // 認証チェック済みフラグ
+    const [isCheckedAuth, setIsCheckedAuth] = useState(false);
+    // アクセストークン(setter)
+    const setAccessToken = SetAccessTokenContext.useCtx();
+
+    // 認証チェック
+    useQueryWrapper(
+        {
+            url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_CHECK_AUTH}`,
+            afSuccessFn: (res: unknown) => {
+
+                // レスポンスの型チェック
+                const resParsed = resSchema(loginResponseSchema).safeParse(res);
+
+                if (!resParsed.success) {
+                    return;
+                }
+
+                const resData = resParsed.data.data;
+
+                setLoginUserInfo(resData.userInfo);
+                setAccessToken(resData.accessToken);
+                setIsLogin(true);
+                setIsCheckedAuth(true);
+            },
+            afErrorFn: (err) => {
+                setIsLogin(false);
+                setIsCheckedAuth(true);
+            }
+        }
+    );
+
+    return {
+        isLogin,
+        setIsLogin,
+        loginUserInfo,
+        setLoginUserInfo,
+        isCheckedAuth,
+        setIsCheckedAuth,
+    }
+}
+
+export default useQueryApp;

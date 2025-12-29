@@ -1,8 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { useGlobalAtomValue } from "../../../../hooks/useGlobalAtom";
-import { IsLoginContext } from "../../../../QueryApp";
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { IsLoginContext } from "../../../../app/components/QueryApp";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { useGetNowPath } from "../useGetNowPath";
 

@@ -1,17 +1,13 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAtom, useAtomValue } from "jotai";
-import useSwitch from "../../../../hooks/useSwitch";
-import { useCookies } from "react-cookie";
-import useMutationWrapper from "../../../../hooks/useMutationWrapper";
-import ENV from '../../../../env.json';
-import { errResType, resType } from "../../../../hooks/useMutationWrapperBase";
-import { useGlobalAtom } from "../../../../hooks/useGlobalAtom";
-import { IsCheckedAuthContext, IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../../../QueryApp";
+import { toast } from "react-toastify";
+import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../../../app/components/QueryApp";
 import { LOGIN_USER_INFO_INIT, PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { toast } from "react-toastify";
+import ENV from '../../../../env.json';
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { useGetPreviousPath } from "../../../../hooks/useGetPreviousPath";
+import useMutationWrapper from "../../../../hooks/useMutationWrapper";
+import { errResType } from "../../../../hooks/useMutationWrapperBase";
+import useSwitch from "../../../../hooks/useSwitch";
 
 
 export function useHeaderUserMenuList() {

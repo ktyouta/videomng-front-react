@@ -1,26 +1,19 @@
-import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useLocation } from "react-router-dom";
-import ENV from '../../../env.json';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { refType } from '../../../components/BaseTextbox';
-import useMutationWrapper from '../../../hooks/useMutationWrapper';
-import { errResType, resSchema, resType } from '../../../hooks/useMutationWrapperBase';
-import { useSetAtom } from 'jotai';
-import { useSetGlobalAtom } from '../../../hooks/useGlobalAtom';
-import { SetIsLoginContext, SetLoginUserInfoContext } from '../../../QueryApp';
-import { SiginupRequestType } from '../types/SiginupRequestType';
-import { useCreateYearList } from '../../../hooks/useCreateYearList';
-import { LoginUserInfoType } from '../../../types/LoginUserInfoType';
-import { ROUTER_PATH } from '../../../consts/RouterPath';
-import useSwitch from '../../../hooks/useSwitch';
-import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../../consts/CommonConst';
-import { useQueryParams } from '../../../hooks/useQueryParams';
-import { useSignupForm } from './useSignupForm';
-import { loginUserInfoSchema } from '../../login/schemas/loginUserInfoSchema';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { SetIsLoginContext, SetLoginUserInfoContext } from '../../../app/components/QueryApp';
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../../consts/CommonConst';
+import { ROUTER_PATH } from '../../../consts/RouterPath';
+import ENV from '../../../env.json';
+import { useCreateYearList } from '../../../hooks/useCreateYearList';
+import useMutationWrapper from '../../../hooks/useMutationWrapper';
+import { errResType, resSchema } from '../../../hooks/useMutationWrapperBase';
+import useSwitch from '../../../hooks/useSwitch';
 import { getPrevPath } from '../../../utils/CommonFunction';
+import { loginResponseSchema } from '../../login/schemas/loginResponseSchema';
 import { SIGINUP_PATH_KEY } from '../const/SiginupConst';
+import { SiginupRequestType } from '../types/SiginupRequestType';
+import { useSignupForm } from './useSignupForm';
 
 
 export function useSiginup() {
@@ -54,7 +47,7 @@ export function useSiginup() {
         afSuccessFn: (res: unknown) => {
 
             // レスポンスの型チェック
-            const resParsed = resSchema(loginUserInfoSchema).safeParse(res);
+            const resParsed = resSchema(loginResponseSchema).safeParse(res);
 
             if (!resParsed.success) {
                 toast.error(`アカウントの作成に失敗しました。時間をおいて再度お試しください。`);
@@ -62,9 +55,9 @@ export function useSiginup() {
                 return;
             }
 
-            const loginUserInfo = resParsed.data.data;
+            const resData = resParsed.data.data;
 
-            setLoginUserInfo(loginUserInfo);
+            setLoginUserInfo(resData.userInfo);
             setIsLogin(true);
             navigate(next);
         },

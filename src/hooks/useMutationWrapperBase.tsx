@@ -1,7 +1,8 @@
-import { QueryKey, useMutation, useQuery, useQueryClient, UseQueryOptions } from 'react-query';
-import axios from "axios";
 import { useMemo } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import z from 'zod';
+import { AccessTokenContext } from '../app/components/TokenProvider';
+import { api } from "../lib/apiClient";
 
 
 /**
@@ -74,22 +75,38 @@ const useMutationWrapperBase = <
 >(props: propsType<U>) => {
 
     const queryClient = useQueryClient();
+    // アクセストークン
+    const accessToken = AccessTokenContext.useCtx();
+
 
     //POST
     const postQuery = async (postData: T) => {
-        const { data } = await axios.post(props.url, postData, { withCredentials: true },);
+        const { data } = await api.post(props.url, postData, {
+            headers: {
+                ...(accessToken && { Authorization: `access_token ${accessToken}` }),
+            }
+        });
         return data;
     }
 
     //PUT
     const putQuery = async (putData: T) => {
-        const { data } = await axios.put(props.url, putData, { withCredentials: true },);
+        const { data } = await api.put(props.url, putData, {
+            headers: {
+                ...(accessToken && { Authorization: `${accessToken}` }),
+            }
+        });
         return data;
     }
 
     //DELETE
     const deleteQuery = async (delData: T) => {
-        const { data } = await axios.delete(props.url, { data: delData, withCredentials: true },);
+        const { data } = await api.delete(props.url, {
+            data: delData,
+            headers: {
+                ...(accessToken && { Authorization: `${accessToken}` }),
+            }
+        },);
         return data;
     }
 

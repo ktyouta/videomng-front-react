@@ -1,14 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAtom, useAtomValue } from "jotai";
-import useSwitch from "../../../../hooks/useSwitch";
-import { useCookies } from "react-cookie";
-import ENV from '../../../../env.json';
-import { errResType, resType } from "../../../../hooks/useMutationWrapperBase";
-import { useGlobalAtom } from "../../../../hooks/useGlobalAtom";
-import { IsCheckedAuthContext, IsLoginContext, LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from "../../../../QueryApp";
-import { LOGIN_USER_INFO_INIT, PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
+import { IsLoginContext } from "../../../../app/components/QueryApp";
+import { PREV_PATH_KEY } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { toast } from "react-toastify";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 
 

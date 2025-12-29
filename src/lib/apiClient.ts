@@ -1,6 +1,13 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios';
+import Cookies from 'js-cookie';
 import { VIDEO_MNG_PATH } from '../consts/CommonConst';
 import ENV from '../env.json';
+import { updateAccessToken } from './accessTokenStore';
+
+type QueueItem = {
+  resolve: () => void;
+  reject: (reason?: any) => void;
+};
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 
@@ -20,7 +27,7 @@ export const api = Axios.create({
 api.interceptors.request.use(authRequestInterceptor);
 
 let isRefreshing = false;
-let queue: Array<() => void> = [];
+let queue: QueueItem[] = [];
 
 api.interceptors.response.use(
   (response) => {
@@ -40,22 +47,34 @@ api.interceptors.response.use(
 
         try {
 
-          await api.post(ENV.REFRESH);
+          const res = await api.post(
+            ENV.REFRESH,
+            {},
+            {
+              headers: {
+                'X-CSRF-Token': Cookies.get('csrf_token'),
+              },
+            }
+          );
 
-          queue.forEach(cb => cb());
+          updateAccessToken(res.data.accessToken);
+
+          queue.forEach(cb => cb.resolve());
           queue = [];
         } catch {
 
           // リフレッシュ失敗
-          window.location.href = ENV.FRONT_USER_LOGIN;
           return Promise.reject(error);
         } finally {
           isRefreshing = false;
         }
       }
 
-      return new Promise(resolve => {
-        queue.push(() => resolve(api(originalRequest)));
+      return new Promise((resolve, reject) => {
+        queue.push({
+          resolve: () => resolve(api(originalRequest)),
+          reject,
+        });
       });
     }
 

@@ -1,22 +1,19 @@
 import React from 'react';
-import { Home } from './features/home/components/Home';
-import { Main } from './features/main/components/Main';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import useQueryApp from './useQueryApp';
-import { Login } from './features/login/components/Login';
-import { createCtx } from './utils/createCtx';
-import { Siginup } from './features/signup/components/Siginup';
-import { LoginUserInfoType } from './types/LoginUserInfoType';
-import { ROUTER_PATH } from './consts/RouterPath';
-import { TOAST_INIT, ToastComponent, toastStatusType } from './components/ToastComponent';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { TOAST_DISPLAY_TIME } from './consts/CommonConst';
-import { UpdateUserInfo } from './features/updateuserinfo/components/UpdateUserInfo';
-import { UpdateUserPassword } from './features/updateuserpassword/components/UpdateUserPassword';
 import styled from 'styled-components';
-import LoadingBase from './components/LoadingBase';
-import Loading from './components/Loading';
+import Loading from '../../components/Loading';
+import { TOAST_DISPLAY_TIME } from '../../consts/CommonConst';
+import { ROUTER_PATH } from '../../consts/RouterPath';
+import { Login } from '../../features/login/components/Login';
+import { Main } from '../../features/main/components/Main';
+import { Siginup } from '../../features/signup/components/Siginup';
+import { UpdateUserInfo } from '../../features/updateuserinfo/components/UpdateUserInfo';
+import { UpdateUserPassword } from '../../features/updateuserpassword/components/UpdateUserPassword';
+import { LoginUserInfoType } from '../../types/LoginUserInfoType';
+import { createCtx } from '../../utils/createCtx';
+import useQueryApp from '../hooks/useQueryApp';
 
 
 const LoadingScreenDiv = styled.div`
@@ -55,8 +52,8 @@ function QueryApp() {
         isCheckedAuth, } = useQueryApp();
 
     return (
-        <SetIsLoginContext.Provider value={setIsLogin}>
-            <IsLoginContext.Provider value={isLogin}>
+        <IsLoginContext.Provider value={isLogin}>
+            <SetIsLoginContext.Provider value={setIsLogin}>
                 {/* トースト */}
                 <ToastContainer
                     position="top-center"
@@ -136,8 +133,8 @@ function QueryApp() {
                         }
                     />
                 </Routes>
-            </IsLoginContext.Provider>
-        </SetIsLoginContext.Provider>
+            </SetIsLoginContext.Provider>
+        </IsLoginContext.Provider>
     );
 }
 

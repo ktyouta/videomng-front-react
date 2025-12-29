@@ -1,24 +1,16 @@
-import React, { RefObject, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useLocation } from "react-router-dom";
-import ENV from '../../../env.json';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { refType } from '../../../components/BaseTextbox';
-import useMutationWrapper from '../../../hooks/useMutationWrapper';
-import { errResType, resSchema, resType } from '../../../hooks/useMutationWrapperBase';
-import { useSetAtom } from 'jotai';
-import { useSetGlobalAtom } from '../../../hooks/useGlobalAtom';
-import { LoginUserInfoContext, SetIsLoginContext, SetLoginUserInfoContext } from '../../../QueryApp';
-import { useCreateYearList } from '../../../hooks/useCreateYearList';
-import { ROUTER_PATH } from '../../../consts/RouterPath';
-import { UpdateUserInfoRequestType } from '../../updateuserinfo/types/UpdateUserInfoRequestType';
-import useSwitch from '../../../hooks/useSwitch';
-import { UpdateUserPasswordRequestType } from '../types/UpdateUserPasswordRequestType';
+import { useState } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { LoginUserInfoContext } from '../../../app/components/QueryApp';
 import { VIDEO_MNG_PATH } from '../../../consts/CommonConst';
-import { useQueryParams } from '../../../hooks/useQueryParams';
-import { useUpdateUserPasswordForm } from './useUpdateUserPasswordForm';
+import { ROUTER_PATH } from '../../../consts/RouterPath';
+import ENV from '../../../env.json';
+import useMutationWrapper from '../../../hooks/useMutationWrapper';
+import { errResType, resSchema } from '../../../hooks/useMutationWrapperBase';
+import useSwitch from '../../../hooks/useSwitch';
 import { UPDATEUSERPASSWORD_PREV_PATH_KEY } from '../const/UpdateUserPasswordConst';
+import { UpdateUserPasswordRequestType } from '../types/UpdateUserPasswordRequestType';
+import { useUpdateUserPasswordForm } from './useUpdateUserPasswordForm';
 
 
 export function useUpdateUserPassword() {

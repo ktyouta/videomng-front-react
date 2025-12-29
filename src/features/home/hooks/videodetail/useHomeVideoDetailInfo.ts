@@ -1,23 +1,16 @@
-import { useAtom, useAtomValue } from "jotai";
-import useMutationWrapper from "../../../../hooks/useMutationWrapper";
-import { errResType, resSchema, resType } from "../../../../hooks/useMutationWrapperBase";
-import ENV from '../../../../env.json';
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useSwitch from "../../../../hooks/useSwitch";
-import { useRef, useState } from "react";
-import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
-import { AddToFavoriteResponseType } from "../../types/videodetail/AddToFavoriteResponseType";
-import { useGlobalAtomValue } from "../../../../hooks/useGlobalAtom";
-import { IsLoginContext } from "../../../../QueryApp";
-import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { IsLoginContext } from "../../../../app/components/QueryApp";
 import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
+import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import ENV from '../../../../env.json';
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { useVideoId } from "./useVideoId";
+import useMutationWrapper from "../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
 import { useVideoPlayUrl } from "../../../../hooks/useVideoPlayUrl";
-import { useCreateHomeVideoListQuery } from "../videolist/useCreateHomeVideoListQuery";
-import { useQueryParams } from "../../../../hooks/useQueryParams";
 import { getPrevPath } from "../../../../utils/CommonFunction";
+import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
+import { useVideoId } from "./useVideoId";
 
 
 export function useHomeVideoDetailInfo() {
