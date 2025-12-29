@@ -5,7 +5,7 @@ import ENV from '../env.json';
 import { updateAccessToken } from './accessTokenStore';
 
 type QueueItem = {
-  resolve: () => void;
+  resolve: (accessToken: string) => void;
   reject: (reason?: any) => void;
 };
 
@@ -57,9 +57,11 @@ api.interceptors.response.use(
             }
           );
 
-          updateAccessToken(res.data.accessToken);
+          const newAccessToken = res.data.accessToken;
 
-          queue.forEach(cb => cb.resolve());
+          updateAccessToken(newAccessToken);
+
+          queue.forEach(cb => cb.resolve(newAccessToken));
           queue = [];
         } catch {
 
@@ -72,7 +74,10 @@ api.interceptors.response.use(
 
       return new Promise((resolve, reject) => {
         queue.push({
-          resolve: () => resolve(api(originalRequest)),
+          resolve: (token) => {
+            originalRequest.headers['Authorization'] = token;
+            resolve(api(originalRequest));
+          },
           reject,
         });
       });
