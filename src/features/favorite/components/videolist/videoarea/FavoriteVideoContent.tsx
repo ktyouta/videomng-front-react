@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteVideoContent } from "../../../hooks/videolist/videoarea/useFavoriteVideoContent";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { MEDIA } from "../../../../../consts/MediaConst";
 
 const VideoArticle = styled.article`
 `;
@@ -115,13 +114,13 @@ export function FavoriteVideoContent(props: propsType) {
                 <VideoImg
                     src={imgUrl}
                     onMouseDown={handleMouseDown}
-                    onMouseUp={(e) => {
+                    onPointerUp={(e) => {
                         handleMouseUp(videoId, e);
                     }}
                 />
                 <VideoTitleDiv
                     onMouseDown={handleMouseDown}
-                    onMouseUp={(e) => {
+                    onPointerUp={(e) => {
                         handleMouseUp(videoId, e);
                     }}
                 >

@@ -1,13 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-import { YouTubeDataApiVideoListItemType } from "../../types/videolist/YouTubeDataApiVideoListItemType";
-import { useHomeVideoContent } from "../../hooks/videolist/videoarea/result/useHomeVideoContent";
-import { VideoListItemType } from "../../types/videolist/VideoListItemType";
-import { IconComponent } from "../../../../components/IconComponent";
-import { FaStar } from "react-icons/fa";
 import { FLG } from "../../../../consts/CommonConst";
-import { HomeVideoContentFavoriteIconArea } from "../videolist/videoarea/result/HomeFavoriteIconArea";
+import { MEDIA } from "../../../../consts/MediaConst";
 import { useHomeChannelVideoContent } from "../../hooks/videochannel/useHomeChannelVideoContent";
+import { VideoListItemType } from "../../types/videolist/VideoListItemType";
+import { HomeVideoContentFavoriteIconArea } from "../videolist/videoarea/result/HomeFavoriteIconArea";
 
 
 const VideoArticle = styled.article`
@@ -31,7 +27,25 @@ const VideoImgAreaDiv = styled.div`
 const VideoTitleDiv = styled.div`
     color:white;
     cursor:pointer;
-    font-size: 14px;
+    word-break: break-word;
+    font-size: 11px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 12px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 14px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 14px;
+    }
 `;
 
 const DateDiv = styled.div`
