@@ -1,5 +1,4 @@
 import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
-import { AccessTokenContext } from '../app/components/TokenProvider';
 import { api } from '../lib/apiClient';
 
 
@@ -28,26 +27,15 @@ const useQueryWrapper = <
     PData extends {} = {},
 >(props: propsType<TData, RData, PData>) => {
 
-    // アクセストークン
-    const accessToken = AccessTokenContext.useCtx();
-
     //GET
     const getQuery = async () => {
-        const { data } = await api.get(props.url, {
-            headers: {
-                ...(accessToken && { Authorization: `${accessToken}` }),
-            }
-        });
+        const { data } = await api.get(props.url);
         return data;
     }
 
     //POST
     const postQuery = async () => {
-        const { data } = await api.post(props.url, props.postData ?? {}, {
-            headers: {
-                ...(accessToken && { Authorization: `${accessToken}` }),
-            }
-        });
+        const { data } = await api.post(props.url, props.postData ?? {});
         return data;
     }
 

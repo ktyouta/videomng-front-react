@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { SetIsLoginContext, SetLoginUserInfoContext } from '../../../app/components/QueryApp';
-import { SetAccessTokenContext } from '../../../app/components/TokenProvider';
 import { PREV_PATH_KEY, VIDEO_MNG_PATH } from '../../../consts/CommonConst';
 import { ROUTER_PATH } from '../../../consts/RouterPath';
 import ENV from '../../../env.json';
 import useMutationWrapper from '../../../hooks/useMutationWrapper';
 import { errResType, resSchema } from '../../../hooks/useMutationWrapperBase';
+import { updateAccessToken } from '../../../lib/accessTokenStore';
 import { getPrevPath } from '../../../utils/CommonFunction';
 import { SIGINUP_PATH_KEY } from '../../signup/const/SiginupConst';
 import { loginResponseSchema } from '../schemas/loginResponseSchema';
@@ -31,8 +31,6 @@ export function useLogin() {
     const pathName = location.pathname;
     // 前画面のパスを取得
     const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
-    // アクセストークン(setter)
-    const setAccessToken = SetAccessTokenContext.useCtx();
 
     /**
      * ログインリクエスト
@@ -55,7 +53,7 @@ export function useLogin() {
             const resData = resParsed.data.data;
 
             setLoginUserInfo(resData.userInfo);
-            setAccessToken(resData.accessToken);
+            updateAccessToken(resData.accessToken);
             setIsLogin(true);
             navigate(prev);
         },

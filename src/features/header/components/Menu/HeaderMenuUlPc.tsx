@@ -26,6 +26,8 @@ const NavLi = styled.li<{ isActive: boolean }>`
   color:white;
   margin-right:3%;
   cursor:pointer;
+  min-width: 81px;
+  min-height: 40px;
   &:hover {
       color: black;
       background-color: white;

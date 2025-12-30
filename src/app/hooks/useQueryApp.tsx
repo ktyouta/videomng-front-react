@@ -5,7 +5,6 @@ import { loginResponseSchema } from '../../features/login/schemas/loginResponseS
 import { resSchema } from '../../hooks/useMutationWrapperBase';
 import useQueryWrapper from '../../hooks/useQueryWrapper';
 import { LoginUserInfoType } from '../../types/LoginUserInfoType';
-import { SetAccessTokenContext } from '../components/TokenProvider';
 
 
 function useQueryApp() {
@@ -16,8 +15,6 @@ function useQueryApp() {
     const [loginUserInfo, setLoginUserInfo] = useState<LoginUserInfoType>(LOGIN_USER_INFO_INIT);
     // 認証チェック済みフラグ
     const [isCheckedAuth, setIsCheckedAuth] = useState(false);
-    // アクセストークン(setter)
-    const setAccessToken = SetAccessTokenContext.useCtx();
 
     // 認証チェック
     useQueryWrapper(
@@ -35,7 +32,6 @@ function useQueryApp() {
                 const resData = resParsed.data.data;
 
                 setLoginUserInfo(resData.userInfo);
-                setAccessToken(resData.accessToken);
                 setIsLogin(true);
                 setIsCheckedAuth(true);
             },

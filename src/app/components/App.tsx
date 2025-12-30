@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Exception } from '../../features/exception/components/Exception';
 import QueryApp from './QueryApp';
-import { TokenProvider } from './TokenProvider';
 
 function App() {
 
@@ -20,17 +19,15 @@ function App() {
   });
 
   return (
-    <TokenProvider>
-      <ErrorBoundary
-        FallbackComponent={Exception}
-      >
-        <QueryClientProvider client={queryClient}>
-          <QueryApp />
-          {/* React-query devtool */}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </ErrorBoundary>
-    </TokenProvider>
+    <ErrorBoundary
+      FallbackComponent={Exception}
+    >
+      <QueryClientProvider client={queryClient}>
+        <QueryApp />
+        {/* React-query devtool */}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ErrorBoundary>
   )
 }
 

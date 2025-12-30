@@ -2,7 +2,7 @@ import Axios, { InternalAxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 import { VIDEO_MNG_PATH } from '../consts/CommonConst';
 import ENV from '../env.json';
-import { updateAccessToken } from './accessTokenStore';
+import { accessTokenRef, updateAccessToken } from './accessTokenStore';
 
 type QueueItem = {
   resolve: (accessToken: string) => void;
@@ -11,8 +11,11 @@ type QueueItem = {
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 
-  if (config.headers) {
-    config.headers.Accept = 'application/json';
+  config.headers = config.headers || {};
+  config.headers.Accept = 'application/json';
+
+  if (accessTokenRef) {
+    config.headers['Authorization'] = accessTokenRef;
   }
 
   config.withCredentials = true;
@@ -41,45 +44,55 @@ api.interceptors.response.use(
 
       originalRequest._retry = true;
 
-      if (!isRefreshing) {
+      return new Promise(async (resolve, reject) => {
 
-        isRefreshing = true;
-
-        try {
-
-          const res = await api.post(
-            ENV.REFRESH,
-            {},
-            {
-              headers: {
-                'X-CSRF-Token': Cookies.get('csrf_token'),
-              },
-            }
-          );
-
-          const newAccessToken = res.data.accessToken;
-
-          updateAccessToken(newAccessToken);
-
-          queue.forEach(cb => cb.resolve(newAccessToken));
-          queue = [];
-        } catch {
-
-          // リフレッシュ失敗
-          return Promise.reject(error);
-        } finally {
-          isRefreshing = false;
-        }
-      }
-
-      return new Promise((resolve, reject) => {
         queue.push({
           resolve: (token) => {
-            originalRequest.headers['Authorization'] = token;
+
+            originalRequest.headers = {
+              ...(originalRequest.headers || {}),
+              Authorization: token,
+            };
+
             resolve(api(originalRequest));
           },
           reject,
         });
+
+        if (!isRefreshing) {
+
+          isRefreshing = true;
+
+          try {
+
+            // リフレッシュ
+            const res = await api.post(
+              ENV.REFRESH,
+              {},
+              {
+                headers: {
+                  'X-CSRF-Token': Cookies.get('csrf_token'),
+                },
+              }
+            );
+
+            const newAccessToken = res.data.data;
+            updateAccessToken(newAccessToken);
+
+            // 認証エラーになったAPIを再度コール
+            queue.forEach(cb => {
+              cb.resolve(newAccessToken);
+            });
+
+            queue = [];
+          } catch {
+
+            // リフレッシュ失敗
+            return Promise.reject(error);
+          } finally {
+            isRefreshing = false;
+          }
+        }
       });
     }
 
