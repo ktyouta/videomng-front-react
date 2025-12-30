@@ -132,6 +132,7 @@ export function FavoriteVideoArea() {
               return (
                 <FavoriteVideoFolder
                   data={e}
+                  key={e.folderId}
                 />
               )
             })

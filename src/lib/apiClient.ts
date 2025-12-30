@@ -1,8 +1,8 @@
-import Axios, { InternalAxiosRequestConfig } from 'axios';
+import { default as Axios, InternalAxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 import { VIDEO_MNG_PATH } from '../consts/CommonConst';
 import ENV from '../env.json';
-import { accessTokenRef, updateAccessToken } from './accessTokenStore';
+import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from './accessTokenStore';
 
 type QueueItem = {
   resolve: (accessToken: string) => void;
@@ -27,7 +27,12 @@ export const api = Axios.create({
   baseURL: VIDEO_MNG_PATH,
 });
 
+const refreshApi = Axios.create({
+  baseURL: VIDEO_MNG_PATH,
+});
+
 api.interceptors.request.use(authRequestInterceptor);
+refreshApi.interceptors.request.use(authRequestInterceptor);
 
 let isRefreshing = false;
 let queue: QueueItem[] = [];
@@ -66,7 +71,7 @@ api.interceptors.response.use(
           try {
 
             // リフレッシュ
-            const res = await api.post(
+            const res = await refreshApi.post(
               ENV.REFRESH,
               {},
               {
@@ -85,10 +90,13 @@ api.interceptors.response.use(
             });
 
             queue = [];
-          } catch {
+          } catch (err) {
 
             // リフレッシュ失敗
-            return Promise.reject(error);
+            resetAccessToken();
+            resetLogin();
+
+            reject(err);
           } finally {
             isRefreshing = false;
           }

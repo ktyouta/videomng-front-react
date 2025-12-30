@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from '../../consts/CommonConst';
+import { ROUTER_PATH } from '../../consts/RouterPath';
 import ENV from "../../env.json";
 import { loginResponseSchema } from '../../features/login/schemas/loginResponseSchema';
 import { resSchema } from '../../hooks/useMutationWrapperBase';
 import useQueryWrapper from '../../hooks/useQueryWrapper';
+import { registerResetLogin } from '../../lib/accessTokenStore';
 import { LoginUserInfoType } from '../../types/LoginUserInfoType';
 
 
@@ -15,6 +18,15 @@ function useQueryApp() {
     const [loginUserInfo, setLoginUserInfo] = useState<LoginUserInfoType>(LOGIN_USER_INFO_INIT);
     // 認証チェック済みフラグ
     const [isCheckedAuth, setIsCheckedAuth] = useState(false);
+    // ルーティング用
+    const navigate = useNavigate();
+
+    /**
+     * ログイン画面に遷移
+     */
+    function moveLogin() {
+        navigate(`${ROUTER_PATH.LOGIN}`);
+    }
 
     // 認証チェック
     useQueryWrapper(
@@ -41,6 +53,16 @@ function useQueryApp() {
             }
         }
     );
+
+    // ログインリセット処理を登録
+    useEffect(() => {
+        {
+            registerResetLogin({
+                setIsLogin,
+                moveLogin
+            });
+        }
+    }, []);
 
     return {
         isLogin,
