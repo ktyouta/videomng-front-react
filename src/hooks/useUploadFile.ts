@@ -1,5 +1,6 @@
-import axios, { AxiosProgressEvent } from "axios";
+import { AxiosProgressEvent } from "axios";
 import { useState } from "react";
+import { api } from "../lib/apiClient";
 
 type propsType = {
     onUploadProgress?: (progressEvent: AxiosProgressEvent) => void,
@@ -25,7 +26,7 @@ export function useUploadFile(props: propsType) {
             const formData = new FormData();
             formData.append("file", fileData);
 
-            const res = await axios.post(`${props.url}`, formData, {
+            const res = await api.post(`${props.url}`, formData, {
                 withCredentials: true,
                 onUploadProgress: props.onUploadProgress,
             });

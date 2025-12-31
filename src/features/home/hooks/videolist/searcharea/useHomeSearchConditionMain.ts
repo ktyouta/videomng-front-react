@@ -1,8 +1,6 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useGlobalAtomValue } from "../../../../../hooks/useGlobalAtom";
+import { useMemo } from "react";
 import { useVideoCategory } from "../../../../main/hooks/useVideoCategory";
 import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
-import { useMemo } from "react";
 
 export function useHomeSearchConditionMain() {
 

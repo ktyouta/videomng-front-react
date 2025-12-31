@@ -1,8 +1,4 @@
-import { QueryKey, useMutation, useQuery, useQueryClient, UseQueryOptions } from 'react-query';
-import axios from "axios";
-import { useMemo } from 'react';
 import useMutationWrapperBase, { errResType, resType } from './useMutationWrapperBase';
-
 
 
 //引数の型

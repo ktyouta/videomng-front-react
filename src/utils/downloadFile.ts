@@ -1,8 +1,8 @@
-import axios from "axios";
+import { api } from "../lib/apiClient";
 
 export async function downloadFile(url: string, fileName: string) {
 
-    const res = await axios.get(url, {
+    const res = await api.get(url, {
         withCredentials: true,
         responseType: "blob",
     });

@@ -1,8 +1,5 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { EDIT_MODE } from "../../../const/FavoriteConst";
-import { FavoriteVideoDetailDataType } from "../../../types/videodetail/FavoriteVideoDetailDataType";
-import { useGlobalAtomValue } from "../../../../../hooks/useGlobalAtom";
 
 
 export function useFavoriteDetailSetting() {

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../lib/apiClient";
 
 type ApiCallOptions<T> = {
     method: "POST" | "PUT" | "DELETE";
@@ -16,13 +16,13 @@ export function callApi<T>({ method, url, body, onSuccess, onError, onFinally }:
 
     switch (method) {
         case "POST":
-            req = axios.post(url, body, { withCredentials: true });
+            req = api.post(url, body, { withCredentials: true });
             break;
         case "PUT":
-            req = axios.put(url, body, { withCredentials: true });
+            req = api.put(url, body, { withCredentials: true });
             break;
         case "DELETE":
-            req = axios.delete(url, { data: body, withCredentials: true });
+            req = api.delete(url, { data: body, withCredentials: true });
             break;
         default:
             throw new Error(`Unsupported method: ${method}`);
