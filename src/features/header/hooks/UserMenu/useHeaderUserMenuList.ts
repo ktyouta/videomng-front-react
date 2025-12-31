@@ -8,6 +8,7 @@ import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType } from "../../../../hooks/useMutationWrapperBase";
 import useSwitch from "../../../../hooks/useSwitch";
+import { resetAccessToken } from "../../../../lib/accessTokenStore";
 
 
 export function useHeaderUserMenuList() {
@@ -45,6 +46,7 @@ export function useHeaderUserMenuList() {
 
             setLoginUserInfo(LOGIN_USER_INFO_INIT);
             setIsLogin(false);
+            resetAccessToken();
             navigate(ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
