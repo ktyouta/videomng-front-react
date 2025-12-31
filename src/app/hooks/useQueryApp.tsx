@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from '../../consts/CommonConst';
 import { ROUTER_PATH } from '../../consts/RouterPath';
 import ENV from "../../env.json";
-import { loginResponseSchema } from '../../features/login/schemas/loginResponseSchema';
 import { resSchema } from '../../hooks/useMutationWrapperBase';
 import useQueryWrapper from '../../hooks/useQueryWrapper';
 import { registerResetLogin } from '../../lib/accessTokenStore';
 import { LoginUserInfoType } from '../../types/LoginUserInfoType';
+import { AuthCheckResponseSchema } from '../schemas/AuthCheckResponseSchema';
 
 
 function useQueryApp() {
@@ -35,7 +35,7 @@ function useQueryApp() {
             afSuccessFn: (res: unknown) => {
 
                 // レスポンスの型チェック
-                const resParsed = resSchema(loginResponseSchema).safeParse(res);
+                const resParsed = resSchema(AuthCheckResponseSchema).safeParse(res);
 
                 if (!resParsed.success) {
                     return;
