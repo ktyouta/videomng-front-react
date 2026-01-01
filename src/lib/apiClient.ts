@@ -1,5 +1,4 @@
 import { default as Axios, InternalAxiosRequestConfig } from 'axios';
-import Cookies from 'js-cookie';
 import { VIDEO_MNG_PATH } from '../consts/CommonConst';
 import ENV from '../env.json';
 import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from './accessTokenStore';
@@ -76,7 +75,7 @@ api.interceptors.response.use(
               {},
               {
                 headers: {
-                  'X-CSRF-Token': Cookies.get('csrf_token'),
+                  'X-CSRF-Token': 'web',
                 },
               }
             );
