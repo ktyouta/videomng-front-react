@@ -1,7 +1,7 @@
-import { useState, CSSProperties } from "react";
+import { CSSProperties } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
+import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
 
 //引数の型
 type propsType = {
@@ -16,10 +16,13 @@ function Loading(props: propsType) {
         ...props.style
     };
 
+    // 画面サイズ判定
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
+
     return (
         <ClipLoader
             cssOverride={override}
-            size={85}
+            size={isPcLess ? 45 : 85}
             aria-label="Loading Spinner"
             data-testid="loader"
         />

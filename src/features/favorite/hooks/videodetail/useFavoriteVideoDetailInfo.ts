@@ -1,17 +1,14 @@
-import useMutationWrapper from "../../../../hooks/useMutationWrapper";
-import { errResType, resSchema, resType } from "../../../../hooks/useMutationWrapperBase";
-import ENV from '../../../../env.json';
-import { useLocation, useNavigate } from "react-router-dom";
-import useSwitch from "../../../../hooks/useSwitch";
-import { useState } from "react";
-import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
-import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { useVideoId } from "./useVideoId";
+import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import ENV from '../../../../env.json';
+import useMutationWrapper from "../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
+import useSwitch from "../../../../hooks/useSwitch";
 import { useVideoPlayUrl } from "../../../../hooks/useVideoPlayUrl";
-import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
 import { getPrevPath } from "../../../../utils/CommonFunction";
+import { useVideoId } from "./useVideoId";
 
 
 export function useFavoriteVideoDetailInfo() {
@@ -20,8 +17,6 @@ export function useFavoriteVideoDetailInfo() {
     const navigate = useNavigate();
     // 確認モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
-    // 画面サイズ判定
-    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 動画ID
     const videoId = useVideoId();
     // 前画面のパスを取得
@@ -98,6 +93,5 @@ export function useFavoriteVideoDetailInfo() {
         isOpenModal,
         closeModal,
         executeDelete,
-        isMobile,
     }
 }

@@ -87,8 +87,6 @@ export function HomeVideoDetailInfo(props: propsType) {
     const title = snippet?.title;
     // お気に入りフラグ
     const favoriteFlg = item?.favoriteFlg;
-    // ボタン幅
-    const buttonWidth = isMobile ? "50%" : "90%";
 
     return (
         <VideoInfoDiv>
@@ -105,10 +103,10 @@ export function HomeVideoDetailInfo(props: propsType) {
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
-                        "width": `${buttonWidth}`,
+                        "width": "90%",
                         "color": "white",
                         "borderRadius": "8px",
-                        "marginBottom": isMobile ? "7%" : "10%",
+                        "marginBottom": "8%",
                         "display": "flex",
                         "alignItems": "center",
                         "justifyContent": "center",
@@ -132,8 +130,8 @@ export function HomeVideoDetailInfo(props: propsType) {
                                     <ButtonComponent
                                         style={{
                                             "fontSize": "0.9rem",
-                                            "height": "50px",
-                                            "width": `${buttonWidth}`,
+                                            "minHeight": "50px",
+                                            "width": "90%",
                                             "background": "rgb(100, 100, 100)",
                                             "color": "white",
                                             "borderRadius": "8px",
@@ -149,8 +147,8 @@ export function HomeVideoDetailInfo(props: propsType) {
                                         onClick={addToFavorite}
                                         style={{
                                             "fontSize": "0.9rem",
-                                            "height": "50px",
-                                            "width": `${buttonWidth}`,
+                                            "minHeight": "50px",
+                                            "width": "90%",
                                             "borderRadius": "8px",
                                             "display": "block",
                                         }}
@@ -166,8 +164,8 @@ export function HomeVideoDetailInfo(props: propsType) {
                             onClick={moveLogin}
                             style={{
                                 "fontSize": "0.9rem",
-                                "height": "50px",
-                                "width": `${buttonWidth}`,
+                                "minHeight": "50px",
+                                "width": "90%",
                                 "borderRadius": "8px",
                                 "display": "block",
                             }}

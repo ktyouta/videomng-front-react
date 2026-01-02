@@ -1,14 +1,11 @@
-import React from "react";
-import { useFavoriteVideoDetail } from "../../hooks/videodetail/useFavoriteVideoDetail";
-import LoadingBase from "../../../../components/LoadingBase";
-import styled from "styled-components";
-import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { FaArrowLeft } from "react-icons/fa6";
+import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
-import { MEDIA } from "../../../../consts/MediaConst";
 import Loading from "../../../../components/Loading";
+import { MEDIA } from "../../../../consts/MediaConst";
+import { useFavoriteVideoDetail } from "../../hooks/videodetail/useFavoriteVideoDetail";
+import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { FavoriteVideoDetailMenu } from "./FavoriteVideoDetailMenu";
-import { createCtx } from "../../../../utils/createCtx";
 
 
 const Parent = styled.div`

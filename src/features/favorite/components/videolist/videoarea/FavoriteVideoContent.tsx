@@ -14,6 +14,7 @@ const VideoImg = styled.img`
     width:100%;
     border-radius: 6%;
     cursor:pointer;
+    touch-action: none;
 `;
 
 const VideoTitleDiv = styled.div`
@@ -26,6 +27,7 @@ const VideoTitleDiv = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    touch-action: none;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 12px;
@@ -113,13 +115,13 @@ export function FavoriteVideoContent(props: propsType) {
             <VideoSection>
                 <VideoImg
                     src={imgUrl}
-                    onMouseDown={handleMouseDown}
+                    onPointerDown={handleMouseDown}
                     onPointerUp={(e) => {
                         handleMouseUp(videoId, e);
                     }}
                 />
                 <VideoTitleDiv
-                    onMouseDown={handleMouseDown}
+                    onPointerDown={handleMouseDown}
                     onPointerUp={(e) => {
                         handleMouseUp(videoId, e);
                     }}

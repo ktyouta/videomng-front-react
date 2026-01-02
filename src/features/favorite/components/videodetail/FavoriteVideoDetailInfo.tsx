@@ -75,7 +75,6 @@ export function FavoriteVideoDetailInfo(props: propsType) {
         isOpenModal,
         closeModal,
         executeDelete,
-        isMobile,
     } = useFavoriteVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
@@ -85,8 +84,6 @@ export function FavoriteVideoDetailInfo(props: propsType) {
     const imgUrl = snippet.thumbnails.high?.url;
     // タイトル
     const title = snippet.title;
-    // ボタン幅
-    const buttonWidth = isMobile ? "50%" : "90%";
 
     return (
         <VideoInfoDiv>
@@ -102,11 +99,11 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     onClick={play}
                     style={{
                         "fontSize": "0.9rem",
-                        "height": "50px",
-                        "width": `${buttonWidth}`,
+                        "minHeight": "50px",
+                        "width": "95%",
                         "color": "white",
                         "borderRadius": "8px",
-                        "marginBottom": isMobile ? "7%" : "10%",
+                        "marginBottom": "8%",
                         "display": "flex",
                         "alignItems": "center",
                         "justifyContent": "center",
@@ -124,8 +121,8 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     onClick={clickDeleteFavoriteVide}
                     style={{
                         "fontSize": "0.9rem",
-                        "height": "50px",
-                        "width": `${buttonWidth}`,
+                        "minHeight": "50px",
+                        "width": "95%",
                         "background": "rgb(175, 55, 42)",
                         "color": "white",
                         "borderRadius": "8px",
