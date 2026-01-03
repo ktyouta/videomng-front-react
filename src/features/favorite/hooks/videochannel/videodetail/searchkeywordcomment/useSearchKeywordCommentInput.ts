@@ -1,0 +1,40 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { SetSearchKeywordContext } from "../../../../components/videochannel/videodetail/searchkeywordcomment/SearchKeywordComment";
+
+
+export function useSearchKeywordCommentInput() {
+
+    // 入力用キーワード
+    const [inputKeyword, setInputKeyword] = useState(``);
+    // 検索用キーワード(setter)
+    const setSearchKeyword = SetSearchKeywordContext.useCtx();
+
+    /**
+     * 検索ボタン押下イベント
+     * @returns 
+     */
+    function clickSearchBtn() {
+
+        if (!inputKeyword) {
+            toast.warn(`キーワードを入力してください。`);
+            return;
+        }
+
+        setSearchKeyword(inputKeyword);
+    }
+
+    /**
+     * 入力中のキーワードをクリアする
+     */
+    function clearInputKeyword() {
+        setInputKeyword(``);
+    }
+
+    return {
+        clickSearchBtn,
+        clearInputKeyword,
+        inputKeyword,
+        setInputKeyword,
+    }
+}

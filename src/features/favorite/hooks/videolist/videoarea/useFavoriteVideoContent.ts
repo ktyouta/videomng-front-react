@@ -1,6 +1,7 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSSProperties, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
@@ -29,6 +30,8 @@ export function useFavoriteVideoContent(props: propsType) {
     // 動画コンテンツの位置
     const dragStartX = useRef(0);
     const dragStartY = useRef(0);
+    // パス
+    const pathName = location.pathname;
 
     /**
      * ドラッグ開始位置を記録
@@ -58,6 +61,18 @@ export function useFavoriteVideoContent(props: propsType) {
         }
     };
 
+    /**
+     * チャンネル名のクリックイベント
+     */
+    function clickChannel(id: string) {
+
+        if (!id) {
+            toast.error(`チャンネル情報を取得できませんでした。`);
+            return;
+        }
+
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.CHANNEL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
+    }
 
     return {
         attributes,
@@ -67,5 +82,6 @@ export function useFavoriteVideoContent(props: propsType) {
         draggingStyle,
         handleMouseDown,
         handleMouseUp,
+        clickChannel,
     }
 }

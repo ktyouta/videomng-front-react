@@ -83,11 +83,25 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
         postMutation.mutate();
     }
 
+    /**
+     * チャンネル名のクリックイベント
+     */
+    function clickChannel(id: string) {
+
+        if (!id) {
+            toast.error(`チャンネル情報を取得できませんでした。`);
+            return;
+        }
+
+        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.CHANNEL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
+    }
+
     return {
         clickVideo,
         deleteVideo,
         isOpenModal,
         openModal,
         closeModal,
+        clickChannel,
     }
 }

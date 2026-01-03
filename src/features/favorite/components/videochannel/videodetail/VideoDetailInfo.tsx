@@ -1,12 +1,12 @@
 import React from "react";
 import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
-import ButtonComponent from "../../../../components/ButtonComponent";
-import { IconComponent } from "../../../../components/IconComponent";
-import { FLG } from "../../../../consts/CommonConst";
-import { MEDIA } from "../../../../consts/MediaConst";
-import { useHomeVideoDetailInfo } from "../../hooks/videodetail/useHomeVideoDetailInfo";
-import { VideoDetailItemType } from "../../types/videodetail/VideoDetailItemType";
+import ButtonComponent from "../../../../../components/ButtonComponent";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { FLG } from "../../../../../consts/CommonConst";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { useVideoDetailInfo } from "../../../hooks/videochannel/videodetail/useVideoDetailInfo";
+import { VideoDetailItemType } from "../../../types/videochannel/videodetail/VideoDetailItemType";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -66,16 +66,16 @@ type propsType = {
 }
 
 
-export function HomeVideoDetailInfo(props: propsType) {
+export function VideoDetailInfo(props: propsType) {
 
-    console.log("HomeVideoDetailInfo render");
+    console.log("VideoDetailInfo render");
 
     const {
         addToFavorite,
         play,
         isLogin,
         moveLogin,
-    } = useHomeVideoDetailInfo();
+    } = useVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
     const item = videoDetail;

@@ -11,6 +11,8 @@ export const ROUTER_PATH = {
         ROOT: `/favorite`,
         DETAIL: `/detail`,
         FOLDER: `/folder`,
+        CHANNEL: `/channel`,
+        DETAIL_NON_FAVORITE: `/detail/non-favorite`,
     },
     // ログイン
     LOGIN: `/login`,

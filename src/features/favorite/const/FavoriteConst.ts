@@ -40,6 +40,22 @@ export const VIDEO_DETIAL_MENU_LIST: Option[] = [
     }
 ];
 
+// お気に入り動画詳細画面メニューリスト(未登録)
+export const NON_FAVORITE_VIDEO_DETAIL_MENU_LIST: Option[] = [
+    {
+        label: `動画情報`,
+        value: `1`,
+    },
+    {
+        label: `公開コメント`,
+        value: `4`,
+    },
+    {
+        label: `キーワード検索(コメント)`,
+        value: `3`,
+    },
+];
+
 // コメントお気に入りステータス
 export const COMMENT_FAVORITE_STATUS = {
     NONE: "0",

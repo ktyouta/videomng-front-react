@@ -74,6 +74,12 @@ const ChennelTitleDiv = styled.div`
     }
 `;
 
+const ChennelTitleSpan = styled.span`
+    cursor:pointer;
+    &:hover {
+        color:#2563eb;
+    }
+`;
 
 type propsType = {
     data: FavoriteVideoListMergedType,
@@ -89,7 +95,8 @@ export function FavoriteVideoContent(props: propsType) {
         setNodeRef,
         draggingStyle,
         handleMouseDown,
-        handleMouseUp, } = useFavoriteVideoContent({ ...props });
+        handleMouseUp,
+        clickChannel, } = useFavoriteVideoContent({ ...props });
 
     const data = props.data
     const snipet = data.snippet;
@@ -104,6 +111,8 @@ export function FavoriteVideoContent(props: propsType) {
     // 日付
     const dateList = snipet.publishedAt.split("T");
     const publishedDate = dateList.length > 0 ? dateList[0] : ``;
+    // チャンネルID
+    const channelId = snipet.channelId;
 
     return (
         <VideoArticle
@@ -131,8 +140,14 @@ export function FavoriteVideoContent(props: propsType) {
                 <DateDiv>
                     {publishedDate}
                 </DateDiv>
-                <ChennelTitleDiv>
-                    {channelTitle}
+                <ChennelTitleDiv
+                    onPointerDown={() => {
+                        clickChannel(channelId)
+                    }}
+                >
+                    <ChennelTitleSpan>
+                        {channelTitle}
+                    </ChennelTitleSpan>
                 </ChennelTitleDiv>
             </VideoSection>
         </VideoArticle>

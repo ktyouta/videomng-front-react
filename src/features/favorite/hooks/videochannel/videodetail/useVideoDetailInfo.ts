@@ -1,18 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { IsLoginContext } from "../../../../app/components/QueryApp";
-import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
-import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import ENV from '../../../../env.json';
-import useMutationWrapper from "../../../../hooks/useMutationWrapper";
-import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
-import { useVideoPlayUrl } from "../../../../hooks/useVideoPlayUrl";
-import { getPrevPath } from "../../../../utils/CommonFunction";
-import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
+import { IsLoginContext } from "../../../../../app/components/QueryApp";
+import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
+import { ROUTER_PATH } from "../../../../../consts/RouterPath";
+import ENV from '../../../../../env.json';
+import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import { useVideoPlayUrl } from "../../../../../hooks/useVideoPlayUrl";
+import { getPrevPath } from "../../../../../utils/CommonFunction";
+import { AddToFavoriteRequestType } from "../../../types/videochannel/videodetail/AddToFavoriteRequestType";
 import { useVideoId } from "./useVideoId";
 
 
-export function useHomeVideoDetailInfo() {
+export function useVideoDetailInfo() {
 
     // ルーティング用
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ export function useHomeVideoDetailInfo() {
     // パス
     const pathName = location.pathname;
     // 前画面のパスを取得
-    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
+    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
 
     /**
      * お気に入り登録リクエスト

@@ -1,16 +1,13 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import useQueryWrapper from "../../../../hooks/useQueryWrapper";
-import { useLocation, useNavigate } from "react-router-dom";
-import { errResType } from "../../../../hooks/useMutationWrapperBase";
-import { FavoriteVideoDetailResponseType } from "../../types/videodetail/FavoriteVideoDetailResponseType";
-import { useEffect, useState } from "react";
-import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
-import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
-import { useCreateFavoriteVideoListQuery } from "../useCreateFavoriteVideoListQuery";
-import { useVideoId } from "./useVideoId";
-import { getPrevPath } from "../../../../utils/CommonFunction";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PREV_PATH_KEY } from "../../../../consts/CommonConst";
+import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import useQueryWrapper from "../../../../hooks/useQueryWrapper";
+import { getPrevPath } from "../../../../utils/CommonFunction";
+import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
+import { FavoriteVideoDetailResponseType } from "../../types/videodetail/FavoriteVideoDetailResponseType";
+import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
+import { useVideoId } from "./useVideoId";
 
 export function useFavoriteVideoDetail() {
 
