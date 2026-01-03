@@ -1,15 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import LoadingBase from "../../../../components/LoadingBase";
-import { YouTubeDataApiVideoListItemType } from "../../types/videolist/YouTubeDataApiVideoListItemType";
-import { HomeVideoContent } from "../videolist/videoarea/result/HomeVideoContent";
-import ButtonComponent from "../../../../components/ButtonComponent";
-import { VideoListItemType } from "../../types/videolist/VideoListItemType";
-import { HomeChannelVideoContent } from "./HomeChannelVideoContent";
-import { VideoListDataType } from "../../types/videolist/VideoListDataType";
-import { useHomeChannelVideoArea } from "../../hooks/videochannel/useHomeChannelVideoArea";
 import Loading from "../../../../components/Loading";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { VideoListDataType } from "../../../../types/videolist/VideoListDataType";
+import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
+import { useHomeChannelVideoArea } from "../../hooks/videochannel/useHomeChannelVideoArea";
+import { HomeChannelVideoContent } from "./HomeChannelVideoContent";
 
 const Parent = styled.div`
   width: 100%;
@@ -73,64 +69,64 @@ const LoadingParentNext = styled.div`
 `;
 
 type propsType = {
-    videoListData: VideoListDataType,
-    setNextPageToken: React.Dispatch<React.SetStateAction<string>>,
-    isLoading: boolean,
+  videoListData: VideoListDataType,
+  setNextPageToken: React.Dispatch<React.SetStateAction<string>>,
+  isLoading: boolean,
 }
 
 
 export function HomeChannelVideoArea(props: propsType) {
 
-    console.log("HomeChannelVideoArea render");
+  console.log("HomeChannelVideoArea render");
 
-    const { ref } = useHomeChannelVideoArea({ ...props });
+  const { ref } = useHomeChannelVideoArea({ ...props });
 
-    // 動画リスト
-    const videoListItems = props.videoListData.items;
-    // 次データ取得用トークン
-    const nextPageToken = props.videoListData.nextPageToken;
+  // 動画リスト
+  const videoListItems = props.videoListData.items;
+  // 次データ取得用トークン
+  const nextPageToken = props.videoListData.nextPageToken;
 
-    if (videoListItems.length === 0) {
-        return (
-            <MessageDiv>
-                動画が存在しません。
-            </MessageDiv>
-        );
-    }
-
+  if (videoListItems.length === 0) {
     return (
-        <Parent>
-            <VideoUl>
-                {
-                    videoListItems?.map((e: VideoListItemType) => {
-                        return (
-                            <HomeChannelVideoContent
-                                data={e}
-                                key={e.id.videoId}
-                            />
-                        )
-                    })
-                }
-            </VideoUl>
-            {
-                // 無限スクロール
-                nextPageToken &&
-                <React.Fragment>
-                    {
-                        props.isLoading
-                            ?
-                            <NextGetAreaDiv>
-                                <LoadingParentNext>
-                                    <Loading />
-                                </LoadingParentNext>
-                            </NextGetAreaDiv>
-                            :
-                            <InfiniteScrollAreaDiv
-                                ref={ref}
-                            />
-                    }
-                </React.Fragment>
-            }
-        </Parent>
+      <MessageDiv>
+        動画が存在しません。
+      </MessageDiv>
     );
+  }
+
+  return (
+    <Parent>
+      <VideoUl>
+        {
+          videoListItems?.map((e: VideoListItemType) => {
+            return (
+              <HomeChannelVideoContent
+                data={e}
+                key={e.id.videoId}
+              />
+            )
+          })
+        }
+      </VideoUl>
+      {
+        // 無限スクロール
+        nextPageToken &&
+        <React.Fragment>
+          {
+            props.isLoading
+              ?
+              <NextGetAreaDiv>
+                <LoadingParentNext>
+                  <Loading />
+                </LoadingParentNext>
+              </NextGetAreaDiv>
+              :
+              <InfiniteScrollAreaDiv
+                ref={ref}
+              />
+          }
+        </React.Fragment>
+      }
+    </Parent>
+  );
 }

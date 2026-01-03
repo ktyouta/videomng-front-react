@@ -1,7 +1,7 @@
+import { YouTubeDataApiVideoDetailItemType } from "../../../../types/youtube/YouTubeDataApiVideoDetailItemType";
 import { FavoriteVideoVideoMngApiDataType } from "./FavoriteVideoVideoMngApiDataType";
-import { FavoriteVideoMemoType } from "./videomemo/FavoriteVideoMemoType";
-import { YouTubeDataApiVideoDetailItemType } from "./YouTubeDataApiVideoDetailItemType";
 import { FavoriteVideoDetailCategoryType } from "./videodetailsetting/FavoriteVideoDetailCategoryType";
+import { FavoriteVideoMemoType } from "./videomemo/FavoriteVideoMemoType";
 
 export type FavoriteVideoDetailDataType = {
 

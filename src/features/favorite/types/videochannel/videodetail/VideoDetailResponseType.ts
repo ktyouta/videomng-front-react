@@ -1,4 +1,4 @@
-import { VideoDetailItemType } from "./VideoDetailItemType";
+import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
 
 //YouTube Data Api(動画詳細)のレスポンス
 export type VideoDetailResponseType = {

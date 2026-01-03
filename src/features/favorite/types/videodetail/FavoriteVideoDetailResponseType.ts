@@ -1,5 +1,4 @@
 import { FavoriteVideoDetailDataType } from "./FavoriteVideoDetailDataType";
-import { YouTubeDataApiVideoDetailItemType } from "./YouTubeDataApiVideoDetailItemType";
 
 export type FavoriteVideoDetailResponseType = {
 

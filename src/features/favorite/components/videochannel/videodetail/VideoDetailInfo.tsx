@@ -5,8 +5,8 @@ import ButtonComponent from "../../../../../components/ButtonComponent";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { FLG } from "../../../../../consts/CommonConst";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
 import { useVideoDetailInfo } from "../../../hooks/videochannel/videodetail/useVideoDetailInfo";
-import { VideoDetailItemType } from "../../../types/videochannel/videodetail/VideoDetailItemType";
 
 const VideoInfoDiv = styled.div`
   width: 95%;

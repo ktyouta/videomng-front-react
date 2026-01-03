@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Loading from "../../../../components/Loading";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { VideoListDataType } from "../../../../types/videolist/VideoListDataType";
+import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
 import { useChannelVideoArea } from "../../hooks/videochannel/useChannelVideoArea";
-import { VideoListDataType } from "../../types/videochannel/VideoListDataType";
-import { VideoListItemType } from "../../types/videochannel/VideoListItemType";
 import { ChannelVideoContent } from "./ChannelVideoContent";
 
 const Parent = styled.div`

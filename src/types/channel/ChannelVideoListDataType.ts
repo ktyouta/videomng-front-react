@@ -1,6 +1,5 @@
-import { ChannelInfoType } from "./ChannelInfoType";
 import { VideoListItemType } from "../videolist/VideoListItemType";
-import { YouTubeDataApiVideoListItemType } from "../videolist/YouTubeDataApiVideoListItemType";
+import { ChannelInfoType } from "./ChannelInfoType";
 
 // チャンネル動画リストapiレスポンスの動画情報本体の型
 export type ChannelVideoListDataType = {

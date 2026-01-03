@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { VideoListDataType } from "../../types/videochannel/VideoListDataType";
+import { VideoListDataType } from "../../../../types/videolist/VideoListDataType";
 
 
 type propsType = {

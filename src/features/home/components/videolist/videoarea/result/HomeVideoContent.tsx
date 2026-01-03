@@ -1,13 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-import { YouTubeDataApiVideoListItemType } from "../../../../types/videolist/YouTubeDataApiVideoListItemType";
+import { FLG } from "../../../../../../consts/CommonConst";
+import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useHomeVideoContent } from "../../../../hooks/videolist/videoarea/result/useHomeVideoContent";
 import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { FaStar } from "react-icons/fa";
-import { FLG } from "../../../../../../consts/CommonConst";
 import { HomeVideoContentFavoriteIconArea } from "./HomeFavoriteIconArea";
-import { MEDIA } from "../../../../../../consts/MediaConst";
 
 
 const VideoArticle = styled.article`

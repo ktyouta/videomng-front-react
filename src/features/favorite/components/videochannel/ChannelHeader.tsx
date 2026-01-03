@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { MEDIA } from "../../../../consts/MediaConst";
-import { ChannelInfoType } from "../../types/videochannel/ChannelInfoType";
+import { ChannelInfoType } from "../../../../types/channel/ChannelInfoType";
 
 const Parent = styled.div`
   width: 100%;

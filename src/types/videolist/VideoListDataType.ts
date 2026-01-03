@@ -1,5 +1,4 @@
 import { VideoListItemType } from "./VideoListItemType";
-import { YouTubeDataApiVideoListItemType } from "./YouTubeDataApiVideoListItemType";
 
 // 動画リストapiレスポンスの動画情報本体の型
 export type VideoListDataType = {

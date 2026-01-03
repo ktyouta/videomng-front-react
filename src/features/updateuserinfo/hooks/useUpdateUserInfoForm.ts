@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { UpdateUserInfoFormType } from "../types/UpdateUserInfoForm";
+import { LoginUserInfoType } from "../../../types/userinfo/LoginUserInfoType";
 import { updateUserInfoSchema } from "../schemas/updateUserInfoSchema";
-import { LoginUserInfoType } from "../../../types/LoginUserInfoType";
+import { UpdateUserInfoFormType } from "../types/UpdateUserInfoForm";
 
 export function useUpdateUserInfoForm(loginUserInfo: LoginUserInfoType) {
 

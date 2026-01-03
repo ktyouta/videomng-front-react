@@ -1,5 +1,4 @@
-import ENV from "../env.json";
-import { LoginUserInfoType } from "../types/LoginUserInfoType";
+import { LoginUserInfoType } from "../types/userinfo/LoginUserInfoType";
 
 const protocol = import.meta.env.VITE_PROTOCOL ?? ``;
 const domain = import.meta.env.VITE_DOMAIN ?? ``;

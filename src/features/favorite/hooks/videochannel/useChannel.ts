@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { errResType } from "../../../../hooks/useMutationWrapperBase";
 import useQueryWrapper from "../../../../hooks/useQueryWrapper";
-import { ChannelVideoListDataType } from "../../types/videochannel/ChannelVideoListDataType";
-import { ChannelVideoListResponseType } from "../../types/videochannel/ChannelVideoListResponseType";
+import { ChannelVideoListDataType } from "../../../../types/channel/ChannelVideoListDataType";
+import { ChannelVideoListResponseType } from "../../../../types/channel/ChannelVideoListResponseType";
 import { useChannelEndpoint } from "./useChannelEndpoint";
 import { useChannelId } from "./useChannelId";
 

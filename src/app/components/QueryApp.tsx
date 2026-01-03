@@ -11,7 +11,7 @@ import { Main } from '../../features/main/components/Main';
 import { Siginup } from '../../features/signup/components/Siginup';
 import { UpdateUserInfo } from '../../features/updateuserinfo/components/UpdateUserInfo';
 import { UpdateUserPassword } from '../../features/updateuserpassword/components/UpdateUserPassword';
-import { LoginUserInfoType } from '../../types/LoginUserInfoType';
+import { LoginUserInfoType } from '../../types/userinfo/LoginUserInfoType';
 import { createCtx } from '../../utils/createCtx';
 import useQueryApp from '../hooks/useQueryApp';
 

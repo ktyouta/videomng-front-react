@@ -6,7 +6,7 @@ import ENV from "../../env.json";
 import { resSchema } from '../../hooks/useMutationWrapperBase';
 import useQueryWrapper from '../../hooks/useQueryWrapper';
 import { registerResetLogin } from '../../lib/accessTokenStore';
-import { LoginUserInfoType } from '../../types/LoginUserInfoType';
+import { LoginUserInfoType } from '../../types/userinfo/LoginUserInfoType';
 import { AuthCheckResponseSchema } from '../schemas/AuthCheckResponseSchema';
 
 

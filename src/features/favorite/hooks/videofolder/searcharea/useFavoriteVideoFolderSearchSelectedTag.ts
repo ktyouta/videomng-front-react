@@ -25,7 +25,7 @@ export function useFavoriteVideoFolderSearchSelectedTag() {
         const newTagValue = tagList.filter((e) => e !== value).join(`,`);
 
         const newQuery = create({
-            folderVideotag: newTagValue,
+            folderVideoTag: newTagValue,
             folderPage: INIT_PAGE
         });
 

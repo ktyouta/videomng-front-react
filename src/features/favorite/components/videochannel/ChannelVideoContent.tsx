@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FLG } from "../../../../consts/CommonConst";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
 import { useChannelVideoContent } from "../../hooks/videochannel/useChannelVideoContent";
-import { VideoListItemType } from "../../types/videochannel/VideoListItemType";
 import { FavoriteIconArea } from "./FavoriteIconArea";
 
 

@@ -1,7 +1,4 @@
-import { FavoriteVideoDetailDataType } from "../videodetail/FavoriteVideoDetailDataType";
-import { FavoriteVideoMemoType } from "../videodetail/videomemo/FavoriteVideoMemoType";
 import { ViewStatusType } from "./ViewStatusType";
-import { YouTubeDataApiVideoDetailItemType } from "../videodetail/YouTubeDataApiVideoDetailItemType";
 
 export type ViewStatusResponseType = {
 

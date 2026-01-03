@@ -31,7 +31,7 @@ export function useFavoriteVideoFolderSearchSortArea() {
     function selectSort(value: string) {
 
         const newQuery = create({
-            folderSortkey: value,
+            folderSortKey: value,
             folderPage: INIT_PAGE
         });
 
