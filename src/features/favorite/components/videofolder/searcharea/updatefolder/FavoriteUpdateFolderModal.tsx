@@ -67,12 +67,9 @@ export function FavoriteUpdateFolderModal(props: propsType) {
             <ModalPortal
                 isOpen={isOpenModal}
                 modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight=""
+                modalMinHeight="35%"
                 isCloseOuter={true}
                 close={closeModal}
-                containerStyle={{
-                    minHeight: "35%"
-                }}
             >
                 <FavoriteUpdateFolder
                     folder={props.folder}

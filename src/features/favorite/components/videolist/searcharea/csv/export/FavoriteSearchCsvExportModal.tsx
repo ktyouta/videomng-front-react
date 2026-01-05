@@ -74,12 +74,11 @@ export function FavoriteSearchCsvExportModal() {
                 isOpen={isOpenModal}
                 modalWidth={isMobile ? `80%` : `45%`}
                 containerStyle={{
-                    minHeight: `405px`,
                     fontSize: isMobile ? "12px" : "15px",
                     display: "flex",
                     flexDirection: "column"
                 }}
-                modalHeight=""
+                modalMinHeight="405px"
             >
                 <FavoriteSearchCsvExport
                     close={closeModal}

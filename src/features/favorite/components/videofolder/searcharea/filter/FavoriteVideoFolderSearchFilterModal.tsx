@@ -48,41 +48,41 @@ const FilterTitleSpan = styled.span`
  */
 export function FavoriteVideoFolderSearchFilterModal() {
 
-    console.log("FavoriteVideoFolderSearchFilterModal render");
+  console.log("FavoriteVideoFolderSearchFilterModal render");
 
-    const {
-        isOpenFilterModal,
-        openFilterModal,
-        closeFilterModal,
-        isMobile } = useFavoriteVideoFolderSearchFilterModal();
+  const {
+    isOpenFilterModal,
+    openFilterModal,
+    closeFilterModal,
+    isMobile } = useFavoriteVideoFolderSearchFilterModal();
 
 
-    return (
-        <React.Fragment>
-            <FilterIconAreaDiv>
-                <IconComponent
-                    icon={FaFilter}
-                    onclick={openFilterModal}
-                    size="40%"
-                />
-            </FilterIconAreaDiv>
-            <FilterTitleSpan
-                onClick={openFilterModal}
-            >
-                フィルター
-            </FilterTitleSpan>
-            {/* フィルターモーダル */}
-            <ModalPortal
-                isOpen={isOpenFilterModal}
-                modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight="70%"
-                isCloseOuter={true}
-                close={closeFilterModal}
-            >
-                <FavoriteVideoFolderSearchCondition
-                    close={closeFilterModal}
-                />
-            </ModalPortal>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <FilterIconAreaDiv>
+        <IconComponent
+          icon={FaFilter}
+          onclick={openFilterModal}
+          size="40%"
+        />
+      </FilterIconAreaDiv>
+      <FilterTitleSpan
+        onClick={openFilterModal}
+      >
+        フィルター
+      </FilterTitleSpan>
+      {/* フィルターモーダル */}
+      <ModalPortal
+        isOpen={isOpenFilterModal}
+        modalWidth={isMobile ? `80%` : `45%`}
+        modalMinHeight="70%"
+        isCloseOuter={true}
+        close={closeFilterModal}
+      >
+        <FavoriteVideoFolderSearchCondition
+          close={closeFilterModal}
+        />
+      </ModalPortal>
+    </React.Fragment>
+  );
 }

@@ -1,9 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import { ModalPortal } from "../../../../../components/ModalPortal";
 import { useHeaderUsagePrecautionModal } from "../../../hooks/SideMenu/UsagePrecaution/useHeaderUsagePrecautionModal";
 import { HeaderUsagePrecaution } from "./HeaderUsagePrecaution";
-import { OverlayDiv } from "../../../../../styles/styledcomponent/OverlayDiv";
-import { ModalPortal } from "../../../../../components/ModalPortal";
 
 
 type propsType = {
@@ -20,7 +17,7 @@ export function HeaderUsagePrecautionModal(props: propsType) {
         <ModalPortal
             isOpen={true}
             modalWidth={isMobile ? "86%" : "45%"}
-            modalHeight="70%"
+            modalMinHeight="70%"
             isCloseOuter={true}
             close={props.closeMenu}
         >

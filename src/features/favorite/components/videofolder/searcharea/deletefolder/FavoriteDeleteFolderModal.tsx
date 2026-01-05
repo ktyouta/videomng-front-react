@@ -70,7 +70,7 @@ export function FavoriteDeleteFolderModal() {
             <ModalPortal
                 isOpen={isOpenModal}
                 modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight="25%"
+                modalMinHeight="25%"
                 isCloseOuter={true}
                 close={closeModal}
                 containerStyle={{

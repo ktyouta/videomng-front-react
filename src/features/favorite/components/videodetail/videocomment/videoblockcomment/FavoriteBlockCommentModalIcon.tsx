@@ -1,12 +1,11 @@
+import React from "react";
+import { HiOutlineInbox } from 'react-icons/hi';
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { HiOutlineInbox } from 'react-icons/hi';
-import { useFavoriteBlockCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentModalIcon";
-import React from "react";
-import { FavoriteBlockComment } from "./FavoriteBlockComment";
-import { OverlayDiv } from "../../../../../../styles/styledcomponent/OverlayDiv";
-import { MEDIA } from "../../../../../../consts/MediaConst";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { MEDIA } from "../../../../../../consts/MediaConst";
+import { useFavoriteBlockCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentModalIcon";
+import { FavoriteBlockComment } from "./FavoriteBlockComment";
 
 
 const IconDiv = styled.div`
@@ -83,6 +82,11 @@ export function FavoriteBlockCommentModalIcon() {
             {/* 非表示コメントリスト */}
             <ModalPortal
                 isOpen={isOpenBlockListModal}
+                containerStyle={{
+                    height: `90%`
+                }}
+                isCloseOuter={true}
+                close={closeBlockListModal}
             >
                 <FavoriteBlockComment
                     close={closeBlockListModal}

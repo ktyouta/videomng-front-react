@@ -1,9 +1,9 @@
 import { CSSProperties } from "react";
-import styled from "styled-components";
-import { ClearableTextbox } from "./ClearableTextbox";
-import { MEDIA } from "../consts/MediaConst";
-import { IconComponent } from "./IconComponent";
 import { IconType } from "react-icons";
+import styled from "styled-components";
+import { MEDIA } from "../consts/MediaConst";
+import { ClearableTextbox } from "./ClearableTextbox";
+import { IconComponent } from "./IconComponent";
 
 
 const RADIUS_DEFAULT = "6px";
@@ -41,6 +41,7 @@ const SearchIconAreaDiv = styled.div<{ width: string, mobileWidth: string, radiu
   align-items: center;
   justify-content: center;
   width:${({ mobileWidth }) => (mobileWidth)};
+  cursor: pointer;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: ${({ mobileWidth }) => (mobileWidth)};
@@ -126,10 +127,10 @@ export function TextboxWithButton(props: propsType) {
         width={props.iconWidth}
         mobileWidth={props.iconMobileWidth}
         radius={props.radius ?? RADIUS_DEFAULT}
+        onClick={props.onClick}
       >
         <IconComponent
           icon={props.icon}
-          onclick={props.onClick}
           size={props.iconSize || "75%"}
         />
       </SearchIconAreaDiv>

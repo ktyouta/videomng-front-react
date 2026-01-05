@@ -47,44 +47,44 @@ const TitleSpan = styled.span`
  */
 export function FavoriteCreateFolderModal() {
 
-    console.log("FavoriteCreateFolderModal render");
+  console.log("FavoriteCreateFolderModal render");
 
-    const {
-        isOpenModal,
-        openModal,
-        closeModal,
-        isMobile, } = useFavoriteCreateFolderModal();
+  const {
+    isOpenModal,
+    openModal,
+    closeModal,
+    isMobile, } = useFavoriteCreateFolderModal();
 
 
-    return (
-        <React.Fragment>
-            <IconAreaDiv>
-                <IconComponent
-                    icon={FaFolder}
-                    onclick={openModal}
-                    size="40%"
-                />
-            </IconAreaDiv>
-            <TitleSpan
-                onClick={openModal}
-            >
-                フォルダ作成
-            </TitleSpan>
-            {/* フォルダ作成モーダル */}
-            <ModalPortal
-                isOpen={isOpenModal}
-                modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight=""
-                isCloseOuter={true}
-                close={closeModal}
-                containerStyle={{
-                    minHeight: "55%"
-                }}
-            >
-                <FavoriteCreateFolder
-                    close={closeModal}
-                />
-            </ModalPortal>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <IconAreaDiv>
+        <IconComponent
+          icon={FaFolder}
+          onclick={openModal}
+          size="40%"
+        />
+      </IconAreaDiv>
+      <TitleSpan
+        onClick={openModal}
+      >
+        フォルダ作成
+      </TitleSpan>
+      {/* フォルダ作成モーダル */}
+      <ModalPortal
+        isOpen={isOpenModal}
+        modalWidth={isMobile ? `80%` : `45%`}
+        modalMinHeight=""
+        isCloseOuter={true}
+        close={closeModal}
+        containerStyle={{
+          minHeight: "55%"
+        }}
+      >
+        <FavoriteCreateFolder
+          close={closeModal}
+        />
+      </ModalPortal>
+    </React.Fragment>
+  );
 }

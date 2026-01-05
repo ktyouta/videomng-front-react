@@ -1,13 +1,10 @@
+import React from "react";
+import { IoNewspaperOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { HiOutlineInbox } from 'react-icons/hi';
-import { useFavoriteBlockCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentModalIcon";
-import React from "react";
-import { OverlayDiv } from "../../../../../../styles/styledcomponent/OverlayDiv";
-import { useFavoriteFavoriteCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentModalIcon";
-import { IoNewspaperOutline } from "react-icons/io5";
-import { MEDIA } from "../../../../../../consts/MediaConst";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { MEDIA } from "../../../../../../consts/MediaConst";
+import { useFavoriteFavoriteCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentModalIcon";
 import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
 
 
@@ -84,6 +81,11 @@ export function FavoriteFavoriteCommentModalIcon() {
             {/* お気に入りコメントリスト */}
             <ModalPortal
                 isOpen={isOpenFavoriteListModal}
+                containerStyle={{
+                    height: `90%`
+                }}
+                isCloseOuter={true}
+                close={closeFavoriteListModal}
             >
                 <FavoriteFavoriteComment
                     close={closeFavoriteListModal}

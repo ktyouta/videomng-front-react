@@ -1,11 +1,10 @@
 import React from "react";
+import { MdTune } from 'react-icons/md';
 import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { ModalPortal } from "../../../../../components/ModalPortal";
 import { useHomeSearchConditionModal } from "../../../hooks/videolist/searcharea/useHomeSearchConditionModal";
 import { HomeSearchCondition } from "./HomeSearchCondition";
-import { OverlayDiv } from "../../../../../styles/styledcomponent/OverlayDiv";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { MdTune } from 'react-icons/md';
-import { ModalPortal } from "../../../../../components/ModalPortal";
 
 
 const SearchConditionIconAreaDiv = styled.div`
@@ -62,7 +61,7 @@ export function HomeSearchConditionModal() {
             <ModalPortal
                 isOpen={isOpenFilterModal}
                 modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight="55%"
+                modalMinHeight="55%"
                 isCloseOuter={true}
                 close={closeFilterModal}
             >

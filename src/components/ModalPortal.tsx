@@ -1,8 +1,7 @@
-import { CSSProperties, ReactNode, useEffect } from "react";
+import React, { CSSProperties, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
-import React from "react";
 import "../styles/css/ModalPortal.css";
 
 
@@ -12,7 +11,7 @@ type basePropsType = {
     containerStyle?: CSSProperties,
     zindex?: number,
     isOpen: boolean,
-    modalHeight?: string,
+    modalMinHeight?: string,
     modalWidth?: string,
 }
 
@@ -35,15 +34,18 @@ const Overlay = styled.div<{ zIndex?: number }>`
   z-index: ${({ zIndex }) => zIndex ?? Z_INDEX_PARAM.MODAL_OVERLAY};
 `;
 
-const ModalContainer = styled.div<{ modalHeight?: string, modalWidth?: string, }>`
+const ModalContainer = styled.div<{ modalMinHeight?: string, modalWidth?: string, }>`
   position: relative;
   background-color: #181a1e;
   border-radius: 6px;
   padding: 20px;
-  height: ${({ modalHeight }) => modalHeight ?? `90%`};
+  min-height: ${({ modalMinHeight }) => modalMinHeight ?? `90%`};
+  max-height:90%;
   width: ${({ modalWidth }) => modalWidth ?? `73%`};
   border: 1px solid white;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 `;
 
 export function ModalPortal(props: CloseableProps | NonCloseableProps) {
@@ -85,7 +87,7 @@ export function ModalPortal(props: CloseableProps | NonCloseableProps) {
                     >
                         <ModalContainer
                             style={props.containerStyle}
-                            modalHeight={props.modalHeight}
+                            modalMinHeight={props.modalMinHeight}
                             modalWidth={props.modalWidth}
                             onClick={(e) => e.stopPropagation()}
                         >

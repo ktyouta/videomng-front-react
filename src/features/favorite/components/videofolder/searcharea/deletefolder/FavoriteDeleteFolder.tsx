@@ -7,8 +7,10 @@ import { DELETEFAVORITEVIDEOINFOLDER } from "../../../../const/FavoriteConst";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  height:100%;
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  flex:1;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 13px;
@@ -24,7 +26,7 @@ const Parent = styled.div`
 `;
 
 const MeainArea = styled.div`
-    height: 59%;
+    flex: 1;
 `;
 
 const MessageArea = styled.div`
@@ -51,7 +53,7 @@ const SelectLabel = styled.label`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 30%;
+    height: 60px;
     box-sizing: border-box;
     color: black;
     display: flex;

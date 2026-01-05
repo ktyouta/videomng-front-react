@@ -48,41 +48,41 @@ const FilterTitleSpan = styled.span`
  */
 export function FavoriteSearchFilterModal() {
 
-    console.log("FavoriteSearchFilterModal render");
+  console.log("FavoriteSearchFilterModal render");
 
-    const {
-        isOpenFilterModal,
-        openFilterModal,
-        closeFilterModal,
-        isMobile } = useFavoriteSearchFilterModal();
+  const {
+    isOpenFilterModal,
+    openFilterModal,
+    closeFilterModal,
+    isMobile } = useFavoriteSearchFilterModal();
 
 
-    return (
-        <React.Fragment>
-            <FilterIconAreaDiv>
-                <IconComponent
-                    icon={FaFilter}
-                    onclick={openFilterModal}
-                    size="40%"
-                />
-            </FilterIconAreaDiv>
-            <FilterTitleSpan
-                onClick={openFilterModal}
-            >
-                フィルター
-            </FilterTitleSpan>
-            {/* フィルターモーダル */}
-            <ModalPortal
-                isOpen={isOpenFilterModal}
-                modalWidth={isMobile ? `80%` : `45%`}
-                modalHeight="70%"
-                isCloseOuter={true}
-                close={closeFilterModal}
-            >
-                <FavoriteSearchCondition
-                    close={closeFilterModal}
-                />
-            </ModalPortal>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <FilterIconAreaDiv>
+        <IconComponent
+          icon={FaFilter}
+          onclick={openFilterModal}
+          size="40%"
+        />
+      </FilterIconAreaDiv>
+      <FilterTitleSpan
+        onClick={openFilterModal}
+      >
+        フィルター
+      </FilterTitleSpan>
+      {/* フィルターモーダル */}
+      <ModalPortal
+        isOpen={isOpenFilterModal}
+        modalWidth={isMobile ? `80%` : `45%`}
+        modalMinHeight="70%"
+        isCloseOuter={true}
+        close={closeFilterModal}
+      >
+        <FavoriteSearchCondition
+          close={closeFilterModal}
+        />
+      </ModalPortal>
+    </React.Fragment>
+  );
 }

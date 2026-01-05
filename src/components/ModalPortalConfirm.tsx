@@ -9,26 +9,28 @@ import { ModalPortal } from "./ModalPortal";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:1%;
-  height:100%;
+  padding-top:3%;
+  display: flex;
+  flex-direction:column;
+  flex: 1;
 `;
 
 const HeaderDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
   padding-left: 1%;
-  height:65%;
+  flex: 1;
 `;
 
 const TitleSpan = styled.div`
   font-size:14px;
+  width: 100%;
 `;
 
 const BtnAreaDiv = styled.div`
     width: 100%;
-    height: 36%;
+    height: 60px;
     box-sizing: border-box;
     color: white;
     display: flex;
@@ -63,7 +65,7 @@ export function ModalPortalConfirm(props: propsType) {
                 ...props.style,
             }}
             modalWidth={modalWidth}
-            modalHeight="30%"
+            modalMinHeight="clamp(240px, 20vh, 300px)"
             zindex={Z_INDEX_PARAM.CONFIRM_MODAL_OVERLAY}
         >
             <Parent>
