@@ -1,9 +1,11 @@
 import { DragEndEvent } from "@dnd-kit/core";
 import { toast } from "react-toastify";
+import { FLG } from "../../../../../consts/CommonConst";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { callApi } from "../../../../../utils/callApi";
 import { DisplayFolderListContext, DisplayVideoListContext, SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
+import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { FolderType } from "../../../types/videolist/FolderType";
@@ -108,9 +110,11 @@ export function useFavoriteVideoArea() {
                 });
 
                 // フォルダ登録後に一覧から非表示にする
-                setDisplayVideoList((e) => {
+                setDisplayVideoList((e: FavoriteVideoListMergedType[]) => {
 
-                    const newList = e.filter((e1) => e1.id !== videoId);
+                    const newList = e.filter((e1) => {
+                        return e1.id !== videoId || e1.isVisibleAfterFolderAdd === FLG.ON;
+                    });
                     return newList;
                 });
 

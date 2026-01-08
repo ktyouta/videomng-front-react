@@ -2,4 +2,5 @@
 export type FavoriteVideoTransactionType = {
     readonly userId: number,
     readonly videoId: string,
+    readonly isVisibleAfterFolderAdd: string,
 }
