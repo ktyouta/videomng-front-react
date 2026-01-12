@@ -1,14 +1,9 @@
 import styled from "styled-components";
-import { useFavoriteMemoList } from "../../../hooks/videodetail/videomemo/useFavoriteMemoList";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../videomemo/FavoriteMemoContent";
-import LoadingBase from "../../../../../components/LoadingBase";
+import Loading from "../../../../../components/Loading";
+import TagButtonComponent from "../../../../../components/TagButtonComponent";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteTagList } from "../../../hooks/videodetail/videotag/useFavoriteTagList";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
-import React from "react";
-import TagButtonComponent from "../../../../../components/TagButtonComponent";
-import Loading from "../../../../../components/Loading";
-import { MEDIA } from "../../../../../consts/MediaConst";
 
 
 const Parent = styled.div`
@@ -127,6 +122,7 @@ export function FavoriteTagList() {
                                         marginRight: "15px"
                                     }}
                                     key={tagId}
+                                    tagColor={e.tagColor}
                                 />
                             )
                         })

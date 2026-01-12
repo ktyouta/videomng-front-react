@@ -109,7 +109,7 @@ export function FavoriteTagEditAssignedList() {
                                                         deleteTag(index);
                                                     }}
                                                     key={`${tagKey}-tagedit`}
-                                                    bgColor={e.bgColor}
+                                                    tagColor={e.tagColor}
                                                 />
                                             )
                                         })

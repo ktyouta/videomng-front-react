@@ -77,7 +77,7 @@ export function useFavoriteTagEditUpdateIcon() {
                 prev.push({
                     id: value ?? undefined,
                     name: e.label,
-                    bgColor: e.bgColor,
+                    tagColor: e.tagColor,
                 });
 
                 return prev;

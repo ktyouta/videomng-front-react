@@ -1,16 +1,13 @@
-import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { toast } from "react-toastify";
+import { tagType } from "../../../../../components/TagsComponent";
 import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
 import ENV from "../../../../../env.json";
 import { errResType } from "../../../../../hooks/useMutationWrapperBase";
-import { FavoriteVideoMemoResponseType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoResponseType";
+import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
-import { tagType } from "../../../../../components/TagsComponent";
-import { toast } from "react-toastify";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
-import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 
 
 
@@ -36,6 +33,7 @@ export function useFavoriteTagEditExistingList() {
                     return {
                         value: e.tagName,
                         label: e.tagName,
+                        tagColor: e.tagColor,
                     }
                 });
 

@@ -1,13 +1,12 @@
-import styled from "styled-components";
 import React from "react";
+import { GoTriangleDown, GoTriangleRight } from "react-icons/go";
+import styled from "styled-components";
+import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
+import { IconComponent } from "../../../../../components/IconComponent";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { tagType } from "../../../../../components/TagsComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
-import { GoTriangleDown } from "react-icons/go";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { GoTriangleRight } from "react-icons/go";
 import { useFavoriteTagEditExistingList } from "../../../hooks/videodetail/videotag/useFavoriteTagEditExistingList";
-import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
 
 
 const Parent = styled.div`
@@ -197,6 +196,7 @@ export function FavoriteTagEditExistingList() {
                                                                     addTagEditList(e);
                                                                 }}
                                                                 key={`${tagKey}-tagmst`}
+                                                                tagColor={e.tagColor}
                                                             />
                                                         )
                                                     })

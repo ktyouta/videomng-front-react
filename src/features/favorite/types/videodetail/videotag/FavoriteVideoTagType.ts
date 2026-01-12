@@ -6,5 +6,6 @@ export type FavoriteVideoTagType = {
     createDate: Date;
     updateDate: Date;
     deleteFlg: string;
-    tagName: string,
+    tagName: string;
+    tagColor: string;
 }

@@ -5,7 +5,7 @@ import '../styles/css/TagsComponent.css';
 export type tagType = {
     label: string,
     value: string | number | symbol | null,
-    bgColor?: string,
+    tagColor?: string,
 }
 
 //引数の型

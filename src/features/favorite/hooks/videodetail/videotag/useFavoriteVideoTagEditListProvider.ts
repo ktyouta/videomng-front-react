@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { tagType } from "../../../../../components/TagsComponent";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
-import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { errResType } from "../../../../../hooks/useMutationWrapperBase";
+import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
 import { useVideoId } from "../useVideoId";
+import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 export function useFavoriteVideoTagEditListProvider() {
@@ -29,6 +29,7 @@ export function useFavoriteVideoTagEditListProvider() {
                     return {
                         label: e.tagName,
                         value: e.tagId,
+                        tagColor: e.tagColor,
                     }
                 }));
             },

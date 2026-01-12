@@ -31,7 +31,7 @@ export function useFavoriteAddTagMain(props: propsType) {
         const newTag: tagType = {
             label: tagName,
             value: null,
-            bgColor: tagColor
+            tagColor
         }
 
         // 編集リストに追加

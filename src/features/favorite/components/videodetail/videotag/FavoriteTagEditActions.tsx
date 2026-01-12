@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import BaseTextbox from "../../../../../components/BaseTextbox";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { FaArrowUp } from "react-icons/fa";
-import { useFavoriteMemoCreateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCreateInput";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { FavoriteTagEditCloseIcon } from "./FavoriteTagEditCloseIcon";
 import { FavoriteTagEditUpdateIcon } from "./FavoriteTagEditUpdateIcon";
-import { tagType } from "../../../../../components/TagsComponent";
 
 
 const MemoInputAreaDiv = styled.div`
