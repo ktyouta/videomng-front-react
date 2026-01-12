@@ -1,8 +1,8 @@
 import { Option } from "../../../../components/Selectbox";
 import { VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
+import ENV from "../../../../env.json";
 import useQueryWrapper from "../../../../hooks/useQueryWrapper";
 import { FavoriteVideoTagResponseType } from "../../types/videodetail/videotag/FavoriteVideoTagResponseType";
-import ENV from "../../../../env.json";
 
 
 type porpsType = {
@@ -12,7 +12,7 @@ type porpsType = {
 export function useTagMasterList(props: porpsType) {
 
     // タグマスタリストを取得
-    return useQueryWrapper<FavoriteVideoTagResponseType, Option[]>(
+    return useQueryWrapper<FavoriteVideoTagResponseType, (Option & { tagColor: string })[]>(
         {
             url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
             select: (res: FavoriteVideoTagResponseType) => {
@@ -24,6 +24,7 @@ export function useTagMasterList(props: porpsType) {
                         return {
                             value: e.tagName,
                             label: e.tagName,
+                            tagColor: e.tagColor,
                         }
                     })
                 ]

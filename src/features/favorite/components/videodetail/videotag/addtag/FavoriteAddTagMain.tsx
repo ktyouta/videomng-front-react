@@ -5,6 +5,7 @@ import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
+import TagButtonComponent from "../../../../../../components/TagButtonComponent";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteAddTagMain } from "../../../../hooks/videodetail/videotag/addtag/useFavoriteAddTagMain";
 
@@ -101,11 +102,24 @@ export function FavoriteAddTagMain(props: propsType) {
                             選択中のタグカラー
                         </SelectColorTitleDiv>
                         {/* プレビュー */}
-                        <IconComponent
-                            icon={FaSquare}
-                            bgColor={tagColor}
-                            size="35px"
-                        />
+                        {
+                            tagName
+                                ?
+                                <TagButtonComponent
+                                    title={tagName}
+                                    btnStyle={{
+                                        marginRight: "15px"
+                                    }}
+                                    tagColor={tagColor}
+                                />
+
+                                :
+                                <IconComponent
+                                    icon={FaSquare}
+                                    bgColor={tagColor}
+                                    size="35px"
+                                />
+                        }
                     </SelectedColor>
                     <DefaultColorLink
                         onClick={() => {

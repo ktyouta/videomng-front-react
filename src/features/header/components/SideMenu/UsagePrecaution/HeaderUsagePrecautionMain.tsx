@@ -9,7 +9,6 @@ const Parent = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
-    justify-content: center;
     padding: 0 5%;
     line-height: 2.0;
 `;

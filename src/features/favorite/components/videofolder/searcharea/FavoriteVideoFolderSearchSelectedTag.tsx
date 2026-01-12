@@ -1,5 +1,6 @@
 import React from "react";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
+import { DEFAULT_TAG_COLOR } from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchSelectedTag } from "../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchSelectedTag";
 
 
@@ -12,7 +13,8 @@ export function FavoriteVideoFolderSearchSelectedTag() {
 
   const {
     selectedFavoriteVideoTag,
-    resetTag } = useFavoriteVideoFolderSearchSelectedTag();
+    resetTag,
+    tagMasterList, } = useFavoriteVideoFolderSearchSelectedTag();
 
   const tagList = selectedFavoriteVideoTag ? selectedFavoriteVideoTag.split(`,`) : [];
 
@@ -20,8 +22,12 @@ export function FavoriteVideoFolderSearchSelectedTag() {
     <React.Fragment>
       {
         // 選択中のタグ
+        tagMasterList && tagMasterList.length > 0 &&
         tagList && tagList.length > 0 &&
         tagList.map((e) => {
+
+          const tagInfo = tagMasterList.find((e1) => e1.value === e);
+
           return (
             <TagButtonComponent
               title={e}
@@ -34,6 +40,7 @@ export function FavoriteVideoFolderSearchSelectedTag() {
               onclick={() => {
                 resetTag(e);
               }}
+              tagColor={tagInfo?.tagColor ?? DEFAULT_TAG_COLOR}
             />
           )
         })

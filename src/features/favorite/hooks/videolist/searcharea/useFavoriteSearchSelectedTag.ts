@@ -1,6 +1,7 @@
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
+import { useTagMasterList } from "../useTagMasterList";
 
 
 export function useFavoriteSearchSelectedTag() {
@@ -13,7 +14,10 @@ export function useFavoriteSearchSelectedTag() {
     const { create } = useCreateFavoriteVideoListQuery();
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
-
+    // タグマスタリスト
+    const { data: tagMasterList } = useTagMasterList({
+        isGetChache: true
+    });
 
     /**
      * 選択中のタグをリセット
@@ -37,5 +41,6 @@ export function useFavoriteSearchSelectedTag() {
     return {
         selectedFavoriteVideoTag,
         resetTag,
+        tagMasterList,
     }
 }

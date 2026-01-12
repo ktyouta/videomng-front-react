@@ -29,14 +29,22 @@ export function useFavoriteAddTagMain(props: propsType) {
         }
 
         const newTag: tagType = {
-            label: tagName,
+            label: tagName.trim(),
             value: null,
             tagColor
         }
 
         // 編集リストに追加
         setFavoriteVideoTagEditList((e) => {
-            return [...e, newTag];
+
+            const tagInfo = e.find((e1) => e1.label === newTag.label);
+
+            if (tagInfo) {
+                return e.map(tag => tag.label === newTag.label ? newTag : tag);
+            }
+            else {
+                return [...e, newTag];
+            }
         });
 
         props.close();
