@@ -1,11 +1,8 @@
+import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { HiOutlineInbox } from 'react-icons/hi';
-import { useFavoriteBlockCommentModalIcon } from "../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentModalIcon";
-import React from "react";
-import { RxCross1 } from "react-icons/rx";
-import { useFavoriteDetailSettingCloseIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingCloseIcon";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteDetailSettingCloseIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingCloseIcon";
 
 
 const Parent = styled.div`
@@ -71,7 +68,7 @@ export function FavoriteDetailSettingCloseIcon(props: propsType) {
                 icon={RxCross1}
                 onclick={props.changeView}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#E53935"
                 onMouseEnter={openCloseNav}
                 onMouseLeave={closeCloseNav}
             />

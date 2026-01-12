@@ -1,8 +1,8 @@
+import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { RxCross1 } from "react-icons/rx";
-import { useFavoriteTagEditCloseIcon } from "../../../hooks/videodetail/videotag/useFavoriteTagEditCloseIcon";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteTagEditCloseIcon } from "../../../hooks/videodetail/videotag/useFavoriteTagEditCloseIcon";
 
 
 const Parent = styled.div`
@@ -64,7 +64,7 @@ export function FavoriteTagEditCloseIcon() {
                 icon={RxCross1}
                 onclick={changeView}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#E53935"
                 onMouseEnter={openCloseNav}
                 onMouseLeave={closeCloseNav}
             />

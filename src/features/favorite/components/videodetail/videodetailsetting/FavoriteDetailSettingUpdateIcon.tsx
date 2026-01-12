@@ -1,8 +1,8 @@
+import { FaCheck } from "react-icons/fa6";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { FaCheck } from "react-icons/fa6";
-import { useFavoriteDetailSettingUpdateIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingUpdateIcon";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteDetailSettingUpdateIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingUpdateIcon";
 
 
 const Parent = styled.div`
@@ -67,7 +67,7 @@ export function FavoriteDetailSettingUpdateIcon(props: propsType) {
                 icon={FaCheck}
                 onclick={props.updateFavoriteVideo}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#43A047"
                 onMouseEnter={openUpdateNav}
                 onMouseLeave={closeUpdateNav}
             />

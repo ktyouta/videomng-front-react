@@ -12,17 +12,20 @@ type propsType = {
     width?: string,
     heght?: string,
     isDispCross?: boolean,
+    bgColor?: string,
+    titleColor?: string,
 }
 
 
 //ボタンの基本スタイル
-const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?: boolean, isCursorPointer: boolean }>`
+const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?: boolean, isCursorPointer: boolean, bgColor?: string, titleColor?: string }>`
     width:${({ width }) => (width ?? "")};
     heght:${({ heght }) => (heght ?? "")};
     padding: .375rem .5rem;
-    border: 1px solid #3b82f6;
+    border: 1px solid ${({ bgColor }) => (bgColor ?? "linear-gradient(135deg, #3b82f6, #2563eb)")};
     border-radius: 6px;
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background:${({ bgColor }) => (bgColor ?? "linear-gradient(135deg, #3b82f6, #2563eb)")};
+    color:${({ titleColor }) => (titleColor ?? "#181818")};
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     font-size: inherit;
     line-height: inherit;
@@ -32,11 +35,10 @@ const BaseButton = styled.button<{ width?: string, heght?: string, isDispCross?:
     cursor:${({ isCursorPointer }) => (isCursorPointer ? "pointer" : "default")};
     min-width: 82px;
     text-align: center;
-
         &:focus {
         outline: none;
     }
-
+        
     &:focus-visible {
         outline: none;
     }
@@ -68,6 +70,8 @@ const TagButtonComponent = (props: propsType) => {
             heght={props.heght}
             width={props.width}
             isDispCross={props.isDispCross}
+            bgColor={props.bgColor}
+            titleColor={props.titleColor}
             style={props.btnStyle}
             onClick={props.onclick}
             isCursorPointer={!!props.onclick}

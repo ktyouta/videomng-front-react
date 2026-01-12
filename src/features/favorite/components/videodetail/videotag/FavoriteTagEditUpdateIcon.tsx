@@ -1,8 +1,8 @@
+import { FaCheck } from "react-icons/fa6";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { FaCheck } from "react-icons/fa6";
-import { useFavoriteTagEditUpdateIcon } from "../../../hooks/videodetail/videotag/useFavoriteTagEditUpdateIcon";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteTagEditUpdateIcon } from "../../../hooks/videodetail/videotag/useFavoriteTagEditUpdateIcon";
 
 
 const Parent = styled.div`
@@ -62,9 +62,9 @@ export function FavoriteTagEditUpdateIcon() {
                 icon={FaCheck}
                 onclick={udpateTag}
                 size="100%"
-                style={{ color: "white" }}
                 onMouseEnter={openUpdateNav}
                 onMouseLeave={closeUpdateNav}
+                bgColor="#43A047"
             />
             <BlockNavDiv
                 isDisplay={isOpenUpdateNav}

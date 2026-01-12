@@ -1,10 +1,8 @@
 import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { MdEdit } from "react-icons/md";
-import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
-import { useFavoriteMemoUpdateIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoUpdateIconArea";
 import { FaCheck } from "react-icons/fa6";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { useFavoriteMemoUpdateIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoUpdateIconArea";
 
 
 const UpdateNavDiv = styled.div<{ isDisplay: boolean }>`
@@ -45,6 +43,7 @@ export function FavoriteMemoUpdateIconArea(props: propsType) {
                 size="50%"
                 onMouseEnter={openUpdateNav}
                 onMouseLeave={closeUpdateNav}
+                bgColor="#43A047"
             />
             <UpdateNavDiv
                 isDisplay={isOpenUpdateNav}

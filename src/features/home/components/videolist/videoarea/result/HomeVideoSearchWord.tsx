@@ -1,15 +1,10 @@
-import styled from "styled-components";
-import { useHomeVideoListResult } from "../../../../hooks/videolist/videoarea/result/useHomeVideoListResult";
-import { VideoListDataType } from "../../../../types/videolist/VideoListDataType";
-import { nowSearchConditionType } from "../../../HomeVideoNowSearchConditionValueProvider";
 import React from "react";
-import { FAVORITE_KEYWORD_MAX } from "../../../../const/HomeConst";
-import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
-import { HomeVideoContent } from "./HomeVideoContent";
-import { MEDIA } from "../../../../../../consts/MediaConst";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { FaCheck } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../../components/IconComponent";
+import { MEDIA } from "../../../../../../consts/MediaConst";
+import { FAVORITE_KEYWORD_MAX } from "../../../../const/HomeConst";
 import { useHomeVideoSearchWord } from "../../../../hooks/videolist/videoarea/result/useHomeVideoSearchWord";
 
 
@@ -97,9 +92,7 @@ export function HomeVideoSearchWord(props: propsType) {
                                     <IconComponent
                                         icon={FaCheck}
                                         size="30%"
-                                        style={{
-                                            color: `rgb(158, 158, 158)`
-                                        }}
+                                        bgColor="#43A047"
                                     />
                                 </RegisterdFavoriteIconDiv>
                                 <RegisterdFavoriteTitleSpan>

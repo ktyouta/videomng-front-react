@@ -149,3 +149,6 @@ export const ISSHOWFOLDERFILTERLIST = [
 
 // デフォルトのフォルダカラー
 export const DEFAULT_FOLDER_COLOR = "#00A8FF";
+
+// デフォルトのタグカラー
+export const DEFAULT_TAG_COLOR = "linear-gradient(135deg, #3b82f6, #2563eb)";

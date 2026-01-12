@@ -1,13 +1,8 @@
 import styled from "styled-components";
 import BaseTextbox from "../../../../../components/BaseTextbox";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { FaArrowUp } from "react-icons/fa";
-import { useFavoriteMemoCreateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCreateInput";
 import { useFavoriteMemoUpdateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoUpdateInput";
-import { RxCross1 } from "react-icons/rx";
-import { FaCheck } from "react-icons/fa6";
-import { FavoriteMemoUpdateIconArea } from "./FavoriteMemoUpdateIconArea";
 import { FavoriteMemoCancelIconArea } from "./FavoriteMemoCancelIconArea";
+import { FavoriteMemoUpdateIconArea } from "./FavoriteMemoUpdateIconArea";
 
 
 const MemoInputAreaDiv = styled.div`

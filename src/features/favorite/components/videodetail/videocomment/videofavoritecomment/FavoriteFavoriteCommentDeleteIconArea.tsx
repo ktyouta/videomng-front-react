@@ -1,15 +1,8 @@
-import React from "react";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { MdEdit } from "react-icons/md";
-import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
-import { useFavoriteMemoDeleteIconArea } from "../../../../hooks/videodetail/videomemo/useFavoriteMemoDeleteIconArea";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useFavoriteCommentBlockIconArea } from "../../../../hooks/videodetail/videocomment/useFavoriteCommentBlockIconArea";
-import { MdVisibility } from "react-icons/md";
-import { useFavoriteCommentRestoreIconArea } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteCommentRestoreIconArea";
-import { useFavoriteFavoriteCommentDeleteIconArea } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentDeleteIconArea";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../../consts/MediaConst";
+import { useFavoriteFavoriteCommentDeleteIconArea } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentDeleteIconArea";
 
 
 const IconDiv = styled.div`
@@ -70,7 +63,7 @@ export function FavoriteFavoriteCommentDeleteIconArea(props: propsType) {
                 icon={FaRegTrashAlt}
                 onclick={props.deleteComment}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#A1A1AA"
                 onMouseEnter={openDeleteNav}
                 onMouseLeave={closeDeleteNav}
             />

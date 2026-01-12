@@ -1,14 +1,9 @@
-import styled from "styled-components";
-import { FavoriteFavoriteCommentModalIcon } from "../videocomment/videofavoritecomment/FavoriteFavoriteCommentModalIcon";
-import { FavoriteBlockCommentModalIcon } from "../videocomment/videoblockcomment/FavoriteBlockCommentModalIcon";
-import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
-import { FavoriteDetailSettingEditIcon } from "../videodetailsetting/FavoriteDetailSettingEditIcon";
-import { EDIT_MODE } from "../../../const/FavoriteConst";
-import { IconComponent } from "../../../../../components/IconComponent";
 import { MdEdit } from "react-icons/md";
-import { useFavoriteDetailSettingEditIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEditIcon";
-import { useFavoriteTagViewActions } from "../../../hooks/videodetail/videotag/useFavoriteTagViewActions";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { useFavoriteTagViewActions } from "../../../hooks/videodetail/videotag/useFavoriteTagViewActions";
 
 
 const Parent = styled.div`
@@ -83,7 +78,7 @@ export function FavoriteTagViewActions() {
           icon={MdEdit}
           onclick={changeEdit}
           size="100%"
-          style={{ color: "white" }}
+          bgColor="#60A5FA"
           onMouseEnter={openEditNav}
           onMouseLeave={closeEditNav}
         />

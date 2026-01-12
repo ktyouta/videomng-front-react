@@ -1,11 +1,8 @@
-import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { MdEdit } from "react-icons/md";
-import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
-import { useFavoriteMemoDeleteIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoDeleteIconArea";
 import { FaRegTrashAlt } from "react-icons/fa";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteMemoDeleteIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoDeleteIconArea";
 
 
 const Parent = styled.div`
@@ -66,7 +63,7 @@ export function FavoriteMemoDeleteIconArea(props: propsType) {
                 icon={FaRegTrashAlt}
                 onclick={props.deleteMemo}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#A1A1AA"
                 onMouseEnter={openDeleteNav}
                 onMouseLeave={closeDeleteNav}
             />

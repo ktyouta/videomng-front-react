@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react'
-import { ReactTags } from 'react-tag-autocomplete'
+import { ReactTags } from 'react-tag-autocomplete';
 import '../styles/css/TagsComponent.css';
 
 //タグの型
 export type tagType = {
     label: string,
     value: string | number | symbol | null,
+    bgColor?: string,
 }
 
 //引数の型

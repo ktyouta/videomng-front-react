@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import React from "react";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { tagType } from "../../../../../components/TagsComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteTagEditAssignedList } from "../../../hooks/videodetail/videotag/useFavoriteTagEditAssignedList";
+import { FavoriteAddTagModal } from "./addtag/FavoriteAddTagModal";
 
 
 const Parent = styled.div`
@@ -38,8 +38,13 @@ const TagListTitleDiv = styled.div`
     }
 `;
 
+const SettingTagAreaDiv = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const TagListAreaDiv = styled.div`
-    width: 97%;
+    flex:1;
     overflow: auto;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -47,6 +52,7 @@ const TagListAreaDiv = styled.div`
 `;
 
 const NoTagListTitleDiv = styled.div`
+    flex:1;
     margin-top: 2%;
     margin-left: 1%;
     margin-bottom: 30px;
@@ -82,7 +88,7 @@ export function FavoriteTagEditAssignedList() {
                 </TagListTitleDiv>
                 {
                     favoriteVideoTagEditList &&
-                    <React.Fragment>
+                    <SettingTagAreaDiv>
                         {
                             favoriteVideoTagEditList.length > 0 ?
                                 <TagListAreaDiv>
@@ -103,6 +109,7 @@ export function FavoriteTagEditAssignedList() {
                                                         deleteTag(index);
                                                     }}
                                                     key={`${tagKey}-tagedit`}
+                                                    bgColor={e.bgColor}
                                                 />
                                             )
                                         })
@@ -114,7 +121,8 @@ export function FavoriteTagEditAssignedList() {
                                     「タグを入力して追加」または「既存タグ」から設定可能です。
                                 </NoTagListTitleDiv>
                         }
-                    </React.Fragment>
+                        <FavoriteAddTagModal />
+                    </SettingTagAreaDiv>
                 }
             </TagEditAreaDiv>
         </Parent>

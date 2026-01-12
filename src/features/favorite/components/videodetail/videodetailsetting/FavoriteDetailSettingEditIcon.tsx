@@ -1,8 +1,8 @@
+import { MdEdit } from "react-icons/md";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { useFavoriteDetailSettingEditIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEditIcon";
-import { MdEdit } from "react-icons/md";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteDetailSettingEditIcon } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEditIcon";
 
 
 const Parent = styled.div`
@@ -67,7 +67,7 @@ export function FavoriteDetailSettingEditIcon(props: propsType) {
                 icon={MdEdit}
                 onclick={props.changeEdit}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#60A5FA"
                 onMouseEnter={openEditNav}
                 onMouseLeave={closeEditNav}
             />

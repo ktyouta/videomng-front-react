@@ -1,9 +1,8 @@
-import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
 import { MdEdit } from "react-icons/md";
 import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
+import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteMemoEditIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
 
 
 const Parent = styled.div`
@@ -65,7 +64,7 @@ export function FavoriteMemoEditIconArea(props: propsType) {
                 icon={MdEdit}
                 onclick={props.openEdit}
                 size="100%"
-                style={{ color: "white" }}
+                bgColor="#60A5FA"
                 onMouseEnter={openEditNav}
                 onMouseLeave={closeEditNav}
             />

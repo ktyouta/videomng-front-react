@@ -1,10 +1,8 @@
 import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { MdEdit } from "react-icons/md";
-import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
-import { useFavoriteMemoCacelIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCacelIconArea";
 import { RxCross1 } from "react-icons/rx";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { useFavoriteMemoCacelIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCacelIconArea";
 
 
 const CancelNavDiv = styled.div<{ isDisplay: boolean }>`
@@ -45,6 +43,7 @@ export function FavoriteMemoCancelIconArea(props: propsType) {
                 size="50%"
                 onMouseEnter={openCancelNav}
                 onMouseLeave={closeCancelNav}
+                bgColor="#E53935"
             />
             <CancelNavDiv
                 isDisplay={isOpenCancelNav}

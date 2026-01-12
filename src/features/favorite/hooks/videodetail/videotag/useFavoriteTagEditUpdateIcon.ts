@@ -1,16 +1,14 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
-import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
-import useSwitch from "../../../../../hooks/useSwitch";
-import { UpdateToFavoriteVideoTagReqestType } from "../../../types/videodetail/videotag/UpdateToFavoriteVideoTagReqestType";
-import { tagType } from "../../../../../components/TagsComponent";
-import { UpdateFavoriteVideoTagType } from "../../../types/videodetail/videotag/UpdateFavoriteVideoTagType";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
-import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
+import { tagType } from "../../../../../components/TagsComponent";
+import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import useSwitch from "../../../../../hooks/useSwitch";
 import { ChangeViewContext } from "../../../components/videodetail/videotag/FavoriteTag";
+import { FavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
+import { UpdateFavoriteVideoTagType } from "../../../types/videodetail/videotag/UpdateFavoriteVideoTagType";
+import { UpdateToFavoriteVideoTagReqestType } from "../../../types/videodetail/videotag/UpdateToFavoriteVideoTagReqestType";
 import { useVideoId } from "../useVideoId";
+import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 
@@ -78,7 +76,8 @@ export function useFavoriteTagEditUpdateIcon() {
 
                 prev.push({
                     id: value ?? undefined,
-                    name: e.label
+                    name: e.label,
+                    bgColor: e.bgColor,
                 });
 
                 return prev;

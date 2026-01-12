@@ -1,9 +1,6 @@
-import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
-import { YouTubeDataApiVideoDetailItemType } from "../../../types/videodetail/YouTubeDataApiVideoDetailItemType";
+import { YouTubeDataApiVideoDetailItemType } from "../../../../../types/youtube/YouTubeDataApiVideoDetailItemType";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
 
 
