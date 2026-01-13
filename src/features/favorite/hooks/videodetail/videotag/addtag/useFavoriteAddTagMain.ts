@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { tagType } from "../../../../../../components/TagsComponent";
 import { SetFavoriteVideoTagEditListContext } from "../../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
+import { useTagMasterList } from "../../../videolist/useTagMasterList";
 
 
 type propsType = {
@@ -17,6 +18,10 @@ export function useFavoriteAddTagMain(props: propsType) {
     const [tagColor, setTagColor] = useState(DEFAULT_FOLDER_COLOR);
     // タグ編集リスト
     const setFavoriteVideoTagEditList = SetFavoriteVideoTagEditListContext.useCtx();
+    // タグマスタリスト
+    const { data: tagMasterList } = useTagMasterList({
+        isGetChache: true
+    });
 
     /**
      * タグを追加
@@ -56,5 +61,6 @@ export function useFavoriteAddTagMain(props: propsType) {
         tagColor,
         setTagColor,
         addTag,
+        tagMasterList,
     }
 }

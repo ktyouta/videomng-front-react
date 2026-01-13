@@ -7,8 +7,10 @@ import { FavoriteAddTagMain } from "./FavoriteAddTagMain";
 const Parent = styled.div`
   box-sizing:border-box;
   padding-top:1%;
-  height:100%;
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 13px;

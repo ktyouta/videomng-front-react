@@ -11,7 +11,7 @@ const Parent = styled.div`
   align-items: center;
   color: white;
   padding-left: 1%;
-  margin-bottom:6%;
+  margin-bottom: 2%;
 `;
 
 const BlockIconDiv = styled.div`

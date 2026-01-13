@@ -1,13 +1,24 @@
-import React from "react";
 import { FaSquare } from "react-icons/fa";
 import styled from "styled-components";
-import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
+import { SuggestTextbox } from "../../../../../../components/SuggestTextbox";
 import TagButtonComponent from "../../../../../../components/TagButtonComponent";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteAddTagMain } from "../../../../hooks/videodetail/videotag/addtag/useFavoriteAddTagMain";
+
+const Parent = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+`;
+
+const MainArea = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+`;
 
 const InputArea = styled.div`
     padding: 0 5%;
@@ -15,7 +26,6 @@ const InputArea = styled.div`
     margin: 30px 0px;
     display: flex;
     align-items: center;
-    flex: 1;
 `;
 
 const InputTitleSpan = styled.span`
@@ -78,64 +88,74 @@ export function FavoriteAddTagMain(props: propsType) {
         setTagName,
         tagColor,
         setTagColor,
-        addTag, } = useFavoriteAddTagMain({ ...props });
+        addTag,
+        tagMasterList, } = useFavoriteAddTagMain({ ...props });
 
     return (
-        <React.Fragment>
-            <InputArea>
-                <InputTitleSpan>
-                    タグ名：
-                </InputTitleSpan>
-                <BaseTextbox
-                    value={tagName}
-                    onChange={setTagName}
-                    style={{
-                        flex: "1",
-                        marginLeft: "10px"
-                    }}
-                />
-            </InputArea>
-            <SelectColorDiv>
-                <ColorHeader>
-                    <SelectedColor>
-                        <SelectColorTitleDiv>
-                            選択中のタグカラー
-                        </SelectColorTitleDiv>
-                        {/* プレビュー */}
-                        {
-                            tagName
-                                ?
-                                <TagButtonComponent
-                                    title={tagName}
-                                    btnStyle={{
-                                        marginRight: "15px"
-                                    }}
-                                    tagColor={tagColor}
-                                />
+        <Parent>
+            <MainArea>
+                <InputArea>
+                    <InputTitleSpan>
+                        タグ名：
+                    </InputTitleSpan>
+                    <SuggestTextbox
+                        value={tagName}
+                        onChange={setTagName}
+                        textboxStyle={{
+                            backgroundColor: `white`,
+                        }}
+                        containerStyle={{
+                            marginLeft: `10px`,
+                            flex: `1`,
+                            backgroundColor: `white`,
+                            border: `1px solid rgb(118, 118, 118)`,
+                            borderRadius: `5px`,
+                        }}
+                        options={tagMasterList ?? []}
+                    />
+                </InputArea>
+                <SelectColorDiv>
+                    <ColorHeader>
+                        <SelectedColor>
+                            <SelectColorTitleDiv>
+                                選択中のタグカラー
+                            </SelectColorTitleDiv>
+                            {/* プレビュー */}
+                            {
+                                tagName && tagName.trim()
+                                    ?
+                                    <TagButtonComponent
+                                        title={tagName}
+                                        btnStyle={{
+                                            marginRight: "15px"
+                                        }}
+                                        tagColor={tagColor}
+                                    />
 
-                                :
-                                <IconComponent
-                                    icon={FaSquare}
-                                    bgColor={tagColor}
-                                    size="35px"
-                                />
-                        }
-                    </SelectedColor>
-                    <DefaultColorLink
-                        onClick={() => {
-                            setTagColor(DEFAULT_FOLDER_COLOR)
-                        }}>
-                        デフォルトカラーを使う
-                    </DefaultColorLink>
-                </ColorHeader>
-                {/* カラーピッカー */}
-                <ColorPickerTwitter
-                    color={tagColor}
-                    changeColor={setTagColor}
-                    triangle="hide"
-                    width="33%"
-                />
-            </SelectColorDiv>
+                                    :
+                                    <IconComponent
+                                        icon={FaSquare}
+                                        bgColor={tagColor}
+                                        size="35px"
+                                    />
+                            }
+                        </SelectedColor>
+                        <DefaultColorLink
+                            onClick={() => {
+                                setTagColor(DEFAULT_FOLDER_COLOR)
+                            }}>
+                            デフォルトカラーを使う
+                        </DefaultColorLink>
+                    </ColorHeader>
+                    {/* カラーピッカー */}
+                    <ColorPickerTwitter
+                        color={tagColor}
+                        changeColor={setTagColor}
+                        triangle="hide"
+                        width="33%"
+                    />
+                </SelectColorDiv>
+            </MainArea>
             <FooterDiv >
                 <ButtonComponent
                     shape="rounded"
@@ -161,6 +181,6 @@ export function FavoriteAddTagMain(props: propsType) {
                     追加
                 </ButtonComponent>
             </FooterDiv>
-        </React.Fragment>
+        </Parent>
     );
 }
