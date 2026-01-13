@@ -54,13 +54,14 @@ const CrossButtonSpan = styled.span`
     background: none;
     border: none;
     font-size: 20px;
-    color: #bdbdc3;
+    color: #2A2D33;
     padding: 0;
     &:hover {
-        color: #fff;
+        color: #2A2D33;
     }
     outline: none;
     line-height: 1;
+    padding-left: 5px
 `;
 
 

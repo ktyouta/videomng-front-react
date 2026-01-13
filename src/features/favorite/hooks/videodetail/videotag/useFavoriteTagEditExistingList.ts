@@ -65,7 +65,7 @@ export function useFavoriteTagEditExistingList() {
 
         // 編集リストに追加
         setFavoriteVideoTagEditList((e: tagType[]) => {
-            return [{ label: addTag.label, value: null }, ...e];
+            return [{ label: addTag.label, value: null, tagColor: addTag.tagColor }, ...e];
         });
     }
 
