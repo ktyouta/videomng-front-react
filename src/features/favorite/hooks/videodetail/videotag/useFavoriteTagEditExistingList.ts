@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { tagType } from "../../../../../components/TagsComponent";
 import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
 import ENV from "../../../../../env.json";
-import { errResType } from "../../../../../hooks/useMutationWrapperBase";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
@@ -42,8 +40,7 @@ export function useFavoriteTagEditExistingList() {
             afSuccessFn: (res: tagType[]) => {
                 setDisplayTagMaster(res);
             },
-            afErrorFn: (res) => {
-                const errRes = res as errResType;
+            afErrorFn: () => {
             }
         }
     );
@@ -53,19 +50,17 @@ export function useFavoriteTagEditExistingList() {
      */
     function addTagEditList(addTag: tagType) {
 
-        const existTag = favoriteVideoTagEditList.find((e) => {
-            return e.label === addTag.label;
-        });
-
-        // 同名のタグが設定されている場合は追加しない
-        if (existTag) {
-            toast.error(`同名のタグが設定されています。`);
-            return;
-        }
-
         // 編集リストに追加
         setFavoriteVideoTagEditList((e: tagType[]) => {
-            return [{ label: addTag.label, value: null, tagColor: addTag.tagColor }, ...e];
+
+            const tagInfo = favoriteVideoTagEditList.find((tag) => tag.label === addTag.label);
+
+            if (tagInfo) {
+                return favoriteVideoTagEditList.map(tag => tag.label === addTag.label ? addTag : tag);
+            }
+            else {
+                return [...e, addTag];
+            }
         });
     }
 

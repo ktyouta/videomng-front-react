@@ -131,7 +131,6 @@ export function FavoriteAddTagMain(props: propsType) {
                                         }}
                                         tagColor={tagColor}
                                     />
-
                                     :
                                     <IconComponent
                                         icon={FaSquare}
