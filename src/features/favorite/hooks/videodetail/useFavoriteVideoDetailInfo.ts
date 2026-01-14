@@ -6,8 +6,8 @@ import ENV from '../../../../env.json';
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
 import useSwitch from "../../../../hooks/useSwitch";
-import { useVideoPlayUrl } from "../../../../hooks/useVideoPlayUrl";
 import { getPrevPath } from "../../../../utils/CommonFunction";
+import { playVideo } from "../../../../utils/playVideo";
 import { useVideoId } from "./useVideoId";
 
 
@@ -75,7 +75,7 @@ export function useFavoriteVideoDetailInfo() {
             return;
         }
 
-        window.open(useVideoPlayUrl(videoId), `_blank`);
+        playVideo(videoId);
     }
 
     /**

@@ -25,3 +25,9 @@ dist-ssr
 
 .env.development
 .env.production
+
+.claude/**
+!.claude/commands/
+!.claude/commands/**
+
+tmpclaude-*

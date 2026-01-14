@@ -1,9 +1,9 @@
 import { format } from "date-fns";
-import parse from "html-react-parser";
 import { IoIosThumbsUp } from "react-icons/io";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { sanitizeAndParseHtml } from "../../../../../../utils/sanitizeAndParseHtml";
 import { useFavoriteFavoriteCommentContent } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentContent";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { FavoriteFavoriteCommentDeleteIconArea } from "./FavoriteFavoriteCommentDeleteIconArea";
@@ -80,7 +80,7 @@ export function FavoriteFavoriteCommentContent(props: propsType) {
     // コメントスレッドの詳細情報
     const snippet = favoriteVideoComment.snippet;
     // コメント本文
-    const parentCommentText = parse(snippet.textDisplay);
+    const parentCommentText = sanitizeAndParseHtml(snippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(snippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者

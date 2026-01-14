@@ -1,3 +1,5 @@
+import { ALLOWED_PATH } from "../consts/AllowedPath";
+
 /**
  * オブジェクトのディープコピー
  * @param arg 
@@ -55,6 +57,11 @@ export function getPrevPath(key: string, defaultPath: string) {
     }
 
     const start = keyIndex + `${key}=`.length;
+    const path = queryParam.slice(start) || defaultPath;
 
-    return queryParam.slice(start) || defaultPath;
+    if (path.startsWith('/') && !path.startsWith('//') && ALLOWED_PATH.some((e) => path.startsWith(e))) {
+        return path;
+    }
+
+    return defaultPath;
 };

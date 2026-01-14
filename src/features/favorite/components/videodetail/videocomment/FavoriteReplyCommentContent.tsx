@@ -1,9 +1,9 @@
 import { format } from "date-fns";
-import parse from "html-react-parser";
 import { IoIosThumbsUp } from "react-icons/io";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { sanitizeAndParseHtml } from "../../../../../utils/sanitizeAndParseHtml";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadReplyCommentType";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 
@@ -82,7 +82,7 @@ export function FavoriteReplyCommentContent(props: propsType) {
     const commentId = commentThreadReply.id;
     const commentThreadReplySnippet = commentThreadReply.snippet;
     // コメント本文
-    const parentCommentText = parse(commentThreadReplySnippet.textDisplay);
+    const parentCommentText = sanitizeAndParseHtml(commentThreadReplySnippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(commentThreadReplySnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者

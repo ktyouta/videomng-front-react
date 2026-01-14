@@ -1,12 +1,9 @@
-import styled from "styled-components";
 import { format } from "date-fns";
-import { FavoriteCommentBlockIconArea } from "../FavoriteCommentBlockIconArea";
+import styled from "styled-components";
+import { sanitizeAndParseHtml } from "../../../../../../utils/sanitizeAndParseHtml";
+import { useFavoriteBlockCommentContent } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentContent";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { FavoriteCommentRestoreIconArea } from "./FavoriteCommentRestoreIconArea";
-import { useFavoriteBlockCommentContent } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentContent";
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
-import { FavoriteVideoBlockCommentListResponseType } from "../../../../types/videodetail/videocomment/videoblockcomment/FavoriteVideoBlockCommentListResponseType";
-import parse from "html-react-parser";
 
 
 const Parent = styled.div`
@@ -57,7 +54,7 @@ export function FavoriteBlockCommentContent(props: propsType) {
     // コメントスレッドの詳細情報
     const snippet = favoriteVideoComment.snippet;
     // コメント本文
-    const parentCommentText = parse(snippet.textDisplay);
+    const parentCommentText = sanitizeAndParseHtml(snippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(snippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
