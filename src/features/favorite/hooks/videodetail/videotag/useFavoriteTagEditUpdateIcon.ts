@@ -55,10 +55,6 @@ export function useFavoriteTagEditUpdateIcon() {
      * @returns 
      */
     function udpateTag() {
-        if (!favoriteVideoTagEditList || favoriteVideoTagEditList.length === 0) {
-            toast.error(`タグが設定されていません。`);
-            return;
-        }
 
         if (!videoId) {
             toast.error(`タグを更新できません。`);
@@ -68,14 +64,7 @@ export function useFavoriteTagEditUpdateIcon() {
         const body: UpdateToFavoriteVideoTagReqestType = {
             tag: favoriteVideoTagEditList.reduce((prev: UpdateFavoriteVideoTagType[], e: tagType) => {
 
-                const value = e.value;
-
-                if (typeof value === `string` || typeof value === `symbol`) {
-                    return prev;
-                }
-
                 prev.push({
-                    id: value ?? undefined,
                     name: e.label,
                     tagColor: e.tagColor,
                 });

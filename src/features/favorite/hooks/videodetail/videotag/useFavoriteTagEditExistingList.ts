@@ -53,10 +53,10 @@ export function useFavoriteTagEditExistingList() {
         // 編集リストに追加
         setFavoriteVideoTagEditList((e: tagType[]) => {
 
-            const tagInfo = favoriteVideoTagEditList.find((tag) => tag.label === addTag.label);
+            const tagInfo = e.find((tag) => tag.label === addTag.label);
 
             if (tagInfo) {
-                return favoriteVideoTagEditList.map(tag => tag.label === addTag.label ? addTag : tag);
+                return e.map(tag => tag.label === addTag.label ? addTag : tag);
             }
             else {
                 return [...e, addTag];

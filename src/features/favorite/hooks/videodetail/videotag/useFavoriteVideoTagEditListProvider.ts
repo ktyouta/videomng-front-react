@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { tagType } from "../../../../../components/TagsComponent";
-import { errResType } from "../../../../../hooks/useMutationWrapperBase";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
 import { useVideoId } from "../useVideoId";
@@ -11,13 +10,11 @@ export function useFavoriteVideoTagEditListProvider() {
 
     // タグ編集リスト
     const [favoriteVideoTagEditList, setFavoriteVideoTagEditList] = useState<tagType[]>([]);
-    // エラーメッセージ
-    const [errMessage, setErrMessage] = useState(``);
     // 動画ID
     const videoId = useVideoId();
 
     // 設定されたタグリストを取得
-    const { isLoading } = useQueryWrapper<FavoriteVideoTagResponseType>(
+    useQueryWrapper<FavoriteVideoTagResponseType>(
         {
             url: useFavoriteTagEndpoint(videoId),
             afSuccessFn: (res: FavoriteVideoTagResponseType) => {
@@ -33,10 +30,7 @@ export function useFavoriteVideoTagEditListProvider() {
                     }
                 }));
             },
-            afErrorFn: (res) => {
-                const errRes = res as errResType;
-                setErrMessage(`タグの取得に失敗しました`);
-            }
+            afErrorFn: () => { }
         }
     );
 
