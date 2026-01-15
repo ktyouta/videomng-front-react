@@ -89,7 +89,8 @@ export function FavoriteAddTagMain(props: propsType) {
         tagColor,
         setTagColor,
         addTag,
-        tagMasterList, } = useFavoriteAddTagMain({ ...props });
+        tagMasterList,
+        isPcLess, } = useFavoriteAddTagMain({ ...props });
 
     return (
         <Parent>
@@ -151,7 +152,7 @@ export function FavoriteAddTagMain(props: propsType) {
                         color={tagColor}
                         changeColor={setTagColor}
                         triangle="hide"
-                        width="33%"
+                        width={isPcLess ? "90%" : "33%"}
                     />
                 </SelectColorDiv>
             </MainArea>

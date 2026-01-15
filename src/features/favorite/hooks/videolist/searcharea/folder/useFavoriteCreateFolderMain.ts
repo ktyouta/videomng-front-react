@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
 import ENV from "../../../../../../env.json";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
+import { mediaQuery, useMediaQuery } from "../../../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
@@ -22,6 +23,8 @@ export function useFavoriteCreateFolderMain(props: propsType) {
     const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteVideoListEndpoint());
     // フォルダカラー
     const [folderColor, setFolderColor] = useState(DEFAULT_FOLDER_COLOR);
+    // 画面サイズ判定
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
     /**
      * フォルダ作成リクエスト
@@ -81,5 +84,6 @@ export function useFavoriteCreateFolderMain(props: propsType) {
         setFolderName,
         folderColor,
         setFolderColor,
+        isPcLess,
     }
 }

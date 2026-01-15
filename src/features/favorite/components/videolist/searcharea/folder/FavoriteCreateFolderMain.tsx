@@ -87,7 +87,8 @@ export function FavoriteCreateFolderMain(props: propsType) {
         folderName,
         setFolderName,
         folderColor,
-        setFolderColor, } = useFavoriteCreateFolderMain({ ...props });
+        setFolderColor,
+        isPcLess, } = useFavoriteCreateFolderMain({ ...props });
 
     return (
         <React.Fragment>
@@ -136,7 +137,7 @@ export function FavoriteCreateFolderMain(props: propsType) {
                     color={folderColor}
                     changeColor={setFolderColor}
                     triangle="hide"
-                    width="33%"
+                    width={isPcLess ? "90%" : "33%"}
                 />
             </SelectColorDiv>
             <FooterDiv >

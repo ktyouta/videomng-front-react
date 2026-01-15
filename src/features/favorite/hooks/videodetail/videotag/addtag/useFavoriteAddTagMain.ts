@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { tagType } from "../../../../../../components/TagsComponent";
+import { mediaQuery, useMediaQuery } from "../../../../../../hooks/useMediaQuery";
 import { SetFavoriteVideoTagEditListContext } from "../../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useTagMasterList } from "../../../videolist/useTagMasterList";
@@ -22,6 +23,8 @@ export function useFavoriteAddTagMain(props: propsType) {
     const { data: tagMasterList } = useTagMasterList({
         isGetChache: true
     });
+    // 画面サイズ判定
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
     /**
      * タグを追加
@@ -62,5 +65,6 @@ export function useFavoriteAddTagMain(props: propsType) {
         setTagColor,
         addTag,
         tagMasterList,
+        isPcLess,
     }
 }
