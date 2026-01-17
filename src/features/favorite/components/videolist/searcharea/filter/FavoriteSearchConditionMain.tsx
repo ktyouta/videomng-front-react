@@ -45,6 +45,7 @@ const InputLabel = styled.label`
 const DefaultColorLink = styled.div`
     color: #7abaff;
     cursor: pointer;
+    display: inline-block;
     &:hover {
         text-decoration: underline;
     }

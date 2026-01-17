@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
@@ -9,26 +8,36 @@ import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImpo
 import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
 import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
 
-const OperationRowDiv = styled.div`
+
+const Parent = styled.div`
   width: 100%;
+  display:flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 8%;
+`;
+
+const OperationRowDiv = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 9%;
 `;
 
-const SelectedTagAreaDiv = styled.div`
-  width: 100%;
+const SwitchModeRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 9%;
-  margin-top:1%;
+  margin-bottom: 40px;
 `;
 
+const SelectedTagAreaDiv = styled.div`
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top:35px;
+`;
 
 /**
  * 検索条件エリア
@@ -38,10 +47,12 @@ export function FavoriteSearchAreaPc() {
   console.log("FavoriteSearchArea render");
 
   return (
-    <React.Fragment>
-      <OperationRowDiv>
+    <Parent>
+      <SwitchModeRowDiv>
         {/* 表示切替 */}
         <FavoriteSearchSwichMode />
+      </SwitchModeRowDiv>
+      <OperationRowDiv>
         {/* タイトルフィルター */}
         <FavoriteSearchText
           width="85%"
@@ -61,6 +72,6 @@ export function FavoriteSearchAreaPc() {
         {/* 選択中のタグ */}
         <FavoriteSearchSelectedTag />
       </SelectedTagAreaDiv>
-    </React.Fragment>
+    </Parent>
   );
 }
