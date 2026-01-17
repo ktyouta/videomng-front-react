@@ -24,7 +24,7 @@ export function FavoriteSearchSwichMode() {
                 marginRight: "30px",
                 height: "35px",
             }}
-            color="#3A7BD5"
+            color="#2563eb"
         />
     );
 }

@@ -1,18 +1,16 @@
 import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
-import styled from "styled-components";
-import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEdit";
-import BaseTextAreaComponent from "../../../../../components/BaseTextAreaComponent";
-import CheckBoxComponent from "../../../../../components/CheckBoxComponent";
-import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADD, ISVISIBLEAFTERFOLDERADDLIST } from "../../../const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
-import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
-import TagButtonComponent from "../../../../../components/TagButtonComponent";
-import { FavoriteDetailSettingEditActions } from "./FavoriteDetailSettingEditActions";
-import { Selectbox } from "../../../../../components/Selectbox";
+import styled from "styled-components";
+import BaseTextAreaComponent from "../../../../../components/BaseTextAreaComponent";
 import { Checkbox } from "../../../../../components/Checkbox";
+import { IconComponent } from "../../../../../components/IconComponent";
+import { Selectbox } from "../../../../../components/Selectbox";
+import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
+import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADDLIST } from "../../../const/FavoriteConst";
+import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEdit";
+import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
+import { FavoriteDetailSettingEditActions } from "./FavoriteDetailSettingEditActions";
 
 
 const ContentDiv = styled.div`

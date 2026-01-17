@@ -1,14 +1,11 @@
-import styled from "styled-components";
-import { useHomeVideoListResult } from "../../../../hooks/videolist/videoarea/result/useHomeVideoListResult";
-import { VideoListDataType } from "../../../../types/videolist/VideoListDataType";
-import { nowSearchConditionType } from "../../../HomeVideoNowSearchConditionValueProvider";
 import React from "react";
-import { FAVORITE_KEYWORD_MAX } from "../../../../const/HomeConst";
-import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
-import { HomeVideoContent } from "./HomeVideoContent";
-import { MEDIA } from "../../../../../../consts/MediaConst";
-import { IconComponent } from "../../../../../../components/IconComponent";
+import styled from "styled-components";
 import Loading from "../../../../../../components/Loading";
+import { MEDIA } from "../../../../../../consts/MediaConst";
+import { VideoListDataType } from "../../../../../../types/videolist/VideoListDataType";
+import { VideoListItemType } from "../../../../../../types/videolist/VideoListItemType";
+import { useHomeVideoListResult } from "../../../../hooks/videolist/videoarea/result/useHomeVideoListResult";
+import { HomeVideoContent } from "./HomeVideoContent";
 
 
 const LoadingParentNext = styled.div`

@@ -70,9 +70,11 @@ export function FavoriteVideoDetail() {
 
   // ローディング
   if (isLoading) {
-    <LoadingParent>
-      <Loading />
-    </LoadingParent>
+    return (
+      <LoadingParent>
+        <Loading />
+      </LoadingParent>
+    );
   }
 
   // 詳細取得エラー

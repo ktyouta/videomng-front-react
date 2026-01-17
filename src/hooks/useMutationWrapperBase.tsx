@@ -107,7 +107,7 @@ const useMutationWrapperBase = <
             default:
                 return undefined;
         }
-    }, [props.url]);
+    }, [props.url, props.method]);
 
     return useMutation({
         //HTTPリクエスト送信処理
