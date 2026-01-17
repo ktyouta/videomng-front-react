@@ -1,16 +1,14 @@
 import styled from "styled-components";
 import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
-import { useFavoriteSearchText } from "../../../hooks/videolist/searcharea/useFavoriteSearchText";
 import { MEDIA } from "../../../../../consts/MediaConst";
-import React from "react";
+import { useFavoriteSearchText } from "../../../hooks/videolist/searcharea/useFavoriteSearchText";
 
 
 const Parent = styled.div`
-  flex: 0 1 500px;
+  flex: 1;
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-right:3%;
 `;
 
 const TitleSpan = styled.span`
