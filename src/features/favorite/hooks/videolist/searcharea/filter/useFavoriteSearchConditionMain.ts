@@ -33,6 +33,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         setSelectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoFolder,
         setSlectedFavoriteVideoFolder,
+        selectedFavoriteVideoMode,
         resetPage,
         reset, } = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
@@ -238,5 +239,6 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         changeFolder,
         folderList,
         clearFilter,
+        selectedFavoriteVideoMode,
     };
 }

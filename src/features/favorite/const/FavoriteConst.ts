@@ -93,6 +93,8 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_PAGE: `page`,
     // クエリパラメータのキー(フォルダ)
     QUERY_KEY_FOLDER: `folder`,
+    // クエリパラメータのキー(モード)
+    QUERY_KEY_MODE: `mode`,
 } as const;
 
 // フォルダ内動画一覧の検索条件
@@ -152,3 +154,17 @@ export const DEFAULT_FOLDER_COLOR = "#00A8FF";
 
 // デフォルトのタグカラー
 export const DEFAULT_TAG_COLOR = "linear-gradient(135deg, #3b82f6, #2563eb)";
+
+// 一覧画面表示モード
+export const FAVORITE_LIST_MODE_FOLDER = `1`;
+export const FAVORITE_LIST_MODE_ONLY_VIDEO = `2`;
+export const FAVORITE_LIST_MODE = [
+    {
+        label: `フォルダを表示`,
+        value: FAVORITE_LIST_MODE_FOLDER
+    },
+    {
+        label: `動画のみ表示`,
+        value: FAVORITE_LIST_MODE_ONLY_VIDEO,
+    },
+];

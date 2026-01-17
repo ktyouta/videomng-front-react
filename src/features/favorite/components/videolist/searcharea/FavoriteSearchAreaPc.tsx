@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
+import { FavoriteSearchSwichMode } from "./FavoriteSearchSwichMode";
 import { FavoriteSearchText } from "./FavoriteSearchText";
 import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExportModal";
 import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
@@ -39,6 +40,8 @@ export function FavoriteSearchAreaPc() {
   return (
     <React.Fragment>
       <OperationRowDiv>
+        {/* 表示切替 */}
+        <FavoriteSearchSwichMode />
         {/* タイトルフィルター */}
         <FavoriteSearchText
           width="85%"

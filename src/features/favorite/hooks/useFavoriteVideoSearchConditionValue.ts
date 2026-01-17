@@ -1,4 +1,4 @@
-import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoFolderContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetSelectedFavoriteVideoPageContext, SetselectedFavoriteVideoFolderContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../components/FavoriteVideoSearchConditionValueProvider";
+import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoFolderContext, SelectedFavoriteVideoModeContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetselectedFavoriteVideoFolderContext, SetselectedFavoriteVideoModeContext, SetSelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../components/FavoriteVideoSearchConditionValueProvider";
 
 export const INIT_PAGE = `1`;
 
@@ -32,6 +32,10 @@ export function useFavoriteVideoSearchConditionValue() {
     const selectedFavoriteVideoFolder = SelectedFavoriteVideoFolderContext.useCtx();
     // 動画一覧検索フォルダ setter
     const setSlectedFavoriteVideoFolder = SetselectedFavoriteVideoFolderContext.useCtx();
+    // 動画一覧検索モード
+    const selectedFavoriteVideoMode = SelectedFavoriteVideoModeContext.useCtx();
+    // 動画一覧検索モード setter
+    const setSlectedFavoriteVideoMode = SetselectedFavoriteVideoModeContext.useCtx();
 
 
     /**
@@ -69,6 +73,8 @@ export function useFavoriteVideoSearchConditionValue() {
         setSelectedFavoriteVideoPage,
         selectedFavoriteVideoFolder,
         setSlectedFavoriteVideoFolder,
+        selectedFavoriteVideoMode,
+        setSlectedFavoriteVideoMode,
         reset,
         resetPage,
     };

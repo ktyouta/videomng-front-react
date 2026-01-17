@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
+import { FAVORITE_LIST_MODE_FOLDER } from "../../../../const/FavoriteConst";
 import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchConditionMain";
 
 
@@ -74,7 +75,8 @@ export function FavoriteSearchConditionMain(props: propsType) {
         selectedFavoriteVideoFolder,
         changeFolder,
         folderList,
-        clearFilter, } = useFavoriteSearchConditionMain({ ...props });
+        clearFilter,
+        selectedFavoriteVideoMode, } = useFavoriteSearchConditionMain({ ...props });
 
 
     return (
@@ -153,7 +155,7 @@ export function FavoriteSearchConditionMain(props: propsType) {
                     </InputDiv>
                 }
                 {
-                    folderList && folderList.length > 0 &&
+                    selectedFavoriteVideoMode === FAVORITE_LIST_MODE_FOLDER && folderList && folderList.length > 0 &&
                     <InputDiv>
                         <InputLabel>
                             フォルダ

@@ -3,6 +3,7 @@ import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExpo
 import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
+import { FavoriteSearchSwichMode } from "./FavoriteSearchSwichMode";
 import { FavoriteSearchText } from "./FavoriteSearchText";
 import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
 import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
@@ -22,6 +23,13 @@ const OperationRowDiv = styled.div`
   margin-top: 20px;
 `;
 
+const ModeRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+`;
 
 /**
  * 検索条件エリア
@@ -32,6 +40,10 @@ export function FavoriteSearchAreaMobile() {
 
   return (
     <Parent>
+      <ModeRowDiv>
+        {/* 表示切替 */}
+        <FavoriteSearchSwichMode />
+      </ModeRowDiv>
       {/* タイトルフィルター */}
       <FavoriteSearchText
         width="70%"

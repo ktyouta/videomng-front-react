@@ -5,8 +5,8 @@ import styled from "styled-components";
 const Container = styled.div<{ color?: string }>`
   display: inline-flex;
   background: #f1f3f5;
-  border-radius: 10px;
-  border: 1px solid ${({ color }) => (color ? color : "#4f63ff")};
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1.5px ${({ color }) => (color ? color : "#4f63ff")};
   overflow: hidden;
 `;
 
@@ -14,8 +14,7 @@ const SegmentButton = styled.button<{ active?: boolean, color?: string }>`
   appearance: none;
   border: none;
   padding: 6px 18px;
-  font-size: 14px;
-  line-height: 1.2;
+  font-size: 15px;
   cursor: pointer;
   background-color: ${({ active, color }) => (active ? color ? color : "#4f63ff" : "transparent")};
   color: ${({ active }) => (active ? "#ffffff" : "#666666")};
@@ -24,14 +23,8 @@ const SegmentButton = styled.button<{ active?: boolean, color?: string }>`
   position: relative;
   border-radius: 0;
   flex: 1;
-  &:not(:first-child)::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 6px;
-    bottom: 6px;
-    width: 1px;
-    background: rgba(0,0,0,0.08);
+  &:not(:first-child) {
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
   }
   &:focus,
   &:focus-visible,
