@@ -11,6 +11,7 @@ const VideoSection = styled.section`
     touch-action: manipulation;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 `;
 
 const VideoImg = styled.img`
@@ -126,12 +127,12 @@ export function FavoriteVideoContent(props: propsType) {
             <VideoSection>
                 <VideoImg
                     src={imgUrl}
-                    onClick={(e) => {
+                    onClick={() => {
                         clickVideo(videoId);
                     }}
                 />
                 <VideoTitleDiv
-                    onClick={(e) => {
+                    onClick={() => {
                         clickVideo(videoId);
                     }}
                 >
