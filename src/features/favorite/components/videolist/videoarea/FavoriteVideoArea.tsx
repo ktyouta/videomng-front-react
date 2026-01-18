@@ -89,7 +89,8 @@ export function FavoriteVideoArea() {
     isFetching,
     total,
     displayFolderList,
-    handleDragEnd, } = useFavoriteVideoArea();
+    handleDragEnd,
+    dragSensors, } = useFavoriteVideoArea();
 
   if (isLoading || isFetching) {
     return (
@@ -126,6 +127,7 @@ export function FavoriteVideoArea() {
       <VideoUl>
         <DndContext
           onDragEnd={handleDragEnd}
+          sensors={dragSensors}
         >
           {
             displayFolderList.map((e: FolderType) => {

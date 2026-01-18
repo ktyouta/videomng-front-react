@@ -8,6 +8,9 @@ const VideoArticle = styled.article`
 
 const VideoSection = styled.section`
     width:100%;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 `;
 
 const VideoImg = styled.img`
@@ -94,8 +97,7 @@ export function FavoriteVideoContent(props: propsType) {
         listeners,
         setNodeRef,
         draggingStyle,
-        handleMouseDown,
-        handleMouseUp,
+        clickVideo,
         clickChannel, } = useFavoriteVideoContent({ ...props });
 
     const data = props.data
@@ -124,15 +126,13 @@ export function FavoriteVideoContent(props: propsType) {
             <VideoSection>
                 <VideoImg
                     src={imgUrl}
-                    onPointerDown={handleMouseDown}
-                    onPointerUp={(e) => {
-                        handleMouseUp(videoId, e);
+                    onClick={(e) => {
+                        clickVideo(videoId);
                     }}
                 />
                 <VideoTitleDiv
-                    onPointerDown={handleMouseDown}
-                    onPointerUp={(e) => {
-                        handleMouseUp(videoId, e);
+                    onClick={(e) => {
+                        clickVideo(videoId);
                     }}
                 >
                     {title}
@@ -141,7 +141,7 @@ export function FavoriteVideoContent(props: propsType) {
                     {publishedDate}
                 </DateDiv>
                 <ChennelTitleDiv
-                    onPointerDown={() => {
+                    onClick={() => {
                         clickChannel(channelId)
                     }}
                 >

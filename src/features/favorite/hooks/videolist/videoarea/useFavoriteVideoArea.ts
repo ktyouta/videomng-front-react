@@ -1,4 +1,4 @@
-import { DragEndEvent } from "@dnd-kit/core";
+import { DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import { FLG } from "../../../../../consts/CommonConst";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
@@ -23,6 +23,22 @@ export function useFavoriteVideoArea() {
     const displayFolderList = DisplayFolderListContext.useCtx();
     // 画面表示用のフォルダリスト(setter)
     const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
+    // ドラッグ設定
+    const dragSensors = useSensors(
+        // PC用
+        useSensor(MouseSensor, {
+            activationConstraint: {
+                distance: 3,
+            },
+        }),
+        // スマホ用
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 150,
+                tolerance: 10,
+            },
+        })
+    );
 
     // 動画一覧を取得
     const { data, isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
@@ -150,6 +166,7 @@ export function useFavoriteVideoArea() {
         isFetching,
         total: data?.total,
         displayFolderList,
-        handleDragEnd
+        handleDragEnd,
+        dragSensors,
     }
 }
