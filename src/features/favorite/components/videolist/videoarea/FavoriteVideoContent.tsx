@@ -18,7 +18,7 @@ const VideoImg = styled.img`
     width:100%;
     border-radius: 6%;
     cursor:pointer;
-    touch-action: none;
+    touch-action: auto;
 `;
 
 const VideoTitleDiv = styled.div`
