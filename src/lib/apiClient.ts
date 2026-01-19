@@ -84,18 +84,24 @@ api.interceptors.response.use(
             updateAccessToken(newAccessToken);
 
             // 認証エラーになったAPIを再度コール
-            queue.forEach(cb => {
+            const currentQueue = [...queue];
+            queue = [];
+
+            currentQueue.forEach(cb => {
               cb.resolve(newAccessToken);
             });
-
-            queue = [];
           } catch (err) {
 
             // リフレッシュ失敗
             resetAccessToken();
             resetLogin();
 
-            reject(err);
+            const currentQueue = [...queue];
+            queue = [];
+
+            currentQueue.forEach(cb => {
+              cb.reject(err);
+            });
           } finally {
             isRefreshing = false;
           }

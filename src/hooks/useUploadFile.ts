@@ -2,6 +2,22 @@ import { AxiosProgressEvent } from "axios";
 import { useState } from "react";
 import { api } from "../lib/apiClient";
 
+// 許可ファイル情報
+const FILE_LIMITS = {
+    avatar: {
+        maxSize: 2 * 1024 * 1024,
+        allowedTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    },
+    document: {
+        maxSize: 10 * 1024 * 1024,
+        allowedTypes: ['application/pdf', 'application/msword'],
+    },
+    csv: {
+        maxSize: 10 * 1024 * 1024,
+        allowedTypes: ['text/csv', 'application/vnd.ms-excel', 'text/plain'],
+    }
+};
+
 type propsType = {
     onUploadProgress?: (progressEvent: AxiosProgressEvent) => void,
     onSuccess?: (res: unknown) => void,
@@ -22,6 +38,12 @@ export function useUploadFile(props: propsType) {
         setIsLoading(true);
 
         try {
+
+            const errMessage = checkFile(fileData);
+
+            if (errMessage) {
+                throw Error(errMessage);
+            }
 
             const formData = new FormData();
             formData.append("file", fileData);
@@ -53,5 +75,32 @@ export function useUploadFile(props: propsType) {
     return {
         isLoading,
         upload
+    }
+}
+
+/**
+ * アップロード前ファイルチェック
+ * @param fileData 
+ * @returns 
+ */
+function checkFile(fileData: File) {
+
+    const targetFileInfoList = Object.values(FILE_LIMITS);
+
+    const targetFileInfo = targetFileInfoList.find((e) => {
+        return e.allowedTypes.includes(fileData.type);
+    });
+
+    // ファイルタイプの検証
+    if (!targetFileInfo) {
+        return `許可されていないファイル形式です。`;
+    }
+
+    // ファイルサイズの検証
+    const maxSize = targetFileInfo.maxSize;
+
+    if (fileData.size > maxSize) {
+        const maxMB = maxSize / (1024 * 1024);
+        return `ファイルサイズが大きすぎます。上限: ${maxMB}MB`;
     }
 }
