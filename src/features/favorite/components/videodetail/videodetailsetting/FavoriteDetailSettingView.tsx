@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import styled from "styled-components";
-import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
-import { Option } from "../../../../../components/Selectbox";
-import { FavoriteDetailSettingViewActions } from "./FavoriteDetailSettingViewActions";
-import { useFavoriteDetailSettingView } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingView";
-import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
 import { FaStar } from "react-icons/fa";
-import Loading from "../../../../../components/Loading";
+import styled from "styled-components";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
-import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
+import { IconComponent } from "../../../../../components/IconComponent";
+import Loading from "../../../../../components/Loading";
+import { Option } from "../../../../../components/Selectbox";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
+import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
+import { useFavoriteDetailSettingView } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingView";
+import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
+import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
+import { FavoriteDetailSettingViewActions } from "./FavoriteDetailSettingViewActions";
 
 
 const Parent = styled.div`
@@ -249,6 +249,7 @@ export function FavoriteDetailSettingView(props: propsType) {
                                                 marginRight: "15px"
                                             }}
                                             key={e.tagId}
+                                            tagColor={e.tagColor}
                                         />
                                     )
                                 })

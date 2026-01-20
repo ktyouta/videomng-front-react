@@ -250,6 +250,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                                 marginRight: "15px"
                                             }}
                                             key={e.tagId}
+                                            tagColor={e.tagColor}
                                         />
                                     )
                                 })
