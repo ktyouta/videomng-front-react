@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { useQueryParams } from "../../../hooks/useQueryParams";
 import { createCtx } from "../../../utils/createCtx";
-import { SEARCH_CONDITION } from "../const/FavoriteConst";
+import { FAVORITE_LIST_MODE, SEARCH_CONDITION } from "../const/FavoriteConst";
 
 
 // 動画一覧検索条件選択値(カテゴリ)
@@ -62,7 +62,7 @@ export function FavoriteVideoSearchConditionValueProvider(props: propsType) {
     // 動画一覧検索フォルダ
     const [selectedFavoriteVideoFolder, setSelectedFavoriteVideoFolder] = useState(params[SEARCH_CONDITION.QUERY_KEY_FOLDER]);
     // 動画一覧表示モード
-    const [selectedFavoriteVideoMode, setSelectedFavoriteVideoMode] = useState(params[SEARCH_CONDITION.QUERY_KEY_MODE]);
+    const [selectedFavoriteVideoMode, setSelectedFavoriteVideoMode] = useState(params[SEARCH_CONDITION.QUERY_KEY_MODE] || FAVORITE_LIST_MODE.folder.value);
 
     return (
         <SelectedFavoriteVideoCategoryContext.Provider value={selectedFavoriteVideoCategory}>

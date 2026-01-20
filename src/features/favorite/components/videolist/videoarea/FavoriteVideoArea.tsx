@@ -154,18 +154,18 @@ export function FavoriteVideoArea() {
       </ResultNumDiv>
       <VideoUl>
         {
-          selectedFavoriteVideoMode === FAVORITE_LIST_MODE.videoOnly.value
+          selectedFavoriteVideoMode === FAVORITE_LIST_MODE.folder.value
             ?
-            <React.Fragment>
-              {videoContent}
-            </React.Fragment>
-            :
             <DndContext
               onDragEnd={handleDragEnd}
               sensors={dragSensors}
             >
               {videoContent}
             </DndContext>
+            :
+            <React.Fragment>
+              {videoContent}
+            </React.Fragment>
         }
       </VideoUl>
       <FavoriteVideoAreaFooter />

@@ -17,7 +17,7 @@ export function FavoriteSearchSwichMode() {
     return (
         <SegmentedControl
             options={Object.values(FAVORITE_LIST_MODE)}
-            value={selectedFavoriteVideoMode || FAVORITE_LIST_MODE.folder.value}
+            value={selectedFavoriteVideoMode}
             onChange={switchMode}
             outerStyle={{
                 minWidth: "220px",
