@@ -1,5 +1,5 @@
 import { SegmentedControl } from "../../../../../components/SegmentedControl";
-import { FAVORITE_LIST_MODE, FAVORITE_LIST_MODE_FOLDER } from "../../../const/FavoriteConst";
+import { FAVORITE_LIST_MODE } from "../../../const/FavoriteConst";
 import { useFavoriteSearchSwichMode } from "../../../hooks/videolist/searcharea/useFavoriteSearchSwichMode";
 
 
@@ -16,8 +16,8 @@ export function FavoriteSearchSwichMode() {
 
     return (
         <SegmentedControl
-            options={FAVORITE_LIST_MODE}
-            value={selectedFavoriteVideoMode || FAVORITE_LIST_MODE_FOLDER}
+            options={Object.values(FAVORITE_LIST_MODE)}
+            value={selectedFavoriteVideoMode || FAVORITE_LIST_MODE.folder.value}
             onChange={switchMode}
             outerStyle={{
                 minWidth: "220px",

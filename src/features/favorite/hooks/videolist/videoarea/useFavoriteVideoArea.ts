@@ -10,6 +10,7 @@ import { FavoriteVideoListResponseDataType } from "../../../types/videolist/Favo
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { getFavoriteVideoFolderEndpoint } from "../../../utils/endpoint";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 
@@ -23,6 +24,9 @@ export function useFavoriteVideoArea() {
     const displayFolderList = DisplayFolderListContext.useCtx();
     // 画面表示用のフォルダリスト(setter)
     const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
+    // 検索条件
+    const { selectedFavoriteVideoMode } = useFavoriteVideoSearchConditionValue();
+
     // ドラッグ設定
     const dragSensors = useSensors(
         // PC用
@@ -168,5 +172,6 @@ export function useFavoriteVideoArea() {
         displayFolderList,
         handleDragEnd,
         dragSensors,
+        selectedFavoriteVideoMode,
     }
 }

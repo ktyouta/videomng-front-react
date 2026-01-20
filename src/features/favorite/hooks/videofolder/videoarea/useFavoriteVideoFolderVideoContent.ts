@@ -8,6 +8,7 @@ import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBa
 import useSwitch from "../../../../../hooks/useSwitch";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { favoriteVideoFolderId } from "../../../utils/endpoint";
+import { useFolderMasterList } from "../../videolist/useFolderMasterList";
 import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
 import { useFolderId } from "../useFolderId";
 import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
@@ -31,6 +32,8 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
     const folderId = useFolderId();
     // 動画再取得用
     const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteVideoFolderVideoListEndpoint(folderId));
+    // フォルダリスト
+    const { data: folderList } = useFolderMasterList();
 
     /**
      * 動画をフォルダから削除
@@ -53,7 +56,11 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
                 return;
             }
 
-            toast.success("動画をフォルダから削除しました。");
+            const folderName = folderList?.find((e) => {
+                return e.value === folderId;
+            })?.label ?? ``;
+
+            toast.success(`動画を${folderName}フォルダから削除しました。`);
             closeModal();
             invalidataPublic();
         },
