@@ -149,7 +149,7 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
                     {publishedDate}
                 </DateDiv>
                 <ChennelTitleDiv
-                    onPointerDown={() => {
+                    onClick={() => {
                         clickChannel(channelId)
                     }}
                 >
