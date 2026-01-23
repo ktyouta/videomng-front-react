@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { errResType } from "../../../../hooks/useMutationWrapperBase";
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import useQueryWrapper from "../../../../hooks/useQueryWrapper";
 import { ChannelVideoListDataType } from "../../../../types/channel/ChannelVideoListDataType";
 import { ChannelVideoListResponseType } from "../../../../types/channel/ChannelVideoListResponseType";
@@ -17,12 +16,10 @@ export function useChannel() {
     const [nextPageToken, setNextPageToken] = useState(``);
     // チャンネル情報データ
     const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
-    //ルーティング用
-    const navigate = useNavigate();
     // チャンネルID
     const channelId = useChannelId();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search;
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
 
 
     // チャンネル動画一覧を取得
@@ -53,8 +50,7 @@ export function useChannel() {
 
                 setErrMessage(``);
             },
-            afErrorFn: (res) => {
-                const errRes = res as errResType;
+            afErrorFn: () => {
                 setErrMessage(`動画情報の取得に失敗しました`);
             }
         }
@@ -64,9 +60,7 @@ export function useChannel() {
      * ホーム画面に戻る
      */
     function back() {
-
-        const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.FAVORITE.ROOT;
-        navigate(prev);
+        appGoBack(ROUTER_PATH.FAVORITE.ROOT);
     }
 
     return {
