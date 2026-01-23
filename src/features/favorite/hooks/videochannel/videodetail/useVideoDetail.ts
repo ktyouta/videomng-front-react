@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
-import { getPrevPath } from "../../../../../utils/CommonFunction";
 import { VideoDetailResponseType } from "../../../types/videochannel/videodetail/VideoDetailResponseType";
 import { useVideoDetailEndpoint } from "./useVideoDetailEndpoint";
 import { useVideoId } from "./useVideoId";
@@ -11,11 +9,9 @@ import { useVideoId } from "./useVideoId";
 export function useVideoDetail() {
 
     // ルーティング用
-    const navigate = useNavigate();
+    const { appGoBack } = useAppNavigation();
     // 動画ID
     const videoId = useVideoId();
-    // 前画面のパスを取得
-    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
 
 
     // 動画詳細を取得
@@ -34,7 +30,7 @@ export function useVideoDetail() {
      * 前画面に戻る
      */
     function backScreen() {
-        navigate(prev);
+        appGoBack(ROUTER_PATH.FAVORITE.ROOT);
     }
 
     return {

@@ -8,7 +8,7 @@ import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType } from "../../../../hooks/useMutationWrapperBase";
 import useSwitch from "../../../../hooks/useSwitch";
-import { resetAccessToken } from "../../../../lib/accessTokenStore";
+import { resetAccessToken } from "../../../../store/accessTokenStore";
 
 
 export function useHeaderUserMenuList() {

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FLG } from "../../../../../../consts/CommonConst";
 import { MEDIA } from "../../../../../../consts/MediaConst";
+import { VideoListItemType } from "../../../../../../types/videolist/VideoListItemType";
 import { useHomeVideoContent } from "../../../../hooks/videolist/videoarea/result/useHomeVideoContent";
-import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
 import { HomeVideoContentFavoriteIconArea } from "./HomeFavoriteIconArea";
 
 

@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { PREV_PATH_KEY } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import useQueryWrapper from "../../../../hooks/useQueryWrapper";
-import { getPrevPath } from "../../../../utils/CommonFunction";
 import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
 import { FavoriteVideoDetailResponseType } from "../../types/videodetail/FavoriteVideoDetailResponseType";
 import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
@@ -13,12 +11,10 @@ export function useFavoriteVideoDetail() {
 
     // エラーメッセージ
     const [errMessage, setErrMessage] = useState(``);
-    //ルーティング用
-    const navigate = useNavigate();
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
     // 動画ID
     const videoId = useVideoId();
-    // 前画面のパスを取得
-    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
 
 
     // 動画詳細を取得
@@ -35,10 +31,10 @@ export function useFavoriteVideoDetail() {
     );
 
     /**
-     * お気に入り動画一覧画面に戻る
+     * 前画面に戻る
      */
     function backPage() {
-        navigate(prev);
+        appGoBack(ROUTER_PATH.FAVORITE.ROOT);
     }
 
     return {

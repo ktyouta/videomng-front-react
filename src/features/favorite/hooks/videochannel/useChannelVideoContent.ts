@@ -1,17 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FLG, PREV_PATH_KEY } from "../../../../consts/CommonConst";
+import { FLG } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 
 
 export function useChannelVideoContent() {
 
-    //ルーティング用
-    const navigate = useNavigate();
-    // パス
-    const pathName = location.pathname;
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search;
+    // ルーティング用
+    const { appNavigate } = useAppNavigation();
 
     /**
      * 動画サムネイル、タイトルのクリックイベント
@@ -25,10 +21,10 @@ export function useChannelVideoContent() {
 
         // お気に入り登録済み
         if (favoriteFlg === FLG.ON) {
-            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${videoId}?${PREV_PATH_KEY}=${pathName}${queryParam}`);
+            appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${videoId}`);
         }
         else {
-            navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL_NON_FAVORITE}/${videoId}?${PREV_PATH_KEY}=${pathName}${queryParam}`);
+            appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL_NON_FAVORITE}/${videoId}`);
         }
     }
 

@@ -1,20 +1,11 @@
-import { useAtom, useAtomValue } from "jotai";
-import useQueryWrapper from "../../../../hooks/useQueryWrapper";
-import { errResType } from "../../../../hooks/useMutationWrapperBase";
-import { VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
-import ENV from "../../../../env.json"
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { ChannelVideoListResponseType } from "../../types/videochannel/ChannelVideoListResponseType";
-import { VideoListDataType } from "../../types/videolist/VideoListDataType";
-import { ChannelInfoType } from "../../types/videochannel/ChannelInfoType";
-import { ChannelVideoListDataType } from "../../types/videochannel/ChannelVideoListDataType";
+import { useState } from "react";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { useNavigate } from "react-router-dom";
-import { useHomeChannelEndpoint } from "./useHomeChannelEndpoint";
-import { useCreateHomeVideoListQuery } from "../videolist/useCreateHomeVideoListQuery";
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
+import useQueryWrapper from "../../../../hooks/useQueryWrapper";
+import { ChannelVideoListDataType } from "../../../../types/channel/ChannelVideoListDataType";
+import { ChannelVideoListResponseType } from "../../../../types/channel/ChannelVideoListResponseType";
 import { useChannelId } from "./useChannelId";
-import { useQueryParams } from "../../../../hooks/useQueryParams";
+import { useHomeChannelEndpoint } from "./useHomeChannelEndpoint";
 
 
 export function useHomeChannel() {
@@ -25,12 +16,10 @@ export function useHomeChannel() {
     const [nextPageToken, setNextPageToken] = useState(``);
     // チャンネル情報データ
     const [channelVideoListData, setChannelVideoListData] = useState<ChannelVideoListDataType>();
-    //ルーティング用
-    const navigate = useNavigate();
     // チャンネルID
     const channelId = useChannelId();
-    // クエリパラメータ(遷移元情報)
-    const queryParam = location.search;
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
 
 
     // チャンネル動画一覧を取得
@@ -61,8 +50,7 @@ export function useHomeChannel() {
 
                 setErrMessage(``);
             },
-            afErrorFn: (res) => {
-                const errRes = res as errResType;
+            afErrorFn: () => {
                 setErrMessage(`動画情報の取得に失敗しました`);
             }
         }
@@ -72,9 +60,7 @@ export function useHomeChannel() {
      * ホーム画面に戻る
      */
     function backHome() {
-
-        const prev = queryParam.replace(/^\?previouspath=/, "") || ROUTER_PATH.HOME.ROOT;
-        navigate(prev);
+        appGoBack(ROUTER_PATH.HOME.ROOT);
     }
 
     return {

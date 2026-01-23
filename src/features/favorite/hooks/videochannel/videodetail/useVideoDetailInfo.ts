@@ -4,9 +4,9 @@ import { IsLoginContext } from "../../../../../app/components/QueryApp";
 import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import ENV from '../../../../../env.json';
+import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
-import { getPrevPath } from "../../../../../utils/CommonFunction";
 import { playVideo } from "../../../../../utils/playVideo";
 import { AddToFavoriteRequestType } from "../../../types/videochannel/videodetail/AddToFavoriteRequestType";
 import { useVideoId } from "./useVideoId";
@@ -16,6 +16,8 @@ export function useVideoDetailInfo() {
 
     // ルーティング用
     const navigate = useNavigate();
+    // ルーティング用（アプリ内遷移）
+    const { appGoBack } = useAppNavigation();
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
     // 動画ID
@@ -26,8 +28,6 @@ export function useVideoDetailInfo() {
     const queryParam = location.search;
     // パス
     const pathName = location.pathname;
-    // 前画面のパスを取得
-    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
 
     /**
      * お気に入り登録リクエスト
@@ -51,7 +51,7 @@ export function useVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(prev);
+            appGoBack(ROUTER_PATH.FAVORITE.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

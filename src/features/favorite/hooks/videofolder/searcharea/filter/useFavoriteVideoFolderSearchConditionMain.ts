@@ -1,10 +1,7 @@
 import { useMemo } from "react";
 import { MultiValue } from "react-select";
 import { Option } from "../../../../../../components/MultiSelectbox";
-import { PREV_PATH_KEY } from "../../../../../../consts/CommonConst";
-import { ROUTER_PATH } from "../../../../../../consts/RouterPath";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
-import { getPrevPath } from "../../../../../../utils/CommonFunction";
 import { useVideoCategory } from "../../../../../main/hooks/useVideoCategory";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
 import { INIT_PAGE } from "../../../useFavoriteVideoSearchConditionValue";
@@ -184,12 +181,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
      */
     function clearFilter() {
 
-        // 前画面のパスを取得
-        const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
-        const query = `?${PREV_PATH_KEY}=${prev}`
-
-        // クエリパラメータを更新
-        replace(query);
+        // クエリパラメータをクリア
+        replace(``);
 
         reset();
         props.close();

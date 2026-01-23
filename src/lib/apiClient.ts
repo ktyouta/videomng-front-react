@@ -1,7 +1,7 @@
 import { default as Axios, InternalAxiosRequestConfig } from 'axios';
 import { VIDEO_MNG_PATH } from '../consts/CommonConst';
 import ENV from '../env.json';
-import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from './accessTokenStore';
+import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from '../store/accessTokenStore';
 
 type QueueItem = {
   resolve: (accessToken: string) => void;

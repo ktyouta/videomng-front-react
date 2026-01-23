@@ -4,9 +4,9 @@ import { IsLoginContext } from "../../../../app/components/QueryApp";
 import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import ENV from '../../../../env.json';
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
-import { getPrevPath } from "../../../../utils/CommonFunction";
 import { playVideo } from "../../../../utils/playVideo";
 import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
 import { useVideoId } from "./useVideoId";
@@ -26,8 +26,8 @@ export function useHomeVideoDetailInfo() {
     const queryParam = location.search;
     // パス
     const pathName = location.pathname;
-    // 前画面のパスを取得
-    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.HOME.ROOT);
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
 
     /**
      * お気に入り登録リクエスト
@@ -51,7 +51,7 @@ export function useHomeVideoDetailInfo() {
                 toast.success(message);
             }
 
-            navigate(prev);
+            appGoBack(ROUTER_PATH.HOME.ROOT);
         },
         // 失敗後の処理
         afErrorFn: (res: errResType) => {

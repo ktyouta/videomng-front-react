@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { mediaQuery, useMediaQuery } from "../../../../../../hooks/useMediaQuery";
-import useSwitch from "../../../../../../hooks/useSwitch";
-import { useFolderId } from "../../useFolderId";
-import { PREV_PATH_KEY } from "../../../../../../consts/CommonConst";
-import { getPrevPath } from "../../../../../../utils/CommonFunction";
-import { ROUTER_PATH } from "../../../../../../consts/RouterPath";
-import { useNavigate } from "react-router-dom";
-import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
-import { folderIdEndpoint } from "../../../../utils/endpoint";
-import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
 import { toast } from "react-toastify";
-import { DeleteFolderRequestType } from "../../../../types/videofolder/searcharea/deletefolder/DeleteFolderRequestType";
+import { ROUTER_PATH } from "../../../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../../../hooks/useAppNavigation";
+import { mediaQuery, useMediaQuery } from "../../../../../../hooks/useMediaQuery";
+import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import useSwitch from "../../../../../../hooks/useSwitch";
 import { DELETEFAVORITEVIDEOINFOLDER } from "../../../../const/FavoriteConst";
+import { DeleteFolderRequestType } from "../../../../types/videofolder/searcharea/deletefolder/DeleteFolderRequestType";
+import { folderIdEndpoint } from "../../../../utils/endpoint";
+import { useFolderId } from "../../useFolderId";
 
 
 export function useFavoriteDeleteFolderModal() {
@@ -26,16 +24,14 @@ export function useFavoriteDeleteFolderModal() {
     const folderId = useFolderId();
     // フォルダ内のお気に入り動画削除フラグ
     const [deleteVideoFlg, setDeleteVideoFlg] = useState<string>(DELETEFAVORITEVIDEOINFOLDER.OFF);
-    // 前画面のパスを取得
-    const prev = getPrevPath(PREV_PATH_KEY, ROUTER_PATH.FAVORITE.ROOT);
-    //ルーティング用
-    const navigate = useNavigate();
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
 
     /**
      * 前画面に遷移
      */
     function back() {
-        navigate(prev);
+        appGoBack(ROUTER_PATH.FAVORITE.ROOT);
     }
 
     /**

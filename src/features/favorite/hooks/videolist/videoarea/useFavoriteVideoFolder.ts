@@ -1,11 +1,9 @@
 import { useDroppable } from "@dnd-kit/core";
 import { CSSProperties } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
 import { FolderType } from "../../../types/videolist/FolderType";
-import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 
 
 type propsType = {
@@ -24,18 +22,14 @@ export function useFavoriteVideoFolder(props: propsType) {
         border: isOver ? `1px solid rgba(0, 168, 255, 0.9)` : undefined,
         transform: isOver ? `scale(1.07)` : undefined,
     };
-    //ルーティング用
-    const navigate = useNavigate();
-    // クエリ作成用
-    const { query } = useCreateFavoriteVideoListQuery();
-    // パス
-    const pathName = location.pathname;
+    // ルーティング用
+    const { appNavigate } = useAppNavigation();
 
 
     /**
      * フォルダ名のクリックイベント
-     * @param id 
-     * @returns 
+     * @param id
+     * @returns
      */
     function clickFolder(id: number) {
 
@@ -44,7 +38,7 @@ export function useFavoriteVideoFolder(props: propsType) {
             return;
         }
 
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.FOLDER}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
+        appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.FOLDER}/${id}`);
     }
 
     return {

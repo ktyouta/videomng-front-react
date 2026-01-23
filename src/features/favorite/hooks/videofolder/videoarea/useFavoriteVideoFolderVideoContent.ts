@@ -1,7 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { PREV_PATH_KEY } from "../../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
 import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
@@ -9,7 +8,6 @@ import useSwitch from "../../../../../hooks/useSwitch";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { favoriteVideoFolderId } from "../../../utils/endpoint";
 import { useFolderMasterList } from "../../videolist/useFolderMasterList";
-import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
 import { useFolderId } from "../useFolderId";
 import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
 
@@ -20,12 +18,8 @@ type propsType = {
 
 export function useFavoriteVideoFolderVideoContent(props: propsType) {
 
-    //ルーティング用
-    const navigate = useNavigate();
-    // クエリ作成用
-    const { query } = useCreateFavoriteVideoFolderVideoListQuery();
-    // パス
-    const pathName = location.pathname;
+    // ルーティング用
+    const { appNavigate } = useAppNavigation();
     // モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // フォルダID
@@ -77,10 +71,10 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
 
     /**
      * 動画クリック処理
-     * @param id 
+     * @param id
      */
     function clickVideo(id: string) {
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
+        appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.DETAIL}/${id}`);
     };
 
     /**
@@ -100,7 +94,7 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
             return;
         }
 
-        navigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.CHANNEL}/${id}?${PREV_PATH_KEY}=${pathName}${query}`);
+        appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.CHANNEL}/${id}`);
     }
 
     return {

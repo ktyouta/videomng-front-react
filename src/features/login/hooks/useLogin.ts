@@ -7,7 +7,7 @@ import { ROUTER_PATH } from '../../../consts/RouterPath';
 import ENV from '../../../env.json';
 import useMutationWrapper from '../../../hooks/useMutationWrapper';
 import { errResType, resSchema } from '../../../hooks/useMutationWrapperBase';
-import { updateAccessToken } from '../../../lib/accessTokenStore';
+import { updateAccessToken } from '../../../store/accessTokenStore';
 import { getPrevPath } from '../../../utils/CommonFunction';
 import { SIGINUP_PATH_KEY } from '../../signup/const/SiginupConst';
 import { loginResponseSchema } from '../schemas/loginResponseSchema';
