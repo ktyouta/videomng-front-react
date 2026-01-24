@@ -11,7 +11,7 @@ const MessageDiv = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  margin-top: 70px;
+  margin-top: 45px;
   font-size: 15px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -34,9 +34,9 @@ const WordAreaDiv = styled.div`
   color:white;
   display:flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 35px;
   align-items: center;
-  margin-top: 57px;
+  margin-top: 33px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 15px;
