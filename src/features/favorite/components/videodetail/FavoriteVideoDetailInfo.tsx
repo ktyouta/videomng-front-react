@@ -100,7 +100,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     style={{
                         "fontSize": "0.9rem",
                         "minHeight": "50px",
-                        "width": "95%",
+                        "width": "100%",
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": "8%",
@@ -122,7 +122,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     style={{
                         "fontSize": "0.9rem",
                         "minHeight": "50px",
-                        "width": "95%",
+                        "width": "100%",
                         "background": "rgb(175, 55, 42)",
                         "color": "white",
                         "borderRadius": "8px",

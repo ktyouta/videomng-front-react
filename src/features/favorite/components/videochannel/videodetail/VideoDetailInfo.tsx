@@ -102,7 +102,7 @@ export function VideoDetailInfo(props: propsType) {
                     style={{
                         "fontSize": "0.9rem",
                         "height": "50px",
-                        "width": "90%",
+                        "width": "100%",
                         "color": "white",
                         "borderRadius": "8px",
                         "marginBottom": "8%",
@@ -130,7 +130,7 @@ export function VideoDetailInfo(props: propsType) {
                                         style={{
                                             "fontSize": "0.9rem",
                                             "minHeight": "50px",
-                                            "width": "90%",
+                                            "width": "100%",
                                             "background": "rgb(100, 100, 100)",
                                             "color": "white",
                                             "borderRadius": "8px",
@@ -147,7 +147,7 @@ export function VideoDetailInfo(props: propsType) {
                                         style={{
                                             "fontSize": "0.9rem",
                                             "minHeight": "50px",
-                                            "width": "90%",
+                                            "width": "100%",
                                             "borderRadius": "8px",
                                             "display": "block",
                                         }}
@@ -164,7 +164,7 @@ export function VideoDetailInfo(props: propsType) {
                             style={{
                                 "fontSize": "0.9rem",
                                 "minHeight": "50px",
-                                "width": "90%",
+                                "width": "100%",
                                 "borderRadius": "8px",
                                 "display": "block",
                             }}

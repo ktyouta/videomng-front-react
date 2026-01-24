@@ -34,25 +34,25 @@ const WordAreaDiv = styled.div`
   color:white;
   display:flex;
   flex-direction: column;
-  gap: clamp(70px, 10vh, 125px);
+  gap: 48px;
   align-items: center;
-  margin-top: 95px;
+  margin-top: 57px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 15px;
-    margin-top: 95px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     font-size: 17px;
+    gap: 125px;
     margin-top: 95px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     font-size: 17px;
+    gap: 125px;
     margin-top: 95px;
   }
-
 `;
 
 export function HomeVideoAreaDefault() {

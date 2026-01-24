@@ -20,7 +20,6 @@ Reactで構築されたWebサービスのフロントエンド
 # コーディング規約
 - TypeScriptの厳密モードを使用
 - コンポーネントはfunction宣言で定義
-- スタイルはTailwind CSSのみ使用
 - テストはVitestで記述
 
 ## 指示・回答について
