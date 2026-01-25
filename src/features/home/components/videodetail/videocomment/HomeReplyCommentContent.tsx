@@ -3,6 +3,7 @@ import { IoIosThumbsUp } from "react-icons/io";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { sanitizeAndParseHtml } from "../../../../../utils/sanitizeAndParseHtml";
 import { HomeVideoCommentThreadReplySnippetType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadReplySnippetType";
 
 
@@ -67,7 +68,7 @@ export function HomeReplyCommentContent(props: propsType) {
 
     const commentThreadReplySnippet = props.commentThreadReplySnippet;
     // コメント本文
-    const parentCommentText = commentThreadReplySnippet.textDisplay;
+    const parentCommentText = sanitizeAndParseHtml(commentThreadReplySnippet.textDisplay);
     // 投稿日
     const publishedDate = format(new Date(commentThreadReplySnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
