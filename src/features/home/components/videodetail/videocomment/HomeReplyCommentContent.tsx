@@ -67,7 +67,7 @@ export function HomeReplyCommentContent(props: propsType) {
 
     const commentThreadReplySnippet = props.commentThreadReplySnippet;
     // コメント本文
-    const parentCommentText = commentThreadReplySnippet.textOriginal;
+    const parentCommentText = commentThreadReplySnippet.textDisplay;
     // 投稿日
     const publishedDate = format(new Date(commentThreadReplySnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者

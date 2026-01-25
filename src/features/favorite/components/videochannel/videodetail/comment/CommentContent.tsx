@@ -74,7 +74,7 @@ export function CommentContent(props: propsType) {
     const parentComment = snippet.topLevelComment;
     const parentCommentSnippet = parentComment.snippet;
     // コメント本文
-    const parentCommentText = parentCommentSnippet.textOriginal;
+    const parentCommentText = parentCommentSnippet.textDisplay;
     // 投稿日
     const publishedDate = format(new Date(parentCommentSnippet.publishedAt), "yyyy/MM/dd  HH:mm");
     // 投稿者
