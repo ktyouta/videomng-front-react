@@ -47,8 +47,12 @@ const CategoryDiv = styled.div`
 const MetaContentDiv = styled.div`
 `;
 
-const TagGuideDiv = styled(MetaDiv)`
+const GuideDiv = styled(MetaDiv)`
     font-size: 13px;
+`;
+
+const FolderMetaDiv = styled(MetaDiv)`
+    margin-bottom: 10px
 `;
 
 const CategoryLabel = styled.label`
@@ -68,6 +72,22 @@ const FlexDiv = styled.div`
   display:flex;
   gap: 50px;
   flex-wrap: wrap;
+`;
+
+
+const FolderAreaDiv = styled.div`
+  box-sizing:border-box;
+  align-items: center;
+  display:flex;
+  flex-wrap: wrap;
+  grid-column-gap: 2%;
+`;
+
+const FolderDiv = styled.div`
+  display: flex;
+  text-align: center;
+  width: auto;
+  align-items: center;
 `;
 
 type propsType = {
@@ -98,6 +118,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
 
     const createDate = data?.detail.createDate;
     const updateDate = data?.detail.updateDate;
+    const folders = data?.folders;
 
     return (
         <React.Fragment>
@@ -260,9 +281,39 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                 </span>
                         }
                     </MetaDiv>
-                    <TagGuideDiv>
+                    <GuideDiv>
                         ※タグの設定はメニューの「タグ」から行えます。
-                    </TagGuideDiv>
+                    </GuideDiv>
+                </MetaContentDiv>
+                <MetaContentDiv>
+                    <TitleDiv>
+                        【所属フォルダ】
+                    </TitleDiv>
+                    <FolderMetaDiv>
+                        {
+                            folders && folders.length > 0
+                                ?
+                                <FolderAreaDiv>
+                                    {
+                                        folders.map((e) => {
+
+                                            return (
+                                                <FolderDiv
+                                                    key={e.folderId}
+                                                >
+                                                    {e.folderName}
+                                                </FolderDiv>
+                                            )
+                                        })
+                                    }
+                                </FolderAreaDiv>
+                                :
+                                `未登録`
+                        }
+                    </FolderMetaDiv>
+                    <GuideDiv>
+                        ※フォルダへの登録はお気に入り一覧画面から行えます。
+                    </GuideDiv>
                 </MetaContentDiv>
                 <FlexDiv
                     style={{ marginBottom: "25px" }}

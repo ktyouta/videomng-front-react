@@ -9,6 +9,7 @@ import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
 import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
 import { useFavoriteDetailSettingView } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingView";
+import { FavoriteVideoCustomFolderType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomFolderType";
 import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import { FavoriteDetailSettingViewActions } from "./FavoriteDetailSettingViewActions";
@@ -77,6 +78,20 @@ const FavoriteLevelAreaDiv = styled.div`
   grid-column-gap: 15px;
 `;
 
+const FolderAreaDiv = styled.div`
+  box-sizing:border-box;
+  align-items: center;
+  display:flex;
+  flex-wrap: wrap;
+  grid-column-gap: 2%;
+`;
+
+const FolderDiv = styled.div`
+  display: flex;
+  text-align: center;
+  width: auto;
+  align-items: center;
+`;
 
 type propsType = {
     changeEdit: () => void,
@@ -120,6 +135,7 @@ export function FavoriteDetailSettingView(props: propsType) {
     const detail = data.detail;
     const categorys = data.categorys;
     const tags = data.tags;
+    const folders = data.folders;
 
     return (
         <React.Fragment>
@@ -257,6 +273,33 @@ export function FavoriteDetailSettingView(props: propsType) {
                                 <span>
                                     タグが設定されていません。
                                 </span>
+                        }
+                    </MetaDiv>
+                </MetaContentDiv>
+                <MetaContentDiv
+                    style={{ marginBottom: "15px" }}
+                >
+                    <TitleDiv>
+                        【所属フォルダ】
+                    </TitleDiv>
+                    <MetaDiv>
+                        {
+                            folders && folders.length > 0 ?
+                                <FolderAreaDiv>
+                                    {
+                                        folders && folders.map((e: FavoriteVideoCustomFolderType) => {
+                                            return (
+                                                <FolderDiv
+                                                    key={e.folderId}
+                                                >
+                                                    {e.folderName}
+                                                </FolderDiv>
+                                            )
+                                        }, [])
+                                    }
+                                </FolderAreaDiv>
+                                :
+                                `未登録`
                         }
                     </MetaDiv>
                 </MetaContentDiv>
