@@ -1,8 +1,7 @@
 import styled from "styled-components";
+import { Selectbox } from "../../../../../components/Selectbox";
 import { VIDEO_TYPE_LIST } from "../../../const/HomeConst";
 import { useHomeSearchConditionMain } from "../../../hooks/videolist/searcharea/useHomeSearchConditionMain";
-import { VideoCategoryItemType } from "../../../../main/types/VideoCategoryItemType";
-import { Selectbox } from "../../../../../components/Selectbox";
 
 
 const Parent = styled.div`

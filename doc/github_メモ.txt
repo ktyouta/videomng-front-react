@@ -1,4 +1,4 @@
-githubリポジトリ作成・プッシュ手順
+GitHubリポジトリ作成・プッシュ手順
 
 
 1. リポジトリの作成(githubページ側)
@@ -16,7 +16,7 @@ githubリポジトリ作成・プッシュ手順
 
 6. git branch -M main
 
-7. git remote add origin https://github.com/ktyouta/[リポジトリ名].git
+7. git remote add origin https://github.com/[GitHubユーザー名]/[リポジトリ名].git
 
 8. git push origin main
 

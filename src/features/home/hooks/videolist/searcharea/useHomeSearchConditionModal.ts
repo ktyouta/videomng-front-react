@@ -1,11 +1,5 @@
-import useSwitch from "../../../../../hooks/useSwitch";
-import { useNavigate } from "react-router-dom";
-import { useFrequentKeywords } from "../videoarea/default/useFrequentKeywords";
-import { useRecentKeyword } from "../videoarea/default/useRecentKeyword";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
-import { useHomeVideoSearchConditionValue } from "../useHomeVideoSearchConditionValue";
-import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
-import { toast } from "react-toastify";
+import useSwitch from "../../../../../hooks/useSwitch";
 
 
 export function useHomeSearchConditionModal() {

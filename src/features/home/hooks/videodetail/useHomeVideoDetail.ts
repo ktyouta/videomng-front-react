@@ -1,9 +1,7 @@
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { useAppNavigation } from "../../../../hooks/useAppNavigation";
-import useQueryWrapper from "../../../../hooks/useQueryWrapper";
-import { VideoDetailItemType } from "../../../../types/videodetail/VideoDetailItemType";
 import { VideoDetailResponseType } from "../../../../types/videodetail/VideoDetailResponseType";
-import { useHomeVideoDetailEndpoint } from "./useHomeVideoDetailEndpoint";
+import { getVideoDetail } from "../../api/getVideoDetail";
 import { useVideoId } from "./useVideoId";
 
 export function useHomeVideoDetail() {
@@ -13,18 +11,13 @@ export function useHomeVideoDetail() {
     // ルーティング用
     const { appGoBack } = useAppNavigation();
 
-
     // 動画詳細を取得
-    const { data: videoDetail, isLoading, isError } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
-        {
-            url: useHomeVideoDetailEndpoint(videoId),
-            select: (res: VideoDetailResponseType) => {
-                return res.data.items;
-            },
-            afErrorFn: (res) => {
-            }
-        }
-    );
+    const { data: videoDetail, isLoading, isError } = getVideoDetail({
+        videoId,
+        select: (res: VideoDetailResponseType) => {
+            return res.data.items;
+        },
+    });
 
     /**
      * 前画面に戻る

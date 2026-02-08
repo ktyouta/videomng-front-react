@@ -68,5 +68,8 @@ export const SEARCH_CONDITION = {
     QUERY_KEY_NEXT_PAGE_TOKEN: `nextPageToken`
 } as const;
 
+// クエリパラメータ(キーワード検索)
+export const QUERY_KEY_SEARCH_COMMENT = `q`;
+
 // 検索条件一式をURLクエリで保持するためのキー
 export const LIST_SEARCH_CONDITION_KEY = `criteria`;

@@ -1,8 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import { useHomeVideoAreaResult } from "../../../../hooks/videolist/videoarea/result/useHomeVideoAreaResult";
-import { HomeVideoAreaDefault } from "../default/HomeVideoAreaDefault";
 import Loading from "../../../../../../components/Loading";
+import { useHomeVideoAreaResult } from "../../../../hooks/videolist/videoarea/result/useHomeVideoAreaResult";
 import { HomeVideoListResult } from "./HomeVideoListResult";
 import { HomeVideoSearchWord } from "./HomeVideoSearchWord";
 

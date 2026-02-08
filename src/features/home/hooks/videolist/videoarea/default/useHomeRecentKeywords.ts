@@ -20,18 +20,16 @@ export function useHomeRecentKeywords() {
         selectedVideoCategory,
         selectedVideoType } = useHomeVideoSearchConditionValue();
     // 現在の検索条件
-    const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
+    const { nowSearchCondition, setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateHomeVideoListQuery();
+    const { create } = useCreateHomeVideoListQuery({ nowSearchCondition });
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
 
 
     // ローカルストレージから最近の検索リストを取得
     useEffect(() => {
-
         const wordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
-
         setRecentWordList(wordList);
     }, []);
 

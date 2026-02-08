@@ -1,14 +1,10 @@
-import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useRef, useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json";
-import { HomeVideoCommentThreadResponseType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadResponseType";
-import { useHomeCommentEndpoint } from "./useHomeCommentEndpoint";
-import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
-import { useVideoId } from "../useVideoId";
 import { useInView } from "react-intersection-observer";
+import { getVideoComment } from "../../../api/getVideoComment";
+import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
+import { HomeVideoCommentThreadResponseType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadResponseType";
 import { HomeVideoCommentThreadType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadType";
+import { useVideoId } from "../useVideoId";
 
 
 export function useHomeCommentList() {
@@ -28,44 +24,39 @@ export function useHomeCommentList() {
         threshold: 0.2,
     });
 
-
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<HomeVideoCommentThreadResponseType, HomeVideoCommentThreadType>(
-        {
-            url: useHomeCommentEndpoint({
-                videoId,
-                nextPageToken,
-            }),
-            select: (res: HomeVideoCommentThreadResponseType) => {
-                return res.data;
-            },
-            afSuccessFn: (res: HomeVideoCommentThreadType) => {
+    const { isLoading, error } = getVideoComment({
+        videoId,
+        nextPageToken,
+        select: (res: HomeVideoCommentThreadResponseType) => {
+            return res.data;
+        },
+        onSuccess: (res: HomeVideoCommentThreadType) => {
 
-                setDisplayCommentList((e) => {
+            setDisplayCommentList((e) => {
 
-                    if (!res.items || res.items.length === 0) {
-                        return e;
-                    }
+                if (!res.items || res.items.length === 0) {
+                    return e;
+                }
 
-                    if (!nextPageToken) {
-                        return res.items;
-                    }
+                if (!nextPageToken) {
+                    return res.items;
+                }
 
-                    if (!e) {
-                        return e;
-                    }
+                if (!e) {
+                    return e;
+                }
 
-                    return [...e, ...res.items];
-                });
+                return [...e, ...res.items];
+            });
 
-                nextPageTokenRef.current = res.nextPageToken;
-            },
-            afErrorFn: (res) => {
-                setErrMessage(`コメントの取得に失敗しました。`);
-            }
+            nextPageTokenRef.current = res.nextPageToken;
+        },
+        onError: (res: unknown) => {
+            setErrMessage(`コメントの取得に失敗しました。`);
         }
-    );
-
+    });
+    console.log(`error:`, error);
     /**
      * 画面下までスクロールしたら次データを取得する
      */

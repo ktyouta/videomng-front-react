@@ -21,9 +21,9 @@ export function useHomeFrequentKeywords() {
         selectedVideoCategory,
         selectedVideoType } = useHomeVideoSearchConditionValue();
     // 現在の検索条件
-    const { setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
+    const { nowSearchCondition, setNowSearchCondition } = useHomeVideoNowSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateHomeVideoListQuery();
+    const { create } = useCreateHomeVideoListQuery({ nowSearchCondition });
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
 
