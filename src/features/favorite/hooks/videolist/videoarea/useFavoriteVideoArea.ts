@@ -2,8 +2,8 @@ import { DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors } from "@
 import { toast } from "react-toastify";
 import { FLG } from "../../../../../consts/CommonConst";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { callApi } from "../../../../../utils/callApi";
+import { getFavoriteVideoList } from "../../../api/getFavoriteVideoList";
 import { DisplayFolderListContext, DisplayVideoListContext, SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
@@ -11,7 +11,6 @@ import { FavoriteVideoListResponseType } from "../../../types/videolist/Favorite
 import { FolderType } from "../../../types/videolist/FolderType";
 import { getFavoriteVideoFolderEndpoint } from "../../../utils/endpoint";
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
-import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 
 export function useFavoriteVideoArea() {
@@ -25,7 +24,7 @@ export function useFavoriteVideoArea() {
     // 画面表示用のフォルダリスト(setter)
     const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
     // 検索条件
-    const { selectedFavoriteVideoMode } = useFavoriteVideoSearchConditionValue();
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
 
     // ドラッグ設定
     const dragSensors = useSensors(
@@ -45,20 +44,16 @@ export function useFavoriteVideoArea() {
     );
 
     // 動画一覧を取得
-    const { data, isLoading, isError, isFetching } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
-        {
-            url: useFavoriteVideoListEndpoint(),
-            select: (res: FavoriteVideoListResponseType) => {
-                return res.data;
-            },
-            afSuccessFn: (res: FavoriteVideoListResponseDataType) => {
-                setDisplayVideoList(res.item ?? []);
-                setDisplayFolderList(res.folder ?? []);
-            },
-            afErrorFn: (res) => {
-            }
-        }
-    );
+    const { data, isLoading, isError, isFetching } = getFavoriteVideoList({
+        searchConditionObj,
+        select: (res: FavoriteVideoListResponseType) => {
+            return res.data;
+        },
+        onSuccess: (res: FavoriteVideoListResponseDataType) => {
+            setDisplayVideoList(res.item ?? []);
+            setDisplayFolderList(res.folder ?? []);
+        },
+    });
 
     /**
      * 動画をフォルダに登録
@@ -172,6 +167,6 @@ export function useFavoriteVideoArea() {
         displayFolderList,
         handleDragEnd,
         dragSensors,
-        selectedFavoriteVideoMode,
+        selectedFavoriteVideoMode: searchConditionObj.selectedFavoriteVideoMode,
     }
 }

@@ -1,33 +1,28 @@
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
-import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
+import { getFavoriteVideoList } from "../../../api/getFavoriteVideoList";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { useCreateFavoriteVideoListQuery } from "../../useCreateFavoriteVideoListQuery";
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
-import { useFavoriteVideoListEndpoint } from "./useFavoriteVideoListEndpoint";
 
 export function useFavoriteVideoAreaFooter() {
 
+    // 検索条件
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoListQuery();
+    const { create } = useCreateFavoriteVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // 検索条件
     const { selectedFavoriteVideoPage,
         setSelectedFavoriteVideoPage } = useFavoriteVideoSearchConditionValue();
     // 動画一覧
-    const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
-        {
-            url: useFavoriteVideoListEndpoint(),
-            select: (res: FavoriteVideoListResponseType) => {
-                return res.data;
-            },
-            options: {
-                enabled: false
-            }
-        }
-    );
+    const { data } = getFavoriteVideoList({
+        searchConditionObj,
+        select: (res: FavoriteVideoListResponseType) => {
+            return res.data;
+        },
+        enabled: false,
+    });
     // 選択中のページ
     const selectPage = parseInt(selectedFavoriteVideoPage);
 

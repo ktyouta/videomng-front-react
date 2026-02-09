@@ -5,12 +5,9 @@ import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../useFavori
 export function useFavoriteSearchSwichMode() {
 
     // 検索条件
-    const {
-        selectedFavoriteVideoMode,
-        setSlectedFavoriteVideoMode,
-        resetPage } = useFavoriteVideoSearchConditionValue();
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoListQuery();
+    const { create } = useCreateFavoriteVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
 
@@ -28,12 +25,12 @@ export function useFavoriteSearchSwichMode() {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSlectedFavoriteVideoMode(mode);
-        resetPage();
+        searchConditionObj.setSlectedFavoriteVideoMode(mode);
+        searchConditionObj.resetPage();
     }
 
     return {
-        selectedFavoriteVideoMode,
+        selectedFavoriteVideoMode: searchConditionObj.selectedFavoriteVideoMode,
         switchMode,
     };
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { HomeVideoNowSearchConditionValueProvider } from "../HomeVideoNowSearchConditionValueProvider";
 import { HomeVideoSearchConditionValueProvider } from "./HomeVideoSearchConditionValueProvider";
 import { HomeSearchArea } from "./searcharea/HomeSearchArea";
 import { HomeVideoArea } from "./videoarea/HomeVideoArea";
@@ -13,13 +14,15 @@ export function HomeVideoList() {
     console.log("HomeVideoList render");
 
     return (
-        <HomeVideoSearchConditionValueProvider>
-            <Parent>
-                {/* 検索条件エリア */}
-                <HomeSearchArea />
-                {/* 動画表示エリア */}
-                <HomeVideoArea />
-            </Parent>
-        </HomeVideoSearchConditionValueProvider>
+        <HomeVideoNowSearchConditionValueProvider>
+            <HomeVideoSearchConditionValueProvider>
+                <Parent>
+                    {/* 検索条件エリア */}
+                    <HomeSearchArea />
+                    {/* 動画表示エリア */}
+                    <HomeVideoArea />
+                </Parent>
+            </HomeVideoSearchConditionValueProvider>
+        </HomeVideoNowSearchConditionValueProvider>
     );
 }

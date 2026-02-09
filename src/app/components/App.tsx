@@ -4,19 +4,19 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Exception } from '../../features/exception/components/Exception';
 import QueryApp from './QueryApp';
 
+//React-Query用
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 function App() {
 
   console.log("App render");
-
-  //React-Query用
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        refetchOnWindowFocus: false,
-      },
-    },
-  });
 
   return (
     <ErrorBoundary
@@ -31,4 +31,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

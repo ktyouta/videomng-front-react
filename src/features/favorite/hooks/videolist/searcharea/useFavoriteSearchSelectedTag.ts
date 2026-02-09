@@ -7,11 +7,9 @@ import { useTagMasterList } from "../useTagMasterList";
 export function useFavoriteSearchSelectedTag() {
 
     // 検索条件
-    const {
-        selectedFavoriteVideoTag,
-        setSelectedFavoriteVideoTag, } = useFavoriteVideoSearchConditionValue();
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoListQuery();
+    const { create } = useCreateFavoriteVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // タグマスタリスト
@@ -24,7 +22,7 @@ export function useFavoriteSearchSelectedTag() {
      */
     function resetTag(value: string) {
 
-        const tagList = selectedFavoriteVideoTag.split(`,`);
+        const tagList = searchConditionObj.selectedFavoriteVideoTag.split(`,`);
         const newTagValue = tagList.filter((e) => e !== value).join(`,`);
 
         const newQuery = create({
@@ -35,11 +33,11 @@ export function useFavoriteSearchSelectedTag() {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoTag(newTagValue);
+        searchConditionObj.setSelectedFavoriteVideoTag(newTagValue);
     }
 
     return {
-        selectedFavoriteVideoTag,
+        selectedFavoriteVideoTag: searchConditionObj.selectedFavoriteVideoTag,
         resetTag,
         tagMasterList,
     }

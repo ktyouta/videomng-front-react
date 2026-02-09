@@ -6,9 +6,10 @@ import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
 import { mediaQuery, useMediaQuery } from "../../../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { favoriteVideoKeys } from "../../../../api/queryKey";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { CreateFolderRequestType } from "../../../../types/videolist/searcharea/folder/CreateFolderRequestType";
-import { useFavoriteVideoListEndpoint } from "../../videoarea/useFavoriteVideoListEndpoint";
+import { useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 
 
 type propsType = {
@@ -19,8 +20,10 @@ export function useFavoriteCreateFolderMain(props: propsType) {
 
     // フォルダ名
     const [folderName, setFolderName] = useState(``);
+    // 検索条件
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // 動画一覧再取得用
-    const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteVideoListEndpoint());
+    const { invalidate: invalidataFavorite } = useInvalidateQuery(favoriteVideoKeys.list(searchConditionObj));
     // フォルダカラー
     const [folderColor, setFolderColor] = useState(DEFAULT_FOLDER_COLOR);
     // 画面サイズ判定

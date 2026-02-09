@@ -8,14 +8,11 @@ import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../useFavori
 export function useFavoriteSearchSortArea() {
 
     // 検索条件
-    const {
-        selectedFavoriteVideoSortKey,
-        setSelectedFavoriteVideoSortKey,
-        resetPage } = useFavoriteVideoSearchConditionValue();
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // 画面サイズ判定
     const isPcLess = useMediaQuery(mediaQuery.pcLess);
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoListQuery();
+    const { create } = useCreateFavoriteVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // ソートリストを取得
@@ -37,14 +34,14 @@ export function useFavoriteSearchSortArea() {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoSortKey(value);
-        resetPage();
+        searchConditionObj.setSelectedFavoriteVideoSortKey(value);
+        searchConditionObj.resetPage();
     }
 
     return {
         sortList,
         selectSort,
-        selectedFavoriteVideoSortKey,
+        selectedFavoriteVideoSortKey: searchConditionObj.selectedFavoriteVideoSortKey,
         isPcLess,
     }
 }

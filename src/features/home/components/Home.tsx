@@ -1,13 +1,9 @@
-import React, { createContext } from "react";
-import { HomeVideoList } from "./videolist/HomeVideoList";
-import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { HomeVideoDetail } from "./videodetail/HomeVideoDetail";
-import { createCtx } from "../../../utils/createCtx";
-import { Provider } from "jotai";
+import { Route, Routes } from "react-router-dom";
 import { ROUTER_PATH } from "../../../consts/RouterPath";
 import { NotFound } from "../../notfound/components/NotFound";
 import { HomeChannel } from "./videochannel/HomeChannel";
-import { HomeVideoNowSearchConditionValueProvider } from "./HomeVideoNowSearchConditionValueProvider";
+import { HomeVideoDetail } from "./videodetail/HomeVideoDetail";
+import { HomeVideoList } from "./videolist/HomeVideoList";
 
 
 export function Home() {
@@ -20,9 +16,7 @@ export function Home() {
             <Route
                 path={`/`}
                 element={
-                    <HomeVideoNowSearchConditionValueProvider>
-                        <HomeVideoList />
-                    </HomeVideoNowSearchConditionValueProvider>
+                    <HomeVideoList />
                 }
             />
             {/* 動画詳細 */}

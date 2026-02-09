@@ -1,9 +1,8 @@
 import { useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { getFavoriteVideoList } from "../../../api/getFavoriteVideoList";
 import { SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
-import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
-import { useFavoriteVideoListEndpoint } from "../videoarea/useFavoriteVideoListEndpoint";
+import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 
 export function useFavoriteSearchText() {
 
@@ -13,18 +12,16 @@ export function useFavoriteSearchText() {
     const setDisplayVideoList = SetDisplayVideoListContext.useCtx();
     // 画面表示用のフォルダリスト(setter)
     const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
+    // 検索条件
+    const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // 動画一覧
-    const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
-        {
-            url: useFavoriteVideoListEndpoint(),
-            select: (res: FavoriteVideoListResponseType) => {
-                return res.data;
-            },
-            options: {
-                enabled: false
-            }
-        }
-    );
+    const { data } = getFavoriteVideoList({
+        searchConditionObj,
+        select: (res: FavoriteVideoListResponseType) => {
+            return res.data;
+        },
+        enabled: false,
+    });
 
     /**
      * 入力値および表示用動画情報を初期化
