@@ -1,14 +1,12 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
-import { errResType, resSchema, resType } from "../../../../../../hooks/useMutationWrapperBase";
-import { FavoriteVideoBlockCommentType } from "../../../../types/videodetail/videocomment/videoblockcomment/FavoriteVideoBlockCommentType";
-import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
-import { DeleteToFavoriteVideoBlockCommentReqestType } from "../../../../types/videodetail/videocomment/videoblockcomment/DeleteToFavoriteVideoBlockCommentReqestType";
 import { toast } from "react-toastify";
-import { useFavoriteBlockCommentIdEndpoint } from "./useFavoriteBlockCommentIdEndpoint";
-import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
+import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
+import ENV from "../../../../../../env.json";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
-import { useFavoriteBlockCommentEndpoint } from "./useFavoriteBlockCommentEndpoint";
+import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { favoriteVideoKeys } from "../../../../api/queryKey";
+import { DeleteToFavoriteVideoBlockCommentReqestType } from "../../../../types/videodetail/videocomment/videoblockcomment/DeleteToFavoriteVideoBlockCommentReqestType";
+import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { useVideoId } from "../../useVideoId";
 
 
@@ -21,21 +19,22 @@ export function useFavoriteBlockCommentContent(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // 公開コメント再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint({
-        videoId
+    const { invalidate: invalidataPublic } = useInvalidateQuery(favoriteVideoKeys.comment({
+        videoId,
+        nextPageToken: ``,
     }));
     // 非表示コメント再取得用
-    const { invalidate: invalidateBlock } = useInvalidateQuery(useFavoriteBlockCommentEndpoint(videoId));
-
+    const { invalidate: invalidateBlock } = useInvalidateQuery(favoriteVideoKeys.blockComment(videoId));
+    // コメントID
+    const commentId = props.commentDetailItem.id;
+    // 再表示リクエストエンドポイント
+    const endpoint = videoId && commentId ? `${VIDEO_MNG_PATH}${ENV.BLOCK_COMMENT_ID}`.replace(`:videoId`, videoId).replace(`:commentId`, commentId) : ``
 
     /**
      * 再表示リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteBlockCommentIdEndpoint({
-            videoId,
-            commentId: props.commentDetailItem.id
-        }),
+        url: endpoint,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {

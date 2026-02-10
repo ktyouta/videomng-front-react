@@ -7,7 +7,7 @@ import { VideoDetailResponseType } from "../../../types/videodetail/VideoDetailR
 import { videoKeys } from "./queryKey";
 
 type PropsType = {
-    select?: ((data: VideoDetailResponseType) => VideoDetailItemType) | undefined
+    select: ((data: VideoDetailResponseType) => VideoDetailItemType) | undefined
     videoId: string;
 }
 

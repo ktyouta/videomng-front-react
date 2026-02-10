@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { useAppNavigation } from "../../../../hooks/useAppNavigation";
-import useQueryWrapper from "../../../../hooks/useQueryWrapper";
-import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
+import { getFavoriteVideoDetail } from "../../api/getFavoriteVideoDetail";
 import { FavoriteVideoDetailResponseType } from "../../types/videodetail/FavoriteVideoDetailResponseType";
-import { useFavoriteVideoDetailEndpoint } from "./useFavoriteVideoDetailEndpoint";
 import { useVideoId } from "./useVideoId";
 
 export function useFavoriteVideoDetail() {
@@ -16,19 +14,16 @@ export function useFavoriteVideoDetail() {
     // 動画ID
     const videoId = useVideoId();
 
-
     // 動画詳細を取得
-    const { data: videoDetail, isLoading } = useQueryWrapper<FavoriteVideoDetailResponseType, FavoriteVideoDetailDataType>(
-        {
-            url: useFavoriteVideoDetailEndpoint(videoId),
-            select: (res: FavoriteVideoDetailResponseType) => {
-                return res.data
-            },
-            afErrorFn: (res) => {
-                setErrMessage(`動画情報の取得に失敗しました。`);
-            }
+    const { data: videoDetail, isLoading } = getFavoriteVideoDetail({
+        videoId,
+        select: (res: FavoriteVideoDetailResponseType) => {
+            return res.data
+        },
+        onError: (res) => {
+            setErrMessage(`動画情報の取得に失敗しました。`);
         }
-    );
+    });
 
     /**
      * 前画面に戻る

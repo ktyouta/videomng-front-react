@@ -113,6 +113,9 @@ export const FOLDER_SEARCH_CONDITION = {
     QUERY_KEY_PAGE: `folderPage`,
 } as const;
 
+// クエリパラメータ(キーワード検索)
+export const QUERY_KEY_SEARCH_COMMENT = `q`;
+
 // フォルダ内の動画を削除するフラグ
 export const DELETEFAVORITEVIDEOINFOLDER = {
     ON: `1`,

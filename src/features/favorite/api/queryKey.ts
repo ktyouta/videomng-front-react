@@ -14,6 +14,16 @@ type VideoCommentType = {
     nextPageToken: string;
 }
 
+type FavoriteCommentType = {
+    videoId: string;
+    nextPageToken: string;
+}
+
+type BlockCommentType = {
+    videoId: string;
+    nextPageToken: string;
+}
+
 type VideoSearchCommentType = {
     videoId: string;
     keyword: string;
@@ -50,6 +60,10 @@ export const favoriteVideoKeys = {
     detail: (videoId: string) => [...favoriteVideoKeys.details(), videoId] as const,
     comments: () => [...favoriteVideoKeys.all, `comment`] as const,
     comment: (props: VideoCommentType) => [...favoriteVideoKeys.comments(), props] as const,
+    favoriteComments: () => [...favoriteVideoKeys.all, `favoriteComment`] as const,
+    favoriteComment: (videoId: string) => [...favoriteVideoKeys.favoriteComments(), videoId] as const,
+    blockComments: () => [...favoriteVideoKeys.all, `blockComment`] as const,
+    blockComment: (videoId: string) => [...favoriteVideoKeys.blockComments(), videoId] as const,
     searchComments: () => [...favoriteVideoKeys.all, `searchcommentbykeyword`] as const,
     searchComment: (props: VideoSearchCommentType) => [...favoriteVideoKeys.searchComments(), props] as const,
     channels: () => [...favoriteVideoKeys.all, `channel`] as const,

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { useFavoriteCommentEndpoint } from "./useFavoriteCommentEndpoint";
-import { FavoriteVideoCommentThreadResponseType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadResponseType";
-import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
-import { useVideoId } from "../useVideoId";
-import { FavoriteVideoCommentThreadType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadType";
 import { useInView } from "react-intersection-observer";
+import { getVideoComment } from "../../../api/getVideoComment";
+import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
+import { FavoriteVideoCommentThreadResponseType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadResponseType";
+import { FavoriteVideoCommentThreadType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadType";
+import { useVideoId } from "../useVideoId";
 
 
 export function useFavoriteCommentList() {
@@ -25,43 +24,38 @@ export function useFavoriteCommentList() {
         threshold: 0.1,
     });
 
-
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<FavoriteVideoCommentThreadResponseType, FavoriteVideoCommentThreadType>(
-        {
-            url: useFavoriteCommentEndpoint({
-                videoId,
-                nextPageToken,
-            }),
-            select: (res: FavoriteVideoCommentThreadResponseType) => {
-                return res.data;
-            },
-            afSuccessFn: (res: FavoriteVideoCommentThreadType) => {
+    const { isLoading } = getVideoComment({
+        videoId,
+        nextPageToken,
+        select: (res: FavoriteVideoCommentThreadResponseType) => {
+            return res.data;
+        },
+        onSuccess: (res: FavoriteVideoCommentThreadType) => {
 
-                setDisplayCommentList((e) => {
+            setDisplayCommentList((e) => {
 
-                    if (!res.items || res.items.length === 0) {
-                        return e;
-                    }
+                if (!res.items || res.items.length === 0) {
+                    return e;
+                }
 
-                    if (!nextPageToken) {
-                        return res.items;
-                    }
+                if (!nextPageToken) {
+                    return res.items;
+                }
 
-                    if (!e) {
-                        return e;
-                    }
+                if (!e) {
+                    return e;
+                }
 
-                    return [...e, ...res.items];
-                });
+                return [...e, ...res.items];
+            });
 
-                nextPageTokenRef.current = res.nextPageToken;
-            },
-            afErrorFn: (res) => {
-                setErrMessage(`コメントの取得に失敗しました。`);
-            }
+            nextPageTokenRef.current = res.nextPageToken;
+        },
+        onError: (res) => {
+            setErrMessage(`コメントの取得に失敗しました。`);
         }
-    );
+    });
 
     /**
      * 画面下までスクロールしたら次データを取得する

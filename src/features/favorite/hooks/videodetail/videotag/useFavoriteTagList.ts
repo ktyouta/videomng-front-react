@@ -1,14 +1,9 @@
-import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json";
-import { errResType } from "../../../../../hooks/useMutationWrapperBase";
-import { FavoriteVideoMemoResponseType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoResponseType";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import { useVideoId } from "../useVideoId";
+import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 export function useFavoriteTagList() {
@@ -26,7 +21,6 @@ export function useFavoriteTagList() {
                 return res.data ?? [];
             },
             afErrorFn: (res) => {
-                const errRes = res as errResType;
                 setErrMessage(`タグの取得に失敗しました`);
             }
         }

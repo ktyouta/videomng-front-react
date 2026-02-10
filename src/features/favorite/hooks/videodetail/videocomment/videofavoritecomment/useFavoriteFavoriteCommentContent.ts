@@ -1,15 +1,13 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
-import { errResType, resSchema, resType } from "../../../../../../hooks/useMutationWrapperBase";
-import { FavoriteVideoFavoriteCommentType } from "../../../../types/videodetail/videocomment/videofavoritecomment/FavoriteVideoFavoriteCommentType";
-import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { toast } from "react-toastify";
-import { useFavoriteFavoriteCommentIdEndpoint } from "./useFavoriteFavoriteCommentIdEndpoint";
-import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
+import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
+import ENV from "../../../../../../env.json";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
-import { useFavoriteCommentEndpoint } from "../useFavoriteCommentEndpoint";
+import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { favoriteVideoKeys } from "../../../../api/queryKey";
+import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { useVideoId } from "../../useVideoId";
-
+import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 
 type propsType = {
     commentDetailItem: YouTubeDataApiCommentDetailItemType,
@@ -20,20 +18,22 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // 公開コメント再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteCommentEndpoint({
-        videoId
+    const { invalidate: invalidataPublic } = useInvalidateQuery(favoriteVideoKeys.comment({
+        videoId,
+        nextPageToken: ``,
     }));
     // お気に入りコメント再取得用
     const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteFavoriteCommentEndpoint(videoId));
+    // コメントID
+    const commentId = props.commentDetailItem.id;
+    // お気に入りコメント削除用エンドポイント
+    const favoriteCommentIdEndpoint = videoId && commentId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT_ID}`.replace(`:videoId`, videoId).replace(`:commentId`, commentId) : ``;
 
     /**
      * お気に入りコメント削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteFavoriteCommentIdEndpoint({
-            videoId,
-            commentId: props.commentDetailItem.id
-        }),
+        url: favoriteCommentIdEndpoint,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {

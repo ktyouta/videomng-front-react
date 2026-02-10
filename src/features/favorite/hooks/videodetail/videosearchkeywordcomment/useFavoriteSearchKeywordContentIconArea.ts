@@ -1,19 +1,19 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
+import ENV from "../../../../../env.json";
+import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
+import { favoriteVideoKeys } from "../../../api/queryKey";
+import { SearchKeywordCommentKeywordContext } from "../../../components/videodetail/videosearchkeywordcomment/FavoriteSearchKeywordComment";
+import { COMMENT_FAVORITE_STATUS } from "../../../const/FavoriteConst";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../types/videodetail/videocomment/videoblockcomment/AddToFavoriteVideoBlockCommentReqestType";
-import { FavoriteVideoBlockCommentType } from "../../../types/videodetail/videocomment/videoblockcomment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../types/videodetail/videocomment/videofavoritecomment/AddToFavoriteVideoFavoriteCommentReqestType";
 import { FavoriteVideoFavoriteCommentType } from "../../../types/videodetail/videocomment/videofavoritecomment/FavoriteVideoFavoriteCommentType";
-import { COMMENT_FAVORITE_STATUS } from "../../../const/FavoriteConst";
-import { toast } from "react-toastify";
-import { useFavoriteBlockCommentEndpoint } from "../videocomment/videoblockcomment/useFavoriteBlockCommentEndpoint";
-import { useFavoriteFavoriteCommentIdEndpoint } from "../videocomment/videofavoritecomment/useFavoriteFavoriteCommentIdEndpoint";
-import { useFavoriteFavoriteCommentEndpoint } from "../videocomment/videofavoritecomment/useFavoriteFavoriteCommentEndpoint";
-import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
-import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
-import { SearchKeywordCommentKeywordContext } from "../../../components/videodetail/videosearchkeywordcomment/FavoriteSearchKeywordComment";
 import { useVideoId } from "../useVideoId";
+import { useFavoriteBlockCommentEndpoint } from "../videocomment/videoblockcomment/useFavoriteBlockCommentEndpoint";
+import { useFavoriteFavoriteCommentEndpoint } from "../videocomment/videofavoritecomment/useFavoriteFavoriteCommentEndpoint";
 
 
 type propsType = {
@@ -31,11 +31,14 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // コメント再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteSearchKeywordCommentEndpoint({
-        videoId: videoId,
+    const { invalidate } = useInvalidateQuery(favoriteVideoKeys.searchComment({
+        videoId,
         keyword: searchKeywordCommentKeyword,
     }));
-
+    // コメントID
+    const commentId = props.commentId;
+    // お気に入りコメント削除用エンドポイント
+    const favoriteCommentIdEndpoint = videoId && commentId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT_ID}`.replace(`:videoId`, videoId).replace(`:commentId`, commentId) : ``;
 
     /**
      * コメントブロックリクエスト
@@ -135,10 +138,7 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
      * お気に入りコメント削除リクエスト
      */
     const delMutation = useMutationWrapper({
-        url: useFavoriteFavoriteCommentIdEndpoint({
-            videoId,
-            commentId: props.commentId
-        }),
+        url: favoriteCommentIdEndpoint,
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {

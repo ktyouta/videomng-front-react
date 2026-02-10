@@ -1,15 +1,8 @@
 import styled from "styled-components";
-import { useFavoriteMemoList } from "../../../../hooks/videodetail/videomemo/useFavoriteMemoList";
-import { FavoriteVideoMemoType } from "../../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../../videomemo/FavoriteMemoContent";
-import LoadingBase from "../../../../../../components/LoadingBase";
-import { useFavoriteCommentList } from "../../../../hooks/videodetail/videocomment/useFavoriteCommentList";
-import { FavoriteCommentContent } from "../FavoriteCommentContent";
+import Loading from "../../../../../../components/Loading";
 import { useFavoriteBlockCommentList } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentList";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { FavoriteBlockCommentContent } from "./FavoriteBlockCommentContent";
-import React from "react";
-import Loading from "../../../../../../components/Loading";
 
 
 const Parent = styled.div`

@@ -1,10 +1,8 @@
 import { useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { getSearchComment } from "../../../api/getSearchComment";
 import { SearchKeywordCommentKeywordContext } from "../../../components/videodetail/videosearchkeywordcomment/FavoriteSearchKeywordComment";
-import { SearchKeywordCommentResponseDataType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseDataType";
 import { SearchKeywordCommentResponseType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
 import { useVideoId } from "../useVideoId";
-import { useFavoriteSearchKeywordCommentEndpoint } from "./useFavoriteSearchKeywordCommentEndpoint";
 
 
 export function useFavoriteSearchKeywordCommentList() {
@@ -16,22 +14,17 @@ export function useFavoriteSearchKeywordCommentList() {
     // 動画ID
     const videoId = useVideoId();
 
-
     // コメント情報を取得
-    const { data: searchCommentData, isLoading } = useQueryWrapper<SearchKeywordCommentResponseType, SearchKeywordCommentResponseDataType>(
-        {
-            url: useFavoriteSearchKeywordCommentEndpoint({
-                videoId,
-                keyword: searchKeywordCommentKeyword
-            }),
-            select: (res: SearchKeywordCommentResponseType) => {
-                return res.data;
-            },
-            afErrorFn: (res) => {
-                setErrMessage(`コメントの取得に失敗しました。`);
-            }
+    const { data: searchCommentData, isLoading } = getSearchComment({
+        videoId,
+        keyword: searchKeywordCommentKeyword,
+        select: (res: SearchKeywordCommentResponseType) => {
+            return res.data;
+        },
+        onError: (res) => {
+            setErrMessage(`コメントの取得に失敗しました。`);
         }
-    );
+    });
 
     return {
         isLoading,

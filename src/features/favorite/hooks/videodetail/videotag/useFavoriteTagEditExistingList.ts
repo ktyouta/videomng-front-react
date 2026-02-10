@@ -3,7 +3,7 @@ import { tagType } from "../../../../../components/TagsComponent";
 import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
 import ENV from "../../../../../env.json";
 import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { FavoriteVideoTagEditListContext, SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
+import { SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 
@@ -13,8 +13,6 @@ export function useFavoriteTagEditExistingList() {
 
     // タグマスタリスト表示フラグ
     const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
-    // タグ編集リスト
-    const favoriteVideoTagEditList = FavoriteVideoTagEditListContext.useCtx();
     // タグ編集リスト(setter)
     const setFavoriteVideoTagEditList = SetFavoriteVideoTagEditListContext.useCtx();
     // セクション表示用タグマスタリスト
