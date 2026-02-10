@@ -64,4 +64,5 @@ export const favoriteVideoKeys = {
     memo: (videoId: string) => [favoriteVideoKeys.memos(), videoId] as const,
     tags: () => [favoriteVideoKeys.all, `tag`] as const,
     tag: (videoId: string) => [favoriteVideoKeys.tags(), videoId] as const,
+    tagMasters: () => [favoriteVideoKeys.all, `tagMaster`] as const,
 }

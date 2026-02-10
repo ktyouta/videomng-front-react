@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { tagType } from "../../../../../components/TagsComponent";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { getFavoriteVideoTag } from "../../../api/getFavoriteVideoTag";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
+import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import { useVideoId } from "../useVideoId";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 export function useFavoriteVideoTagEditListProvider() {
@@ -14,25 +14,23 @@ export function useFavoriteVideoTagEditListProvider() {
     const videoId = useVideoId();
 
     // 設定されたタグリストを取得
-    useQueryWrapper<FavoriteVideoTagResponseType>(
-        {
-            url: useFavoriteTagEndpoint(videoId),
-            afSuccessFn: (res: FavoriteVideoTagResponseType) => {
+    getFavoriteVideoTag({
+        videoId,
+        select: (res: FavoriteVideoTagResponseType) => {
+            return res.data ?? [];
+        },
+        onSuccess: (res: FavoriteVideoTagType[]) => {
 
-                const settingTagList = res.data
-
-                // タグ編集リストに設定
-                setFavoriteVideoTagEditList(settingTagList.map((e) => {
-                    return {
-                        label: e.tagName,
-                        value: e.tagId,
-                        tagColor: e.tagColor,
-                    }
-                }));
-            },
-            afErrorFn: () => { }
-        }
-    );
+            // タグ編集リストに設定
+            setFavoriteVideoTagEditList(res.map((e) => {
+                return {
+                    label: e.tagName,
+                    value: e.tagId,
+                    tagColor: e.tagColor,
+                }
+            }));
+        },
+    });
 
     return {
         favoriteVideoTagEditList,

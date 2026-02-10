@@ -8,7 +8,8 @@ import { favoriteVideoKeys } from "./queryKey";
 type PropsType = {
     videoId: string;
     select: (res: FavoriteVideoTagResponseType) => FavoriteVideoTagType[];
-    onError: (res: unknown) => void;
+    onSuccess?: (res: FavoriteVideoTagType[]) => void;
+    onError?: (res: unknown) => void;
 }
 
 export function getFavoriteVideoTag(props: PropsType) {
@@ -20,6 +21,7 @@ export function getFavoriteVideoTag(props: PropsType) {
             return data;
         },
         select: props.select,
+        onSuccess: props.onSuccess,
         onError: props.onError,
         enabled: !!props.videoId,
     });

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { tagType } from "../../../../../components/TagsComponent";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { getFavoriteVideoTagMaster } from "../../../api/getFavoriteVideoTagMaster";
 import { SetFavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
@@ -20,28 +18,23 @@ export function useFavoriteTagEditExistingList() {
     // 入力中のキーワード
     const [inputKeyword, setInputKeyword] = useState(``);
     // タグマスタリストを取得
-    const { data: tagMasterList } = useQueryWrapper<FavoriteVideoTagResponseType, tagType[]>(
-        {
-            url: `${VIDEO_MNG_PATH}${ENV.TAG_INFO}`,
-            select: (res: FavoriteVideoTagResponseType) => {
+    const { data: tagMasterList } = getFavoriteVideoTagMaster({
+        select: (res: FavoriteVideoTagResponseType) => {
 
-                const tagComboList = res.data.map((e: FavoriteVideoTagType) => {
-                    return {
-                        value: e.tagName,
-                        label: e.tagName,
-                        tagColor: e.tagColor,
-                    }
-                });
+            const tagComboList = res.data.map((e: FavoriteVideoTagType) => {
+                return {
+                    value: e.tagName,
+                    label: e.tagName,
+                    tagColor: e.tagColor,
+                }
+            });
 
-                return tagComboList;
-            },
-            afSuccessFn: (res: tagType[]) => {
-                setDisplayTagMaster(res);
-            },
-            afErrorFn: () => {
-            }
-        }
-    );
+            return tagComboList;
+        },
+        onSuccess: (res: tagType[]) => {
+            setDisplayTagMaster(res);
+        },
+    });
 
     /**
      * 入力欄のタグを編集リストに追加する
