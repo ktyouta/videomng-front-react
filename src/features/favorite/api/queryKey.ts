@@ -14,16 +14,6 @@ type VideoCommentType = {
     nextPageToken: string;
 }
 
-type FavoriteCommentType = {
-    videoId: string;
-    nextPageToken: string;
-}
-
-type BlockCommentType = {
-    videoId: string;
-    nextPageToken: string;
-}
-
 type VideoSearchCommentType = {
     videoId: string;
     keyword: string;

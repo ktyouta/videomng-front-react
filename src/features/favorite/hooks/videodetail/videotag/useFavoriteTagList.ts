@@ -1,9 +1,7 @@
 import { useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { getFavoriteVideoTag } from "../../../api/getFavoriteVideoTag";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
-import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import { useVideoId } from "../useVideoId";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 export function useFavoriteTagList() {
@@ -14,17 +12,15 @@ export function useFavoriteTagList() {
     const videoId = useVideoId();
 
     // タグリストを取得
-    const { data: favoriteVideoTagList, isLoading } = useQueryWrapper<FavoriteVideoTagResponseType, FavoriteVideoTagType[]>(
-        {
-            url: useFavoriteTagEndpoint(videoId),
-            select: (res: FavoriteVideoTagResponseType) => {
-                return res.data ?? [];
-            },
-            afErrorFn: (res) => {
-                setErrMessage(`タグの取得に失敗しました`);
-            }
+    const { data: favoriteVideoTagList, isLoading } = getFavoriteVideoTag({
+        videoId,
+        select: (res: FavoriteVideoTagResponseType) => {
+            return res.data ?? [];
+        },
+        onError: (res) => {
+            setErrMessage(`タグの取得に失敗しました`);
         }
-    );
+    });
 
     return {
         favoriteVideoTagList,

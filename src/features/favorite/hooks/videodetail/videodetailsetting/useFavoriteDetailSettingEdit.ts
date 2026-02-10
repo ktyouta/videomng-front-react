@@ -1,22 +1,19 @@
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useMemo, useState } from "react";
-import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
-import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
-import { UpdateFavoriteVideoResponseDataType } from "../../../types/videodetail/videodetailsetting/UpdateFavoriteVideoResponseDataType";
-import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
-import ENV from "../../../../../env.json";
-import { UpdateToFavoriteVideoReqestType } from "../../../types/videodetail/videodetailsetting/UpdateToFavoriteVideoReqestType";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
+import ENV from "../../../../../env.json";
+import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import { useVideoCategory } from "../../../../main/hooks/useVideoCategory";
+import { getFavoriteVideoCustom } from "../../../api/getFavoriteVideoCustom";
+import { ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
+import { UpdateFavoriteVideoResponseDataSchema } from "../../../schemas/videodetail/videodetailsetting/UpdateFavoriteVideoResponseDataSchema";
+import { FavoriteVideoCustomDataType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomDataType";
+import { FavoriteVideoCustomResponseType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomResponseType";
+import { FavoriteVideoDetailCategoryType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoDetailCategoryType";
+import { UpdateToFavoriteVideoReqestType } from "../../../types/videodetail/videodetailsetting/UpdateToFavoriteVideoReqestType";
 import { useViewStatusList } from "../../useViewStatusList";
 import { useVideoId } from "../useVideoId";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { FavoriteVideoCustomResponseType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomResponseType";
-import { FavoriteVideoCustomDataType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomDataType";
-import { useFavoriteDetailSettingEndpoint } from "./useFavoriteDetailSettingEndpoint";
-import { useVideoCategory } from "../../../../main/hooks/useVideoCategory";
-import { UpdateFavoriteVideoResponseDataSchema } from "../../../schemas/videodetail/videodetailsetting/UpdateFavoriteVideoResponseDataSchema";
-import { ISVISIBLEAFTERFOLDERADD } from "../../../const/FavoriteConst";
 
 
 type propsType = {
@@ -42,37 +39,35 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const [isVisibleAfterFolderAdd, setIsVisibleAfterFolderAdd] = useState<string>(ISVISIBLEAFTERFOLDERADD.OFF);
     // 動画ID
     const videoId = useVideoId();
+    // お気に入り動画更新リクエスト用エンドポイント
+    const endpoint = videoId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_CUSTOM}`.replace(`:videoId`, videoId) : ``;
 
     // カスタム情報を取得
-    const { data } = useQueryWrapper<FavoriteVideoCustomResponseType, FavoriteVideoCustomDataType>(
-        {
-            url: useFavoriteDetailSettingEndpoint(videoId),
-            select: (res: FavoriteVideoCustomResponseType) => {
-                return res.data;
-            },
-            afSuccessFn: (res: FavoriteVideoCustomDataType) => {
+    const { data } = getFavoriteVideoCustom({
+        videoId,
+        select: (res: FavoriteVideoCustomResponseType) => {
+            return res.data;
+        },
+        onSuccess: (res: FavoriteVideoCustomDataType) => {
 
-                const detail = res.detail;
-                const categorys = res.categorys;
+            const detail = res.detail;
+            const categorys = res.categorys;
 
-                setSummary(detail.summary);
-                setCategorys(categorys.map((e: FavoriteVideoDetailCategoryType) => {
-                    return e.categoryId;
-                }));
-                setViewStatus(detail.viewStatus);
-                setFavoriteLevel(detail.favoriteLevel);
-                setIsVisibleAfterFolderAdd(detail.isVisibleAfterFolderAdd);
-            },
-            afErrorFn: (res) => {
-            }
+            setSummary(detail.summary);
+            setCategorys(categorys.map((e: FavoriteVideoDetailCategoryType) => {
+                return e.categoryId;
+            }));
+            setViewStatus(detail.viewStatus);
+            setFavoriteLevel(detail.favoriteLevel);
+            setIsVisibleAfterFolderAdd(detail.isVisibleAfterFolderAdd);
         }
-    );
+    });
 
     /**
      * お気に入り動画更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteDetailSettingEndpoint(videoId),
+        url: endpoint,
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {

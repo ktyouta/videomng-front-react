@@ -7,8 +7,8 @@ import { ChangeViewContext } from "../../../components/videodetail/videotag/Favo
 import { FavoriteVideoTagEditListContext } from "../../../components/videodetail/videotag/FavoriteVideoTagEditListProvider";
 import { UpdateFavoriteVideoTagType } from "../../../types/videodetail/videotag/UpdateFavoriteVideoTagType";
 import { UpdateToFavoriteVideoTagReqestType } from "../../../types/videodetail/videotag/UpdateToFavoriteVideoTagReqestType";
+import { favoriteTagEndpoint } from "../../../utils/endpoint";
 import { useVideoId } from "../useVideoId";
-import { useFavoriteTagEndpoint } from "./useFavoriteTagEndpoint";
 
 
 
@@ -27,7 +27,7 @@ export function useFavoriteTagEditUpdateIcon() {
      * お気に入り動画タグ更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteTagEndpoint(videoId),
+        url: favoriteTagEndpoint(videoId),
         method: "PUT",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {

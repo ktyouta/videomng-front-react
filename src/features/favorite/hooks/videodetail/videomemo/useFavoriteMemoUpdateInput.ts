@@ -1,18 +1,11 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
-import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
-import ENV from "../../../../../env.json";
-import { AddToFavoriteVideoMemoResponseType } from "../../../types/videodetail/videomemo/AddToFavoriteVideoMemoResponseType";
-import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
-import { AddToFavoriteVideoMemoReqestType } from "../../../types/videodetail/videomemo/AddToFavoriteVideoMemoReqestType";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { UpdateToFavoriteVideoMemoReqestType } from "../../../types/videodetail/videomemo/UpdateToFavoriteVideoMemoReqestType";
-import useSwitch from "../../../../../hooks/useSwitch";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
 import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
-import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
+import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import { favoriteVideoKeys } from "../../../api/queryKey";
+import { UpdateToFavoriteVideoMemoReqestType } from "../../../types/videodetail/videomemo/UpdateToFavoriteVideoMemoReqestType";
+import { favoriteMemoIdEndpoint } from "../../../utils/endpoint";
 import { useVideoId } from "../useVideoId";
 
 
@@ -29,14 +22,13 @@ export function useFavoriteMemoUpdateInput(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // メモ再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(videoId));
-
+    const { invalidate } = useInvalidateQuery(favoriteVideoKeys.memo(videoId));
 
     /**
      * お気に入り動画メモ更新リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteMemoIdEndpoint({
+        url: favoriteMemoIdEndpoint({
             videoId,
             memoId: props.videoMemoSeq
         }),

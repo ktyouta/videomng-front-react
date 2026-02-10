@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json";
 import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
@@ -11,6 +9,7 @@ import { COMMENT_FAVORITE_STATUS } from "../../../const/FavoriteConst";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../types/videodetail/videocomment/videoblockcomment/AddToFavoriteVideoBlockCommentReqestType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../types/videodetail/videocomment/videofavoritecomment/AddToFavoriteVideoFavoriteCommentReqestType";
 import { FavoriteVideoFavoriteCommentType } from "../../../types/videodetail/videocomment/videofavoritecomment/FavoriteVideoFavoriteCommentType";
+import { favoriteCommentIdEndpoint } from "../../../utils/endpoint";
 import { useVideoId } from "../useVideoId";
 import { useFavoriteBlockCommentEndpoint } from "../videocomment/videoblockcomment/useFavoriteBlockCommentEndpoint";
 import { useFavoriteFavoriteCommentEndpoint } from "../videocomment/videofavoritecomment/useFavoriteFavoriteCommentEndpoint";
@@ -37,8 +36,6 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
     }));
     // コメントID
     const commentId = props.commentId;
-    // お気に入りコメント削除用エンドポイント
-    const favoriteCommentIdEndpoint = videoId && commentId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT_ID}`.replace(`:videoId`, videoId).replace(`:commentId`, commentId) : ``;
 
     /**
      * コメントブロックリクエスト
@@ -138,7 +135,10 @@ export function useFavoriteSearchKeywordContentIconArea(props: propsType) {
      * お気に入りコメント削除リクエスト
      */
     const delMutation = useMutationWrapper({
-        url: favoriteCommentIdEndpoint,
+        url: favoriteCommentIdEndpoint({
+            videoId,
+            commentId
+        }),
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoFavoriteCommentType>) => {

@@ -119,7 +119,8 @@ export function FavoriteTagList() {
                                 <TagButtonComponent
                                     title={e.tagName}
                                     btnStyle={{
-                                        marginRight: "15px"
+                                        marginRight: "15px",
+                                        marginBottom: "10px",
                                     }}
                                     key={tagId}
                                     tagColor={e.tagColor}

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
-import ENV from "../../../../../env.json";
 import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
@@ -10,6 +8,7 @@ import { COMMENT_FAVORITE_STATUS } from "../../../const/FavoriteConst";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../types/videodetail/videocomment/videoblockcomment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../types/videodetail/videocomment/videoblockcomment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../types/videodetail/videocomment/videofavoritecomment/AddToFavoriteVideoFavoriteCommentReqestType";
+import { favoriteCommentIdEndpoint } from "../../../utils/endpoint";
 import { useVideoId } from "../useVideoId";
 import { useFavoriteBlockCommentEndpoint } from "./videoblockcomment/useFavoriteBlockCommentEndpoint";
 import { useFavoriteFavoriteCommentEndpoint } from "./videofavoritecomment/useFavoriteFavoriteCommentEndpoint";
@@ -34,8 +33,6 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
     }));
     // コメントID
     const commentId = props.commentId;
-    // お気に入りコメント削除用エンドポイント
-    const favoriteCommentIdEndpoint = videoId && commentId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT_ID}`.replace(`:videoId`, videoId).replace(`:commentId`, commentId) : ``;
 
     // コメント情報再取得時にアイコン状態を変更する
     useEffect(() => {
@@ -144,7 +141,10 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * お気に入りコメント削除リクエスト
      */
     const delMutation = useMutationWrapper({
-        url: favoriteCommentIdEndpoint,
+        url: favoriteCommentIdEndpoint({
+            videoId,
+            commentId
+        }),
         method: "DELETE",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {

@@ -1,11 +1,11 @@
 import { toast } from "react-toastify";
-import useSwitch from "../../../../../hooks/useSwitch";
-import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
-import { useFavoriteMemoIdEndpoint } from "./useFavoriteMemoIdEndpoint";
-import { errResType, resSchema, resType } from "../../../../../hooks/useMutationWrapperBase";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { useFavoriteMemoEndpoint } from "./useFavoriteMemoEndpoint";
 import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
+import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import useSwitch from "../../../../../hooks/useSwitch";
+import { favoriteVideoKeys } from "../../../api/queryKey";
+import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
+import { favoriteMemoIdEndpoint } from "../../../utils/endpoint";
 import { useVideoId } from "../useVideoId";
 
 
@@ -20,14 +20,13 @@ export function useFavoriteMemoContentViewDeleteArea(props: propsType) {
     // 動画ID
     const videoId = useVideoId();
     // メモ再取得用
-    const { invalidate } = useInvalidateQuery(useFavoriteMemoEndpoint(videoId));
-
+    const { invalidate } = useInvalidateQuery(favoriteVideoKeys.memo(videoId));
 
     /**
      * メモ削除リクエスト
      */
     const postMutation = useMutationWrapper({
-        url: useFavoriteMemoIdEndpoint({
+        url: favoriteMemoIdEndpoint({
             videoId,
             memoId: props.data.videoMemoSeq,
         }),
