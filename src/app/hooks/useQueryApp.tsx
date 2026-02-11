@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LOGIN_USER_INFO_INIT, VIDEO_MNG_PATH } from '../../consts/CommonConst';
+import { LOGIN_USER_INFO_INIT } from '../../consts/CommonConst';
 import { ROUTER_PATH } from '../../consts/RouterPath';
-import ENV from "../../env.json";
+import { getAuthCheck } from '../../features/api/getAuthCheck';
 import { resSchema } from '../../hooks/useMutationWrapperBase';
-import useQueryWrapper from '../../hooks/useQueryWrapper';
 import { registerResetLogin } from '../../store/accessTokenStore';
 import { LoginUserInfoType } from '../../types/userinfo/LoginUserInfoType';
 import { AuthCheckResponseSchema } from '../schemas/AuthCheckResponseSchema';
@@ -29,30 +28,27 @@ function useQueryApp() {
     }
 
     // 認証チェック
-    useQueryWrapper(
-        {
-            url: `${VIDEO_MNG_PATH}${ENV.FRONT_USER_CHECK_AUTH}`,
-            afSuccessFn: (res: unknown) => {
+    getAuthCheck({
+        onSuccess: (res: unknown) => {
 
-                // レスポンスの型チェック
-                const resParsed = resSchema(AuthCheckResponseSchema).safeParse(res);
+            // レスポンスの型チェック
+            const resParsed = resSchema(AuthCheckResponseSchema).safeParse(res);
 
-                if (!resParsed.success) {
-                    return;
-                }
-
-                const resData = resParsed.data.data;
-
-                setLoginUserInfo(resData.userInfo);
-                setIsLogin(true);
-                setIsCheckedAuth(true);
-            },
-            afErrorFn: (err) => {
-                setIsLogin(false);
-                setIsCheckedAuth(true);
+            if (!resParsed.success) {
+                return;
             }
+
+            const resData = resParsed.data.data;
+
+            setLoginUserInfo(resData.userInfo);
+            setIsLogin(true);
+            setIsCheckedAuth(true);
+        },
+        onError: (err) => {
+            setIsLogin(false);
+            setIsCheckedAuth(true);
         }
-    );
+    });
 
     // ログインリセット処理を登録
     useEffect(() => {

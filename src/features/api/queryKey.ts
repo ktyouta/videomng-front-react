@@ -17,3 +17,14 @@ export const videoKeys = {
     searchComments: () => [...videoKeys.all, `searchcommentbykeyword`] as const,
     searchComment: (props: VideoSearchCommentType) => [...videoKeys.searchComments(), props] as const,
 }
+
+export const appKeys = {
+    all: [`app`] as const,
+    authCheck: () => [...appKeys.all, `authCheck`] as const,
+}
+
+export const masterKeys = {
+    all: [`master`] as const,
+    videoCategory: () => [...masterKeys.all, `videoCategory`] as const,
+    sortList: () => [...masterKeys.all, `sortList`] as const,
+}

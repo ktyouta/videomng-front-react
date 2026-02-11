@@ -54,3 +54,13 @@ export function favoriteVideoFolderVideoListEndpoint(props: { folderId: string, 
     const endpoint = props.folderId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_FOLDER}${props.query}`.replace(`:folderId`, props.folderId) : ``;
     return endpoint;
 }
+
+export function favoriteBlockCommentEndpoint(videoId: string) {
+    const endpoint = videoId ? `${VIDEO_MNG_PATH}${ENV.BLOCK_COMMENT}`.replace(`:videoId`, videoId) : ``;
+    return endpoint;
+}
+
+export function favoriteFavoriteCommentEndpoint(videoId: string) {
+    const endpoint = videoId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_COMMENT}`.replace(`:videoId`, videoId) : ``;
+    return endpoint;
+}

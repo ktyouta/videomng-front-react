@@ -8,10 +8,8 @@ import { COMMENT_FAVORITE_STATUS } from "../../../const/FavoriteConst";
 import { AddToFavoriteVideoBlockCommentReqestType } from "../../../types/videodetail/videocomment/videoblockcomment/AddToFavoriteVideoBlockCommentReqestType";
 import { FavoriteVideoBlockCommentType } from "../../../types/videodetail/videocomment/videoblockcomment/FavoriteVideoBlockCommentType";
 import { AddToFavoriteVideoFavoriteCommentReqestType } from "../../../types/videodetail/videocomment/videofavoritecomment/AddToFavoriteVideoFavoriteCommentReqestType";
-import { favoriteCommentIdEndpoint } from "../../../utils/endpoint";
+import { favoriteBlockCommentEndpoint, favoriteCommentIdEndpoint, favoriteFavoriteCommentEndpoint } from "../../../utils/endpoint";
 import { useVideoId } from "../useVideoId";
-import { useFavoriteBlockCommentEndpoint } from "./videoblockcomment/useFavoriteBlockCommentEndpoint";
-import { useFavoriteFavoriteCommentEndpoint } from "./videofavoritecomment/useFavoriteFavoriteCommentEndpoint";
 
 
 type propsType = {
@@ -43,7 +41,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントブロックリクエスト
      */
     const postBlockMutation = useMutationWrapper({
-        url: useFavoriteBlockCommentEndpoint(videoId),
+        url: favoriteBlockCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: resType<FavoriteVideoBlockCommentType>) => {
@@ -91,7 +89,7 @@ export function useFavoriteCommentContentIconArea(props: propsType) {
      * コメントお気に入りリクエスト
      */
     const postFavoriteMutation = useMutationWrapper({
-        url: useFavoriteFavoriteCommentEndpoint(videoId),
+        url: favoriteFavoriteCommentEndpoint(videoId),
         method: "POST",
         // 正常終了後の処理
         afSuccessFn: (res: unknown) => {

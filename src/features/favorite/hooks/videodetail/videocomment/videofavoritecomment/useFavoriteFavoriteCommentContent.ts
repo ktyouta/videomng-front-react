@@ -6,7 +6,6 @@ import { favoriteVideoKeys } from "../../../../api/queryKey";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { favoriteCommentIdEndpoint } from "../../../../utils/endpoint";
 import { useVideoId } from "../../useVideoId";
-import { useFavoriteFavoriteCommentEndpoint } from "./useFavoriteFavoriteCommentEndpoint";
 
 type propsType = {
     commentDetailItem: YouTubeDataApiCommentDetailItemType,
@@ -22,7 +21,7 @@ export function useFavoriteFavoriteCommentContent(props: propsType) {
         nextPageToken: ``,
     }));
     // お気に入りコメント再取得用
-    const { invalidate: invalidataFavorite } = useInvalidateQuery(useFavoriteFavoriteCommentEndpoint(videoId));
+    const { invalidate: invalidataFavorite } = useInvalidateQuery(favoriteVideoKeys.favoriteComment(videoId));
     // コメントID
     const commentId = props.commentDetailItem.id;
 

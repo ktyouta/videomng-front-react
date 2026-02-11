@@ -79,4 +79,5 @@ export const favoriteVideoKeys = {
     folderVideo: (props: { folderId: string, searchConditionObj: FolderVideoSearchConditionType }) => [...favoriteVideoKeys.folderVideos(), props.folderId, createFolderVideoListKey(props.searchConditionObj)] as const,
     sharedVideos: () => [...favoriteVideoKeys.all, `sharedVideo`] as const,
     sharedVideo: (folderId: string) => [favoriteVideoKeys.sharedVideos(), folderId] as const,
+    viewStatuses: () => [...favoriteVideoKeys.all, `viewStatus`] as const,
 }

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { tagType } from "../../../components/TagsComponent";
+import { Option } from "../../../components/Selectbox";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
 import { api } from "../../../lib/apiClient";
@@ -7,8 +7,9 @@ import { FavoriteVideoTagResponseType } from "../types/videodetail/videotag/Favo
 import { favoriteVideoKeys } from "./queryKey";
 
 type PropsType = {
-    select: (res: FavoriteVideoTagResponseType) => tagType[];
-    onSuccess?: (res: tagType[]) => void;
+    select: (res: FavoriteVideoTagResponseType) => (Option & { tagColor: string })[];
+    onSuccess?: (res: (Option & { tagColor: string })[]) => void;
+    enabled?: boolean;
 }
 
 export function getFavoriteVideoTagMaster(props: PropsType) {
@@ -21,5 +22,6 @@ export function getFavoriteVideoTagMaster(props: PropsType) {
         },
         select: props.select,
         onSuccess: props.onSuccess,
+        enabled: props.enabled,
     });
 }
