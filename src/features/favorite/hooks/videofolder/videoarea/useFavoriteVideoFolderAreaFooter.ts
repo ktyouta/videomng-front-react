@@ -1,37 +1,31 @@
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
-import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
+import { getFolderVideo } from "../../../api/getFolderVideo";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { useCreateFavoriteVideoFolderVideoListQuery } from "../useCreateFavoriteVideoFolderVideoListQuery";
 import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
 import { useFolderId } from "../useFolderId";
-import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
 
 export function useFavoriteVideoFolderAreaFooter() {
 
+    // 検索条件
+    const searchConditionObj = useFavoriteVideoFolderSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoFolderVideoListQuery();
+    const { create } = useCreateFavoriteVideoFolderVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // フォルダID
     const folderId = useFolderId();
-    // 検索条件
-    const { selectedFavoriteVideoPage,
-        setSelectedFavoriteVideoPage } = useFavoriteVideoFolderSearchConditionValue();
     // 動画一覧
-    const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
-        {
-            url: useFavoriteVideoFolderVideoListEndpoint(folderId),
-            select: (res: FavoriteVideoListResponseType) => {
-                return res.data;
-            },
-            options: {
-                enabled: false
-            }
-        }
-    );
+    const { data } = getFolderVideo({
+        folderId,
+        searchConditionObj,
+        select: (res: FavoriteVideoListResponseType) => {
+            return res.data;
+        },
+        enabled: false
+    });
     // 選択中のページ
-    const selectPage = parseInt(selectedFavoriteVideoPage);
+    const selectPage = parseInt(searchConditionObj.selectedFavoriteVideoPage);
 
     /**
      * ページリンク選択
@@ -45,7 +39,7 @@ export function useFavoriteVideoFolderAreaFooter() {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoPage(page.toString());
+        searchConditionObj.setSelectedFavoriteVideoPage(page.toString());
     }
 
     return {

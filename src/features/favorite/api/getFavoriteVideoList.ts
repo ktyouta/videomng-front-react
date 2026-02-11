@@ -5,19 +5,11 @@ import { api } from "../../../lib/apiClient";
 import { useCreateFavoriteVideoListQuery } from "../hooks/useCreateFavoriteVideoListQuery";
 import { FavoriteVideoListResponseDataType } from "../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../types/videolist/FavoriteVideoListResponseType";
+import { VideoSearchConditionType } from "../types/videolist/VideoSearchConditionType";
 import { favoriteVideoKeys } from "./queryKey";
 
 type PropsType = {
-    searchConditionObj: {
-        selectedFavoriteVideoCategory: string;
-        selectedFavoriteVideoViewStatus: string;
-        selectedFavoriteVideoTag: string;
-        selectedFavoriteVideoFavoriteLevel: string;
-        selectedFavoriteVideoSortKey: string;
-        selectedFavoriteVideoPage: string;
-        selectedFavoriteVideoFolder: string;
-        selectedFavoriteVideoMode: string;
-    }
+    searchConditionObj: VideoSearchConditionType;
     select: (res: FavoriteVideoListResponseType) => FavoriteVideoListResponseDataType;
     onSuccess?: (response: FavoriteVideoListResponseDataType) => void;
     enabled?: boolean,

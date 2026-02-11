@@ -1,10 +1,9 @@
 import { useState } from "react";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
+import { getFolderVideo } from "../../../api/getFolderVideo";
 import { SetDisplayVideoListContext } from "../../../components/videofolder/FavoriteVideoFolderDisplayVideoListProvider";
-import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
+import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
 import { useFolderId } from "../useFolderId";
-import { useFavoriteVideoFolderVideoListEndpoint } from "../videoarea/useFavoriteVideoFolderVideoListEndpoint";
 
 export function useFavoriteVideoFolderSearchText() {
 
@@ -14,18 +13,17 @@ export function useFavoriteVideoFolderSearchText() {
     const setDisplayVideoList = SetDisplayVideoListContext.useCtx();
     // フォルダID
     const folderId = useFolderId();
+    // 検索条件
+    const searchConditionObj = useFavoriteVideoFolderSearchConditionValue();
     // 動画一覧
-    const { data } = useQueryWrapper<FavoriteVideoListResponseType, FavoriteVideoListResponseDataType>(
-        {
-            url: useFavoriteVideoFolderVideoListEndpoint(folderId),
-            select: (res: FavoriteVideoListResponseType) => {
-                return res.data;
-            },
-            options: {
-                enabled: false
-            }
-        }
-    );
+    const { data } = getFolderVideo({
+        folderId,
+        searchConditionObj,
+        select: (res: FavoriteVideoListResponseType) => {
+            return res.data;
+        },
+        enabled: false
+    });
 
     /**
      * 入力値および表示用動画情報を初期化

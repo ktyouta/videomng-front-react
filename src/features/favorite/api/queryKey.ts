@@ -1,13 +1,5 @@
-type videoListKeyType = {
-    selectedFavoriteVideoCategory: string;
-    selectedFavoriteVideoViewStatus: string;
-    selectedFavoriteVideoTag: string;
-    selectedFavoriteVideoFavoriteLevel: string;
-    selectedFavoriteVideoSortKey: string;
-    selectedFavoriteVideoPage: string;
-    selectedFavoriteVideoFolder: string;
-    selectedFavoriteVideoMode: string;
-}
+import { FolderVideoSearchConditionType } from "../types/videofolder/FolderVideoSearchConditionType";
+import { VideoSearchConditionType } from "../types/videolist/VideoSearchConditionType";
 
 type VideoCommentType = {
     videoId: string;
@@ -29,7 +21,7 @@ type ChannelVideoType = {
  * @param props 
  * @returns 
  */
-function createVideoListKey(props: videoListKeyType) {
+function createVideoListKey(props: VideoSearchConditionType) {
     return {
         selectedFavoriteVideoCategory: props.selectedFavoriteVideoCategory,
         selectedFavoriteVideoViewStatus: props.selectedFavoriteVideoViewStatus,
@@ -42,10 +34,26 @@ function createVideoListKey(props: videoListKeyType) {
     };
 }
 
+/**
+ * フォルダ内動画一覧取得用のキー作成
+ * @param props 
+ * @returns 
+ */
+function createFolderVideoListKey(props: FolderVideoSearchConditionType) {
+    return {
+        selectedFavoriteVideoCategory: props.selectedFavoriteVideoCategory,
+        selectedFavoriteVideoViewStatus: props.selectedFavoriteVideoViewStatus,
+        selectedFavoriteVideoTag: props.selectedFavoriteVideoTag,
+        selectedFavoriteVideoFavoriteLevel: props.selectedFavoriteVideoFavoriteLevel,
+        selectedFavoriteVideoSortKey: props.selectedFavoriteVideoSortKey,
+        selectedFavoriteVideoPage: props.selectedFavoriteVideoPage,
+    };
+}
+
 export const favoriteVideoKeys = {
     all: [`favoriteVideo`] as const,
     lists: () => [...favoriteVideoKeys.all, `list`] as const,
-    list: (props: videoListKeyType) => [...favoriteVideoKeys.lists(), createVideoListKey(props)] as const,
+    list: (props: VideoSearchConditionType) => [...favoriteVideoKeys.lists(), createVideoListKey(props)] as const,
     details: () => [...favoriteVideoKeys.all, `detail`] as const,
     detail: (videoId: string) => [...favoriteVideoKeys.details(), videoId] as const,
     comments: () => [...favoriteVideoKeys.all, `comment`] as const,
@@ -65,4 +73,8 @@ export const favoriteVideoKeys = {
     tags: () => [favoriteVideoKeys.all, `tag`] as const,
     tag: (videoId: string) => [favoriteVideoKeys.tags(), videoId] as const,
     tagMasters: () => [favoriteVideoKeys.all, `tagMaster`] as const,
+    folders: () => [...favoriteVideoKeys.all, `folder`] as const,
+    folder: (folderId: string) => [...favoriteVideoKeys.folders(), folderId] as const,
+    folderVideos: () => [...favoriteVideoKeys.all, `folderVideo`] as const,
+    folderVideo: (props: { folderId: string, searchConditionObj: FolderVideoSearchConditionType }) => [...favoriteVideoKeys.folderVideos(), props.folderId, createFolderVideoListKey(props.searchConditionObj)] as const,
 }

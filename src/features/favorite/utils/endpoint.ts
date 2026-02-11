@@ -49,3 +49,8 @@ export function favoriteTagEndpoint(videoId: string) {
     const endpoint = videoId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_TAG}`.replace(`:videoId`, videoId) : ``;
     return endpoint;
 }
+
+export function favoriteVideoFolderVideoListEndpoint(props: { folderId: string, query: string }) {
+    const endpoint = props.folderId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_FOLDER}${props.query}`.replace(`:folderId`, props.folderId) : ``;
+    return endpoint;
+}

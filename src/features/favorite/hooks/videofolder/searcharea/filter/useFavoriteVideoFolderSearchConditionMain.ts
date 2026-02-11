@@ -22,19 +22,9 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
     // 視聴状況リストを取得
     const { data: viewStatusList } = useViewStatusList();
     // 検索条件
-    const {
-        selectedFavoriteVideoCategory,
-        setSelectedFavoriteVideoCategory,
-        selectedFavoriteVideoViewStatus,
-        setSelectedFavoriteVideoViewStatus,
-        selectedFavoriteVideoTag,
-        setSelectedFavoriteVideoTag,
-        selectedFavoriteVideoFavoriteLevel,
-        setSelectedFavoriteVideoFavoriteLevel,
-        resetPage,
-        reset, } = useFavoriteVideoFolderSearchConditionValue();
+    const searchConditionObj = useFavoriteVideoFolderSearchConditionValue();
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoFolderVideoListQuery();
+    const { create } = useCreateFavoriteVideoFolderVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // タグマスタリストを取得
@@ -66,11 +56,11 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
 
         const selectedValues = selectedCategorys.map((e) => e.value).join(`,`);
 
-        if (!selectedFavoriteVideoCategory && !selectedValues) {
+        if (!searchConditionObj.selectedFavoriteVideoCategory && !selectedValues) {
             return;
         }
 
-        if (selectedFavoriteVideoCategory === selectedValues) {
+        if (searchConditionObj.selectedFavoriteVideoCategory === selectedValues) {
             return;
         }
 
@@ -82,8 +72,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoCategory(selectedValues);
-        resetPage();
+        searchConditionObj.setSelectedFavoriteVideoCategory(selectedValues);
+        searchConditionObj.resetPage();
 
         props.close();
     }
@@ -96,11 +86,11 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
 
         const selectedValues = selectedStatuses.map((e) => e.value).join(`,`);
 
-        if (!selectedFavoriteVideoViewStatus && !selectedValues) {
+        if (!searchConditionObj.selectedFavoriteVideoViewStatus && !selectedValues) {
             return;
         }
 
-        if (selectedFavoriteVideoViewStatus === selectedValues) {
+        if (searchConditionObj.selectedFavoriteVideoViewStatus === selectedValues) {
             return;
         }
 
@@ -112,8 +102,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoViewStatus(selectedValues);
-        resetPage();
+        searchConditionObj.setSelectedFavoriteVideoViewStatus(selectedValues);
+        searchConditionObj.resetPage();
 
         props.close();
     }
@@ -126,11 +116,11 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
 
         const selectedTagValues = selectedVideoTag.map((e) => e.value).join(`,`);
 
-        if (!selectedFavoriteVideoTag && !selectedTagValues) {
+        if (!searchConditionObj.selectedFavoriteVideoTag && !selectedTagValues) {
             return;
         }
 
-        if (selectedFavoriteVideoTag === selectedTagValues) {
+        if (searchConditionObj.selectedFavoriteVideoTag === selectedTagValues) {
             return;
         }
 
@@ -142,8 +132,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoTag(selectedTagValues);
-        resetPage();
+        searchConditionObj.setSelectedFavoriteVideoTag(selectedTagValues);
+        searchConditionObj.resetPage();
         props.close();
     }
 
@@ -155,11 +145,11 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
 
         const selectedValues = selectedFavoriteLevel.map((e) => e.value).join(`,`);
 
-        if (!selectedFavoriteVideoFavoriteLevel && !selectedValues) {
+        if (!searchConditionObj.selectedFavoriteVideoFavoriteLevel && !selectedValues) {
             return;
         }
 
-        if (selectedFavoriteVideoFavoriteLevel === selectedValues) {
+        if (searchConditionObj.selectedFavoriteVideoFavoriteLevel === selectedValues) {
             return;
         }
 
@@ -171,8 +161,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoFavoriteLevel(selectedValues);
-        resetPage();
+        searchConditionObj.setSelectedFavoriteVideoFavoriteLevel(selectedValues);
+        searchConditionObj.resetPage();
         props.close();
     }
 
@@ -184,22 +174,22 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         // クエリパラメータをクリア
         replace(``);
 
-        reset();
+        searchConditionObj.reset();
         props.close();
     }
 
     return {
         videoCategory,
-        selectedFavoriteVideoCategory,
+        selectedFavoriteVideoCategory: searchConditionObj.selectedFavoriteVideoCategory,
         viewStatusList,
-        selectedFavoriteVideoViewStatus,
+        selectedFavoriteVideoViewStatus: searchConditionObj.selectedFavoriteVideoViewStatus,
         changeVideoCategory,
         changeViewStatus,
-        selectedFavoriteVideoTag,
+        selectedFavoriteVideoTag: searchConditionObj.selectedFavoriteVideoTag,
         tagMasterList,
         changeVideoTag,
         favoriteLevelList,
-        selectedFavoriteVideoFavoriteLevel,
+        selectedFavoriteVideoFavoriteLevel: searchConditionObj.selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel,
         clearFilter,
     };

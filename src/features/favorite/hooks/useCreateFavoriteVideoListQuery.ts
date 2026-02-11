@@ -13,7 +13,7 @@ type PropsType = {
     selectedFavoriteVideoPage: string;
     selectedFavoriteVideoFolder: string;
     selectedFavoriteVideoMode: string;
-}
+};
 
 export function useCreateFavoriteVideoListQuery(props: PropsType) {
 

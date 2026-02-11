@@ -5,11 +5,12 @@ import { useInvalidateQuery } from "../../../../../hooks/useInvalidateQuery";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
 import useSwitch from "../../../../../hooks/useSwitch";
+import { favoriteVideoKeys } from "../../../api/queryKey";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { favoriteVideoFolderId } from "../../../utils/endpoint";
 import { useFolderMasterList } from "../../videolist/useFolderMasterList";
+import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
 import { useFolderId } from "../useFolderId";
-import { useFavoriteVideoFolderVideoListEndpoint } from "./useFavoriteVideoFolderVideoListEndpoint";
 
 
 type propsType = {
@@ -24,8 +25,13 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
     // フォルダID
     const folderId = useFolderId();
+    // 検索条件
+    const searchConditionObj = useFavoriteVideoFolderSearchConditionValue();
     // 動画再取得用
-    const { invalidate: invalidataPublic } = useInvalidateQuery(useFavoriteVideoFolderVideoListEndpoint(folderId));
+    const { invalidate: invalidataPublic } = useInvalidateQuery(favoriteVideoKeys.folderVideo({
+        folderId,
+        searchConditionObj
+    }));
     // フォルダリスト
     const { data: folderList } = useFolderMasterList();
 

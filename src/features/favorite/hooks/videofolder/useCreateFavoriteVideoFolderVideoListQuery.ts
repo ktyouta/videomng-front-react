@@ -1,79 +1,76 @@
 import { hasKey } from "../../../../utils/CommonFunction";
 import { FOLDER_SEARCH_CONDITION } from "../../const/FavoriteConst";
-import { useFavoriteVideoFolderSearchConditionValue } from "./useFavoriteVideoFolderSearchConditionValue";
 
 
 // 更新用クエリ作成時の引数
 type createNewQueryType = { [key in (typeof FOLDER_SEARCH_CONDITION)[keyof typeof FOLDER_SEARCH_CONDITION]]?: string };
 
+type PropsType = {
+    selectedFavoriteVideoCategory: string;
+    selectedFavoriteVideoViewStatus: string
+    selectedFavoriteVideoTag: string;
+    selectedFavoriteVideoFavoriteLevel: string;
+    selectedFavoriteVideoSortKey: string;
+    selectedFavoriteVideoPage: string;
+}
 
-export function useCreateFavoriteVideoFolderVideoListQuery() {
-
-    const {
-        selectedFavoriteVideoCategory,
-        selectedFavoriteVideoViewStatus,
-        selectedFavoriteVideoTag,
-        selectedFavoriteVideoFavoriteLevel,
-        selectedFavoriteVideoSortKey,
-        selectedFavoriteVideoPage,
-    } = useFavoriteVideoFolderSearchConditionValue();
-
+export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
     /**
      * 更新用のクエリを作成
-     * @param props 
+     * @param query 
      * @returns 
      */
-    function createNewQuery(props: createNewQueryType) {
+    function createNewQuery(query: createNewQueryType) {
 
         let queryParam = ``;
 
         // カテゴリ
-        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.folderVideoCategory);
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, query.folderVideoCategory);
         }
         else {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.selectedFavoriteVideoCategory);
         }
 
         // 視聴状況
-        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.folderViewStatus);
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, query.folderViewStatus);
         }
         else {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.selectedFavoriteVideoViewStatus);
         }
 
         // タグ
-        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.folderVideoTag);
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, query.folderVideoTag);
         }
         else {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.selectedFavoriteVideoTag);
         }
 
         // ソート
-        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.folderSortKey);
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, query.folderSortKey);
         }
         else {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.selectedFavoriteVideoSortKey);
         }
 
         // お気に入り度
-        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.folderFavoriteLevel);
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, query.folderFavoriteLevel);
         }
         else {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.selectedFavoriteVideoFavoriteLevel);
         }
 
         // ページ
-        if (hasKey(props, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.folderPage);
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, query.folderPage);
         }
         else {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.selectedFavoriteVideoPage);
         }
 
         if (queryParam) {
@@ -87,12 +84,12 @@ export function useCreateFavoriteVideoFolderVideoListQuery() {
 
         let queryParam = ``;
 
-        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, selectedFavoriteVideoViewStatus);
-        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, selectedFavoriteVideoCategory);
-        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, selectedFavoriteVideoTag);
-        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, selectedFavoriteVideoSortKey);
-        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, selectedFavoriteVideoFavoriteLevel);
-        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, selectedFavoriteVideoPage);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.selectedFavoriteVideoViewStatus);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.selectedFavoriteVideoCategory);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.selectedFavoriteVideoTag);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.selectedFavoriteVideoSortKey);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.selectedFavoriteVideoFavoriteLevel);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.selectedFavoriteVideoPage);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;

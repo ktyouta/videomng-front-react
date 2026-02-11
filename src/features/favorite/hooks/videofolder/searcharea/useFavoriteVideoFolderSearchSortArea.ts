@@ -9,14 +9,11 @@ import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoF
 export function useFavoriteVideoFolderSearchSortArea() {
 
     // 検索条件
-    const {
-        selectedFavoriteVideoSortKey,
-        setSelectedFavoriteVideoSortKey,
-        resetPage } = useFavoriteVideoFolderSearchConditionValue();
+    const searchConditionObj = useFavoriteVideoFolderSearchConditionValue();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.pcLess);
     // クエリ作成用
-    const { create } = useCreateFavoriteVideoFolderVideoListQuery();
+    const { create } = useCreateFavoriteVideoFolderVideoListQuery(searchConditionObj);
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
     // ソートリストを取得
@@ -38,14 +35,14 @@ export function useFavoriteVideoFolderSearchSortArea() {
         // クエリパラメータを更新
         replace(newQuery);
 
-        setSelectedFavoriteVideoSortKey(value);
-        resetPage();
+        searchConditionObj.setSelectedFavoriteVideoSortKey(value);
+        searchConditionObj.resetPage();
     }
 
     return {
         sortList,
         selectSort,
-        selectedFavoriteVideoSortKey,
+        selectedFavoriteVideoSortKey: searchConditionObj.selectedFavoriteVideoSortKey,
         isMobile,
     }
 }

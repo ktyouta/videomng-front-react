@@ -18,17 +18,6 @@ const Parent = styled.div`
   color: white;
 `;
 
-const SecondRowDiv = styled.div`
-  width: 100%;
-  display:flex;
-  align-items: center;
-  box-sizing: border-box;
-  margin-top: 20px;
-  padding-right: 13%;
-  padding-left: 9%;
-  flex-wrap: wrap;
-`;
-
 const FolderNameSpan = styled.span`
   font-size: 17px;
   margin-right: 23px;
@@ -44,39 +33,6 @@ const FirstRowDiv = styled.div`
   color: white;
   font-size: 24px;
   flex-wrap: wrap;
-`;
-
-const ThirdRowDiv = styled.div`
-  width: 100%;
-  display:flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 7%;
-  flex-wrap: wrap;
-  margin-top: 20px;
-`;
-
-const FourthRowDiv = styled.div`
-  width: 100%;
-  display:flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 7%;
-  flex-wrap: wrap;
-  margin-top: 20px;
-`;
-
-const FifthRowDiv = styled.div`
-  width: 100%;
-  display:flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 7%;
-  flex-wrap: wrap;
-  margin-top: 20px;
 `;
 
 const OperationRowDiv = styled.div`

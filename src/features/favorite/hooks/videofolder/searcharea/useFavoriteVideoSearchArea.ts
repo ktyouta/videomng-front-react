@@ -1,10 +1,6 @@
-import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import ENV from '../../../../../env.json';
-import { FolderType } from "../../../types/videolist/FolderType";
+import { getFolder } from "../../../api/getFolder";
 import { FolderResponseType } from "../../../types/videolist/FolderResponseType";
-import { folderIdEndpoint } from "../../../utils/endpoint";
 import { useFolderId } from "../useFolderId";
 
 export function useFavoriteVideoSearchArea() {
@@ -15,17 +11,14 @@ export function useFavoriteVideoSearchArea() {
     const folderId = useFolderId();
 
     // フォルダ情報取得
-    const { data } = useQueryWrapper<FolderResponseType, FolderType>(
-        {
-            url: folderIdEndpoint(folderId),
-            select: (res: FolderResponseType) => {
-
-                return res.data;
-            },
-            afErrorFn: (res) => {
-            }
+    const { data } = getFolder({
+        folderId,
+        select: (res: FolderResponseType) => {
+            return res.data;
+        },
+        onError: (res) => {
         }
-    );
+    });
 
     return {
         isPcLess,
