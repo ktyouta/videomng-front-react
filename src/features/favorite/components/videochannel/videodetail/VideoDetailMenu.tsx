@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Selectbox } from "../../../../../components/Selectbox";
 import { MEDIA } from "../../../../../consts/MediaConst";
-import { YouTubeDataApiVideoDetailItemType } from "../../../../../types/youtube/YouTubeDataApiVideoDetailItemType";
+import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
 import { MENU_NO, NON_FAVORITE_VIDEO_DETAIL_MENU_LIST } from "../../../const/FavoriteConst";
 import { useVideoDetailMenu } from "../../../hooks/videochannel/videodetail/useVideoDetailMenu";
 import { Comment } from "./comment/Comment";
@@ -69,7 +69,7 @@ const ComboTitleSpan = styled.span`
 `;
 
 type propsType = {
-  videoDetail: YouTubeDataApiVideoDetailItemType,
+  videoDetail: VideoDetailItemType,
 }
 
 

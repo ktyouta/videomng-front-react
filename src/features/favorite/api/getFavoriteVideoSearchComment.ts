@@ -2,10 +2,10 @@ import { useQuery } from "react-query";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from '../../../env.json';
 import { api } from "../../../lib/apiClient";
-import { QUERY_KEY_SEARCH_COMMENT } from "../const/HomeConst";
+import { QUERY_KEY_SEARCH_COMMENT } from "../const/FavoriteConst";
 import { SearchKeywordCommentResponseDataType } from "../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseDataType";
 import { SearchKeywordCommentResponseType } from "../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
-import { videoKeys } from "./queryKey";
+import { favoriteVideoKeys } from "./queryKey";
 
 type PropsType = {
     select: ((res: SearchKeywordCommentResponseType) => SearchKeywordCommentResponseDataType);
@@ -14,13 +14,13 @@ type PropsType = {
     onError: (res: unknown) => void;
 }
 
-export function getSearchComment(props: PropsType) {
+export function getFavoriteVideoSearchComment(props: PropsType) {
 
     const endpoint = props.videoId ? `${VIDEO_MNG_PATH}${ENV.SEARCH_COMMENT_BY_KEYWORD}`.replace(`:videoId`, props.videoId) : ``;
     const queryParam = `?${QUERY_KEY_SEARCH_COMMENT}=${props.keyword}`;
 
     return useQuery({
-        queryKey: videoKeys.searchComment({
+        queryKey: favoriteVideoKeys.searchComment({
             videoId: props.videoId,
             keyword: props.keyword,
         }),

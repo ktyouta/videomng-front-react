@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
-import ENV from '../../../env.json';
-import { api } from "../../../lib/apiClient";
-import { QUERY_KEY_SEARCH_COMMENT } from "../const/FavoriteConst";
-import { SearchKeywordCommentResponseDataType } from "../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseDataType";
-import { SearchKeywordCommentResponseType } from "../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
-import { favoriteVideoKeys } from "./queryKey";
+import { VIDEO_MNG_PATH } from "../../consts/CommonConst";
+import ENV from '../../env.json';
+import { api } from "../../lib/apiClient";
+import { QUERY_KEY_SEARCH_COMMENT } from "../home/const/HomeConst";
+import { SearchKeywordCommentResponseDataType } from "../home/types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseDataType";
+import { SearchKeywordCommentResponseType } from "../home/types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
+import { videoKeys } from "./queryKey";
 
 type PropsType = {
     select: ((res: SearchKeywordCommentResponseType) => SearchKeywordCommentResponseDataType);
@@ -20,7 +20,7 @@ export function getSearchComment(props: PropsType) {
     const queryParam = `?${QUERY_KEY_SEARCH_COMMENT}=${props.keyword}`;
 
     return useQuery({
-        queryKey: favoriteVideoKeys.searchComment({
+        queryKey: videoKeys.searchComment({
             videoId: props.videoId,
             keyword: props.keyword,
         }),

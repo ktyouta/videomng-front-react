@@ -14,7 +14,7 @@ type PropsType = {
     onError: (res: unknown) => void;
 }
 
-export function getVideoComment(props: PropsType) {
+export function getFavoriteVideoComment(props: PropsType) {
 
     const nextPageTokenQuery = props.nextPageToken ? `?nextpagetoken=${props.nextPageToken}` : ``;
     const endpoint = props.videoId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_COMMENT}${nextPageTokenQuery}`.replace(`:videoId`, props.videoId) : ``;

@@ -1,9 +1,7 @@
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
-import useQueryWrapper from "../../../../../hooks/useQueryWrapper";
-import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
+import { getVideoDetail } from "../../../../api/getVideoDetail";
 import { VideoDetailResponseType } from "../../../types/videochannel/videodetail/VideoDetailResponseType";
-import { useVideoDetailEndpoint } from "./useVideoDetailEndpoint";
 import { useVideoId } from "./useVideoId";
 
 export function useVideoDetail() {
@@ -15,16 +13,12 @@ export function useVideoDetail() {
 
 
     // 動画詳細を取得
-    const { data: videoDetail, isLoading, isError } = useQueryWrapper<VideoDetailResponseType, VideoDetailItemType>(
-        {
-            url: useVideoDetailEndpoint(videoId),
-            select: (res: VideoDetailResponseType) => {
-                return res.data.items;
-            },
-            afErrorFn: (res) => {
-            }
+    const { data: videoDetail, isLoading, isError } = getVideoDetail({
+        videoId,
+        select: (res: VideoDetailResponseType) => {
+            return res.data.items;
         }
-    );
+    });
 
     /**
      * 前画面に戻る

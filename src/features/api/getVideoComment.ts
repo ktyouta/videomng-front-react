@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
-import ENV from '../../../env.json';
-import { api } from "../../../lib/apiClient";
-import { HomeVideoCommentThreadResponseType } from "../types/videodetail/videocomment/HomeVideoCommentThreadResponseType";
-import { HomeVideoCommentThreadType } from "../types/videodetail/videocomment/HomeVideoCommentThreadType";
+import { VIDEO_MNG_PATH } from "../../consts/CommonConst";
+import ENV from '../../env.json';
+import { api } from "../../lib/apiClient";
+import { HomeVideoCommentThreadResponseType } from "../home/types/videodetail/videocomment/HomeVideoCommentThreadResponseType";
+import { HomeVideoCommentThreadType } from "../home/types/videodetail/videocomment/HomeVideoCommentThreadType";
 import { videoKeys } from "./queryKey";
 
 type PropsType = {

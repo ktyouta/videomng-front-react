@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getSearchComment } from "../../../api/getSearchComment";
+import { getSearchComment } from "../../../../api/getSearchComment";
 import { SearchKeywordContext, SetSearchKeywordContext } from "../../../components/videodetail/videosearchkeywordcomment/HomeSearchKeywordComment";
 import { SearchKeywordCommentResponseType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
 import { useVideoId } from "../useVideoId";

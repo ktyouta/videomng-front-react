@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
-import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
-import ENV from '../../../env.json';
-import { api } from "../../../lib/apiClient";
-import { VideoDetailItemType } from "../../../types/videodetail/VideoDetailItemType";
-import { VideoDetailResponseType } from "../../../types/videodetail/VideoDetailResponseType";
+import { VIDEO_MNG_PATH } from "../../consts/CommonConst";
+import ENV from '../../env.json';
+import { api } from "../../lib/apiClient";
+import { VideoDetailItemType } from "../../types/videodetail/VideoDetailItemType";
+import { VideoDetailResponseType } from "../../types/videodetail/VideoDetailResponseType";
 import { videoKeys } from "./queryKey";
 
 type PropsType = {

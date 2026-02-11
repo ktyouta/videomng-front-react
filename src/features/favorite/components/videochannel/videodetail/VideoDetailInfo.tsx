@@ -78,14 +78,13 @@ export function VideoDetailInfo(props: propsType) {
     } = useVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
-    const item = videoDetail;
-    const snippet = item?.snippet;
+    const snippet = videoDetail?.snippet;
     // サムネイルURL
     const imgUrl = snippet?.thumbnails.high?.url;
     // タイトル
     const title = snippet?.title;
     // お気に入りフラグ
-    const favoriteFlg = item?.favoriteFlg;
+    const favoriteFlg = videoDetail?.favoriteFlg;
 
     return (
         <VideoInfoDiv>

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import useQueryWrapper from "../../../../../../hooks/useQueryWrapper";
+import { getVideoComment } from "../../../../../api/getVideoComment";
 import { VideoCommentThreadItemType } from "../../../../types/videochannel/videodetail/comment/VideoCommentThreadItemType";
 import { VideoCommentThreadResponseType } from "../../../../types/videochannel/videodetail/comment/VideoCommentThreadResponseType";
 import { VideoCommentThreadType } from "../../../../types/videochannel/videodetail/comment/VideoCommentThreadType";
 import { useVideoId } from "../useVideoId";
-import { useCommentEndpoint } from "./useCommentEndpoint";
 
 
 export function useCommentList() {
@@ -25,43 +24,38 @@ export function useCommentList() {
         threshold: 0.2,
     });
 
-
     // コメント情報を取得
-    const { isLoading } = useQueryWrapper<VideoCommentThreadResponseType, VideoCommentThreadType>(
-        {
-            url: useCommentEndpoint({
-                videoId,
-                nextPageToken,
-            }),
-            select: (res: VideoCommentThreadResponseType) => {
-                return res.data;
-            },
-            afSuccessFn: (res: VideoCommentThreadType) => {
+    const { isLoading } = getVideoComment({
+        videoId,
+        nextPageToken,
+        select: (res: VideoCommentThreadResponseType) => {
+            return res.data;
+        },
+        onSuccess: (res: VideoCommentThreadType) => {
 
-                setDisplayCommentList((e) => {
+            setDisplayCommentList((e) => {
 
-                    if (!res.items || res.items.length === 0) {
-                        return e;
-                    }
+                if (!res.items || res.items.length === 0) {
+                    return e;
+                }
 
-                    if (!nextPageToken) {
-                        return res.items;
-                    }
+                if (!nextPageToken) {
+                    return res.items;
+                }
 
-                    if (!e) {
-                        return e;
-                    }
+                if (!e) {
+                    return e;
+                }
 
-                    return [...e, ...res.items];
-                });
+                return [...e, ...res.items];
+            });
 
-                nextPageTokenRef.current = res.nextPageToken;
-            },
-            afErrorFn: (res) => {
-                setErrMessage(`コメントの取得に失敗しました。`);
-            }
+            nextPageTokenRef.current = res.nextPageToken;
+        },
+        onError: function (res: unknown): void {
+            throw new Error("Function not implemented.");
         }
-    );
+    });
 
     /**
      * 画面下までスクロールしたら次データを取得する

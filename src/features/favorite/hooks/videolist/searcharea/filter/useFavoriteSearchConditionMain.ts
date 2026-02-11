@@ -7,7 +7,7 @@ import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
 import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../../../useViewStatusList";
-import { useFolderMasterList } from "../../useFolderMasterList";
+import { useFolderMasterList } from "../../../useFolderMasterList";
 import { useTagMasterList } from "../../useTagMasterList";
 
 

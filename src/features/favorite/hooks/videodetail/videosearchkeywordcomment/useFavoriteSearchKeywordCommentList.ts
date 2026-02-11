@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getSearchComment } from "../../../api/getSearchComment";
+import { getFavoriteVideoSearchComment } from "../../../api/getFavoriteVideoSearchComment";
 import { SearchKeywordCommentKeywordContext } from "../../../components/videodetail/videosearchkeywordcomment/FavoriteSearchKeywordComment";
 import { SearchKeywordCommentResponseType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentResponseType";
 import { useVideoId } from "../useVideoId";
@@ -15,7 +15,7 @@ export function useFavoriteSearchKeywordCommentList() {
     const videoId = useVideoId();
 
     // コメント情報を取得
-    const { data: searchCommentData, isLoading } = getSearchComment({
+    const { data: searchCommentData, isLoading } = getFavoriteVideoSearchComment({
         videoId,
         keyword: searchKeywordCommentKeyword,
         select: (res: SearchKeywordCommentResponseType) => {

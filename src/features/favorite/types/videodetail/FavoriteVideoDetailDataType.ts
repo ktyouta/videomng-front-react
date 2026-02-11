@@ -4,10 +4,8 @@ import { FavoriteVideoDetailCategoryType } from "./videodetailsetting/FavoriteVi
 import { FavoriteVideoMemoType } from "./videomemo/FavoriteVideoMemoType";
 
 export type FavoriteVideoDetailDataType = {
-
     readonly detail: FavoriteVideoVideoMngApiDataType;
     readonly memos: FavoriteVideoMemoType[];
     readonly item: YouTubeDataApiVideoDetailItemType;
     readonly categorys: FavoriteVideoDetailCategoryType[];
-
 }

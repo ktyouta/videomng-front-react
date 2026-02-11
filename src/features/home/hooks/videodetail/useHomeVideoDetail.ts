@@ -1,7 +1,7 @@
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import { VideoDetailResponseType } from "../../../../types/videodetail/VideoDetailResponseType";
-import { getVideoDetail } from "../../api/getVideoDetail";
+import { getVideoDetail } from "../../../api/getVideoDetail";
 import { useVideoId } from "./useVideoId";
 
 export function useHomeVideoDetail() {

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import { useFavoriteVideoSearchConditionValue } from "../useFavoriteVideoSearchConditionValue";
 import { useViewStatusList } from "../useViewStatusList";
-import { useFolderMasterList } from "./useFolderMasterList";
+import { useFolderMasterList } from "../useFolderMasterList";
 import { useTagMasterList } from "./useTagMasterList";
 
 export function useFavoriteVideoList() {

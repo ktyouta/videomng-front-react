@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { getVideoComment } from "../../../api/getVideoComment";
+import { getVideoComment } from "../../../../api/getVideoComment";
 import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
 import { HomeVideoCommentThreadResponseType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadResponseType";
 import { HomeVideoCommentThreadType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadType";

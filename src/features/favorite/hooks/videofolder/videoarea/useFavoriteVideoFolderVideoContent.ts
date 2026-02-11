@@ -8,7 +8,7 @@ import useSwitch from "../../../../../hooks/useSwitch";
 import { favoriteVideoKeys } from "../../../api/queryKey";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { favoriteVideoFolderId } from "../../../utils/endpoint";
-import { useFolderMasterList } from "../../videolist/useFolderMasterList";
+import { useFolderMasterList } from "../../useFolderMasterList";
 import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
 import { useFolderId } from "../useFolderId";
 

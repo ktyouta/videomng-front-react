@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
 import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { favoriteVideoKeys } from "../../../../api/queryKey";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { UpdateFolderRequestType } from "../../../../types/videofolder/searcharea/updatefolder/UpdateFolderRequestType";
 import { FolderType } from "../../../../types/videolist/FolderType";
@@ -22,7 +23,7 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
     // フォルダID
     const folderId = useFolderId();
     // フォルダ情報再取得用
-    const { invalidate: invalidataFavorite } = useInvalidateQuery(folderIdEndpoint(folderId));
+    const { invalidate: invalidataFavorite } = useInvalidateQuery(favoriteVideoKeys.folder(folderId));
     // フォルダカラー
     const [folderColor, setFolderColor] = useState(props.folder.folderColor || DEFAULT_FOLDER_COLOR);
 
@@ -46,7 +47,7 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
 
             // フォルダ情報再取得
             invalidataFavorite();
-            toast.success("フォルダ名を更新しました。");
+            toast.success("フォルダ情報を更新しました。");
             props.close();
         },
         // 失敗後の処理

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { getVideoComment } from "../../../api/getVideoComment";
+import { getFavoriteVideoComment } from "../../../api/getFavoriteVideoComment";
 import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
 import { FavoriteVideoCommentThreadResponseType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadResponseType";
 import { FavoriteVideoCommentThreadType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadType";
@@ -25,7 +25,7 @@ export function useFavoriteCommentList() {
     });
 
     // コメント情報を取得
-    const { isLoading } = getVideoComment({
+    const { isLoading } = getFavoriteVideoComment({
         videoId,
         nextPageToken,
         select: (res: FavoriteVideoCommentThreadResponseType) => {

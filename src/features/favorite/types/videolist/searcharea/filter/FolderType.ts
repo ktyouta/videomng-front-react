@@ -1,4 +1,4 @@
-export type FolderType = {
+export type FolderSummaryType = {
     name: string;
     userId: number;
     createDate: Date;
