@@ -1,61 +1,53 @@
 import React from "react";
 import styled from "styled-components";
-import BaseTextbox from "../../../components/BaseTextbox";
 import ButtonComponent from "../../../components/ButtonComponent";
-import { useSiginup } from "../hooks/useSiginup";
+import { ErrorMessageField } from "../../../components/ErrorMessageField";
+import { LoadingCenter } from "../../../components/LoadingCenter";
+import { ModalPortalConfirm } from "../../../components/ModalPortalConfirm";
 import { DAY_LIST, MONTH_LIST, } from "../../../consts/CommonConst";
 import { MEDIA } from "../../../consts/MediaConst";
-import { LoadingCenter } from "../../../components/LoadingCenter";
 import { OverlayDiv } from "../../../styles/styledcomponent/OverlayDiv";
-import { RhfTextbox } from "../../../styles/styledcomponent/RhfTextbox";
-import { ErrorMessageField } from "../../../components/ErrorMessageField";
 import { RhfSelect } from "../../../styles/styledcomponent/RhfSelect";
-import { ModalPortalConfirm } from "../../../components/ModalPortalConfirm";
+import { RhfTextbox } from "../../../styles/styledcomponent/RhfTextbox";
+import { useSiginup } from "../hooks/useSiginup";
 
 
 const Parent = styled.div`
   width: 100%;
-  background-color: #dcdcdc;
   min-height: 100vh;
   box-sizing: border-box;
-  padding-bottom: 3%;
-  padding-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5% 4% 3%;
 
-    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        padding-left: 10%;
-    }
-
-    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        padding-left: 10%;
-    }
-
-    @media (min-width: ${MEDIA.PC}) {
-        padding-left: 10%;
-    }
+  @media (min-width: ${MEDIA.TABLET}) {
+    align-items: center;
+    padding-bottom: 12%;
+  }
 `;
 
 const SiginupFormDiv = styled.div`
     box-sizing: border-box;
-    width: 382px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    padding: 24px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        margin-left: 0;
-        margin-right: 0;
-        width: 550px;
+        width: 680px;
+        padding: 32px 44px;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        margin-left: 0;
-        margin-right: 0;
-        width: 550px;
+        width: 680px;
+        padding: 32px 44px;
     }
 
     @media (min-width: ${MEDIA.PC}) {
-        margin-left: 0;
-        margin-right: 0;
-        width: 550px;
+        width: 680px;
+        padding: 32px 44px;
     }
 `;
 
@@ -64,14 +56,16 @@ const SiginupButtonDiv = styled.div`
 `;
 
 const TitleDiv = styled.div`
-    font-size: 30px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
     margin-bottom: 8%;
 `;
 
 const ErrMessageDiv = styled.div`
     font-size: 15px;
     margin-bottom: 6%;
-    color: red;
+    color: #ff6b6b;
     white-space: pre-line;
 `;
 
@@ -79,10 +73,12 @@ const BirthDayDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
 `;
 
 const BirthDayLabelDiv = styled.div`
-  margin-right:2px;
+  color: rgba(255, 255, 255, 0.7);
 `;
 
 const InputRowDiv = styled.div`
@@ -90,6 +86,9 @@ const InputRowDiv = styled.div`
 `;
 
 const InputTitleDiv = styled.div`
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-bottom: 8px;
 `;
 
 
@@ -263,7 +262,7 @@ export function Siginup() {
         </InputRowDiv>
         <SiginupButtonDiv>
           <ButtonComponent
-            variant="black"
+            variant="grad-gray"
             shape="rounded"
             onClick={clickBack}
             style={{
@@ -273,7 +272,7 @@ export function Siginup() {
             戻る
           </ButtonComponent>
           <ButtonComponent
-            variant="black"
+            variant="blue"
             shape="rounded"
             onClick={handleSiginupClick}
             style={{

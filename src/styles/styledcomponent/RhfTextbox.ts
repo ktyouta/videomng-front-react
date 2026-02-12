@@ -6,4 +6,5 @@ export const RhfTextbox = styled.input<{ width: string, height: string }>`
     border: solid 1px rgb(118, 118, 118);
     width: ${({ width }) => width};    
     height: ${({ height }) => height};
+    padding-left: 5px;
 `;

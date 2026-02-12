@@ -1,83 +1,91 @@
 import React from "react";
 import styled from "styled-components";
-import { useLogin } from "../hooks/useLogin";
 import BaseTextbox from "../../../components/BaseTextbox";
 import ButtonComponent from "../../../components/ButtonComponent";
-import { MEDIA } from "../../../consts/MediaConst";
-import Loading from "../../../components/Loading";
-import { OverlayDiv } from "../../../styles/styledcomponent/OverlayDiv";
 import { LoadingCenter } from "../../../components/LoadingCenter";
-import { loginSchema } from "../schemas/loginSchema";
+import { MEDIA } from "../../../consts/MediaConst";
+import { OverlayDiv } from "../../../styles/styledcomponent/OverlayDiv";
+import { useLogin } from "../hooks/useLogin";
 
 const Parent = styled.div`
   width: 100%;
-  background-color: #dcdcdc;
   min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5% 4% 3%;
+
+  @media (min-width: ${MEDIA.TABLET}) {
+    align-items: center;
+    padding-bottom: 12%;
+  }
 `;
 
 const LoginFormDiv = styled.div`
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10%;
-    width: 100%;
-    padding-left: 3%;
-    padding-right: 3%;
     box-sizing: border-box;
+    width: 100%;
+    padding: 24px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-      width: 382px;
-      padding-left: 0;
-      padding-right: 0;
+      width: 680px;
+      padding: 32px 44px;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-      width: 382px;
-      padding-left: 0;
-      padding-right: 0;
+      width: 680px;
+      padding: 32px 44px;
     }
 
     @media (min-width: ${MEDIA.PC}) {
-      width: 382px;
-      padding-left: 0;
-      padding-right: 0;
+      width: 680px;
+      padding: 32px 44px;
     }
 `;
 
 const LoginButtonDiv = styled.div`
-    text-align: center;
     margin-top: 6%;
 `;
 
 const TitleDiv = styled.div`
-    text-align: center;
-    font-size: 27px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
     margin-bottom: 6%;
 `;
 
 const ErrMessageDiv = styled.div`
-    text-align: center;
     font-size: 15px;
-    margin-top:3%;
+    margin-top: 3%;
     margin-bottom: 6%;
-    color: red;
+    color: #ff6b6b;
 `;
 
 const SignUpDiv = styled.div`
-    text-align: center;
     margin-top: 7%;
 `;
 
 const SignUpSpan = styled.span`
     font-size: 15px;
-    color: blue;
-    cursor:pointer;
+    color: #646cff;
+    cursor: pointer;
+
+    &:hover {
+      color: #535bf2;
+    }
 `;
 
 const InputRowDiv = styled.div`
-  margin-bottom:7%;
+  margin-bottom: 7%;
 `;
 
 const InputTitleDiv = styled.div`
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-bottom: 8px;
 `;
 
 
@@ -129,7 +137,8 @@ export function Login() {
                 textWidth="100%"
                 style={{
                   boxSizing: "border-box",
-                  height: "37px"
+                  height: "37px",
+                  paddingLeft: "5px",
                 }}
                 onKeyDown={handleKeyPress}
               />
@@ -159,7 +168,8 @@ export function Login() {
                 textWidth="100%"
                 style={{
                   boxSizing: "border-box",
-                  height: "37px"
+                  height: "37px",
+                  paddingLeft: "5px",
                 }}
                 onKeyDown={handleKeyPress}
               />
@@ -180,7 +190,7 @@ export function Login() {
         </SignUpDiv>
         <LoginButtonDiv>
           <ButtonComponent
-            variant="black"
+            variant="grad-gray"
             onClick={clickBack}
             shape="rounded"
             style={{
@@ -190,7 +200,7 @@ export function Login() {
             戻る
           </ButtonComponent>
           <ButtonComponent
-            variant="black"
+            variant="blue"
             onClick={form.handleSubmit}
             shape="rounded"
             style={{
