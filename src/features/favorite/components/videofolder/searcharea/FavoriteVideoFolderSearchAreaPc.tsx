@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
 import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
 import { FolderType } from "../../../types/videolist/FolderType";
+import { FavoriteCreateFolderModal } from "../../videolist/searcharea/folder/FavoriteCreateFolderModal";
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSelectedTag } from "./FavoriteVideoFolderSearchSelectedTag";
 import { FavoriteVideoFolderSearchSortArea } from "./FavoriteVideoFolderSearchSortArea";
@@ -89,6 +90,8 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         <FavoriteVideoFolderSearchSortArea />
         {/* フィルター */}
         <FavoriteVideoFolderSearchFilterModal />
+        {/* フォルダ作成 */}
+        <FavoriteCreateFolderModal />
       </OperationRowDiv>
       <TagRowDiv>
         {/* 選択中のタグ */}

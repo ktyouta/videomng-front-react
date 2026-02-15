@@ -5,7 +5,7 @@ import { IconComponent } from "../../../../../../components/IconComponent";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
-import { FavoriteCreateFolder } from "./FavoriteCreateFolder";
+import { FavoriteCreateFolderContainer } from "./FavoriteCreateFolderContainer";
 
 const IconAreaDiv = styled.div`
   width: 46px;
@@ -55,7 +55,6 @@ export function FavoriteCreateFolderModal() {
     closeModal,
     isMobile, } = useFavoriteCreateFolderModal();
 
-
   return (
     <React.Fragment>
       <IconAreaDiv>
@@ -81,7 +80,7 @@ export function FavoriteCreateFolderModal() {
           minHeight: "55%"
         }}
       >
-        <FavoriteCreateFolder
+        <FavoriteCreateFolderContainer
           close={closeModal}
         />
       </ModalPortal>
