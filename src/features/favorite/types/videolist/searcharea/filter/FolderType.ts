@@ -3,5 +3,5 @@ export type FolderSummaryType = {
     userId: number;
     createDate: Date;
     updateDate: Date;
-    folderId: number;
+    id: number;
 }

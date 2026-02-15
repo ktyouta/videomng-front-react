@@ -10,7 +10,7 @@ export function useFolderMasterList() {
             return [
                 ...res.data.map((e) => {
                     return {
-                        value: e.folderId.toString(),
+                        value: e.id.toString(),
                         label: e.name,
                     }
                 })
