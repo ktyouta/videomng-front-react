@@ -2,11 +2,11 @@ import React from "react";
 import { BiSolidFolder } from "react-icons/bi";
 import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
-import { Icon } from "../../../../../components/Icon";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
-import { useFavoriteVideoFolder } from "../../../hooks/videolist/videoarea/useFavoriteVideoFolder";
-import { FolderType } from "../../../types/videolist/FolderType";
+import { Icon } from "../../../components/Icon";
+import { MEDIA } from "../../../consts/MediaConst";
+import { DEFAULT_FOLDER_COLOR } from "../const/FavoriteConst";
+import { useFavoriteVideoFolderContent } from "../hooks/useFavoriteVideoFolderContent";
+import { FolderType } from "../types/videolist/FolderType";
 
 
 const Parent = styled.div`
@@ -75,14 +75,14 @@ type propsType = {
     data: FolderType,
 }
 
-export function FavoriteVideoFolder(props: propsType) {
+export function FavoriteVideoFolderContent(props: propsType) {
 
-    console.log("FavoriteVideoFolder render");
+    console.log("FavoriteVideoFolderContent render");
 
     const {
         setNodeRef,
         draggingStyle,
-        clickFolder, } = useFavoriteVideoFolder({ ...props });
+        clickFolder, } = useFavoriteVideoFolderContent({ ...props });
 
     const data = props.data
     const name = data.name;

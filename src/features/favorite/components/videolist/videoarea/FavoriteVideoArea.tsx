@@ -8,9 +8,9 @@ import { FAVORITE_LIST_MODE } from "../../../const/FavoriteConst";
 import { useFavoriteVideoArea } from "../../../hooks/videolist/videoarea/useFavoriteVideoArea";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
 import { FolderType } from "../../../types/videolist/FolderType";
+import { FavoriteVideoFolderContent } from "../../FavoriteVideoFolderContent";
 import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";
 import { FavoriteVideoContent } from "./FavoriteVideoContent";
-import { FavoriteVideoFolder } from "./FavoriteVideoFolder";
 
 const Parent = styled.div`
   width: 100%;
@@ -124,7 +124,7 @@ export function FavoriteVideoArea() {
       {
         displayFolderList.map((e: FolderType) => {
           return (
-            <FavoriteVideoFolder
+            <FavoriteVideoFolderContent
               data={e}
               key={e.folderId}
             />

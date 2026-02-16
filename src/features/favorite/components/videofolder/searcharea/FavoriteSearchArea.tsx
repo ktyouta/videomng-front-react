@@ -1,8 +1,7 @@
 import React from "react";
-import { useFavoriteSearchArea } from "../../../hooks/videolist/searcharea/useFavoriteSearchArea";
+import { useFavoriteVideoSearchArea } from "../../../hooks/videofolder/searcharea/useFavoriteVideoSearchArea";
 import { FavoriteVideoFolderSearchAreaMobile } from "./FavoriteVideoFolderSearchAreaMobile";
 import { FavoriteVideoFolderSearchAreaPc } from "./FavoriteVideoFolderSearchAreaPc";
-import { useFavoriteVideoSearchArea } from "../../../hooks/videofolder/searcharea/useFavoriteVideoSearchArea";
 
 export function FavoriteSearchArea() {
 

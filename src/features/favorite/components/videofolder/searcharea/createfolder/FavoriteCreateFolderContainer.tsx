@@ -1,6 +1,5 @@
-import { useFavoriteCreateFolderMain } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderMain";
+import { useFavoriteCreateFolderInFolderMain } from "../../../../hooks/videofolder/searcharea/createfolder/useFavoriteCreateFolderInFolderMain";
 import { FavoriteCreateFolder } from "../../../FavoriteCreateFolder";
-
 
 type propsType = {
   close: () => void;
@@ -10,7 +9,7 @@ export function FavoriteCreateFolderContainer(props: propsType) {
 
   console.log("FavoriteCreateFolderContainer render");
 
-  const retObj = useFavoriteCreateFolderMain(props);
+  const retObj = useFavoriteCreateFolderInFolderMain(props);
 
   return (
     <FavoriteCreateFolder

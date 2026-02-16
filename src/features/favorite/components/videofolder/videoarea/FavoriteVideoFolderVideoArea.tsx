@@ -4,6 +4,8 @@ import { MEDIA } from "../../../../../consts/MediaConst";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { useFavoriteVideoFolderArea } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderArea";
 import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FolderType } from "../../../types/videolist/FolderType";
+import { FavoriteVideoFolderContent } from "../../FavoriteVideoFolderContent";
 import { FavoriteVideoFolderAreaFooter } from "./FavoriteVideoFolderAreaFooter";
 import { FavoriteVideoFolderVideoContent } from "./FavoriteVideoFolderVideoContent";
 
@@ -84,7 +86,8 @@ export function FavoriteVideoFolderVideoArea() {
     isLoading,
     isError,
     isFetching,
-    total, } = useFavoriteVideoFolderArea();
+    total,
+    displayFolderList, } = useFavoriteVideoFolderArea();
 
   if (isLoading || isFetching) {
     return (
@@ -119,6 +122,16 @@ export function FavoriteVideoFolderVideoArea() {
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>
+        {
+          displayFolderList.map((e: FolderType) => {
+            return (
+              <FavoriteVideoFolderContent
+                data={e}
+                key={e.folderId}
+              />
+            )
+          })
+        }
         {
           displayVideoList.map((e: FavoriteVideoListMergedType) => {
             return (

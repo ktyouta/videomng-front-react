@@ -1,5 +1,5 @@
 import { getFolderVideo } from "../../../api/getFolderVideo";
-import { DisplayVideoListContext, SetDisplayVideoListContext } from "../../../components/videofolder/FavoriteVideoFolderDisplayVideoListProvider";
+import { DisplayFolderListContext, DisplayVideoListContext, SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videofolder/FavoriteVideoFolderDisplayVideoListProvider";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
@@ -12,6 +12,10 @@ export function useFavoriteVideoFolderArea() {
     const displayVideoList = DisplayVideoListContext.useCtx();
     // 画面表示用の動画リスト(setter)
     const setDisplayVideoList = SetDisplayVideoListContext.useCtx();
+    // 画面表示用フォルダリスト
+    const displayFolderList = DisplayFolderListContext.useCtx();
+    // 画面表示用フォルダリスト(setter)
+    const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
     // フォルダID
     const folderId = useFolderId();
     // 検索条件
@@ -26,6 +30,7 @@ export function useFavoriteVideoFolderArea() {
         },
         onSuccess: (res: FavoriteVideoListResponseDataType) => {
             setDisplayVideoList(res.item ?? []);
+            setDisplayFolderList(res.folder ?? []);
         }
     });
 
@@ -35,5 +40,6 @@ export function useFavoriteVideoFolderArea() {
         displayVideoList,
         isFetching,
         total: data?.total,
+        displayFolderList,
     }
 }

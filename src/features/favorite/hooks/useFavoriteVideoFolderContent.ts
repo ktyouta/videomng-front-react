@@ -1,16 +1,16 @@
 import { useDroppable } from "@dnd-kit/core";
 import { CSSProperties } from "react";
 import { toast } from "react-toastify";
-import { ROUTER_PATH } from "../../../../../consts/RouterPath";
-import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
-import { FolderType } from "../../../types/videolist/FolderType";
+import { ROUTER_PATH } from "../../../consts/RouterPath";
+import { useAppNavigation } from "../../../hooks/useAppNavigation";
+import { FolderType } from "../types/videolist/FolderType";
 
 
 type propsType = {
     data: FolderType,
 }
 
-export function useFavoriteVideoFolder(props: propsType) {
+export function useFavoriteVideoFolderContent(props: propsType) {
 
     // ドラッグ用
     const { setNodeRef, isOver } = useDroppable({

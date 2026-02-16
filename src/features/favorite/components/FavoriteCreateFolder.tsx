@@ -1,13 +1,13 @@
 import { FaFolder } from 'react-icons/fa';
 import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
-import BaseTextbox from "../../../../components/BaseTextbox";
-import ButtonComponent from "../../../../components/ButtonComponent";
-import { ColorPickerTwitter } from "../../../../components/ColorPickerTwitter";
-import { IconComponent } from "../../../../components/IconComponent";
-import { MEDIA } from '../../../../consts/MediaConst';
-import { FlexSpaceDiv } from "../../../../styles/styledcomponent/FlexSpaceDiv";
-import { DEFAULT_FOLDER_COLOR } from "../../const/FavoriteConst";
+import BaseTextbox from "../../../components/BaseTextbox";
+import ButtonComponent from "../../../components/ButtonComponent";
+import { ColorPickerTwitter } from "../../../components/ColorPickerTwitter";
+import { IconComponent } from "../../../components/IconComponent";
+import { MEDIA } from '../../../consts/MediaConst';
+import { FlexSpaceDiv } from "../../../styles/styledcomponent/FlexSpaceDiv";
+import { DEFAULT_FOLDER_COLOR } from "../const/FavoriteConst";
 
 const Parent = styled.div`
   box-sizing:border-box;
