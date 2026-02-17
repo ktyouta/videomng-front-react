@@ -111,6 +111,8 @@ export const FOLDER_SEARCH_CONDITION = {
     QUERY_KEY_SORT: `folderSortKey`,
     // クエリパラメータのキー(ページ)
     QUERY_KEY_PAGE: `folderPage`,
+    // クエリパラメータのキー(モード)
+    QUERY_KEY_MODE: `folderMode`,
 } as const;
 
 // クエリパラメータ(キーワード検索)

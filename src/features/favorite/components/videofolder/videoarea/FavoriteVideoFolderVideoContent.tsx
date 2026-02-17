@@ -4,7 +4,7 @@ import { Icon } from "../../../../../components/Icon";
 import { ModalPortalConfirm } from "../../../../../components/ModalPortalConfirm";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteVideoFolderVideoContent } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderVideoContent";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 
 
 const VideoArticle = styled.article`
@@ -98,7 +98,11 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
         isOpenModal,
         openModal,
         closeModal,
-        clickChannel, } = useFavoriteVideoFolderVideoContent({ ...props });
+        clickChannel,
+        setNodeRef,
+        draggingStyle,
+        attributes,
+        listeners, } = useFavoriteVideoFolderVideoContent({ ...props });
 
     const data = props.data
     const snipet = data.snippet;
@@ -117,7 +121,12 @@ export function FavoriteVideoFolderVideoContent(props: propsType) {
     const channelId = snipet.channelId;
 
     return (
-        <VideoArticle>
+        <VideoArticle
+            ref={setNodeRef}
+            {...listeners}
+            {...attributes}
+            style={draggingStyle}
+        >
             <VideoSection>
                 <VideoImg
                     src={imgUrl}

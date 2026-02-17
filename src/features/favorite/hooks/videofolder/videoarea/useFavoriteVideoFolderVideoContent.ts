@@ -1,3 +1,5 @@
+import { useDraggable } from "@dnd-kit/core";
+import { CSSProperties } from "react";
 import { toast } from "react-toastify";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
@@ -6,7 +8,7 @@ import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
 import useSwitch from "../../../../../hooks/useSwitch";
 import { favoriteVideoKeys } from "../../../api/queryKey";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 import { favoriteVideoFolderId } from "../../../utils/endpoint";
 import { useFolderMasterList } from "../../useFolderMasterList";
 import { useFavoriteVideoFolderSearchConditionValue } from "../useFavoriteVideoFolderSearchConditionValue";
@@ -34,6 +36,15 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
     }));
     // フォルダリスト
     const { data: folderList } = useFolderMasterList();
+    // ドラッグ用
+    const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+        id: props.data.videoId,
+    });
+    // ドラッグ時スタイル
+    const draggingStyle: CSSProperties = {
+        transform: transform ? `translate(${transform.x}px, ${transform.y}px) scale(0.99)` : undefined,
+        opacity: isDragging ? 0.8 : 1,
+    };
 
     /**
      * 動画をフォルダから削除
@@ -110,5 +121,9 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
         openModal,
         closeModal,
         clickChannel,
+        setNodeRef,
+        draggingStyle,
+        attributes,
+        listeners,
     }
 }

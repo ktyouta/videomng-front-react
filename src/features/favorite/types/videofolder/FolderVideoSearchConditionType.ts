@@ -5,4 +5,5 @@ export type FolderVideoSearchConditionType = {
     selectedFavoriteVideoFavoriteLevel: string;
     selectedFavoriteVideoSortKey: string;
     selectedFavoriteVideoPage: string;
+    selectedFavoriteVideoMode: string;
 }

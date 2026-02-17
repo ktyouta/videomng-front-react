@@ -6,7 +6,7 @@ import { MEDIA } from "../../../../../consts/MediaConst";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { FAVORITE_LIST_MODE } from "../../../const/FavoriteConst";
 import { useFavoriteVideoArea } from "../../../hooks/videolist/videoarea/useFavoriteVideoArea";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteVideoFolderContent } from "../../FavoriteVideoFolderContent";
 import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";

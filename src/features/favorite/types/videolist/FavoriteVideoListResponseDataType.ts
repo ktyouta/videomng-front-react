@@ -1,4 +1,4 @@
-import { FavoriteVideoListMergedType } from "./FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../FavoriteVideoListMergedType";
 import { FolderType } from "./FolderType";
 
 // お気に入り動画リストapiのレスポンスデータ部

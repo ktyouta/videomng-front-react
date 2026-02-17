@@ -3,7 +3,7 @@ import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExpo
 import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
-import { FavoriteSearchSwichMode } from "./FavoriteSearchSwichMode";
+import { FavoriteSearchSwichModeContainer } from "./FavoriteSearchSwichModeContainer";
 import { FavoriteSearchText } from "./FavoriteSearchText";
 import { FavoriteSearchFilterModal } from "./filter/FavoriteSearchFilterModal";
 import { FavoriteCreateFolderModal } from "./folder/FavoriteCreateFolderModal";
@@ -42,7 +42,7 @@ export function FavoriteSearchAreaMobile() {
     <Parent>
       <ModeRowDiv>
         {/* 表示切替 */}
-        <FavoriteSearchSwichMode />
+        <FavoriteSearchSwichModeContainer />
       </ModeRowDiv>
       {/* タイトルフィルター */}
       <FavoriteSearchText

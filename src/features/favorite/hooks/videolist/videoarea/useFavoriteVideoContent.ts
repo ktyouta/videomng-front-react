@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 import { toast } from "react-toastify";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 
 
 type propsType = {
@@ -49,7 +49,6 @@ export function useFavoriteVideoContent(props: propsType) {
         attributes,
         listeners,
         setNodeRef,
-        transform,
         draggingStyle,
         clickVideo,
         clickChannel,

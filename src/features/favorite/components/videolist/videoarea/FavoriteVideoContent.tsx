@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteVideoContent } from "../../../hooks/videolist/videoarea/useFavoriteVideoContent";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 
 const VideoArticle = styled.article`
 `;

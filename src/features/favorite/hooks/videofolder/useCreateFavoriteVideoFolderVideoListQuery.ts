@@ -12,6 +12,7 @@ type PropsType = {
     selectedFavoriteVideoFavoriteLevel: string;
     selectedFavoriteVideoSortKey: string;
     selectedFavoriteVideoPage: string;
+    selectedFavoriteVideoMode: string;
 }
 
 export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
@@ -73,6 +74,14 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.selectedFavoriteVideoPage);
         }
 
+        // モード
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, query.folderMode);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, props.selectedFavoriteVideoMode);
+        }
+
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;
         }
@@ -90,6 +99,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.selectedFavoriteVideoSortKey);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.selectedFavoriteVideoFavoriteLevel);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.selectedFavoriteVideoPage);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, props.selectedFavoriteVideoMode);
 
         if (queryParam) {
             queryParam = `?${queryParam.slice(1)}`;

@@ -35,7 +35,7 @@ export function useFavoriteDeleteFolderModal() {
     }
 
     /**
-     * フォルダ名更新リクエスト
+     * フォルダ削除リクエスト
      */
     const postMutation = useMutationWrapper({
         url: folderIdEndpoint(folderId),
@@ -53,6 +53,7 @@ export function useFavoriteDeleteFolderModal() {
             }
 
             toast.success("フォルダを削除しました。");
+            closeModal();
             back();
         },
         // 失敗後の処理

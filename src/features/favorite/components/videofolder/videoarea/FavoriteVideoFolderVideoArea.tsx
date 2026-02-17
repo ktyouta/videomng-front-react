@@ -1,9 +1,10 @@
+import { DndContext } from "@dnd-kit/core";
 import styled from "styled-components";
 import Loading from "../../../../../components/Loading";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { useFavoriteVideoFolderArea } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderArea";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteVideoFolderContent } from "../../FavoriteVideoFolderContent";
 import { FavoriteVideoFolderAreaFooter } from "./FavoriteVideoFolderAreaFooter";
@@ -87,7 +88,9 @@ export function FavoriteVideoFolderVideoArea() {
     isError,
     isFetching,
     total,
-    displayFolderList, } = useFavoriteVideoFolderArea();
+    displayFolderList,
+    handleDragEnd,
+    dragSensors, } = useFavoriteVideoFolderArea();
 
   if (isLoading || isFetching) {
     return (
@@ -105,7 +108,7 @@ export function FavoriteVideoFolderVideoArea() {
     );
   }
 
-  if (!displayVideoList || displayVideoList.length === 0) {
+  if ((!displayVideoList || displayVideoList.length === 0) && (!displayFolderList || displayFolderList.length === 0)) {
     return (
       <MessageDiv>
         動画が存在しません。
@@ -122,26 +125,31 @@ export function FavoriteVideoFolderVideoArea() {
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>
-        {
-          displayFolderList.map((e: FolderType) => {
-            return (
-              <FavoriteVideoFolderContent
-                data={e}
-                key={e.folderId}
-              />
-            )
-          })
-        }
-        {
-          displayVideoList.map((e: FavoriteVideoListMergedType) => {
-            return (
-              <FavoriteVideoFolderVideoContent
-                data={e}
-                key={e.videoId}
-              />
-            )
-          })
-        }
+        <DndContext
+          onDragEnd={handleDragEnd}
+          sensors={dragSensors}
+        >
+          {
+            displayFolderList.map((e: FolderType) => {
+              return (
+                <FavoriteVideoFolderContent
+                  data={e}
+                  key={e.folderId}
+                />
+              )
+            })
+          }
+          {
+            displayVideoList.map((e: FavoriteVideoListMergedType) => {
+              return (
+                <FavoriteVideoFolderVideoContent
+                  data={e}
+                  key={e.videoId}
+                />
+              )
+            })
+          }
+        </DndContext>
       </VideoUl>
       <FavoriteVideoFolderAreaFooter />
     </Parent>

@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { useQueryParams } from "../../../../hooks/useQueryParams";
 import { createCtx } from "../../../../utils/createCtx";
-import { FOLDER_SEARCH_CONDITION } from "../../const/FavoriteConst";
+import { FAVORITE_LIST_MODE, FOLDER_SEARCH_CONDITION } from "../../const/FavoriteConst";
 
 
 // 動画一覧検索ページ
@@ -28,6 +28,10 @@ export const SetselectedFavoriteVideoTagContext = createCtx<React.Dispatch<React
 export const SelectedFavoriteVideoFavoriteLevelContext = createCtx<string>();
 // 動画一覧検索条件選択値(お気に入り度) setter
 export const SetSelectedFavoriteVideoFavoriteLevelContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
+// 動画一覧検索モード
+export const SelectedFavoriteVideoModeContext = createCtx<string>();
+// 動画一覧検索モード setter
+export const SetselectedFavoriteVideoModeContext = createCtx<React.Dispatch<React.SetStateAction<string>>>();
 
 // 引数の型
 type propsType = {
@@ -51,6 +55,8 @@ export function FavoriteVideoFolderSearchConditionValueProvider(props: propsType
     const [selectedFavoriteVideoPage, setSelectedFavoriteVideoPage] = useState(params[FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE]);
     // 動画一覧検索ソートキー
     const [selectedFavoriteVideoSortKey, setSelectedFavoriteVideoSortKey] = useState(params[FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT]);
+    // 動画一覧表示モード
+    const [selectedFavoriteVideoMode, setSelectedFavoriteVideoMode] = useState(params[FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE] || FAVORITE_LIST_MODE.folder.value);
 
     return (
         <SelectedFavoriteVideoCategoryContext.Provider value={selectedFavoriteVideoCategory}>
@@ -65,7 +71,11 @@ export function FavoriteVideoFolderSearchConditionValueProvider(props: propsType
                                             <SetSelectedFavoriteVideoSortKeyContext.Provider value={setSelectedFavoriteVideoSortKey}>
                                                 <SelectedFavoriteVideoPageContext.Provider value={selectedFavoriteVideoPage}>
                                                     <SetSelectedFavoriteVideoPageContext.Provider value={setSelectedFavoriteVideoPage}>
-                                                        {props.children}
+                                                        <SelectedFavoriteVideoModeContext.Provider value={selectedFavoriteVideoMode}>
+                                                            <SetselectedFavoriteVideoModeContext.Provider value={setSelectedFavoriteVideoMode}>
+                                                                {props.children}
+                                                            </SetselectedFavoriteVideoModeContext.Provider>
+                                                        </SelectedFavoriteVideoModeContext.Provider>
                                                     </SetSelectedFavoriteVideoPageContext.Provider>
                                                 </SelectedFavoriteVideoPageContext.Provider>
                                             </SetSelectedFavoriteVideoSortKeyContext.Provider>

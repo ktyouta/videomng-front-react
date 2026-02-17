@@ -1,18 +1,21 @@
-import { SegmentedControl } from "../../../../../components/SegmentedControl";
-import { FAVORITE_LIST_MODE } from "../../../const/FavoriteConst";
-import { useFavoriteSearchSwichMode } from "../../../hooks/videolist/searcharea/useFavoriteSearchSwichMode";
+import { SegmentedControl } from "../../../components/SegmentedControl";
+import { FAVORITE_LIST_MODE } from "../const/FavoriteConst";
 
+type PropsType = {
+    selectedFavoriteVideoMode: string;
+    switchMode: (mode: string) => void;
+}
 
 /**
  * 検索条件エリア
  */
-export function FavoriteSearchSwichMode() {
+export function FavoriteSearchSwichMode(props: PropsType) {
 
     console.log("FavoriteSearchSwichMode render");
 
     const {
         selectedFavoriteVideoMode,
-        switchMode, } = useFavoriteSearchSwichMode();
+        switchMode, } = props;
 
     return (
         <SegmentedControl

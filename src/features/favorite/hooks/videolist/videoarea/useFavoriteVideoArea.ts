@@ -1,15 +1,16 @@
-import { DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { DragEndEvent } from "@dnd-kit/core";
 import { toast } from "react-toastify";
 import { FLG } from "../../../../../consts/CommonConst";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
 import { callApi } from "../../../../../utils/callApi";
 import { getFavoriteVideoList } from "../../../api/getFavoriteVideoList";
 import { DisplayFolderListContext, DisplayVideoListContext, SetDisplayFolderListContext, SetDisplayVideoListContext } from "../../../components/videolist/FavoriteVideoDisplayVideoListProvider";
-import { FavoriteVideoListMergedType } from "../../../types/videolist/FavoriteVideoListMergedType";
+import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 import { FavoriteVideoListResponseDataType } from "../../../types/videolist/FavoriteVideoListResponseDataType";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
 import { FolderType } from "../../../types/videolist/FolderType";
 import { getFavoriteVideoFolderEndpoint } from "../../../utils/endpoint";
+import { useDragSensors } from "../../useDragSensors";
 import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSearchConditionValue";
 
 
@@ -25,23 +26,8 @@ export function useFavoriteVideoArea() {
     const setDisplayFolderList = SetDisplayFolderListContext.useCtx();
     // 検索条件
     const searchConditionObj = useFavoriteVideoSearchConditionValue();
-
     // ドラッグ設定
-    const dragSensors = useSensors(
-        // PC用
-        useSensor(MouseSensor, {
-            activationConstraint: {
-                distance: 3,
-            },
-        }),
-        // スマホ用
-        useSensor(TouchSensor, {
-            activationConstraint: {
-                delay: 150,
-                tolerance: 10,
-            },
-        })
-    );
+    const dragSensors = useDragSensors();
 
     // 動画一覧を取得
     const { data, isLoading, isError, isFetching } = getFavoriteVideoList({

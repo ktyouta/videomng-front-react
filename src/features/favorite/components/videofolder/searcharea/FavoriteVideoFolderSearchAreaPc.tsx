@@ -1,4 +1,3 @@
-import React from "react";
 import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
@@ -8,18 +7,26 @@ import { FavoriteCreateFolderInFolderModal } from "./createfolder/FavoriteCreate
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSelectedTag } from "./FavoriteVideoFolderSearchSelectedTag";
 import { FavoriteVideoFolderSearchSortArea } from "./FavoriteVideoFolderSearchSortArea";
+import { FavoriteVideoFolderSearchSwichModeContainer } from './FavoriteVideoFolderSearchSwichModeContainer';
 import { FavoriteVideoFolderSearchText } from "./FavoriteVideoFolderSearchText";
 import { FavoriteVideoFolderSearchFilterModal } from "./filter/FavoriteVideoFolderSearchFilterModal";
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
 
+
+const Parent = styled.div`
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-right: 13%;
+  padding-left: 8%;
+`;
 
 const FirstRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 8%;
   color: white;
   flex-wrap: wrap;
 `;
@@ -29,8 +36,6 @@ const OperationRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 8%;
   margin-top: 40px;
 `;
 
@@ -41,6 +46,13 @@ const TagRowDiv = styled(OperationRowDiv)`
 const FolderNameSpan = styled.span`
   font-size: 25px;
   margin-right: 35px;
+`;
+
+const SwitchModeRowDiv = styled.div`
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 40px;
 `;
 
 type propsType = {
@@ -61,7 +73,11 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
   const folderColor = props.folder.folderColor || DEFAULT_FOLDER_COLOR;
 
   return (
-    <React.Fragment>
+    <Parent>
+      <SwitchModeRowDiv>
+        {/* 表示切替 */}
+        <FavoriteVideoFolderSearchSwichModeContainer />
+      </SwitchModeRowDiv>
       <FirstRowDiv>
         <Icon
           icon={FaFolder}
@@ -97,6 +113,6 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         {/* 選択中のタグ */}
         <FavoriteVideoFolderSearchSelectedTag />
       </TagRowDiv>
-    </React.Fragment>
+    </Parent>
   );
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
-import { FavoriteSearchSwichMode } from "./FavoriteSearchSwichMode";
+import { FavoriteSearchSwichModeContainer } from "./FavoriteSearchSwichModeContainer";
 import { FavoriteSearchText } from "./FavoriteSearchText";
 import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExportModal";
 import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
@@ -50,7 +50,7 @@ export function FavoriteSearchAreaPc() {
     <Parent>
       <SwitchModeRowDiv>
         {/* 表示切替 */}
-        <FavoriteSearchSwichMode />
+        <FavoriteSearchSwichModeContainer />
       </SwitchModeRowDiv>
       <OperationRowDiv>
         {/* タイトルフィルター */}
