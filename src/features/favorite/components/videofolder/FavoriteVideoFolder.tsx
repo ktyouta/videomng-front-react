@@ -1,12 +1,11 @@
-import React from "react";
-import { FavoriteVideoFolderVideoArea } from "./videoarea/FavoriteVideoFolderVideoArea";
-import styled from "styled-components";
-import { FavoriteSearchArea } from "./searcharea/FavoriteSearchArea";
-import { FavoriteVideoFolderDisplayVideoListProvider } from "./FavoriteVideoFolderDisplayVideoListProvider";
-import { useFavoriteVideoFolderVideoList } from "../../hooks/videofolder/useFavoriteVideoFolderVideoList";
-import { FavoriteVideoFolderSearchConditionValueProvider } from "./FavoriteVideoFolderSearchConditionValueProvider";
-import { IconComponent } from "../../../../components/IconComponent";
 import { FaArrowLeft } from "react-icons/fa6";
+import styled from "styled-components";
+import { IconComponent } from "../../../../components/IconComponent";
+import { useFavoriteVideoFolderVideoList } from "../../hooks/videofolder/useFavoriteVideoFolderVideoList";
+import { FavoriteVideoFolderDisplayVideoListProvider } from "./FavoriteVideoFolderDisplayVideoListProvider";
+import { FavoriteVideoFolderSearchConditionValueProvider } from "./FavoriteVideoFolderSearchConditionValueProvider";
+import { FavoriteSearchArea } from "./searcharea/FavoriteSearchArea";
+import { FavoriteVideoFolderVideoArea } from "./videoarea/FavoriteVideoFolderVideoArea";
 
 
 const Parent = styled.div`

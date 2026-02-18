@@ -47,6 +47,7 @@ function createFolderVideoListKey(props: FolderVideoSearchConditionType) {
         selectedFavoriteVideoFavoriteLevel: props.selectedFavoriteVideoFavoriteLevel,
         selectedFavoriteVideoSortKey: props.selectedFavoriteVideoSortKey,
         selectedFavoriteVideoPage: props.selectedFavoriteVideoPage,
+        selectedFavoriteVideoMode: props.selectedFavoriteVideoMode,
     };
 }
 

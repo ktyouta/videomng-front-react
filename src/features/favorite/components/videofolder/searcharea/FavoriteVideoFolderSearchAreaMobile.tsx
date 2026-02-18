@@ -7,6 +7,7 @@ import { FavoriteCreateFolderInFolderModal } from './createfolder/FavoriteCreate
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSelectedTag } from './FavoriteVideoFolderSearchSelectedTag';
 import { FavoriteVideoFolderSearchSortArea } from './FavoriteVideoFolderSearchSortArea';
+import { FavoriteVideoFolderSearchSwichModeContainer } from './FavoriteVideoFolderSearchSwichModeContainer';
 import { FavoriteVideoFolderSearchText } from './FavoriteVideoFolderSearchText';
 import { FavoriteVideoFolderSearchFilterModal } from './filter/FavoriteVideoFolderSearchFilterModal';
 import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderModal";
@@ -15,7 +16,8 @@ import { FavoriteUpdateFolderModal } from "./updatefolder/FavoriteUpdateFolderMo
 const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding-left: 3%;
+  padding-right: 13%;
+  padding-left: 10%;
   color: white;
 `;
 
@@ -29,8 +31,6 @@ const FirstRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 9%;
   color: white;
   font-size: 24px;
   flex-wrap: wrap;
@@ -41,10 +41,16 @@ const OperationRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 7%;
   flex-wrap: wrap;
   margin-top: 20px;
+`;
+
+const ModeRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
 `;
 
 type propsType = {
@@ -66,6 +72,10 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
 
   return (
     <Parent>
+      <ModeRowDiv>
+        {/* 表示切替 */}
+        <FavoriteVideoFolderSearchSwichModeContainer />
+      </ModeRowDiv>
       <FirstRowDiv>
         <Icon
           icon={FaFolder}
