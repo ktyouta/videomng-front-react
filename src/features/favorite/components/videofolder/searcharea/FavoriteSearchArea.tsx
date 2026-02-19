@@ -14,12 +14,12 @@ export function FavoriteSearchArea() {
                     ?
                     // PCサイズ以下
                     <FavoriteVideoFolderSearchAreaMobile
-                        folder={data}
+                        folderList={data}
                     />
                     :
                     // PC
                     <FavoriteVideoFolderSearchAreaPc
-                        folder={data}
+                        folderList={data}
                     />
             }
         </React.Fragment>

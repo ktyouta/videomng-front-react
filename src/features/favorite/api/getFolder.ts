@@ -7,7 +7,7 @@ import { favoriteVideoKeys } from "./queryKey";
 
 type PropsType = {
     folderId: string;
-    select: (res: FolderResponseType) => FolderType;
+    select: (res: FolderResponseType) => FolderType[];
     onError: (res: unknown) => void;
 }
 

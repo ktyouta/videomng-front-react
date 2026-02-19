@@ -1,3 +1,4 @@
+import React from 'react';
 import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
@@ -54,7 +55,7 @@ const ModeRowDiv = styled.div`
 `;
 
 type propsType = {
-  folder: FolderType | undefined
+  folderList: FolderType[] | undefined
 }
 
 /**
@@ -64,11 +65,14 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
 
   console.log("FavoriteVideoFolderSearchAreaMobile render");
 
-  if (!props.folder) {
+  const folderList = props.folderList;
+
+  if (!folderList) {
     return null;
   }
 
-  const folderColor = props.folder.folderColor || DEFAULT_FOLDER_COLOR;
+  const folder = folderList[folderList.length - 1];
+  const folderColor = folder.folderColor || DEFAULT_FOLDER_COLOR;
 
   return (
     <Parent>
@@ -86,14 +90,28 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
           width="30px"
           height="100%"
         />
-        <FolderNameSpan>
-          {props.folder?.name}
-        </FolderNameSpan>
+        {
+          folderList.map((e, index) => {
+            return (
+              <React.Fragment>
+                <FolderNameSpan>
+                  {e.name}
+                </FolderNameSpan>
+                {
+                  index !== folderList.length - 1 &&
+                  <span>
+                    &gt;
+                  </span>
+                }
+              </React.Fragment>
+            )
+          })
+        }
       </FirstRowDiv>
       <OperationRowDiv>
         {/* フォルダ名変更モーダル */}
         <FavoriteUpdateFolderModal
-          folder={props.folder}
+          folder={folder}
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />

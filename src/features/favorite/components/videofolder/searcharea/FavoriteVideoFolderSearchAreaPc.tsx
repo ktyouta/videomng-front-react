@@ -1,3 +1,4 @@
+import React from 'react';
 import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
@@ -48,6 +49,11 @@ const FolderNameSpan = styled.span`
   margin-right: 35px;
 `;
 
+const ArrowSpan = styled.span`
+  font-size: 25px;
+  margin-right: 35px;
+`;
+
 const SwitchModeRowDiv = styled.div`
   display:flex;
   align-items: center;
@@ -56,7 +62,7 @@ const SwitchModeRowDiv = styled.div`
 `;
 
 type propsType = {
-  folder: FolderType | undefined
+  folderList: FolderType[] | undefined
 }
 
 /**
@@ -66,11 +72,14 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
 
   console.log("FavoriteVideoFolderSearchAreaPc render");
 
-  if (!props.folder) {
+  const folderList = props.folderList;
+
+  if (!folderList) {
     return null;
   }
 
-  const folderColor = props.folder.folderColor || DEFAULT_FOLDER_COLOR;
+  const folder = folderList[folderList.length - 1];
+  const folderColor = folder.folderColor || DEFAULT_FOLDER_COLOR;
 
   return (
     <Parent>
@@ -87,12 +96,26 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
           bgColor={folderColor}
           width="38px"
         />
-        <FolderNameSpan>
-          {props.folder.name}
-        </FolderNameSpan>
+        {
+          folderList.map((e, index) => {
+            return (
+              <React.Fragment>
+                <FolderNameSpan>
+                  {e.name}
+                </FolderNameSpan>
+                {
+                  index !== folderList.length - 1 &&
+                  <ArrowSpan>
+                    &gt;
+                  </ArrowSpan>
+                }
+              </React.Fragment>
+            )
+          })
+        }
         {/* フォルダ名変更モーダル */}
         <FavoriteUpdateFolderModal
-          folder={props.folder}
+          folder={folder}
         />
         {/* フォルダ削除モーダル */}
         <FavoriteDeleteFolderModal />
