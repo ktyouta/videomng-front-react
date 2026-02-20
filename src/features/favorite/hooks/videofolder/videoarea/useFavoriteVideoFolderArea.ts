@@ -157,5 +157,6 @@ export function useFavoriteVideoFolderArea() {
         displayFolderList,
         handleDragEnd,
         dragSensors,
+        selectedFavoriteVideoMode: searchConditionObj.selectedFavoriteVideoMode,
     }
 }

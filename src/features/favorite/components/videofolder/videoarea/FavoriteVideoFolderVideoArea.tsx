@@ -1,8 +1,10 @@
 import { DndContext } from "@dnd-kit/core";
+import React from "react";
 import styled from "styled-components";
 import Loading from "../../../../../components/Loading";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { FAVORITE_LIST_MODE } from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolderArea } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderArea";
 import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 import { FolderType } from "../../../types/videolist/FolderType";
@@ -90,7 +92,8 @@ export function FavoriteVideoFolderVideoArea() {
     total,
     displayFolderList,
     handleDragEnd,
-    dragSensors, } = useFavoriteVideoFolderArea();
+    dragSensors,
+    selectedFavoriteVideoMode, } = useFavoriteVideoFolderArea();
 
   if (isLoading || isFetching) {
     return (
@@ -116,6 +119,31 @@ export function FavoriteVideoFolderVideoArea() {
     );
   }
 
+  const videoContent = (
+    <React.Fragment>
+      {
+        displayFolderList.map((e: FolderType) => {
+          return (
+            <FavoriteVideoFolderContent
+              data={e}
+              key={e.folderId}
+            />
+          )
+        })
+      }
+      {
+        displayVideoList.map((e: FavoriteVideoListMergedType) => {
+          return (
+            <FavoriteVideoFolderVideoContent
+              data={e}
+              key={e.videoId}
+            />
+          )
+        })
+      }
+    </React.Fragment>
+  );
+
   return (
     <Parent>
       <ResultNumDiv>
@@ -125,31 +153,21 @@ export function FavoriteVideoFolderVideoArea() {
         </ResultNumSpan>
       </ResultNumDiv>
       <VideoUl>
-        <DndContext
-          onDragEnd={handleDragEnd}
-          sensors={dragSensors}
-        >
-          {
-            displayFolderList.map((e: FolderType) => {
-              return (
-                <FavoriteVideoFolderContent
-                  data={e}
-                  key={e.folderId}
-                />
-              )
-            })
-          }
-          {
-            displayVideoList.map((e: FavoriteVideoListMergedType) => {
-              return (
-                <FavoriteVideoFolderVideoContent
-                  data={e}
-                  key={e.videoId}
-                />
-              )
-            })
-          }
-        </DndContext>
+        {
+          selectedFavoriteVideoMode === FAVORITE_LIST_MODE.folder.value
+            ?
+            <DndContext
+              onDragEnd={handleDragEnd}
+              sensors={dragSensors}
+            >
+              {videoContent}
+            </DndContext>
+            :
+            <React.Fragment>
+              {videoContent}
+            </React.Fragment>
+        }
+
       </VideoUl>
       <FavoriteVideoFolderAreaFooter />
     </Parent>
