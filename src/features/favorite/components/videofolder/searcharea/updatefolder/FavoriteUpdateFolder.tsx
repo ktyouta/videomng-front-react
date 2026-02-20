@@ -1,11 +1,8 @@
-import React from "react";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
 import { MEDIA } from "../../../../../../consts/MediaConst";
+import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { FavoriteUpdateFolderHeader } from "./FavoriteUpdateFolderHeader";
 import { FavoriteUpdateFolderMain } from "./FavoriteUpdateFolderMain";
-import { FolderType } from "../../../../types/videolist/FolderType";
 
 
 const Parent = styled.div`
@@ -29,7 +26,7 @@ const Parent = styled.div`
 
 type propsType = {
   close: () => void,
-  folder: FolderType,
+  folder: FolderMasterType,
 }
 
 export function FavoriteUpdateFolder(props: propsType) {

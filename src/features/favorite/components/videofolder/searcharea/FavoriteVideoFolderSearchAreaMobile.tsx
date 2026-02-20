@@ -3,7 +3,8 @@ import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
 import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
-import { FolderType } from "../../../types/videolist/FolderType";
+import { useFavoriteVideoFolderSearchArea } from '../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchArea';
+import { FolderMasterType } from '../../../types/videolist/FolderMasterType';
 import { FavoriteCreateFolderInFolderModal } from './createfolder/FavoriteCreateFolderInFolderModal';
 import { FavoriteDeleteFolderModal } from "./deletefolder/FavoriteDeleteFolderModal";
 import { FavoriteVideoFolderSearchSelectedTag } from './FavoriteVideoFolderSearchSelectedTag';
@@ -22,9 +23,19 @@ const Parent = styled.div`
   color: white;
 `;
 
-const FolderNameSpan = styled.span`
+const FolderNameArea = styled.div`
   font-size: 17px;
+  display:flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
   margin-right: 23px;
+`;
+
+const FolderNameSpan = styled.span`
+`;
+
+const ArrowSpan = styled.span`
 `;
 
 const FirstRowDiv = styled.div`
@@ -55,7 +66,7 @@ const ModeRowDiv = styled.div`
 `;
 
 type propsType = {
-  folderList: FolderType[] | undefined
+  folderList: FolderMasterType[] | undefined
 }
 
 /**
@@ -64,6 +75,8 @@ type propsType = {
 export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
 
   console.log("FavoriteVideoFolderSearchAreaMobile render");
+
+  const { clickFolderName } = useFavoriteVideoFolderSearchArea();
 
   const folderList = props.folderList;
 
@@ -90,23 +103,46 @@ export function FavoriteVideoFolderSearchAreaMobile(props: propsType) {
           width="30px"
           height="100%"
         />
-        {
-          folderList.map((e, index) => {
-            return (
-              <React.Fragment>
-                <FolderNameSpan>
-                  {e.name}
-                </FolderNameSpan>
-                {
-                  index !== folderList.length - 1 &&
-                  <span>
-                    &gt;
-                  </span>
-                }
-              </React.Fragment>
-            )
-          })
-        }
+        <FolderNameArea>
+          {
+            (folderList.length >= 3
+              ? [folderList[0], null, folderList[folderList.length - 1]]
+              : folderList
+            ).map((e, index, arr) => {
+              const isLast = index !== arr.length - 1;
+              if (e === null) {
+                return (
+                  <React.Fragment
+                    key="ellipsis"
+                  >
+                    <FolderNameSpan>...</FolderNameSpan>
+                    <ArrowSpan>&gt;</ArrowSpan>
+                  </React.Fragment>
+                );
+              }
+              return (
+                <React.Fragment
+                  key={e.id}
+                >
+                  <FolderNameSpan
+                    style={isLast ? { "color": "#2563eb", "cursor": "pointer" } : {}}
+                    onClick={() => {
+                      clickFolderName(e.id);
+                    }}
+                  >
+                    {e.name}
+                  </FolderNameSpan>
+                  {
+                    isLast &&
+                    <ArrowSpan>
+                      &gt;
+                    </ArrowSpan>
+                  }
+                </React.Fragment>
+              );
+            })
+          }
+        </FolderNameArea>
       </FirstRowDiv>
       <OperationRowDiv>
         {/* フォルダ名変更モーダル */}

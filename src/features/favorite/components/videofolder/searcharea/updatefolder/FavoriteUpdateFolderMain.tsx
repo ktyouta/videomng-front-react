@@ -7,7 +7,7 @@ import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwit
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteUpdateFolderMain } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderMain";
-import { FolderType } from "../../../../types/videolist/FolderType";
+import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 
 
 const InputArea = styled.div`
@@ -66,7 +66,7 @@ const DefaultColorLink = styled.span`
 
 type propsType = {
     close: () => void,
-    folder: FolderType,
+    folder: FolderMasterType,
 }
 
 export function FavoriteUpdateFolderMain(props: propsType) {

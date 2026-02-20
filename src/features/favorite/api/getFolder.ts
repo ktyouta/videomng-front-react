@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
 import { api } from "../../../lib/apiClient";
+import { FolderMasterType } from "../types/videolist/FolderMasterType";
 import { FolderResponseType } from "../types/videolist/FolderResponseType";
-import { FolderType } from "../types/videolist/FolderType";
 import { folderIdEndpoint } from "../utils/endpoint";
 import { favoriteVideoKeys } from "./queryKey";
 
 type PropsType = {
     folderId: string;
-    select: (res: FolderResponseType) => FolderType[];
+    select: (res: FolderResponseType) => FolderMasterType[];
     onError: (res: unknown) => void;
 }
 

@@ -6,14 +6,14 @@ import { errResType, resSchema } from "../../../../../../hooks/useMutationWrappe
 import { favoriteVideoKeys } from "../../../../api/queryKey";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { UpdateFolderRequestType } from "../../../../types/videofolder/searcharea/updatefolder/UpdateFolderRequestType";
-import { FolderType } from "../../../../types/videolist/FolderType";
+import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { folderIdEndpoint } from "../../../../utils/endpoint";
 import { useFolderId } from "../../useFolderId";
 
 
 type propsType = {
     close: () => void,
-    folder: FolderType,
+    folder: FolderMasterType,
 }
 
 export function useFavoriteUpdateFolderMain(props: propsType) {

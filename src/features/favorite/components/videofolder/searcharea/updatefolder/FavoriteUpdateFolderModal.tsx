@@ -5,7 +5,7 @@ import { Icon } from "../../../../../../components/Icon";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteUpdateFolderModal } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderModal";
-import { FolderType } from "../../../../types/videolist/FolderType";
+import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { FavoriteUpdateFolder } from "./FavoriteUpdateFolder";
 
 
@@ -32,7 +32,7 @@ const TitleSpan = styled.span`
 `;
 
 type propsType = {
-    folder: FolderType
+    folder: FolderMasterType
 }
 
 export function FavoriteUpdateFolderModal(props: propsType) {
