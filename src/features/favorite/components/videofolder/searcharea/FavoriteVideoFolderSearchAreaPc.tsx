@@ -134,7 +134,9 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
           folder={folder}
         />
         {/* フォルダ削除モーダル */}
-        <FavoriteDeleteFolderModal />
+        <FavoriteDeleteFolderModal
+          folder={folder}
+        />
       </FirstRowDiv>
       <OperationRowDiv>
         {/* タイトルフィルター */}

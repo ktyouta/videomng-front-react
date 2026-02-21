@@ -5,6 +5,7 @@ import { Icon } from "../../../../../../components/Icon";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
+import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { FavoriteDeleteFolder } from "./FavoriteDeleteFolder";
 import { FavoriteDeleteFolderConfirmModal } from "./FavoriteDeleteFolderConfirmModal";
 
@@ -31,8 +32,11 @@ const TitleSpan = styled.span`
   }
 `;
 
+type PropsType = {
+    folder: FolderMasterType;
+}
 
-export function FavoriteDeleteFolderModal() {
+export function FavoriteDeleteFolderModal(props: PropsType) {
 
     console.log("FavoriteDeleteFolderModal render");
 
@@ -46,8 +50,7 @@ export function FavoriteDeleteFolderModal() {
         execute,
         clickDelete,
         isOpenConfirmModal,
-        closeConfirmModal, } = useFavoriteDeleteFolderModal();
-
+        closeConfirmModal, } = useFavoriteDeleteFolderModal(props);
 
     return (
         <React.Fragment>

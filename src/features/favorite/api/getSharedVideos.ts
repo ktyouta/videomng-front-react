@@ -14,7 +14,7 @@ type PropsType = {
 export function getSharedVideos(props: PropsType) {
 
     return useQuery({
-        queryKey: favoriteVideoKeys.folder(props.folderId),
+        queryKey: favoriteVideoKeys.sharedVideo(props.folderId),
         queryFn: async () => {
             const { data } = await api.get(folderShareVideosEndpoint(props.folderId));
             return data;

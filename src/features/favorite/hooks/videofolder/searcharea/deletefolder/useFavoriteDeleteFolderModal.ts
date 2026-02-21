@@ -8,11 +8,16 @@ import { errResType, resSchema } from "../../../../../../hooks/useMutationWrappe
 import useSwitch from "../../../../../../hooks/useSwitch";
 import { DELETEFAVORITEVIDEOINFOLDER } from "../../../../const/FavoriteConst";
 import { DeleteFolderRequestType } from "../../../../types/videofolder/searcharea/deletefolder/DeleteFolderRequestType";
+import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { folderIdEndpoint } from "../../../../utils/endpoint";
 import { useFolderId } from "../../useFolderId";
 
 
-export function useFavoriteDeleteFolderModal() {
+type PropsType = {
+    folder: FolderMasterType;
+}
+
+export function useFavoriteDeleteFolderModal(props: PropsType) {
 
     // モーダルの表示フラグ
     const { flag: isOpenModal, on: openModal, off: closeModal } = useSwitch();
@@ -25,13 +30,13 @@ export function useFavoriteDeleteFolderModal() {
     // フォルダ内のお気に入り動画削除フラグ
     const [deleteVideoFlg, setDeleteVideoFlg] = useState<string>(DELETEFAVORITEVIDEOINFOLDER.OFF);
     // ルーティング用
-    const { appGoBack } = useAppNavigation();
+    const { appNavigate } = useAppNavigation();
 
     /**
      * 前画面に遷移
      */
     function back() {
-        appGoBack(ROUTER_PATH.FAVORITE.ROOT);
+        appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.FOLDER}/${props.folder.parentId}`);
     }
 
     /**
