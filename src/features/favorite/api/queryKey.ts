@@ -16,6 +16,10 @@ type ChannelVideoType = {
     nextPageToken: string;
 }
 
+type FolderListType = {
+    parentFolderId?: string;
+}
+
 /**
  * 動画一覧取得用のキー作成
  * @param props 
@@ -48,6 +52,7 @@ function createFolderVideoListKey(props: FolderVideoSearchConditionType) {
         selectedFavoriteVideoSortKey: props.selectedFavoriteVideoSortKey,
         selectedFavoriteVideoPage: props.selectedFavoriteVideoPage,
         selectedFavoriteVideoMode: props.selectedFavoriteVideoMode,
+        selectedFavoriteVideoFolder: props.selectedFavoriteVideoFolder,
     };
 }
 
@@ -76,6 +81,8 @@ export const favoriteVideoKeys = {
     tagMasters: () => [favoriteVideoKeys.all, `tagMaster`] as const,
     folders: () => [...favoriteVideoKeys.all, `folder`] as const,
     folder: (folderId: string) => [...favoriteVideoKeys.folders(), folderId] as const,
+    folderLists: () => [...favoriteVideoKeys.all, `folderList`] as const,
+    folderList: (props: FolderListType) => [...favoriteVideoKeys.folderLists(), props] as const,
     folderVideos: () => [...favoriteVideoKeys.all, `folderVideo`] as const,
     folderVideo: (props: { folderId: string, searchConditionObj: FolderVideoSearchConditionType }) => [...favoriteVideoKeys.folderVideos(), props.folderId, createFolderVideoListKey(props.searchConditionObj)] as const,
     sharedVideos: () => [...favoriteVideoKeys.all, `sharedVideo`] as const,

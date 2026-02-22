@@ -9,14 +9,19 @@ import { favoriteVideoKeys } from "./queryKey";
 type PropsType = {
     select: (res: FolderResponseType) => Option[];
     onError?: (res: unknown) => void;
+    parentFolderId?: string;
 }
 
 export function getFolderList(props: PropsType) {
 
+    const query = props.parentFolderId ? `?parentFolderId=${props.parentFolderId}` : ``;
+
     return useQuery({
-        queryKey: favoriteVideoKeys.folders(),
+        queryKey: favoriteVideoKeys.folderList({
+            parentFolderId: props.parentFolderId
+        }),
         queryFn: async () => {
-            const { data } = await api.get(`${VIDEO_MNG_PATH}${ENV.FOLDER}`);
+            const { data } = await api.get(`${VIDEO_MNG_PATH}${ENV.FOLDER}${query}`);
             return data;
         },
         select: props.select,

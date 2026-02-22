@@ -28,8 +28,8 @@ export function useFavoriteVideoFolderSearchSortArea() {
     function selectSort(value: string) {
 
         const newQuery = create({
-            folderSortKey: value,
-            folderPage: INIT_PAGE
+            sortKey: value,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新

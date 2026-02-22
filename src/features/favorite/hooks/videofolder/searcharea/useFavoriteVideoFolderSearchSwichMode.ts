@@ -19,8 +19,8 @@ export function useFavoriteVideoFolderSearchSwichMode() {
     function switchMode(mode: string) {
 
         const newQuery = create({
-            folderMode: mode,
-            folderPage: INIT_PAGE
+            mode: mode,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新

@@ -33,7 +33,7 @@ export function useFavoriteVideoFolderAreaFooter() {
     function changePage(page: number) {
 
         const newQuery = create({
-            folderPage: page.toString()
+            page: page.toString()
         });
 
         // クエリパラメータを更新

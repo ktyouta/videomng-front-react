@@ -1,4 +1,4 @@
-import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoModeContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetselectedFavoriteVideoModeContext, SetSelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../../components/videofolder/FavoriteVideoFolderSearchConditionValueProvider";
+import { SelectedFavoriteVideoCategoryContext, SelectedFavoriteVideoFavoriteLevelContext, SelectedFavoriteVideoFolderContext, SelectedFavoriteVideoModeContext, SelectedFavoriteVideoPageContext, SelectedFavoriteVideoSortKeyContext, SelectedFavoriteVideoTagContext, SelectedFavoriteVideoViewStatusContext, SetSelectedFavoriteVideoCategoryContext, SetSelectedFavoriteVideoFavoriteLevelContext, SetselectedFavoriteVideoFolderContext, SetselectedFavoriteVideoModeContext, SetSelectedFavoriteVideoPageContext, SetSelectedFavoriteVideoSortKeyContext, SetselectedFavoriteVideoTagContext, SetselectedFavoriteVideoViewStatusContext } from "../../components/videofolder/FavoriteVideoFolderSearchConditionValueProvider";
 
 export const INIT_PAGE = `1`;
 
@@ -28,6 +28,10 @@ export function useFavoriteVideoFolderSearchConditionValue() {
     const selectedFavoriteVideoSortKey = SelectedFavoriteVideoSortKeyContext.useCtx();
     // 動画一覧検索ソートキー setter
     const setSelectedFavoriteVideoSortKey = SetSelectedFavoriteVideoSortKeyContext.useCtx();
+    // 動画一覧検索フォルダ
+    const selectedFavoriteVideoFolder = SelectedFavoriteVideoFolderContext.useCtx();
+    // 動画一覧検索フォルダ setter
+    const setSlectedFavoriteVideoFolder = SetselectedFavoriteVideoFolderContext.useCtx();
     // 動画一覧検索モード
     const selectedFavoriteVideoMode = SelectedFavoriteVideoModeContext.useCtx();
     // 動画一覧検索モード setter
@@ -43,6 +47,7 @@ export function useFavoriteVideoFolderSearchConditionValue() {
         setSelectedFavoriteVideoViewStatus(``);
         setSelectedFavoriteVideoTag(``);
         setSelectedFavoriteVideoFavoriteLevel(``);
+        setSlectedFavoriteVideoFolder(``);
     }
 
     /**
@@ -65,6 +70,8 @@ export function useFavoriteVideoFolderSearchConditionValue() {
         setSelectedFavoriteVideoTag,
         selectedFavoriteVideoFavoriteLevel,
         setSelectedFavoriteVideoFavoriteLevel,
+        selectedFavoriteVideoFolder,
+        setSlectedFavoriteVideoFolder,
         selectedFavoriteVideoMode,
         setSlectedFavoriteVideoMode,
         reset,

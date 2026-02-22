@@ -5,10 +5,12 @@ import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { useVideoCategory } from "../../../../../main/hooks/useVideoCategory";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
 import { INIT_PAGE } from "../../../useFavoriteVideoSearchConditionValue";
+import { useFolderMasterList } from "../../../useFolderMasterList";
 import { useViewStatusList } from "../../../useViewStatusList";
 import { useTagMasterList } from "../../../videolist/useTagMasterList";
 import { useCreateFavoriteVideoFolderVideoListQuery } from "../../useCreateFavoriteVideoFolderVideoListQuery";
 import { useFavoriteVideoFolderSearchConditionValue } from "../../useFavoriteVideoFolderSearchConditionValue";
+import { useFolderId } from "../../useFolderId";
 
 
 type propsType = {
@@ -17,6 +19,8 @@ type propsType = {
 
 export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
 
+    // フォルダID
+    const folderId = useFolderId();
     // 動画カテゴリ
     const { data: videoCategory } = useVideoCategory();
     // 視聴状況リストを取得
@@ -30,6 +34,10 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
     // タグマスタリストを取得
     const { data: tagMasterList } = useTagMasterList({
         isGetChache: false
+    });
+    // フォルダリスト
+    const { data: folderList } = useFolderMasterList({
+        parentFolderId: folderId
     });
 
     // お気に入り度リスト
@@ -65,8 +73,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderVideoCategory: selectedValues,
-            folderPage: INIT_PAGE
+            videoCategory: selectedValues,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
@@ -95,8 +103,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderViewStatus: selectedValues,
-            folderPage: INIT_PAGE
+            viewStatus: selectedValues,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
@@ -125,8 +133,8 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderVideoTag: selectedTagValues,
-            folderPage: INIT_PAGE
+            videoTag: selectedTagValues,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
@@ -154,14 +162,43 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         }
 
         const newQuery = create({
-            folderFavoriteLevel: selectedValues,
-            folderPage: INIT_PAGE
+            favoriteLevel: selectedValues,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新
         replace(newQuery);
 
         searchConditionObj.setSelectedFavoriteVideoFavoriteLevel(selectedValues);
+        searchConditionObj.resetPage();
+        props.close();
+    }
+
+    /**
+     * フォルダ選択イベント
+     * @param value 
+     */
+    function changeFolder(value: MultiValue<Option>) {
+
+        const selectedValues = value.map((e) => e.value).join(`,`);
+
+        if (!searchConditionObj.selectedFavoriteVideoFolder && !selectedValues) {
+            return;
+        }
+
+        if (searchConditionObj.selectedFavoriteVideoFolder === selectedValues) {
+            return;
+        }
+
+        const newQuery = create({
+            folder: selectedValues,
+            page: INIT_PAGE
+        });
+
+        // クエリパラメータを更新
+        replace(newQuery);
+
+        searchConditionObj.setSlectedFavoriteVideoFolder(selectedValues);
         searchConditionObj.resetPage();
         props.close();
     }
@@ -192,5 +229,9 @@ export function useFavoriteVideoFolderSearchConditionMain(props: propsType) {
         selectedFavoriteVideoFavoriteLevel: searchConditionObj.selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel,
         clearFilter,
+        folderList,
+        changeFolder,
+        selectedFavoriteVideoMode: searchConditionObj.selectedFavoriteVideoMode,
+        selectedFavoriteVideoFolder: searchConditionObj.selectedFavoriteVideoFolder,
     };
 }

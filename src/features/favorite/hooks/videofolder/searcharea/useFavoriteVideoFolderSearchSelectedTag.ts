@@ -27,8 +27,8 @@ export function useFavoriteVideoFolderSearchSelectedTag() {
         const newTagValue = tagList.filter((e) => e !== value).join(`,`);
 
         const newQuery = create({
-            folderVideoTag: newTagValue,
-            folderPage: INIT_PAGE
+            videoTag: newTagValue,
+            page: INIT_PAGE
         });
 
         // クエリパラメータを更新

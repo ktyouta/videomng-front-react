@@ -13,6 +13,7 @@ type PropsType = {
     selectedFavoriteVideoSortKey: string;
     selectedFavoriteVideoPage: string;
     selectedFavoriteVideoMode: string;
+    selectedFavoriteVideoFolder: string;
 }
 
 export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
@@ -28,7 +29,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
         // カテゴリ
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, query.folderVideoCategory);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, query.videoCategory);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_CATEGORY, props.selectedFavoriteVideoCategory);
@@ -36,7 +37,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
         // 視聴状況
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, query.folderViewStatus);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, query.viewStatus);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_VIEW_STATUS, props.selectedFavoriteVideoViewStatus);
@@ -44,7 +45,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
         // タグ
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, query.folderVideoTag);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, query.videoTag);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_TAG, props.selectedFavoriteVideoTag);
@@ -52,7 +53,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
         // ソート
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, query.folderSortKey);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, query.sortKey);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.selectedFavoriteVideoSortKey);
@@ -60,7 +61,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
         // お気に入り度
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, query.folderFavoriteLevel);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, query.favoriteLevel);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.selectedFavoriteVideoFavoriteLevel);
@@ -68,15 +69,23 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
 
         // ページ
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, query.folderPage);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, query.page);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.selectedFavoriteVideoPage);
         }
 
+        // フォルダ
+        if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_FOLDER)) {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FOLDER, query.folder);
+        }
+        else {
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FOLDER, props.selectedFavoriteVideoFolder);
+        }
+
         // モード
         if (hasKey(query, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE)) {
-            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, query.folderMode);
+            queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, query.mode);
         }
         else {
             queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, props.selectedFavoriteVideoMode);
@@ -99,6 +108,7 @@ export function useCreateFavoriteVideoFolderVideoListQuery(props: PropsType) {
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_SORT, props.selectedFavoriteVideoSortKey);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FAVORITE_LEVEL, props.selectedFavoriteVideoFavoriteLevel);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_PAGE, props.selectedFavoriteVideoPage);
+        queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_FOLDER, props.selectedFavoriteVideoFolder);
         queryParam = appendQuery(queryParam, FOLDER_SEARCH_CONDITION.QUERY_KEY_MODE, props.selectedFavoriteVideoMode);
 
         if (queryParam) {

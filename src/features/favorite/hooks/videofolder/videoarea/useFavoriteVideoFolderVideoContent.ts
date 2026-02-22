@@ -35,7 +35,9 @@ export function useFavoriteVideoFolderVideoContent(props: propsType) {
         searchConditionObj
     }));
     // フォルダリスト
-    const { data: folderList } = useFolderMasterList();
+    const { data: folderList } = useFolderMasterList({
+        parentFolderId: folderId,
+    });
     // ドラッグ用
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: props.data.videoId,

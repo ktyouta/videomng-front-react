@@ -6,8 +6,8 @@ import { useVideoCategory } from "../../../../../main/hooks/useVideoCategory";
 import { FAVORITE_LEVEL_SETTING_LIST } from "../../../../const/FavoriteConst";
 import { useCreateFavoriteVideoListQuery } from "../../../useCreateFavoriteVideoListQuery";
 import { INIT_PAGE, useFavoriteVideoSearchConditionValue } from "../../../useFavoriteVideoSearchConditionValue";
-import { useViewStatusList } from "../../../useViewStatusList";
 import { useFolderMasterList } from "../../../useFolderMasterList";
+import { useViewStatusList } from "../../../useViewStatusList";
 import { useTagMasterList } from "../../useTagMasterList";
 
 
@@ -32,7 +32,7 @@ export function useFavoriteSearchConditionMain(props: propsType) {
         isGetChache: false
     });
     // フォルダリスト
-    const { data: folderList } = useFolderMasterList();
+    const { data: folderList } = useFolderMasterList({});
 
     // お気に入り度リスト
     const favoriteLevelList = useMemo(() => {

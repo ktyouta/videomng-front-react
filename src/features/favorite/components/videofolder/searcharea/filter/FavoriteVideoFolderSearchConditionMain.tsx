@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
+import { FAVORITE_LIST_MODE } from "../../../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchConditionMain } from "../../../../hooks/videofolder/searcharea/filter/useFavoriteVideoFolderSearchConditionMain";
 
 
@@ -71,8 +72,11 @@ export function FavoriteVideoFolderSearchConditionMain(props: propsType) {
         favoriteLevelList,
         selectedFavoriteVideoFavoriteLevel,
         changeFavoriteLevel,
-        clearFilter, } = useFavoriteVideoFolderSearchConditionMain({ ...props });
-
+        clearFilter,
+        folderList,
+        changeFolder,
+        selectedFavoriteVideoMode,
+        selectedFavoriteVideoFolder, } = useFavoriteVideoFolderSearchConditionMain({ ...props });
 
     return (
         <Parent>
@@ -142,6 +146,23 @@ export function FavoriteVideoFolderSearchConditionMain(props: propsType) {
                             options={favoriteLevelList}
                             value={selectedFavoriteVideoFavoriteLevel.split(`,`) ?? favoriteLevelList[0].value}
                             onMenuClose={changeFavoriteLevel}
+                            width="68%"
+                            minWidth="8%"
+                            height="39px"
+                            placeholder="すべて"
+                        />
+                    </InputDiv>
+                }
+                {
+                    selectedFavoriteVideoMode === FAVORITE_LIST_MODE.folder.value && folderList && folderList.length > 0 &&
+                    <InputDiv>
+                        <InputLabel>
+                            フォルダ
+                        </InputLabel>
+                        <MultiSelectbox
+                            options={folderList}
+                            value={selectedFavoriteVideoFolder.split(`,`) ?? folderList[0].value}
+                            onMenuClose={changeFolder}
                             width="68%"
                             minWidth="8%"
                             height="39px"

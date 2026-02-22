@@ -100,19 +100,21 @@ export const SEARCH_CONDITION = {
 // フォルダ内動画一覧の検索条件
 export const FOLDER_SEARCH_CONDITION = {
     // クエリパラメータのキー(視聴状況)
-    QUERY_KEY_VIEW_STATUS: `folderViewStatus`,
+    QUERY_KEY_VIEW_STATUS: `viewStatus`,
     // クエリパラメータのキー(カテゴリ)
-    QUERY_KEY_CATEGORY: `folderVideoCategory`,
+    QUERY_KEY_CATEGORY: `videoCategory`,
     // クエリパラメータのキー(タグ)
-    QUERY_KEY_TAG: `folderVideoTag`,
+    QUERY_KEY_TAG: `videoTag`,
     // クエリパラメータのキー(お気に入り度)
-    QUERY_KEY_FAVORITE_LEVEL: `folderFavoriteLevel`,
+    QUERY_KEY_FAVORITE_LEVEL: `favoriteLevel`,
     // クエリパラメータのキー(ソート)
-    QUERY_KEY_SORT: `folderSortKey`,
+    QUERY_KEY_SORT: `sortKey`,
     // クエリパラメータのキー(ページ)
-    QUERY_KEY_PAGE: `folderPage`,
+    QUERY_KEY_PAGE: `page`,
+    // クエリパラメータのキー(フォルダ)
+    QUERY_KEY_FOLDER: `folder`,
     // クエリパラメータのキー(モード)
-    QUERY_KEY_MODE: `folderMode`,
+    QUERY_KEY_MODE: `mode`,
 } as const;
 
 // クエリパラメータ(キーワード検索)
