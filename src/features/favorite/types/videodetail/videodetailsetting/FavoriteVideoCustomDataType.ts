@@ -10,5 +10,5 @@ export type FavoriteVideoCustomDataType = {
     readonly memos: FavoriteVideoMemoType[];
     readonly categorys: FavoriteVideoDetailCategoryType[];
     readonly tags: FavoriteVideoTagType[],
-    readonly folders: FavoriteVideoCustomFolderType[],
+    readonly folders: FavoriteVideoCustomFolderType[][],
 }

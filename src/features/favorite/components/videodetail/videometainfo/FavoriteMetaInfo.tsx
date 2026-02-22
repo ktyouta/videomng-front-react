@@ -1,19 +1,7 @@
-import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../videomemo/FavoriteMemoContent";
-import BaseTextbox from "../../../../../components/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "../videomemo/FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "../videomemo/FavoriteMemoHeader";
-import { FavoriteMemoList } from "../videomemo/FavoriteMemoList";
-import { FavoriteCommentHeader } from "../videocomment/FavoriteCommentHeader";
-import { FavoriteCommentList } from "../videocomment/FavoriteCommentList";
-import { FavoriteVideoDetailDataType } from "../../../types/videodetail/FavoriteVideoDetailDataType";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
+import { FavoriteVideoDetailDataType } from "../../../types/videodetail/FavoriteVideoDetailDataType";
 
 
 const ContentDiv = styled.div`

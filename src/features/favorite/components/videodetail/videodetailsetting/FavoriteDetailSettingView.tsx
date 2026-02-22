@@ -80,17 +80,29 @@ const FavoriteLevelAreaDiv = styled.div`
 
 const FolderAreaDiv = styled.div`
   box-sizing:border-box;
-  align-items: center;
   display:flex;
-  flex-wrap: wrap;
-  grid-column-gap: 2%;
+  flex-direction: column;
+  gap: 10px;
 `;
 
-const FolderDiv = styled.div`
-  display: flex;
-  text-align: center;
-  width: auto;
-  align-items: center;
+const FolderRowDiv = styled.div`
+  box-sizing:border-box;
+  display:flex;
+  item-align: center;
+  gap: 9px;
+`;
+
+const FolderNameArea = styled.div`
+  display:flex;
+  item-align: center;
+  gap: 9px;
+  flex-wrap: wrap;
+`;
+
+const ArrowSpan = styled.span`
+`;
+
+const FolderSpan = styled.span`
 `;
 
 type propsType = {
@@ -287,15 +299,37 @@ export function FavoriteDetailSettingView(props: propsType) {
                             folders && folders.length > 0 ?
                                 <FolderAreaDiv>
                                     {
-                                        folders && folders.map((e: FavoriteVideoCustomFolderType) => {
+                                        folders && folders.map((folderList: FavoriteVideoCustomFolderType[]) => {
                                             return (
-                                                <FolderDiv
-                                                    key={e.folderId}
-                                                >
-                                                    {e.folderName}
-                                                </FolderDiv>
+                                                <FolderRowDiv>
+                                                    {
+                                                        folderList && folderList.length > 0 &&
+                                                        folderList.map((folder, index) => {
+                                                            const isLast = index === folderList.length - 1;
+                                                            return (
+                                                                <FolderNameArea>
+                                                                    <FolderSpan
+                                                                        key={folder.folderMasterId}
+                                                                        style={isLast ? {
+                                                                            borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
+                                                                            paddingBottom: "1px",
+                                                                        } : {}}
+                                                                    >
+                                                                        {folder.folderName}
+                                                                    </FolderSpan>
+                                                                    {
+                                                                        !isLast &&
+                                                                        <ArrowSpan>
+                                                                            &gt;
+                                                                        </ArrowSpan>
+                                                                    }
+                                                                </FolderNameArea>
+                                                            )
+                                                        })
+                                                    }
+                                                </FolderRowDiv>
                                             )
-                                        }, [])
+                                        })
                                     }
                                 </FolderAreaDiv>
                                 :

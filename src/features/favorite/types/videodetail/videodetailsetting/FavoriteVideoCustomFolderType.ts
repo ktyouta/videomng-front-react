@@ -1,5 +1,6 @@
 
 export type FavoriteVideoCustomFolderType = {
-    readonly folderId: number,
+    readonly folderMasterId: number,
     readonly folderName: string,
+    readonly parentId: number,
 }

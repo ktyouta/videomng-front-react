@@ -9,6 +9,7 @@ import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
 import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADDLIST } from "../../../const/FavoriteConst";
 import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEdit";
+import { FavoriteVideoCustomFolderType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomFolderType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import { FavoriteDetailSettingEditActions } from "./FavoriteDetailSettingEditActions";
 
@@ -52,7 +53,10 @@ const GuideDiv = styled(MetaDiv)`
 `;
 
 const FolderMetaDiv = styled(MetaDiv)`
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 7px;
+    display:flex;
 `;
 
 const CategoryLabel = styled.label`
@@ -74,20 +78,24 @@ const FlexDiv = styled.div`
   flex-wrap: wrap;
 `;
 
-
-const FolderAreaDiv = styled.div`
+const FolderRowDiv = styled.div`
   box-sizing:border-box;
-  align-items: center;
   display:flex;
-  flex-wrap: wrap;
-  grid-column-gap: 2%;
+  item-align: center;
+  gap: 9px;
 `;
 
-const FolderDiv = styled.div`
-  display: flex;
-  text-align: center;
-  width: auto;
-  align-items: center;
+const FolderNameArea = styled.div`
+  display:flex;
+  item-align: center;
+  gap: 9px;
+  flex-wrap: wrap;
+`;
+
+const ArrowSpan = styled.span`
+`;
+
+const FolderSpan = styled.span`
 `;
 
 type propsType = {
@@ -291,24 +299,37 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                     </TitleDiv>
                     <FolderMetaDiv>
                         {
-                            folders && folders.length > 0
-                                ?
-                                <FolderAreaDiv>
-                                    {
-                                        folders.map((e) => {
-
-                                            return (
-                                                <FolderDiv
-                                                    key={e.folderId}
-                                                >
-                                                    {e.folderName}
-                                                </FolderDiv>
-                                            )
-                                        })
-                                    }
-                                </FolderAreaDiv>
-                                :
-                                `未登録`
+                            folders && folders.map((folderList: FavoriteVideoCustomFolderType[]) => {
+                                return (
+                                    <FolderRowDiv>
+                                        {
+                                            folderList && folderList.length > 0 &&
+                                            folderList.map((folder, index) => {
+                                                const isLast = index === folderList.length - 1;
+                                                return (
+                                                    <FolderNameArea>
+                                                        <FolderSpan
+                                                            key={folder.folderMasterId}
+                                                            style={isLast ? {
+                                                                borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
+                                                                paddingBottom: "1px",
+                                                            } : {}}
+                                                        >
+                                                            {folder.folderName}
+                                                        </FolderSpan>
+                                                        {
+                                                            !isLast &&
+                                                            <ArrowSpan>
+                                                                &gt;
+                                                            </ArrowSpan>
+                                                        }
+                                                    </FolderNameArea>
+                                                )
+                                            })
+                                        }
+                                    </FolderRowDiv>
+                                )
+                            })
                         }
                     </FolderMetaDiv>
                     <GuideDiv>

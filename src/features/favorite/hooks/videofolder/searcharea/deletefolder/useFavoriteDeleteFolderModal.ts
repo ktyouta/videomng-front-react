@@ -36,7 +36,12 @@ export function useFavoriteDeleteFolderModal(props: PropsType) {
      * 前画面に遷移
      */
     function back() {
-        appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.FOLDER}/${props.folder.parentId}`);
+        if (props.folder.parentId) {
+            appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}${ROUTER_PATH.FAVORITE.FOLDER}/${props.folder.parentId}`);
+        }
+        else {
+            appNavigate(`${ROUTER_PATH.FAVORITE.ROOT}`);
+        }
     }
 
     /**
@@ -54,11 +59,13 @@ export function useFavoriteDeleteFolderModal(props: PropsType) {
             if (!resParsed.success) {
                 toast.error(`フォルダの削除に失敗しました。時間をおいて再度お試しください。`);
                 closeModal();
+                closeConfirmModal();
                 return;
             }
 
             toast.success("フォルダを削除しました。");
             closeModal();
+            closeConfirmModal();
             back();
         },
         // 失敗後の処理
@@ -77,9 +84,7 @@ export function useFavoriteDeleteFolderModal(props: PropsType) {
      * @param value 
      */
     function changeSelect(value: string) {
-
         setDeleteVideoFlg((e) => {
-
             return e === value ? DELETEFAVORITEVIDEOINFOLDER.OFF : DELETEFAVORITEVIDEOINFOLDER.ON;
         });
     }
@@ -88,7 +93,6 @@ export function useFavoriteDeleteFolderModal(props: PropsType) {
      * 削除モーダルオープン
      */
     function openDeleteModal() {
-
         setDeleteVideoFlg(DELETEFAVORITEVIDEOINFOLDER.OFF);
         openModal();
     }
