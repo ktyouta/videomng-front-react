@@ -78,14 +78,6 @@ export function FavoriteTagList() {
         isLoading,
         errMessage } = useFavoriteTagList();
 
-    if (!favoriteVideoTagList) {
-        return (
-            <LoadingParent>
-                <Loading />
-            </LoadingParent>
-        );
-    }
-
     if (isLoading) {
         return (
             <LoadingParent>
@@ -99,6 +91,14 @@ export function FavoriteTagList() {
             <Parent>
                 {errMessage}
             </Parent>
+        );
+    }
+
+    if (!favoriteVideoTagList) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

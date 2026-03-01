@@ -120,14 +120,6 @@ export function FavoriteDetailSettingView(props: propsType) {
         errMessage,
         videoCategory } = useFavoriteDetailSettingView();
 
-    if (!data) {
-        return (
-            <LoadingParent>
-                <Loading />
-            </LoadingParent>
-        );
-    }
-
     if (isLoading) {
         return (
             <LoadingParent>
@@ -141,6 +133,14 @@ export function FavoriteDetailSettingView(props: propsType) {
             <ErrorMessageSpan>
                 {errMessage}
             </ErrorMessageSpan>
+        );
+    }
+
+    if (!data) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

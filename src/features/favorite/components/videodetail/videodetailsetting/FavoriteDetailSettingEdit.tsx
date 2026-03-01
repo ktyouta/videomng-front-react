@@ -92,6 +92,10 @@ const FolderNameArea = styled.div`
   flex-wrap: wrap;
 `;
 
+const ErrorMessageSpan = styled.span`
+    color:white;
+`;
+
 const ArrowSpan = styled.span`
 `;
 
@@ -122,7 +126,16 @@ export function FavoriteDetailSettingEdit(props: propsType) {
         data,
         isVisibleAfterFolderAdd,
         setIsVisibleAfterFolderAdd,
+        errMessage
     } = useFavoriteDetailSettingEdit({ ...props });
+
+    if (errMessage) {
+        return (
+            <ErrorMessageSpan>
+                {errMessage}
+            </ErrorMessageSpan>
+        );
+    }
 
     const createDate = data?.detail.createDate;
     const updateDate = data?.detail.updateDate;

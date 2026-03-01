@@ -1,9 +1,8 @@
 import styled from "styled-components";
+import Loading from "../../../../../components/Loading";
 import { useFavoriteMemoList } from "../../../hooks/videodetail/videomemo/useFavoriteMemoList";
 import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
 import { FavoriteMemoContent } from "./FavoriteMemoContent";
-import LoadingBase from "../../../../../components/LoadingBase";
-import Loading from "../../../../../components/Loading";
 
 
 const Parent = styled.div`
@@ -50,19 +49,19 @@ export function FavoriteMemoList() {
         );
     }
 
-    if (!favoriteVideoMemoList) {
-        return (
-            <LoadingParent>
-                <Loading />
-            </LoadingParent>
-        );
-    }
-
     if (errMessage) {
         return (
             <Parent>
                 {errMessage}
             </Parent>
+        );
+    }
+
+    if (!favoriteVideoMemoList) {
+        return (
+            <LoadingParent>
+                <Loading />
+            </LoadingParent>
         );
     }
 

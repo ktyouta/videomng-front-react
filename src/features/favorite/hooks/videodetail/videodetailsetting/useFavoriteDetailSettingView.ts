@@ -24,7 +24,7 @@ export function useFavoriteDetailSettingView() {
             return res.data;
         },
         onError: (res) => {
-            setErrMessage(`カスタム情報の取得に失敗しました`);
+            setErrMessage(`動画情報の取得に失敗しました。`);
         }
     });
 

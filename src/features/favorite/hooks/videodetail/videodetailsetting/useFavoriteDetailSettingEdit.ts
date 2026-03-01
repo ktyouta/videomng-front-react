@@ -41,6 +41,8 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
     const videoId = useVideoId();
     // お気に入り動画更新リクエスト用エンドポイント
     const endpoint = videoId ? `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO_CUSTOM}`.replace(`:videoId`, videoId) : ``;
+    // エラーメッセージ
+    const [errMessage, setErrMessage] = useState(``);
 
     // カスタム情報を取得
     const { data } = getFavoriteVideoCustom({
@@ -60,6 +62,9 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
             setViewStatus(detail.viewStatus);
             setFavoriteLevel(detail.favoriteLevel);
             setIsVisibleAfterFolderAdd(detail.isVisibleAfterFolderAdd);
+        },
+        onError: (res) => {
+            setErrMessage(`動画情報の取得に失敗しました。`);
         }
     });
 
@@ -158,5 +163,6 @@ export function useFavoriteDetailSettingEdit(props: propsType) {
         data,
         isVisibleAfterFolderAdd,
         setIsVisibleAfterFolderAdd,
+        errMessage,
     };
 }
