@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useNavigationType } from 'react-router-dom';
 import { LOGIN_USER_INFO_INIT } from '../../consts/CommonConst';
 import { ROUTER_PATH } from '../../consts/RouterPath';
 import { getAuthCheck } from '../../features/api/getAuthCheck';
@@ -19,6 +19,10 @@ function useQueryApp() {
     const [isCheckedAuth, setIsCheckedAuth] = useState(false);
     // ルーティング用
     const navigate = useNavigate();
+    // 現在のパス
+    const { pathname } = useLocation();
+    // ナビゲーション種別
+    const navigationType = useNavigationType();
 
     /**
      * ログイン画面に遷移
@@ -59,6 +63,13 @@ function useQueryApp() {
             });
         }
     }, []);
+
+    // ページ遷移時にスクロール位置をトップに戻す
+    useEffect(() => {
+        if (navigationType !== "POP") {
+            window.scrollTo(0, 0);
+        }
+    }, [pathname, navigationType]);
 
     return {
         isLogin,
