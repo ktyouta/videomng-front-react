@@ -1,14 +1,10 @@
 import React from "react";
+import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
-import { RxCross1 } from "react-icons/rx";
 import { MEDIA } from "../../../../consts/MediaConst";
-import { HeaderHowToUseModal } from "./HowToUse/HeaderHowToUseModal";
-import { HeaderUsagePrecautionModal } from "./UsagePrecaution/HeaderUsagePrecautionModal";
 import { MENU_NO } from "../../const/HeaderConst";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { useHeaderSideMenu } from "../../hooks/SideMenu/useHeaderSideMenu";
-import { OverlayDiv } from "../../../../styles/styledcomponent/OverlayDiv";
 import { HeaderSideMenuLi } from "./HeaderSideMenuLi";
 import { HeaderSideMenuModal } from "./HeaderSideMenuModal";
 
@@ -50,7 +46,7 @@ const MenuUl = styled.ul`
   padding-bottom: 1%;
   color: white;
   background-color: #1e1e1e;
-  padding-left: 10%;
+  padding-left: 12%;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -104,12 +100,16 @@ export function HeaderSideMenu() {
   console.log(`HeaderSideMenu render`);
 
   const {
+    isMobile,
     openMenuNo,
     openInnerMenu,
     closeInnerMenu,
     isOpenSideMenu,
     openSideMenu,
-    closeSideMenu } = useHeaderSideMenu();
+    closeSideMenu,
+    moveToHome,
+    moveToFavorite,
+    isLogin, } = useHeaderSideMenu();
 
   return (
     <React.Fragment>
@@ -137,6 +137,22 @@ export function HeaderSideMenu() {
           />
         </CloseIconAreaDiv>
         <MenuUl>
+          {
+            isMobile &&
+            <React.Fragment>
+              <HeaderSideMenuLi
+                title="ホーム"
+                onClick={moveToHome}
+              />
+              {
+                isLogin &&
+                <HeaderSideMenuLi
+                  title="お気に入り"
+                  onClick={moveToFavorite}
+                />
+              }
+            </React.Fragment>
+          }
           <HeaderSideMenuLi
             title="使い方を見る"
             onClick={() => {

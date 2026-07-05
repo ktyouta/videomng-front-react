@@ -1,11 +1,6 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { useHeaderMenuUl } from "../../hooks/Menu/useHeaderMenuUl";
-import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import { MEDIA } from "../../../../consts/MediaConst";
 import React from "react";
+import { useHeaderMenuUl } from "../../hooks/Menu/useHeaderMenuUl";
 import { HeaderMenuUlPc } from "./HeaderMenuUlPc";
-import { HeaderMenuUlMobile } from "./HeaderMenuUlMobile";
 
 
 export function HeaderMenuUl() {
@@ -20,7 +15,7 @@ export function HeaderMenuUl() {
                 isMobile
                     ?
                     // モバイル
-                    <HeaderMenuUlMobile />
+                    null
                     :
                     // PC
                     <HeaderMenuUlPc />

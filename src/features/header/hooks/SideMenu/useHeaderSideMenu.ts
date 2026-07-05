@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { IsLoginContext } from "../../../../app/components/QueryApp";
+import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { MENU_NO } from "../../const/HeaderConst";
 
@@ -11,7 +14,10 @@ export function useHeaderSideMenu() {
     const [openMenuNo, setOpenMenuNo] = useState<MENU_NO>(MENU_NO.NONE);
     // サイドメニュー展開フラグ
     const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
-
+    // ログインフラグ
+    const isLogin = IsLoginContext.useCtx();
+    // 画面遷移用
+    const { appNavigate } = useAppNavigation();
 
     /**
      * サイドメニューを開く
@@ -33,7 +39,7 @@ export function useHeaderSideMenu() {
      */
     function openInnerMenu(menuNo: MENU_NO) {
         setOpenMenuNo(menuNo);
-        // メニュー展開時に
+        // メニュー展開時にサイドメニューを閉じる
         closeSideMenu();
     }
 
@@ -42,6 +48,22 @@ export function useHeaderSideMenu() {
      */
     function closeInnerMenu() {
         setOpenMenuNo(MENU_NO.NONE);
+    }
+
+    /**
+     * ホーム画面に遷移
+     */
+    function moveToHome() {
+        appNavigate(ROUTER_PATH.HOME.ROOT);
+        closeSideMenu();
+    }
+
+    /**
+     * お気に入り画面に遷移
+     */
+    function moveToFavorite() {
+        appNavigate(ROUTER_PATH.FAVORITE.ROOT);
+        closeSideMenu();
     }
 
     return {
@@ -53,5 +75,8 @@ export function useHeaderSideMenu() {
         setIsOpenSideMenu,
         openSideMenu,
         closeSideMenu,
+        moveToHome,
+        moveToFavorite,
+        isLogin,
     }
 }
