@@ -3,6 +3,11 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
 import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
 
+const SPINNER_COLOR = "#1d4ed8";
+const SPINNER_BORDER_WIDTH = "4px";
+const SPINNER_SIZE_MOBILE = 28;
+const SPINNER_SIZE_DEFAULT = 42;
+
 //引数の型
 type propsType = {
     style?: CSSProperties,
@@ -11,7 +16,7 @@ type propsType = {
 function Loading(props: propsType) {
 
     const override: CSSProperties = {
-        borderColor: "#a9a9a9",
+        border: `${SPINNER_BORDER_WIDTH} solid`,
         zIndex: Z_INDEX_PARAM.WAITL_OADING,
         ...props.style
     };
@@ -21,8 +26,9 @@ function Loading(props: propsType) {
 
     return (
         <ClipLoader
+            color={SPINNER_COLOR}
             cssOverride={override}
-            size={isPcLess ? 45 : 85}
+            size={isPcLess ? SPINNER_SIZE_MOBILE : SPINNER_SIZE_DEFAULT}
             aria-label="Loading Spinner"
             data-testid="loader"
         />
