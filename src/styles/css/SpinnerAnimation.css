@@ -1,0 +1,9 @@
+/* react-spinnersのClipLoaderはデフォルトでscaleも含むため、回転のみに絞って定義する */
+@keyframes spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

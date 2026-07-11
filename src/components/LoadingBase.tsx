@@ -1,7 +1,8 @@
-import { useState, CSSProperties } from "react";
+import { CSSProperties } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
+import { SPINNER_ANIMATION } from "../consts/SpinnerAnimationConst";
+import "../styles/css/SpinnerAnimation.css";
 
 //引数の型
 type propsType = {
@@ -18,6 +19,7 @@ function LoadingBase(props: propsType) {
         top: props.top ?? "50%",
         left: props.left ?? "50%",
         zIndex: Z_INDEX_PARAM.WAITL_OADING,
+        animation: SPINNER_ANIMATION,
     };
 
     return (

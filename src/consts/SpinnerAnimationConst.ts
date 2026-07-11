@@ -1,0 +1,1 @@
+export const SPINNER_ANIMATION = `spinner-rotate 0.75s linear infinite`;
