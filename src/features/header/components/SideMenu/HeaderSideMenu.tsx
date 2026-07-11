@@ -119,7 +119,7 @@ export function HeaderSideMenu() {
           icon={RxHamburgerMenu}
           onclick={openSideMenu}
           style={{ color: "white" }}
-          size="95%"
+          size="20px"
         />
       </BurgerIconDiv>
       <SideMenuAside

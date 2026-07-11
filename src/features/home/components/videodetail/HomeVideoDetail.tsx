@@ -1,14 +1,11 @@
-import React from "react";
-import { useHomeVideoDetail } from "../../hooks/videodetail/useHomeVideoDetail";
-import LoadingBase from "../../../../components/LoadingBase";
+import { FaArrowLeft } from "react-icons/fa6";
 import styled from "styled-components";
+import { IconComponent } from "../../../../components/IconComponent";
+import Loading from "../../../../components/Loading";
+import { MEDIA } from "../../../../consts/MediaConst";
+import { useHomeVideoDetail } from "../../hooks/videodetail/useHomeVideoDetail";
 import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
-import { FaArrowLeft } from "react-icons/fa6";
-import { IconComponent } from "../../../../components/IconComponent";
-import { MEDIA } from "../../../../consts/MediaConst";
-import Loading from "../../../../components/Loading";
-import { createCtx } from "../../../../utils/createCtx";
 
 
 const Parent = styled.div`

@@ -75,12 +75,31 @@ const OverlayDiv = styled.div`
   z-index: ${Z_INDEX_PARAM.HEAD_OVERLAY}; 
 `;
 
+const USER_NAME_MAX_WIDTH = "120px";
+
 // ユーザー名のスタイル
 const UserNameSpan = styled.span`
   color:white;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  max-width: ${USER_NAME_MAX_WIDTH};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 15px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 15px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 15px;
+  }
 `;
 
 
@@ -104,13 +123,11 @@ export function HeaderUserMenuList() {
             <UserDiv
                 onClick={clickUserIcon}
             >
-                {
-                    !isMobile &&
-                    <UserNameSpan
-                    >
-                        {loginUserInfo.userName}
-                    </UserNameSpan>
-                }
+                <UserNameSpan
+                    title={loginUserInfo.userName}
+                >
+                    {loginUserInfo.userName}
+                </UserNameSpan>
                 <IconDiv>
                     <IconComponent
                         icon={IoPersonCircleOutline}

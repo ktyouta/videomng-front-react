@@ -1,13 +1,4 @@
-import React from "react";
-import { useHeaderUserMenu } from "../../hooks/UserMenu/useHeaderUserMenu";
-import { IconComponent } from "../../../../components/IconComponent";
-import { IoPersonCircleOutline } from "react-icons/io5";
 import styled from "styled-components";
-import { Z_INDEX_PARAM } from "../../../../consts/CommonConst";
-import { MEDIA } from "../../../../consts/MediaConst";
-import { useHeaderUserMenuList } from "../../hooks/UserMenu/useHeaderUserMenuList";
-
-
 
 //コンテンツのスタイル
 const ContentDiv = styled.div`
