@@ -1,12 +1,15 @@
-import { FaArrowLeft } from "react-icons/fa6";
 import styled from "styled-components";
-import { IconComponent } from "../../../../components/IconComponent";
+import { BackToListIcon } from "../../../../components/BackToListIcon";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { useFavoriteVideoFolderVideoList } from "../../hooks/videofolder/useFavoriteVideoFolderVideoList";
 import { FavoriteVideoFolderDisplayVideoListProvider } from "./FavoriteVideoFolderDisplayVideoListProvider";
 import { FavoriteVideoFolderSearchConditionValueProvider } from "./FavoriteVideoFolderSearchConditionValueProvider";
 import { FavoriteSearchArea } from "./searcharea/FavoriteSearchArea";
 import { FavoriteVideoFolderVideoArea } from "./videoarea/FavoriteVideoFolderVideoArea";
 
+// 戻る矢印の縦位置（モバイル/それ以外）
+const BACK_ICON_TOP_MOBILE = "70px";
+const BACK_ICON_TOP_DEFAULT = "135px";
 
 const Parent = styled.div`
   width: 100%;
@@ -21,18 +24,18 @@ export function FavoriteVideoFolder() {
 
     const { back } = useFavoriteVideoFolderVideoList();
 
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
+
     return (
         <Parent>
-            <IconComponent
-                icon={FaArrowLeft}
-                size="20"
+            <BackToListIcon
+                onClick={back}
                 style={{
-                    "color": "white",
-                    "position": "absolute",
-                    "top": "18%",
+                    "position": "fixed",
+                    "top": isMobile ? BACK_ICON_TOP_MOBILE : BACK_ICON_TOP_DEFAULT,
                     "left": "3%",
                 }}
-                onclick={back}
             />
             <FavoriteVideoFolderDisplayVideoListProvider>
                 <FavoriteVideoFolderSearchConditionValueProvider>

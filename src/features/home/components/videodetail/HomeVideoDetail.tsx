@@ -1,12 +1,15 @@
-import { FaArrowLeft } from "react-icons/fa6";
 import styled from "styled-components";
-import { IconComponent } from "../../../../components/IconComponent";
+import { BackToListIcon } from "../../../../components/BackToListIcon";
 import Loading from "../../../../components/Loading";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { useHomeVideoDetail } from "../../hooks/videodetail/useHomeVideoDetail";
 import { HomeVideoDetailInfo } from "./HomeVideoDetailInfo";
 import { HomeVideoDetailMenu } from "./HomeVideoDetailMenu";
 
+// 戻る矢印の縦位置（モバイル/それ以外）
+const BACK_ICON_TOP_MOBILE = "60px";
+const BACK_ICON_TOP_DEFAULT = "125px";
 
 const Parent = styled.div`
   width: 100%;
@@ -73,6 +76,9 @@ export function HomeVideoDetail() {
     isError,
     backScreen, } = useHomeVideoDetail();
 
+  // 画面サイズ判定
+  const isMobile = useMediaQuery(mediaQuery.mobile);
+
   if (isError) {
     return (
       <MessageDiv>
@@ -99,16 +105,13 @@ export function HomeVideoDetail() {
 
   return (
     <Parent>
-      <IconComponent
-        icon={FaArrowLeft}
-        size="20"
+      <BackToListIcon
+        onClick={backScreen}
         style={{
-          "color": "white",
-          "position": "absolute",
-          "top": "0",
+          "position": "fixed",
+          "top": isMobile ? BACK_ICON_TOP_MOBILE : BACK_ICON_TOP_DEFAULT,
           "left": "3%",
         }}
-        onclick={backScreen}
       />
       <VideoContentDiv>
         {/* 動画情報 */}

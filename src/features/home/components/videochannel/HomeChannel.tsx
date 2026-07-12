@@ -4,10 +4,13 @@ import { HomeChannelVideoArea } from "./HomeChannelVideoArea";
 import { HomeChannelHeader } from "./HomeChannelHeader";
 import { useHomeChannel } from "../../hooks/videochannel/useHomeChannel";
 import LoadingBase from "../../../../components/LoadingBase";
-import { FaArrowLeft } from "react-icons/fa6";
-import { IconComponent } from "../../../../components/IconComponent";
+import { BackToListIcon } from "../../../../components/BackToListIcon";
 import Loading from "../../../../components/Loading";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 
+// 戻る矢印の縦位置（モバイル/それ以外）
+const BACK_ICON_TOP_MOBILE = "70px";
+const BACK_ICON_TOP_DEFAULT = "135px";
 
 const Parent = styled.div`
   width: 100%;
@@ -42,6 +45,9 @@ export function HomeChannel() {
         setNextPageToken,
         backHome, } = useHomeChannel();
 
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
+
     if (errMessage) {
         return (
             <MessageDiv>
@@ -60,16 +66,13 @@ export function HomeChannel() {
 
     return (
         <Parent>
-            <IconComponent
-                icon={FaArrowLeft}
-                size="20"
+            <BackToListIcon
+                onClick={backHome}
                 style={{
-                    "color": "white",
-                    "position": "absolute",
-                    "top": "18%",
+                    "position": "fixed",
+                    "top": isMobile ? BACK_ICON_TOP_MOBILE : BACK_ICON_TOP_DEFAULT,
                     "left": "3%",
                 }}
-                onclick={backHome}
             />
             {/* ヘッダ */}
             <HomeChannelHeader
