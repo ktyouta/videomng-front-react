@@ -1,14 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IsLoginContext } from "../../../../app/components/QueryApp";
-import { PREV_PATH_KEY, VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
+import { PREV_PATH_KEY } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
-import ENV from '../../../../env.json';
-import { useAppNavigation } from "../../../../hooks/useAppNavigation";
-import useMutationWrapper from "../../../../hooks/useMutationWrapper";
-import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
+import useSwitch from "../../../../hooks/useSwitch";
 import { playVideo } from "../../../../utils/playVideo";
-import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
 import { useVideoId } from "./useVideoId";
 
 
@@ -26,56 +23,16 @@ export function useHomeVideoDetailInfo() {
     const queryParam = location.search;
     // パス
     const pathName = location.pathname;
-    // ルーティング用
-    const { appGoBack } = useAppNavigation();
+    // タグ選択ダイアログ表示フラグ
+    const { flag: isOpenTagSelectModal, on: openTagSelectModal, off: closeTagSelectModal } = useSwitch();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     /**
-     * お気に入り登録リクエスト
+     * お気に入り登録ボタン押下
      */
-    const postMutation = useMutationWrapper({
-        url: `${VIDEO_MNG_PATH}${ENV.FAVORITE_VIDEO}`,
-        method: "POST",
-        // 正常終了後の処理
-        afSuccessFn: (res: unknown) => {
-
-            // レスポンスの型チェック
-            const resParsed = resSchema().safeParse(res);
-
-            if (!resParsed.success) {
-                toast.error(`お気に入り登録に失敗しました。時間をおいて再度お試しください。`);
-                return;
-            }
-
-            const message = resParsed.data.message;
-            if (message) {
-                toast.success(message);
-            }
-
-            appGoBack(ROUTER_PATH.HOME.ROOT);
-        },
-        // 失敗後の処理
-        afErrorFn: (res: errResType) => {
-
-            const message = res.response.data.message;
-            if (message) {
-                toast.error(message);
-            }
-        },
-    });
-
-    /**
-     * 動画をお気に入りに登録する
-     * @param videoId 
-     * @returns 
-     */
-    function addToFavorite() {
-
-        const body: AddToFavoriteRequestType = {
-            videoId
-        }
-
-        // リクエスト送信
-        postMutation.mutate(body);
+    function clickRegister() {
+        openTagSelectModal();
     }
 
     /**
@@ -106,9 +63,12 @@ export function useHomeVideoDetailInfo() {
     }
 
     return {
-        addToFavorite,
+        clickRegister,
         play,
         isLogin,
         moveLogin,
+        isOpenTagSelectModal,
+        closeTagSelectModal,
+        isMobile,
     }
 }

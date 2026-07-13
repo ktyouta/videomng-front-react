@@ -91,7 +91,7 @@ export function useFavoriteTagEditExistingList() {
             return;
         }
 
-        setDisplayTagMaster((e) => {
+        setDisplayTagMaster(() => {
 
             // 入力したタイトルに一致するタグを取得
             const filterdTagList = tagMasterList.filter((e1) => {

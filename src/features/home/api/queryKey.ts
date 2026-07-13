@@ -15,4 +15,5 @@ export const videoKeys = {
     detail: (videoId: string) => [...videoKeys.details(), videoId] as const,
     channels: () => [...videoKeys.all, `channel`] as const,
     channel: (props: ChannelVideoType) => [...videoKeys.channels(), props] as const,
+    tagMasters: () => [...videoKeys.all, `tagMaster`] as const,
 }

@@ -3,10 +3,12 @@ import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import ButtonComponent from "../../../../../components/ButtonComponent";
 import { IconComponent } from "../../../../../components/IconComponent";
+import { ModalPortal } from "../../../../../components/ModalPortal";
 import { FLG } from "../../../../../consts/CommonConst";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
 import { useVideoDetailInfo } from "../../../hooks/videochannel/videodetail/useVideoDetailInfo";
+import { VideoDetailTagSelect } from "./VideoDetailTagSelect";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -71,10 +73,13 @@ export function VideoDetailInfo(props: propsType) {
     console.log("VideoDetailInfo render");
 
     const {
-        addToFavorite,
+        clickRegister,
         play,
         isLogin,
         moveLogin,
+        isOpenTagSelectModal,
+        closeTagSelectModal,
+        isMobile,
     } = useVideoDetailInfo();
 
     const videoDetail = props.videoDetail;
@@ -142,7 +147,7 @@ export function VideoDetailInfo(props: propsType) {
                                     // お気に入り未登録
                                     <ButtonComponent
                                         variant="orange"
-                                        onClick={addToFavorite}
+                                        onClick={clickRegister}
                                         style={{
                                             "fontSize": "0.9rem",
                                             "minHeight": "50px",
@@ -172,6 +177,20 @@ export function VideoDetailInfo(props: propsType) {
                         </ButtonComponent>
                 }
             </VideoMetaDiv>
+            <ModalPortal
+                isOpen={isOpenTagSelectModal}
+                modalWidth={isMobile ? `80%` : `45%`}
+                containerStyle={{
+                    fontSize: isMobile ? "12px" : "15px",
+                    display: "flex",
+                    flexDirection: "column"
+                }}
+                modalMinHeight="405px"
+            >
+                <VideoDetailTagSelect
+                    closeTagSelectModal={closeTagSelectModal}
+                />
+            </ModalPortal>
         </VideoInfoDiv>
     );
 }
