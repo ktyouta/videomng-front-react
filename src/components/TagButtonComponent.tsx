@@ -83,7 +83,7 @@ const TagButtonComponent = (props: propsType) => {
                 {props.title}
             </TitleSpan>
             {props.isDispCross && (
-                <CrossButtonSpan >
+                <CrossButtonSpan>
                     ×
                 </CrossButtonSpan>
             )}

@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { IsLoginContext } from "../../../../app/components/QueryApp";
-import { tagType } from "../../../../components/TagsComponent";
 import { VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
 import ENV from '../../../../env.json';
 import { useAppNavigation } from "../../../../hooks/useAppNavigation";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
 import { getTagMaster } from "../../api/getTagMaster";
 import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
+import { TagMasterType } from "../../types/videodetail/TagMasterType";
 import { useVideoId } from "./useVideoId";
 
 export function useHomeVideoDetailTagSelect() {
@@ -17,39 +18,26 @@ export function useHomeVideoDetailTagSelect() {
     const videoId = useVideoId();
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
     // タグマスタ
     const { data: tagMasterList } = getTagMaster({
         enabled: isLogin,
         select: (data) => {
-            return data.data.map((e) => {
-                return {
-                    value: e.tagId,
-                    label: e.tagName,
-                    tagColor: e.tagColor,
-                }
-            })
+            const tagMasterList = data.data;
+            setDisplayTagMaster(tagMasterList);
+            return tagMasterList;
         }
     });
     // ルーティング用
     const { appGoBack } = useAppNavigation();
-    // タグマスタリスト表示フラグ
-    const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
     // セクション表示用タグマスタリスト
-    const [displayTagMaster, setDisplayTagMaster] = useState<tagType[]>([]);
-    // 選択中のタグ
-    const [selectedTagList, setSelectedTagList] = useState<tagType[]>([]);
+    const [displayTagMaster, setDisplayTagMaster] = useState<TagMasterType[]>([]);
     // 入力中のキーワード
     const [inputKeyword, setInputKeyword] = useState(``);
+    // 選択中のタグ
+    const [selectedTagList, setSelectedTagList] = useState(new Map<number, TagMasterType>());
 
-    // tagMasterListは非同期取得のため、反映処理がないと取得完了前は表示が空になる
-    useEffect(() => {
-
-        if (!tagMasterList) {
-            return;
-        }
-
-        setDisplayTagMaster(tagMasterList);
-    }, [tagMasterList]);
 
     /**
      * お気に入り登録リクエスト
@@ -92,7 +80,7 @@ export function useHomeVideoDetailTagSelect() {
 
         const body: AddToFavoriteRequestType = {
             videoId,
-            tagList: selectedTagList.map((tag) => Number(tag.value)),
+            tagList: [...selectedTagList.values()].map((e) => e.tagId),
         }
 
         // リクエスト送信
@@ -100,41 +88,22 @@ export function useHomeVideoDetailTagSelect() {
     }
 
     /**
-     * 選択中のタグに追加する
-     * @param addTag
+     * 選択中のタグへの追加・解除を切り替える
+     * @param tag
      */
-    function addTagEditList(addTag: tagType) {
+    function toggleTagEditList(tag: TagMasterType) {
 
-        // 選択中のタグに追加
-        setSelectedTagList((e: tagType[]) => {
-
-            const tagInfo = e.find((tag) => tag.label === addTag.label);
-
-            if (tagInfo) {
-                return e.map(tag => tag.label === addTag.label ? addTag : tag);
+        const tagId = tag.tagId;
+        setSelectedTagList((e) => {
+            const newMap = new Map(e);
+            if (newMap.has(tagId)) {
+                newMap.delete(tagId);
             }
             else {
-                return [...e, addTag];
+                newMap.set(tagId, tag);
             }
+            return newMap;
         });
-    }
-
-    /**
-     * 選択中のタグから削除する
-     * @param deleteIndex
-     */
-    function deleteTagEditList(deleteIndex: number) {
-
-        setSelectedTagList((e: tagType[]) => {
-            return e.filter((_, index) => index !== deleteIndex);
-        });
-    }
-
-    /**
-     * タグマスタリスト表示切り替え
-     */
-    function switchTagMasterList() {
-        setIsOpenTagMasterList(!isOpenTagMasterList);
     }
 
     /**
@@ -170,11 +139,9 @@ export function useHomeVideoDetailTagSelect() {
 
             // 入力したタイトルに一致するタグを取得
             const filterdTagList = tagMasterList.filter((e1) => {
-
-                const title = e1.label;
+                const title = e1.tagName;
                 return title.includes(inputKeyword);
             });
-
             return filterdTagList;
         });
     }
@@ -190,18 +157,15 @@ export function useHomeVideoDetailTagSelect() {
 
     return {
         submitFavorite,
-        isLogin,
+        isMobile,
         tagMasterList,
         handleKeyPress,
         clearInput,
-        switchTagMasterList,
-        addTagEditList,
-        deleteTagEditList,
+        toggleTagEditList,
         displayTagMaster,
-        selectedTagList,
-        isOpenTagMasterList,
         inputKeyword,
         setInputKeyword,
-        filterTagMasterList
+        filterTagMasterList,
+        selectedTagList
     }
 }

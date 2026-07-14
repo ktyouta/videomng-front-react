@@ -1,19 +1,51 @@
 import React from "react";
+import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import ButtonComponent from "../../../../components/ButtonComponent";
 import { ClearableTextbox } from "../../../../components/ClearableTextbox";
+import { IconComponent } from "../../../../components/IconComponent";
 import TagButtonComponent from "../../../../components/TagButtonComponent";
-import { tagType } from "../../../../components/TagsComponent";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { FlexSpaceDiv } from "../../../../styles/styledcomponent/FlexSpaceDiv";
 import { useHomeVideoDetailTagSelect } from "../../hooks/videodetail/useHomeVideoDetailTagSelect";
-import { HomeVideoDetailTagSelectAssignedList } from "./HomeVideoDetailTagSelectAssignedList";
-import { HomeVideoDetailTagSelectHeader } from "./HomeVideoDetailTagSelectHeader";
+import { TagMasterType } from "../../types/videodetail/TagMasterType";
 
 
 const Root = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+`;
+
+const HeaderRow = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-left: 1%;
+`;
+
+const CloseIconAreaDiv = styled.div`
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  position: relative;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 const MainArea = styled.div`
@@ -29,13 +61,24 @@ const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding-left: 1%;
-  padding-top: 2%;
   padding-right: 2%;
   color:white;
 `;
 
 const TagMasterAreaDiv = styled.div`
-    margin-bottom: 30px
+    margin-bottom: 16px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        margin-bottom: 30px;
+    }
 `;
 
 const TagMasterListTitleDiv = styled.div`
@@ -43,7 +86,8 @@ const TagMasterListTitleDiv = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
+    margin-bottom: 20px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 17px;
@@ -58,28 +102,48 @@ const TagMasterListTitleDiv = styled.div`
     }
 `;
 
-const OpenTagIconDiv = styled.div`
-  width: 22px;
-  height: 22px;
-`;
-
 const TagMasterListAreaDiv = styled.div`
     width: 97%;
+    max-height: 45vh;
     overflow: auto;
     overflow-x: hidden;
     box-sizing: border-box;
     padding: 2% 1% 1% 0%;
     margin-bottom: 14px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        max-height: 50vh;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        max-height: 50vh;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        max-height: 50vh;
+    }
 `;
 
 const NoTagListTitleDiv = styled.div`
     margin-top: 3%;
     margin-left: 1%;
-    margin-bottom: 30px;
+    margin-bottom: 16px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        margin-bottom: 30px;
+    }
 `;
 
 const TagEditAreaMessageSpan = styled.span`
-    font-size: 12px;
+    font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 15px;
@@ -99,8 +163,12 @@ const FilterInputAreaDiv = styled.div`
   align-items: center;
   box-sizing: border-box;
   margin-right:3%;
-  margin-bottom: 20px;
-  width: 85%;
+  margin-bottom: 22px;
+  width: 100%;
+
+  @media (min-width: ${MEDIA.TABLET}) {
+    margin-bottom: 20px;
+  }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: 85%;
@@ -118,7 +186,7 @@ const FilterInputAreaDiv = styled.div`
 const TitleSpan = styled.span`
   margin-right:7px;
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   white-space: nowrap;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -136,13 +204,17 @@ const TitleSpan = styled.span`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 45px;
+    height: 40px;
     box-sizing: border-box;
     color: white;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 1%;
+
+    @media (min-width: ${MEDIA.TABLET}) {
+        height: 45px;
+    }
 `;
 
 type PropsType = {
@@ -151,105 +223,110 @@ type PropsType = {
 
 export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
 
+    console.log("HomeVideoDetailTagSelect render");
+
     const {
         tagMasterList,
         handleKeyPress,
         clearInput,
-        addTagEditList,
-        deleteTagEditList,
+        toggleTagEditList,
         displayTagMaster,
-        selectedTagList,
-        isOpenTagMasterList,
         inputKeyword,
         setInputKeyword,
         filterTagMasterList,
         submitFavorite,
+        isMobile,
+        selectedTagList,
     } = useHomeVideoDetailTagSelect();
 
     return (
         <Root>
-            {/* タグ選択ヘッダ */}
-            <HomeVideoDetailTagSelectHeader
-                close={closeTagSelectModal}
-            />
+            <HeaderRow>
+                <FlexSpaceDiv />
+                <CloseIconAreaDiv>
+                    <IconComponent
+                        icon={RxCross1}
+                        onclick={closeTagSelectModal}
+                        size="100%"
+                        style={{ color: "white" }}
+                    />
+                </CloseIconAreaDiv>
+            </HeaderRow>
             <MainArea>
-                {/* 選択中のタグ */}
-                <HomeVideoDetailTagSelectAssignedList
-                    selectedTagList={selectedTagList}
-                    deleteTagEditList={deleteTagEditList}
-                />
                 <Parent>
                     <TagMasterAreaDiv>
                         <TagMasterListTitleDiv>
-                            既存タグから設定
+                            タグを選択
                         </TagMasterListTitleDiv>
                         {
-                            isOpenTagMasterList &&
-                            <React.Fragment>
-                                {
-                                    tagMasterList && tagMasterList.length > 0
-                                        ?
-                                        <TagMasterListAreaDiv>
-                                            <FilterInputAreaDiv>
-                                                <TitleSpan>
-                                                    タグ検索：
-                                                </TitleSpan>
-                                                <ClearableTextbox
-                                                    height="99%"
-                                                    textWidth="90%"
-                                                    placeholder=""
-                                                    value={inputKeyword}
-                                                    onChange={setInputKeyword}
-                                                    style={{
-                                                        borderRadius: 6,
-                                                        flex: 1,
-                                                    }}
-                                                    backgroundColor="#ececec"
-                                                    clear={clearInput}
-                                                    onBlur={filterTagMasterList}
-                                                    onKeyDown={handleKeyPress}
-                                                />
-                                            </FilterInputAreaDiv>
-                                            {
-                                                displayTagMaster && displayTagMaster.length > 0
-                                                    ?
-                                                    <React.Fragment>
-                                                        {
-                                                            displayTagMaster.map((e: tagType) => {
+                            tagMasterList && tagMasterList.length > 0
+                                ?
+                                <TagMasterListAreaDiv>
+                                    <FilterInputAreaDiv>
+                                        <TitleSpan>
+                                            タグ検索：
+                                        </TitleSpan>
+                                        <ClearableTextbox
+                                            height={isMobile ? "28px" : "34px"}
+                                            textWidth="90%"
+                                            placeholder=""
+                                            value={inputKeyword}
+                                            onChange={setInputKeyword}
+                                            style={{
+                                                borderRadius: 6,
+                                                flex: 1,
+                                            }}
+                                            textboxStyle={{
+                                                fontSize: "16px",
+                                                height: isMobile ? "28px" : "34px",
+                                            }}
+                                            backgroundColor="#ececec"
+                                            clear={clearInput}
+                                            onBlur={filterTagMasterList}
+                                            onKeyDown={handleKeyPress}
+                                        />
+                                    </FilterInputAreaDiv>
+                                    {
+                                        displayTagMaster && displayTagMaster.length > 0
+                                            ?
+                                            <React.Fragment>
+                                                {
+                                                    displayTagMaster.map((e: TagMasterType) => {
 
-                                                                const tagKey = e.label;
+                                                        const tagId = e.tagId;
+                                                        const isSelected = selectedTagList.has(e.tagId);
 
-                                                                return (
-                                                                    <TagButtonComponent
-                                                                        title={tagKey}
-                                                                        btnStyle={{
-                                                                            marginRight: "15px",
-                                                                            marginBottom: "10px"
-                                                                        }}
-                                                                        onclick={() => {
-                                                                            addTagEditList(e);
-                                                                        }}
-                                                                        key={`${tagKey}-tagmst`}
-                                                                        tagColor={e.tagColor}
-                                                                    />
-                                                                )
-                                                            })
-                                                        }
-                                                    </React.Fragment>
-                                                    :
-                                                    <TagEditAreaMessageSpan>
-                                                        タグが存在しません。
-                                                    </TagEditAreaMessageSpan>
-                                            }
-                                        </TagMasterListAreaDiv>
-                                        :
-                                        <NoTagListTitleDiv>
+                                                        return (
+                                                            <TagButtonComponent
+                                                                title={e.tagName}
+                                                                btnStyle={{
+                                                                    marginRight: isMobile ? "10px" : "15px",
+                                                                    marginBottom: isMobile ? "6px" : "10px",
+                                                                    ...(isMobile ? { padding: "3px 8px", minWidth: "auto" } : {}),
+                                                                    border: `2px solid ${isSelected ? "#ff9f00" : (e.tagColor ?? "transparent")}`,
+                                                                }}
+                                                                onclick={() => {
+                                                                    toggleTagEditList(e);
+                                                                }}
+                                                                key={`${tagId}-tagmst`}
+                                                                tagColor={e.tagColor}
+                                                            />
+                                                        )
+                                                    })
+                                                }
+                                            </React.Fragment>
+                                            :
                                             <TagEditAreaMessageSpan>
-                                                既存タグが存在しません。
+                                                タグが存在しません。
                                             </TagEditAreaMessageSpan>
-                                        </NoTagListTitleDiv>
-                                }
-                            </React.Fragment>
+                                    }
+                                </TagMasterListAreaDiv>
+                                :
+                                <NoTagListTitleDiv>
+                                    <TagEditAreaMessageSpan>
+                                        既存タグが存在しません。
+                                    </TagEditAreaMessageSpan>
+                                </NoTagListTitleDiv>
                         }
                     </TagMasterAreaDiv>
                 </Parent>
@@ -257,6 +334,7 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
             <FooterDiv>
                 <ButtonComponent
                     shape="rounded"
+                    size={isMobile ? "small" : "medium"}
                     onClick={closeTagSelectModal}
                     style={{
                         background: "#3a3d42",
@@ -267,6 +345,7 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
                 </ButtonComponent>
                 <ButtonComponent
                     shape="rounded"
+                    size={isMobile ? "small" : "medium"}
                     onClick={submitFavorite}
                     style={{
                         marginLeft: "5%",

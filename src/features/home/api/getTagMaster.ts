@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { tagType } from "../../../components/TagsComponent";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
 import { api } from "../../../lib/apiClient";
@@ -8,7 +7,7 @@ import { videoKeys } from "./queryKey";
 
 type PropsType = {
     enabled: boolean;
-    select: (data: { data: TagMasterType[] }) => tagType[]
+    select: (data: { data: TagMasterType[] }) => TagMasterType[]
 }
 
 export function getTagMaster(props: PropsType) {
