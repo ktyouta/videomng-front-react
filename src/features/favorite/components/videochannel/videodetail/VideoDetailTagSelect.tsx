@@ -131,7 +131,7 @@ const TagMasterListTitleDiv = styled.div`
 `;
 
 const TagMasterListAreaDiv = styled.div`
-    width: 97%;
+    width: 100%;
     overflow: auto;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -294,7 +294,7 @@ export function VideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
                                 {
                                     tagMasterList && tagMasterList.length > 0
                                         ?
-                                        <TagMasterListAreaDiv>
+                                        <React.Fragment>
                                             <FilterInputAreaDiv>
                                                 <TitleSpan>
                                                     タグ検索：
@@ -315,38 +315,40 @@ export function VideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
                                                     onKeyDown={handleKeyPress}
                                                 />
                                             </FilterInputAreaDiv>
-                                            {
-                                                displayTagMaster && displayTagMaster.length > 0
-                                                    ?
-                                                    <React.Fragment>
-                                                        {
-                                                            displayTagMaster.map((e: tagType) => {
+                                            <TagMasterListAreaDiv>
+                                                {
+                                                    displayTagMaster && displayTagMaster.length > 0
+                                                        ?
+                                                        <React.Fragment>
+                                                            {
+                                                                displayTagMaster.map((e: tagType) => {
 
-                                                                const tagKey = e.label;
+                                                                    const tagKey = e.label;
 
-                                                                return (
-                                                                    <TagButtonComponent
-                                                                        title={tagKey}
-                                                                        btnStyle={{
-                                                                            marginRight: "15px",
-                                                                            marginBottom: "10px"
-                                                                        }}
-                                                                        onclick={() => {
-                                                                            addTagEditList(e);
-                                                                        }}
-                                                                        key={`${tagKey}-tagmst`}
-                                                                        tagColor={e.tagColor}
-                                                                    />
-                                                                )
-                                                            })
-                                                        }
-                                                    </React.Fragment>
-                                                    :
-                                                    <TagEditAreaMessageSpan>
-                                                        タグが存在しません。
-                                                    </TagEditAreaMessageSpan>
-                                            }
-                                        </TagMasterListAreaDiv>
+                                                                    return (
+                                                                        <TagButtonComponent
+                                                                            title={tagKey}
+                                                                            btnStyle={{
+                                                                                marginRight: "15px",
+                                                                                marginBottom: "10px"
+                                                                            }}
+                                                                            onclick={() => {
+                                                                                addTagEditList(e);
+                                                                            }}
+                                                                            key={`${tagKey}-tagmst`}
+                                                                            tagColor={e.tagColor}
+                                                                        />
+                                                                    )
+                                                                })
+                                                            }
+                                                        </React.Fragment>
+                                                        :
+                                                        <TagEditAreaMessageSpan>
+                                                            タグが存在しません。
+                                                        </TagEditAreaMessageSpan>
+                                                }
+                                            </TagMasterListAreaDiv>
+                                        </React.Fragment>
                                         :
                                         <NoTagListTitleDiv>
                                             <TagEditAreaMessageSpan>

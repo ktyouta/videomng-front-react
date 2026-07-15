@@ -12,26 +12,34 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
 `;
 
 const MainArea = styled.div`
   flex: 1;
-  overflow: auto;
-  overflow-x: hidden;
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 `;
 
 const Parent = styled.div`
   flex:1;
+  min-height: 0;
   width: 100%;
   box-sizing: border-box;
   padding-left: 1%;
   padding-right: 2%;
   color:white;
+  display: flex;
+  flex-direction: column;
 `;
 
 const TagMasterAreaDiv = styled.div`
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 16px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -69,25 +77,14 @@ const TagMasterListTitleDiv = styled.div`
 `;
 
 const TagMasterListAreaDiv = styled.div`
-    width: 97%;
-    max-height: 45vh;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
     overflow: auto;
     overflow-x: hidden;
     box-sizing: border-box;
     padding: 2% 1% 1% 0%;
     margin-bottom: 14px;
-
-    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        max-height: 50vh;
-    }
-
-    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        max-height: 50vh;
-    }
-
-    @media (min-width: ${MEDIA.PC}) {
-        max-height: 50vh;
-    }
 `;
 
 const NoTagListTitleDiv = styled.div`
@@ -216,7 +213,7 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
                         {
                             tagMasterList && tagMasterList.length > 0
                                 ?
-                                <TagMasterListAreaDiv>
+                                <React.Fragment>
                                     <FilterInputAreaDiv>
                                         <TitleSpan>
                                             タグ検索：
@@ -241,41 +238,43 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
                                             onKeyDown={handleKeyPress}
                                         />
                                     </FilterInputAreaDiv>
-                                    {
-                                        displayTagMaster && displayTagMaster.length > 0
-                                            ?
-                                            <React.Fragment>
-                                                {
-                                                    displayTagMaster.map((e: TagMasterType) => {
+                                    <TagMasterListAreaDiv>
+                                        {
+                                            displayTagMaster && displayTagMaster.length > 0
+                                                ?
+                                                <React.Fragment>
+                                                    {
+                                                        displayTagMaster.map((e: TagMasterType) => {
 
-                                                        const tagId = e.tagId;
-                                                        const isSelected = selectedTagList.has(e.tagId);
+                                                            const tagId = e.tagId;
+                                                            const isSelected = selectedTagList.has(e.tagId);
 
-                                                        return (
-                                                            <TagButtonComponent
-                                                                title={e.tagName}
-                                                                btnStyle={{
-                                                                    marginRight: isMobile ? "10px" : "15px",
-                                                                    marginBottom: isMobile ? "6px" : "10px",
-                                                                    ...(isMobile ? { padding: "3px 8px", minWidth: "auto" } : {}),
-                                                                    border: `2px solid ${isSelected ? "#ff9f00" : (e.tagColor ?? "transparent")}`,
-                                                                }}
-                                                                onclick={() => {
-                                                                    toggleTagEditList(e);
-                                                                }}
-                                                                key={`${tagId}-tagmst`}
-                                                                tagColor={e.tagColor}
-                                                            />
-                                                        )
-                                                    })
-                                                }
-                                            </React.Fragment>
-                                            :
-                                            <TagEditAreaMessageSpan>
-                                                タグが存在しません。
-                                            </TagEditAreaMessageSpan>
-                                    }
-                                </TagMasterListAreaDiv>
+                                                            return (
+                                                                <TagButtonComponent
+                                                                    title={e.tagName}
+                                                                    btnStyle={{
+                                                                        marginRight: isMobile ? "10px" : "15px",
+                                                                        marginBottom: isMobile ? "6px" : "10px",
+                                                                        ...(isMobile ? { padding: "3px 8px", minWidth: "auto" } : {}),
+                                                                        border: `2px solid ${isSelected ? "#ff9f00" : (e.tagColor ?? "transparent")}`,
+                                                                    }}
+                                                                    onclick={() => {
+                                                                        toggleTagEditList(e);
+                                                                    }}
+                                                                    key={`${tagId}-tagmst`}
+                                                                    tagColor={e.tagColor}
+                                                                />
+                                                            )
+                                                        })
+                                                    }
+                                                </React.Fragment>
+                                                :
+                                                <TagEditAreaMessageSpan>
+                                                    タグが存在しません。
+                                                </TagEditAreaMessageSpan>
+                                        }
+                                    </TagMasterListAreaDiv>
+                                </React.Fragment>
                                 :
                                 <NoTagListTitleDiv>
                                     <TagEditAreaMessageSpan>
