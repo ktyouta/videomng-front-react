@@ -1,19 +1,9 @@
-import React from "react";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { RxCross1 } from 'react-icons/rx';
 import styled from "styled-components";
-import { FavoriteVideoMemoType } from "../../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { FavoriteMemoContent } from "../../videomemo/FavoriteMemoContent";
-import BaseTextbox from "../../../../../../components/BaseTextbox";
-import { FaArrowUp } from "react-icons/fa";
-import { FavoriteMemoCreateInput } from "../../videomemo/FavoriteMemoCreateInput";
-import { FavoriteMemoHeader } from "../../videomemo/FavoriteMemoHeader";
-import { FavoriteMemoList } from "../../videomemo/FavoriteMemoList";
-import { FavoriteCommentHeader } from "../FavoriteCommentHeader";
-import { FavoriteCommentList } from "../FavoriteCommentList";
-import { FavoriteBlockCommentList } from "./FavoriteBlockCommentList";
-import { FavoriteBlockCommentHeader } from "./FavoriteBlockCommentHeader";
+import Loading from "../../../../../../components/Loading";
 import { MEDIA } from "../../../../../../consts/MediaConst";
+import { useFavoriteBlockCommentList } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentList";
+import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
+import { FavoriteBlockCommentContent } from "./FavoriteBlockCommentContent";
 
 
 const Parent = styled.div`
@@ -35,16 +25,98 @@ const Parent = styled.div`
   }
 `;
 
+const HeaderDiv = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-left: 1%;
+  height:4%;
+`;
+
+const HeaderTitleSpan = styled.div`
+`;
+
+const CommentListDiv = styled.div`
+  width: 100%;
+  height: 96%;
+  box-sizing: border-box;
+  padding-left: 2%;
+  color:white;
+  padding-top: 2%;
+`;
+
+const CommentLoadingDiv = styled(CommentListDiv)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const CommentListAreaDiv = styled.div`
+  width: 97%;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding-left: 1%;
+  padding-right: 1%;
+`;
+
 export function FavoriteBlockComment() {
 
   console.log("FavoriteBlockComment render");
 
+  const {
+    isLoading,
+    errMessage,
+    blockCommentData, } = useFavoriteBlockCommentList();
+
   return (
     <Parent>
       {/* ブロックコメントヘッダ */}
-      <FavoriteBlockCommentHeader />
+      <HeaderDiv>
+        <HeaderTitleSpan>
+          非表示コメント
+        </HeaderTitleSpan>
+      </HeaderDiv>
       {/* ブロックコメントリスト */}
-      <FavoriteBlockCommentList />
+      {
+        isLoading
+          ?
+          <CommentLoadingDiv>
+            <Loading />
+          </CommentLoadingDiv>
+          :
+          errMessage
+            ?
+            <CommentListDiv>
+              {errMessage}
+            </CommentListDiv>
+            :
+            <CommentListDiv>
+              {
+                blockCommentData && blockCommentData.items.length > 0 ?
+                  <CommentListAreaDiv>
+                    {
+                      blockCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
+
+                        const commentId = e.id;
+
+                        return (
+                          <FavoriteBlockCommentContent
+                            commentDetailItem={e}
+                            key={commentId}
+                          />
+                        )
+                      })
+                    }
+                  </CommentListAreaDiv>
+                  :
+                  `コメントが存在しません。`
+              }
+            </CommentListDiv>
+      }
     </Parent>
   );
 }

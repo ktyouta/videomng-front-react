@@ -6,8 +6,6 @@ import TagButtonComponent from "../../../../../components/TagButtonComponent";
 import { tagType } from "../../../../../components/TagsComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { useVideoDetailTagSelect } from "../../../hooks/videochannel/videodetail/useVideoDetailTagSelect";
-import { VideoDetailTagSelectAssignedList } from "./VideoDetailTagSelectAssignedList";
-import { VideoDetailTagSelectHeader } from "./VideoDetailTagSelectHeader";
 
 
 const Root = styled.div`
@@ -16,12 +14,86 @@ const Root = styled.div`
   flex: 1;
 `;
 
+const HeaderDiv = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-left: 1%;
+  margin-bottom: 2%;
+`;
+
+const HeaderTitleSpan = styled.div`
+  font-weight: bold;
+`;
+
 const MainArea = styled.div`
   flex: 1;
   overflow: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+`;
+
+const AssignedListDiv = styled.div`
+    width: 100%;
+    box-sizing: border-box;
+    color: white;
+`;
+
+const TagEditAreaDiv = styled.div`
+    border-bottom: 1px solid;
+    margin-bottom: 15px;
+`;
+
+const TagListTitleDiv = styled.div`
+    box-sizing: border-box;
+    padding-left: 1%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 17px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 17px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 17px;
+    }
+`;
+
+const TagListAreaDiv = styled.div`
+    flex: 1;
+    overflow: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 2% 1% 1% 1%;
+`;
+
+const AssignedNoTagListTitleDiv = styled.div`
+    flex: 1;
+    margin-top: 2%;
+    margin-left: 1%;
+    margin-bottom: 30px;
+    font-size: 12px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+        font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+        font-size: 15px;
+    }
 `;
 
 const Parent = styled.div`
@@ -164,13 +236,53 @@ export function VideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
     return (
         <Root>
             {/* タグ選択ヘッダ */}
-            <VideoDetailTagSelectHeader />
+            <HeaderDiv>
+                <HeaderTitleSpan>
+                    タグを設定
+                </HeaderTitleSpan>
+            </HeaderDiv>
             <MainArea>
                 {/* 選択中のタグ */}
-                <VideoDetailTagSelectAssignedList
-                    selectedTagList={selectedTagList}
-                    deleteTagEditList={deleteTagEditList}
-                />
+                <AssignedListDiv>
+                    <TagEditAreaDiv>
+                        <TagListTitleDiv>
+                            選択中のタグ
+                        </TagListTitleDiv>
+                        {
+                            selectedTagList.length > 0
+                                ?
+                                <TagListAreaDiv>
+                                    {
+                                        selectedTagList.map((e: tagType, index: number) => {
+
+                                            const tagKey = e.label;
+
+                                            return (
+                                                <TagButtonComponent
+                                                    title={e.label}
+                                                    btnStyle={{
+                                                        marginRight: "15px",
+                                                        marginBottom: "10px"
+                                                    }}
+                                                    isDispCross={true}
+                                                    onclick={() => {
+                                                        deleteTagEditList(index);
+                                                    }}
+                                                    key={`${tagKey}-tagselect`}
+                                                    tagColor={e.tagColor}
+                                                />
+                                            )
+                                        })
+                                    }
+                                </TagListAreaDiv>
+                                :
+                                <AssignedNoTagListTitleDiv>
+                                    まだタグを選択していません。<br />
+                                    「既存タグから設定」でタグを選択できます。
+                                </AssignedNoTagListTitleDiv>
+                        }
+                    </TagEditAreaDiv>
+                </AssignedListDiv>
                 <Parent>
                     <TagMasterAreaDiv>
                         <TagMasterListTitleDiv>
