@@ -1,7 +1,4 @@
-import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
 
 
 const Parent = styled.div`
@@ -14,20 +11,10 @@ const Parent = styled.div`
   margin-bottom: 2%;
 `;
 
-const BlockIconDiv = styled.div`
-  width: 4%;
-  box-sizing: border-box;
-  position:relative;
-`;
-
 const TitleSpan = styled.div`
 `;
 
-type propsType = {
-    close: () => void;
-}
-
-export function FavoriteAddTagHeader(props: propsType) {
+export function FavoriteAddTagHeader() {
 
     console.log("FavoriteAddTagHeader render");
 
@@ -36,15 +23,6 @@ export function FavoriteAddTagHeader(props: propsType) {
             <TitleSpan>
                 タグを追加
             </TitleSpan>
-            <FlexSpaceDiv />
-            <BlockIconDiv>
-                <IconComponent
-                    icon={RxCross1}
-                    onclick={props.close}
-                    size="90%"
-                    style={{ color: "white" }}
-                />
-            </BlockIconDiv>
         </Parent>
     );
 }

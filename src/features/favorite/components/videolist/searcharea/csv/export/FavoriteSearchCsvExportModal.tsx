@@ -79,6 +79,7 @@ export function FavoriteSearchCsvExportModal() {
                     flexDirection: "column"
                 }}
                 modalMinHeight="405px"
+                close={closeModal}
             >
                 <FavoriteSearchCsvExport
                     close={closeModal}

@@ -22,19 +22,13 @@ const Parent = styled.div`
   }
 `;
 
-type propsType = {
-  close: () => void;
-}
-
-export function HeaderHowToUse(props: propsType) {
+export function HeaderHowToUse() {
 
   console.log("HeaderHowToUse render");
 
   return (
     <Parent>
-      <HeaderHowToUseHeader
-        close={props.close}
-      />
+      <HeaderHowToUseHeader />
       <HeaderHowToUseMain />
     </Parent>
   );

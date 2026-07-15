@@ -15,9 +15,7 @@ export function FavoriteSearchCsvImport(props: propsType) {
   return (
     <React.Fragment>
       {/* ヘッダー */}
-      <FavoriteSearchCsvImportHeader
-        close={props.close}
-      />
+      <FavoriteSearchCsvImportHeader />
       {/* 説明文 */}
       <FavoriteSearchCsvImportMain />
       {/* フッター */}

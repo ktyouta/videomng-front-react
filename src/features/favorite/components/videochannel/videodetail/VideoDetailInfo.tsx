@@ -186,6 +186,7 @@ export function VideoDetailInfo(props: propsType) {
                     flexDirection: "column"
                 }}
                 modalMinHeight="405px"
+                close={closeTagSelectModal}
             >
                 <VideoDetailTagSelect
                     closeTagSelectModal={closeTagSelectModal}

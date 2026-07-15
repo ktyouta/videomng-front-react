@@ -37,9 +37,7 @@ export function FavoriteSearchCondition(props: propsType) {
   return (
     <Parent>
       {/* 検索条件指定ヘッダ */}
-      <FavoriteSearchConditionHeader
-        close={props.close}
-      />
+      <FavoriteSearchConditionHeader />
       {/* 検索条件指定コンテンツ */}
       <FavoriteSearchConditionMain
         close={props.close}

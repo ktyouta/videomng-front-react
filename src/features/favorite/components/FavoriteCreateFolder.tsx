@@ -1,12 +1,10 @@
 import { FaFolder } from 'react-icons/fa';
-import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import BaseTextbox from "../../../components/BaseTextbox";
 import ButtonComponent from "../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../components/IconComponent";
 import { MEDIA } from '../../../consts/MediaConst';
-import { FlexSpaceDiv } from "../../../styles/styledcomponent/FlexSpaceDiv";
 import { DEFAULT_FOLDER_COLOR } from "../const/FavoriteConst";
 
 const Parent = styled.div`
@@ -26,12 +24,6 @@ const Parent = styled.div`
   @media (min-width: ${MEDIA.PC}) {
     font-size: 16px;
   }
-`;
-
-const BlockIconDiv = styled.div`
-  width: 4%;
-  box-sizing: border-box;
-  position:relative;
 `;
 
 const TitleSpan = styled.div`
@@ -139,15 +131,6 @@ export function FavoriteCreateFolder(props: propsType) {
         <TitleSpan>
           フォルダ作成
         </TitleSpan>
-        <FlexSpaceDiv />
-        <BlockIconDiv>
-          <IconComponent
-            icon={RxCross1}
-            onclick={props.close}
-            size="90%"
-            style={{ color: "white" }}
-          />
-        </BlockIconDiv>
       </Header>
       <MessageArea>
         フォルダ名を入力して「作成」ボタンを押すと、新しいフォルダを作成できます。<br />

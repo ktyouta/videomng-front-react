@@ -1,8 +1,11 @@
 import React, { CSSProperties, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
+import { MEDIA } from "../consts/MediaConst";
 import "../styles/css/ModalPortal.css";
+import { IconComponent } from "./IconComponent";
 
 
 type basePropsType = {
@@ -13,6 +16,8 @@ type basePropsType = {
     isOpen: boolean,
     modalMinHeight?: string,
     modalWidth?: string,
+    close?: () => void,
+    hideCloseButton?: boolean,
 }
 
 type CloseableProps = {
@@ -46,6 +51,31 @@ const ModalContainer = styled.div<{ modalMinHeight?: string, modalWidth?: string
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+`;
+
+const CloseIconAreaDiv = styled.div`
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  z-index: 1;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 export function ModalPortal(props: CloseableProps | NonCloseableProps) {
@@ -91,6 +121,17 @@ export function ModalPortal(props: CloseableProps | NonCloseableProps) {
                             modalWidth={props.modalWidth}
                             onClick={(e) => e.stopPropagation()}
                         >
+                            {
+                                props.close && !props.hideCloseButton &&
+                                <CloseIconAreaDiv>
+                                    <IconComponent
+                                        icon={RxCross1}
+                                        onclick={props.close}
+                                        size="100%"
+                                        style={{ color: "white" }}
+                                    />
+                                </CloseIconAreaDiv>
+                            }
                             {props.children}
                         </ModalContainer>
                     </Overlay>,

@@ -36,9 +36,7 @@ export function FavoriteUpdateFolder(props: propsType) {
   return (
     <Parent>
       {/* ヘッダ */}
-      <FavoriteUpdateFolderHeader
-        close={props.close}
-      />
+      <FavoriteUpdateFolderHeader />
       {/* コンテンツ */}
       <FavoriteUpdateFolderMain
         folder={props.folder}

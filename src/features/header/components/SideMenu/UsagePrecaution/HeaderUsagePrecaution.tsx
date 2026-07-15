@@ -24,19 +24,13 @@ const Parent = styled.div`
   }
 `;
 
-type propsType = {
-  close: () => void;
-}
-
-export function HeaderUsagePrecaution(props: propsType) {
+export function HeaderUsagePrecaution() {
 
   console.log("HeaderUsagePrecaution render");
 
   return (
     <Parent>
-      <HeaderUsagePrecautionHeader
-        close={props.close}
-      />
+      <HeaderUsagePrecautionHeader />
       <HeaderUsagePrecautionMain />
     </Parent>
   );

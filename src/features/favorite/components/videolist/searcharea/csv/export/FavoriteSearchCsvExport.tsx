@@ -18,9 +18,7 @@ export function FavoriteSearchCsvExport(props: propsType) {
   return (
     <React.Fragment>
       {/* ヘッダー */}
-      <FavoriteSearchCsvExportHeader
-        close={props.close}
-      />
+      <FavoriteSearchCsvExportHeader />
       <FavoriteSearchCsvExportMain
         close={props.close}
       />

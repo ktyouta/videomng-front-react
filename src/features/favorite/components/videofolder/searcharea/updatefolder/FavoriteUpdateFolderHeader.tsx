@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { RxCross1 } from "react-icons/rx";
-import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
-import { IconComponent } from "../../../../../../components/IconComponent";
 
 
 const Parent = styled.div`
@@ -14,20 +11,10 @@ const Parent = styled.div`
   margin-bottom:6%;
 `;
 
-const BlockIconDiv = styled.div`
-  width: 4%;
-  box-sizing: border-box;
-  position:relative;
-`;
-
 const TitleSpan = styled.div`
 `;
 
-type propsType = {
-    close: () => void;
-}
-
-export function FavoriteUpdateFolderHeader(props: propsType) {
+export function FavoriteUpdateFolderHeader() {
 
     console.log("FavoriteUpdateFolderHeader render");
 
@@ -36,15 +23,6 @@ export function FavoriteUpdateFolderHeader(props: propsType) {
             <TitleSpan>
                 フォルダ名変更
             </TitleSpan>
-            <FlexSpaceDiv />
-            <BlockIconDiv>
-                <IconComponent
-                    icon={RxCross1}
-                    onclick={props.close}
-                    size="90%"
-                    style={{ color: "white" }}
-                />
-            </BlockIconDiv>
         </Parent>
     );
 }

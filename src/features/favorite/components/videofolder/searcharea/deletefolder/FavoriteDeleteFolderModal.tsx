@@ -76,6 +76,7 @@ export function FavoriteDeleteFolderModal(props: PropsType) {
                 modalMinHeight="25%"
                 isCloseOuter={true}
                 close={closeModal}
+                hideCloseButton={true}
                 containerStyle={{
                     backgroundColor: "#e0e0e0",
                     borderRadius: "20px",

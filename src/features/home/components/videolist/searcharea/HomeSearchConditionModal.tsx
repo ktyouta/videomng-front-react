@@ -65,9 +65,7 @@ export function HomeSearchConditionModal() {
                 isCloseOuter={true}
                 close={closeFilterModal}
             >
-                <HomeSearchCondition
-                    close={closeFilterModal}
-                />
+                <HomeSearchCondition />
             </ModalPortal>
         </React.Fragment>
     );

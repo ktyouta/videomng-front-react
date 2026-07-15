@@ -87,9 +87,7 @@ export function FavoriteFavoriteCommentModalIcon() {
                 isCloseOuter={true}
                 close={closeFavoriteListModal}
             >
-                <FavoriteFavoriteComment
-                    close={closeFavoriteListModal}
-                />
+                <FavoriteFavoriteComment />
             </ModalPortal>
         </React.Fragment>
     );

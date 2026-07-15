@@ -34,9 +34,7 @@ export function FavoriteVideoFolderSearchCondition(props: propsType) {
   return (
     <Parent>
       {/* 検索条件指定ヘッダ */}
-      <FavoriteVideoFolderSearchConditionHeader
-        close={props.close}
-      />
+      <FavoriteVideoFolderSearchConditionHeader />
       {/* 検索条件指定コンテンツ */}
       <FavoriteVideoFolderSearchConditionMain
         close={props.close}

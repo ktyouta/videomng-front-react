@@ -21,9 +21,7 @@ export function HeaderHowToUseModal(props: propsType) {
             isCloseOuter={true}
             close={props.closeMenu}
         >
-            <HeaderHowToUse
-                close={props.closeMenu}
-            />
+            <HeaderHowToUse />
         </ModalPortal>
     );
 }

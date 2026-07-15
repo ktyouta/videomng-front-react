@@ -36,9 +36,7 @@ export function FavoriteAddTag(props: propsType) {
   return (
     <Parent>
       {/* タグ追加ヘッダ */}
-      <FavoriteAddTagHeader
-        close={props.close}
-      />
+      <FavoriteAddTagHeader />
       {/* タグ追加コンテンツ */}
       <FavoriteAddTagMain
         close={props.close}

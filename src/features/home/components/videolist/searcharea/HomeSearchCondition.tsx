@@ -12,20 +12,14 @@ const Parent = styled.div`
   height:100%;
 `;
 
-type propsType = {
-    close: () => void;
-}
-
-export function HomeSearchCondition(props: propsType) {
+export function HomeSearchCondition() {
 
     console.log("HomeSearchCondition render");
 
     return (
         <Parent>
             {/* 検索条件指定ヘッダ */}
-            <HomeSearchConditionHeader
-                close={props.close}
-            />
+            <HomeSearchConditionHeader />
             {/* 検索条件指定コンテンツ */}
             <HomeSearchConditionMain />
         </Parent>

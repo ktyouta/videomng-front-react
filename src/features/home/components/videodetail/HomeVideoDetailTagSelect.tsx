@@ -1,12 +1,9 @@
 import React from "react";
-import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import ButtonComponent from "../../../../components/ButtonComponent";
 import { ClearableTextbox } from "../../../../components/ClearableTextbox";
-import { IconComponent } from "../../../../components/IconComponent";
 import TagButtonComponent from "../../../../components/TagButtonComponent";
 import { MEDIA } from "../../../../consts/MediaConst";
-import { FlexSpaceDiv } from "../../../../styles/styledcomponent/FlexSpaceDiv";
 import { useHomeVideoDetailTagSelect } from "../../hooks/videodetail/useHomeVideoDetailTagSelect";
 import { TagMasterType } from "../../types/videodetail/TagMasterType";
 
@@ -15,37 +12,6 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-`;
-
-const HeaderRow = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-`;
-
-const CloseIconAreaDiv = styled.div`
-  width: 15px;
-  height: 15px;
-  box-sizing: border-box;
-  position: relative;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    width: 22px;
-    height: 22px;
-  }
 `;
 
 const MainArea = styled.div`
@@ -241,17 +207,6 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
 
     return (
         <Root>
-            <HeaderRow>
-                <FlexSpaceDiv />
-                <CloseIconAreaDiv>
-                    <IconComponent
-                        icon={RxCross1}
-                        onclick={closeTagSelectModal}
-                        size="100%"
-                        style={{ color: "white" }}
-                    />
-                </CloseIconAreaDiv>
-            </HeaderRow>
             <MainArea>
                 <Parent>
                     <TagMasterAreaDiv>

@@ -164,9 +164,7 @@ export function VideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
     return (
         <Root>
             {/* タグ選択ヘッダ */}
-            <VideoDetailTagSelectHeader
-                close={closeTagSelectModal}
-            />
+            <VideoDetailTagSelectHeader />
             <MainArea>
                 {/* 選択中のタグ */}
                 <VideoDetailTagSelectAssignedList

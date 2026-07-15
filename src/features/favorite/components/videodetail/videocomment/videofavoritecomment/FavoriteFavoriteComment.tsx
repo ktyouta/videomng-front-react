@@ -23,20 +23,14 @@ const Parent = styled.div`
   }
 `;
 
-type propsType = {
-  close: () => void;
-}
-
-export function FavoriteFavoriteComment(props: propsType) {
+export function FavoriteFavoriteComment() {
 
   console.log("FavoriteFavoriteComment render");
 
   return (
     <Parent>
       {/* お気に入りコメントヘッダ */}
-      <FavoriteFavoriteCommentHeader
-        close={props.close}
-      />
+      <FavoriteFavoriteCommentHeader />
       {/* お気に入りコメントリスト */}
       <FavoriteFavoriteCommentList />
     </Parent>

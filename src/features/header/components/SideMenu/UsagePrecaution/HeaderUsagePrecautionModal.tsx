@@ -21,9 +21,7 @@ export function HeaderUsagePrecautionModal(props: propsType) {
             isCloseOuter={true}
             close={props.closeMenu}
         >
-            <HeaderUsagePrecaution
-                close={props.closeMenu}
-            />
+            <HeaderUsagePrecaution />
         </ModalPortal>
     );
 }

@@ -1,7 +1,4 @@
-import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 
 
 const Parent = styled.div`
@@ -14,36 +11,17 @@ const Parent = styled.div`
   margin-bottom: 2%;
 `;
 
-const BlockIconDiv = styled.div`
-  width: 4%;
-  box-sizing: border-box;
-  position: relative;
-`;
-
 const TitleSpan = styled.div`
   font-weight: bold;
 `;
 
-type propsType = {
-    close: () => void;
-}
-
-export function VideoDetailTagSelectHeader(props: propsType) {
+export function VideoDetailTagSelectHeader() {
 
     return (
         <Parent>
             <TitleSpan>
                 タグを設定
             </TitleSpan>
-            <FlexSpaceDiv />
-            <BlockIconDiv>
-                <IconComponent
-                    icon={RxCross1}
-                    onclick={props.close}
-                    size="90%"
-                    style={{ color: "white" }}
-                />
-            </BlockIconDiv>
         </Parent>
     );
 }

@@ -80,6 +80,7 @@ export function FavoriteSearchCsvImportModal() {
                     flexDirection: "column"
                 }}
                 modalMinHeight=""
+                close={closeModal}
             >
                 <FavoriteSearchCsvImport
                     close={closeModal}
