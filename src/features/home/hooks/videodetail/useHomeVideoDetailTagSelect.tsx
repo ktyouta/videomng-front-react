@@ -8,6 +8,7 @@ import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
+import { getFolderMaster } from "../../api/getFolderMaster";
 import { getTagMaster } from "../../api/getTagMaster";
 import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
 import { TagMasterType } from "../../types/videodetail/TagMasterType";
@@ -23,8 +24,8 @@ export function useHomeVideoDetailTagSelect() {
     // タグマスタ
     const { data: tagMasterList } = getTagMaster({
         enabled: isLogin,
-        select: (data) => {
-            const tagMasterList = data.data;
+        select: (res) => {
+            const tagMasterList = res.data;
             setDisplayTagMaster(tagMasterList);
             return tagMasterList;
         }
@@ -37,7 +38,15 @@ export function useHomeVideoDetailTagSelect() {
     const [inputKeyword, setInputKeyword] = useState(``);
     // 選択中のタグ
     const [selectedTagList, setSelectedTagList] = useState(new Map<number, TagMasterType>());
-
+    // フォルダマスタ
+    const { data: folderList } = getFolderMaster({
+        enabled: isLogin,
+        select: (res) => {
+            return res.data;
+        }
+    });
+    // 選択中のフォルダ
+    const [selectedFolder, setSelectedFolder] = useState<number>();
 
     /**
      * お気に入り登録リクエスト
@@ -81,6 +90,7 @@ export function useHomeVideoDetailTagSelect() {
         const body: AddToFavoriteRequestType = {
             videoId,
             tagList: [...selectedTagList.values()].map((e) => e.tagId),
+            folderId: selectedFolder
         }
 
         // リクエスト送信
@@ -155,6 +165,14 @@ export function useHomeVideoDetailTagSelect() {
         }
     };
 
+    /**
+     * フォルダを選択
+     * @param id 
+     */
+    function selectFolder(id: number) {
+        setSelectedFolder(id);
+    }
+
     return {
         submitFavorite,
         isMobile,
@@ -166,6 +184,9 @@ export function useHomeVideoDetailTagSelect() {
         inputKeyword,
         setInputKeyword,
         filterTagMasterList,
-        selectedTagList
+        selectedTagList,
+        folderList,
+        selectedFolder,
+        selectFolder,
     }
 }

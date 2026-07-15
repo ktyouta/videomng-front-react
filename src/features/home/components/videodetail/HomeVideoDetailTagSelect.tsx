@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import ButtonComponent from "../../../../components/ButtonComponent";
 import { ClearableTextbox } from "../../../../components/ClearableTextbox";
+import { Selectbox } from "../../../../components/Selectbox";
 import TagButtonComponent from "../../../../components/TagButtonComponent";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { useHomeVideoDetailTagSelect } from "../../hooks/videodetail/useHomeVideoDetailTagSelect";
@@ -61,7 +62,7 @@ const TagMasterListTitleDiv = styled.div`
     display: flex;
     align-items: center;
     font-size: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 17px;
@@ -119,6 +120,18 @@ const TagEditAreaMessageSpan = styled.span`
     @media (min-width: ${MEDIA.PC}) {
         font-size: 15px;
     }
+`;
+
+const FolderAreaDiv = styled.div`
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-right:3%;
+  margin-bottom: 22px;
+
+  @media (min-width: ${MEDIA.TABLET}) {
+    margin-bottom: 20px;
+  }
 `;
 
 const FilterInputAreaDiv = styled.div`
@@ -200,7 +213,19 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
         submitFavorite,
         isMobile,
         selectedTagList,
+        folderList,
+        selectedFolder,
+        selectFolder,
     } = useHomeVideoDetailTagSelect();
+
+    const folderOptions = useMemo(() => {
+        return (folderList ?? []).map((folder) => {
+            return {
+                value: String(folder.id),
+                label: folder.name,
+            };
+        });
+    }, [folderList]);
 
     return (
         <Root>
@@ -208,8 +233,25 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
                 <Parent>
                     <TagMasterAreaDiv>
                         <TagMasterListTitleDiv>
-                            タグを選択
+                            お気に入り登録設定
                         </TagMasterListTitleDiv>
+                        <FolderAreaDiv>
+                            <TitleSpan>
+                                フォルダ：
+                            </TitleSpan>
+                            <Selectbox
+                                options={folderOptions}
+                                value={selectedFolder !== undefined ? String(selectedFolder) : ""}
+                                onChange={(value) => {
+                                    selectFolder(Number(value));
+                                }}
+                                placeholder="未選択"
+                                width={isMobile ? "55%" : "237px"}
+                                height={isMobile ? "28px" : "39px"}
+                                backgroundColor="rgb(24, 26, 30)"
+                                color="white"
+                            />
+                        </FolderAreaDiv>
                         {
                             tagMasterList && tagMasterList.length > 0
                                 ?

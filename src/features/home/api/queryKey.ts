@@ -7,6 +7,10 @@ type ChannelVideoType = {
     nextPageToken: string;
 }
 
+type FolderListType = {
+    parentFolderId?: string;
+}
+
 export const videoKeys = {
     all: [`video`] as const,
     lists: () => [...videoKeys.all, `list`] as const,
@@ -16,4 +20,6 @@ export const videoKeys = {
     channels: () => [...videoKeys.all, `channel`] as const,
     channel: (props: ChannelVideoType) => [...videoKeys.channels(), props] as const,
     tagMasters: () => [...videoKeys.all, `tagMaster`] as const,
+    folderLists: () => [...videoKeys.all, `folderList`] as const,
+    folderList: (props: FolderListType) => [...videoKeys.folderLists(), props] as const,
 }
