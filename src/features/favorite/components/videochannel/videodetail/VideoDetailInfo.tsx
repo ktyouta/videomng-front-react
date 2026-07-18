@@ -179,13 +179,14 @@ export function VideoDetailInfo(props: propsType) {
             </VideoMetaDiv>
             <ModalPortal
                 isOpen={isOpenTagSelectModal}
-                modalWidth={isMobile ? `80%` : `45%`}
+                modalWidth={isMobile ? `93%` : `45%`}
                 containerStyle={{
                     fontSize: isMobile ? "12px" : "15px",
                     display: "flex",
                     flexDirection: "column"
                 }}
-                modalMinHeight="405px"
+                modalMinHeight={isMobile ? "70vh" : "405px"}
+                isCloseOuter={true}
                 close={closeTagSelectModal}
             >
                 <VideoDetailTagSelect

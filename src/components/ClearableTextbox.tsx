@@ -81,7 +81,6 @@ export function ClearableTextbox(props: propsType) {
             {
                 props.value && props.value.length > 0 &&
                 <IconDiv
-                    iconHeight={props.height}
                     iconWidth={props.iconWidth}
                     style={{
                         marginRight: "7px",

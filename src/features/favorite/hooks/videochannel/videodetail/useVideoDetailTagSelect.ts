@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { IsLoginContext } from "../../../../../app/components/QueryApp";
-import { tagType } from "../../../../../components/TagsComponent";
 import { VIDEO_MNG_PATH } from "../../../../../consts/CommonConst";
 import { ROUTER_PATH } from "../../../../../consts/RouterPath";
 import ENV from '../../../../../env.json';
 import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../hooks/useMutationWrapperBase";
+import { getFolderList } from "../../../api/getFolderList";
 import { getFavoriteVideoTagMaster } from "../../../api/getFavoriteVideoTagMaster";
 import { AddToFavoriteRequestType } from "../../../types/videochannel/videodetail/AddToFavoriteRequestType";
+import { TagMasterType } from "../../../../../types/videodetail/TagMasterType";
 import { FavoriteVideoTagResponseType } from "../../../types/videodetail/videotag/FavoriteVideoTagResponseType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
+import { FolderResponseType } from "../../../types/videolist/searcharea/filter/FolderResponseType";
 import { useVideoId } from "./useVideoId";
 
 export function useVideoDetailTagSelect() {
@@ -19,27 +22,48 @@ export function useVideoDetailTagSelect() {
     const videoId = useVideoId();
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
+    const isTablet = useMediaQuery(mediaQuery.tablet);
     // タグマスタ
-    const { data: tagMasterList } = getFavoriteVideoTagMaster({
+    const { data: tagMasterList } = getFavoriteVideoTagMaster<TagMasterType>({
         enabled: isLogin,
         select: (res: FavoriteVideoTagResponseType) => {
             return res.data.map((e: FavoriteVideoTagType) => {
                 return {
-                    value: e.tagId,
-                    label: e.tagName,
+                    tagId: e.tagId,
+                    tagName: e.tagName,
                     tagColor: e.tagColor,
                 }
             })
         }
     });
+    // フォルダの選択肢
+    const { data: folderOptions } = getFolderList({
+        enabled: isLogin,
+        select: (res: FolderResponseType) => {
+            return [
+                {
+                    value: ``,
+                    label: "未選択",
+                },
+                ...res.data.map((e) => {
+                    return {
+                        value: String(e.id),
+                        label: e.name,
+                    }
+                })
+            ];
+        }
+    });
+    // 選択中のフォルダ
+    const [selectedFolder, setSelectedFolder] = useState<number>();
     // ルーティング用
     const { appGoBack } = useAppNavigation();
-    // タグマスタリスト表示フラグ
-    const [isOpenTagMasterList, setIsOpenTagMasterList] = useState(true);
     // セクション表示用タグマスタリスト
-    const [displayTagMaster, setDisplayTagMaster] = useState<tagType[]>([]);
+    const [displayTagMaster, setDisplayTagMaster] = useState<TagMasterType[]>([]);
     // 選択中のタグ
-    const [selectedTagList, setSelectedTagList] = useState<tagType[]>([]);
+    const [selectedTagList, setSelectedTagList] = useState(new Map<number, TagMasterType>());
     // 入力中のキーワード
     const [inputKeyword, setInputKeyword] = useState(``);
 
@@ -52,6 +76,16 @@ export function useVideoDetailTagSelect() {
 
         setDisplayTagMaster(tagMasterList);
     }, [tagMasterList]);
+
+    // folderOptionsは非同期取得のため、確定したタイミングで初期選択を行う
+    useEffect(() => {
+
+        if (!folderOptions || folderOptions.length === 0) {
+            return;
+        }
+
+        setSelectedFolder(Number(folderOptions[0].value || "0"));
+    }, [folderOptions]);
 
     /**
      * お気に入り登録リクエスト
@@ -94,7 +128,8 @@ export function useVideoDetailTagSelect() {
 
         const body: AddToFavoriteRequestType = {
             videoId,
-            tagList: selectedTagList.map((tag) => Number(tag.value)),
+            tagList: [...selectedTagList.keys()],
+            folderId: selectedFolder,
         }
 
         // リクエスト送信
@@ -102,41 +137,30 @@ export function useVideoDetailTagSelect() {
     }
 
     /**
-     * 選択中のタグに追加する
-     * @param addTag
+     * フォルダを選択
+     * @param id
      */
-    function addTagEditList(addTag: tagType) {
+    function selectFolder(id: number) {
+        setSelectedFolder(id);
+    }
 
-        // 選択中のタグに追加
-        setSelectedTagList((e: tagType[]) => {
+    /**
+     * 選択中のタグへの追加・解除を切り替える
+     * @param tag
+     */
+    function toggleTagEditList(tag: TagMasterType) {
 
-            const tagInfo = e.find((tag) => tag.label === addTag.label);
-
-            if (tagInfo) {
-                return e.map(tag => tag.label === addTag.label ? addTag : tag);
+        const tagId = tag.tagId;
+        setSelectedTagList((e) => {
+            const newMap = new Map(e);
+            if (newMap.has(tagId)) {
+                newMap.delete(tagId);
             }
             else {
-                return [...e, addTag];
+                newMap.set(tagId, tag);
             }
+            return newMap;
         });
-    }
-
-    /**
-     * 選択中のタグから削除する
-     * @param deleteIndex
-     */
-    function deleteTagEditList(deleteIndex: number) {
-
-        setSelectedTagList((e: tagType[]) => {
-            return e.filter((_, index) => index !== deleteIndex);
-        });
-    }
-
-    /**
-     * タグマスタリスト表示切り替え
-     */
-    function switchTagMasterList() {
-        setIsOpenTagMasterList(!isOpenTagMasterList);
     }
 
     /**
@@ -173,7 +197,7 @@ export function useVideoDetailTagSelect() {
             // 入力したタイトルに一致するタグを取得
             const filterdTagList = tagMasterList.filter((e1) => {
 
-                const title = e1.label;
+                const title = e1.tagName;
                 return title.includes(inputKeyword);
             });
 
@@ -193,17 +217,19 @@ export function useVideoDetailTagSelect() {
     return {
         submitFavorite,
         isLogin,
+        isMobile,
+        isTablet,
         tagMasterList,
         handleKeyPress,
         clearInput,
-        switchTagMasterList,
-        addTagEditList,
-        deleteTagEditList,
+        toggleTagEditList,
         displayTagMaster,
         selectedTagList,
-        isOpenTagMasterList,
         inputKeyword,
         setInputKeyword,
-        filterTagMasterList
+        filterTagMasterList,
+        folderOptions,
+        selectedFolder,
+        selectFolder,
     }
 }

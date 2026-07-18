@@ -2,4 +2,5 @@
 export type AddToFavoriteRequestType = {
     videoId: string,
     tagList?: number[],
+    folderId?: number,
 }

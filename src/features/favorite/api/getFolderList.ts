@@ -10,6 +10,7 @@ type PropsType = {
     select: (res: FolderResponseType) => Option[];
     onError?: (res: unknown) => void;
     parentFolderId?: string;
+    enabled?: boolean;
 }
 
 export function getFolderList(props: PropsType) {
@@ -26,5 +27,6 @@ export function getFolderList(props: PropsType) {
         },
         select: props.select,
         onError: props.onError,
+        enabled: props.enabled,
     });
 }

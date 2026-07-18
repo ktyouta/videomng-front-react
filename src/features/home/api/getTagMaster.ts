@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
 import { api } from "../../../lib/apiClient";
-import { TagMasterType } from "../types/videodetail/TagMasterType";
+import { TagMasterType } from "../../../types/videodetail/TagMasterType";
 import { videoKeys } from "./queryKey";
 
 type PropsType = {

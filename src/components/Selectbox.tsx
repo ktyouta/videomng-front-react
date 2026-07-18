@@ -28,6 +28,8 @@ type Props = {
     fontSize?: string,
     backgroundColor?: string,
     outerStyle?: CSSProperties,
+    // 縦幅をheightより小さくしたい場合、矢印アイコン周りの余白を指定する
+    indicatorPadding?: string,
 };
 
 export function Selectbox(props: Props) {
@@ -58,6 +60,7 @@ export function Selectbox(props: Props) {
                 styles={{
                     control: (base) => ({
                         ...base,
+                        minHeight: props.height,
                         boxShadow: `none`,
                         textAlign: `center`,
                         backgroundColor: props.backgroundColor || `white`,
@@ -78,10 +81,20 @@ export function Selectbox(props: Props) {
                     dropdownIndicator: (base) => ({
                         ...base,
                         color: props.color || `black`,
+                        ...(props.indicatorPadding ? { padding: props.indicatorPadding } : {}),
                     }),
                     indicatorSeparator: (base) => ({
                         ...base,
                         backgroundColor: props.separatorColor || `#999`,
+                        ...(props.indicatorPadding ? { marginTop: props.indicatorPadding, marginBottom: props.indicatorPadding } : {}),
+                    }),
+                    valueContainer: (base) => ({
+                        ...base,
+                        ...(props.indicatorPadding ? { paddingTop: 0, paddingBottom: 0 } : {}),
+                    }),
+                    input: (base) => ({
+                        ...base,
+                        ...(props.indicatorPadding ? { margin: 0, paddingTop: 0, paddingBottom: 0 } : {}),
                     }),
                     singleValue: (base) => ({
                         ...base,

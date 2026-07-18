@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { IsLoginContext } from "../../../../app/components/QueryApp";
 import { VIDEO_MNG_PATH } from "../../../../consts/CommonConst";
@@ -11,7 +11,7 @@ import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase"
 import { getFolderMaster } from "../../api/getFolderMaster";
 import { getTagMaster } from "../../api/getTagMaster";
 import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
-import { TagMasterType } from "../../types/videodetail/TagMasterType";
+import { TagMasterType } from "../../../../types/videodetail/TagMasterType";
 import { useVideoId } from "./useVideoId";
 
 export function useHomeVideoDetailTagSelect() {
@@ -21,25 +21,24 @@ export function useHomeVideoDetailTagSelect() {
     const isLogin = IsLoginContext.useCtx();
     // 画面サイズ判定
     const isMobile = useMediaQuery(mediaQuery.mobile);
+    const isTablet = useMediaQuery(mediaQuery.tablet);
+    // セクション表示用タグマスタリスト
+    const [displayTagMaster, setDisplayTagMaster] = useState<TagMasterType[]>([]);
     // タグマスタ
     const { data: tagMasterList } = getTagMaster({
         enabled: isLogin,
         select: (res) => {
-            const tagMasterList = res.data;
-            setDisplayTagMaster(tagMasterList);
-            return tagMasterList;
+            return res.data;
         }
     });
     // ルーティング用
     const { appGoBack } = useAppNavigation();
-    // セクション表示用タグマスタリスト
-    const [displayTagMaster, setDisplayTagMaster] = useState<TagMasterType[]>([]);
     // 入力中のキーワード
     const [inputKeyword, setInputKeyword] = useState(``);
     // 選択中のタグ
     const [selectedTagList, setSelectedTagList] = useState(new Map<number, TagMasterType>());
     // フォルダマスタ
-    const { data: folderList } = getFolderMaster({
+    const { data: folderMaster } = getFolderMaster({
         enabled: isLogin,
         select: (res) => {
             return res.data;
@@ -47,6 +46,40 @@ export function useHomeVideoDetailTagSelect() {
     });
     // 選択中のフォルダ
     const [selectedFolder, setSelectedFolder] = useState<number>();
+    // 選択肢のフォルダリスト
+    const folderOptions = useMemo(() => {
+        const defaultFolder = {
+            value: ``,
+            label: "未選択"
+        };
+        if (!folderMaster) {
+            return [defaultFolder];
+        }
+
+        const options = folderMaster.map((e) => {
+            return {
+                value: String(e.id),
+                label: e.name,
+            }
+        });
+        return [
+            defaultFolder,
+            ...options
+        ];
+    }, [folderMaster]);
+
+    // フォルダ初期選択
+    useEffect(() => {
+        setSelectedFolder(Number(folderOptions[0].value ?? "0"));
+    }, [folderOptions]);
+
+    // 画面表示用タグリスト設定
+    useEffect(() => {
+        if (!tagMasterList) {
+            return;
+        }
+        setDisplayTagMaster(tagMasterList);
+    }, [tagMasterList]);
 
     /**
      * お気に入り登録リクエスト
@@ -146,7 +179,6 @@ export function useHomeVideoDetailTagSelect() {
         }
 
         setDisplayTagMaster(() => {
-
             // 入力したタイトルに一致するタグを取得
             const filterdTagList = tagMasterList.filter((e1) => {
                 const title = e1.tagName;
@@ -176,6 +208,7 @@ export function useHomeVideoDetailTagSelect() {
     return {
         submitFavorite,
         isMobile,
+        isTablet,
         tagMasterList,
         handleKeyPress,
         clearInput,
@@ -185,8 +218,8 @@ export function useHomeVideoDetailTagSelect() {
         setInputKeyword,
         filterTagMasterList,
         selectedTagList,
-        folderList,
         selectedFolder,
         selectFolder,
+        folderOptions
     }
 }
