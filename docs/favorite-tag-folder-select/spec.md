@@ -17,6 +17,8 @@
 - [ ] モーダルはオーバーレイクリックで閉じられる（`isCloseOuter`）
 - [ ] モバイル時のモーダル幅は93%、モーダル最小高さはモバイル時70vh・それ以外405px
 - [ ] Favorite/videochannel側は独自のタグ型（`tagType`）・API（`getFavoriteVideoTagMaster`, `getFolderList`）を使用し続ける（Home側とAPI・型は統一しない）
+- [ ] タイトル直下に、モーダルの目的を伝える一言の説明文を表示する（独立した見出し・セクションとしては扱わない）
 
 ## 変更履歴
 - 2026-07-19: Favorite/videochannel側のUI構成をHome側に統一する改修に伴い新規作成
+- 2026-07-19: タイトル直下に説明文を追加する要件を追記

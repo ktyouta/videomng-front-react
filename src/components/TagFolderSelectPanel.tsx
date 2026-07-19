@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { MEDIA } from "../consts/MediaConst";
+import { TagMasterType } from "../types/videodetail/TagMasterType";
 import ButtonComponent from "./ButtonComponent";
 import { ClearableTextbox } from "./ClearableTextbox";
 import { Option, Selectbox } from "./Selectbox";
 import TagButtonComponent from "./TagButtonComponent";
-import { MEDIA } from "../consts/MediaConst";
-import { TagMasterType } from "../types/videodetail/TagMasterType";
 
 
 const Root = styled.div`
@@ -42,6 +42,7 @@ const TagMasterAreaDiv = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
+    gap: 30px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         margin-bottom: 30px;
@@ -53,7 +54,16 @@ const TagMasterAreaDiv = styled.div`
 
     @media (min-width: ${MEDIA.PC}) {
         margin-bottom: 30px;
+        gap: 40px;
     }
+`;
+
+const TITLE_AREA_GAP = "4px";
+
+const TitleAreaDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: ${TITLE_AREA_GAP};
 `;
 
 const TagMasterListTitleDiv = styled.div`
@@ -61,8 +71,8 @@ const TagMasterListTitleDiv = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 12px;
-    margin-bottom: 30px;
+    font-size: 13px;
+    margin-bottom: 10px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 17px;
@@ -84,26 +94,11 @@ const TagMasterListAreaDiv = styled.div`
     overflow: auto;
     overflow-x: hidden;
     box-sizing: border-box;
-    padding: 2% 1% 1% 0%;
-    margin-bottom: 14px;
 `;
 
 const NoTagListTitleDiv = styled.div`
     margin-top: 1%;
     margin-left: 1%;
-    margin-bottom: 16px;
-
-    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        margin-bottom: 30px;
-    }
-
-    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        margin-bottom: 30px;
-    }
-
-    @media (min-width: ${MEDIA.PC}) {
-        margin-bottom: 30px;
-    }
 `;
 
 const TagEditAreaMessageSpan = styled.span`
@@ -126,18 +121,12 @@ const FolderAreaDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 28px;
-
-  @media (min-width: ${MEDIA.TABLET}) {
-    margin-bottom: 36px;
-  }
 `;
 
 const FilterInputAreaDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 25px;
   width: 100%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -232,9 +221,14 @@ export function TagFolderSelectPanel({
             <MainArea>
                 <Parent>
                     <TagMasterAreaDiv>
-                        <TagMasterListTitleDiv>
-                            お気に入り登録設定
-                        </TagMasterListTitleDiv>
+                        <TitleAreaDiv>
+                            <TagMasterListTitleDiv>
+                                お気に入り登録設定
+                            </TagMasterListTitleDiv>
+                            <TagEditAreaMessageSpan>
+                                登録時にフォルダとタグを設定できます
+                            </TagEditAreaMessageSpan>
+                        </TitleAreaDiv>
                         <FolderAreaDiv>
                             <TitleSpan>
                                 フォルダ：
@@ -262,7 +256,7 @@ export function TagFolderSelectPanel({
                                             タグ検索：
                                         </TitleSpan>
                                         <ClearableTextbox
-                                            height="34px"
+                                            height="100%"
                                             textWidth="90%"
                                             placeholder=""
                                             value={inputKeyword}
@@ -273,6 +267,7 @@ export function TagFolderSelectPanel({
                                             }}
                                             textboxStyle={{
                                                 fontSize: "16px",
+                                                ...(isMobile ? { height: "28px" } : {}),
                                             }}
                                             backgroundColor="#ececec"
                                             clear={clearInput}
