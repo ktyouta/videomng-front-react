@@ -79,13 +79,17 @@ const SelectColorDiv = styled.div`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 45px;
+    height: 40px;
     box-sizing: border-box;
     color: white;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right:1%;
+
+    @media (min-width: ${MEDIA.TABLET}) {
+        height: 45px;
+    }
 `;
 
 const ColorHeader = styled.div`
@@ -112,6 +116,7 @@ const DefaultColorLink = styled.span`
 
 type propsType = {
   close: () => void;
+  isMobile: boolean;
 }
 
 export function FavoriteAddTag(props: propsType) {
@@ -145,6 +150,7 @@ export function FavoriteAddTag(props: propsType) {
             <SuggestTextbox
               value={tagName}
               onChange={setTagName}
+              size={props.isMobile ? "small" : "medium"}
               textboxStyle={{
                 backgroundColor: `white`,
               }}
@@ -202,6 +208,7 @@ export function FavoriteAddTag(props: propsType) {
         <FooterDiv >
           <ButtonComponent
             shape="rounded"
+            size={props.isMobile ? "small" : "medium"}
             onClick={props.close}
             style={{
               background: "#3a3d42",
@@ -212,6 +219,7 @@ export function FavoriteAddTag(props: propsType) {
           </ButtonComponent>
           <ButtonComponent
             shape="rounded"
+            size={props.isMobile ? "small" : "medium"}
             onClick={() => {
               addTag();
             }}

@@ -10,6 +10,7 @@ type propsType = {
     containerStyle?: CSSProperties,
     textboxStyle?: CSSProperties,
     dropdownStyle?: CSSProperties,
+    size?: "small" | "medium",
 };
 
 import { CSSProperties, useState } from "react";
@@ -70,6 +71,7 @@ export function SuggestTextbox(props: propsType) {
                 <TextField
                     {...params}
                     variant="outlined"
+                    size={props.size}
                 />
             )}
         />

@@ -8,7 +8,7 @@ import { FLG } from "../../../../consts/CommonConst";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { VideoDetailItemType } from "../../../../types/videodetail/VideoDetailItemType";
 import { useHomeVideoDetailInfo } from "../../hooks/videodetail/useHomeVideoDetailInfo";
-import { HomeVideoDetailTagSelect } from "./HomeVideoDetailTagSelect";
+import { HomeVideoDetailTagFolderSelect } from "./HomeVideoDetailTagFolderSelect";
 
 
 const VideoInfoDiv = styled.div`
@@ -191,7 +191,7 @@ export function HomeVideoDetailInfo(props: propsType) {
                 isCloseOuter={true}
                 close={closeTagSelectModal}
             >
-                <HomeVideoDetailTagSelect
+                <HomeVideoDetailTagFolderSelect
                     closeTagSelectModal={closeTagSelectModal}
                 />
             </ModalPortal>

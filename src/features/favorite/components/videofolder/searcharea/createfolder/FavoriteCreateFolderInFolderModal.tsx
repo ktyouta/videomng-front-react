@@ -72,7 +72,7 @@ export function FavoriteCreateFolderInFolderModal() {
       {/* フォルダ作成モーダル */}
       <ModalPortal
         isOpen={isOpenModal}
-        modalWidth={isMobile ? `80%` : `45%`}
+        modalWidth={isMobile ? `93%` : `45%`}
         modalMinHeight=""
         isCloseOuter={true}
         close={closeModal}
@@ -82,6 +82,7 @@ export function FavoriteCreateFolderInFolderModal() {
       >
         <FavoriteCreateFolderContainer
           close={closeModal}
+          isMobile={isMobile}
         />
       </ModalPortal>
     </React.Fragment>

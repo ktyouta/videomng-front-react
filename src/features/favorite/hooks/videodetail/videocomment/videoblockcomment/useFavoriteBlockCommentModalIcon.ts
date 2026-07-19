@@ -3,6 +3,8 @@ import useSwitch from "../../../../../../hooks/useSwitch";
 
 export function useFavoriteBlockCommentModalIcon() {
 
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 非表示リストナビゲーション表示フラグ
     const { flag: isOpenBlockListNav, on: openBlockListNav, off: closeBlockListNav } = useSwitch();
     // 非表示リストモーダル表示フラグ
@@ -10,6 +12,7 @@ export function useFavoriteBlockCommentModalIcon() {
 
 
     return {
+        isMobile,
         isOpenBlockListNav,
         openBlockListNav,
         closeBlockListNav,

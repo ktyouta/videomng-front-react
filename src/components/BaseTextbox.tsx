@@ -16,6 +16,7 @@ type propsType = {
     autoComplete?: boolean,
     style?: CSSProperties,
     onBlur?: () => void,
+    height?: string,
 }
 
 //参照の型
@@ -25,10 +26,10 @@ export type refType = {
 }
 
 //テキストボックスの基本スタイル
-const BaseInput = styled.input<{ textWidth?: string, bgColor?: string, }>`
+const BaseInput = styled.input<{ textWidth?: string, bgColor?: string, height?: string }>`
   width: ${({ textWidth }) => (textWidth ?? "400px")};
   background-color:${({ bgColor }) => (bgColor ?? "")};
-  height:33px;
+  height: ${({ height }) => (height ?? "33px")};
   border-radius: 5px;
   border:solid 1px rgb(118, 118, 118);
 `;
@@ -76,6 +77,7 @@ const BaseTextbox = forwardRef<refType, propsType>((props, ref) => {
             value={inputValue}
             textWidth={props.textWidth}
             bgColor={props.bgColor}
+            height={props.height}
             disabled={props.disabled}
             onKeyDown={inputEnterKey}
             placeholder={props.placeholder}

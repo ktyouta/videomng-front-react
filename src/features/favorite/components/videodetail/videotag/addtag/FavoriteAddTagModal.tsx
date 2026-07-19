@@ -76,7 +76,7 @@ export function FavoriteAddTagModal() {
       {/* タグ追加モーダル */}
       <ModalPortal
         isOpen={isOpenModal}
-        modalWidth={isMobile ? `80%` : `45%`}
+        modalWidth={isMobile ? `93%` : `45%`}
         modalMinHeight=""
         isCloseOuter={true}
         close={closeModal}
@@ -86,6 +86,7 @@ export function FavoriteAddTagModal() {
       >
         <FavoriteAddTag
           close={closeModal}
+          isMobile={isMobile}
         />
       </ModalPortal>
     </React.Fragment>

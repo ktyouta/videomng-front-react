@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ButtonComponent from "../../../../../../../components/ButtonComponent";
 import { FileUploadButton } from "../../../../../../../components/FileUploadButton";
 import { ModalPortalConfirm } from "../../../../../../../components/ModalPortalConfirm";
+import { MEDIA } from "../../../../../../../consts/MediaConst";
 import { useFavoriteSearchCsvExportMain } from "../../../../../hooks/videolist/searcharea/csv/export/useFavoriteSearchCsvExportMain";
 
 
@@ -52,17 +53,22 @@ const UploadFileNameSpan = styled.span`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 45px;
+    height: 40px;
     box-sizing: border-box;
     color: white;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right:1%;
+
+    @media (min-width: ${MEDIA.TABLET}) {
+        height: 45px;
+    }
 `;
 
 type propsType = {
   close: () => void;
+  isMobile: boolean;
 }
 
 export function FavoriteSearchCsvExport(props: propsType) {
@@ -116,6 +122,7 @@ export function FavoriteSearchCsvExport(props: propsType) {
       <FooterDiv >
         <ButtonComponent
           shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
           onClick={props.close}
           style={{
             background: "#3a3d42",
@@ -126,6 +133,7 @@ export function FavoriteSearchCsvExport(props: propsType) {
         </ButtonComponent>
         <ButtonComponent
           shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
           onClick={openConfirmModal}
           style={{
             background: isLoading ? "#2c2f33" : "#3a3d42",

@@ -1,14 +1,14 @@
 import { TagFolderSelectPanel } from "../../../../components/TagFolderSelectPanel";
-import { useHomeVideoDetailTagSelect } from "../../hooks/videodetail/useHomeVideoDetailTagSelect";
+import { useHomeVideoDetailTagFolderSelect } from "../../hooks/videodetail/useHomeVideoDetailTagFolderSelect";
 
 
 type PropsType = {
     closeTagSelectModal: () => void;
 }
 
-export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
+export function HomeVideoDetailTagFolderSelect({ closeTagSelectModal }: PropsType) {
 
-    console.log("HomeVideoDetailTagSelect render");
+    console.log("HomeVideoDetailTagFolderSelect render");
 
     const {
         tagMasterList,
@@ -26,7 +26,7 @@ export function HomeVideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
         folderOptions,
         selectedFolder,
         selectFolder,
-    } = useHomeVideoDetailTagSelect();
+    } = useHomeVideoDetailTagFolderSelect();
 
     return (
         <TagFolderSelectPanel

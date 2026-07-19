@@ -60,12 +60,14 @@ export function HomeSearchConditionModal() {
             {/* 検索条件指定モーダル */}
             <ModalPortal
                 isOpen={isOpenFilterModal}
-                modalWidth={isMobile ? `80%` : `45%`}
+                modalWidth={isMobile ? `93%` : `45%`}
                 modalMinHeight="55%"
                 isCloseOuter={true}
                 close={closeFilterModal}
             >
-                <HomeSearchCondition />
+                <HomeSearchCondition
+                    isMobile={isMobile}
+                />
             </ModalPortal>
         </React.Fragment>
     );

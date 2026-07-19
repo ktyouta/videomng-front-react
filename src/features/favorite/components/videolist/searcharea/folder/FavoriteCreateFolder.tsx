@@ -1,11 +1,11 @@
 import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
-import BaseTextbox from "../../../components/BaseTextbox";
-import ButtonComponent from "../../../components/ButtonComponent";
-import { ColorPickerTwitter } from "../../../components/ColorPickerTwitter";
-import { IconComponent } from "../../../components/IconComponent";
-import { MEDIA } from '../../../consts/MediaConst';
-import { DEFAULT_FOLDER_COLOR } from "../const/FavoriteConst";
+import BaseTextbox from "../../../../../../components/BaseTextbox";
+import ButtonComponent from "../../../../../../components/ButtonComponent";
+import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
+import { IconComponent } from "../../../../../../components/IconComponent";
+import { MEDIA } from '../../../../../../consts/MediaConst';
+import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 
 const Parent = styled.div`
   box-sizing:border-box;
@@ -72,13 +72,17 @@ const SelectColorDiv = styled.div`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 45px;
+    height: 40px;
     box-sizing: border-box;
     color: white;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right:1%;
+
+    @media (min-width: ${MEDIA.TABLET}) {
+        height: 45px;
+    }
 `;
 
 const ColorHeader = styled.div`
@@ -96,10 +100,22 @@ const SelectedColor = styled.div`
 
 const DefaultColorLink = styled.span`
     color: #7abaff;
-    font-size: 15px;
+    font-size: 12px;
     cursor: pointer;
     &:hover {
         text-decoration: underline;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: 15px;
     }
 `;
 
@@ -111,6 +127,7 @@ type propsType = {
   folderColor: string;
   setFolderColor: React.Dispatch<React.SetStateAction<string>>;
   isPcLess: boolean;
+  isMobile: boolean;
 }
 
 export function FavoriteCreateFolder(props: propsType) {
@@ -123,7 +140,8 @@ export function FavoriteCreateFolder(props: propsType) {
     setFolderName,
     folderColor,
     setFolderColor,
-    isPcLess, } = props;
+    isPcLess,
+    isMobile, } = props;
 
   return (
     <Parent>
@@ -146,6 +164,7 @@ export function FavoriteCreateFolder(props: propsType) {
         <BaseTextbox
           value={folderName}
           onChange={setFolderName}
+          height={isMobile ? "28px" : undefined}
           style={{
             flex: "1",
             marginLeft: "10px"
@@ -183,6 +202,7 @@ export function FavoriteCreateFolder(props: propsType) {
       <FooterDiv >
         <ButtonComponent
           shape="rounded"
+          size={isMobile ? "small" : "medium"}
           onClick={props.close}
           style={{
             background: "#3a3d42",
@@ -193,6 +213,7 @@ export function FavoriteCreateFolder(props: propsType) {
         </ButtonComponent>
         <ButtonComponent
           shape="rounded"
+          size={isMobile ? "small" : "medium"}
           onClick={execute}
           style={{
             marginLeft: "5%",

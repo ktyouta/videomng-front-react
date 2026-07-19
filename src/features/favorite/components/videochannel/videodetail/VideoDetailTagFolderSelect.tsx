@@ -6,7 +6,7 @@ type PropsType = {
     closeTagSelectModal: () => void;
 }
 
-export function VideoDetailTagSelect({ closeTagSelectModal }: PropsType) {
+export function VideoDetailTagFolderSelect({ closeTagSelectModal }: PropsType) {
 
     const {
         tagMasterList,

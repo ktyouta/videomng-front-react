@@ -70,10 +70,9 @@ const InputDiv = styled.div`
 
 const InputLabel = styled.label`
   display: inline-block;
-  width: 17%;
-  margin-right: 10px;
-  white-space: normal;
-  word-wrap: break-word;
+  width: 6.5em;
+  white-space: nowrap;
+  flex-shrink: 0;
 `;
 
 const DefaultColorLink = styled.div`
@@ -88,11 +87,14 @@ const DefaultColorLink = styled.div`
 
 type propsType = {
   close: () => void;
+  isMobile: boolean;
 }
 
 export function FavoriteSearchCondition(props: propsType) {
 
   console.log("FavoriteSearchCondition render");
+
+  const { isMobile } = props;
 
   const {
     videoCategory,
@@ -138,9 +140,11 @@ export function FavoriteSearchCondition(props: propsType) {
                 options={videoCategory}
                 value={selectedFavoriteVideoCategory.split(`,`) ?? videoCategory[0].value}
                 onMenuClose={changeVideoCategory}
-                width="68%"
-                minWidth="8%"
-                height="39px"
+                width="auto"
+                outerStyle={{ flex: 1, minWidth: 0 }}
+                height={isMobile ? "30px" : "39px"}
+                indicatorPadding={isMobile ? "2px" : undefined}
+                fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
             </InputDiv>
@@ -155,9 +159,11 @@ export function FavoriteSearchCondition(props: propsType) {
                 options={viewStatusList}
                 value={selectedFavoriteVideoViewStatus.split(`,`) ?? viewStatusList[0].value}
                 onMenuClose={changeViewStatus}
-                width="68%"
-                minWidth="8%"
-                height="39px"
+                width="auto"
+                outerStyle={{ flex: 1, minWidth: 0 }}
+                height={isMobile ? "30px" : "39px"}
+                indicatorPadding={isMobile ? "2px" : undefined}
+                fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
             </InputDiv>
@@ -172,9 +178,11 @@ export function FavoriteSearchCondition(props: propsType) {
                 options={tagMasterList}
                 value={selectedFavoriteVideoTag.split(`,`) ?? tagMasterList[0].value}
                 onMenuClose={changeVideoTag}
-                width="68%"
-                minWidth="8%"
-                height="39px"
+                width="auto"
+                outerStyle={{ flex: 1, minWidth: 0 }}
+                height={isMobile ? "30px" : "39px"}
+                indicatorPadding={isMobile ? "2px" : undefined}
+                fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
             </InputDiv>
@@ -189,9 +197,11 @@ export function FavoriteSearchCondition(props: propsType) {
                 options={favoriteLevelList}
                 value={selectedFavoriteVideoFavoriteLevel.split(`,`) ?? favoriteLevelList[0].value}
                 onMenuClose={changeFavoriteLevel}
-                width="68%"
-                minWidth="8%"
-                height="39px"
+                width="auto"
+                outerStyle={{ flex: 1, minWidth: 0 }}
+                height={isMobile ? "30px" : "39px"}
+                indicatorPadding={isMobile ? "2px" : undefined}
+                fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
             </InputDiv>
@@ -206,9 +216,11 @@ export function FavoriteSearchCondition(props: propsType) {
                 options={folderList}
                 value={selectedFavoriteVideoFolder.split(`,`) ?? folderList[0].value}
                 onMenuClose={changeFolder}
-                width="68%"
-                minWidth="8%"
-                height="39px"
+                width="auto"
+                outerStyle={{ flex: 1, minWidth: 0 }}
+                height={isMobile ? "30px" : "39px"}
+                indicatorPadding={isMobile ? "2px" : undefined}
+                fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
             </InputDiv>

@@ -67,6 +67,7 @@ type propsType = {
   deleteVideoFlg: string,
   changeSelect: (value: string) => void,
   clickDelete: () => void,
+  isMobile: boolean,
 }
 
 export function FavoriteDeleteFolder(props: propsType) {
@@ -100,6 +101,7 @@ export function FavoriteDeleteFolder(props: propsType) {
         <ButtonComponent
           variant="black"
           shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
           onClick={props.close}
         >
           キャンセル
@@ -107,6 +109,7 @@ export function FavoriteDeleteFolder(props: propsType) {
         <ButtonComponent
           variant="black"
           shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
           onClick={props.clickDelete}
           style={{
             marginLeft: "5%",

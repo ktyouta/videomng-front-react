@@ -74,12 +74,13 @@ export function FavoriteVideoFolderSearchFilterModal() {
       {/* フィルターモーダル */}
       <ModalPortal
         isOpen={isOpenFilterModal}
-        modalWidth={isMobile ? `80%` : `45%`}
+        modalWidth={isMobile ? `93%` : `45%`}
         modalMinHeight="70%"
         isCloseOuter={true}
         close={closeFilterModal}
       >
         <FavoriteVideoFolderSearchCondition
+          isMobile={isMobile}
           close={closeFilterModal}
         />
       </ModalPortal>

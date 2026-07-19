@@ -8,7 +8,7 @@ import { FLG } from "../../../../../consts/CommonConst";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
 import { useVideoDetailInfo } from "../../../hooks/videochannel/videodetail/useVideoDetailInfo";
-import { VideoDetailTagSelect } from "./VideoDetailTagSelect";
+import { VideoDetailTagFolderSelect } from "./VideoDetailTagFolderSelect";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -189,7 +189,7 @@ export function VideoDetailInfo(props: propsType) {
                 isCloseOuter={true}
                 close={closeTagSelectModal}
             >
-                <VideoDetailTagSelect
+                <VideoDetailTagFolderSelect
                     closeTagSelectModal={closeTagSelectModal}
                 />
             </ModalPortal>

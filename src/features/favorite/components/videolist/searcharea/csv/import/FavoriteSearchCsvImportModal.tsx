@@ -72,7 +72,7 @@ export function FavoriteSearchCsvImportModal() {
             {/*ダウンロードモーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
-                modalWidth={isMobile ? `80%` : `45%`}
+                modalWidth={isMobile ? `93%` : `45%`}
                 containerStyle={{
                     minHeight: `384px`,
                     fontSize: isMobile ? "12px" : "15px",
@@ -84,6 +84,7 @@ export function FavoriteSearchCsvImportModal() {
             >
                 <FavoriteSearchCsvImport
                     close={closeModal}
+                    isMobile={isMobile}
                 />
             </ModalPortal>
         </React.Fragment>

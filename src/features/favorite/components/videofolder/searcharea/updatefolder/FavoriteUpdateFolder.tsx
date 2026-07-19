@@ -56,13 +56,17 @@ const InputTitleSpan = styled.span`
 
 const FooterDiv = styled.div`
     width: 100%;
-    height: 45px;
+    height: 40px;
     box-sizing: border-box;
     color: white;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right:1%;
+
+    @media (min-width: ${MEDIA.TABLET}) {
+        height: 45px;
+    }
 `;
 
 const SelectColorTitleDiv = styled.div`
@@ -99,6 +103,7 @@ const DefaultColorLink = styled.span`
 type propsType = {
   close: () => void,
   folder: FolderMasterType,
+  isMobile: boolean,
 }
 
 export function FavoriteUpdateFolder(props: propsType) {
@@ -128,6 +133,7 @@ export function FavoriteUpdateFolder(props: propsType) {
         <BaseTextbox
           value={folderName}
           onChange={setFolderName}
+          height={props.isMobile ? "28px" : undefined}
           style={{
             flex: "1",
             marginLeft: "10px"
@@ -165,6 +171,7 @@ export function FavoriteUpdateFolder(props: propsType) {
       <FooterDiv >
         <ButtonComponent
           shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
           onClick={props.close}
           style={{
             background: "#3a3d42",
@@ -175,6 +182,7 @@ export function FavoriteUpdateFolder(props: propsType) {
         </ButtonComponent>
         <ButtonComponent
           shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
           onClick={execute}
           style={{
             marginLeft: "5%",

@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { FavoriteSearchCsvExportModal } from "./csv/export/FavoriteSearchCsvExportModal";
-import { FavoriteSearchCsvImportModal } from "./csv/import/FavoriteSearchCsvImportModal";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchSwichModeContainer } from "./FavoriteSearchSwichModeContainer";
@@ -57,12 +55,6 @@ export function FavoriteSearchAreaMobile() {
         <FavoriteSearchFilterModal />
         {/* フォルダ作成 */}
         <FavoriteCreateFolderModal />
-      </OperationRowDiv>
-      <OperationRowDiv>
-        {/* 保存 */}
-        <FavoriteSearchCsvImportModal />
-        {/* 取込 */}
-        <FavoriteSearchCsvExportModal />
       </OperationRowDiv>
       {/* 選択中のタグ */}
       <FavoriteSearchSelectedTag />

@@ -51,6 +51,7 @@ const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
 export function FavoriteFavoriteCommentModalIcon() {
 
     const {
+        isMobile,
         isOpenFavoriteListNav,
         openFavoriteListNav,
         closeFavoriteListNav,
@@ -81,6 +82,7 @@ export function FavoriteFavoriteCommentModalIcon() {
             {/* お気に入りコメントリスト */}
             <ModalPortal
                 isOpen={isOpenFavoriteListModal}
+                modalWidth={isMobile ? `93%` : undefined}
                 containerStyle={{
                     height: `90%`
                 }}

@@ -16,7 +16,7 @@ export function HeaderUsagePrecautionModal(props: propsType) {
     return (
         <ModalPortal
             isOpen={true}
-            modalWidth={isMobile ? "86%" : "45%"}
+            modalWidth={isMobile ? "93%" : "45%"}
             modalMinHeight="70%"
             isCloseOuter={true}
             close={props.closeMenu}

@@ -8,13 +8,13 @@ import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../hooks/useMutationWrapperBase";
+import { TagMasterType } from "../../../../types/videodetail/TagMasterType";
 import { getFolderMaster } from "../../api/getFolderMaster";
 import { getTagMaster } from "../../api/getTagMaster";
 import { AddToFavoriteRequestType } from "../../types/videodetail/AddToFavoriteRequestType";
-import { TagMasterType } from "../../../../types/videodetail/TagMasterType";
 import { useVideoId } from "./useVideoId";
 
-export function useHomeVideoDetailTagSelect() {
+export function useHomeVideoDetailTagFolderSelect() {
     // 動画ID
     const videoId = useVideoId();
     // ログインフラグ

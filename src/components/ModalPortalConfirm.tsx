@@ -1,6 +1,7 @@
 import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
+import { MEDIA } from "../consts/MediaConst";
 import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
 import { FlexSpaceDiv } from "../styles/styledcomponent/FlexSpaceDiv";
 import ButtonComponent from "./ButtonComponent";
@@ -24,8 +25,20 @@ const HeaderDiv = styled.div`
 `;
 
 const TitleSpan = styled.div`
-  font-size:14px;
+  font-size:12px;
   width: 100%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 14px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 14px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 14px;
+  }
 `;
 
 const BtnAreaDiv = styled.div`
@@ -52,7 +65,7 @@ export function ModalPortalConfirm(props: propsType) {
     // 画面サイズ判定
     const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
-    const modalWidth = isPcLess ? "82%" : "29%";
+    const modalWidth = isPcLess ? "93%" : "29%";
 
     return (
         <ModalPortal
@@ -79,6 +92,7 @@ export function ModalPortalConfirm(props: propsType) {
                     <ButtonComponent
                         variant="black"
                         shape="rounded"
+                        size={isPcLess ? "small" : "medium"}
                         onClick={props.closeModal}
                         style={{
                             minWidth: "100px",
@@ -89,6 +103,7 @@ export function ModalPortalConfirm(props: propsType) {
                     <ButtonComponent
                         variant="black"
                         shape="rounded"
+                        size={isPcLess ? "small" : "medium"}
                         onClick={props.clickOk}
                         style={{
                             marginLeft: "5%",

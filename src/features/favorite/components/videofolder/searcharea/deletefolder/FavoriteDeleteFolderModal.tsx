@@ -72,7 +72,7 @@ export function FavoriteDeleteFolderModal(props: PropsType) {
             {/* フォルダ削除確認モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
-                modalWidth={isMobile ? `80%` : `45%`}
+                modalWidth={isMobile ? `93%` : `45%`}
                 modalMinHeight="25%"
                 isCloseOuter={true}
                 close={closeModal}
@@ -90,6 +90,7 @@ export function FavoriteDeleteFolderModal(props: PropsType) {
                     deleteVideoFlg={deleteVideoFlg}
                     changeSelect={changeSelect}
                     clickDelete={clickDelete}
+                    isMobile={isMobile}
                 />
             </ModalPortal>
             {

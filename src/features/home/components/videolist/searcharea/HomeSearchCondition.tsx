@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Selectbox } from "../../../../../components/Selectbox";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { VIDEO_TYPE_LIST } from "../../../const/HomeConst";
 import { useHomeSearchConditionMain } from "../../../hooks/videolist/searcharea/useHomeSearchConditionMain";
 
@@ -8,6 +9,19 @@ const Parent = styled.div`
   box-sizing:border-box;
   padding-top:1%;
   height:100%;
+  font-size: 12px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 13px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 16px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 16px;
+  }
 `;
 
 const HeaderDiv = styled.div`
@@ -53,15 +67,20 @@ const InputDiv = styled.div`
 
 const InputLabel = styled.label`
   display: inline-block;
-  width: 17%;
-  margin-right: 10px;
-  white-space: normal;
-  word-wrap: break-word;
+  width: 4.5em;
+  white-space: nowrap;
+  flex-shrink: 0;
 `;
 
-export function HomeSearchCondition() {
+type propsType = {
+    isMobile: boolean;
+}
+
+export function HomeSearchCondition(props: propsType) {
 
     console.log("HomeSearchCondition render");
+
+    const { isMobile } = props;
 
     const {
         selectVideoCategory,
@@ -89,9 +108,11 @@ export function HomeSearchCondition() {
                             options={VIDEO_TYPE_LIST}
                             value={selectedVideoType || VIDEO_TYPE_LIST[0].value}
                             onChange={setSelectedVideoType}
-                            width="68%"
-                            minWidth="8%"
-                            height="39px"
+                            width="auto"
+                            outerStyle={{ flex: 1, minWidth: 0 }}
+                            height={isMobile ? "30px" : "39px"}
+                            indicatorPadding={isMobile ? "2px" : undefined}
+                            fontSize={isMobile ? "12px" : undefined}
                         />
                     </InputDiv>
                     {
@@ -104,9 +125,11 @@ export function HomeSearchCondition() {
                                 options={selectVideoCategory}
                                 value={selectedVideoCategory || selectVideoCategory[0].value}
                                 onChange={setSelectedVideoCategory}
-                                width="68%"
-                                minWidth="8%"
-                                height="39px"
+                                width="auto"
+                                outerStyle={{ flex: 1, minWidth: 0 }}
+                                height={isMobile ? "30px" : "39px"}
+                                indicatorPadding={isMobile ? "2px" : undefined}
+                                fontSize={isMobile ? "12px" : undefined}
                             />
                         </InputDiv>
                     }

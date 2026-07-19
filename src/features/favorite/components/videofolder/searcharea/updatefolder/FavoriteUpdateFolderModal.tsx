@@ -66,7 +66,7 @@ export function FavoriteUpdateFolderModal(props: propsType) {
             {/* フォルダ名変更モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
-                modalWidth={isMobile ? `80%` : `45%`}
+                modalWidth={isMobile ? `93%` : `45%`}
                 modalMinHeight="35%"
                 isCloseOuter={true}
                 close={closeModal}
@@ -74,6 +74,7 @@ export function FavoriteUpdateFolderModal(props: propsType) {
                 <FavoriteUpdateFolder
                     folder={props.folder}
                     close={closeModal}
+                    isMobile={isMobile}
                 />
             </ModalPortal>
         </React.Fragment>
