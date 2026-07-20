@@ -20,7 +20,7 @@ const Parent = styled.div`
   display:flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 0 8%;
+  padding: 0 6%;
 `;
 
 const OperationRowDiv = styled.div`
