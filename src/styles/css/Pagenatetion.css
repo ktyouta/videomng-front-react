@@ -26,3 +26,14 @@
     background-color: rgb(158, 158, 158);
     border-radius: 4px;
 }
+
+.pagination--compact {
+    gap: 4px;
+}
+
+.page-item--compact,
+.page-link--compact {
+    font-size: 13px;
+    height: 30px;
+    width: 30px;
+}

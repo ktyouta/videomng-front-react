@@ -2,13 +2,21 @@ import ReactPaginate from 'react-paginate';
 import '../styles/css/Pagenatetion.css';
 import React from 'react';
 
+export type PagenationSize = "default" | "compact";
+
 type propsType = {
     changePage: (nowPage: number) => void,
     totalPage: number,
     selectedPage: number,
+    size?: PagenationSize,
 }
 
 export function Pagenation(props: propsType) {
+
+    const isCompact = props.size === "compact";
+    const containerClassName = isCompact ? 'pagination pagination--compact' : 'pagination';
+    const pageClassName = isCompact ? 'page-item page-item--compact' : 'page-item';
+    const pageLinkClassName = isCompact ? 'page-link page-link--compact' : 'page-link';
 
     return (
         <React.Fragment>
@@ -24,20 +32,20 @@ export function Pagenation(props: propsType) {
                         props.changePage(selectedItem.selected + 1);
                     }}
                     forcePage={props.selectedPage - 1}
-                    containerClassName='pagination'
-                    pageClassName='page-item'
-                    pageLinkClassName='page-link'
+                    containerClassName={containerClassName}
+                    pageClassName={pageClassName}
+                    pageLinkClassName={pageLinkClassName}
                     activeClassName='active'
                     previousLabel='<'
                     nextLabel='>'
-                    previousClassName='page-item'
-                    nextClassName='page-item'
-                    previousLinkClassName='page-link'
-                    nextLinkClassName='page-link'
+                    previousClassName={pageClassName}
+                    nextClassName={pageClassName}
+                    previousLinkClassName={pageLinkClassName}
+                    nextLinkClassName={pageLinkClassName}
                     disabledClassName='disabled'
                     breakLabel='...'
-                    breakClassName='page-item'
-                    breakLinkClassName='page-link'
+                    breakClassName={pageClassName}
+                    breakLinkClassName={pageLinkClassName}
                 />
             }
         </React.Fragment>

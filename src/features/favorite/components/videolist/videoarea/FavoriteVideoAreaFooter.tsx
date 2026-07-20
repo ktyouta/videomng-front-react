@@ -15,7 +15,8 @@ export function FavoriteVideoAreaFooter() {
     const {
         changePage,
         totalPage,
-        selectPage } = useFavoriteVideoAreaFooter();
+        selectPage,
+        size } = useFavoriteVideoAreaFooter();
 
     return (
         <Parent>
@@ -25,6 +26,7 @@ export function FavoriteVideoAreaFooter() {
                     changePage={changePage}
                     totalPage={totalPage}
                     selectedPage={selectPage}
+                    size={size}
                 />
             }
         </Parent>

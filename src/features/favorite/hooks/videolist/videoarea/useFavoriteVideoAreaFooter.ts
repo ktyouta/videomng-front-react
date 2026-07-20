@@ -1,3 +1,4 @@
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
 import { getFavoriteVideoList } from "../../../api/getFavoriteVideoList";
 import { FavoriteVideoListResponseType } from "../../../types/videolist/FavoriteVideoListResponseType";
@@ -6,6 +7,8 @@ import { useFavoriteVideoSearchConditionValue } from "../../useFavoriteVideoSear
 
 export function useFavoriteVideoAreaFooter() {
 
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
     // 検索条件
     const searchConditionObj = useFavoriteVideoSearchConditionValue();
     // クエリ作成用
@@ -45,5 +48,6 @@ export function useFavoriteVideoAreaFooter() {
         changePage,
         totalPage: data?.page ?? 0,
         selectPage: Number.isNaN(selectPage) ? 1 : selectPage,
+        size: isMobile ? "compact" as const : "default" as const,
     }
 }
