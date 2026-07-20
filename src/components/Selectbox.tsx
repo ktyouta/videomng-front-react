@@ -27,9 +27,11 @@ type Props = {
     color?: string,
     fontSize?: string,
     backgroundColor?: string,
+    borderColor?: string,
     outerStyle?: CSSProperties,
     // 縦幅をheightより小さくしたい場合、矢印アイコン周りの余白を指定する
     indicatorPadding?: string,
+    borderRadius?: string,
 };
 
 export function Selectbox(props: Props) {
@@ -64,6 +66,8 @@ export function Selectbox(props: Props) {
                         boxShadow: `none`,
                         textAlign: `center`,
                         backgroundColor: props.backgroundColor || `white`,
+                        ...(props.borderColor ? { borderColor: props.borderColor } : {}),
+                        ...(props.borderRadius ? { borderRadius: props.borderRadius } : {})
                     }),
                     menu: (base) => ({
                         ...base,

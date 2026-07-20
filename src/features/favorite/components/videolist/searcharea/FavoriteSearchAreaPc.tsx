@@ -1,4 +1,10 @@
 import styled from "styled-components";
+import {
+  FAVORITE_SEARCH_AREA_PANEL_BG,
+  FAVORITE_SEARCH_AREA_PANEL_BORDER,
+  FAVORITE_SEARCH_AREA_PANEL_SHADOW,
+  FAVORITE_SEARCH_AREA_SECTION_GAP,
+} from "../../../const/FavoriteConst";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
 import { FavoriteSearchSortArea } from "./FavoriteSearchSortArea";
 import { FavoriteSearchSwichModeContainer } from "./FavoriteSearchSwichModeContainer";
@@ -14,29 +20,32 @@ const Parent = styled.div`
   display:flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 8%;
+  padding: 0 8%;
 `;
 
 const OperationRowDiv = styled.div`
   display:flex;
-  justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  padding: 20px 18px;
+  border-radius: 12px;
+  background-color: ${FAVORITE_SEARCH_AREA_PANEL_BG};
+  border: 1px solid ${FAVORITE_SEARCH_AREA_PANEL_BORDER};
+  box-shadow: ${FAVORITE_SEARCH_AREA_PANEL_SHADOW};
 `;
 
 const SwitchModeRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 40px;
+  margin-bottom: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
 `;
 
 const SelectedTagAreaDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-top:35px;
+  margin-top: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
 `;
 
 /**
@@ -54,9 +63,7 @@ export function FavoriteSearchAreaPc() {
       </SwitchModeRowDiv>
       <OperationRowDiv>
         {/* タイトルフィルター */}
-        <FavoriteSearchText
-          width="85%"
-        />
+        <FavoriteSearchText />
         {/* 並び替えリスト */}
         <FavoriteSearchSortArea />
         {/* フィルター用モーダル */}
