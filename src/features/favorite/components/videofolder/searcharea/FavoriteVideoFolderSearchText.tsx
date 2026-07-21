@@ -1,38 +1,30 @@
+import { FaSearch } from "react-icons/fa";
 import styled from "styled-components";
 import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
-import { MEDIA } from "../../../../../consts/MediaConst";
+import { IconComponent } from "../../../../../components/IconComponent";
 import { useFavoriteVideoFolderSearchText } from "../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchText";
 
+// ClearableTextboxのクリアアイコン色（#2C3E50）に合わせて視認性を揃える
+const SEARCH_ICON_COLOR = "#2C3E50";
 
-const Parent = styled.div`
-  flex: 0 1 500px;
+const DEFAULT_MARGIN_RIGHT = "3%";
+
+const Parent = styled.div<{ width: string, marginRight: string }>`
+  width: ${({ width }) => (width)};
   display:flex;
   align-items: center;
+  gap: 8px;
+  height: 39px;
+  padding: 0 14px;
+  margin-right: ${({ marginRight }) => (marginRight)};
+  border-radius: 10px;
   box-sizing: border-box;
-  margin-right:3%;
-`;
-
-const TitleSpan = styled.span`
-  margin-right:7px;
-  color: white;
-  font-size: 12px;
-  white-space: nowrap;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
-  }
+  background-color: #ececec;
 `;
 
 type propsType = {
   width: string,
+  marginRight?: string,
 }
 
 export function FavoriteVideoFolderSearchText(props: propsType) {
@@ -47,21 +39,30 @@ export function FavoriteVideoFolderSearchText(props: propsType) {
     handleKeyPress } = useFavoriteVideoFolderSearchText();
 
   return (
-    <Parent>
-      <TitleSpan>
-        タイトル：
-      </TitleSpan>
+    <Parent
+      width={props.width}
+      marginRight={props.marginRight ?? DEFAULT_MARGIN_RIGHT}
+    >
+      <IconComponent
+        icon={FaSearch}
+        size="14px"
+        bgColor={SEARCH_ICON_COLOR}
+      />
       <ClearableTextbox
-        width={props.width}
-        height="99%"
-        textWidth="90%"
-        placeholder=""
+        width="100%"
+        height="100%"
+        textWidth="100%"
+        placeholder="タイトルで検索"
         value={inputKeyword}
         onChange={setInputKeyword}
         style={{
-          borderRadius: 6,
+          border: "none",
         }}
-        backgroundColor="#ececec"
+        textboxStyle={{
+          border: "none",
+          borderRadius: 0,
+        }}
+        backgroundColor="transparent"
         clear={clearInput}
         onBlur={filterVideoList}
         onKeyDown={handleKeyPress}

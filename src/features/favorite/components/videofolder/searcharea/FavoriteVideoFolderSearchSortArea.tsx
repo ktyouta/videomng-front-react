@@ -2,12 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Selectbox } from "../../../../../components/Selectbox";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import {
+    FAVORITE_SEARCH_AREA_BUTTON_BG,
+    FAVORITE_SEARCH_AREA_LABEL_COLOR,
+} from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchSortArea } from "../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchSortArea";
 
 
 const ComboTitleSpan = styled.span`
   margin-right:7px;
-  color: white;
+  color: ${FAVORITE_SEARCH_AREA_LABEL_COLOR};
   font-size: 12px;
   white-space: nowrap;
 
@@ -50,14 +54,15 @@ export function FavoriteVideoFolderSearchSortArea() {
                         options={sortList}
                         value={selectedFavoriteVideoSortKey || sortList[0].value}
                         onChange={selectSort}
-                        width={isMobile ? `65%` : `23%`}
+                        width={isMobile ? `75%` : `23%`}
                         height="39px"
-                        backgroundColor="rgb(24, 26, 30)"
+                        backgroundColor={FAVORITE_SEARCH_AREA_BUTTON_BG}
                         color="white"
                         fontSize={isMobile ? "12px" : "13px"}
                         outerStyle={{
                             marginRight: "2%",
                         }}
+                        borderRadius="10px"
                     />
                 </React.Fragment>
             }

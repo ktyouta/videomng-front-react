@@ -2,7 +2,7 @@ import React from "react";
 import { FaFolder } from 'react-icons/fa';
 import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
-import { FavoriteSearchActionButton } from "../FavoriteSearchActionButton";
+import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
 import { FavoriteCreateFolderContainer } from "./FavoriteCreateFolderContainer";
 
 /**

@@ -1,12 +1,12 @@
 import { IconType } from "react-icons";
 import styled from "styled-components";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { MEDIA } from "../../../../../consts/MediaConst";
+import { IconComponent } from "../../../components/IconComponent";
+import { MEDIA } from "../../../consts/MediaConst";
 import {
     FAVORITE_SEARCH_AREA_ACCENT_COLOR,
     FAVORITE_SEARCH_AREA_BUTTON_BG,
     FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG,
-} from "../../../const/FavoriteConst";
+} from "../const/FavoriteConst";
 
 
 const LabelSpan = styled.span`

@@ -2,7 +2,7 @@ import React from "react";
 import { FiDownload } from "react-icons/fi";
 import { ModalPortal } from "../../../../../../../components/ModalPortal";
 import { useFavoriteSearchCsvImportModal } from "../../../../../hooks/videolist/searcharea/csv/import/useFavoriteSearchCsvImportModal";
-import { FavoriteSearchActionButton } from "../../FavoriteSearchActionButton";
+import { FavoriteSearchActionButton } from "../../../../FavoriteSearchActionButton";
 import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
 
 

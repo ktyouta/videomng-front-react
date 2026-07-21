@@ -1,36 +1,12 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-import styled from "styled-components";
-import { Icon } from "../../../../../../components/Icon";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
-import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
 import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
+import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
 import { FavoriteDeleteFolder } from "./FavoriteDeleteFolder";
 import { FavoriteDeleteFolderConfirmModal } from "./FavoriteDeleteFolderConfirmModal";
 
-
-const TitleSpan = styled.span`
-  color: #9e9e9e;
-  &:hover {
-    cursor: pointer;
-  }
-  white-space: nowrap;
-  margin-right: 40px;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 12px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 14px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 14px;
-  }
-`;
 
 type PropsType = {
     folder: FolderMasterType;
@@ -54,21 +30,11 @@ export function FavoriteDeleteFolderModal(props: PropsType) {
 
     return (
         <React.Fragment>
-            <Icon
+            <FavoriteSearchActionButton
                 icon={FaRegTrashAlt}
-                bgColor="rgb(158, 158, 158)"
-                style={{
-                    marginRight: `10px`,
-                }}
-                width="20px"
-                height="100%"
-                onclick={openDeleteModal}
-            />
-            <TitleSpan
+                label="フォルダ削除"
                 onClick={openDeleteModal}
-            >
-                フォルダ削除
-            </TitleSpan>
+            />
             {/* フォルダ削除確認モーダル */}
             <ModalPortal
                 isOpen={isOpenModal}

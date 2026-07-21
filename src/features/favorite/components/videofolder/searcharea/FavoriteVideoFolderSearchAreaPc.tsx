@@ -2,7 +2,13 @@ import React from 'react';
 import { FaFolder } from 'react-icons/fa';
 import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
-import { DEFAULT_FOLDER_COLOR } from "../../../const/FavoriteConst";
+import {
+  DEFAULT_FOLDER_COLOR,
+  FAVORITE_SEARCH_AREA_PANEL_BG,
+  FAVORITE_SEARCH_AREA_PANEL_BORDER,
+  FAVORITE_SEARCH_AREA_PANEL_SHADOW,
+  FAVORITE_SEARCH_AREA_SECTION_GAP,
+} from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchArea } from '../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchArea';
 import { FolderMasterType } from '../../../types/videolist/FolderMasterType';
 import { FavoriteCreateFolderInFolderModal } from "./createfolder/FavoriteCreateFolderInFolderModal";
@@ -20,17 +26,21 @@ const Parent = styled.div`
   display:flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding-right: 13%;
-  padding-left: 8%;
+  padding: 0 6%;
 `;
 
-const FirstRowDiv = styled.div`
+const BreadcrumbPanelDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
   box-sizing: border-box;
   color: white;
   flex-wrap: wrap;
+  padding: 20px 18px;
+  border-radius: 12px;
+  background-color: ${FAVORITE_SEARCH_AREA_PANEL_BG};
+  border: 1px solid ${FAVORITE_SEARCH_AREA_PANEL_BORDER};
+  box-shadow: ${FAVORITE_SEARCH_AREA_PANEL_SHADOW};
 `;
 
 const OperationRowDiv = styled.div`
@@ -38,11 +48,20 @@ const OperationRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-top: 40px;
+  padding: 20px 18px;
+  border-radius: 12px;
+  background-color: ${FAVORITE_SEARCH_AREA_PANEL_BG};
+  border: 1px solid ${FAVORITE_SEARCH_AREA_PANEL_BORDER};
+  box-shadow: ${FAVORITE_SEARCH_AREA_PANEL_SHADOW};
+  margin-top: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
 `;
 
-const TagRowDiv = styled(OperationRowDiv)`
-  margin-top: 20px;
+const TagRowDiv = styled.div`
+  width: 100%;
+  display:flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
 `;
 
 const FolderNameArea = styled.div`
@@ -64,7 +83,7 @@ const SwitchModeRowDiv = styled.div`
   display:flex;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 40px;
+  margin-bottom: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
 `;
 
 type propsType = {
@@ -95,7 +114,7 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         {/* 表示切替 */}
         <FavoriteVideoFolderSearchSwichModeContainer />
       </SwitchModeRowDiv>
-      <FirstRowDiv>
+      <BreadcrumbPanelDiv>
         <Icon
           icon={FaFolder}
           style={{
@@ -137,7 +156,7 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
         <FavoriteDeleteFolderModal
           folder={folder}
         />
-      </FirstRowDiv>
+      </BreadcrumbPanelDiv>
       <OperationRowDiv>
         {/* タイトルフィルター */}
         <FavoriteVideoFolderSearchText

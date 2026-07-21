@@ -2,7 +2,7 @@ import React from "react";
 import { FaFilter } from 'react-icons/fa';
 import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteSearchFilterModal } from "../../../../hooks/videolist/searcharea/filter/useFavoriteSearchFilterModal";
-import { FavoriteSearchActionButton } from "../FavoriteSearchActionButton";
+import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
 import { FavoriteSearchCondition } from "./FavoriteSearchCondition";
 
 

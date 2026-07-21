@@ -30,6 +30,12 @@ const OperationPanelDiv = styled.div`
   margin-bottom: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
 `;
 
+const TextRowDiv = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+`;
+
 const SortRowDiv = styled.div`
   width: 100%;
   display:flex;
@@ -66,9 +72,11 @@ export function FavoriteSearchAreaMobile() {
         {/* 表示切替 */}
         <FavoriteSearchSwichModeContainer />
       </ModeRowDiv>
-      {/* タイトルフィルター */}
-      <FavoriteSearchText />
       <OperationPanelDiv>
+        <TextRowDiv>
+          {/* タイトルフィルター */}
+          <FavoriteSearchText />
+        </TextRowDiv>
         <SortRowDiv>
           {/* 並び替えリスト */}
           <FavoriteSearchSortArea />
