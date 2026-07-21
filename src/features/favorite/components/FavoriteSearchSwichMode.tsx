@@ -1,5 +1,11 @@
 import { SegmentedControl } from "../../../components/SegmentedControl";
-import { FAVORITE_LIST_MODE } from "../const/FavoriteConst";
+import {
+    DEFAULT_TAG_COLOR,
+    FAVORITE_LIST_MODE,
+    FAVORITE_SEARCH_AREA_BUTTON_BG,
+    FAVORITE_SEARCH_AREA_LABEL_COLOR,
+    FAVORITE_SEARCH_AREA_PANEL_BORDER,
+} from "../const/FavoriteConst";
 
 type PropsType = {
     selectedFavoriteVideoMode: string;
@@ -25,9 +31,14 @@ export function FavoriteSearchSwichMode(props: PropsType) {
             outerStyle={{
                 minWidth: "220px",
                 marginRight: "30px",
-                height: "35px",
+                height: "39px",
             }}
-            color="#2563eb"
+            color={DEFAULT_TAG_COLOR}
+            backgroundColor={FAVORITE_SEARCH_AREA_BUTTON_BG}
+            inactiveColor={FAVORITE_SEARCH_AREA_LABEL_COLOR}
+            borderRadius="12px"
+            showBorder={false}
+            borderColor={FAVORITE_SEARCH_AREA_PANEL_BORDER}
         />
     );
 }
