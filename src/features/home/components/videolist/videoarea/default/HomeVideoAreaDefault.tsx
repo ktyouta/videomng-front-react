@@ -15,7 +15,7 @@ const OuterDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding: 0 7%;
-  margin-top: 56px;
+  margin-top: 35px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     padding: 0 13%;
@@ -36,15 +36,17 @@ const OuterDiv = styled.div`
 const MessageDiv = styled.div`
   color: ${HOME_SEARCH_AREA_LABEL_COLOR};
   box-sizing: border-box;
-  margin-bottom: 45px;
+  margin-bottom: 25px;
   font-size: 15px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     font-size: 17px;
+    margin-bottom: 45px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     font-size: 17px;
+    margin-bottom: 45px;
   }
 `;
 

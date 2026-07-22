@@ -30,6 +30,7 @@ export function HomeSearchText() {
       iconWidth="47px"
       iconMobileWidth="38px"
       outerHeight="39px"
+      radius="10px"
       style={{
         flex: 1,
         minWidth: 0,

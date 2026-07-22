@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Loading from "../../../../../../components/Loading";
+import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useHomeVideoAreaResult } from "../../../../hooks/videolist/videoarea/result/useHomeVideoAreaResult";
 import { HomeVideoListResult } from "./HomeVideoListResult";
 import { HomeVideoSearchWord } from "./HomeVideoSearchWord";
@@ -8,7 +9,19 @@ import { HomeVideoSearchWord } from "./HomeVideoSearchWord";
 const Parent = styled.div`
   width: 100%;
   height: 90%;
-  padding-top: 3%;
+  padding-top: 4%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    padding-top: 3%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    padding-top: 3%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    padding-top: 3%;
+  }
 `;
 
 const LoadingParent = styled.div`

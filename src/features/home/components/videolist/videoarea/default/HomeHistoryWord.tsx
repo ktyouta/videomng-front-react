@@ -1,10 +1,10 @@
+import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { RxCross1 } from "react-icons/rx";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import {
-  HOME_SEARCH_AREA_BUTTON_BG,
-  HOME_SEARCH_AREA_BUTTON_HOVER_BG,
+    HOME_SEARCH_AREA_BUTTON_BG,
+    HOME_SEARCH_AREA_BUTTON_HOVER_BG,
 } from "../../../../const/HomeConst";
 
 const WordDiv = styled.div`

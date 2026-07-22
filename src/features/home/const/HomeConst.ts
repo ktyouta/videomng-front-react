@@ -54,7 +54,7 @@ export const FREQUENT_KEYWORD_MAX_SAVE_LIMIT = 5;
 export const FAVORITE_KEYWORD = `favoriteKeyword`;
 
 // ローカルストレージ最大表示数/最大保存数(お気に入りワード)
-export const FAVORITE_KEYWORD_MAX = 5;
+export const FAVORITE_KEYWORD_MAX = 10;
 
 // 動画一覧の検索条件
 export const SEARCH_CONDITION = {

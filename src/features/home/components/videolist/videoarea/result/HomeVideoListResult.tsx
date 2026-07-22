@@ -19,7 +19,7 @@ const VideoUl = styled.ul`
   display: grid;
   color: rgb(255, 255, 255);
   margin: 0px;
-  padding: 2% 5% 0px;
+  padding: 4% 5% 0px;
   width: 100%;
   box-sizing: border-box;
   gap: 38px 4%;
@@ -28,14 +28,17 @@ const VideoUl = styled.ul`
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding: 2% 5% 0px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 2% 5% 0px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+    padding: 2% 5% 0px;
   }
 `;
 
