@@ -25,13 +25,15 @@ export function HomeSearchText() {
       value={inputKeyword}
       onChange={setInputKeyword}
       placeholder="キーワード"
-      outerWidth="57%"
-      outerMobileWidth="72%"
+      outerWidth="auto"
+      outerMobileWidth="auto"
       iconWidth="47px"
       iconMobileWidth="38px"
-      outerHeight="99%"
+      outerHeight="39px"
       style={{
-        marginRight: "30px"
+        flex: 1,
+        minWidth: 0,
+        marginRight: "16px"
       }}
     />
   );

@@ -3,28 +3,41 @@ import { MdTune } from 'react-icons/md';
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { ModalPortal } from "../../../../../components/ModalPortal";
+import {
+    HOME_SEARCH_AREA_ACCENT_COLOR,
+    HOME_SEARCH_AREA_BUTTON_BG,
+    HOME_SEARCH_AREA_BUTTON_HOVER_BG,
+} from "../../../const/HomeConst";
 import { useHomeSearchConditionModal } from "../../../hooks/videolist/searcharea/useHomeSearchConditionModal";
 import { HomeSearchCondition } from "./HomeSearchCondition";
 
 
-const SearchConditionIconAreaDiv = styled.div`
-  width: 46px;
-  height: 99%;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 15%;
-  border-bottom-right-radius: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color:#9e9e9e;
-`;
-
 const SearchConditionTitleSpan = styled.span`
   color: #9e9e9e;
   font-size: 14px;
+  transition: color 0.15s ease;
+`;
+
+const TriggerWrapperDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 39px;
+  padding: 0 14px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: ${HOME_SEARCH_AREA_BUTTON_BG};
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+
   &:hover {
-    cursor: pointer;
+    background-color: ${HOME_SEARCH_AREA_BUTTON_HOVER_BG};
+    transform: translateY(-1px);
+  }
+
+  &:hover ${SearchConditionTitleSpan} {
+    color: ${HOME_SEARCH_AREA_ACCENT_COLOR};
   }
 `;
 
@@ -42,21 +55,21 @@ export function HomeSearchConditionModal() {
     return (
         <React.Fragment>
             {/* 検索条件展開用ボタン */}
-            <SearchConditionIconAreaDiv>
+            <TriggerWrapperDiv
+                onClick={openFilterModal}
+            >
                 <IconComponent
                     icon={MdTune}
-                    onclick={openFilterModal}
-                    size="85%"
+                    size="16px"
+                    bgColor="#9e9e9e"
                 />
-            </SearchConditionIconAreaDiv>
-            {
-                !isMobile &&
-                <SearchConditionTitleSpan
-                    onClick={openFilterModal}
-                >
-                    条件を指定
-                </SearchConditionTitleSpan>
-            }
+                {
+                    !isMobile &&
+                    <SearchConditionTitleSpan>
+                        条件を指定
+                    </SearchConditionTitleSpan>
+                }
+            </TriggerWrapperDiv>
             {/* 検索条件指定モーダル */}
             <ModalPortal
                 isOpen={isOpenFilterModal}

@@ -28,6 +28,7 @@ export type refType = {
 //テキストボックスの基本スタイル
 const BaseInput = styled.input<{ textWidth?: string, bgColor?: string, height?: string }>`
   width: ${({ textWidth }) => (textWidth ?? "400px")};
+  min-width: 0;
   background-color:${({ bgColor }) => (bgColor ?? "")};
   height: ${({ height }) => (height ?? "33px")};
   border-radius: 5px;
