@@ -36,17 +36,21 @@ const CardDiv = styled.div`
   background-color: ${HOME_SEARCH_AREA_PANEL_BG};
   border: 1px solid ${HOME_SEARCH_AREA_PANEL_BORDER};
   box-shadow: ${HOME_SEARCH_AREA_PANEL_SHADOW};
+  gap: 16px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     padding: 20px 18px;
+    gap: 20px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     padding: 20px 18px;
+    gap: 20px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     padding: 20px 18px;
+    gap: 20px;
   }
 `;
 

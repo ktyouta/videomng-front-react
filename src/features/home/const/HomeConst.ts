@@ -84,6 +84,9 @@ export const HOME_SEARCH_AREA_PANEL_SHADOW = "0 4px 12px rgba(0, 0, 0, 0.6)";
 // お気に入り動画一覧の操作ボタンと同じ配色に揃える
 export const HOME_SEARCH_AREA_BUTTON_BG = "#3a3d42";
 
+// キーワード検索実行ボタンの色。条件を指定ボタンのホバー色と同系統に揃える
+export const HOME_SEARCH_AREA_SEARCH_BUTTON_BG = "rgb(37, 99, 235)";
+
 export const HOME_SEARCH_AREA_BUTTON_HOVER_BG = "rgba(37, 99, 235, 0.18)";
 
 export const HOME_SEARCH_AREA_ACCENT_COLOR = "#7abaff";

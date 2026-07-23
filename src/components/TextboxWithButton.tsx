@@ -7,6 +7,8 @@ import { IconComponent } from "./IconComponent";
 
 
 const RADIUS_DEFAULT = "6px";
+// Parentの角丸とSearchIconAreaDiv自身の角丸は別々に計算されるため、端数のズレで角に継ぎ目が出る。内側の丸みを少し小さくして継ぎ目を覆う
+const CORNER_SEAM_COMPENSATION = "1px";
 
 const Parent = styled.div < { width: string, mobileWidth: string, height: string, bgColor?: string, radius?: string, } > `
   background-color:${({ bgColor }) => (bgColor ?? "white")};
@@ -30,13 +32,15 @@ const Parent = styled.div < { width: string, mobileWidth: string, height: string
   }
 `;
 
-const SearchIconAreaDiv = styled.div<{ width: string, mobileWidth: string, radius: string, }>`
-  background-color:#FF9900;
+const ICON_AREA_BG_COLOR_DEFAULT = "#FF9900";
+
+const SearchIconAreaDiv = styled.div<{ width: string, mobileWidth: string, radius: string, bgColor?: string, }>`
+  background-color:${({ bgColor }) => (bgColor ?? ICON_AREA_BG_COLOR_DEFAULT)};
   height: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-right-radius: ${({ radius }) => (radius ?? RADIUS_DEFAULT)};
-  border-bottom-right-radius: ${({ radius }) => (radius ?? RADIUS_DEFAULT)};
+  border-top-right-radius: calc(${({ radius }) => (radius ?? RADIUS_DEFAULT)} - ${CORNER_SEAM_COMPENSATION});
+  border-bottom-right-radius: calc(${({ radius }) => (radius ?? RADIUS_DEFAULT)} - ${CORNER_SEAM_COMPENSATION});
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,6 +85,7 @@ type propsType = {
   iconWidth: string,
   iconMobileWidth: string,
   radius?: string,
+  iconAreaBgColor?: string,
 }
 
 
@@ -127,6 +132,7 @@ export function TextboxWithButton(props: propsType) {
         width={props.iconWidth}
         mobileWidth={props.iconMobileWidth}
         radius={props.radius ?? RADIUS_DEFAULT}
+        bgColor={props.iconAreaBgColor}
         onClick={props.onClick}
       >
         <IconComponent

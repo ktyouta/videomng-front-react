@@ -1,5 +1,6 @@
 import { IoSearch } from "react-icons/io5";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
+import { HOME_SEARCH_AREA_SEARCH_BUTTON_BG } from "../../../const/HomeConst";
 import { useHomeSearchText } from "../../../hooks/videolist/searcharea/useHomeSearchText";
 
 
@@ -31,10 +32,10 @@ export function HomeSearchText() {
       iconMobileWidth="38px"
       outerHeight="39px"
       radius="10px"
+      iconAreaBgColor={HOME_SEARCH_AREA_SEARCH_BUTTON_BG}
       style={{
         flex: 1,
         minWidth: 0,
-        marginRight: "16px"
       }}
     />
   );

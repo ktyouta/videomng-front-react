@@ -23,7 +23,7 @@ export function HeaderUserMenu() {
                     :
                     // 未ログイン
                     <ButtonComponent
-                        variant="red"
+                        variant="blue"
                         onClick={clickLogin}
                         size={isMobile ? "small" : "medium"}
                         style={{
