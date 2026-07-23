@@ -7,20 +7,26 @@ import { useFavoriteSearchText } from "../../../hooks/videolist/searcharea/useFa
 // ClearableTextboxのクリアアイコン色（#2C3E50）に合わせて視認性を揃える
 const SEARCH_ICON_COLOR = "#2C3E50";
 
-const Parent = styled.div`
+const DEFAULT_MARGIN_RIGHT = "3%";
+
+const Parent = styled.div<{ marginRight: string }>`
   flex: 1;
   display:flex;
   align-items: center;
   gap: 8px;
   height: 39px;
   padding: 0 14px;
-  margin-right: 16px;
+  margin-right: ${({ marginRight }) => (marginRight)};
   border-radius: 10px;
   box-sizing: border-box;
   background-color: #ececec;
 `;
 
-export function FavoriteSearchText() {
+type propsType = {
+  marginRight?: string,
+}
+
+export function FavoriteSearchText(props: propsType) {
 
   const {
     inputKeyword,
@@ -30,7 +36,9 @@ export function FavoriteSearchText() {
     handleKeyPress } = useFavoriteSearchText();
 
   return (
-    <Parent>
+    <Parent
+      marginRight={props.marginRight ?? DEFAULT_MARGIN_RIGHT}
+    >
       <IconComponent
         icon={FaSearch}
         size="14px"

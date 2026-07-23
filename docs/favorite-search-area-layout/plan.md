@@ -11,3 +11,5 @@
 - [x] `FavoriteSearchAreaPc.tsx` / `FavoriteSearchAreaMobile.tsx` の余白・パネル背景を反映
 - [x] レビュー実施（frontend-review / architecture-review / comments-review / performance-check）
 - [x] spec-review 実施
+- [x] 並べ替えラベル削除に伴うスマホ表示の余白調整（`FavoriteSearchSortArea` / `FavoriteSearchText` / `FavoriteVideoFolderSearchSortArea`）
+- [x] PC操作行の間隔をgapに統一し、共通ボタン`FavoriteSearchActionButton`からmargin-rightを撤廃（影響を受けた全箇所にgapを追加）

@@ -33,7 +33,6 @@ const ButtonWrapper = styled.div`
   gap: 6px;
   height: 39px;
   padding: 0 14px;
-  margin-right: 12px;
   border-radius: 8px;
   box-sizing: border-box;
   background-color: ${FAVORITE_SEARCH_AREA_BUTTON_BG};

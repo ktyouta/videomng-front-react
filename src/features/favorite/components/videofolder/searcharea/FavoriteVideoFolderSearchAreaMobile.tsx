@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
 import {
   DEFAULT_FOLDER_COLOR,
+  FAVORITE_SEARCH_AREA_BUTTON_GAP,
   FAVORITE_SEARCH_AREA_PANEL_BG,
   FAVORITE_SEARCH_AREA_PANEL_BORDER,
   FAVORITE_SEARCH_AREA_PANEL_SHADOW,
@@ -69,6 +70,7 @@ const FolderActionRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_BUTTON_GAP};
   box-sizing: border-box;
   flex-wrap: wrap;
 `;
@@ -103,6 +105,7 @@ const ActionRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_BUTTON_GAP};
   box-sizing: border-box;
   flex-wrap: wrap;
 `;

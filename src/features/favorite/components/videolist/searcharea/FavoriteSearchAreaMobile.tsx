@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {
+  FAVORITE_SEARCH_AREA_BUTTON_GAP,
   FAVORITE_SEARCH_AREA_PANEL_BG,
   FAVORITE_SEARCH_AREA_PANEL_BORDER,
   FAVORITE_SEARCH_AREA_PANEL_SHADOW,
@@ -48,6 +49,7 @@ const ActionRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_BUTTON_GAP};
   box-sizing: border-box;
 `;
 
@@ -75,7 +77,9 @@ export function FavoriteSearchAreaMobile() {
       <OperationPanelDiv>
         <TextRowDiv>
           {/* タイトルフィルター */}
-          <FavoriteSearchText />
+          <FavoriteSearchText
+            marginRight="0"
+          />
         </TextRowDiv>
         <SortRowDiv>
           {/* 並び替えリスト */}

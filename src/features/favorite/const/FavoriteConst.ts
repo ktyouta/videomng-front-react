@@ -164,6 +164,12 @@ export const DEFAULT_TAG_COLOR = "linear-gradient(135deg, #3b82f6, #2563eb)";
 
 export const FAVORITE_SEARCH_AREA_SECTION_GAP = "24px";
 
+// 検索条件エリア操作行内（検索欄・並び替え・ボタン群）の間隔
+export const FAVORITE_SEARCH_AREA_ROW_GAP = "2%";
+
+// 操作ボタン同士（フィルター・フォルダ作成等）の間隔
+export const FAVORITE_SEARCH_AREA_BUTTON_GAP = "12px";
+
 // ヘッダーのユーザーメニュー（HeaderUserMenuList）と同じ「浮いているパネル」の配色に揃える
 export const FAVORITE_SEARCH_AREA_PANEL_BG = "#1c1f26";
 

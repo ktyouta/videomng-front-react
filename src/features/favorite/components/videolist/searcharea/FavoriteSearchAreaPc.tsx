@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import {
+  FAVORITE_SEARCH_AREA_BUTTON_GAP,
   FAVORITE_SEARCH_AREA_PANEL_BG,
   FAVORITE_SEARCH_AREA_PANEL_BORDER,
   FAVORITE_SEARCH_AREA_PANEL_SHADOW,
+  FAVORITE_SEARCH_AREA_ROW_GAP,
   FAVORITE_SEARCH_AREA_SECTION_GAP,
 } from "../../../const/FavoriteConst";
 import { FavoriteSearchSelectedTag } from "./FavoriteSearchSelectedTag";
@@ -26,12 +28,19 @@ const Parent = styled.div`
 const OperationRowDiv = styled.div`
   display:flex;
   align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_ROW_GAP};
   box-sizing: border-box;
   padding: 20px 18px;
   border-radius: 12px;
   background-color: ${FAVORITE_SEARCH_AREA_PANEL_BG};
   border: 1px solid ${FAVORITE_SEARCH_AREA_PANEL_BORDER};
   box-shadow: ${FAVORITE_SEARCH_AREA_PANEL_SHADOW};
+`;
+
+const ButtonGroupDiv = styled.div`
+  display:flex;
+  align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_BUTTON_GAP};
 `;
 
 const SwitchModeRowDiv = styled.div`
@@ -63,17 +72,21 @@ export function FavoriteSearchAreaPc() {
       </SwitchModeRowDiv>
       <OperationRowDiv>
         {/* タイトルフィルター */}
-        <FavoriteSearchText />
+        <FavoriteSearchText
+          marginRight="0"
+        />
         {/* 並び替えリスト */}
         <FavoriteSearchSortArea />
-        {/* フィルター用モーダル */}
-        <FavoriteSearchFilterModal />
-        {/* フォルダ作成 */}
-        <FavoriteCreateFolderModal />
-        {/* 保存 */}
-        <FavoriteSearchCsvImportModal />
-        {/* 取込 */}
-        <FavoriteSearchCsvExportModal />
+        <ButtonGroupDiv>
+          {/* フィルター用モーダル */}
+          <FavoriteSearchFilterModal />
+          {/* フォルダ作成 */}
+          <FavoriteCreateFolderModal />
+          {/* 保存 */}
+          <FavoriteSearchCsvImportModal />
+          {/* 取込 */}
+          <FavoriteSearchCsvExportModal />
+        </ButtonGroupDiv>
       </OperationRowDiv>
       <SelectedTagAreaDiv>
         {/* 選択中のタグ */}

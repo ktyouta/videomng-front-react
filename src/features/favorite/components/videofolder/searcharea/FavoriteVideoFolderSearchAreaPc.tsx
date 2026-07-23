@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { Icon } from "../../../../../components/Icon";
 import {
   DEFAULT_FOLDER_COLOR,
+  FAVORITE_SEARCH_AREA_BUTTON_GAP,
   FAVORITE_SEARCH_AREA_PANEL_BG,
   FAVORITE_SEARCH_AREA_PANEL_BORDER,
   FAVORITE_SEARCH_AREA_PANEL_SHADOW,
+  FAVORITE_SEARCH_AREA_ROW_GAP,
   FAVORITE_SEARCH_AREA_SECTION_GAP,
 } from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchArea } from '../../../hooks/videofolder/searcharea/useFavoriteVideoFolderSearchArea';
@@ -47,6 +49,7 @@ const OperationRowDiv = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_ROW_GAP};
   box-sizing: border-box;
   padding: 20px 18px;
   border-radius: 12px;
@@ -54,6 +57,12 @@ const OperationRowDiv = styled.div`
   border: 1px solid ${FAVORITE_SEARCH_AREA_PANEL_BORDER};
   box-shadow: ${FAVORITE_SEARCH_AREA_PANEL_SHADOW};
   margin-top: ${FAVORITE_SEARCH_AREA_SECTION_GAP};
+`;
+
+const ButtonGroupDiv = styled.div`
+  display:flex;
+  align-items: center;
+  gap: ${FAVORITE_SEARCH_AREA_BUTTON_GAP};
 `;
 
 const TagRowDiv = styled.div`
@@ -148,26 +157,31 @@ export function FavoriteVideoFolderSearchAreaPc(props: propsType) {
             })
           }
         </FolderNameArea>
-        {/* フォルダ名変更モーダル */}
-        <FavoriteUpdateFolderModal
-          folder={folder}
-        />
-        {/* フォルダ削除モーダル */}
-        <FavoriteDeleteFolderModal
-          folder={folder}
-        />
+        <ButtonGroupDiv>
+          {/* フォルダ名変更モーダル */}
+          <FavoriteUpdateFolderModal
+            folder={folder}
+          />
+          {/* フォルダ削除モーダル */}
+          <FavoriteDeleteFolderModal
+            folder={folder}
+          />
+        </ButtonGroupDiv>
       </BreadcrumbPanelDiv>
       <OperationRowDiv>
         {/* タイトルフィルター */}
         <FavoriteVideoFolderSearchText
           width="85%"
+          marginRight="0"
         />
         {/* 並び替えリスト */}
         <FavoriteVideoFolderSearchSortArea />
-        {/* フィルター */}
-        <FavoriteVideoFolderSearchFilterModal />
-        {/* フォルダ作成 */}
-        <FavoriteCreateFolderInFolderModal />
+        <ButtonGroupDiv>
+          {/* フィルター */}
+          <FavoriteVideoFolderSearchFilterModal />
+          {/* フォルダ作成 */}
+          <FavoriteCreateFolderInFolderModal />
+        </ButtonGroupDiv>
       </OperationRowDiv>
       <TagRowDiv>
         {/* 選択中のタグ */}
