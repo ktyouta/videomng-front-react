@@ -7,11 +7,9 @@ import { IconComponent } from "./IconComponent";
 
 
 const RADIUS_DEFAULT = "6px";
-// Parentの角丸とSearchIconAreaDiv自身の角丸は別々に計算されるため、端数のズレで角に継ぎ目が出る。内側の丸みを少し小さくして継ぎ目を覆う
-const CORNER_SEAM_COMPENSATION = "1px";
 
 const Parent = styled.div < { width: string, mobileWidth: string, height: string, bgColor?: string, radius?: string, } > `
-  background-color:${({ bgColor }) => (bgColor ?? "white")};
+  background-color: transparent;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -39,8 +37,8 @@ const SearchIconAreaDiv = styled.div<{ width: string, mobileWidth: string, radiu
   height: 100%;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-right-radius: calc(${({ radius }) => (radius ?? RADIUS_DEFAULT)} - ${CORNER_SEAM_COMPENSATION});
-  border-bottom-right-radius: calc(${({ radius }) => (radius ?? RADIUS_DEFAULT)} - ${CORNER_SEAM_COMPENSATION});
+  border-top-right-radius: ${({ radius }) => (radius)};
+  border-bottom-right-radius: ${({ radius }) => (radius)};
   display: flex;
   align-items: center;
   justify-content: center;

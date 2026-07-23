@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { useReplaceQuery } from "../../../../../hooks/useReplaceQuery";
 import { useHomeVideoNowSearchConditionValue } from "../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../useCreateHomeVideoListQuery";
@@ -25,6 +26,8 @@ export function useHomeSearchText() {
     const { create } = useCreateHomeVideoListQuery({ nowSearchCondition });
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
+    // 画面サイズ判定
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
     /**
      * 検索ボタン押下イベント
@@ -76,5 +79,6 @@ export function useHomeSearchText() {
         clearInput,
         inputKeyword,
         setInputKeyword,
+        isPcLess,
     }
 }

@@ -15,7 +15,8 @@ export function HomeSearchText() {
     clickSearchBtn,
     clearInput,
     inputKeyword,
-    setInputKeyword, } = useHomeSearchText();
+    setInputKeyword,
+    isPcLess } = useHomeSearchText();
 
   return (
     <TextboxWithButton
@@ -28,8 +29,8 @@ export function HomeSearchText() {
       placeholder="キーワード"
       outerWidth="auto"
       outerMobileWidth="auto"
-      iconWidth="47px"
-      iconMobileWidth="38px"
+      iconWidth="50px"
+      iconMobileWidth="40px"
       outerHeight="39px"
       radius="10px"
       iconAreaBgColor={HOME_SEARCH_AREA_SEARCH_BUTTON_BG}
@@ -37,6 +38,7 @@ export function HomeSearchText() {
         flex: 1,
         minWidth: 0,
       }}
+      iconSize={isPcLess ? "65%" : "75%"}
     />
   );
 }
