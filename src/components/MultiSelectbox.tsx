@@ -154,6 +154,7 @@ export function MultiSelectbox(props: Props) {
                     }),
                     input: (base) => ({
                         ...base,
+                        color: props.color || `black`,
                         ...(props.indicatorPadding ? { margin: 0, paddingTop: 0, paddingBottom: 0 } : {}),
                     }),
                     singleValue: (base) => ({

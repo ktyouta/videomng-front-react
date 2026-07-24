@@ -245,6 +245,7 @@ export function TagFolderSelectPanel({
                                 fontSize={isMobile ? "12px" : "15px"}
                                 backgroundColor="rgb(24, 26, 30)"
                                 color="white"
+                                isSearchable={!isMobile}
                             />
                         </FolderAreaDiv>
                         {

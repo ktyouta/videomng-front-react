@@ -20,6 +20,7 @@ type Props = {
     onChange: (value: string) => void,
     placeholder?: string,
     disabled?: boolean,
+    isSearchable?: boolean,
     width: string,
     minWidth?: string,
     height: string,
@@ -57,6 +58,7 @@ export function Selectbox(props: Props) {
                 options={props.options}
                 placeholder={props.placeholder}
                 isDisabled={props.disabled}
+                isSearchable={props.isSearchable ?? false}
                 menuPlacement="auto"
                 menuPosition="fixed"
                 styles={{
@@ -98,6 +100,7 @@ export function Selectbox(props: Props) {
                     }),
                     input: (base) => ({
                         ...base,
+                        color: props.color || `black`,
                         ...(props.indicatorPadding ? { margin: 0, paddingTop: 0, paddingBottom: 0 } : {}),
                     }),
                     singleValue: (base) => ({

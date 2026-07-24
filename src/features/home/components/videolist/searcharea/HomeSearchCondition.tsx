@@ -113,6 +113,7 @@ export function HomeSearchCondition(props: propsType) {
                             height={isMobile ? "30px" : "39px"}
                             indicatorPadding={isMobile ? "2px" : undefined}
                             fontSize={isMobile ? "12px" : undefined}
+                            isSearchable={!isMobile}
                         />
                     </InputDiv>
                     {
@@ -130,6 +131,7 @@ export function HomeSearchCondition(props: propsType) {
                                 height={isMobile ? "30px" : "39px"}
                                 indicatorPadding={isMobile ? "2px" : undefined}
                                 fontSize={isMobile ? "12px" : undefined}
+                                isSearchable={!isMobile}
                             />
                         </InputDiv>
                     }

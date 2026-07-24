@@ -34,6 +34,7 @@ export function FavoriteVideoFolderSearchSortArea() {
                     borderColor="transparent"
                     fontSize={isMobile ? "12px" : "13px"}
                     borderRadius="10px"
+                    isSearchable={!isMobile}
                 />
             }
         </React.Fragment>

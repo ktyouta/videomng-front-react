@@ -34,6 +34,7 @@ export function FavoriteSearchSortArea() {
                     color="white"
                     fontSize={isPcLess ? "12px" : "13px"}
                     borderRadius="10px"
+                    isSearchable={!isPcLess}
                 />
             }
         </React.Fragment>

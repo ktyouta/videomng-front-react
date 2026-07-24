@@ -6,6 +6,7 @@ import { Checkbox } from "../../../../../components/Checkbox";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { Selectbox } from "../../../../../components/Selectbox";
 import TagButtonComponent from "../../../../../components/TagButtonComponent";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
 import { FAVORITE_LEVEL_SETTING_LIST, ISVISIBLEAFTERFOLDERADDLIST } from "../../../const/FavoriteConst";
 import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videodetailsetting/useFavoriteDetailSettingEdit";
@@ -126,8 +127,11 @@ export function FavoriteDetailSettingEdit(props: propsType) {
         data,
         isVisibleAfterFolderAdd,
         setIsVisibleAfterFolderAdd,
-        errMessage
+        errMessage,
     } = useFavoriteDetailSettingEdit({ ...props });
+
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     if (errMessage) {
         return (
@@ -223,6 +227,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                                         height="39px"
                                         backgroundColor="rgb(44, 47, 54)"
                                         color="white"
+                                        isSearchable={!isMobile}
                                     />
                                 </MetaDiv>
                             </React.Fragment>
@@ -269,6 +274,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                             height="39px"
                             backgroundColor="rgb(44, 47, 54)"
                             color="white"
+                            isSearchable={!isMobile}
                         />
                     </MetaDiv>
                 </MetaContentDiv>

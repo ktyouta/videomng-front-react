@@ -106,6 +106,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
             backgroundColor="rgb(24, 26, 30)"
             color="white"
             fontSize={menuComboFontSize}
+            isSearchable={!isMobile}
           />
         </ComboAreaDiv>
         {
