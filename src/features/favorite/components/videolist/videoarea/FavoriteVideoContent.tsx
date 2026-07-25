@@ -127,6 +127,7 @@ export function FavoriteVideoContent(props: propsType) {
             <VideoSection>
                 <VideoImg
                     src={imgUrl}
+                    loading="lazy"
                     onClick={() => {
                         clickVideo(videoId);
                     }}

@@ -83,6 +83,7 @@ export function ChannelVideoContent(props: propsType) {
                 <VideoImgAreaDiv>
                     <VideoImg
                         src={imgUrl}
+                        loading="lazy"
                         onClick={() => {
                             clickVideo(videoId, favoriteFlg);
                         }}

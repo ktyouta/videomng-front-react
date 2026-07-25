@@ -124,6 +124,7 @@ export function HomeVideoContent(props: propsType) {
                 <VideoImgAreaDiv>
                     <VideoImg
                         src={imgUrl}
+                        loading="lazy"
                         onClick={() => {
                             clickVideo(videoId)
                         }}

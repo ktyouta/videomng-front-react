@@ -111,7 +111,7 @@ export function FavoriteVideoFolderContent(props: propsType) {
                         thumbnailUrl && (
                             <React.Fragment>
                                 <ThumbnailWrapper>
-                                    <VideoImg src={thumbnailUrl} />
+                                    <VideoImg src={thumbnailUrl} loading="lazy" />
                                 </ThumbnailWrapper>
                                 <Icon
                                     icon={FaFolder}
