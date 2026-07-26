@@ -1,11 +1,7 @@
 import { LoginUserInfoType } from "../types/userinfo/LoginUserInfoType";
 
-const protocol = import.meta.env.VITE_PROTOCOL ?? ``;
-const domain = import.meta.env.VITE_DOMAIN ?? ``;
-const port = import.meta.env.VITE_PORT ?? ``;
-
 // videomng-apiのパス
-export const VIDEO_MNG_PATH = `${protocol}${domain}${port}`;
+export const VIDEO_MNG_PATH = (import.meta.env.VITE_API_URL ?? ``).replace(/\/+$/, ``);
 //z-index設定用
 export const Z_INDEX_PARAM = {
     WAITL_OADING: 1000,

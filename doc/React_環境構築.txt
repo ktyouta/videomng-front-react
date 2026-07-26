@@ -13,9 +13,7 @@ React + Typescript環境構築
 ⑥言語を選択（Typescript + SWCを選択）
 
 ⑦プロジェクトのルートフォルダに.env.developmentと.env.productionファイルを作成して以下の設定を記載する
-VITE_PROTOCOL=http://
-VITE_DOMAIN=localhost:
-VITE_PORT= 3001
+VITE_API_URL=http://localhost:3001
 ※APIの設定に合わせて指定する
 
 ⑧作成したプロジェクト配下に移動して、npm installを実行する
