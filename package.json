@@ -49,7 +49,6 @@
     "react-paginate": "^8.3.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.26.0",
-    "react-scripts": "5.0.1",
     "react-select": "^5.10.2",
     "react-spinners": "^0.13.8",
     "react-tag-autocomplete": "^7.2.0",
@@ -67,22 +66,12 @@
     "start": "run-p dev",
     "dev": "vite",
     "build": "vite build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test": "vitest run",
     "json-server": "json-server --port 3001 --watch db.json",
-    "local": "run-p local:*",
-    "local:react": "react-scripts start --openssl-legacy-provider",
-    "local:express": "npx ts-node server/index.tsx",
     "vitest": "vitest",
     "vitestrun": "vitest --run",
     "testart": "npm run vitestrun && npm start",
     "preview": "vite preview"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
