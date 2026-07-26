@@ -99,9 +99,3 @@ export const HOME_WORD_AREA_SECTION_GAP = "36px";
 
 // 検索前ワードエリアの区切り線とその上のセクションとの間隔（区切り線を挟んで上下対称にするため、セクション間隔と揃えているが別概念として管理する）
 export const HOME_WORD_AREA_DIVIDER_PADDING = "23px";
-
-// 検索バーと検索前ワードエリア最初のセクションとの間隔(スマホ)。案内文言削除前の見た目上の余白を保つため、旧margin-top(35px)+文言の行の高さ(15px×1.5)+文言のmargin-bottom(25px)を合算した値
-export const HOME_WORD_AREA_TOP_GAP_MOBILE = "35px";
-
-// 検索バーと検索前ワードエリア最初のセクションとの間隔(タブレット/PC)。案内文言削除前の見た目上の余白を保つため、旧margin-top(80px)+文言の行の高さ(17px×1.5)+文言のmargin-bottom(45px)を合算した値
-export const HOME_WORD_AREA_TOP_GAP_DEFAULT = "85px";
