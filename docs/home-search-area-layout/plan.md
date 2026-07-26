@@ -14,5 +14,8 @@
 - [x] レビュー実施（frontend-review / architecture-review / comments-review / performance-check）
 - [x] spec-review 実施
 
+## 追加タスク
+- [x] `HomeVideoAreaDefault.tsx`の案内文言(`MessageDiv`)を削除し、`OuterDiv`のmargin-topで余白を吸収する
+
 ## 既知の残課題
 - 「最近の検索」「よく検索するワード」「お気に入りワード」が3つとも同時に空の場合（新規ユーザー等）、カード自体が中身ゼロの空箱として表示される。解消には3つの子コンポーネントの状態を親に引き上げる構造変更が必要で、hooksのロジック変更を伴うため今回のスコープ外とした。

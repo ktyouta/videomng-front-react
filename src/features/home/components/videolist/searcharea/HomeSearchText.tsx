@@ -26,7 +26,7 @@ export function HomeSearchText() {
       backgroundColor="#ececec"
       value={inputKeyword}
       onChange={setInputKeyword}
-      placeholder="キーワード"
+      placeholder="キーワードで検索"
       outerWidth="auto"
       outerMobileWidth="auto"
       iconWidth="50px"
