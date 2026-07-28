@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LabeledFieldRow } from "../../../../../components/LabeledFieldRow";
 import { Selectbox } from "../../../../../components/Selectbox";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { VIDEO_TYPE_LIST } from "../../../const/HomeConst";
@@ -57,20 +58,8 @@ const ConditionAreaDiv = styled.div`
   padding-top: 11%;
 `;
 
-const InputDiv = styled.div`
-  display:flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 13%;
-  box-sizing: border-box;
-`;
-
-const InputLabel = styled.label`
-  display: inline-block;
-  width: 4.5em;
-  white-space: nowrap;
-  flex-shrink: 0;
-`;
+const LABEL_WIDTH = "4.5em";
+const ROW_MARGIN_BOTTOM = "13%";
 
 type propsType = {
     isMobile: boolean;
@@ -100,10 +89,12 @@ export function HomeSearchCondition(props: propsType) {
             {/* 検索条件指定コンテンツ */}
             <MainContentDiv>
                 <ConditionAreaDiv>
-                    <InputDiv>
-                        <InputLabel>
-                            種別
-                        </InputLabel>
+                    <LabeledFieldRow
+                        label="種別"
+                        isMobile={isMobile}
+                        labelStyle={{ width: LABEL_WIDTH }}
+                        outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+                    >
                         <Selectbox
                             options={VIDEO_TYPE_LIST}
                             value={selectedVideoType || VIDEO_TYPE_LIST[0].value}
@@ -115,13 +106,15 @@ export function HomeSearchCondition(props: propsType) {
                             fontSize={isMobile ? "12px" : undefined}
                             isSearchable={!isMobile}
                         />
-                    </InputDiv>
+                    </LabeledFieldRow>
                     {
                         selectVideoCategory && selectVideoCategory.length > 0 &&
-                        <InputDiv>
-                            <InputLabel>
-                                カテゴリ
-                            </InputLabel>
+                        <LabeledFieldRow
+                            label="カテゴリ"
+                            isMobile={isMobile}
+                            labelStyle={{ width: LABEL_WIDTH }}
+                            outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+                        >
                             <Selectbox
                                 options={selectVideoCategory}
                                 value={selectedVideoCategory || selectVideoCategory[0].value}
@@ -133,7 +126,7 @@ export function HomeSearchCondition(props: propsType) {
                                 fontSize={isMobile ? "12px" : undefined}
                                 isSearchable={!isMobile}
                             />
-                        </InputDiv>
+                        </LabeledFieldRow>
                     }
                 </ConditionAreaDiv>
             </MainContentDiv>

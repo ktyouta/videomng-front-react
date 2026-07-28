@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LabeledFieldRow } from "../../../../../../components/LabeledFieldRow";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { FAVORITE_LIST_MODE } from "../../../../const/FavoriteConst";
@@ -59,21 +60,8 @@ const ConditionAreaDiv = styled.div`
   padding-top: 1%;
 `;
 
-const InputDiv = styled.div`
-  display:flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 8%;
-  box-sizing: border-box;
-  width:100%;
-`;
-
-const InputLabel = styled.label`
-  display: inline-block;
-  width: 6.5em;
-  white-space: nowrap;
-  flex-shrink: 0;
-`;
+const LABEL_WIDTH = "6.5em";
+const ROW_MARGIN_BOTTOM = "8%";
 
 const DefaultColorLink = styled.div`
     color: #7abaff;
@@ -132,10 +120,12 @@ export function FavoriteSearchCondition(props: propsType) {
           </DefaultColorLink>
           {
             videoCategory && videoCategory.length > 0 &&
-            <InputDiv>
-              <InputLabel>
-                カテゴリ
-              </InputLabel>
+            <LabeledFieldRow
+              label="カテゴリ"
+              isMobile={isMobile}
+              labelStyle={{ width: LABEL_WIDTH }}
+              outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+            >
               <MultiSelectbox
                 options={videoCategory}
                 value={selectedFavoriteVideoCategory.split(`,`) ?? videoCategory[0].value}
@@ -147,14 +137,16 @@ export function FavoriteSearchCondition(props: propsType) {
                 fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
-            </InputDiv>
+            </LabeledFieldRow>
           }
           {
             viewStatusList && viewStatusList.length > 0 &&
-            <InputDiv>
-              <InputLabel>
-                視聴状況
-              </InputLabel>
+            <LabeledFieldRow
+              label="視聴状況"
+              isMobile={isMobile}
+              labelStyle={{ width: LABEL_WIDTH }}
+              outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+            >
               <MultiSelectbox
                 options={viewStatusList}
                 value={selectedFavoriteVideoViewStatus.split(`,`) ?? viewStatusList[0].value}
@@ -166,14 +158,16 @@ export function FavoriteSearchCondition(props: propsType) {
                 fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
-            </InputDiv>
+            </LabeledFieldRow>
           }
           {
             tagMasterList && tagMasterList.length > 0 &&
-            <InputDiv>
-              <InputLabel>
-                タグ
-              </InputLabel>
+            <LabeledFieldRow
+              label="タグ"
+              isMobile={isMobile}
+              labelStyle={{ width: LABEL_WIDTH }}
+              outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+            >
               <MultiSelectbox
                 options={tagMasterList}
                 value={selectedFavoriteVideoTag.split(`,`) ?? tagMasterList[0].value}
@@ -185,14 +179,16 @@ export function FavoriteSearchCondition(props: propsType) {
                 fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
-            </InputDiv>
+            </LabeledFieldRow>
           }
           {
             favoriteLevelList &&
-            <InputDiv>
-              <InputLabel>
-                お気に入り度
-              </InputLabel>
+            <LabeledFieldRow
+              label="お気に入り度"
+              isMobile={isMobile}
+              labelStyle={{ width: LABEL_WIDTH }}
+              outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+            >
               <MultiSelectbox
                 options={favoriteLevelList}
                 value={selectedFavoriteVideoFavoriteLevel.split(`,`) ?? favoriteLevelList[0].value}
@@ -204,14 +200,16 @@ export function FavoriteSearchCondition(props: propsType) {
                 fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
-            </InputDiv>
+            </LabeledFieldRow>
           }
           {
             selectedFavoriteVideoMode === FAVORITE_LIST_MODE.folder.value && folderList && folderList.length > 0 &&
-            <InputDiv>
-              <InputLabel>
-                フォルダ
-              </InputLabel>
+            <LabeledFieldRow
+              label="フォルダ"
+              isMobile={isMobile}
+              labelStyle={{ width: LABEL_WIDTH }}
+              outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+            >
               <MultiSelectbox
                 options={folderList}
                 value={selectedFavoriteVideoFolder.split(`,`) ?? folderList[0].value}
@@ -223,7 +221,7 @@ export function FavoriteSearchCondition(props: propsType) {
                 fontSize={isMobile ? "12px" : undefined}
                 placeholder="すべて"
               />
-            </InputDiv>
+            </LabeledFieldRow>
           }
         </ConditionAreaDiv>
       </MainContentDiv>
