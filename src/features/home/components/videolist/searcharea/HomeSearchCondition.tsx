@@ -36,7 +36,6 @@ const HeaderDiv = styled.div`
 `;
 
 const HeaderTitleSpan = styled.div`
-  font-size:14px;
 `;
 
 const MainContentDiv = styled.div`

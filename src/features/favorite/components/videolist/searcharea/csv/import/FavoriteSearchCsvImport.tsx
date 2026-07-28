@@ -12,8 +12,9 @@ const HeaderDiv = styled.div`
   align-items: center;
   color: white;
   padding-left: 1%;
+  padding-top: 1%;
   height:4%;
-  margin-bottom: 4%;
+  margin-bottom: 6%;
 `;
 
 const HeaderTitleSpan = styled.div`
@@ -48,7 +49,6 @@ const FooterDiv = styled.div`
 
 type propsType = {
   close: () => void;
-  isMobile: boolean;
 }
 
 export function FavoriteSearchCsvImport(props: propsType) {
@@ -76,7 +76,7 @@ export function FavoriteSearchCsvImport(props: propsType) {
       <FooterDiv>
         <ButtonComponent
           shape="rounded"
-          size={props.isMobile ? "small" : "medium"}
+          size="medium"
           onClick={props.close}
           style={{
             background: "#3a3d42",
@@ -87,7 +87,7 @@ export function FavoriteSearchCsvImport(props: propsType) {
         </ButtonComponent>
         <ButtonComponent
           shape="rounded"
-          size={props.isMobile ? "small" : "medium"}
+          size="medium"
           onClick={download}
           style={{
             background: "#3a3d42",

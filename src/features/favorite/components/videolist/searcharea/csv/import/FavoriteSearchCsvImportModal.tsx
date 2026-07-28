@@ -16,8 +16,7 @@ export function FavoriteSearchCsvImportModal() {
     const {
         isOpenModal,
         openModal,
-        closeModal,
-        isMobile } = useFavoriteSearchCsvImportModal();
+        closeModal } = useFavoriteSearchCsvImportModal();
 
 
     return (
@@ -30,10 +29,10 @@ export function FavoriteSearchCsvImportModal() {
             {/*ダウンロードモーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
-                modalWidth={isMobile ? `93%` : `45%`}
+                modalWidth="45%"
                 containerStyle={{
                     minHeight: `384px`,
-                    fontSize: isMobile ? "12px" : "15px",
+                    fontSize: "16px",
                     display: "flex",
                     flexDirection: "column"
                 }}
@@ -42,7 +41,6 @@ export function FavoriteSearchCsvImportModal() {
             >
                 <FavoriteSearchCsvImport
                     close={closeModal}
-                    isMobile={isMobile}
                 />
             </ModalPortal>
         </React.Fragment>

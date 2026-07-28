@@ -28,6 +28,9 @@
 - [x] `src/features/favorite/components/videofolder/searcharea/filter/FavoriteVideoFolderSearchCondition.tsx`
 - [x] `src/features/home/components/videolist/searcharea/HomeSearchCondition.tsx`（フォントサイズのメディアクエリも新規追加）
 
+### 見出しの文字サイズをお気に入り側フィルターモーダルと統一
+- [x] `src/features/home/components/videolist/searcharea/HomeSearchCondition.tsx`（`HeaderTitleSpan`の固定14pxを解除し、`Parent`のfont-sizeを継承させる）
+
 ### レビューで追加対応したタスク
 - [x] `src/components/MultiSelectbox.tsx` の `control` に `minHeight: props.height` を追加（`Selectbox.tsx`には既にあったが漏れており、`height` propを渡しても実際の高さが縮まらない状態だった）
 - [x] `useFavoriteSearchConditionMain.ts` / `useFavoriteVideoFolderSearchConditionMain.ts` / `useHomeSearchConditionMain.ts` の `isMobile` を、親hookとの重複購読を避けるため props 経由の受け渡しに変更（hooks-reviewerの指摘により修正）

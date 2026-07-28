@@ -15,7 +15,7 @@
 - [ ] `HomeSearchCondition.tsx` の `Selectbox` は、スマホ表示時に高さ・文字サイズが縮小される
 
 ### 文字サイズ
-- [ ] `HomeSearchCondition.tsx` にスマホ用フォントサイズのメディアクエリが追加される（現状は文字サイズ調整が一切ない）
+- [x] `HomeSearchCondition.tsx` の見出し（`HeaderTitleSpan`）が固定14pxをやめ、`Parent`の画面幅ごとのfont-size(12px/13px/16px)を継承する
 - [ ] `ModalPortalConfirm.tsx` のタイトル文字サイズ（現状14px固定）がレスポンシブ対応する
 
 ## 対象ファイル

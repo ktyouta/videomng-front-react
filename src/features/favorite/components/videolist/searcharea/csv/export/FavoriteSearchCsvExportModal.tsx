@@ -16,8 +16,7 @@ export function FavoriteSearchCsvExportModal() {
     const {
         isOpenModal,
         openModal,
-        closeModal,
-        isMobile, } = useFavoriteSearchCsvExportModal();
+        closeModal, } = useFavoriteSearchCsvExportModal();
 
 
     return (
@@ -30,9 +29,9 @@ export function FavoriteSearchCsvExportModal() {
             {/* アップロードモーダル */}
             <ModalPortal
                 isOpen={isOpenModal}
-                modalWidth={isMobile ? `93%` : `45%`}
+                modalWidth="45%"
                 containerStyle={{
-                    fontSize: isMobile ? "12px" : "15px",
+                    fontSize: "16px",
                     display: "flex",
                     flexDirection: "column"
                 }}
@@ -41,7 +40,6 @@ export function FavoriteSearchCsvExportModal() {
             >
                 <FavoriteSearchCsvExport
                     close={closeModal}
-                    isMobile={isMobile}
                 />
             </ModalPortal>
         </React.Fragment>
