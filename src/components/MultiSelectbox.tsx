@@ -107,6 +107,7 @@ export function MultiSelectbox(props: Props) {
             <Select
                 isMulti
                 closeMenuOnSelect={false}
+                blurInputOnSelect={false}
                 hideSelectedOptions={false}
                 components={{ Option: CheckboxOption }}
                 value={selectedValues}
