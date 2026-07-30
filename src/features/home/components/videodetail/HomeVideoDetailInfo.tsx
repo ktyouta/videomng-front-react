@@ -9,6 +9,7 @@ import { MEDIA } from "../../../../consts/MediaConst";
 import { VideoDetailItemType } from "../../../../types/videodetail/VideoDetailItemType";
 import { useHomeVideoDetailInfo } from "../../hooks/videodetail/useHomeVideoDetailInfo";
 import { HomeVideoDetailTagFolderSelect } from "./HomeVideoDetailTagFolderSelect";
+import { HOME_VIDEO_DETAIL_FONT_SIZE } from "./consts/HomeVideoDetailFontSize";
 
 
 const VideoInfoDiv = styled.div`
@@ -106,7 +107,7 @@ export function HomeVideoDetailInfo(props: propsType) {
                     variant="green"
                     onClick={play}
                     style={{
-                        "fontSize": "0.9rem",
+                        "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                         "minHeight": "50px",
                         "width": "100%",
                         "color": "white",
@@ -134,7 +135,7 @@ export function HomeVideoDetailInfo(props: propsType) {
                                     // お気に入り登録済み
                                     <ButtonComponent
                                         style={{
-                                            "fontSize": "0.9rem",
+                                            "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                                             "minHeight": "50px",
                                             "width": "100%",
                                             "background": "rgb(100, 100, 100)",
@@ -151,7 +152,7 @@ export function HomeVideoDetailInfo(props: propsType) {
                                         variant="orange"
                                         onClick={clickRegister}
                                         style={{
-                                            "fontSize": "0.9rem",
+                                            "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                                             "minHeight": "50px",
                                             "width": "100%",
                                             "borderRadius": "8px",
@@ -168,7 +169,7 @@ export function HomeVideoDetailInfo(props: propsType) {
                             variant="blue"
                             onClick={moveLogin}
                             style={{
-                                "fontSize": "0.9rem",
+                                "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                                 "minHeight": "50px",
                                 "width": "100%",
                                 "borderRadius": "8px",

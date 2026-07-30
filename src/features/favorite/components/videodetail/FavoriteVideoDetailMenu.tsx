@@ -6,6 +6,7 @@ import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/FavoriteConst";
 import { useFavoriteVideoDetailMenu } from "../../hooks/videodetail/useFavoriteVideoDetailMenu";
 import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
 import { FavoriteVideoDetailPanel } from "./FavoriteVideoDetailPanel";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "./consts/FavoriteVideoDetailFontSize";
 import { FavoriteComment } from "./videocomment/FavoriteComment";
 import { FavoriteDetailSetting } from "./videodetailsetting/FavoriteDetailSetting";
 import { FavoriteMemo } from "./videomemo/FavoriteMemo";
@@ -19,14 +20,14 @@ const MenuParentDiv = styled.div`
   box-sizing:border-box;
   padding-top: 1%;
   margin-top: 8%;
-  font-size: 14px;
+  font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.MOBILE};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: 75%;
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
-    font-size: 16px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.PC};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
@@ -34,7 +35,7 @@ const MenuParentDiv = styled.div`
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
-    font-size: 16px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.PC};
   }
 
   @media (min-width: ${MEDIA.PC}) {
@@ -42,7 +43,7 @@ const MenuParentDiv = styled.div`
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
-    font-size: 16px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.PC};
   }
 `;
 
@@ -55,18 +56,18 @@ const ComboAreaDiv = styled.div`
 const ComboTitleSpan = styled.span`
   margin-right:2%;
   color: white;
-  font-size: 14px;
+  font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.MOBILE};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 18px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.PC};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 18px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.PC};
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 18px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.PC};
   }
 
 `;

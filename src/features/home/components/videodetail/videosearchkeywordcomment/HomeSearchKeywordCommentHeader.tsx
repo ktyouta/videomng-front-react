@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { HOME_VIDEO_DETAIL_FONT_SIZE } from "../consts/HomeVideoDetailFontSize";
 
 
 //ヘッダータイトルのスタイル
@@ -13,7 +15,19 @@ const HeaderDiv = styled.div`
 `;
 
 const HeaderTitleSpan = styled.span`
-  font-size:19px;
+  font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.MOBILE};
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.PC};
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.PC};
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.PC};
+  }
 `;
 
 

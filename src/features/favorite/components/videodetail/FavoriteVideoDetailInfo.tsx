@@ -6,6 +6,8 @@ import { ModalPortalConfirm } from "../../../../components/ModalPortalConfirm";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
 import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "./consts/FavoriteVideoDetailFontSize";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -77,6 +79,9 @@ export function FavoriteVideoDetailInfo(props: propsType) {
         executeDelete,
     } = useFavoriteVideoDetailInfo();
 
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
+
     const videoDetail = props.videoDetail;
     const item = videoDetail.item;
     const snippet = item.snippet;
@@ -98,7 +103,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                     variant="green"
                     onClick={play}
                     style={{
-                        "fontSize": "0.9rem",
+                        "fontSize": isMobile ? FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                         "minHeight": "50px",
                         "width": "100%",
                         "color": "white",
@@ -120,7 +125,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                 <ButtonComponent
                     onClick={clickDeleteFavoriteVide}
                     style={{
-                        "fontSize": "0.9rem",
+                        "fontSize": isMobile ? FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                         "minHeight": "50px",
                         "width": "100%",
                         "background": "rgb(175, 55, 42)",

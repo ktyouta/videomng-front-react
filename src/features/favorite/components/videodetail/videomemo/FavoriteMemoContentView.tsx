@@ -5,6 +5,8 @@ import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
 import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
 import { format } from "date-fns";
 import { FavoriteMemoContentViewDeleteArea } from "./FavoriteMemoContentViewDeleteArea";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 const MemoDiv = styled.div`
     box-sizing: border-box;
@@ -20,10 +22,22 @@ const LowerDiv = styled.div`
 `;
 
 const MetaDiv = styled.div`
-    font-size:13px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.MOBILE};
     flex: 1;
     display: flex;
     align-items: center;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
 `;
 
 type propsType = {

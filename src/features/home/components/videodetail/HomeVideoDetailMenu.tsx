@@ -6,6 +6,7 @@ import { YouTubeDataApiVideoDetailItemType } from "../../../../types/youtube/You
 import { MENU_NO, VIDEO_DETIAL_MENU_LIST } from "../../const/HomeConst";
 import { useHomeVideoDetailMenu } from "../../hooks/videodetail/useHomeVideoDetailMenu";
 import { HomeVideoDetailPanel } from "./HomeVideoDetailPanel";
+import { HOME_VIDEO_DETAIL_FONT_SIZE } from "./consts/HomeVideoDetailFontSize";
 import { HomeComment } from "./videocomment/HomeComment";
 import { HomeMetaInfo } from "./videometainfo/HomeMetaInfo";
 import { HomeSearchKeywordComment } from "./videosearchkeywordcomment/HomeSearchKeywordComment";
@@ -16,14 +17,14 @@ const MenuParentDiv = styled.div`
   box-sizing:border-box;
   padding-top: 1%;
   margin-top: 8%;
-  font-size: 14px;
+  font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.MOBILE};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: 75%;
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
-    font-size: 16px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.PC};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
@@ -31,7 +32,7 @@ const MenuParentDiv = styled.div`
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
-    font-size: 16px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.PC};
   }
 
   @media (min-width: ${MEDIA.PC}) {
@@ -39,7 +40,7 @@ const MenuParentDiv = styled.div`
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
-    font-size: 16px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_BODY.PC};
   }
 `;
 
@@ -52,18 +53,18 @@ const ComboAreaDiv = styled.div`
 const ComboTitleSpan = styled.span`
   margin-right:2%;
   color: white;
-  font-size: 14px;
+  font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.MOBILE};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 18px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.PC};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 18px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.PC};
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 18px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.MENU_LABEL.PC};
   }
 
 `;

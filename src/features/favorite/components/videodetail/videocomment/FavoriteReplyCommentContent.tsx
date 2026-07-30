@@ -6,6 +6,8 @@ import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv
 import { sanitizeAndParseHtml } from "../../../../../utils/sanitizeAndParseHtml";
 import { FavoriteVideoCommentThreadReplyCommentType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadReplyCommentType";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 
 const Parent = styled.div`
@@ -50,17 +52,41 @@ const IconDiv = styled.div`
 `;
 
 const PublishedDateSpan = styled.span`
-    font-size:13px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.MOBILE};
     display: inline-block;
     margin-right: 10px;
     word-break: break-word;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
 `;
 
 const LikeCountSpan = styled.span`
-    font-size:13px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.MOBILE};
     display: flex;
     align-items: center;
     word-break: break-word;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
 `;
 
 const LikeCountAraeDiv = styled.div`

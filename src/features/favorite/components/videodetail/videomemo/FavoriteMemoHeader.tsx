@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { RxCross1 } from 'react-icons/rx';
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 
 //ヘッダータイトルのスタイル
@@ -15,7 +17,19 @@ const HeaderDiv = styled.div`
 `;
 
 const HeaderTitleSpan = styled.span`
-  font-size:19px;
+  font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.MOBILE};
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.PC};
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.PC};
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.SECTION_HEADING.PC};
+  }
 `;
 
 

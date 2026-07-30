@@ -4,6 +4,8 @@ import { sanitizeAndParseHtml } from "../../../../../../utils/sanitizeAndParseHt
 import { useFavoriteBlockCommentContent } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentContent";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { FavoriteCommentRestoreIconArea } from "./FavoriteCommentRestoreIconArea";
+import { MEDIA } from "../../../../../../consts/MediaConst";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../../consts/FavoriteVideoDetailFontSize";
 
 
 const Parent = styled.div`
@@ -32,10 +34,22 @@ const LowerDiv = styled.div`
 `;
 
 const MetaDiv = styled.div`
-    font-size:13px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.MOBILE};
     flex: 1;
     display: flex;
     align-items: center;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
 `;
 
 type propsType = {

@@ -1,16 +1,42 @@
 import styled from "styled-components";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 
 const Parent = styled.div`
-  font-size: 0.9rem;
+  font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_BODY.MOBILE};
   line-height: 1.6;
   color: white;
   margin-top: 8px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_BODY.PC};
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_BODY.PC};
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_BODY.PC};
+  }
 `;
 
 const GuideTitle = styled.h3`
-  font-size: 1rem;
+  font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_TITLE.MOBILE};
   margin-bottom: 6px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_TITLE.PC};
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_TITLE.PC};
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_TITLE.PC};
+  }
 `;
 
 const GuideList = styled.ul`

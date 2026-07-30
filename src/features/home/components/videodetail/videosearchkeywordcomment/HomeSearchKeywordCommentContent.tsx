@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { HighlightTextComponent } from "../../../../../components/HighlightTextComponent";
 import { useHomeSearchKeywordCommentContent } from "../../../hooks/videodetail/videosearchkeywordcomment/useHomeSearchKeywordCommentContent";
 import { SearchKeywordCommentType } from "../../../types/videodetail/videosearchkeywordcomment/SearchKeywordCommentType";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { HOME_VIDEO_DETAIL_FONT_SIZE } from "../consts/HomeVideoDetailFontSize";
 
 
 const Parent = styled.div`
@@ -37,10 +39,22 @@ const LowerDiv = styled.div`
 `;
 
 const MetaDiv = styled.div`
-    font-size:13px;
+    font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.CAPTION.MOBILE};
     width:95%;
     display: flex;
     align-items: center;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: ${HOME_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
 `;
 
 

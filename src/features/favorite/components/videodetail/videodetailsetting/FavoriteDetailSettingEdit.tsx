@@ -13,6 +13,8 @@ import { useFavoriteDetailSettingEdit } from "../../../hooks/videodetail/videode
 import { FavoriteVideoCustomFolderType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomFolderType";
 import { FavoriteVideoTagType } from "../../../types/videodetail/videotag/FavoriteVideoTagType";
 import { FavoriteDetailSettingEditActions } from "./FavoriteDetailSettingEditActions";
+import { MEDIA } from "../../../../../consts/MediaConst";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 
 const ContentDiv = styled.div`
@@ -50,7 +52,19 @@ const MetaContentDiv = styled.div`
 `;
 
 const GuideDiv = styled(MetaDiv)`
-    font-size: 13px;
+    font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.MOBILE};
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.CAPTION.PC};
+    }
 `;
 
 const FolderMetaDiv = styled(MetaDiv)`

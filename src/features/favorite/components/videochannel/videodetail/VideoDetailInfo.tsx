@@ -9,6 +9,7 @@ import { MEDIA } from "../../../../../consts/MediaConst";
 import { VideoDetailItemType } from "../../../../../types/videodetail/VideoDetailItemType";
 import { useVideoDetailInfo } from "../../../hooks/videochannel/videodetail/useVideoDetailInfo";
 import { VideoDetailTagFolderSelect } from "./VideoDetailTagFolderSelect";
+import { VIDEO_DETAIL_FONT_SIZE } from "./consts/VideoDetailFontSize";
 
 const VideoInfoDiv = styled.div`
   width: 95%;
@@ -104,7 +105,7 @@ export function VideoDetailInfo(props: propsType) {
                     variant="green"
                     onClick={play}
                     style={{
-                        "fontSize": "0.9rem",
+                        "fontSize": isMobile ? VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                         "height": "50px",
                         "width": "100%",
                         "color": "white",
@@ -132,7 +133,7 @@ export function VideoDetailInfo(props: propsType) {
                                     // お気に入り登録済み
                                     <ButtonComponent
                                         style={{
-                                            "fontSize": "0.9rem",
+                                            "fontSize": isMobile ? VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                                             "minHeight": "50px",
                                             "width": "100%",
                                             "background": "rgb(100, 100, 100)",
@@ -149,7 +150,7 @@ export function VideoDetailInfo(props: propsType) {
                                         variant="orange"
                                         onClick={clickRegister}
                                         style={{
-                                            "fontSize": "0.9rem",
+                                            "fontSize": isMobile ? VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                                             "minHeight": "50px",
                                             "width": "100%",
                                             "borderRadius": "8px",
@@ -166,7 +167,7 @@ export function VideoDetailInfo(props: propsType) {
                             variant="blue"
                             onClick={moveLogin}
                             style={{
-                                "fontSize": "0.9rem",
+                                "fontSize": isMobile ? VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
                                 "minHeight": "50px",
                                 "width": "100%",
                                 "borderRadius": "8px",
