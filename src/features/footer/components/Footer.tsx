@@ -1,22 +1,45 @@
-import React from "react";
 import styled from "styled-components";
-
+import { MEDIA } from "../../../consts/MediaConst";
 
 const Parent = styled.div`
   width: 100%;
-  height:120px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   box-sizing: border-box;
   padding-bottom: 1%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    height:120px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    height:120px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    height:120px;
+  }
 `;
 
 const TermOfUseMessageAreaDiv = styled.div`
   color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
+  font-size: 10px;
   box-sizing: border-box;
   padding-left: 1%;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 11px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 11px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 13px;
+  }
 `;
 
 

@@ -12,15 +12,13 @@ import { HeaderUserMenuContent } from "./HeaderUserMenuContent";
 const UserDiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-right: 5%;
+  gap: 8px;
 `;
 
 // アイコンのスタイル
 const IconDiv = styled.div`
   position:relative;
   align-items: center;
-  width:47px;
   display: flex;
   cursor: pointer;
 `;
@@ -131,7 +129,7 @@ export function HeaderUserMenuList() {
                 <IconDiv>
                     <IconComponent
                         icon={IoPersonCircleOutline}
-                        size={isMobile ? '65%' : '80%'}
+                        size={isMobile ? '30' : '40'}
                     />
                     <NavDiv
                         isDisplay={isOpenUserMenu}
