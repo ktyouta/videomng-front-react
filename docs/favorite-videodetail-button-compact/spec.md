@@ -10,17 +10,16 @@
 
 ### スマホ幅(768px未満)
 - [x] サムネイル下のボタン列(チップ型ボタン)は廃止すること
-- [x] 「再生」「解除」は、サムネイル右上に重ねた小さいアイコンボタン2つ(ラベルなし)にすること
+- [x] サムネイル右上に重ねた小さいアイコンボタン(ラベルなし)にすること
 - [x] アイコンボタンに背景は敷かないこと。サムネイル右上の角から少しはみ出す位置(`top:-10px; right:-10px`)に配置し、サムネイル画像ではなく周囲のページ背景に乗せることで視認性を確保すること
 - [x] アイコンサイズは16px。`drop-shadow`は効果が薄いため付けないこと
-- [x] 再生アイコンは`MdPlayArrow`、解除アイコンは`FaRegTrashAlt`を使うこと
-- [x] アイコンボタン同士の間はgapで余白を持たせること
+- [x] 解除アイコンは`FaRegTrashAlt`を使うこと
 
 ### タブレット・PC幅(768px以上)
-- [x] 元の`ButtonComponent`(大きい角丸ブロック、`minHeight:50px`、`width:100%`、`borderRadius:8px`)の形は維持すること
-- [x] 背景色はスマホと同じグレー(`#3a3d42`)に統一すること。緑/赤の色分けはしないこと
-- [x] ラベルは「再生」「お気に入りから外す」であること
-- [x] 文字サイズは既存定数`FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC`を使うこと
+- [x] 「再生」「解除」ともにアイコン+ラベルのチップ型ボタンにすること(アイコンのみにしないこと)。チップの見た目は一覧画面の`FavoriteSearchActionButton`と同じ値(height:39px, padding:0 14px, gap:6px, background:#3a3d42, border-radius:8px, icon 16px)を使うこと
+- [x] チップボタンを、お気に入り一覧画面の`OperationPanelDiv`と同じ配色のパネル(`background-color:#1c1f26`、`border:1px solid #3a3f4b`、`box-shadow:0 4px 12px rgba(0,0,0,0.6)`、`border-radius:12px`、`padding:14px`)で囲むこと
+- [x] 再生アイコンは`MdPlayArrow`、解除アイコンは`FaRegTrashAlt`を使うこと
+- [x] ラベルの文字サイズは14px(`FavoriteSearchActionButton`のlandscape/PC時の値)にすること
 
 ### デバイス判定
 - [x] スマホ/タブレット・PCの出し分けは、`mediaQuery.tablet`と`mediaQuery.pc`をそれぞれ個別に`useMediaQuery`で呼び出し、その結果(真偽値)同士を`||`で結合した`isTabletOrPc`で行うこと

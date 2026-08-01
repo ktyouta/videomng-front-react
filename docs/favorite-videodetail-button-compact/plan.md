@@ -53,7 +53,7 @@
 - [x] spec-review(仕様通り)
 
 ## 第7弾: ChipButtonをスマホ限定に戻す(PC/タブレットは元のButtonComponentに復元)
-- [x] ユーザーから「スマホのレイアウト調整のはずがPCにも影響している」との指摘。第2弾で「全デバイス共通」をユーザー自身が選択していた経緯を確認の上、スマホのみに戻す方針で合意
+- [x] スマホ限定の調整のはずがPC/タブレットにも影響していたとの指摘。第2弾で「全デバイス共通」をユーザー自身が選択していた経緯を確認の上、スマホのみに戻す方針で合意
 - [x] FavoriteVideoDetailInfo.tsxを修正(isTabletOrPcで出し分け。タブレット/PCは元のButtonComponentブロック、スマホは現行のChipButton)
 - [x] デバイス判定はisTablet/isPcを個別にuseMediaQueryで呼んでから||結合(短絡評価バグ・768px境界重複バグの再発防止)
 - [x] 型チェック(新規エラー0件)
@@ -61,7 +61,7 @@
 - [x] spec-review(仕様通り)
 
 ## 第8弾: タブレット・PCボタンの色もグレーに統一
-- [x] ユーザーから「ボタンの色はスマホと合わせて大丈夫」と確認あり。形・サイズ・ラベルは維持し色のみ変更する認識をすり合わせた上で合意
+- [x] PC/タブレットの背景色もスマホと統一する方向で確認が取れた。形・サイズ・ラベルは維持し色のみ変更する認識をすり合わせた上で合意
 - [x] FavoriteVideoDetailInfo.tsxを修正(isTabletOrPc分岐の背景色を緑/赤から`#3a3d42`に変更、`variant="green"`を削除)
 - [x] 型チェック(新規エラー0件)
 - [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
@@ -76,29 +76,50 @@
 - [x] spec-review(仕様通り)
 
 ## 第10弾: アイコンオーバーレイの背景を廃止し、サムネイル角の外側に配置
-- [x] ユーザーから「半透明の黒い四角は不要かも」との指摘。視認性の懸念(明るいサムネイルで白アイコンが見えなくなる)を説明した上で、サムネイルにぎりぎり被らない位置(ページ背景に乗る位置)なら問題ない、と方針確定
+- [x] アイコン背景の半透明黒四角が不要ではないかとの意見。視認性の懸念(明るいサムネイルで白アイコンが見えなくなる)を説明した上で、サムネイルにぎりぎり被らない位置(ページ背景に乗る位置)なら問題ない、と方針確定
 - [x] FavoriteVideoDetailInfo.tsxを修正(IconBadgeButtonの背景を廃止、IconBtnAreaDivをtop:-10px/right:-10pxでサムネイル角の外側に配置)
 - [x] 型チェック(新規エラー0件)
 - [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
 - [x] spec-review(仕様通り)
 
 ## 第11弾: アイコンの主張を少し強める(サイズ・drop-shadow)
-- [x] ユーザーから「今までで一番しっくりくるが、もう少し目立ってもいい」との感想。背景ボックスは復活させず、アイコンサイズとdrop-shadowで調整する方向を提案し合意
+- [x] 現状のデザインを肯定的に評価しつつ、アイコンをもう少し目立たせたいとの意見。背景ボックスは復活させず、アイコンサイズとdrop-shadowで調整する方向を提案し合意
 - [x] FavoriteVideoDetailInfo.tsxを修正(アイコンサイズ14px→16px、drop-shadow(0 1px 2px rgba(0,0,0,0.6))を追加)
 - [x] 型チェック(新規エラー0件)
 - [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
 - [x] spec-review(仕様通り)
 
 ## 第12弾: drop-shadowを黒い影から白い光彩に変更
-- [x] ユーザーから「背景が黒いからdrop-shadowが全く分からない」との指摘。ページ背景がほぼ黒(`#1a1a1a`前後)のため黒い影は背景に溶けて見えないという原因を確認し、白い光彩(`drop-shadow(0 0 3px rgba(255,255,255,0.7))`)に変更する方針で合意
+- [x] ページ背景が黒いためdrop-shadowの効果が視認できないとの指摘。ページ背景がほぼ黒(`#1a1a1a`前後)のため黒い影は背景に溶けて見えないという原因を確認し、白い光彩(`drop-shadow(0 0 3px rgba(255,255,255,0.7))`)に変更する方針で合意
 - [x] FavoriteVideoDetailInfo.tsxを修正(drop-shadowの色をrgba(0,0,0,0.6)からrgba(255,255,255,0.7)・ぼかし半径を光彩向けに調整)
 - [x] 型チェック(新規エラー0件)
 - [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
 - [x] spec-review(仕様通り)
 
 ## 第13弾: drop-shadowを完全に削除
-- [x] ユーザーから「drop-shadow意味なさそうだから不要」との判断。白い光彩に変更しても効果が薄いと判断し、drop-shadow自体を削除する方針で合意
+- [x] drop-shadowの効果が薄いため不要と判断。白い光彩に変更しても効果が薄いと判断し、drop-shadow自体を削除する方針で合意
 - [x] FavoriteVideoDetailInfo.tsxを修正(filterプロパティを削除、アイコンサイズ16pxは維持)
+- [x] 型チェック(新規エラー0件)
+- [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
+- [x] spec-review(仕様通り)
+
+## 第14弾: PC/タブレットもアイコンのみ+パネル化
+- [x] PC/タブレットもアイコン化し、一覧画面のように大枠のパネルで囲む案の提案。design-proposalで妥当性を検討し賛成、一覧画面のOperationPanelDivの配色を踏襲する方針で合意
+- [x] FavoriteVideoDetailInfo.tsxを修正(ButtonComponentのテキストブロックを廃止、ButtonPanelDiv/PcIconButtonを新設。パネル配色は一覧画面のFAVORITE_SEARCH_AREA_PANEL_*定数の値を直書きで踏襲)
+- [x] 型チェック(新規エラー0件)
+- [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
+- [x] spec-review(仕様通り)
+
+## 第15弾: PC/タブレットのボタンをアイコン+ラベルのチップ型に修正
+- [x] アイコンのサイズ感への強い指摘、および一覧画面の実際のボタンがアイコン+ラベル構成である点の指摘。実際にOperationPanelDiv内で使われているボタン(FavoriteSearchActionButton.tsx等)を確認し、アイコンのみではなくアイコン+ラベルのチップ型だったことを確認
+- [x] FavoriteVideoDetailInfo.tsxを修正(PcIconButton(44×44アイコンのみ)をPcChipButton(height:39px、アイコン16px+ラベル)に置き換え。ButtonPanelDivは維持)
+- [x] 型チェック(新規エラー0件)
+- [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
+- [x] spec-review(仕様通り)
+
+## 第16弾: PcChipButtonの文字サイズ抜けを修正
+- [x] 文字サイズが一覧画面と一致しているかの確認依頼。FavoriteSearchActionButtonの文字サイズ(12px/14px)と突き合わせたところ、PcChipButtonにfont-size指定が漏れていたことが判明
+- [x] FavoriteVideoDetailInfo.tsxを修正(PcChipButtonにfont-size:14pxを追加)。padding/gap/height/border-radius/背景色は既に一致していることを併せて確認
 - [x] 型チェック(新規エラー0件)
 - [x] レビュー(frontend-review / architecture-review / comments-review / performance-check、全て問題なし)
 - [x] spec-review(仕様通り)

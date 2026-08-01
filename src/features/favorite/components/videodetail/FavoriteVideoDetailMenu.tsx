@@ -54,14 +54,17 @@ const ComboAreaDiv = styled.div`
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     justify-content: initial;
+    margin-bottom: 3%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     justify-content: initial;
+    margin-bottom: 3%;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     justify-content: initial;
+    margin-bottom: 3%;
   }
 `;
 
@@ -159,7 +162,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            height: "60vh",
+            height: isMobile ? "700px" : "60vh",
           }}
         >
           <FavoriteComment />

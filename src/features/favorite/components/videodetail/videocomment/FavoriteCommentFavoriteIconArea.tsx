@@ -1,15 +1,8 @@
-import React from "react";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { FaRegStar } from "react-icons/fa";
-import styled from "styled-components";
-import { useFavoriteMemoEditIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoEditIconArea";
-import { useFavoriteMemoDeleteIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoDeleteIconArea";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { useFavoriteCommentBlockIconArea } from "../../../hooks/videodetail/videocomment/useFavoriteCommentBlockIconArea";
-import { MdVisibilityOff } from "react-icons/md";
-import { useFavoriteCommentFavoriteIconArea } from "../../../hooks/videodetail/videocomment/useFavoriteCommentFavoriteIconArea";
 import { FaStar } from "react-icons/fa";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { useFavoriteCommentFavoriteIconArea } from "../../../hooks/videodetail/videocomment/useFavoriteCommentFavoriteIconArea";
 
 
 const Parent = styled.div`

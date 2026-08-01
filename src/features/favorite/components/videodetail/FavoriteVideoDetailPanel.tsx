@@ -1,13 +1,25 @@
 import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
+import { MEDIA } from "../../../../consts/MediaConst";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  min-height: 60vh;
   background-color: #181a1e;
   border-radius: 7px;
   border: solid 1px;
-  padding: 18px;
+  padding: 14px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    padding: 18px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    padding: 18px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    padding: 18px;
+  }
 `;
 
 type propsType = {

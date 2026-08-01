@@ -1,14 +1,13 @@
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
-import ButtonComponent from "../../../../components/ButtonComponent";
 import { IconComponent } from "../../../../components/IconComponent";
 import { ModalPortalConfirm } from "../../../../components/ModalPortalConfirm";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
+import { FAVORITE_SEARCH_AREA_ACCENT_COLOR, FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG } from '../../const/FavoriteConst';
 import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
 import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
-import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "./consts/FavoriteVideoDetailFontSize";
 
 const VideoInfoDiv = styled.div`
   width: 100%;
@@ -89,10 +88,65 @@ const VideoTitle = styled.h3`
     }
 `;
 
-const BtnDiv = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: center;
+const ButtonPanelDiv = styled.div`
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    border-radius: 12px;
+    background-color: #1c1f26;
+    border: 1px solid #3a3f4b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    margin-bottom: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+`;
+
+const LabelSpan = styled.span`
+  color: white;
+  font-size: 12px;
+  transition: color 0.15s ease;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 12px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 14px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 14px;
+  }
+`;
+
+const PcChipButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 45px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    background: #3a3d42;
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+    width: 50%;
+
+    &:hover {
+      background-color: ${FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG};
+      transform: translateY(-1px);
+    }
+
+    &:hover ${LabelSpan} {
+      color: ${FAVORITE_SEARCH_AREA_ACCENT_COLOR};
+    }
 `;
 
 
@@ -153,45 +207,30 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                 </VideoTitle>
                 {
                     isTabletOrPc &&
-                    <>
-                        <ButtonComponent
+                    <ButtonPanelDiv>
+                        <PcChipButton
                             onClick={play}
-                            style={{
-                                "fontSize": FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
-                                "minHeight": "50px",
-                                "width": "100%",
-                                "background": "#3a3d42",
-                                "color": "white",
-                                "borderRadius": "8px",
-                                "marginBottom": "8%",
-                                "display": "flex",
-                                "alignItems": "center",
-                                "justifyContent": "center",
-                            }}
                         >
-                            <BtnDiv>
-                                <IconComponent
-                                    icon={MdPlayArrow}
-                                    size="10%"
-                                />
+                            <IconComponent
+                                icon={MdPlayArrow}
+                                size="16px"
+                            />
+                            <LabelSpan>
                                 再生
-                            </BtnDiv>
-                        </ButtonComponent>
-                        <ButtonComponent
+                            </LabelSpan>
+                        </PcChipButton>
+                        <PcChipButton
                             onClick={clickDeleteFavoriteVide}
-                            style={{
-                                "fontSize": FAVORITE_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
-                                "minHeight": "50px",
-                                "width": "100%",
-                                "background": "#3a3d42",
-                                "color": "white",
-                                "borderRadius": "8px",
-                                "display": "block",
-                            }}
                         >
-                            お気に入りから外す
-                        </ButtonComponent>
-                    </>
+                            <IconComponent
+                                icon={FaRegTrashAlt}
+                                size="16px"
+                            />
+                            <LabelSpan>
+                                解除
+                            </LabelSpan>
+                        </PcChipButton>
+                    </ButtonPanelDiv>
                 }
             </VideoMetaDiv>
             <ModalPortalConfirm

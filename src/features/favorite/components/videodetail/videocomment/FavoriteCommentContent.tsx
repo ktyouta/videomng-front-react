@@ -2,13 +2,13 @@ import { format } from "date-fns";
 import { IoIosThumbsUp } from "react-icons/io";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { sanitizeAndParseHtml } from "../../../../../utils/sanitizeAndParseHtml";
 import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
+import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
 import { FavoriteReplyCommentList } from "./FavoriteReplyCommentList";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 const Parent = styled.div`
     height: auto;
@@ -26,7 +26,19 @@ const AuthorNameDiv = styled.div`
 
 const AuthorIconImg = styled.img`
     border-radius: 50%;
-    width: 25px;
+    width: 20px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 25px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 25px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      width: 25px;
+    }
 `;
 
 const CommentDiv = styled.div`
