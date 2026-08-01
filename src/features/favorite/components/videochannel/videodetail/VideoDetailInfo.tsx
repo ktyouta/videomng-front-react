@@ -16,11 +16,11 @@ const VideoInfoDiv = styled.div`
   padding-top: 3%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    width: 95%;
+    width: 25%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    width: 25%;
+    width: 40%;
   }
 
   @media (min-width: ${MEDIA.PC}) {

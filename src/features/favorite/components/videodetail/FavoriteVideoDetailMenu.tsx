@@ -30,7 +30,7 @@ const MenuParentDiv = styled.div`
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    width: 75%;
+    width: 60%;
     margin-left: 2%;
     margin-top: 0;
     padding-left: 3%;
