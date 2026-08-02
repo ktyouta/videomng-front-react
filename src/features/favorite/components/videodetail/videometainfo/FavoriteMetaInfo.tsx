@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
 import { FavoriteVideoDetailDataType } from "../../../types/videodetail/FavoriteVideoDetailDataType";
 
@@ -57,6 +58,8 @@ export function FavoriteMetaInfo(props: propsType) {
     const likeCount = statistics?.likeCount;
     // 投稿日
     const publishedDate = formatDateJP(snippet.publishedAt);
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     return (
         <ContentDiv>
@@ -105,7 +108,7 @@ export function FavoriteMetaInfo(props: propsType) {
                 {
                     description &&
                     <AccordionComponent
-                        defaultHeight={'70px'}
+                        defaultHeight={isMobile ? '150px' : '70px'}
                         outerStyle={{
                             border: "solid 1px",
                             boxSizing: "border-box",

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { useVideoCategory } from "../../../../main/hooks/useVideoCategory";
 import { getFavoriteVideoCustom } from "../../../api/getFavoriteVideoCustom";
 import { FavoriteVideoCustomResponseType } from "../../../types/videodetail/videodetailsetting/FavoriteVideoCustomResponseType";
@@ -16,6 +17,8 @@ export function useFavoriteDetailSettingView() {
     const [errMessage, setErrMessage] = useState(``);
     // 動画ID
     const videoId = useVideoId();
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     // カスタム情報を取得
     const { data, isLoading } = getFavoriteVideoCustom({
@@ -34,5 +37,6 @@ export function useFavoriteDetailSettingView() {
         isLoading,
         errMessage,
         videoCategory,
+        isMobile,
     };
 }

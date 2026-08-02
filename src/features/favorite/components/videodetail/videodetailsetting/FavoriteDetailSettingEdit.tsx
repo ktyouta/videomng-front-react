@@ -17,11 +17,16 @@ import { MEDIA } from "../../../../../consts/MediaConst";
 import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 
 
+const RelativeDiv = styled.div`
+    position: relative;
+`;
+
 const ContentDiv = styled.div`
     color:white;
     display: flex;
     flex-direction: column;
     gap: 37px;
+    padding-top: 17px;
 `;
 
 const TitleDiv = styled.div`
@@ -160,7 +165,7 @@ export function FavoriteDetailSettingEdit(props: propsType) {
     const folders = data?.folders;
 
     return (
-        <React.Fragment>
+        <RelativeDiv>
             <FavoriteDetailSettingEditActions
                 changeView={props.changeView}
                 updateFavoriteVideo={updateFavoriteVideo}
@@ -390,6 +395,6 @@ export function FavoriteDetailSettingEdit(props: propsType) {
                     </MetaContentDiv>
                 </FlexDiv>
             </ContentDiv>
-        </React.Fragment>
+        </RelativeDiv>
     );
 }

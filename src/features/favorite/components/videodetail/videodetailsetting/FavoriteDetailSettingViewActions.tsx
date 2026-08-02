@@ -1,20 +1,17 @@
 import styled from "styled-components";
 import { FavoriteFavoriteCommentModalIcon } from "../videocomment/videofavoritecomment/FavoriteFavoriteCommentModalIcon";
 import { FavoriteBlockCommentModalIcon } from "../videocomment/videoblockcomment/FavoriteBlockCommentModalIcon";
-import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { FavoriteDetailSettingEditIcon } from "./FavoriteDetailSettingEditIcon";
 import { EDIT_MODE } from "../../../const/FavoriteConst";
 
 
-//ヘッダータイトルのスタイル
-const HeaderDiv = styled.div`
-  width: 100%;
-  box-sizing: border-box;
+const IconOverlayDiv = styled.div`
+  position: absolute;
+  top: -5px;
+  right: -2px;
   display: flex;
   align-items: center;
-  color: white;
-  height: 22px;
-  padding-right: 7px;
+  z-index: 1;
 `;
 
 type propsType = {
@@ -26,12 +23,11 @@ export function FavoriteDetailSettingViewActions(props: propsType) {
   console.log("FavoriteDetailSettingViewActions render");
 
   return (
-    <HeaderDiv>
-      <FlexSpaceDiv />
+    <IconOverlayDiv>
       {/* 編集アイコン */}
       <FavoriteDetailSettingEditIcon
         changeEdit={props.changeEdit}
       />
-    </HeaderDiv>
+    </IconOverlayDiv>
   );
 }

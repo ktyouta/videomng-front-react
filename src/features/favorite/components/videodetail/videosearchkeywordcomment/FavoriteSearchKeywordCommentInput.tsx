@@ -9,7 +9,11 @@ import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import React from "react";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 
+// テキストボックスの高さ（モバイル/それ以外）
+const TEXTBOX_HEIGHT_MOBILE = "33px";
+const TEXTBOX_HEIGHT_DEFAULT = "37px";
 
 export function FavoriteSearchKeywordCommentInput() {
 
@@ -21,6 +25,9 @@ export function FavoriteSearchKeywordCommentInput() {
     clickSearchBtn,
     clearInputKeyword,
   } = useFavoriteSearchKeywordCommentInput();
+
+  // 画面サイズ判定
+  const isMobile = useMediaQuery(mediaQuery.mobile);
 
   return (
     <TextboxWithButton
@@ -35,7 +42,7 @@ export function FavoriteSearchKeywordCommentInput() {
       outerMobileWidth="96%"
       iconWidth="37px"
       iconMobileWidth="34px"
-      outerHeight="37px"
+      outerHeight={isMobile ? TEXTBOX_HEIGHT_MOBILE : TEXTBOX_HEIGHT_DEFAULT}
       style={{
         marginRight: "auto",
         marginLeft: "auto",

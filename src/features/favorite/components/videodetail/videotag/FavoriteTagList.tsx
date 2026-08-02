@@ -13,6 +13,7 @@ const Parent = styled.div`
   color:white;
   display: flex;
   flex-direction: column;
+  padding-top: 17px;
 `;
 
 const LoadingParent = styled(Parent)`

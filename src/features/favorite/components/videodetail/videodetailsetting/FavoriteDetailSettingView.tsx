@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
@@ -19,11 +19,16 @@ const Parent = styled.div`
   display:flex;
 `;
 
+const RelativeDiv = styled.div`
+    position: relative;
+`;
+
 const ContentDiv = styled.div`
     color:white;
     display: flex;
     flex-direction: column;
     gap: 37px;
+    padding-top: 17px;
 `;
 
 const ErrorMessageSpan = styled.span`
@@ -118,7 +123,8 @@ export function FavoriteDetailSettingView(props: propsType) {
         data,
         isLoading,
         errMessage,
-        videoCategory } = useFavoriteDetailSettingView();
+        videoCategory,
+        isMobile } = useFavoriteDetailSettingView();
 
     if (isLoading) {
         return (
@@ -150,7 +156,7 @@ export function FavoriteDetailSettingView(props: propsType) {
     const folders = data.folders;
 
     return (
-        <React.Fragment>
+        <RelativeDiv>
             <FavoriteDetailSettingViewActions
                 changeEdit={props.changeEdit}
             />
@@ -160,12 +166,10 @@ export function FavoriteDetailSettingView(props: propsType) {
                         【要約】
                     </TitleDiv>
                     <AccordionComponent
-                        defaultHeight={'70px'}
+                        defaultHeight={isMobile ? '30px' : '70px'}
                         outerStyle={{
-                            border: "solid 1px",
                             boxSizing: "border-box",
-                            padding: "1%",
-                            borderRadius: "6px",
+                            padding: "1% 0 0 0",
                             width: "90%",
                         }}
                     >
@@ -358,6 +362,6 @@ export function FavoriteDetailSettingView(props: propsType) {
                     </MetaContentDiv>
                 </FlexDiv>
             </ContentDiv>
-        </React.Fragment>
+        </RelativeDiv>
     );
 }

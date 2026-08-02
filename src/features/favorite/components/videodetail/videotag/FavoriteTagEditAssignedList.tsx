@@ -10,6 +10,7 @@ const Parent = styled.div`
   width: 100%;
   box-sizing: border-box;
   color:white;
+  padding-top: 17px;
 `;
 
 const TagEditAreaDiv = styled.div`

@@ -2,18 +2,16 @@ import { MdEdit } from "react-icons/md";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
-import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { useFavoriteTagViewActions } from "../../../hooks/videodetail/videotag/useFavoriteTagViewActions";
 
 
-const Parent = styled.div`
-  width: 100%;
-  box-sizing: border-box;
+const IconOverlayDiv = styled.div`
+  position: absolute;
+  top: -5px;
+  right: -2px;
   display: flex;
   align-items: center;
-  color: white;
-  height: 22px;
-  padding-right: 7px;
+  z-index: 1;
 `;
 
 const EditIconDiv = styled.div`
@@ -71,8 +69,7 @@ export function FavoriteTagViewActions() {
   } = useFavoriteTagViewActions();
 
   return (
-    <Parent>
-      <FlexSpaceDiv />
+    <IconOverlayDiv>
       <EditIconDiv>
         <IconComponent
           icon={MdEdit}
@@ -88,6 +85,6 @@ export function FavoriteTagViewActions() {
           編集
         </BlockNavDiv>
       </EditIconDiv>
-    </Parent>
+    </IconOverlayDiv>
   );
 }

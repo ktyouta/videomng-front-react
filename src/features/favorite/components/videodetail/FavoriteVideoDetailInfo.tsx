@@ -33,7 +33,7 @@ const VideoInfoDiv = styled.div`
 
 const ThumbnailWrapperDiv = styled.div`
     position: relative;
-    width: 99%;
+    width: 100%;
 `;
 
 const VideoImg = styled.img`
@@ -45,7 +45,7 @@ const VideoImg = styled.img`
 const IconBtnAreaDiv = styled.div`
     position: absolute;
     top: -10px;
-    right: -10px;
+    right: -3px;
     display: flex;
     gap: 6px;
 `;

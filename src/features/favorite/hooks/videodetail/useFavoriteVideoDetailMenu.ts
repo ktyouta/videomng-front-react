@@ -1,8 +1,6 @@
-import { MENU_NO } from "../../const/FavoriteConst";
-import { useNavigate } from "react-router-dom";
-import useSwitch from "../../../../hooks/useSwitch";
 import { useState } from "react";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
+import { MENU_NO } from "../../const/FavoriteConst";
 
 
 export function useFavoriteVideoDetailMenu() {

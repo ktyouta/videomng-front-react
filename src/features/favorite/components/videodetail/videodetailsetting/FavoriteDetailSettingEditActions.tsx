@@ -1,22 +1,19 @@
 import styled from "styled-components";
 import { FavoriteFavoriteCommentModalIcon } from "../videocomment/videofavoritecomment/FavoriteFavoriteCommentModalIcon";
 import { FavoriteBlockCommentModalIcon } from "../videocomment/videoblockcomment/FavoriteBlockCommentModalIcon";
-import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { FavoriteDetailSettingEditIcon } from "./FavoriteDetailSettingEditIcon";
 import { EDIT_MODE } from "../../../const/FavoriteConst";
 import { FavoriteDetailSettingCloseIcon } from "./FavoriteDetailSettingCloseIcon";
 import { FavoriteDetailSettingUpdateIcon } from "./FavoriteDetailSettingUpdateIcon";
 
 
-//ヘッダータイトルのスタイル
-const HeaderDiv = styled.div`
-  width: 100%;
-  box-sizing: border-box;
+const IconOverlayDiv = styled.div`
+  position: absolute;
+  top: -5px;
+  right: -2px;
   display: flex;
   align-items: center;
-  color: white;
-  height: 22px;
-  padding-right: 7px;
+  z-index: 1;
 `;
 
 type propsType = {
@@ -29,8 +26,7 @@ export function FavoriteDetailSettingEditActions(props: propsType) {
   console.log("FavoriteDetailSettingEditActions render");
 
   return (
-    <HeaderDiv>
-      <FlexSpaceDiv />
+    <IconOverlayDiv>
       {/* 閉じるアイコン */}
       <FavoriteDetailSettingCloseIcon
         changeView={props.changeView}
@@ -39,6 +35,6 @@ export function FavoriteDetailSettingEditActions(props: propsType) {
       <FavoriteDetailSettingUpdateIcon
         updateFavoriteVideo={props.updateFavoriteVideo}
       />
-    </HeaderDiv>
+    </IconOverlayDiv>
   );
 }

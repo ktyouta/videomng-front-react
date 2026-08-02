@@ -15,7 +15,7 @@ import { FavoriteTag } from "./videotag/FavoriteTag";
 
 
 const MenuParentDiv = styled.div`
-  width: 99%;
+  width: 100%;
   box-sizing:border-box;
   padding-top: 1%;
   margin-top: 2%;
@@ -135,7 +135,8 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            minHeight: `505px`
+            minHeight: isMobile ? "unset" : "505px",
+            height: isMobile ? "655px" : "auto",
           }}
         >
           <FavoriteMetaInfo
@@ -150,6 +151,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
+            height: isMobile ? "655px" : "60vh",
           }}
         >
           <FavoriteMemo />
@@ -162,7 +164,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            height: isMobile ? "700px" : "60vh",
+            height: isMobile ? "655px" : "60vh",
           }}
         >
           <FavoriteComment />
@@ -175,7 +177,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            height: "60vh",
+            height: isMobile ? "655px" : "60vh",
           }}
         >
           <FavoriteSearchKeywordComment />
@@ -188,6 +190,9 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
+            minHeight: isMobile ? "unset" : "45vh",
+            height: isMobile ? "655px" : "auto",
+            overflowY: isMobile ? "auto" : "visible",
           }}
         >
           <FavoriteDetailSetting />
@@ -198,7 +203,9 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         openMenuNo === MENU_NO.TAG &&
         <FavoriteVideoDetailPanel
           style={{
-            minHeight: isMobile ? "65vh" : "45vh",
+            minHeight: isMobile ? "unset" : "45vh",
+            height: isMobile ? "655px" : "auto",
+            overflowY: isMobile ? "auto" : "visible",
             display: "flex",
             flexDirection: "column",
           }}

@@ -7,7 +7,7 @@ const Parent = styled.div`
   background-color: #181a1e;
   border-radius: 7px;
   border: solid 1px;
-  padding: 14px;
+  padding: 10px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     padding: 18px;
@@ -23,17 +23,17 @@ const Parent = styled.div`
 `;
 
 type propsType = {
-    children: ReactNode,
-    style?: CSSProperties,
+  children: ReactNode,
+  style?: CSSProperties,
 }
 
 export function FavoriteVideoDetailPanel(props: propsType) {
 
-    return (
-        <Parent
-            style={props.style}
-        >
-            {props.children}
-        </Parent>
-    );
+  return (
+    <Parent
+      style={props.style}
+    >
+      {props.children}
+    </Parent>
+  );
 }

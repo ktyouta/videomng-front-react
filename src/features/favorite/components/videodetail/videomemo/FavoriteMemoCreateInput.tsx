@@ -1,13 +1,11 @@
-import styled from "styled-components";
-import BaseTextbox from "../../../../../components/BaseTextbox";
-import { IconComponent } from "../../../../../components/IconComponent";
 import { FaArrowUp } from "react-icons/fa";
-import { useFavoriteMemoCreateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCreateInput";
-import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import React from "react";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { useFavoriteMemoCreateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCreateInput";
 
+// テキストボックスの高さ（モバイル/それ以外）
+const TEXTBOX_HEIGHT_MOBILE = "33px";
+const TEXTBOX_HEIGHT_DEFAULT = "37px";
 
 export function FavoriteMemoCreateInput() {
 
@@ -19,6 +17,9 @@ export function FavoriteMemoCreateInput() {
     addToMemo,
     clearInputMemo,
   } = useFavoriteMemoCreateInput();
+
+  // 画面サイズ判定
+  const isMobile = useMediaQuery(mediaQuery.mobile);
 
   return (
     <TextboxWithButton
@@ -33,11 +34,12 @@ export function FavoriteMemoCreateInput() {
       outerMobileWidth="96%"
       iconWidth="37px"
       iconMobileWidth="34px"
-      outerHeight="37px"
+      outerHeight={isMobile ? TEXTBOX_HEIGHT_MOBILE : TEXTBOX_HEIGHT_DEFAULT}
       style={{
         marginRight: "auto",
         marginLeft: "auto",
       }}
+      iconSize={isMobile ? "20px" : ""}
     />
   );
 }

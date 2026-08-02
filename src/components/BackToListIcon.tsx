@@ -11,6 +11,9 @@ const BACK_ICON_SIZE_DEFAULT = "24";
 // 矢印を表示するスクロール位置の閾値
 const DISPLAY_SCROLL_THRESHOLD = 200;
 
+// 矢印の重なり順（サムネイル画像等の他要素より手前に表示するため）
+const BACK_ICON_Z_INDEX = 10;
+
 type propsType = {
     onClick: () => void,
     style?: CSSProperties,
@@ -52,6 +55,7 @@ export function BackToListIcon(props: propsType) {
             size={isMobile ? BACK_ICON_SIZE_MOBILE : BACK_ICON_SIZE_DEFAULT}
             style={{
                 "color": "white",
+                "zIndex": BACK_ICON_Z_INDEX,
                 ...props.style,
             }}
             onclick={props.onClick}
