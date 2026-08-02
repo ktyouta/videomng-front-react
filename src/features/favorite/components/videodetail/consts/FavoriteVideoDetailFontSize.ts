@@ -17,17 +17,17 @@ export const FAVORITE_VIDEO_DETAIL_FONT_SIZE = {
     },
     // タグガイドの見出し
     TAG_GUIDE_TITLE: {
-        MOBILE: `12px`,
+        MOBILE: `11px`,
         PC: `16px`,
     },
     // タグガイドの本文
     TAG_GUIDE_BODY: {
-        MOBILE: `12px`,
+        MOBILE: `11px`,
         PC: `16px`,
     },
     // メニューエリアの本文
     MENU_BODY: {
-        MOBILE: `12px`,
+        MOBILE: `11px`,
         PC: `16px`,
     },
     // メニューエリアのラベル(「メニュー：」)

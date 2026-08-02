@@ -28,7 +28,8 @@ const TagMasterListTitleDiv = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 11px;
+    margin-bottom: 2%;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 17px;
@@ -64,7 +65,7 @@ const NoTagListTitleDiv = styled.div`
 `;
 
 const TagEditAreaMessageSpan = styled.span`
-    font-size: 12px;
+    font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 15px;
@@ -103,7 +104,7 @@ const FilterInputAreaDiv = styled.div`
 const TitleSpan = styled.span`
   margin-right:7px;
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   white-space: nowrap;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {

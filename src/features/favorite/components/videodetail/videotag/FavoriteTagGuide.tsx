@@ -8,6 +8,7 @@ const Parent = styled.div`
   line-height: 1.6;
   color: white;
   margin-top: 8px;
+  padding-left: 1%;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: ${FAVORITE_VIDEO_DETAIL_FONT_SIZE.TAG_GUIDE_BODY.PC};

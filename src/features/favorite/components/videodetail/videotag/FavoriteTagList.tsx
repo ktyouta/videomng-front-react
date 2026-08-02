@@ -37,7 +37,7 @@ const TagListAreaTitleDiv = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 2%;
-    font-size: 14px;
+    font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 17px;
@@ -55,7 +55,7 @@ const TagListAreaTitleDiv = styled.div`
 const NoTagListTitleDiv = styled.div`
     margin-top: 2%;
     margin-bottom: 30px;
-    font-size: 12px;
+    font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 15px;

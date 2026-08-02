@@ -14,6 +14,7 @@ type propsType = {
     isDispCross?: boolean,
     tagColor?: string,
     tagTitleColor?: string,
+    crossSize?: string,
 }
 
 
@@ -50,10 +51,10 @@ const TitleSpan = styled.span`
     background-color: inherit;
 `;
 
-const CrossButtonSpan = styled.span`
+const CrossButtonSpan = styled.span<{ crossSize?: string }>`
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: ${({ crossSize }) => (crossSize ?? "20px")};
     color: #2A2D33;
     padding: 0;
     &:hover {
@@ -83,7 +84,9 @@ const TagButtonComponent = (props: propsType) => {
                 {props.title}
             </TitleSpan>
             {props.isDispCross && (
-                <CrossButtonSpan>
+                <CrossButtonSpan
+                    crossSize={props.crossSize}
+                >
                     ×
                 </CrossButtonSpan>
             )}

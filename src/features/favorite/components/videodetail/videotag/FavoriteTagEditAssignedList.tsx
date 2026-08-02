@@ -5,6 +5,10 @@ import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteTagEditAssignedList } from "../../../hooks/videodetail/videotag/useFavoriteTagEditAssignedList";
 import { FavoriteAddTagModal } from "./addtag/FavoriteAddTagModal";
 
+// タグ削除アイコン（×印）のサイズ（モバイル/それ以外）
+const TAG_CROSS_SIZE_MOBILE = "14px";
+const TAG_CROSS_SIZE_DEFAULT = "20px";
+
 
 const Parent = styled.div`
   width: 100%;
@@ -24,7 +28,7 @@ const TagListTitleDiv = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 17px;
@@ -57,7 +61,7 @@ const NoTagListTitleDiv = styled.div`
     margin-top: 2%;
     margin-left: 1%;
     margin-bottom: 30px;
-    font-size: 12px;
+    font-size: 11px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
         font-size: 15px;
@@ -79,7 +83,8 @@ export function FavoriteTagEditAssignedList() {
 
     const {
         deleteTag,
-        favoriteVideoTagEditList } = useFavoriteTagEditAssignedList();
+        favoriteVideoTagEditList,
+        isMobile } = useFavoriteTagEditAssignedList();
 
     return (
         <Parent>
@@ -106,6 +111,7 @@ export function FavoriteTagEditAssignedList() {
                                                         marginBottom: "10px"
                                                     }}
                                                     isDispCross={true}
+                                                    crossSize={isMobile ? TAG_CROSS_SIZE_MOBILE : TAG_CROSS_SIZE_DEFAULT}
                                                     onclick={() => {
                                                         deleteTag(index);
                                                     }}
