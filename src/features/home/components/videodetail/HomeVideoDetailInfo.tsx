@@ -104,6 +104,7 @@ const ButtonPanelDiv = styled.div`
     align-items: center;
     justify-content: center;
     gap: 12px;
+    width: 100%;
 `;
 
 const LabelSpan = styled.span`
@@ -140,7 +141,8 @@ const ChipButton = styled.button`
     white-space: nowrap;
     cursor: pointer;
     transition: filter 0.15s ease;
-
+    width: 50%;
+    
     &:hover {
       background-color: ${BUTTON_HOVER_BG_COLOR};
       transform: translateY(-1px);
