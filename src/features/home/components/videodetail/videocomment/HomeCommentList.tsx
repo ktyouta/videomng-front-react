@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loading from "../../../../../components/Loading";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { useHomeCommentList } from "../../../hooks/videodetail/videocomment/useHomeCommentList";
 import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
 import { HomeCommentContent } from "./HomeCommentContent";
@@ -11,7 +12,7 @@ const Parent = styled.div`
   flex: 1;
   box-sizing: border-box;
   color:white;
-  padding-top: 20px;
+  padding-top: 17px;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -30,10 +31,26 @@ const CommentListAreaDiv = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
   padding-left: 1%;
-  padding-right: 20px;
+  padding-right: 7px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  font-size: 11px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    padding-right: 20px;
+    font-size: 12px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    padding-right: 20px;
+    font-size: 12px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    padding-right: 20px;
+    font-size: 16px;
+  }
 `;
 
 const LoadingParentNext = styled.div`

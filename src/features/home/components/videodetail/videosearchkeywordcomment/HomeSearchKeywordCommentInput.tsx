@@ -1,14 +1,11 @@
-import styled from "styled-components";
-import BaseTextbox from "../../../../../components/BaseTextbox";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { FaArrowUp } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
-import { useHomeSearchKeywordCommentInput } from "../../../hooks/videodetail/videosearchkeywordcomment/useHomeSearchKeywordCommentInput";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import React from "react";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { useHomeSearchKeywordCommentInput } from "../../../hooks/videodetail/videosearchkeywordcomment/useHomeSearchKeywordCommentInput";
 
+// テキストボックスの高さ（モバイル/それ以外）
+const TEXTBOX_HEIGHT_MOBILE = "33px";
+const TEXTBOX_HEIGHT_DEFAULT = "37px";
 
 export function HomeSearchKeywordCommentInput() {
 
@@ -19,6 +16,9 @@ export function HomeSearchKeywordCommentInput() {
     clearInputKeyword,
     inputKeyword,
     setInputKeyword, } = useHomeSearchKeywordCommentInput();
+
+  // 画面サイズ判定
+  const isMobile = useMediaQuery(mediaQuery.mobile);
 
   return (
     <TextboxWithButton
@@ -33,7 +33,7 @@ export function HomeSearchKeywordCommentInput() {
       outerMobileWidth="96%"
       iconWidth="37px"
       iconMobileWidth="34px"
-      outerHeight="37px"
+      outerHeight={isMobile ? TEXTBOX_HEIGHT_MOBILE : TEXTBOX_HEIGHT_DEFAULT}
       style={{
         marginRight: "auto",
         marginLeft: "auto",

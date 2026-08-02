@@ -3,9 +3,9 @@ import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
 import { ModalPortalConfirm } from "../../../../components/ModalPortalConfirm";
+import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { FAVORITE_SEARCH_AREA_ACCENT_COLOR, FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG } from '../../const/FavoriteConst';
 import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
 import { FavoriteVideoDetailDataType } from "../../types/videodetail/FavoriteVideoDetailDataType";
 
@@ -140,12 +140,12 @@ const PcChipButton = styled.button`
     width: 50%;
 
     &:hover {
-      background-color: ${FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG};
+      background-color: ${BUTTON_HOVER_BG_COLOR};
       transform: translateY(-1px);
     }
 
     &:hover ${LabelSpan} {
-      color: ${FAVORITE_SEARCH_AREA_ACCENT_COLOR};
+      color: ${BUTTON_HOVER_ACCENT_COLOR};
     }
 `;
 

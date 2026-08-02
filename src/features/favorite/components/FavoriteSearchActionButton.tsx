@@ -1,12 +1,9 @@
 import { IconType } from "react-icons";
 import styled from "styled-components";
 import { IconComponent } from "../../../components/IconComponent";
+import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR } from "../../../consts/ButtonInteractionConst";
 import { MEDIA } from "../../../consts/MediaConst";
-import {
-    FAVORITE_SEARCH_AREA_ACCENT_COLOR,
-    FAVORITE_SEARCH_AREA_BUTTON_BG,
-    FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG,
-} from "../const/FavoriteConst";
+import { FAVORITE_SEARCH_AREA_BUTTON_BG } from "../const/FavoriteConst";
 
 
 const LabelSpan = styled.span`
@@ -41,12 +38,12 @@ const ButtonWrapper = styled.div`
   transition: background-color 0.15s ease, transform 0.15s ease;
 
   &:hover {
-    background-color: ${FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG};
+    background-color: ${BUTTON_HOVER_BG_COLOR};
     transform: translateY(-1px);
   }
 
   &:hover ${LabelSpan} {
-    color: ${FAVORITE_SEARCH_AREA_ACCENT_COLOR};
+    color: ${BUTTON_HOVER_ACCENT_COLOR};
   }
 `;
 

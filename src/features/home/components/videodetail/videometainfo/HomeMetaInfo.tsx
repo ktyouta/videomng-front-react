@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
+import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
 import { YouTubeDataApiVideoDetailItemType } from "../../../../../types/youtube/YouTubeDataApiVideoDetailItemType";
 import { formatDateJP } from "../../../../../utils/CommonFunction";
 
@@ -59,6 +60,8 @@ export function HomeMetaInfo(props: propsType) {
     const likeCount = statistics?.likeCount;
     // 投稿日
     const publishedDate = formatDateJP(snippet.publishedAt);
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
 
     return (
         <ContentDiv>
@@ -107,7 +110,7 @@ export function HomeMetaInfo(props: propsType) {
                 {
                     description &&
                     <AccordionComponent
-                        defaultHeight={'70px'}
+                        defaultHeight={isMobile ? '150px' : '70px'}
                         outerStyle={{
                             border: "solid 1px",
                             boxSizing: "border-box",

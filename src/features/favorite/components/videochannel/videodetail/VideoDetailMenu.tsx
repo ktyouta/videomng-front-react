@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Selectbox } from "../../../../../components/Selectbox";
 import { MEDIA } from "../../../../../consts/MediaConst";
@@ -13,7 +12,7 @@ import { VIDEO_DETAIL_FONT_SIZE } from "./consts/VideoDetailFontSize";
 
 
 const MenuParentDiv = styled.div`
-  width: 99%;
+  width: 100%;
   box-sizing:border-box;
   padding-top: 1%;
   margin-top: 8%;
@@ -47,7 +46,23 @@ const MenuParentDiv = styled.div`
 const ComboAreaDiv = styled.div`
   display:flex;
   align-items: center;
-  margin-bottom: 3%;
+  margin-bottom: 4%;
+  justify-content: center;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    justify-content: initial;
+    margin-bottom: 3%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    justify-content: initial;
+    margin-bottom: 3%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    justify-content: initial;
+    margin-bottom: 3%;
+  }
 `;
 
 const ComboTitleSpan = styled.span`
@@ -86,72 +101,76 @@ export function VideoDetailMenu(props: propsType) {
   } = useVideoDetailMenu();
 
   const videoDetail = props.videoDetail;
-  const menuWidth = isMobile ? "75%" : "50%";
+  const menuWidth = isMobile ? "96%" : "50%";
   const menuComboFontSize = isMobile ? "11px" : "13px";
 
   return (
-    <React.Fragment>
-      <MenuParentDiv>
-        <ComboAreaDiv>
+    <MenuParentDiv>
+      <ComboAreaDiv>
+        {
+          !isMobile &&
           <ComboTitleSpan>
             メニュー：
           </ComboTitleSpan>
-          <Selectbox
-            options={NON_FAVORITE_VIDEO_DETAIL_MENU_LIST}
-            value={openMenuNo || NON_FAVORITE_VIDEO_DETAIL_MENU_LIST[0].value}
-            onChange={setOpenMenuNo}
-            width={menuWidth}
-            minWidth="8%"
-            height="39px"
-            backgroundColor="rgb(24, 26, 30)"
-            color="white"
-            fontSize={menuComboFontSize}
-            isSearchable={!isMobile}
+        }
+        <Selectbox
+          options={NON_FAVORITE_VIDEO_DETAIL_MENU_LIST}
+          value={openMenuNo || NON_FAVORITE_VIDEO_DETAIL_MENU_LIST[0].value}
+          onChange={setOpenMenuNo}
+          width={menuWidth}
+          minWidth="8%"
+          height="39px"
+          backgroundColor="#3a3d42"
+          borderColor="transparent"
+          borderRadius="10px"
+          color="white"
+          fontSize={menuComboFontSize}
+          isSearchable={!isMobile}
+        />
+      </ComboAreaDiv>
+      {
+        // 動画情報
+        openMenuNo === MENU_NO.INFO &&
+        <VideoDetailPanel
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: isMobile ? "unset" : "505px",
+            height: isMobile ? "655px" : "auto",
+          }}
+        >
+          <MetaInfo
+            videoId={videoId}
+            videoDetail={videoDetail}
           />
-        </ComboAreaDiv>
-        {
-          // 動画情報
-          openMenuNo === MENU_NO.INFO &&
-          <VideoDetailPanel
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              minHeight: `505px`
-            }}
-          >
-            <MetaInfo
-              videoId={videoId}
-              videoDetail={videoDetail}
-            />
-          </VideoDetailPanel>
-        }
-        {
-          // 公開コメント
-          openMenuNo === MENU_NO.COMMENT &&
-          <VideoDetailPanel
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "505px",
-            }}
-          >
-            <Comment />
-          </VideoDetailPanel>
-        }
-        {
-          // キーワード検索(コメント)
-          openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
-          <VideoDetailPanel
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "505px",
-            }}
-          >
-            <SearchKeywordComment />
-          </VideoDetailPanel>
-        }
-      </MenuParentDiv>
-    </React.Fragment>
+        </VideoDetailPanel>
+      }
+      {
+        // 公開コメント
+        openMenuNo === MENU_NO.COMMENT &&
+        <VideoDetailPanel
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: isMobile ? "655px" : "60vh",
+          }}
+        >
+          <Comment />
+        </VideoDetailPanel>
+      }
+      {
+        // キーワード検索(コメント)
+        openMenuNo === MENU_NO.KEYWORD_SEARCH_COMMENT &&
+        <VideoDetailPanel
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: isMobile ? "655px" : "60vh",
+          }}
+        >
+          <SearchKeywordComment />
+        </VideoDetailPanel>
+      }
+    </MenuParentDiv>
   );
 }

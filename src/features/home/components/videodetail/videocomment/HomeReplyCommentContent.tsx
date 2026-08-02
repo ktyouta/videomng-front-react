@@ -25,7 +25,19 @@ const AuthorNameDiv = styled.div`
 
 const AuthorIconImg = styled.img`
     border-radius: 50%;
-    width: 25px;
+    width: 20px;
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      width: 25px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      width: 25px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      width: 25px;
+    }
 `;
 
 const CommentDiv = styled.div`

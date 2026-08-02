@@ -1,37 +1,69 @@
 import React from "react";
-import { MdPlayArrow } from 'react-icons/md';
+import { FaRegStar, FaStar } from 'react-icons/fa';
+import { MdLogin, MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
-import ButtonComponent from "../../../../components/ButtonComponent";
 import { IconComponent } from "../../../../components/IconComponent";
 import { ModalPortal } from "../../../../components/ModalPortal";
+import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 import { FLG } from "../../../../consts/CommonConst";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { VideoDetailItemType } from "../../../../types/videodetail/VideoDetailItemType";
 import { useHomeVideoDetailInfo } from "../../hooks/videodetail/useHomeVideoDetailInfo";
 import { HomeVideoDetailTagFolderSelect } from "./HomeVideoDetailTagFolderSelect";
-import { HOME_VIDEO_DETAIL_FONT_SIZE } from "./consts/HomeVideoDetailFontSize";
 
 
 const VideoInfoDiv = styled.div`
-  width: 95%;
-  padding-top: 3%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: 25%;
+    padding-top: 3%;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     width: 40%;
+    padding-top: 3%;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     width: 25%;
+    padding-top: 3%;
   }
+`;
+
+const ThumbnailWrapperDiv = styled.div`
+    position: relative;
+    width: 100%;
 `;
 
 const VideoImg = styled.img`
     width: 100%;
+    display: block;
     border-radius: 6%;
+`;
+
+const IconBtnAreaDiv = styled.div`
+    position: absolute;
+    top: -10px;
+    right: -3px;
+    display: flex;
+    gap: 6px;
+`;
+
+const IconBadgeButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
 `;
 
 const VideoMetaDiv = styled.div`
@@ -39,8 +71,9 @@ const VideoMetaDiv = styled.div`
 `;
 
 const VideoTitle = styled.h3`
-  margin-bottom: 9%;
-  font-size: 15px;
+  margin-bottom: 1px;
+  margin-top: 1px;
+  font-size: 12px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 15px;
@@ -58,10 +91,64 @@ const VideoTitle = styled.h3`
   }
 `;
 
-const BtnDiv = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: center;
+const ButtonPanelDiv = styled.div`
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 14px;
+    border-radius: 12px;
+    background-color: #1c1f26;
+    border: 1px solid #3a3f4b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    margin: 0 auto 8% auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+`;
+
+const LabelSpan = styled.span`
+  color: white;
+  font-size: 12px;
+  transition: color 0.15s ease;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 12px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 14px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 14px;
+  }
+`;
+
+const ChipButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 45px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    background: #3a3d42;
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+
+    &:hover {
+      background-color: ${BUTTON_HOVER_BG_COLOR};
+      transform: translateY(-1px);
+    }
+
+    &:hover ${LabelSpan} {
+      color: ${BUTTON_HOVER_ACCENT_COLOR};
+    }
 `;
 
 
@@ -93,91 +180,126 @@ export function HomeVideoDetailInfo(props: propsType) {
     const title = snippet?.title;
     // お気に入りフラグ
     const favoriteFlg = item?.favoriteFlg;
+    // タブレット・PC幅判定(ボタンの出し分け用。isMobileは768px幅をタブレットと重複して判定するため使わない)
+    const isTablet = useMediaQuery(mediaQuery.tablet);
+    const isPc = useMediaQuery(mediaQuery.pc);
+    const isTabletOrPc = isTablet || isPc;
 
     return (
         <VideoInfoDiv>
-            <VideoImg
-                src={imgUrl}
-            />
+            <ThumbnailWrapperDiv>
+                <VideoImg
+                    src={imgUrl}
+                />
+                {
+                    !isTabletOrPc &&
+                    <IconBtnAreaDiv>
+                        {
+                            isLogin ?
+                                <React.Fragment>
+                                    {
+                                        favoriteFlg === FLG.ON
+                                            ?
+                                            // お気に入り登録済み
+                                            <IconBadgeButton>
+                                                <IconComponent
+                                                    icon={FaStar}
+                                                    size="16px"
+                                                    style={{ color: "yellow" }}
+                                                />
+                                            </IconBadgeButton>
+                                            :
+                                            // お気に入り未登録
+                                            <IconBadgeButton
+                                                onClick={clickRegister}
+                                            >
+                                                <IconComponent
+                                                    icon={FaRegStar}
+                                                    size="16px"
+                                                    style={{ color: "white" }}
+                                                />
+                                            </IconBadgeButton>
+                                    }
+                                </React.Fragment>
+                                :
+                                // ログイン画面遷移ボタン
+                                <IconBadgeButton
+                                    onClick={moveLogin}
+                                >
+                                    <IconComponent
+                                        icon={MdLogin}
+                                        size="16px"
+                                        style={{ color: "white" }}
+                                    />
+                                </IconBadgeButton>
+                        }
+                    </IconBtnAreaDiv>
+                }
+            </ThumbnailWrapperDiv>
             <VideoMetaDiv>
                 <VideoTitle>
                     {title}
                 </VideoTitle>
-                <ButtonComponent
-                    variant="green"
-                    onClick={play}
-                    style={{
-                        "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
-                        "minHeight": "50px",
-                        "width": "100%",
-                        "color": "white",
-                        "borderRadius": "8px",
-                        "marginBottom": "8%",
-                        "display": "flex",
-                        "alignItems": "center",
-                        "justifyContent": "center",
-                    }}
-                >
-                    <BtnDiv>
-                        <IconComponent
-                            icon={MdPlayArrow}
-                            size="10%"
-                        />
-                        再生
-                    </BtnDiv>
-                </ButtonComponent>
                 {
-                    isLogin ?
-                        <React.Fragment>
-                            {
-                                favoriteFlg === FLG.ON
-                                    ?
-                                    // お気に入り登録済み
-                                    <ButtonComponent
-                                        style={{
-                                            "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
-                                            "minHeight": "50px",
-                                            "width": "100%",
-                                            "background": "rgb(100, 100, 100)",
-                                            "color": "white",
-                                            "borderRadius": "8px",
-                                            "display": "block",
-                                        }}
-                                    >
-                                        お気に入り登録済み
-                                    </ButtonComponent>
-                                    :
-                                    // お気に入り未登録
-                                    <ButtonComponent
-                                        variant="orange"
-                                        onClick={clickRegister}
-                                        style={{
-                                            "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
-                                            "minHeight": "50px",
-                                            "width": "100%",
-                                            "borderRadius": "8px",
-                                            "display": "block",
-                                        }}
-                                    >
-                                        お気に入りに登録する
-                                    </ButtonComponent>
-                            }
-                        </React.Fragment>
-                        :
-                        // ログイン画面遷移ボタン
-                        <ButtonComponent
-                            variant="blue"
-                            onClick={moveLogin}
-                            style={{
-                                "fontSize": isMobile ? HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.MOBILE : HOME_VIDEO_DETAIL_FONT_SIZE.BUTTON.PC,
-                                "minHeight": "50px",
-                                "width": "100%",
-                                "borderRadius": "8px",
-                                "display": "block",
-                            }}
+                    isTabletOrPc &&
+                    <ButtonPanelDiv>
+                        <ChipButton
+                            onClick={play}
                         >
-                            ログインしてお気に入りに登録
-                        </ButtonComponent>
+                            <IconComponent
+                                icon={MdPlayArrow}
+                                size="16px"
+                            />
+                            <LabelSpan>
+                                再生
+                            </LabelSpan>
+                        </ChipButton>
+                        {
+                            isLogin ?
+                                <React.Fragment>
+                                    {
+                                        favoriteFlg === FLG.ON
+                                            ?
+                                            // お気に入り登録済み
+                                            <ChipButton>
+                                                <IconComponent
+                                                    icon={FaStar}
+                                                    size="16px"
+                                                />
+                                                <LabelSpan>
+                                                    登録済み
+                                                </LabelSpan>
+                                            </ChipButton>
+                                            :
+                                            // お気に入り未登録
+                                            <ChipButton
+                                                onClick={clickRegister}
+                                            >
+                                                <IconComponent
+                                                    icon={FaRegStar}
+                                                    size="16px"
+                                                />
+                                                <LabelSpan>
+                                                    登録する
+                                                </LabelSpan>
+                                            </ChipButton>
+                                    }
+                                </React.Fragment>
+                                :
+                                // ログイン画面遷移ボタン
+                                <ChipButton
+                                    onClick={moveLogin}
+                                >
+                                    <IconComponent
+                                        icon={MdLogin}
+                                        size="16px"
+                                    />
+                                    <LabelSpan>
+                                        ログインして登録
+                                    </LabelSpan>
+                                </ChipButton>
+                        }
+                    </ButtonPanelDiv>
                 }
             </VideoMetaDiv>
             <ModalPortal

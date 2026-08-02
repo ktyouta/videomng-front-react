@@ -17,7 +17,7 @@ export const HOME_VIDEO_DETAIL_FONT_SIZE = {
     },
     // メニューエリアの本文
     MENU_BODY: {
-        MOBILE: `12px`,
+        MOBILE: `11px`,
         PC: `16px`,
     },
     // メニューエリアのラベル(「メニュー：」)

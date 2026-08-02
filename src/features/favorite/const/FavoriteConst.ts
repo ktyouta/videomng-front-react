@@ -180,11 +180,7 @@ export const FAVORITE_SEARCH_AREA_PANEL_SHADOW = "0 4px 12px rgba(0, 0, 0, 0.6)"
 // キャンセル/実行ボタン（FavoriteCreateFolder等）と同じ色に揃える
 export const FAVORITE_SEARCH_AREA_BUTTON_BG = "#3a3d42";
 
-export const FAVORITE_SEARCH_AREA_BUTTON_HOVER_BG = "rgba(37, 99, 235, 0.18)";
-
 export const FAVORITE_SEARCH_AREA_LABEL_COLOR = "#9e9e9e";
-
-export const FAVORITE_SEARCH_AREA_ACCENT_COLOR = "#7abaff";
 
 // 一覧画面表示モード
 export const FAVORITE_LIST_MODE = {

@@ -29,8 +29,8 @@ const VideoContentDiv = styled.div`
   width: 100%;
   height: 52%;
   box-sizing:border-box;
-  padding-left:6%;
-  padding-right:5%;
+  padding-left: 7px;
+  padding-right: 7px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     display:flex;
@@ -42,6 +42,8 @@ const VideoContentDiv = styled.div`
 
   @media (min-width: ${MEDIA.PC}) {
     display:flex;
+    padding-left: 6%;
+    padding-right: 5%;
   }
 `;
 
