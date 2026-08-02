@@ -16,7 +16,6 @@ const VideoInfoDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: 25%;
@@ -204,7 +203,7 @@ export function VideoDetailInfo(props: propsType) {
                                                 <IconComponent
                                                     icon={FaStar}
                                                     size="16px"
-                                                    style={{ color: "white" }}
+                                                    style={{ color: "yellow" }}
                                                 />
                                             </IconBadgeButton>
                                             :
