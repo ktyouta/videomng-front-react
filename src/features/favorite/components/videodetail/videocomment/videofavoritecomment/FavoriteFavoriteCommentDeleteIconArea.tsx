@@ -7,22 +7,18 @@ import { useFavoriteFavoriteCommentDeleteIconArea } from "../../../../hooks/vide
 
 const IconDiv = styled.div`
     position: relative;
-    width: 12px;
-    height: 12px;
+    font-size: 16px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        width: 16px;
-        height: 16px;
+        font-size: 20px;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        width: 16px;
-        height: 16px;
+        font-size: 20px;
     }
 
     @media (min-width: ${MEDIA.PC}) {
-        width: 16px;
-        height: 16px;
+        font-size: 20px;
     }
 `;
 
@@ -62,10 +58,10 @@ export function FavoriteFavoriteCommentDeleteIconArea(props: propsType) {
             <IconComponent
                 icon={FaRegTrashAlt}
                 onclick={props.deleteComment}
-                size="100%"
                 bgColor="#A1A1AA"
                 onMouseEnter={openDeleteNav}
                 onMouseLeave={closeDeleteNav}
+                hasCircleBackground
             />
             <BlockNavDiv
                 isDisplay={isOpenDeleteNav}

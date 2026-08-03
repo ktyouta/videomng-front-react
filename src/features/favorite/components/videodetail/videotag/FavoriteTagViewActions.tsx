@@ -7,7 +7,7 @@ import { useFavoriteTagViewActions } from "../../../hooks/videodetail/videotag/u
 
 const IconOverlayDiv = styled.div`
   position: absolute;
-  top: -5px;
+  top: -3px;
   right: -2px;
   display: flex;
   align-items: center;
@@ -19,22 +19,18 @@ const EditIconDiv = styled.div`
   position:relative;
   display: flex;
   grid-column-gap: 10px;
-  width: 15px;
-  height: 15px;
+  font-size: 16px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-      width: 22px;
-      height: 22px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-      width: 22px;
-      height: 22px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-      width: 22px;
-      height: 22px;
+      font-size: 20px;
   }
 `;
 
@@ -74,10 +70,10 @@ export function FavoriteTagViewActions() {
         <IconComponent
           icon={MdEdit}
           onclick={changeEdit}
-          size="100%"
           bgColor="#60A5FA"
           onMouseEnter={openEditNav}
           onMouseLeave={closeEditNav}
+          hasCircleBackground
         />
         <BlockNavDiv
           isDisplay={isOpenEditNav}

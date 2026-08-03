@@ -10,22 +10,18 @@ const Parent = styled.div`
   position:relative;
   display: flex;
   margin-right: 14px;
-  width: 10px;
-  height: 10px;
+  font-size: 16px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-      width: 12px;
-      height: 12px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-      width: 12px;
-      height: 12px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-      width: 12px;
-      height: 12px;
+      font-size: 20px;
   }
 `;
 
@@ -72,12 +68,10 @@ export function FavoriteCommentFavoriteIconArea(props: propsType) {
             <IconComponent
                 icon={FaStar}
                 onclick={() => { props.onClick(props.commentId); }}
-                size="100%"
-                style={{
-                    color: iconColor,
-                }}
+                bgColor={iconColor}
                 onMouseEnter={openFavoriteNav}
                 onMouseLeave={closeFavoriteNav}
+                hasCircleBackground
             />
             <BlockNavDiv
                 isDisplay={isOpenFavoriteNav}

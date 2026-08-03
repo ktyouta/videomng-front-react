@@ -10,7 +10,7 @@ import styled from "styled-components";
 const Parent = styled.div`
     display:flex;
     align-items: center;
-    width: 38px;
+    width: 90px;
 `;
 
 type propsType = {

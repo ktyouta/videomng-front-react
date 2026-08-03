@@ -20,7 +20,7 @@ const RelativeDiv = styled.div`
 
 const IconOverlayDiv = styled.div`
   position: absolute;
-  top: -5px;
+  top: -3px;
   right: -10px;
   display: flex;
   align-items: center;

@@ -9,8 +9,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Videomng',
-        short_name: 'Videomng',
+        name: 'VideoMng',
+        short_name: 'VideoMng',
         description: '動画管理サービス',
         theme_color: '#00050d',
         background_color: '#00050d',

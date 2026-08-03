@@ -3,7 +3,7 @@ import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
 import { ModalPortalConfirm } from "../../../../components/ModalPortalConfirm";
-import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
+import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR, THUMBNAIL_ICON_CIRCLE_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
@@ -43,7 +43,7 @@ const VideoImg = styled.img`
 
 const IconBtnAreaDiv = styled.div`
     position: absolute;
-    top: -10px;
+    top: 4px;
     right: -3px;
     display: flex;
     gap: 6px;
@@ -57,7 +57,8 @@ const IconBadgeButton = styled.button`
     height: 30px;
     box-sizing: border-box;
     border: none;
-    background: none;
+    border-radius: 50%;
+    background-color: ${THUMBNAIL_ICON_CIRCLE_BG_COLOR};
     cursor: pointer;
     padding: 0;
 `;

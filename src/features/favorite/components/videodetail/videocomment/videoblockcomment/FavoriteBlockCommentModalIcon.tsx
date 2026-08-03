@@ -11,24 +11,19 @@ import { FavoriteBlockComment } from "./FavoriteBlockComment";
 const IconDiv = styled.div`
     margin-right: 10px;
     position: relative;
-    width: 15px;
-    height: 15px;
+    font-size: 16px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        width: 22px;
-        height: 22px;
+        font-size: 20px;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        width: 22px;
-        height: 22px;
+        font-size: 20px;
     }
 
     @media (min-width: ${MEDIA.PC}) {
-        width: 22px;
-        height: 22px;
+        font-size: 20px;
     }
-
 `;
 
 const BlockNavDiv = styled.div<{ isDisplay: boolean }>`
@@ -67,12 +62,10 @@ export function FavoriteBlockCommentModalIcon() {
                 <IconComponent
                     icon={HiOutlineInbox}
                     onclick={openBlockListModal}
-                    style={{
-                        color: "white",
-                    }}
+                    bgColor="white"
                     onMouseEnter={openBlockListNav}
                     onMouseLeave={closeBlockListNav}
-                    size="100%"
+                    hasCircleBackground
                 />
                 <BlockNavDiv
                     isDisplay={isOpenBlockListNav}

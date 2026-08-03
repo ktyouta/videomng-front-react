@@ -2,8 +2,27 @@ import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteMemoUpdateIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoUpdateIconArea";
 
+
+const IconSizeDiv = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  font-size: 16px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: 20px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: 20px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      font-size: 20px;
+  }
+`;
 
 const UpdateNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -37,14 +56,16 @@ export function FavoriteMemoUpdateIconArea(props: propsType) {
 
     return (
         <React.Fragment>
-            <IconComponent
-                icon={FaCheck}
-                onclick={props.updateMemo}
-                size="50%"
-                onMouseEnter={openUpdateNav}
-                onMouseLeave={closeUpdateNav}
-                bgColor="#43A047"
-            />
+            <IconSizeDiv>
+                <IconComponent
+                    icon={FaCheck}
+                    onclick={props.updateMemo}
+                    onMouseEnter={openUpdateNav}
+                    onMouseLeave={closeUpdateNav}
+                    bgColor="#43A047"
+                    hasCircleBackground
+                />
+            </IconSizeDiv>
             <UpdateNavDiv
                 isDisplay={isOpenUpdateNav}
             >

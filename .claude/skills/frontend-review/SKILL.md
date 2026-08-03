@@ -41,6 +41,9 @@ version: 1.0.0
   - アンチパターン: `function handleDelete(id) { ... }` を毎レンダリング再生成して `onDelete` として渡す
   - 正しいパターン: `const handleDelete = useCallback((id) => { ... }, [deps])`
 - マジックナンバー・マジック文字列が直接記述されていないか（`consts/` / `const/` の定数に切り出せないか）
+- 既存要素と子要素の間に新しいラッパー要素（div・span等）を挿入する場合、子要素が%指定でサイズ・位置（width/height/position:absoluteのtop・left等）を決めていないか確認する
+  - %指定がある場合、新設したラッパーが親から見て definite なサイズ（明示的なwidth/height、または100%等で確実に確定する値）を持っているか検証する
+  - ラッパーが`padding`のみ・`width`/`height`未指定（content依存のauto sizing）の場合、%指定の基準が不定になり意図しないサイズで描画される可能性があるため、`width:100%;height:100%`等で明示するか、絶対値サイズに切り替える
 
 ### コーディング規約（CLAUDE.md 準拠）
 - コンポーネントが `function` 宣言で定義されているか（アロー関数でないか）

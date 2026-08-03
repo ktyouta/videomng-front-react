@@ -5,8 +5,8 @@ import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
 import { IconComponent } from "./IconComponent";
 
 // 戻る矢印のサイズ（モバイル/それ以外）
-const BACK_ICON_SIZE_MOBILE = "17";
-const BACK_ICON_SIZE_DEFAULT = "24";
+const BACK_ICON_SIZE_MOBILE = "17px";
+const BACK_ICON_SIZE_DEFAULT = "24px";
 
 // 矢印を表示するスクロール位置の閾値
 const DISPLAY_SCROLL_THRESHOLD = 200;
@@ -52,13 +52,14 @@ export function BackToListIcon(props: propsType) {
     return (
         <IconComponent
             icon={FaArrowLeft}
-            size={isMobile ? BACK_ICON_SIZE_MOBILE : BACK_ICON_SIZE_DEFAULT}
             style={{
                 "color": "white",
                 "zIndex": BACK_ICON_Z_INDEX,
+                "fontSize": isMobile ? BACK_ICON_SIZE_MOBILE : BACK_ICON_SIZE_DEFAULT,
                 ...props.style,
             }}
             onclick={props.onClick}
+            hasCircleBackground
         />
     );
 }

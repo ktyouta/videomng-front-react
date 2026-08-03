@@ -15,12 +15,13 @@ const MemoInputAreaDiv = styled.div`
 `;
 
 const EditIconAreaDiv = styled.div`
-  width: 7%;
+  width: 20%;
   height: 38px;
   color:white;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   position:relative;
 `;
 
@@ -46,7 +47,7 @@ export function FavoriteMemoEditInput(props: propsType) {
     return (
         <MemoInputAreaDiv>
             <BaseTextbox
-                textWidth="92%"
+                textWidth="78%"
                 placeholder="メモ"
                 value={inputMemo}
                 onChange={setInputMemo}

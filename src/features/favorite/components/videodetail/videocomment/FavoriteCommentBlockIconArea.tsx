@@ -14,22 +14,18 @@ const Parent = styled.div`
   box-sizing: border-box;
   position:relative;
   display: flex;
-  width: 10px;
-  height: 10px;
+  font-size: 16px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-      width: 12px;
-      height: 12px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-      width: 12px;
-      height: 12px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-      width: 12px;
-      height: 12px;
+      font-size: 20px;
   }
 `;
 
@@ -71,10 +67,10 @@ export function FavoriteCommentBlockIconArea(props: propsType) {
             <IconComponent
                 icon={MdVisibilityOff}
                 onclick={props.blockComment}
-                size="100%"
-                style={{ color: "white" }}
+                bgColor="white"
                 onMouseEnter={openBlockNav}
                 onMouseLeave={closeBlockNav}
+                hasCircleBackground
             />
             <BlockNavDiv
                 isDisplay={isOpenBlockNav}

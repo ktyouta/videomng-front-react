@@ -10,22 +10,18 @@ const Parent = styled.div`
   position:relative;
   display: flex;
   grid-column-gap: 10px;
-  width: 15px;
-  height: 15px;
+  font-size: 16px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-      width: 22px;
-      height: 22px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-      width: 22px;
-      height: 22px;
+      font-size: 20px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-      width: 22px;
-      height: 22px;
+      font-size: 20px;
   }
 `;
 
@@ -61,10 +57,10 @@ export function FavoriteTagEditUpdateIcon() {
             <IconComponent
                 icon={FaCheck}
                 onclick={udpateTag}
-                size="100%"
                 onMouseEnter={openUpdateNav}
                 onMouseLeave={closeUpdateNav}
                 bgColor="#43A047"
+                hasCircleBackground
             />
             <BlockNavDiv
                 isDisplay={isOpenUpdateNav}

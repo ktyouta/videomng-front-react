@@ -2,8 +2,27 @@ import React from "react";
 import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { useFavoriteMemoCacelIconArea } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCacelIconArea";
 
+
+const IconSizeDiv = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  font-size: 16px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: 20px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: 20px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+      font-size: 20px;
+  }
+`;
 
 const CancelNavDiv = styled.div<{ isDisplay: boolean }>`
     display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
@@ -37,14 +56,16 @@ export function FavoriteMemoCancelIconArea(props: propsType) {
 
     return (
         <React.Fragment>
-            <IconComponent
-                icon={RxCross1}
-                onclick={props.closeEdit}
-                size="50%"
-                onMouseEnter={openCancelNav}
-                onMouseLeave={closeCancelNav}
-                bgColor="#E53935"
-            />
+            <IconSizeDiv>
+                <IconComponent
+                    icon={RxCross1}
+                    onclick={props.closeEdit}
+                    onMouseEnter={openCancelNav}
+                    onMouseLeave={closeCancelNav}
+                    bgColor="#E53935"
+                    hasCircleBackground
+                />
+            </IconSizeDiv>
             <CancelNavDiv
                 isDisplay={isOpenCancelNav}
             >

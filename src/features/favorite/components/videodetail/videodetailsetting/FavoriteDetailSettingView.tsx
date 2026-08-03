@@ -278,7 +278,8 @@ export function FavoriteDetailSettingView(props: propsType) {
                                         <TagButtonComponent
                                             title={e.tagName}
                                             btnStyle={{
-                                                marginRight: "15px"
+                                                marginRight: "15px",
+                                                marginBottom: "10px",
                                             }}
                                             key={e.tagId}
                                             tagColor={e.tagColor}

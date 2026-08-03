@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import { FavoriteFavoriteCommentModalIcon } from "../videocomment/videofavoritecomment/FavoriteFavoriteCommentModalIcon";
-import { FavoriteBlockCommentModalIcon } from "../videocomment/videoblockcomment/FavoriteBlockCommentModalIcon";
 import { FavoriteDetailSettingEditIcon } from "./FavoriteDetailSettingEditIcon";
-import { EDIT_MODE } from "../../../const/FavoriteConst";
 
 
 const IconOverlayDiv = styled.div`
   position: absolute;
-  top: -5px;
+  top: -3px;
   right: -2px;
   display: flex;
   align-items: center;

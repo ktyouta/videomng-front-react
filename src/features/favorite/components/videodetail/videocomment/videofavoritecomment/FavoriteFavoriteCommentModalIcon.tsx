@@ -11,22 +11,18 @@ import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
 const IconDiv = styled.div`
     margin-right: 10px;
     position: relative;
-    width: 15px;
-    height: 15px;
+    font-size: 16px;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-        width: 22px;
-        height: 22px;
+        font-size: 20px;
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-        width: 22px;
-        height: 22px;
+        font-size: 20px;
     }
 
     @media (min-width: ${MEDIA.PC}) {
-        width: 22px;
-        height: 22px;
+        font-size: 20px;
     }
 `;
 
@@ -66,12 +62,10 @@ export function FavoriteFavoriteCommentModalIcon() {
                 <IconComponent
                     icon={IoNewspaperOutline}
                     onclick={openFavoriteListModal}
-                    style={{
-                        color: "white",
-                    }}
+                    bgColor="white"
                     onMouseEnter={openFavoriteListNav}
                     onMouseLeave={closeFavoriteListNav}
-                    size="100%"
+                    hasCircleBackground
                 />
                 <BlockNavDiv
                     isDisplay={isOpenFavoriteListNav}
