@@ -12,7 +12,7 @@ const BACK_ICON_SIZE_DEFAULT = "24";
 const DISPLAY_SCROLL_THRESHOLD = 200;
 
 // 矢印の重なり順（サムネイル画像等の他要素より手前に表示するため）
-const BACK_ICON_Z_INDEX = 10;
+export const BACK_ICON_Z_INDEX = 10;
 
 type propsType = {
     onClick: () => void,

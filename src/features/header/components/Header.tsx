@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Z_INDEX_PARAM } from "../../../consts/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../hooks/useMediaQuery";
 import { FlexSpaceDiv } from "../../../styles/styledcomponent/FlexSpaceDiv";
 import { HeaderMenuUl } from "./Menu/HeaderMenuUl";
@@ -13,7 +14,7 @@ const Parent = styled.div<{ isMobile: boolean }>`
   left: 0;
   position: fixed;
   background-color:#00050d;
-  z-index: 2;
+  z-index: ${Z_INDEX_PARAM.HEADER_BAR};
 `;
 
 const MenuNav = styled.nav`

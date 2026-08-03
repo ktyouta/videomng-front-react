@@ -4,6 +4,8 @@ import { LoginUserInfoType } from "../types/userinfo/LoginUserInfoType";
 export const VIDEO_MNG_PATH = (import.meta.env.VITE_API_URL ?? ``).replace(/\/+$/, ``);
 //z-index設定用
 export const Z_INDEX_PARAM = {
+    // ヘッダー本体（サイドメニューを内包するため、画面内の各種戻る矢印等より必ず手前に表示する）
+    HEADER_BAR: 20,
     WAITL_OADING: 1000,
     HEAD_OVERLAY: 2000,
     HEAD_NAV: 2001,
