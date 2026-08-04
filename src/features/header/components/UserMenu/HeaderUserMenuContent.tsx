@@ -1,20 +1,28 @@
+import { IconType } from "react-icons";
 import styled from "styled-components";
+import { IconComponent } from "../../../../components/IconComponent";
+import { BUTTON_HOVER_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 
 //コンテンツのスタイル
 const ContentDiv = styled.div`
-    cursor:pointer;
-    &:hover {
-        text-decoration: underline;
-    }
-    min-height: 29px;
-    box-sizing: border-box;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    margin-bottom: 2px;
+    gap: 12px;
+    min-height: 29px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+        background-color: ${BUTTON_HOVER_BG_COLOR};
+    }
 `;
 
 type propsType = {
     title: string,
+    icon: IconType,
     onClick: () => void,
 }
 
@@ -26,6 +34,11 @@ export function HeaderUserMenuContent(props: propsType) {
         <ContentDiv
             onClick={props.onClick}
         >
+            <IconComponent
+                icon={props.icon}
+                size="18px"
+                style={{ color: "white" }}
+            />
             {props.title}
         </ContentDiv>
     );

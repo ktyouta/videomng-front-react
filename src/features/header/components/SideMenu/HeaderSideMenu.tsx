@@ -4,16 +4,16 @@ import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
 import { MEDIA } from "../../../../consts/MediaConst";
-import { MENU_NO } from "../../const/HeaderConst";
+import { HEADER_BURGER_ICON_SIZE, HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL, HEADER_PANEL_BG_COLOR, HEADER_PANEL_BORDER_COLOR, HEADER_PANEL_SHADOW, HEADER_PANEL_TRANSITION, MENU_NO } from "../../const/HeaderConst";
 import { useHeaderSideMenu } from "../../hooks/SideMenu/useHeaderSideMenu";
 import { HeaderSideMenuLi } from "./HeaderSideMenuLi";
 import { HeaderSideMenuModal } from "./HeaderSideMenuModal";
 
 
 // サイドメニューパネルの配色（ホーム・お気に入り検索エリア等の共通パネルと揃える）
-const PANEL_BG = "#1c1f26";
-const PANEL_BORDER = "#3a3f4b";
-const PANEL_SHADOW = "0 4px 12px rgba(0, 0, 0, 0.6)";
+const PANEL_BG = HEADER_PANEL_BG_COLOR;
+const PANEL_BORDER = HEADER_PANEL_BORDER_COLOR;
+const PANEL_SHADOW = HEADER_PANEL_SHADOW;
 
 const LIST_TOP_PADDING = "8%";
 const LIST_BOTTOM_PADDING = "1%";
@@ -35,9 +35,9 @@ const SideMenuAside = styled.aside<{ isDisplay: boolean }>`
   overflow: hidden;
   transform: ${({ isDisplay }) => (isDisplay ? "translateX(0)" : "translateX(-100%)")};
   visibility: ${({ isDisplay }) => (isDisplay ? "visible" : "hidden")};
-  transition: transform 0.3s ease, visibility 0.3s ease;
+  transition: transform ${HEADER_PANEL_TRANSITION}, visibility ${HEADER_PANEL_TRANSITION};
   z-index: 1000;
-  font-size: 13px;
+  font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     width: 250px;
@@ -67,18 +67,18 @@ const MenuUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${LIST_GAP};
-  font-size: 13px;
+  font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
+    font-size: ${HEADER_FONT_SIZE_SMALL};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 `;
 
@@ -107,16 +107,28 @@ const OverlaySimeMenuDiv = styled.div<{ isDisplay: boolean }>`
     background-color: black;
     opacity: ${({ isDisplay }) => (isDisplay ? 0.9 : 0)};
     visibility: ${({ isDisplay }) => (isDisplay ? "visible" : "hidden")};
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity ${HEADER_PANEL_TRANSITION}, visibility ${HEADER_PANEL_TRANSITION};
     z-index: 999;
 `;
 
 const BurgerIconDiv = styled.div`
   margin-right: 5%;
-  width: 20px;
+  width: ${HEADER_BURGER_ICON_SIZE};
   height: 25%;
   display: flex;
   align-items: center;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    margin-right: 2%;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    margin-right: 2%;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    margin-right: 2%;
+  }
 `;
 
 
@@ -144,7 +156,7 @@ export function HeaderSideMenu() {
           icon={RxHamburgerMenu}
           onclick={openSideMenu}
           style={{ color: "white" }}
-          size="20px"
+          size={isMobile ? "18px" : "22px"}
         />
       </BurgerIconDiv>
       <SideMenuAside

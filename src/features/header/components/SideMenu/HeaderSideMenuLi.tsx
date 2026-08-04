@@ -1,9 +1,7 @@
 import { IconType } from "react-icons";
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
-
-// ホバー時の背景色（操作ボタン群のホバー色と揃える）
-const ITEM_HOVER_BG = "rgba(37, 99, 235, 0.18)";
+import { BUTTON_HOVER_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 
 const MenuLi = styled.li`
   cursor: pointer;
@@ -17,7 +15,7 @@ const MenuLi = styled.li`
   padding-left: 12%;
 
   &:hover {
-    background-color: ${ITEM_HOVER_BG};
+    background-color: ${BUTTON_HOVER_BG_COLOR};
   }
 `;
 

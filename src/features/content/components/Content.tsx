@@ -1,25 +1,22 @@
-import React from "react";
-import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
-import { Provider } from "jotai";
-import { useContent } from "../hooks/useContent";
+import styled from "styled-components";
 import { ROUTER_PATH } from "../../../consts/RouterPath";
 import { mediaQuery, useMediaQuery } from "../../../hooks/useMediaQuery";
-import { Home } from "../../home/components/Home";
 import { Favorite } from "../../favorite/components/Favorite";
+import { Home } from "../../home/components/Home";
 import { NotFound } from "../../notfound/components/NotFound";
+import { useContent } from "../hooks/useContent";
 import { BackToTopIcon } from "./BackToTopIcon";
 
 // ヘッダーの高さ（モバイル/それ以外）
-const HEADER_HEIGHT_MOBILE = "60px";
-const HEADER_HEIGHT_DEFAULT = "125px";
+const HEADER_HEIGHT_MOBILE = "80px";
+const HEADER_HEIGHT_DEFAULT = "153px";
 
 const Parent = styled.div<{ isMobile: boolean }>`
   width: 100%;
   box-sizing: border-box;
   flex: 1;
   padding-top:${({ isMobile }) => (isMobile ? HEADER_HEIGHT_MOBILE : HEADER_HEIGHT_DEFAULT)};
-  margin-top: 1%;
 `;
 
 export function Content() {

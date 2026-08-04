@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { ROUTER_PATH } from "../../../../consts/RouterPath";
+import { HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL } from "../../const/HeaderConst";
 import { useHeaderMenuUlPc } from "../../hooks/Menu/useHeaderMenuUlPc";
 
+
+const NAV_LI_MIN_HEIGHT = "44px";
 
 const NavUl = styled.ul`
   display: flex;
@@ -27,10 +31,11 @@ const NavLi = styled.li<{ isActive: boolean }>`
   margin-right:3%;
   cursor:pointer;
   min-width: 81px;
-  min-height: 40px;
+  min-height: ${NAV_LI_MIN_HEIGHT};
+  transition: background-color 0.15s ease, color 0.15s ease;
   &:hover {
-      color: black;
-      background-color: white;
+      color: ${BUTTON_HOVER_ACCENT_COLOR};
+      background-color: ${BUTTON_HOVER_BG_COLOR};
   }
 `;
 
@@ -42,18 +47,18 @@ const MenuLink = styled(Link)`
     height: 100%;
     padding: 0 17px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_SMALL};
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-      font-size: 15px;
+      font-size: ${HEADER_FONT_SIZE_SMALL};
     }
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-      font-size: 19px;
+      font-size: ${HEADER_FONT_SIZE_LARGE};
     }
 
     @media (min-width: ${MEDIA.PC}) {
-      font-size: 19px;
+      font-size: ${HEADER_FONT_SIZE_LARGE};
     }
 `;
 

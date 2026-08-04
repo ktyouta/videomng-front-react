@@ -1,23 +1,24 @@
 import styled from "styled-components";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL } from "../../../const/HeaderConst";
 
 
 const Parent = styled.div`
   box-sizing:border-box;
   padding-top:2%;
   height:100%;
-  font-size: 13px;
+  font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
+    font-size: ${HEADER_FONT_SIZE_SMALL};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 `;
 

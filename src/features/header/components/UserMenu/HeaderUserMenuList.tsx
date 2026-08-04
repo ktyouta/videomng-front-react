@@ -1,11 +1,15 @@
 import React from "react";
-import { IoPersonCircleOutline } from "react-icons/io5";
+import { IoLockClosedOutline, IoLogOutOutline, IoPersonCircleOutline, IoPersonOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
 import { Z_INDEX_PARAM } from "../../../../consts/CommonConst";
 import { MEDIA } from "../../../../consts/MediaConst";
+import { HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL, HEADER_PANEL_BG_COLOR, HEADER_PANEL_BORDER_COLOR, HEADER_PANEL_SHADOW, HEADER_PANEL_TRANSITION } from "../../const/HeaderConst";
 import { useHeaderUserMenuList } from "../../hooks/UserMenu/useHeaderUserMenuList";
 import { HeaderUserMenuContent } from "./HeaderUserMenuContent";
+
+
+const NAV_HIDDEN_OFFSET_Y = "-8px";
 
 
 // ユーザー情報エリアのスタイル
@@ -32,32 +36,34 @@ const NavDiv = styled.div<{ isDisplay: boolean }>`
   height: auto;
   min-height: 200px;
   padding-top: 14px;
-  display: ${({ isDisplay }) => (isDisplay ? "block" : "none")};
+  visibility: ${({ isDisplay }) => (isDisplay ? "visible" : "hidden")};
+  opacity: ${({ isDisplay }) => (isDisplay ? 1 : 0)};
+  transform: ${({ isDisplay }) => (isDisplay ? "translateY(0)" : `translateY(${NAV_HIDDEN_OFFSET_Y})`)};
+  transition: opacity ${HEADER_PANEL_TRANSITION}, visibility ${HEADER_PANEL_TRANSITION}, transform ${HEADER_PANEL_TRANSITION};
   border-radius: 6px;
   z-index:${Z_INDEX_PARAM.HEAD_NAV};
   box-sizing: border-box;
-  background-color: #1c1f26;
-  border: 1px solid #3a3f4b;
+  background-color: ${HEADER_PANEL_BG_COLOR};
+  border: 1px solid ${HEADER_PANEL_BORDER_COLOR};
   color: #f1f1f1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  padding-left: 22px;
+  box-shadow: ${HEADER_PANEL_SHADOW};
 
-  font-size: 12px;
+  font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
     width: 273px;
     left: -160px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
     width: 273px;
     left: -160px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
     width: 273px;
     left: -160px;
   }
@@ -85,18 +91,18 @@ const UserNameSpan = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    font-size: 15px;
+    font-size: ${HEADER_FONT_SIZE_LARGE};
   }
 `;
 
@@ -136,14 +142,17 @@ export function HeaderUserMenuList() {
                     >
                         <HeaderUserMenuContent
                             title="ユーザー情報更新"
+                            icon={IoPersonOutline}
                             onClick={clickUpdateUserInfo}
                         />
                         <HeaderUserMenuContent
                             title="パスワードの変更"
+                            icon={IoLockClosedOutline}
                             onClick={clickUpdateUserPassword}
                         />
                         <HeaderUserMenuContent
                             title="ログアウト"
+                            icon={IoLogOutOutline}
                             onClick={clickLogout}
                         />
                     </NavDiv>

@@ -2,18 +2,23 @@ import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../../../consts/CommonConst";
 import { mediaQuery, useMediaQuery } from "../../../hooks/useMediaQuery";
 import { FlexSpaceDiv } from "../../../styles/styledcomponent/FlexSpaceDiv";
+import { HEADER_PANEL_BORDER_COLOR } from "../const/HeaderConst";
 import { HeaderMenuUl } from "./Menu/HeaderMenuUl";
 import { HeaderSideMenu } from "./SideMenu/HeaderSideMenu";
 import { HeaderUserMenu } from "./UserMenu/HeaderUserMenu";
 
 
+const SERVICE_TITLE = "VideoMng";
+
 const Parent = styled.div<{ isMobile: boolean }>`
   width: 100%;
   height:${({ isMobile }) => (isMobile ? `60px` : "125px")};
+  box-sizing: border-box;
   top: 0;
   left: 0;
   position: fixed;
   background-color:#00050d;
+  border-bottom: 1px solid ${HEADER_PANEL_BORDER_COLOR};
   z-index: ${Z_INDEX_PARAM.HEADER_BAR};
 `;
 
@@ -26,6 +31,15 @@ const MenuNav = styled.nav`
   display:flex;
   align-items: center;
   height:100%;
+`;
+
+const TitleSpan = styled.span<{ isMobile: boolean }>`
+  color: white;
+  font-weight: bold;
+  white-space: nowrap;
+  margin-right: 3%;
+  font-size: ${({ isMobile }) => (isMobile ? "14px" : "17px")};
+  font-family:Shippori Mincho B1,serif;
 `;
 
 export function Header() {
@@ -42,6 +56,12 @@ export function Header() {
       <MenuNav>
         {/* サイドメニュー */}
         <HeaderSideMenu />
+        {/* サービス名 */}
+        <TitleSpan
+          isMobile={isMobile}
+        >
+          {SERVICE_TITLE}
+        </TitleSpan>
         {/* メニュー */}
         <HeaderMenuUl />
         <FlexSpaceDiv />
