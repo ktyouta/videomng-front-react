@@ -1,6 +1,7 @@
 import { FaArrowUp } from "react-icons/fa";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { FAVORITE_SEARCH_AREA_SEARCH_BUTTON_BG } from "../../../const/FavoriteConst";
 import { useFavoriteMemoCreateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCreateInput";
 
 // テキストボックスの高さ（モバイル/それ以外）
@@ -32,14 +33,15 @@ export function FavoriteMemoCreateInput() {
       placeholder="メモ"
       outerWidth="96%"
       outerMobileWidth="96%"
-      iconWidth="37px"
+      iconWidth="45px"
       iconMobileWidth="34px"
       outerHeight={isMobile ? TEXTBOX_HEIGHT_MOBILE : TEXTBOX_HEIGHT_DEFAULT}
       style={{
         marginRight: "auto",
         marginLeft: "auto",
       }}
-      iconSize={isMobile ? "20px" : ""}
+      iconSize={isMobile ? "20px" : "23px"}
+      iconAreaBgColor={FAVORITE_SEARCH_AREA_SEARCH_BUTTON_BG}
     />
   );
 }

@@ -135,7 +135,7 @@ export function HomeVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            minHeight: isMobile ? "unset" : "505px",
+            minHeight: isMobile ? "unset" : "60vh",
             height: isMobile ? "655px" : "auto",
           }}
         >

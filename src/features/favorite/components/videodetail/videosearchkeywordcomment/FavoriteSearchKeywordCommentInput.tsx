@@ -1,15 +1,8 @@
-import styled from "styled-components";
-import BaseTextbox from "../../../../../components/BaseTextbox";
-import { IconComponent } from "../../../../../components/IconComponent";
-import { FaArrowUp } from "react-icons/fa";
-import { useFavoriteMemoCreateInput } from "../../../hooks/videodetail/videomemo/useFavoriteMemoCreateInput";
-import { useFavoriteSearchKeywordCommentInput } from "../../../hooks/videodetail/videosearchkeywordcomment/useFavoriteSearchKeywordCommentInput";
 import { IoSearch } from "react-icons/io5";
-import { ClearableTextbox } from "../../../../../components/ClearableTextbox";
-import { MEDIA } from "../../../../../consts/MediaConst";
-import React from "react";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { FAVORITE_SEARCH_AREA_SEARCH_BUTTON_BG } from "../../../const/FavoriteConst";
+import { useFavoriteSearchKeywordCommentInput } from "../../../hooks/videodetail/videosearchkeywordcomment/useFavoriteSearchKeywordCommentInput";
 
 // テキストボックスの高さ（モバイル/それ以外）
 const TEXTBOX_HEIGHT_MOBILE = "33px";
@@ -40,13 +33,14 @@ export function FavoriteSearchKeywordCommentInput() {
       placeholder="キーワード"
       outerWidth="96%"
       outerMobileWidth="96%"
-      iconWidth="37px"
+      iconWidth="45px"
       iconMobileWidth="34px"
       outerHeight={isMobile ? TEXTBOX_HEIGHT_MOBILE : TEXTBOX_HEIGHT_DEFAULT}
       style={{
         marginRight: "auto",
         marginLeft: "auto",
       }}
+      iconAreaBgColor={FAVORITE_SEARCH_AREA_SEARCH_BUTTON_BG}
     />
   );
 }

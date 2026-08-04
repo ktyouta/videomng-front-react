@@ -193,3 +193,6 @@ export const FAVORITE_LIST_MODE = {
         value: `2`,
     }
 }
+
+// キーワード検索実行ボタンの色。条件を指定ボタンのホバー色と同系統に揃える
+export const FAVORITE_SEARCH_AREA_SEARCH_BUTTON_BG = "rgb(37, 99, 235)";

@@ -135,7 +135,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            minHeight: isMobile ? "unset" : "505px",
+            minHeight: isMobile ? "unset" : "60vh",
             height: isMobile ? "655px" : "auto",
           }}
         >
@@ -190,7 +190,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
           style={{
             display: "flex",
             flexDirection: "column",
-            minHeight: isMobile ? "unset" : "45vh",
+            minHeight: isMobile ? "unset" : "60vh",
             height: isMobile ? "655px" : "auto",
             overflowY: isMobile ? "auto" : "visible",
           }}
@@ -203,7 +203,7 @@ export function FavoriteVideoDetailMenu(props: propsType) {
         openMenuNo === MENU_NO.TAG &&
         <FavoriteVideoDetailPanel
           style={{
-            minHeight: isMobile ? "unset" : "45vh",
+            minHeight: isMobile ? "unset" : "60vh",
             height: isMobile ? "655px" : "auto",
             overflowY: isMobile ? "auto" : "visible",
             display: "flex",

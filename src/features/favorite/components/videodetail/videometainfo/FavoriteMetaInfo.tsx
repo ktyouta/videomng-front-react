@@ -108,7 +108,7 @@ export function FavoriteMetaInfo(props: propsType) {
                 {
                     description &&
                     <AccordionComponent
-                        defaultHeight={isMobile ? '150px' : '70px'}
+                        defaultHeight={isMobile ? '150px' : '100px'}
                         outerStyle={{
                             border: "solid 1px",
                             boxSizing: "border-box",

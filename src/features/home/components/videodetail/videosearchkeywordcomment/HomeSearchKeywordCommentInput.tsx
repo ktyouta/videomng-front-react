@@ -1,6 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 import { TextboxWithButton } from "../../../../../components/TextboxWithButton";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
+import { HOME_SEARCH_AREA_SEARCH_BUTTON_BG } from "../../../const/HomeConst";
 import { useHomeSearchKeywordCommentInput } from "../../../hooks/videodetail/videosearchkeywordcomment/useHomeSearchKeywordCommentInput";
 
 // テキストボックスの高さ（モバイル/それ以外）
@@ -31,13 +32,14 @@ export function HomeSearchKeywordCommentInput() {
       placeholder="キーワード"
       outerWidth="96%"
       outerMobileWidth="96%"
-      iconWidth="37px"
+      iconWidth="45px"
       iconMobileWidth="34px"
       outerHeight={isMobile ? TEXTBOX_HEIGHT_MOBILE : TEXTBOX_HEIGHT_DEFAULT}
       style={{
         marginRight: "auto",
         marginLeft: "auto",
       }}
+      iconAreaBgColor={HOME_SEARCH_AREA_SEARCH_BUTTON_BG}
     />
   );
 }
