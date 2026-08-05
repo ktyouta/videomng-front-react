@@ -137,7 +137,7 @@ const PcChipButton = styled.button`
     white-space: nowrap;
     cursor: pointer;
     transition: filter 0.15s ease;
-    width: 50%;
+    flex: 1;
 
     &:hover {
       background-color: ${BUTTON_HOVER_BG_COLOR};

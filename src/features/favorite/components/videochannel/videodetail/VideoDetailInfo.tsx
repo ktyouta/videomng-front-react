@@ -92,14 +92,14 @@ const VideoTitle = styled.h3`
 `;
 
 const ButtonPanelDiv = styled.div`
-    width: fit-content;
+    width: 100%;
     box-sizing: border-box;
     padding: 14px;
     border-radius: 12px;
     background-color: #1c1f26;
     border: 1px solid #3a3f4b;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-    margin: 0 auto 8% auto;
+    margin-bottom: 8%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,6 +140,7 @@ const ChipButton = styled.button`
     white-space: nowrap;
     cursor: pointer;
     transition: filter 0.15s ease;
+    flex: 1;
 
     &:hover {
       background-color: ${BUTTON_HOVER_BG_COLOR};
