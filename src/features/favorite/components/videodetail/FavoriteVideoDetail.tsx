@@ -8,8 +8,8 @@ import { FavoriteVideoDetailInfo } from "./FavoriteVideoDetailInfo";
 import { FavoriteVideoDetailMenu } from "./FavoriteVideoDetailMenu";
 
 // 戻る矢印の縦位置（モバイル/それ以外）
-const BACK_ICON_TOP_MOBILE = "60px";
-const BACK_ICON_TOP_DEFAULT = "125px";
+const BACK_ICON_TOP_MOBILE = "70px";
+const BACK_ICON_TOP_DEFAULT = "140px";
 
 const Parent = styled.div`
   width: 100%;

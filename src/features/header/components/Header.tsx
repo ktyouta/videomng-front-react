@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../../../consts/CommonConst";
+import { MEDIA } from "../../../consts/MediaConst";
 import { mediaQuery, useMediaQuery } from "../../../hooks/useMediaQuery";
 import { FlexSpaceDiv } from "../../../styles/styledcomponent/FlexSpaceDiv";
 import { HEADER_PANEL_BORDER_COLOR } from "../const/HeaderConst";
@@ -35,11 +36,25 @@ const MenuNav = styled.nav`
 
 const TitleSpan = styled.span<{ isMobile: boolean }>`
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   white-space: nowrap;
-  margin-right: 3%;
-  font-size: ${({ isMobile }) => (isMobile ? "14px" : "17px")};
-  font-family:Shippori Mincho B1,serif;
+  font-size: 16px;
+  font-family:"Playfair Display",serif;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    font-size: 20px;
+    margin-right: 65px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    font-size: 20px;
+    margin-right: 65px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    font-size: 20px;
+    margin-right: 65px;
+  }
 `;
 
 export function Header() {

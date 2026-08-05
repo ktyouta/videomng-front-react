@@ -8,7 +8,7 @@ import { ChannelVideoArea } from "./ChannelVideoArea";
 
 // 戻る矢印の縦位置（モバイル/それ以外）
 const BACK_ICON_TOP_MOBILE = "70px";
-const BACK_ICON_TOP_DEFAULT = "135px";
+const BACK_ICON_TOP_DEFAULT = "140px";
 
 const Parent = styled.div`
   width: 100%;

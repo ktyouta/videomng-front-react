@@ -1,16 +1,14 @@
-import React from "react";
 import styled from "styled-components";
-import { HomeChannelVideoArea } from "./HomeChannelVideoArea";
-import { HomeChannelHeader } from "./HomeChannelHeader";
-import { useHomeChannel } from "../../hooks/videochannel/useHomeChannel";
-import LoadingBase from "../../../../components/LoadingBase";
 import { BackToListIcon } from "../../../../components/BackToListIcon";
 import Loading from "../../../../components/Loading";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
+import { useHomeChannel } from "../../hooks/videochannel/useHomeChannel";
+import { HomeChannelHeader } from "./HomeChannelHeader";
+import { HomeChannelVideoArea } from "./HomeChannelVideoArea";
 
 // 戻る矢印の縦位置（モバイル/それ以外）
 const BACK_ICON_TOP_MOBILE = "70px";
-const BACK_ICON_TOP_DEFAULT = "135px";
+const BACK_ICON_TOP_DEFAULT = "140px";
 
 const Parent = styled.div`
   width: 100%;

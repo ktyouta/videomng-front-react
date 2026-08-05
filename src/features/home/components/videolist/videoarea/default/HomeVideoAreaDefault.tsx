@@ -13,7 +13,7 @@ import { HomeRecentKeywords } from "./HomeRecentKeywords";
 const HOME_WORD_AREA_TOP_GAP_MOBILE = "35px";
 
 // 検索バーと検索前ワードエリア最初のセクションとの間隔(タブレット/PC)
-const HOME_WORD_AREA_TOP_GAP_DEFAULT = "80px";
+const HOME_WORD_AREA_TOP_GAP_DEFAULT = "75px";
 
 // 検索バー（HomeSearchArea）の直下に付属する候補エリアのため、横幅の基準・余白を合わせる
 const OuterDiv = styled.div`
