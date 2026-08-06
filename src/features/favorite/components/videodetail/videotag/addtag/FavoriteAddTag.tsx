@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
+import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../components/ModalLayout";
 import { SuggestTextbox } from "../../../../../../components/SuggestTextbox";
 import TagButtonComponent from "../../../../../../components/TagButtonComponent";
 import { MEDIA } from "../../../../../../consts/MediaConst";
@@ -12,11 +13,11 @@ import { useFavoriteAddTagMain } from "../../../../hooks/videodetail/videotag/ad
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:1%;
   font-size: 12px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 13px;
@@ -31,29 +32,9 @@ const Parent = styled.div`
   }
 `;
 
-const HeaderDiv = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-  margin-bottom: 2%;
-`;
-
-const HeaderTitleSpan = styled.div`
-`;
-
-const MainContentDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-`;
-
 const MainArea = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 1;
 `;
 
 const InputArea = styled.div`
@@ -75,21 +56,6 @@ const SelectColorTitleDiv = styled.div`
 const SelectColorDiv = styled.div`
     padding-left: 5%;
     margin-bottom: 15px;
-`;
-
-const FooterDiv = styled.div`
-    width: 100%;
-    height: 40px;
-    box-sizing: border-box;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right:1%;
-
-    @media (min-width: ${MEDIA.TABLET}) {
-        height: 45px;
-    }
 `;
 
 const ColorHeader = styled.div`
@@ -135,13 +101,11 @@ export function FavoriteAddTag(props: propsType) {
   return (
     <Parent>
       {/* タグ追加ヘッダ */}
-      <HeaderDiv>
-        <HeaderTitleSpan>
-          タグを追加
-        </HeaderTitleSpan>
-      </HeaderDiv>
+      <ModalHeader>
+        タグを追加
+      </ModalHeader>
       {/* タグ追加コンテンツ */}
-      <MainContentDiv>
+      <ModalBody>
         <MainArea>
           <InputArea>
             <InputTitleSpan>
@@ -205,34 +169,33 @@ export function FavoriteAddTag(props: propsType) {
             />
           </SelectColorDiv>
         </MainArea>
-        <FooterDiv >
-          <ButtonComponent
-            shape="rounded"
-            size={props.isMobile ? "small" : "medium"}
-            onClick={props.close}
-            style={{
-              background: "#3a3d42",
-              color: "white"
-            }}
-          >
-            キャンセル
-          </ButtonComponent>
-          <ButtonComponent
-            shape="rounded"
-            size={props.isMobile ? "small" : "medium"}
-            onClick={() => {
-              addTag();
-            }}
-            style={{
-              marginLeft: "5%",
-              color: "white",
-              background: "#3a3d42",
-            }}
-          >
-            追加
-          </ButtonComponent>
-        </FooterDiv>
-      </MainContentDiv>
+      </ModalBody>
+      <ModalFooter>
+        <ButtonComponent
+          shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
+          onClick={props.close}
+          style={{
+            background: "#3a3d42",
+            color: "white"
+          }}
+        >
+          キャンセル
+        </ButtonComponent>
+        <ButtonComponent
+          shape="rounded"
+          size={props.isMobile ? "small" : "medium"}
+          onClick={() => {
+            addTag();
+          }}
+          style={{
+            color: "white",
+            background: "#3a3d42",
+          }}
+        >
+          追加
+        </ButtonComponent>
+      </ModalFooter>
     </Parent>
   );
 }

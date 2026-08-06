@@ -1,5 +1,7 @@
+import { FaFilter } from "react-icons/fa";
 import styled from "styled-components";
 import { LabeledFieldRow } from "../../../../../../components/LabeledFieldRow";
+import { ModalBody, ModalHeader } from "../../../../../../components/ModalLayout";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { FAVORITE_LIST_MODE } from "../../../../const/FavoriteConst";
@@ -8,8 +10,10 @@ import { useFavoriteSearchConditionMain } from "../../../../hooks/videolist/sear
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:1%;
-  height:100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   font-size: 12px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -25,39 +29,11 @@ const Parent = styled.div`
   }
 `;
 
-const HeaderDiv = styled.div`
+const ConditionAreaDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-  height:4%;
-  margin-bottom: 4%;
-`;
-
-const HeaderTitleSpan = styled.div`
-`;
-
-const MainContentDiv = styled.div`
-    width: 100%;
-    height: 87%;
-    box-sizing: border-box;
-    padding-left: 6%;
-    color: white;
-    overflow-y: auto;
-    overflow-x: hidden;
-`;
-
-const ConditionAreaDiv = styled.div`
-  width: 97%;
-  height: 97%;
-  overflow: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  padding-left: 1%;
-  padding-right: 1%;
-  padding-top: 1%;
+  padding-left: 6%;
+  padding-right: 6%;
 `;
 
 const LABEL_WIDTH = "6.5em";
@@ -106,13 +82,11 @@ export function FavoriteSearchCondition(props: propsType) {
   return (
     <Parent>
       {/* 検索条件指定ヘッダ */}
-      <HeaderDiv>
-        <HeaderTitleSpan>
-          フィルター
-        </HeaderTitleSpan>
-      </HeaderDiv>
+      <ModalHeader icon={FaFilter}>
+        フィルター
+      </ModalHeader>
       {/* 検索条件指定コンテンツ */}
-      <MainContentDiv>
+      <ModalBody>
         <ConditionAreaDiv>
           <DefaultColorLink
             onClick={clearFilter}>
@@ -224,7 +198,7 @@ export function FavoriteSearchCondition(props: propsType) {
             </LabeledFieldRow>
           }
         </ConditionAreaDiv>
-      </MainContentDiv>
+      </ModalBody>
     </Parent>
   );
 }

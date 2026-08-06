@@ -238,6 +238,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                 closeModal={closeModal}
                 titleMessage={`この動画をお気に入りから外してもよろしいですか？`}
                 clickOk={executeDelete}
+                danger={true}
             />
         </VideoInfoDiv>
     );

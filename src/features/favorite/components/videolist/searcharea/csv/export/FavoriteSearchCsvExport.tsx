@@ -1,26 +1,13 @@
 import { LinearProgress } from "@mui/material";
 import React from "react";
+import { FiUpload } from "react-icons/fi";
 import styled from "styled-components";
 import ButtonComponent from "../../../../../../../components/ButtonComponent";
 import { FileUploadButton } from "../../../../../../../components/FileUploadButton";
+import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../../components/ModalLayout";
 import { ModalPortalConfirm } from "../../../../../../../components/ModalPortalConfirm";
-import { MEDIA } from "../../../../../../../consts/MediaConst";
 import { useFavoriteSearchCsvExportMain } from "../../../../../hooks/videolist/searcharea/csv/export/useFavoriteSearchCsvExportMain";
 
-
-const HeaderDiv = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-  padding-top: 1%;
-  margin-bottom:6%;
-`;
-
-const HeaderTitleSpan = styled.div`
-`;
 
 const MessageArea = styled.div`
     width: 100%;
@@ -28,7 +15,6 @@ const MessageArea = styled.div`
     color: white;
     padding: 0 5%;
     line-height: 2.0;
-    flex:1;
 `;
 
 const UploadBtnArea = styled.div`
@@ -52,21 +38,6 @@ const UploadFileNameSpan = styled.span`
     margin-left: 11px;
 `;
 
-const FooterDiv = styled.div`
-    width: 100%;
-    height: 40px;
-    box-sizing: border-box;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right:1%;
-
-    @media (min-width: ${MEDIA.TABLET}) {
-        height: 45px;
-    }
-`;
-
 type propsType = {
   close: () => void;
 }
@@ -88,38 +59,38 @@ export function FavoriteSearchCsvExport(props: propsType) {
   return (
     <React.Fragment>
       {/* ヘッダー */}
-      <HeaderDiv>
-        <HeaderTitleSpan>
-          お気に入りの取込
-        </HeaderTitleSpan>
-      </HeaderDiv>
-      <MessageArea>
-        お気に入りのインポートでダウンロードしたCSVファイルを選択してアップロードボタンを押すと、動画IDをもとにお気に入りへ一括登録できます。 <br />
-        CSVには動画タイトルなどの情報は含まれません。<br />
-        登録済みの動画がある場合は重複して登録されません。<br />
-        <UploadBtnArea>
-          <FileUploadButton
-            onClick={handleFileChange}
-            selectFileType=".csv"
-          />
-          <UploadFileNameSpan>
-            {selectedFile?.name}
-          </UploadFileNameSpan>
-        </UploadBtnArea>
-        {
-          progress > 0 &&
-          <ProgressArea>
-            <ProgressMesageDiv>
-              {`CSVファイル送信中：${progress}%`}
-            </ProgressMesageDiv>
-            <LinearProgress
-              variant="determinate"
-              value={progress}
+      <ModalHeader icon={FiUpload}>
+        お気に入りの取込
+      </ModalHeader>
+      <ModalBody>
+        <MessageArea>
+          お気に入りのインポートでダウンロードしたCSVファイルを選択してアップロードボタンを押すと、動画IDをもとにお気に入りへ一括登録できます。 <br />
+          CSVには動画タイトルなどの情報は含まれません。<br />
+          登録済みの動画がある場合は重複して登録されません。<br />
+          <UploadBtnArea>
+            <FileUploadButton
+              onClick={handleFileChange}
+              selectFileType=".csv"
             />
-          </ProgressArea>
-        }
-      </MessageArea>
-      <FooterDiv >
+            <UploadFileNameSpan>
+              {selectedFile?.name}
+            </UploadFileNameSpan>
+          </UploadBtnArea>
+          {
+            progress > 0 &&
+            <ProgressArea>
+              <ProgressMesageDiv>
+                {`CSVファイル送信中：${progress}%`}
+              </ProgressMesageDiv>
+              <LinearProgress
+                variant="determinate"
+                value={progress}
+              />
+            </ProgressArea>
+          }
+        </MessageArea>
+      </ModalBody>
+      <ModalFooter>
         <ButtonComponent
           shape="rounded"
           size="medium"
@@ -137,14 +108,13 @@ export function FavoriteSearchCsvExport(props: propsType) {
           onClick={openConfirmModal}
           style={{
             background: isLoading ? "#2c2f33" : "#3a3d42",
-            marginLeft: "5%",
             color: "white"
           }}
           disabled={isLoading}
         >
           アップロード
         </ButtonComponent>
-      </FooterDiv>
+      </ModalFooter>
       {
         // アップロード確認用モーダル
         isOpenConfirm &&

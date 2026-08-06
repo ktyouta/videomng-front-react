@@ -4,13 +4,16 @@ import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
+import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../components/ModalLayout";
 import { MEDIA } from '../../../../../../consts/MediaConst';
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:1%;
-  height:100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   font-size: 12px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -26,17 +29,9 @@ const Parent = styled.div`
   }
 `;
 
-const TitleSpan = styled.div`
-`;
-
-const Header = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-  margin-bottom:6%;
+const MainArea = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const MessageArea = styled.div`
@@ -45,7 +40,6 @@ const MessageArea = styled.div`
     color: white;
     padding: 0 5%;
     line-height: 2.0;
-    flex:1;
 `;
 
 const InputArea = styled.div`
@@ -54,7 +48,6 @@ const InputArea = styled.div`
     margin: 30px 0px;
     display: flex;
     align-items: center;
-    flex: 1;
 `;
 
 const InputTitleSpan = styled.span`
@@ -68,21 +61,6 @@ const SelectColorTitleDiv = styled.div`
 const SelectColorDiv = styled.div`
     padding-left: 5%;
     margin-bottom: 15px;
-`;
-
-const FooterDiv = styled.div`
-    width: 100%;
-    height: 40px;
-    box-sizing: border-box;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right:1%;
-
-    @media (min-width: ${MEDIA.TABLET}) {
-        height: 45px;
-    }
 `;
 
 const ColorHeader = styled.div`
@@ -145,33 +123,33 @@ export function FavoriteCreateFolder(props: propsType) {
 
   return (
     <Parent>
-      <Header>
-        <TitleSpan>
-          フォルダ作成
-        </TitleSpan>
-      </Header>
-      <MessageArea>
-        フォルダ名を入力して「作成」ボタンを押すと、新しいフォルダを作成できます。<br />
-        作成したフォルダはお気に入り一覧画面に表示されます。<br />
-        お気に入りに登録した動画をドラッグ＆ドロップすると、フォルダに登録できます。<br />
-        フォルダに登録した動画を一覧画面にも表示したい場合は、動画詳細画面の動画詳細設定メニューにある
-        「フォルダ追加後も一覧に表示する」にチェックを入れてください。<br />
-      </MessageArea>
-      <InputArea>
-        <InputTitleSpan>
-          フォルダ名：
-        </InputTitleSpan>
-        <BaseTextbox
-          value={folderName}
-          onChange={setFolderName}
-          height={isMobile ? "28px" : undefined}
-          style={{
-            flex: "1",
-            marginLeft: "10px"
-          }}
-        />
-      </InputArea>
-      <SelectColorDiv>
+      <ModalHeader icon={FaFolder}>
+        フォルダ作成
+      </ModalHeader>
+      <ModalBody>
+       <MainArea>
+        <MessageArea>
+          フォルダ名を入力して「作成」ボタンを押すと、新しいフォルダを作成できます。<br />
+          作成したフォルダはお気に入り一覧画面に表示されます。<br />
+          お気に入りに登録した動画をドラッグ＆ドロップすると、フォルダに登録できます。<br />
+          フォルダに登録した動画を一覧画面にも表示したい場合は、動画詳細画面の動画詳細設定メニューにある
+          「フォルダ追加後も一覧に表示する」にチェックを入れてください。<br />
+        </MessageArea>
+        <InputArea>
+          <InputTitleSpan>
+            フォルダ名：
+          </InputTitleSpan>
+          <BaseTextbox
+            value={folderName}
+            onChange={setFolderName}
+            height={isMobile ? "28px" : undefined}
+            style={{
+              flex: "1",
+              marginLeft: "10px"
+            }}
+          />
+        </InputArea>
+        <SelectColorDiv>
         <ColorHeader>
           <SelectedColor>
             <SelectColorTitleDiv>
@@ -198,8 +176,10 @@ export function FavoriteCreateFolder(props: propsType) {
           triangle="hide"
           width={isPcLess ? "90%" : "33%"}
         />
-      </SelectColorDiv>
-      <FooterDiv >
+        </SelectColorDiv>
+       </MainArea>
+      </ModalBody>
+      <ModalFooter>
         <ButtonComponent
           shape="rounded"
           size={isMobile ? "small" : "medium"}
@@ -216,14 +196,13 @@ export function FavoriteCreateFolder(props: propsType) {
           size={isMobile ? "small" : "medium"}
           onClick={execute}
           style={{
-            marginLeft: "5%",
             color: "white",
             background: "#3a3d42",
           }}
         >
           作成
         </ButtonComponent>
-      </FooterDiv>
+      </ModalFooter>
     </Parent>
   );
 }

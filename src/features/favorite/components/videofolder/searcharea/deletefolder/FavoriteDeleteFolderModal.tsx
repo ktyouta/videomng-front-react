@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { CONFIRM_MODAL_CONTAINER_STYLE } from "../../../../../../consts/ModalConst";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
 import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
@@ -39,17 +40,9 @@ export function FavoriteDeleteFolderModal(props: PropsType) {
             <ModalPortal
                 isOpen={isOpenModal}
                 modalWidth={isMobile ? `93%` : `45%`}
-                modalMinHeight="25%"
                 isCloseOuter={true}
                 close={closeModal}
-                hideCloseButton={true}
-                containerStyle={{
-                    backgroundColor: "#e0e0e0",
-                    borderRadius: "20px",
-                    border: "solid 1px",
-                    color: "black",
-                    minHeight: "23%"
-                }}
+                containerStyle={CONFIRM_MODAL_CONTAINER_STYLE}
             >
                 <FavoriteDeleteFolder
                     close={closeModal}

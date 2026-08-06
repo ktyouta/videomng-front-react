@@ -1,12 +1,16 @@
+import { IoHelpCircleOutline } from "react-icons/io5";
 import styled from "styled-components";
+import { ModalBody, ModalHeader } from "../../../../../components/ModalLayout";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL } from "../../../const/HeaderConst";
 
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:2%;
-  height:100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -20,30 +24,6 @@ const Parent = styled.div`
   @media (min-width: ${MEDIA.PC}) {
     font-size: ${HEADER_FONT_SIZE_LARGE};
   }
-`;
-
-const HeaderDiv = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-  height:4%;
-  margin-bottom:6%;
-`;
-
-const HeaderTitleSpan = styled.div`
-`;
-
-const MainContentDiv = styled.div`
-    width: 100%;
-    height: 87%;
-    box-sizing: border-box;
-    color: white;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
 `;
 
 const MessageOl = styled.ol`
@@ -68,12 +48,10 @@ export function HeaderHowToUse() {
 
   return (
     <Parent>
-      <HeaderDiv>
-        <HeaderTitleSpan>
-          使い方
-        </HeaderTitleSpan>
-      </HeaderDiv>
-      <MainContentDiv>
+      <ModalHeader icon={IoHelpCircleOutline}>
+        使い方
+      </ModalHeader>
+      <ModalBody>
         <MessageOl>
           <MessageLi>
             <StepSpan>
@@ -106,7 +84,7 @@ export function HeaderHowToUse() {
             「お気に入り」画面でフォルダの作成ができます。フォルダを使うことで動画を目的ごとに整理し、より快適に管理できます。
           </MessageLi>
         </MessageOl>
-      </MainContentDiv>
+      </ModalBody>
     </Parent>
   );
 }

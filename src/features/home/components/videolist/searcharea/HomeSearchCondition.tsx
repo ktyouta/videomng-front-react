@@ -1,5 +1,7 @@
+import { MdTune } from "react-icons/md";
 import styled from "styled-components";
 import { LabeledFieldRow } from "../../../../../components/LabeledFieldRow";
+import { ModalBody, ModalHeader } from "../../../../../components/ModalLayout";
 import { Selectbox } from "../../../../../components/Selectbox";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { VIDEO_TYPE_LIST } from "../../../const/HomeConst";
@@ -8,8 +10,10 @@ import { useHomeSearchConditionMain } from "../../../hooks/videolist/searcharea/
 
 const Parent = styled.div`
   box-sizing:border-box;
-  padding-top:1%;
-  height:100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   font-size: 12px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -25,36 +29,11 @@ const Parent = styled.div`
   }
 `;
 
-const HeaderDiv = styled.div`
+const ConditionAreaDiv = styled.div`
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-left: 1%;
-  height:4%;
-`;
-
-const HeaderTitleSpan = styled.div`
-`;
-
-const MainContentDiv = styled.div`
-    width: 100%;
-    height: 96%;
-    box-sizing: border-box;
-    padding-left: 6%;
-    color: white;
-`;
-
-const ConditionAreaDiv = styled.div`
-  width: 97%;
-  height: 100%;
-  overflow: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  padding-left: 1%;
-  padding-right: 1%;
-  padding-top: 11%;
+  padding-left: 6%;
+  padding-right: 6%;
 `;
 
 const LABEL_WIDTH = "4.5em";
@@ -80,13 +59,11 @@ export function HomeSearchCondition(props: propsType) {
     return (
         <Parent>
             {/* 検索条件指定ヘッダ */}
-            <HeaderDiv>
-                <HeaderTitleSpan>
-                    条件を指定
-                </HeaderTitleSpan>
-            </HeaderDiv>
+            <ModalHeader icon={MdTune}>
+                条件を指定
+            </ModalHeader>
             {/* 検索条件指定コンテンツ */}
-            <MainContentDiv>
+            <ModalBody>
                 <ConditionAreaDiv>
                     <LabeledFieldRow
                         label="種別"
@@ -128,7 +105,7 @@ export function HomeSearchCondition(props: propsType) {
                         </LabeledFieldRow>
                     }
                 </ConditionAreaDiv>
-            </MainContentDiv>
+            </ModalBody>
         </Parent>
     );
 }

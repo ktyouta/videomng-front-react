@@ -1,6 +1,8 @@
+import { FaRegTrashAlt } from "react-icons/fa";
 import styled from "styled-components";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { Checkbox } from "../../../../../../components/Checkbox";
+import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../components/ModalLayout";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { DELETEFAVORITEVIDEOINFOLDER } from "../../../../const/FavoriteConst";
 
@@ -11,6 +13,7 @@ const Parent = styled.div`
   display: flex;
   flex-direction: column;
   flex:1;
+  min-height: 0;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 13px;
@@ -25,23 +28,18 @@ const Parent = styled.div`
   }
 `;
 
-const MeainArea = styled.div`
-    flex: 1;
-`;
-
 const MessageArea = styled.div`
     width: 100%;
     box-sizing: border-box;
     color: black;
     padding: 0 5%;
     line-height: 2.0;
-    margin-top: 25px;
 `;
 
 const InputArea = styled.div`
     padding: 0 6%;
     box-sizing: border-box;
-    margin: 30px 0px 0px 0px;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -49,17 +47,6 @@ const InputArea = styled.div`
 
 const SelectLabel = styled.label`
     color: black;
-`;
-
-const FooterDiv = styled.div`
-    width: 100%;
-    height: 60px;
-    box-sizing: border-box;
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right:1%;
 `;
 
 type propsType = {
@@ -76,7 +63,10 @@ export function FavoriteDeleteFolder(props: propsType) {
 
   return (
     <Parent>
-      <MeainArea>
+      <ModalHeader theme="light" icon={FaRegTrashAlt}>
+        フォルダ削除
+      </ModalHeader>
+      <ModalBody theme="light">
         <MessageArea>
           ！フォルダを削除します
         </MessageArea>
@@ -96,8 +86,8 @@ export function FavoriteDeleteFolder(props: propsType) {
             フォルダ内の動画をお気に入りから削除する
           </SelectLabel>
         </InputArea>
-      </MeainArea>
-      <FooterDiv >
+      </ModalBody>
+      <ModalFooter theme="light">
         <ButtonComponent
           variant="black"
           shape="rounded"
@@ -111,13 +101,10 @@ export function FavoriteDeleteFolder(props: propsType) {
           shape="rounded"
           size={props.isMobile ? "small" : "medium"}
           onClick={props.clickDelete}
-          style={{
-            marginLeft: "5%",
-          }}
         >
           削除
         </ButtonComponent>
-      </FooterDiv>
+      </ModalFooter>
     </Parent>
   );
 }

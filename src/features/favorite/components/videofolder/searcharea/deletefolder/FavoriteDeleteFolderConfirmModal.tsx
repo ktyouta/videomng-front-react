@@ -3,13 +3,14 @@ import { GoTriangleDown, GoTriangleRight } from "react-icons/go";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { ModalPortalConfirm } from "../../../../../../components/ModalPortalConfirm";
+import { DANGER_COLOR } from "../../../../../../consts/ButtonInteractionConst";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteDeleteFolderConfirmModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderConfirmModal";
 import { FolderShareVideosResponseDataType } from "../../../../types/videofolder/searcharea/deletefolder/FolderShareVideosResponseDataType";
 
 
 const MessageSpan = styled.span`
-  color: red;
+  color: ${DANGER_COLOR};
   display: inline-block;
   font-weight: bold;
   margin-top: 23px;
@@ -92,6 +93,7 @@ const FolderTitleDiv = styled.div`
 const FinalWarnTextSpan = styled.span`
   margin-top: 16px;
   font-weight: 600;
+  color: ${DANGER_COLOR};
 `;
 
 
@@ -117,6 +119,7 @@ export function FavoriteDeleteFolderConfirmModal(props: propsType) {
     <ModalPortalConfirm
       isOpenModal={props.isOpenModal}
       closeModal={props.closeConfirmModal}
+      danger={true}
       style={{
         minHeight: "30%"
       }}

@@ -32,6 +32,7 @@ export function FavoriteMemoContentViewDeleteArea(props: propsType) {
                 closeModal={closeModal}
                 titleMessage={`メモを削除しますか？`}
                 clickOk={executeDelete}
+                danger={true}
             />
         </React.Fragment>
     );

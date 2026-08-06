@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CSSProperties } from "react";
+import { DANGER_COLOR } from "../consts/ButtonInteractionConst";
 
 type ButtonVariant =
   | "base"
@@ -42,7 +43,7 @@ const variantStyles: Record<ButtonVariant, CSSProperties> = {
     color: "#fff",
   },
   red: {
-    background: "#eb3941",
+    background: DANGER_COLOR,
     color: "#fff",
   },
   blue: {

@@ -2,10 +2,12 @@ import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
 import { MEDIA } from "../consts/MediaConst";
+import { CONFIRM_MODAL_CONTAINER_STYLE } from "../consts/ModalConst";
 import { mediaQuery, useMediaQuery } from "../hooks/useMediaQuery";
 import { FlexSpaceDiv } from "../styles/styledcomponent/FlexSpaceDiv";
 import ButtonComponent from "./ButtonComponent";
 import { ModalPortal } from "./ModalPortal";
+import { WarningHeader } from "./ModalLayout";
 
 
 const Parent = styled.div`
@@ -14,6 +16,11 @@ const Parent = styled.div`
   display: flex;
   flex-direction:column;
   flex: 1;
+`;
+
+const WarningHeaderAreaDiv = styled.div`
+  padding-left: 1%;
+  margin-bottom: 2%;
 `;
 
 const HeaderDiv = styled.div`
@@ -58,6 +65,8 @@ type propsType = {
     titleMessage: ReactNode,
     clickOk: () => void,
     style?: CSSProperties,
+    // 元に戻せない・データが失われる操作の場合にtrueにする（OKボタンが危険色になり、警告アイコンが表示される）
+    danger?: boolean,
 }
 
 export function ModalPortalConfirm(props: propsType) {
@@ -70,11 +79,10 @@ export function ModalPortalConfirm(props: propsType) {
     return (
         <ModalPortal
             isOpen={props.isOpenModal}
+            close={props.closeModal}
+            isCloseOuter={true}
             containerStyle={{
-                backgroundColor: "#e0e0e0",
-                borderRadius: "20px",
-                border: "solid 1px",
-                color: "black",
+                ...CONFIRM_MODAL_CONTAINER_STYLE,
                 ...props.style,
             }}
             modalWidth={modalWidth}
@@ -82,6 +90,14 @@ export function ModalPortalConfirm(props: propsType) {
             zindex={Z_INDEX_PARAM.CONFIRM_MODAL_OVERLAY}
         >
             <Parent>
+                {
+                    props.danger &&
+                    <WarningHeaderAreaDiv>
+                        <WarningHeader>
+                            警告
+                        </WarningHeader>
+                    </WarningHeaderAreaDiv>
+                }
                 <HeaderDiv>
                     <TitleSpan>
                         {props.titleMessage}
@@ -101,7 +117,7 @@ export function ModalPortalConfirm(props: propsType) {
                         キャンセル
                     </ButtonComponent>
                     <ButtonComponent
-                        variant="black"
+                        variant={props.danger ? "red" : "black"}
                         shape="rounded"
                         size={isPcLess ? "small" : "medium"}
                         onClick={props.clickOk}

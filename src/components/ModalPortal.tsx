@@ -1,9 +1,11 @@
-import React, { CSSProperties, ReactNode, useEffect } from "react";
+import React, { CSSProperties, ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { RxCross1 } from "react-icons/rx";
 import styled from "styled-components";
+import { BUTTON_HOVER_ACCENT_COLOR } from "../consts/ButtonInteractionConst";
 import { Z_INDEX_PARAM } from "../consts/CommonConst";
 import { MEDIA } from "../consts/MediaConst";
+import { MODAL_BACKGROUND_GRADIENT, MODAL_CLOSE_ICON_SIZE_LARGE, MODAL_CLOSE_ICON_SIZE_MOBILE, MODAL_GLOW_SHADOW } from "../consts/ModalConst";
 import "../styles/css/ModalPortal.css";
 import { IconComponent } from "./IconComponent";
 
@@ -41,13 +43,13 @@ const Overlay = styled.div<{ zIndex?: number }>`
 
 const ModalContainer = styled.div<{ modalMinHeight?: string, modalWidth?: string, }>`
   position: relative;
-  background-color: #181a1e;
+  background: ${MODAL_BACKGROUND_GRADIENT};
   border-radius: 6px;
   padding: 20px;
-  min-height: ${({ modalMinHeight }) => modalMinHeight ?? `90%`};
+  min-height: ${({ modalMinHeight }) => modalMinHeight ?? `auto`};
   max-height:90%;
   width: ${({ modalWidth }) => modalWidth ?? `73%`};
-  border: 1px solid white;
+  box-shadow: ${MODAL_GLOW_SHADOW};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -57,34 +59,30 @@ const CloseIconAreaDiv = styled.div`
   position: absolute;
   top: 18px;
   right: 18px;
-  width: 15px;
-  height: 15px;
+  width: ${MODAL_CLOSE_ICON_SIZE_MOBILE};
+  height: ${MODAL_CLOSE_ICON_SIZE_MOBILE};
   box-sizing: border-box;
   z-index: 1;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    width: 22px;
-    height: 22px;
+    width: ${MODAL_CLOSE_ICON_SIZE_LARGE};
+    height: ${MODAL_CLOSE_ICON_SIZE_LARGE};
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    width: 22px;
-    height: 22px;
+    width: ${MODAL_CLOSE_ICON_SIZE_LARGE};
+    height: ${MODAL_CLOSE_ICON_SIZE_LARGE};
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    width: 22px;
-    height: 22px;
+    width: ${MODAL_CLOSE_ICON_SIZE_LARGE};
+    height: ${MODAL_CLOSE_ICON_SIZE_LARGE};
   }
 `;
 
 export function ModalPortal(props: CloseableProps | NonCloseableProps) {
 
-    const modalRoot = document.getElementById("modal-root");
-
-    if (!modalRoot) {
-        return null;
-    }
+    const [isCloseHover, setIsCloseHover] = useState(false);
 
     // モーダル展開中に背景要素のスクロールを停止する
     useEffect(() => {
@@ -100,6 +98,12 @@ export function ModalPortal(props: CloseableProps | NonCloseableProps) {
             document.documentElement.classList.remove(className);
         };
     }, [props.isOpen]);
+
+    const modalRoot = document.getElementById("modal-root");
+
+    if (!modalRoot) {
+        return null;
+    }
 
     return (
         <React.Fragment>
@@ -128,7 +132,9 @@ export function ModalPortal(props: CloseableProps | NonCloseableProps) {
                                         icon={RxCross1}
                                         onclick={props.close}
                                         size="100%"
-                                        style={{ color: "white" }}
+                                        style={{ color: isCloseHover ? BUTTON_HOVER_ACCENT_COLOR : "white" }}
+                                        onMouseEnter={() => setIsCloseHover(true)}
+                                        onMouseLeave={() => setIsCloseHover(false)}
                                     />
                                 </CloseIconAreaDiv>
                             }
