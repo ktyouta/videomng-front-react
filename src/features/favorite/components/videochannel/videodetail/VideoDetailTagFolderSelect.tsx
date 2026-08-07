@@ -3,10 +3,11 @@ import { useVideoDetailTagSelect } from "../../../hooks/videochannel/videodetail
 
 
 type PropsType = {
+    isOpen: boolean;
     closeTagSelectModal: () => void;
 }
 
-export function VideoDetailTagFolderSelect({ closeTagSelectModal }: PropsType) {
+export function VideoDetailTagFolderSelect({ isOpen, closeTagSelectModal }: PropsType) {
 
     const {
         tagMasterList,
@@ -28,6 +29,7 @@ export function VideoDetailTagFolderSelect({ closeTagSelectModal }: PropsType) {
 
     return (
         <TagFolderSelectPanel
+            isOpen={isOpen}
             closeTagSelectModal={closeTagSelectModal}
             isMobile={isMobile}
             isTablet={isTablet}

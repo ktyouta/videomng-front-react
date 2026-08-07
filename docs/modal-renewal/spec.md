@@ -64,6 +64,8 @@
 **対象外（スコープ縮小）**: 開閉時のtransitionは対象外とする。現在の`ModalPortal`は`{props.isOpen && createPortal(...)}`という条件付きレンダリングで、非表示時はDOMから即座に取り除かれるため、CSSの`transition`を追加しても閉じる際のアンマウントが即座に起こり退場アニメーションが機能しない。実現するには遅延アンマウント（`isOpen`が`false`になった後も一定時間マウントを維持する仕組み）が別途必要で、土台となる`ModalPortal.tsx`の複雑度を上げてまで今回対応する優先度ではないと判断（ui-consistency-reviewの指摘を受けて決定）。
 
 ### 内部レイアウト
+> **【2026-08-07 改訂により一部撤回】** 本節の「`ModalHeader`/`ModalBody`/`ModalFooter`を公開部品として新設し、各モーダルの中身が個別importして組み合わせる」という方針は、後述の「## 設計改訂（2026-08-07）: `ModalPortal`への集約」で撤回された。3部品の**寸法・スタイル仕様（下記コードブロック）はそのまま有効**だが、これらは公開部品ではなく`ModalPortal`の**内部実装**となり、呼び出し側はスロットpropsを介してのみ利用する。以下は仕様の記録として残す。
+
 共通レイアウト部品`ModalHeader`/`ModalBody`/`ModalFooter`を新設し、各モーダルの中身コンポーネントがこれを組み合わせて使う。
 
 ```
@@ -107,6 +109,56 @@ ModalFooter: display:flex; justify-content:flex-end; gap:12px; padding-top:16px;
   - light: `rgba(0,0,0,0.08)`（黒ベース、明るい背景で視認できる）
   - **注意**: dark用に設計した白ベースの区切り線をライト系にそのまま使うと、明るい背景に明るい線がほぼ同化して見えなくなる。ダーク版で直した「輪郭が見えない」問題をライト系で再発させないよう、themeごとに反転させる必要がある
 - `FavoriteDeleteFolderModal`の中身（`FavoriteDeleteFolder.tsx`）を、独自の`Parent`/`MeainArea`/`FooterDiv`実装から`ModalHeader`(theme="light")+`ModalBody`(チェックボックス内容)+`ModalFooter`(キャンセル/削除ボタン)の組み合わせに置き換える
+
+## 設計改訂（2026-08-07）: `ModalPortal`への集約
+
+### 改訂の経緯
+「モーダル」が実際には複数層・複数ファイルに分割していることが、設計相談の中で改めて問題視された。
+
+1. `ModalPortal` … オーバーレイ・コンテナ・閉じるボタン（枠）
+2. 各`XxxModal.tsx`ラッパー … `<ModalPortal>`に`containerStyle`/`modalWidth`を渡して中身を包む
+3. 各`Xxx.tsx`本体 … 毎回`Parent`(flex column / min-height:0 / レスポンシブfont)を自前で書き、その中に`ModalHeader`/`ModalBody`/`ModalFooter`を並べる
+4. `ModalConst.ts` … 上記が使う定数の寄せ集め
+
+`ModalHeader`/`ModalBody`/`ModalFooter`を**個別export**し、`Parent`のflex骨格を各画面で重複実装していたことが分割感の正体。さらに`ModalContainer`(display:flex column) → `Parent`(また flex column) → `ModalBody`(また flex:1)と、同じflex骨格が三重にネストしていた。
+
+**定数の実態**: `ModalConst.ts`をimportする4ファイルが使う定数の集合は重複しておらず（`ModalLayout`専用・`ModalPortal`専用・`CONFIRM_MODAL_CONTAINER_STYLE`の2利用のみ）、「共有定数の置き場」ではなく単一利用定数の寄せ集めだった。
+
+### 決定：土台の`ModalPortal`が骨格ごと持つ（部品は非公開化）
+`ModalHeader`/`ModalBody`/`ModalFooter`を`ModalPortal`の**内部実装**にし、呼び出し側にはスロット（props）だけを見せる。
+
+- 共通で使い回す**土台は`ModalPortal`1つ**に集約する
+- `ModalLayout.tsx`の公開export（`ModalHeader`/`ModalBody`/`ModalFooter`）は廃止し、`ModalPortal`内部の非公開部品にする
+- `ModalConst.ts`は廃止し、各定数を利用先へコロケーションする（`ModalLayout`系・`ModalPortal`系の定数は`ModalPortal.tsx`へ、`CONFIRM_MODAL_CONTAINER_STYLE`は確認プリセット側へ）
+- 各`Xxx.tsx`本体の`Parent`(flex骨格)を撤廃し、flex骨格は`ModalContainer`＋内部`ModalBody`に一本化する
+
+**新しい呼び出し側API（イメージ）**:
+```tsx
+<ModalPortal
+  isOpen={isOpen}
+  close={close}
+  title="フォルダ名変更"
+  titleIcon={MdEdit}
+  footer={<><ButtonComponent/>...</>}
+>
+  {/* 本文（children）だけ */}
+</ModalPortal>
+```
+`title`/`titleIcon`/`footer`は省略可。Header+Body+Footer型／Header+Body型（footerなし）／確認型の全パターンを、同一の`ModalPortal`とその派生で表現する。
+
+### 確認モーダル（`ModalPortalConfirm`）は残す
+`ModalPortalConfirm`は8箇所以上（`UpdateUserPassword`/`UpdateUserInfo`/`Siginup`/`FavoriteVideoDetailInfo`/`FavoriteMemoContentViewDeleteArea`/CSV出力/フォルダ削除確認 等）から、`titleMessage`と`clickOk`など少数のpropsだけで呼ばれ、キャンセル/OKボタン・危険色分岐(`danger`)・警告ヘッダー・ライト配色・閉じる挙動が定型化されている**高レベルの完成品**。
+
+Header/Body/Footer（低レベルの骨格部品）は`ModalPortal`へ内包するが、`ModalPortalConfirm`は抽象レベルが異なるため土台には畳まない。土台に畳むとボタン・危険色・警告ヘッダーの定型が呼び出し側8箇所へ逆流しDRYに反する。
+
+**決定**: `ModalPortalConfirm`は残すが、中身は新`ModalPortal`を呼ぶだけの**薄いプリセット1枚**に整理する。関係は「共通の土台`ModalPortal` 1つ ＋ その上の確認プリセット1枚」。
+
+**破綻ケース**: 確認モーダルの種類（削除確認・保存確認・警告のみ等）が増えてそれぞれレイアウトが分化した場合、薄いプリセット1枚では足りず分割が必要になる。現状は削除・更新等の確認のみのため1枚で十分。
+
+### この改訂に伴う既存決定への影響
+- 「### 内部レイアウト」の3部品新設方針 → 公開部品ではなく`ModalPortal`内部実装へ（寸法仕様は有効）
+- 「### 『ライト系だが自由なコンテンツ』の受け皿」の`theme?: "dark" | "light"`prop → 内部部品側のpropとして維持（区切り線色のdark/light反転仕様は有効）
+- `CONFIRM_MODAL_CONTAINER_STYLE`の二重管理解消 → `ModalConst.ts`廃止に伴い、確認プリセット側に定義し`FavoriteDeleteFolderModal`はそこから参照
 
 ## 未決事項
 なし。実装対象ファイル一覧・作業計画は`docs/modal-renewal/plan.md`を参照（全11件の内部レイアウト対象ファイルの実装確認済み、`danger`対象の判定も「お気に入り解除＝danger（付随データが失われる）」「フォルダから除外＝danger対象外（紐付け解除のみ）」で確定）。次のステップは実装着手。

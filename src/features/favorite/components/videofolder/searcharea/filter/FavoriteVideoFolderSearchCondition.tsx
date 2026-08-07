@@ -1,33 +1,11 @@
 import { FaFilter } from "react-icons/fa";
 import styled from "styled-components";
 import { LabeledFieldRow } from "../../../../../../components/LabeledFieldRow";
-import { ModalBody, ModalHeader } from "../../../../../../components/ModalLayout";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MultiSelectbox } from "../../../../../../components/MultiSelectbox";
-import { MEDIA } from "../../../../../../consts/MediaConst";
 import { FAVORITE_LIST_MODE } from "../../../../const/FavoriteConst";
 import { useFavoriteVideoFolderSearchConditionMain } from "../../../../hooks/videofolder/searcharea/filter/useFavoriteVideoFolderSearchConditionMain";
 
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
-  }
-`;
 
 const ConditionAreaDiv = styled.div`
   width: 100%;
@@ -49,6 +27,7 @@ const DefaultColorLink = styled.div`
 `;
 
 type propsType = {
+  isOpen: boolean;
   close: () => void;
   isMobile: boolean;
 }
@@ -79,14 +58,16 @@ export function FavoriteVideoFolderSearchCondition(props: propsType) {
     selectedFavoriteVideoFolder, } = useFavoriteVideoFolderSearchConditionMain({ ...props });
 
   return (
-    <Parent>
-      {/* 検索条件指定ヘッダ */}
-      <ModalHeader icon={FaFilter}>
-        フィルター
-      </ModalHeader>
-      {/* 検索条件指定コンテンツ */}
-      <ModalBody>
-        <ConditionAreaDiv>
+    <ModalPortal
+      isOpen={props.isOpen}
+      modalWidth={isMobile ? "93%" : "45%"}
+      modalMinHeight="70%"
+      isCloseOuter={true}
+      close={props.close}
+      title="フィルター"
+      titleIcon={FaFilter}
+    >
+      <ConditionAreaDiv>
           <DefaultColorLink
             onClick={clearFilter}>
             フィルター条件をクリア
@@ -197,7 +178,6 @@ export function FavoriteVideoFolderSearchCondition(props: propsType) {
             </LabeledFieldRow>
           }
         </ConditionAreaDiv>
-      </ModalBody>
-    </Parent>
+    </ModalPortal>
   );
 }

@@ -32,7 +32,6 @@ const WarnMessageAreaDiv = styled.div`
   @media (min-width: ${MEDIA.PC}) {
     font-size: 14px;
   }
-
 `;
 
 const VideoListTitleDiv = styled.div`
@@ -120,9 +119,7 @@ export function FavoriteDeleteFolderConfirmModal(props: propsType) {
       isOpenModal={props.isOpenModal}
       closeModal={props.closeConfirmModal}
       danger={true}
-      style={{
-        minHeight: "30%"
-      }}
+      nested={true}
       titleMessage={
         !isLoading &&
         <WarnMessageAreaDiv>

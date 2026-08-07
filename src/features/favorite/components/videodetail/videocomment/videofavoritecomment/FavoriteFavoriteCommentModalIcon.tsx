@@ -2,7 +2,6 @@ import React from "react";
 import { IoNewspaperOutline } from "react-icons/io5";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteFavoriteCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentModalIcon";
 import { FavoriteFavoriteComment } from "./FavoriteFavoriteComment";
@@ -73,18 +72,15 @@ export function FavoriteFavoriteCommentModalIcon() {
                     お気に入りリスト
                 </BlockNavDiv>
             </IconDiv>
-            {/* お気に入りコメントリスト */}
-            <ModalPortal
-                isOpen={isOpenFavoriteListModal}
-                modalWidth={isMobile ? `93%` : undefined}
-                containerStyle={{
-                    height: `90%`
-                }}
-                isCloseOuter={true}
-                close={closeFavoriteListModal}
-            >
-                <FavoriteFavoriteComment />
-            </ModalPortal>
+            {/* お気に入りコメントリスト（閉じている間はコメント取得を走らせないため未マウントにする） */}
+            {
+                isOpenFavoriteListModal &&
+                <FavoriteFavoriteComment
+                    isOpen={isOpenFavoriteListModal}
+                    close={closeFavoriteListModal}
+                    isMobile={isMobile}
+                />
+            }
         </React.Fragment>
     );
 }

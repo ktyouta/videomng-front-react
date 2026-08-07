@@ -4,7 +4,7 @@ import { MEDIA } from "../consts/MediaConst";
 import { TagMasterType } from "../types/videodetail/TagMasterType";
 import ButtonComponent from "./ButtonComponent";
 import { ClearableTextbox } from "./ClearableTextbox";
-import { ModalBody, ModalFooter, ModalHeader } from "./ModalLayout";
+import { ModalPortal } from "./ModalPortal";
 import { Option, Selectbox } from "./Selectbox";
 import TagButtonComponent from "./TagButtonComponent";
 
@@ -128,6 +128,7 @@ const TitleSpan = styled.span`
 const SELECTED_TAG_BORDER_COLOR = "#ff9f00";
 
 type PropsType = {
+    isOpen: boolean;
     closeTagSelectModal: () => void;
     isMobile: boolean;
     isTablet: boolean;
@@ -147,6 +148,7 @@ type PropsType = {
 }
 
 export function TagFolderSelectPanel({
+    isOpen,
     closeTagSelectModal,
     isMobile,
     isTablet,
@@ -166,11 +168,47 @@ export function TagFolderSelectPanel({
 }: PropsType) {
 
     return (
-        <React.Fragment>
-        <ModalHeader>
-            お気に入り登録設定
-        </ModalHeader>
-        <ModalBody overflowY="hidden">
+        <ModalPortal
+            isOpen={isOpen}
+            modalWidth={isMobile ? "93%" : "45%"}
+            containerStyle={{
+                fontSize: isMobile ? "12px" : "15px",
+                display: "flex",
+                flexDirection: "column"
+            }}
+            modalMinHeight={isMobile ? "70vh" : "405px"}
+            isCloseOuter={true}
+            close={closeTagSelectModal}
+            title="お気に入り登録設定"
+            bodyOverflowY="hidden"
+            bodyStyle={{ fontSize: "inherit" }}
+            footer={
+                <>
+                    <ButtonComponent
+                        shape="rounded"
+                        size={isMobile ? "small" : "medium"}
+                        onClick={closeTagSelectModal}
+                        style={{
+                            background: "#3a3d42",
+                            color: "white"
+                        }}
+                    >
+                        キャンセル
+                    </ButtonComponent>
+                    <ButtonComponent
+                        shape="rounded"
+                        size={isMobile ? "small" : "medium"}
+                        onClick={submitFavorite}
+                        style={{
+                            color: "white",
+                            background: "#3a3d42",
+                        }}
+                    >
+                        登録
+                    </ButtonComponent>
+                </>
+            }
+        >
             <MainArea>
                 <Parent>
                     <TagMasterAreaDiv>
@@ -271,31 +309,6 @@ export function TagFolderSelectPanel({
                     </TagMasterAreaDiv>
                 </Parent>
             </MainArea>
-        </ModalBody>
-        <ModalFooter>
-            <ButtonComponent
-                shape="rounded"
-                size={isMobile ? "small" : "medium"}
-                onClick={closeTagSelectModal}
-                style={{
-                    background: "#3a3d42",
-                    color: "white"
-                }}
-            >
-                キャンセル
-            </ButtonComponent>
-            <ButtonComponent
-                shape="rounded"
-                size={isMobile ? "small" : "medium"}
-                onClick={submitFavorite}
-                style={{
-                    color: "white",
-                    background: "#3a3d42",
-                }}
-            >
-                登録
-            </ButtonComponent>
-        </ModalFooter>
-        </React.Fragment>
+        </ModalPortal>
     );
 }

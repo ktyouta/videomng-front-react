@@ -3,10 +3,11 @@ import { useHomeVideoDetailTagFolderSelect } from "../../hooks/videodetail/useHo
 
 
 type PropsType = {
+    isOpen: boolean;
     closeTagSelectModal: () => void;
 }
 
-export function HomeVideoDetailTagFolderSelect({ closeTagSelectModal }: PropsType) {
+export function HomeVideoDetailTagFolderSelect({ isOpen, closeTagSelectModal }: PropsType) {
 
     console.log("HomeVideoDetailTagFolderSelect render");
 
@@ -30,6 +31,7 @@ export function HomeVideoDetailTagFolderSelect({ closeTagSelectModal }: PropsTyp
 
     return (
         <TagFolderSelectPanel
+            isOpen={isOpen}
             closeTagSelectModal={closeTagSelectModal}
             isMobile={isMobile}
             isTablet={isTablet}

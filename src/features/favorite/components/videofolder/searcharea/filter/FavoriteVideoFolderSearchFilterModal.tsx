@@ -1,6 +1,5 @@
 import React from "react";
 import { FaFilter } from 'react-icons/fa';
-import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteVideoFolderSearchFilterModal } from "../../../../hooks/videofolder/searcharea/filter/useFavoriteVideoFolderSearchFilterModal";
 import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
 import { FavoriteVideoFolderSearchCondition } from "./FavoriteVideoFolderSearchCondition";
@@ -27,19 +26,15 @@ export function FavoriteVideoFolderSearchFilterModal() {
         label="フィルター"
         onClick={openFilterModal}
       />
-      {/* フィルターモーダル */}
-      <ModalPortal
-        isOpen={isOpenFilterModal}
-        modalWidth={isMobile ? `93%` : `45%`}
-        modalMinHeight="70%"
-        isCloseOuter={true}
-        close={closeFilterModal}
-      >
+      {/* フィルターモーダル（閉じている間は内部状態・取得を保持しないため未マウントにする） */}
+      {
+        isOpenFilterModal &&
         <FavoriteVideoFolderSearchCondition
-          isMobile={isMobile}
+          isOpen={isOpenFilterModal}
           close={closeFilterModal}
+          isMobile={isMobile}
         />
-      </ModalPortal>
+      }
     </React.Fragment>
   );
 }

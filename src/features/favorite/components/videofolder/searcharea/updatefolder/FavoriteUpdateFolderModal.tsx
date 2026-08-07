@@ -1,6 +1,5 @@
 import React from "react";
 import { MdEdit } from "react-icons/md";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteUpdateFolderModal } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderModal";
 import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
@@ -29,20 +28,16 @@ export function FavoriteUpdateFolderModal(props: propsType) {
                 label="フォルダ情報更新"
                 onClick={openModal}
             />
-            {/* フォルダ名変更モーダル */}
-            <ModalPortal
-                isOpen={isOpenModal}
-                modalWidth={isMobile ? `93%` : `45%`}
-                modalMinHeight="35%"
-                isCloseOuter={true}
-                close={closeModal}
-            >
+            {/* フォルダ名変更モーダル（閉じている間は入力状態を保持しないため未マウントにする） */}
+            {
+                isOpenModal &&
                 <FavoriteUpdateFolder
+                    isOpen={isOpenModal}
                     folder={props.folder}
                     close={closeModal}
                     isMobile={isMobile}
                 />
-            </ModalPortal>
+            }
         </React.Fragment>
     );
 }

@@ -5,33 +5,11 @@ import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../components/ModalLayout";
-import { MEDIA } from "../../../../../../consts/MediaConst";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteUpdateFolderMain } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderMain";
 import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
-  }
-`;
 
 const MainArea = styled.div`
     display: flex;
@@ -82,6 +60,7 @@ const DefaultColorLink = styled.span`
 `;
 
 type propsType = {
+  isOpen: boolean,
   close: () => void,
   folder: FolderMasterType,
   isMobile: boolean,
@@ -99,14 +78,42 @@ export function FavoriteUpdateFolder(props: propsType) {
     setFolderColor, } = useFavoriteUpdateFolderMain({ ...props });
 
   return (
-    <Parent>
-      {/* ヘッダ */}
-      <ModalHeader icon={MdEdit}>
-        フォルダ名変更
-      </ModalHeader>
-      {/* コンテンツ */}
-      <ModalBody>
-       <MainArea>
+    <ModalPortal
+      isOpen={props.isOpen}
+      modalWidth={props.isMobile ? "93%" : "45%"}
+      modalMinHeight="35%"
+      isCloseOuter={true}
+      close={props.close}
+      title="フォルダ名変更"
+      titleIcon={MdEdit}
+      footer={
+        <>
+          <ButtonComponent
+            shape="rounded"
+            size={props.isMobile ? "small" : "medium"}
+            onClick={props.close}
+            style={{
+              background: "#3a3d42",
+              color: "white"
+            }}
+          >
+            キャンセル
+          </ButtonComponent>
+          <ButtonComponent
+            shape="rounded"
+            size={props.isMobile ? "small" : "medium"}
+            onClick={execute}
+            style={{
+              color: "white",
+              background: "#3a3d42",
+            }}
+          >
+            変更
+          </ButtonComponent>
+        </>
+      }
+    >
+      <MainArea>
         <InputArea>
           <InputTitleSpan>
             フォルダ名：
@@ -149,32 +156,7 @@ export function FavoriteUpdateFolder(props: propsType) {
             width="33%"
           />
         </SelectColorDiv>
-       </MainArea>
-      </ModalBody>
-      <ModalFooter>
-        <ButtonComponent
-          shape="rounded"
-          size={props.isMobile ? "small" : "medium"}
-          onClick={props.close}
-          style={{
-            background: "#3a3d42",
-            color: "white"
-          }}
-        >
-          キャンセル
-        </ButtonComponent>
-        <ButtonComponent
-          shape="rounded"
-          size={props.isMobile ? "small" : "medium"}
-          onClick={execute}
-          style={{
-            color: "white",
-            background: "#3a3d42",
-          }}
-        >
-          変更
-        </ButtonComponent>
-      </ModalFooter>
-    </Parent>
+      </MainArea>
+    </ModalPortal>
   );
 }

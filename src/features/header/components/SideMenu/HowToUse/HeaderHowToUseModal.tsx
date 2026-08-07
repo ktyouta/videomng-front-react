@@ -1,4 +1,3 @@
-import { ModalPortal } from "../../../../../components/ModalPortal";
 import { useHeaderHowToUseModal } from "../../../hooks/SideMenu/HowToUse/useHeaderHowToUseModal";
 import { HeaderHowToUse } from "./HeaderHowToUse";
 
@@ -14,14 +13,10 @@ export function HeaderHowToUseModal(props: propsType) {
     const { isMobile } = useHeaderHowToUseModal();
 
     return (
-        <ModalPortal
+        <HeaderHowToUse
             isOpen={true}
-            modalWidth={isMobile ? "93%" : "45%"}
-            modalMinHeight="70%"
-            isCloseOuter={true}
             close={props.closeMenu}
-        >
-            <HeaderHowToUse />
-        </ModalPortal>
+            isMobile={isMobile}
+        />
     );
 }

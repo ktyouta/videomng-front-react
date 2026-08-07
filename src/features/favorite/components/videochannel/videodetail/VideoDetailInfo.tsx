@@ -3,7 +3,6 @@ import { FaRegStar, FaStar } from 'react-icons/fa';
 import { MdLogin, MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { ModalPortal } from "../../../../../components/ModalPortal";
 import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR, THUMBNAIL_ICON_CIRCLE_BG_COLOR } from "../../../../../consts/ButtonInteractionConst";
 import { FLG } from "../../../../../consts/CommonConst";
 import { MEDIA } from "../../../../../consts/MediaConst";
@@ -302,22 +301,14 @@ export function VideoDetailInfo(props: propsType) {
                     </ButtonPanelDiv>
                 }
             </VideoMetaDiv>
-            <ModalPortal
-                isOpen={isOpenTagSelectModal}
-                modalWidth={isMobile ? `93%` : `45%`}
-                containerStyle={{
-                    fontSize: isMobile ? "12px" : "15px",
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-                modalMinHeight={isMobile ? "70vh" : "405px"}
-                isCloseOuter={true}
-                close={closeTagSelectModal}
-            >
+            {
+                // 閉じている間はタグ・フォルダ取得を走らせないため未マウントにする
+                isOpenTagSelectModal &&
                 <VideoDetailTagFolderSelect
+                    isOpen={isOpenTagSelectModal}
                     closeTagSelectModal={closeTagSelectModal}
                 />
-            </ModalPortal>
+            }
         </VideoInfoDiv>
     );
 }

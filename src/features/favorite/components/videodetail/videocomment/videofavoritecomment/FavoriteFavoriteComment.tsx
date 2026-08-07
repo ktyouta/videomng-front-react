@@ -1,33 +1,11 @@
 import { IoNewspaperOutline } from "react-icons/io5";
 import styled from "styled-components";
 import Loading from "../../../../../../components/Loading";
-import { ModalBody, ModalHeader } from "../../../../../../components/ModalLayout";
-import { MEDIA } from "../../../../../../consts/MediaConst";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteFavoriteCommentList } from "../../../../hooks/videodetail/videocomment/videofavoritecomment/useFavoriteFavoriteCommentList";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { FavoriteFavoriteCommentContent } from "./FavoriteFavoriteCommentContent";
 
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
-  }
-`;
 
 const CommentListDiv = styled.div`
   width: 100%;
@@ -50,7 +28,13 @@ const CommentListAreaDiv = styled.div`
   padding-right: 1%;
 `;
 
-export function FavoriteFavoriteComment() {
+type propsType = {
+  isOpen: boolean;
+  close: () => void;
+  isMobile: boolean;
+}
+
+export function FavoriteFavoriteComment(props: propsType) {
 
   console.log("FavoriteFavoriteComment render");
 
@@ -60,50 +44,53 @@ export function FavoriteFavoriteComment() {
     favoriteCommentData, } = useFavoriteFavoriteCommentList();
 
   return (
-    <Parent>
-      {/* お気に入りコメントヘッダ */}
-      <ModalHeader icon={IoNewspaperOutline}>
-        お気に入りコメント
-      </ModalHeader>
-      {/* お気に入りコメントリスト */}
-      <ModalBody>
-        {
-          isLoading
+    <ModalPortal
+      isOpen={props.isOpen}
+      modalWidth={props.isMobile ? "93%" : undefined}
+      containerStyle={{
+        height: "90%"
+      }}
+      isCloseOuter={true}
+      close={props.close}
+      title="お気に入りコメント"
+      titleIcon={IoNewspaperOutline}
+    >
+      {
+        isLoading
+          ?
+          <CommentLoadingDiv>
+            <Loading />
+          </CommentLoadingDiv>
+          :
+          errMessage
             ?
-            <CommentLoadingDiv>
-              <Loading />
-            </CommentLoadingDiv>
+            <CommentListDiv>
+              {errMessage}
+            </CommentListDiv>
             :
-            errMessage
-              ?
-              <CommentListDiv>
-                {errMessage}
-              </CommentListDiv>
-              :
-              <CommentListDiv>
-                {
-                  favoriteCommentData && favoriteCommentData.items.length > 0 ?
-                    <CommentListAreaDiv>
-                      {
-                        favoriteCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
+            <CommentListDiv>
+              {
+                favoriteCommentData && favoriteCommentData.items.length > 0 ?
+                  <CommentListAreaDiv>
+                    {
+                      favoriteCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
 
-                          const commentId = e.id
+                        const commentId = e.id
 
-                          return (
-                            <FavoriteFavoriteCommentContent
-                              commentDetailItem={e}
-                              key={`${commentId}-favoritecommentid`}
-                            />
-                          )
-                        })
-                      }
-                    </CommentListAreaDiv>
-                    :
-                    `コメントが存在しません。`
-                }
-              </CommentListDiv>
-        }
-      </ModalBody>
-    </Parent>
+                        return (
+                          <FavoriteFavoriteCommentContent
+                            commentDetailItem={e}
+                            key={`${commentId}-favoritecommentid`}
+                          />
+                        )
+                      })
+                    }
+                  </CommentListAreaDiv>
+                  :
+                  `コメントが存在しません。`
+              }
+            </CommentListDiv>
+      }
+    </ModalPortal>
   );
 }

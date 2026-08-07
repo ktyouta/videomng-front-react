@@ -4,7 +4,7 @@ import { FiUpload } from "react-icons/fi";
 import styled from "styled-components";
 import ButtonComponent from "../../../../../../../components/ButtonComponent";
 import { FileUploadButton } from "../../../../../../../components/FileUploadButton";
-import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../../components/ModalLayout";
+import { ModalPortal } from "../../../../../../../components/ModalPortal";
 import { ModalPortalConfirm } from "../../../../../../../components/ModalPortalConfirm";
 import { useFavoriteSearchCsvExportMain } from "../../../../../hooks/videolist/searcharea/csv/export/useFavoriteSearchCsvExportMain";
 
@@ -39,6 +39,7 @@ const UploadFileNameSpan = styled.span`
 `;
 
 type propsType = {
+  isOpen: boolean;
   close: () => void;
 }
 
@@ -58,11 +59,46 @@ export function FavoriteSearchCsvExport(props: propsType) {
 
   return (
     <React.Fragment>
-      {/* ヘッダー */}
-      <ModalHeader icon={FiUpload}>
-        お気に入りの取込
-      </ModalHeader>
-      <ModalBody>
+      <ModalPortal
+        isOpen={props.isOpen}
+        modalWidth="45%"
+        containerStyle={{
+          fontSize: "16px",
+          display: "flex",
+          flexDirection: "column"
+        }}
+        modalMinHeight="405px"
+        close={props.close}
+        title="お気に入りの取込"
+        titleIcon={FiUpload}
+        footer={
+          <>
+            <ButtonComponent
+              shape="rounded"
+              size="medium"
+              onClick={props.close}
+              style={{
+                background: "#3a3d42",
+                color: "white"
+              }}
+            >
+              キャンセル
+            </ButtonComponent>
+            <ButtonComponent
+              shape="rounded"
+              size="medium"
+              onClick={openConfirmModal}
+              style={{
+                background: isLoading ? "#2c2f33" : "#3a3d42",
+                color: "white"
+              }}
+              disabled={isLoading}
+            >
+              アップロード
+            </ButtonComponent>
+          </>
+        }
+      >
         <MessageArea>
           お気に入りのインポートでダウンロードしたCSVファイルを選択してアップロードボタンを押すと、動画IDをもとにお気に入りへ一括登録できます。 <br />
           CSVには動画タイトルなどの情報は含まれません。<br />
@@ -89,38 +125,14 @@ export function FavoriteSearchCsvExport(props: propsType) {
             </ProgressArea>
           }
         </MessageArea>
-      </ModalBody>
-      <ModalFooter>
-        <ButtonComponent
-          shape="rounded"
-          size="medium"
-          onClick={props.close}
-          style={{
-            background: "#3a3d42",
-            color: "white"
-          }}
-        >
-          キャンセル
-        </ButtonComponent>
-        <ButtonComponent
-          shape="rounded"
-          size="medium"
-          onClick={openConfirmModal}
-          style={{
-            background: isLoading ? "#2c2f33" : "#3a3d42",
-            color: "white"
-          }}
-          disabled={isLoading}
-        >
-          アップロード
-        </ButtonComponent>
-      </ModalFooter>
+      </ModalPortal>
       {
         // アップロード確認用モーダル
         isOpenConfirm &&
         <ModalPortalConfirm
           isOpenModal={isOpenConfirm}
           closeModal={closeConfirmModal}
+          nested={true}
           titleMessage={`アップロードします。よろしいですか？`}
           clickOk={uploadCsv}
         />

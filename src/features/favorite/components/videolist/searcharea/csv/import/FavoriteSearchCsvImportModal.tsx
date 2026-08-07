@@ -1,6 +1,5 @@
 import React from "react";
 import { FiDownload } from "react-icons/fi";
-import { ModalPortal } from "../../../../../../../components/ModalPortal";
 import { useFavoriteSearchCsvImportModal } from "../../../../../hooks/videolist/searcharea/csv/import/useFavoriteSearchCsvImportModal";
 import { FavoriteSearchActionButton } from "../../../../FavoriteSearchActionButton";
 import { FavoriteSearchCsvImport } from "./FavoriteSearchCsvImport";
@@ -26,23 +25,14 @@ export function FavoriteSearchCsvImportModal() {
                 label="保存"
                 onClick={openModal}
             />
-            {/*ダウンロードモーダル */}
-            <ModalPortal
-                isOpen={isOpenModal}
-                modalWidth="45%"
-                containerStyle={{
-                    minHeight: `384px`,
-                    fontSize: "16px",
-                    display: "flex",
-                    flexDirection: "column"
-                }}
-                modalMinHeight=""
-                close={closeModal}
-            >
+            {/*ダウンロードモーダル（閉じている間は内部状態を保持しないため未マウントにする） */}
+            {
+                isOpenModal &&
                 <FavoriteSearchCsvImport
+                    isOpen={isOpenModal}
                     close={closeModal}
                 />
-            </ModalPortal>
+            }
         </React.Fragment>
     );
 }

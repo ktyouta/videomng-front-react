@@ -2,6 +2,7 @@ import { useFavoriteCreateFolderInFolderMain } from "../../../../hooks/videofold
 import { FavoriteCreateFolder } from "../../../videolist/searcharea/folder/FavoriteCreateFolder";
 
 type propsType = {
+  isOpen: boolean;
   close: () => void;
   isMobile: boolean;
 }
@@ -14,6 +15,7 @@ export function FavoriteCreateFolderContainer(props: propsType) {
 
   return (
     <FavoriteCreateFolder
+      isOpen={props.isOpen}
       close={props.close}
       isMobile={props.isMobile}
       {...retObj}

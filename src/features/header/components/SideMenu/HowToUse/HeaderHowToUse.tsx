@@ -1,16 +1,11 @@
 import { IoHelpCircleOutline } from "react-icons/io5";
 import styled from "styled-components";
-import { ModalBody, ModalHeader } from "../../../../../components/ModalLayout";
+import { ModalPortal } from "../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL } from "../../../const/HeaderConst";
 
 
-const Parent = styled.div`
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
+const MessageOl = styled.ol`
   font-size: ${HEADER_FONT_SIZE_SMALL};
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -26,10 +21,6 @@ const Parent = styled.div`
   }
 `;
 
-const MessageOl = styled.ol`
-
-`;
-
 const MessageLi = styled.li`
   margin-bottom: 6%;
   display: flex;
@@ -42,49 +33,58 @@ const StepSpan = styled.span`
   margin-right: 0.75rem;
 `;
 
-export function HeaderHowToUse() {
+type propsType = {
+  isOpen: boolean,
+  close: () => void,
+  isMobile: boolean,
+}
+
+export function HeaderHowToUse(props: propsType) {
 
   console.log("HeaderHowToUse render");
 
   return (
-    <Parent>
-      <ModalHeader icon={IoHelpCircleOutline}>
-        使い方
-      </ModalHeader>
-      <ModalBody>
-        <MessageOl>
-          <MessageLi>
-            <StepSpan>
-              1
-            </StepSpan>
-            ホーム画面でキーワードを入力し、動画を検索します。
-          </MessageLi>
-          <MessageLi>
-            <StepSpan>
-              2
-            </StepSpan>
-            気になる動画を選択すると、詳細画面に遷移します。
-          </MessageLi>
-          <MessageLi>
-            <StepSpan>
-              3
-            </StepSpan>
-            詳細画面から「お気に入り」に登録できます（ログインが必要）。
-          </MessageLi>
-          <MessageLi>
-            <StepSpan>
-              4
-            </StepSpan>
-            お気に入り登録後、「お気に入り」画面から設定の変更が可能です。
-          </MessageLi>
-          <MessageLi>
-            <StepSpan>
-              5
-            </StepSpan>
-            「お気に入り」画面でフォルダの作成ができます。フォルダを使うことで動画を目的ごとに整理し、より快適に管理できます。
-          </MessageLi>
-        </MessageOl>
-      </ModalBody>
-    </Parent>
+    <ModalPortal
+      isOpen={props.isOpen}
+      modalWidth={props.isMobile ? "93%" : "45%"}
+      modalMinHeight="70%"
+      isCloseOuter={true}
+      close={props.close}
+      title="使い方"
+      titleIcon={IoHelpCircleOutline}
+    >
+      <MessageOl>
+        <MessageLi>
+          <StepSpan>
+            1
+          </StepSpan>
+          ホーム画面でキーワードを入力し、動画を検索します。
+        </MessageLi>
+        <MessageLi>
+          <StepSpan>
+            2
+          </StepSpan>
+          気になる動画を選択すると、詳細画面に遷移します。
+        </MessageLi>
+        <MessageLi>
+          <StepSpan>
+            3
+          </StepSpan>
+          詳細画面から「お気に入り」に登録できます（ログインが必要）。
+        </MessageLi>
+        <MessageLi>
+          <StepSpan>
+            4
+          </StepSpan>
+          お気に入り登録後、「お気に入り」画面から設定の変更が可能です。
+        </MessageLi>
+        <MessageLi>
+          <StepSpan>
+            5
+          </StepSpan>
+          「お気に入り」画面でフォルダの作成ができます。フォルダを使うことで動画を目的ごとに整理し、より快適に管理できます。
+        </MessageLi>
+      </MessageOl>
+    </ModalPortal>
   );
 }

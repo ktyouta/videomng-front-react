@@ -57,6 +57,46 @@
 **horizontal-scopeで発見した4つ目のパターン（上記11件とは別枠）**
 - [x] `src/components/TagFolderSelectPanel.tsx`（`HomeVideoDetailTagFolderSelect.tsx`と`VideoDetailTagFolderSelect.tsx`(videochannel)の共通中身）: `ModalHeader`/`ModalBody`(`overflowY="hidden"`)/`ModalFooter`に統一。フォルダ選択・タグ検索欄は固定表示のままタグ一覧のみスクロールする既存の使い勝手を維持（`MainArea`/`Parent`/`TagMasterAreaDiv`/`TagMasterListAreaDiv`の内部構造は維持）
 
+## 6. `ModalPortal`への集約（2026-08-07改訂）
+`spec.md`「## 設計改訂（2026-08-07）: `ModalPortal`への集約」の実装。旧タスク（1〜5）は完了済み・履歴として残す。振る舞い（各モーダルの見た目・挙動）は現状維持したまま内部構造だけを作り替える改修。
+
+### 6-1. 土台の再構築
+- [x] `src/components/ModalPortal.tsx`
+  - `ModalLayout.tsx`の`ModalHeader`/`ModalBody`/`ModalFooter`を**非公開の内部部品**として取り込む
+  - スロットprop追加: `title?`/`titleIcon?`（ヘッダ）、`footer?`（フッタ）、`theme?`、`bodyOverflowY?`、`bodyStyle?`
+  - `title`/`footer`いずれか指定時のみ骨格（Header/Body/Footer）を描画。未指定時は従来通り素の枠として`children`を直接描画（`VideoDetailInfo`/`HomeVideoDetailInfo`等の既存の素枠利用を壊さない）
+  - `ModalConst.ts`の定数のうち`ModalLayout`系・`ModalPortal`系をこのファイルにモジュールレベル定数としてコロケーション
+- [x] `src/components/ModalPortalConfirm.tsx`
+  - `WarningHeader`をこのファイルへコロケーション（確認モーダル専用のため）
+  - `CONFIRM_MODAL_CONTAINER_STYLE`をこのファイルへコロケーション
+  - 新`ModalPortal`のスロットAPIを使う薄いプリセットに整理
+
+### 6-2. 各画面の移行（14件）
+中身コンポーネント（`Xxx.tsx`）が`ModalPortal`を直接描画し、`title`/`titleIcon`/`footer`スロット＋本文childrenを渡す形に変更。ラッパー（`XxxModal.tsx`）はトリガー＋開閉stateのみ担当し`<Xxx isOpen close .../>`を描画。各画面の`Parent`(flex骨格)は撤廃。本文フォントが12/13/16系と異なる画面（HowToUse/UsagePrecaution=13/16系）は内側要素にフォント指定を残して現状維持。
+- [x] `FavoriteSearchCondition.tsx`（footerなし）
+- [x] `FavoriteVideoFolderSearchCondition.tsx`（footerなし）
+- [x] `HomeSearchCondition.tsx`（footerなし）
+- [x] `HeaderHowToUse.tsx`（footerなし・font 13/16系）
+- [x] `HeaderUsagePrecaution.tsx`（footerなし・font 13/16系）
+- [x] `FavoriteFavoriteComment.tsx`（固定高さ`height:90%`）
+- [x] `FavoriteBlockComment.tsx`
+- [x] `FavoriteAddTag.tsx`
+- [x] `FavoriteCreateFolder.tsx`（`FavoriteCreateFolderInFolderModal`と共用）
+- [x] `FavoriteUpdateFolder.tsx`
+- [x] `FavoriteSearchCsvExport.tsx`
+- [x] `FavoriteSearchCsvImport.tsx`
+- [x] `FavoriteDeleteFolder.tsx`（`theme="light"`）
+- [x] `TagFolderSelectPanel.tsx`（`bodyOverflowY="hidden"`・タグ一覧のみ独自スクロール維持）
+
+### 6-3. 旧ファイルの削除
+- [x] `src/components/ModalLayout.tsx`を削除（全consumerが`ModalPortal`スロットへ移行済みを確認後）
+- [x] `src/consts/ModalConst.ts`を削除
+- [x] `FavoriteDeleteFolderModal.tsx`の`CONFIRM_MODAL_CONTAINER_STYLE`参照を`ModalPortalConfirm.tsx`からの参照に変更
+
+### 6-4. 確認
+- [x] `npx tsc --noEmit -p tsconfig.app.json`で今回変更起因のエラー0件
+- [x] 各種レビュー（frontend-review等）
+
 ## 5. 対象外（意図的に除外）
 - `FavoriteVideoDetailInfo.tsx`（favorite・videochannelではなく通常のお気に入り画面側）はタグ選択モーダルを持たないため対象外（呼び出し元propsを確認済み。お気に入り画面では`FavoriteAddTagModal`という別フローでタグ編集する設計のため）
 - PC/スマホのレスポンシブ幅調整は`docs/modal-mobile-responsive/`で対応済みのため今回スコープ外

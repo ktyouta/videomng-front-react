@@ -4,30 +4,9 @@ import BaseTextbox from "../../../../../../components/BaseTextbox";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { ModalBody, ModalFooter, ModalHeader } from "../../../../../../components/ModalLayout";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from '../../../../../../consts/MediaConst';
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
-  }
-`;
 
 const MainArea = styled.div`
     display: flex;
@@ -98,6 +77,7 @@ const DefaultColorLink = styled.span`
 `;
 
 type propsType = {
+  isOpen: boolean,
   close: () => void,
   execute: () => void;
   folderName: string;
@@ -122,11 +102,44 @@ export function FavoriteCreateFolder(props: propsType) {
     isMobile, } = props;
 
   return (
-    <Parent>
-      <ModalHeader icon={FaFolder}>
-        フォルダ作成
-      </ModalHeader>
-      <ModalBody>
+    <ModalPortal
+      isOpen={props.isOpen}
+      modalWidth={isMobile ? "93%" : "45%"}
+      modalMinHeight=""
+      isCloseOuter={true}
+      close={props.close}
+      containerStyle={{
+        minHeight: "55%"
+      }}
+      title="フォルダ作成"
+      titleIcon={FaFolder}
+      footer={
+        <>
+          <ButtonComponent
+            shape="rounded"
+            size={isMobile ? "small" : "medium"}
+            onClick={props.close}
+            style={{
+              background: "#3a3d42",
+              color: "white"
+            }}
+          >
+            キャンセル
+          </ButtonComponent>
+          <ButtonComponent
+            shape="rounded"
+            size={isMobile ? "small" : "medium"}
+            onClick={execute}
+            style={{
+              color: "white",
+              background: "#3a3d42",
+            }}
+          >
+            作成
+          </ButtonComponent>
+        </>
+      }
+    >
        <MainArea>
         <MessageArea>
           フォルダ名を入力して「作成」ボタンを押すと、新しいフォルダを作成できます。<br />
@@ -178,31 +191,6 @@ export function FavoriteCreateFolder(props: propsType) {
         />
         </SelectColorDiv>
        </MainArea>
-      </ModalBody>
-      <ModalFooter>
-        <ButtonComponent
-          shape="rounded"
-          size={isMobile ? "small" : "medium"}
-          onClick={props.close}
-          style={{
-            background: "#3a3d42",
-            color: "white"
-          }}
-        >
-          キャンセル
-        </ButtonComponent>
-        <ButtonComponent
-          shape="rounded"
-          size={isMobile ? "small" : "medium"}
-          onClick={execute}
-          style={{
-            color: "white",
-            background: "#3a3d42",
-          }}
-        >
-          作成
-        </ButtonComponent>
-      </ModalFooter>
-    </Parent>
+    </ModalPortal>
   );
 }

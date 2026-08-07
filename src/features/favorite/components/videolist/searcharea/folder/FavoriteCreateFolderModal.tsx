@@ -1,6 +1,5 @@
 import React from "react";
 import { FaFolder } from 'react-icons/fa';
-import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteCreateFolderModal } from "../../../../hooks/videolist/searcharea/folder/useFavoriteCreateFolderModal";
 import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
 import { FavoriteCreateFolderContainer } from "./FavoriteCreateFolderContainer";
@@ -25,22 +24,15 @@ export function FavoriteCreateFolderModal() {
         label="フォルダ作成"
         onClick={openModal}
       />
-      {/* フォルダ作成モーダル */}
-      <ModalPortal
-        isOpen={isOpenModal}
-        modalWidth={isMobile ? `93%` : `45%`}
-        modalMinHeight=""
-        isCloseOuter={true}
-        close={closeModal}
-        containerStyle={{
-          minHeight: "55%"
-        }}
-      >
+      {/* フォルダ作成モーダル（閉じている間は入力状態を保持しないため未マウントにする） */}
+      {
+        isOpenModal &&
         <FavoriteCreateFolderContainer
+          isOpen={isOpenModal}
           close={closeModal}
           isMobile={isMobile}
         />
-      </ModalPortal>
+      }
     </React.Fragment>
   );
 }

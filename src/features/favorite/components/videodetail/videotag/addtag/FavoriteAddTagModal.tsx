@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ButtonComponent from "../../../../../../components/ButtonComponent";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteAddTagModal } from "../../../../hooks/videodetail/videotag/addtag/useFavoriteAddTagModal";
 import { FavoriteAddTag } from "./FavoriteAddTag";
@@ -73,22 +72,15 @@ export function FavoriteAddTagModal() {
       >
         タグを追加
       </ButtonComponent>
-      {/* タグ追加モーダル */}
-      <ModalPortal
-        isOpen={isOpenModal}
-        modalWidth={isMobile ? `93%` : `45%`}
-        modalMinHeight=""
-        isCloseOuter={true}
-        close={closeModal}
-        containerStyle={{
-          minHeight: "43%"
-        }}
-      >
+      {/* タグ追加モーダル（閉じている間は入力状態を保持しないため未マウントにする） */}
+      {
+        isOpenModal &&
         <FavoriteAddTag
+          isOpen={isOpenModal}
           close={closeModal}
           isMobile={isMobile}
         />
-      </ModalPortal>
+      }
     </React.Fragment>
   );
 }

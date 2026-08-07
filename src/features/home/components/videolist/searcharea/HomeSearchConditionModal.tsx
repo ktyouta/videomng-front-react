@@ -2,7 +2,6 @@ import React from "react";
 import { MdTune } from 'react-icons/md';
 import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
-import { ModalPortal } from "../../../../../components/ModalPortal";
 import {
     HOME_SEARCH_AREA_ACCENT_COLOR,
     HOME_SEARCH_AREA_BUTTON_BG,
@@ -70,18 +69,15 @@ export function HomeSearchConditionModal() {
                     </SearchConditionTitleSpan>
                 }
             </TriggerWrapperDiv>
-            {/* 検索条件指定モーダル */}
-            <ModalPortal
-                isOpen={isOpenFilterModal}
-                modalWidth={isMobile ? `93%` : `45%`}
-                modalMinHeight="55%"
-                isCloseOuter={true}
-                close={closeFilterModal}
-            >
+            {/* 検索条件指定モーダル（閉じている間は内部状態・取得を保持しないため未マウントにする） */}
+            {
+                isOpenFilterModal &&
                 <HomeSearchCondition
+                    isOpen={isOpenFilterModal}
+                    close={closeFilterModal}
                     isMobile={isMobile}
                 />
-            </ModalPortal>
+            }
         </React.Fragment>
     );
 }

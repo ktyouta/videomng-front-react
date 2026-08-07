@@ -2,7 +2,6 @@ import React from "react";
 import { HiOutlineInbox } from 'react-icons/hi';
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { useFavoriteBlockCommentModalIcon } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentModalIcon";
 import { FavoriteBlockComment } from "./FavoriteBlockComment";
@@ -73,18 +72,15 @@ export function FavoriteBlockCommentModalIcon() {
                     非表示リスト
                 </BlockNavDiv>
             </IconDiv>
-            {/* 非表示コメントリスト */}
-            <ModalPortal
-                isOpen={isOpenBlockListModal}
-                modalWidth={isMobile ? `93%` : undefined}
-                containerStyle={{
-                    height: `90%`
-                }}
-                isCloseOuter={true}
-                close={closeBlockListModal}
-            >
-                <FavoriteBlockComment />
-            </ModalPortal>
+            {/* 非表示コメントリスト（閉じている間はコメント取得を走らせないため未マウントにする） */}
+            {
+                isOpenBlockListModal &&
+                <FavoriteBlockComment
+                    isOpen={isOpenBlockListModal}
+                    close={closeBlockListModal}
+                    isMobile={isMobile}
+                />
+            }
         </React.Fragment>
     );
 }

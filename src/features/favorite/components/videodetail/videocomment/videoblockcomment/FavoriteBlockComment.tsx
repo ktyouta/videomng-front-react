@@ -1,33 +1,11 @@
 import { HiOutlineInbox } from "react-icons/hi";
 import styled from "styled-components";
 import Loading from "../../../../../../components/Loading";
-import { ModalBody, ModalHeader } from "../../../../../../components/ModalLayout";
-import { MEDIA } from "../../../../../../consts/MediaConst";
+import { ModalPortal } from "../../../../../../components/ModalPortal";
 import { useFavoriteBlockCommentList } from "../../../../hooks/videodetail/videocomment/videoblockcomment/useFavoriteBlockCommentList";
 import { YouTubeDataApiCommentDetailItemType } from "../../../../types/videodetail/videocomment/YouTubeDataApiCommentDetailItemType";
 import { FavoriteBlockCommentContent } from "./FavoriteBlockCommentContent";
 
-
-const Parent = styled.div`
-  box-sizing:border-box;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 13px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 16px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 16px;
-  }
-`;
 
 const CommentListDiv = styled.div`
   width: 100%;
@@ -50,7 +28,13 @@ const CommentListAreaDiv = styled.div`
   padding-right: 1%;
 `;
 
-export function FavoriteBlockComment() {
+type propsType = {
+  isOpen: boolean;
+  close: () => void;
+  isMobile: boolean;
+}
+
+export function FavoriteBlockComment(props: propsType) {
 
   console.log("FavoriteBlockComment render");
 
@@ -60,50 +44,53 @@ export function FavoriteBlockComment() {
     blockCommentData, } = useFavoriteBlockCommentList();
 
   return (
-    <Parent>
-      {/* ブロックコメントヘッダ */}
-      <ModalHeader icon={HiOutlineInbox}>
-        非表示コメント
-      </ModalHeader>
-      {/* ブロックコメントリスト */}
-      <ModalBody>
-        {
-          isLoading
+    <ModalPortal
+      isOpen={props.isOpen}
+      modalWidth={props.isMobile ? "93%" : undefined}
+      containerStyle={{
+        height: "90%"
+      }}
+      isCloseOuter={true}
+      close={props.close}
+      title="非表示コメント"
+      titleIcon={HiOutlineInbox}
+    >
+      {
+        isLoading
+          ?
+          <CommentLoadingDiv>
+            <Loading />
+          </CommentLoadingDiv>
+          :
+          errMessage
             ?
-            <CommentLoadingDiv>
-              <Loading />
-            </CommentLoadingDiv>
+            <CommentListDiv>
+              {errMessage}
+            </CommentListDiv>
             :
-            errMessage
-              ?
-              <CommentListDiv>
-                {errMessage}
-              </CommentListDiv>
-              :
-              <CommentListDiv>
-                {
-                  blockCommentData && blockCommentData.items.length > 0 ?
-                    <CommentListAreaDiv>
-                      {
-                        blockCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
+            <CommentListDiv>
+              {
+                blockCommentData && blockCommentData.items.length > 0 ?
+                  <CommentListAreaDiv>
+                    {
+                      blockCommentData.items.map((e: YouTubeDataApiCommentDetailItemType) => {
 
-                          const commentId = e.id;
+                        const commentId = e.id;
 
-                          return (
-                            <FavoriteBlockCommentContent
-                              commentDetailItem={e}
-                              key={commentId}
-                            />
-                          )
-                        })
-                      }
-                    </CommentListAreaDiv>
-                    :
-                    `コメントが存在しません。`
-                }
-              </CommentListDiv>
-        }
-      </ModalBody>
-    </Parent>
+                        return (
+                          <FavoriteBlockCommentContent
+                            commentDetailItem={e}
+                            key={commentId}
+                          />
+                        )
+                      })
+                    }
+                  </CommentListAreaDiv>
+                  :
+                  `コメントが存在しません。`
+              }
+            </CommentListDiv>
+      }
+    </ModalPortal>
   );
 }

@@ -1,4 +1,3 @@
-import { ModalPortal } from "../../../../../components/ModalPortal";
 import { useHeaderUsagePrecautionModal } from "../../../hooks/SideMenu/UsagePrecaution/useHeaderUsagePrecautionModal";
 import { HeaderUsagePrecaution } from "./HeaderUsagePrecaution";
 
@@ -14,14 +13,10 @@ export function HeaderUsagePrecautionModal(props: propsType) {
     const { isMobile } = useHeaderUsagePrecautionModal();
 
     return (
-        <ModalPortal
+        <HeaderUsagePrecaution
             isOpen={true}
-            modalWidth={isMobile ? "93%" : "45%"}
-            modalMinHeight="70%"
-            isCloseOuter={true}
             close={props.closeMenu}
-        >
-            <HeaderUsagePrecaution />
-        </ModalPortal>
+            isMobile={isMobile}
+        />
     );
 }

@@ -1,7 +1,5 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { ModalPortal } from "../../../../../../components/ModalPortal";
-import { CONFIRM_MODAL_CONTAINER_STYLE } from "../../../../../../consts/ModalConst";
 import { useFavoriteDeleteFolderModal } from "../../../../hooks/videofolder/searcharea/deletefolder/useFavoriteDeleteFolderModal";
 import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
 import { FavoriteSearchActionButton } from "../../../FavoriteSearchActionButton";
@@ -36,22 +34,18 @@ export function FavoriteDeleteFolderModal(props: PropsType) {
                 label="フォルダ削除"
                 onClick={openDeleteModal}
             />
-            {/* フォルダ削除確認モーダル */}
-            <ModalPortal
-                isOpen={isOpenModal}
-                modalWidth={isMobile ? `93%` : `45%`}
-                isCloseOuter={true}
-                close={closeModal}
-                containerStyle={CONFIRM_MODAL_CONTAINER_STYLE}
-            >
+            {/* フォルダ削除確認モーダル（閉じている間は選択状態を保持しないため未マウントにする） */}
+            {
+                isOpenModal &&
                 <FavoriteDeleteFolder
+                    isOpen={isOpenModal}
                     close={closeModal}
                     deleteVideoFlg={deleteVideoFlg}
                     changeSelect={changeSelect}
                     clickDelete={clickDelete}
                     isMobile={isMobile}
                 />
-            </ModalPortal>
+            }
             {
                 isOpenConfirmModal &&
                 // フォルダ削除最終確認モーダル
