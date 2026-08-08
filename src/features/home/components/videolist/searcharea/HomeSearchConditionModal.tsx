@@ -50,7 +50,6 @@ export function HomeSearchConditionModal() {
         closeFilterModal,
         isMobile } = useHomeSearchConditionModal();
 
-
     return (
         <React.Fragment>
             {/* 検索条件展開用ボタン */}

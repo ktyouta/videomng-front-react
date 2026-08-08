@@ -10,7 +10,7 @@ const MessageDiv = styled.div`
     box-sizing: border-box;
     color: white;
     padding: 0 5%;
-    line-height: 2.0;
+    line-height: 3.0;
     font-size: ${HEADER_FONT_SIZE_SMALL};
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
@@ -40,7 +40,7 @@ export function HeaderUsagePrecaution(props: propsType) {
     <ModalPortal
       isOpen={props.isOpen}
       modalWidth={props.isMobile ? "93%" : "45%"}
-      modalMinHeight="70%"
+      modalMinHeight={props.isMobile ? "55%" : "35%"}
       isCloseOuter={true}
       close={props.close}
       title="使用上の注意"

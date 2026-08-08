@@ -47,25 +47,24 @@ export function FavoriteMemoEditInput(props: propsType) {
     return (
         <MemoInputAreaDiv>
             <BaseTextbox
-                textWidth="78%"
+                textWidth="99%"
                 placeholder="メモ"
                 value={inputMemo}
                 onChange={setInputMemo}
                 style={{
                     height: "34px",
+                    marginRight: "20px"
                 }}
                 onKeyDown={handleKeyPress}
             />
-            <EditIconAreaDiv>
-                {/* キャンセル */}
-                <FavoriteMemoCancelIconArea
-                    closeEdit={props.closeEdit}
-                />
-                {/* 更新 */}
-                <FavoriteMemoUpdateIconArea
-                    updateMemo={() => { updateMemo(); }}
-                />
-            </EditIconAreaDiv>
+            {/* キャンセル */}
+            <FavoriteMemoCancelIconArea
+                closeEdit={props.closeEdit}
+            />
+            {/* 更新 */}
+            <FavoriteMemoUpdateIconArea
+                updateMemo={() => { updateMemo(); }}
+            />
         </MemoInputAreaDiv>
     );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useInvalidateQuery } from "../../../../../../hooks/useInvalidateQuery";
+import { mediaQuery, useMediaQuery } from "../../../../../../hooks/useMediaQuery";
 import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
 import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
 import { favoriteVideoKeys } from "../../../../api/queryKey";
@@ -26,6 +27,10 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
     const { invalidate: invalidataFavorite } = useInvalidateQuery(favoriteVideoKeys.folder(folderId));
     // フォルダカラー
     const [folderColor, setFolderColor] = useState(props.folder.folderColor || DEFAULT_FOLDER_COLOR);
+    // 画面サイズ判定
+    const isMobile = useMediaQuery(mediaQuery.mobile);
+    // PC未満判定
+    const isPcLess = useMediaQuery(mediaQuery.pcLess);
 
     /**
      * フォルダ名更新リクエスト
@@ -83,5 +88,7 @@ export function useFavoriteUpdateFolderMain(props: propsType) {
         setFolderName,
         folderColor,
         setFolderColor,
+        isMobile,
+        isPcLess,
     }
 }

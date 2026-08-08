@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Z_INDEX_PARAM } from "../../../consts/CommonConst";
 import { MEDIA } from "../../../consts/MediaConst";
-import { mediaQuery, useMediaQuery } from "../../../hooks/useMediaQuery";
 import { FlexSpaceDiv } from "../../../styles/styledcomponent/FlexSpaceDiv";
 import { HEADER_PANEL_BORDER_COLOR } from "../const/HeaderConst";
+import { useHeader } from "../hooks/useHeader";
 import { HeaderMenuUl } from "./Menu/HeaderMenuUl";
 import { HeaderSideMenu } from "./SideMenu/HeaderSideMenu";
 import { HeaderUserMenu } from "./UserMenu/HeaderUserMenu";
@@ -40,6 +40,7 @@ const TitleSpan = styled.span<{ isMobile: boolean }>`
   white-space: nowrap;
   font-size: 16px;
   font-family:"Playfair Display",serif;
+  cursor: pointer;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: 20px;
@@ -61,8 +62,7 @@ export function Header() {
 
   console.log(`Header render`);
 
-  // 画面サイズ判定
-  const isMobile = useMediaQuery(mediaQuery.mobile);
+  const { clickTitle, isMobile } = useHeader();
 
   return (
     <Parent
@@ -74,6 +74,7 @@ export function Header() {
         {/* サービス名 */}
         <TitleSpan
           isMobile={isMobile}
+          onClick={clickTitle}
         >
           {SERVICE_TITLE}
         </TitleSpan>

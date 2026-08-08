@@ -6,6 +6,7 @@ import ButtonComponent from "../../../../../../components/ButtonComponent";
 import { ColorPickerTwitter } from "../../../../../../components/ColorPickerTwitter";
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { ModalPortal } from "../../../../../../components/ModalPortal";
+import { MEDIA } from '../../../../../../consts/MediaConst';
 import { DEFAULT_FOLDER_COLOR } from "../../../../const/FavoriteConst";
 import { useFavoriteUpdateFolderMain } from "../../../../hooks/videofolder/searcharea/updatefolder/useFavoriteUpdateFolderMain";
 import { FolderMasterType } from "../../../../types/videolist/FolderMasterType";
@@ -19,9 +20,20 @@ const MainArea = styled.div`
 const InputArea = styled.div`
     padding: 0 5%;
     box-sizing: border-box;
-    margin: 30px 0px 75px 0;
+    margin: 0 0px 25px 0;
     display: flex;
     align-items: center;
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      margin: 5px 0px 35px 0;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      margin: 5px 0px 35px 0;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      margin: 5px 0px 35px 0;
+    }
 `;
 
 const InputTitleSpan = styled.span`
@@ -52,10 +64,21 @@ const SelectedColor = styled.div`
 
 const DefaultColorLink = styled.span`
     color: #7abaff;
-    font-size: 15px;
+    font-size: 12px;
     cursor: pointer;
     &:hover {
         text-decoration: underline;
+    }
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+      font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+      font-size: 15px;
+    }
+
+    @media (min-width: ${MEDIA.PC}) {
+      font-size: 15px;
     }
 `;
 
@@ -75,7 +98,9 @@ export function FavoriteUpdateFolder(props: propsType) {
     folderName,
     setFolderName,
     folderColor,
-    setFolderColor, } = useFavoriteUpdateFolderMain({ ...props });
+    setFolderColor,
+    isMobile,
+    isPcLess, } = useFavoriteUpdateFolderMain({ ...props });
 
   return (
     <ModalPortal
@@ -138,7 +163,7 @@ export function FavoriteUpdateFolder(props: propsType) {
               <IconComponent
                 icon={FaFolder}
                 bgColor={folderColor}
-                size="35px"
+                size={isMobile ? "25px" : "35px"}
               />
             </SelectedColor>
             <DefaultColorLink
@@ -153,7 +178,7 @@ export function FavoriteUpdateFolder(props: propsType) {
             color={folderColor}
             changeColor={setFolderColor}
             triangle="hide"
-            width="33%"
+            width={isPcLess ? "90%" : "33%"}
           />
         </SelectColorDiv>
       </MainArea>

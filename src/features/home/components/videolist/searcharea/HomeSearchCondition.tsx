@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { LabeledFieldRow } from "../../../../../components/LabeledFieldRow";
 import { ModalPortal } from "../../../../../components/ModalPortal";
 import { Selectbox } from "../../../../../components/Selectbox";
+import { MEDIA } from "../../../../../consts/MediaConst";
 import { VIDEO_TYPE_LIST } from "../../../const/HomeConst";
 import { useHomeSearchConditionMain } from "../../../hooks/videolist/searcharea/useHomeSearchConditionMain";
 
@@ -12,10 +13,26 @@ const ConditionAreaDiv = styled.div`
   box-sizing: border-box;
   padding-left: 6%;
   padding-right: 6%;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
+    padding-top: 2%;
+    gap: 35px;
+  }
+
+  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
+    padding-top: 2%;
+    gap: 75px;
+  }
+
+  @media (min-width: ${MEDIA.PC}) {
+    padding-top: 2%;
+    gap: 75px;
+  }
 `;
 
-const LABEL_WIDTH = "4.5em";
-const ROW_MARGIN_BOTTOM = "13%";
 
 type propsType = {
     isOpen: boolean;
@@ -40,7 +57,7 @@ export function HomeSearchCondition(props: propsType) {
         <ModalPortal
             isOpen={props.isOpen}
             modalWidth={isMobile ? "93%" : "45%"}
-            modalMinHeight="45%"
+            modalMinHeight={isMobile ? "40%" : "35%"}
             isCloseOuter={true}
             close={props.close}
             title="条件を指定"
@@ -49,9 +66,7 @@ export function HomeSearchCondition(props: propsType) {
             <ConditionAreaDiv>
                 <LabeledFieldRow
                     label="種別"
-                    isMobile={isMobile}
-                    labelStyle={{ width: LABEL_WIDTH }}
-                    outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+                    isMobile={isMobile} labelStyle={{ width: "4.5rem" }}
                 >
                     <Selectbox
                         options={VIDEO_TYPE_LIST}
@@ -70,8 +85,7 @@ export function HomeSearchCondition(props: propsType) {
                     <LabeledFieldRow
                         label="カテゴリ"
                         isMobile={isMobile}
-                        labelStyle={{ width: LABEL_WIDTH }}
-                        outerStyle={{ marginBottom: ROW_MARGIN_BOTTOM }}
+                        labelStyle={{ width: "4.5rem" }}
                     >
                         <Selectbox
                             options={selectVideoCategory}

@@ -7,6 +7,9 @@ import { HEADER_FONT_SIZE_LARGE, HEADER_FONT_SIZE_SMALL } from "../../../const/H
 
 const MessageOl = styled.ol`
   font-size: ${HEADER_FONT_SIZE_SMALL};
+  margin: 0;
+  padding: 0px 5%;
+  line-height: 2.0;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
     font-size: ${HEADER_FONT_SIZE_SMALL};
@@ -22,9 +25,9 @@ const MessageOl = styled.ol`
 `;
 
 const MessageLi = styled.li`
-  margin-bottom: 6%;
   display: flex;
   align-items: flex-start;
+  margin-bottom: 6%;
 `;
 
 const StepSpan = styled.span`
@@ -47,7 +50,7 @@ export function HeaderHowToUse(props: propsType) {
     <ModalPortal
       isOpen={props.isOpen}
       modalWidth={props.isMobile ? "93%" : "45%"}
-      modalMinHeight="70%"
+      modalMinHeight={props.isMobile ? "55%" : "45%"}
       isCloseOuter={true}
       close={props.close}
       title="使い方"

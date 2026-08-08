@@ -10,6 +10,7 @@ const IconSizeDiv = styled.div`
   box-sizing: border-box;
   display: flex;
   font-size: 16px;
+  margin-right: 14px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
       font-size: 20px;

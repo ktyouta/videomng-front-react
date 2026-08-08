@@ -1,12 +1,11 @@
+import { format } from "date-fns";
 import React from "react";
 import styled from "styled-components";
-import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
-import { FavoriteMemoDeleteIconArea } from "./FavoriteMemoDeleteIconArea";
-import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
-import { format } from "date-fns";
-import { FavoriteMemoContentViewDeleteArea } from "./FavoriteMemoContentViewDeleteArea";
 import { MEDIA } from "../../../../../consts/MediaConst";
+import { FavoriteVideoMemoType } from "../../../types/videodetail/videomemo/FavoriteVideoMemoType";
 import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
+import { FavoriteMemoContentViewDeleteArea } from "./FavoriteMemoContentViewDeleteArea";
+import { FavoriteMemoEditIconArea } from "./FavoriteMemoEditIconArea";
 
 const MemoDiv = styled.div`
     box-sizing: border-box;
@@ -19,6 +18,7 @@ const LowerDiv = styled.div`
     text-align: left;
     overflow-wrap: break-word;
     align-items: center;
+    margin-bottom: 6px;
 `;
 
 const MetaDiv = styled.div`
