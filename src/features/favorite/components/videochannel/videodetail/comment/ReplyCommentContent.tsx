@@ -3,6 +3,7 @@ import { IoIosThumbsUp } from "react-icons/io";
 import styled from "styled-components";
 import { IconComponent } from "../../../../../../components/IconComponent";
 import { FlexSpaceDiv } from "../../../../../../styles/styledcomponent/FlexSpaceDiv";
+import { formatNumberComma } from "../../../../../../utils/CommonFunction";
 import { VideoCommentThreadReplySnippetType } from "../../../../types/videochannel/videodetail/comment/VideoCommentThreadReplySnippetType";
 import { MEDIA } from "../../../../../../consts/MediaConst";
 import { VIDEO_DETAIL_FONT_SIZE } from "../consts/VideoDetailFontSize";
@@ -133,7 +134,7 @@ export function ReplyCommentContent(props: propsType) {
                         icon={IoIosThumbsUp}
                     />
                     <LikeCountSpan>
-                        {likeCount}
+                        {formatNumberComma(likeCount)}
                     </LikeCountSpan>
                 </LikeCountAraeDiv>
                 <FlexSpaceDiv />

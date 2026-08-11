@@ -5,6 +5,7 @@ import { IconComponent } from "../../../../../components/IconComponent";
 import { MEDIA } from "../../../../../consts/MediaConst";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { sanitizeAndParseHtml } from "../../../../../utils/sanitizeAndParseHtml";
+import { formatNumberComma } from "../../../../../utils/CommonFunction";
 import { FavoriteVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/FavoriteVideoCommentThreadItemType";
 import { FAVORITE_VIDEO_DETAIL_FONT_SIZE } from "../consts/FavoriteVideoDetailFontSize";
 import { FavoriteCommentContentIconArea } from "./FavoriteCommentContentIconArea";
@@ -151,7 +152,7 @@ export function FavoriteCommentContent(props: propsType) {
                         icon={IoIosThumbsUp}
                     />
                     <LikeCountSpan>
-                        {likeCount}
+                        {formatNumberComma(likeCount)}
                     </LikeCountSpan>
                 </LikeCountAraeDiv>
                 <FlexSpaceDiv />

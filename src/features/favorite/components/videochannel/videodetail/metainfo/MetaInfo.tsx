@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { AccordionComponent } from "../../../../../../components/AccordionComponent";
-import { formatDateJP } from "../../../../../../utils/CommonFunction";
+import { formatDateJP, formatNumberComma } from "../../../../../../utils/CommonFunction";
 import { YouTubeDataApiVideoDetailItemType } from "../../../../types/videodetail/YouTubeDataApiVideoDetailItemType";
 
 
@@ -88,7 +88,7 @@ export function MetaInfo(props: propsType) {
                         【再生回数】
                     </TitleDiv>
                     <StatisticsDataDiv>
-                        {viewCount ? `${viewCount} 回` : ``}
+                        {viewCount ? `${formatNumberComma(viewCount)} 回` : ``}
                     </StatisticsDataDiv>
                 </StatisticsDiv>
                 <StatisticsDiv>
@@ -96,7 +96,7 @@ export function MetaInfo(props: propsType) {
                         【高評価数】
                     </TitleDiv>
                     <StatisticsDataDiv>
-                        {likeCount}
+                        {formatNumberComma(likeCount)}
                     </StatisticsDataDiv>
                 </StatisticsDiv>
             </StatisticsAreaDiv>

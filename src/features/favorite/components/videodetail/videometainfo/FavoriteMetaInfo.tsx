@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AccordionComponent } from "../../../../../components/AccordionComponent";
 import { mediaQuery, useMediaQuery } from "../../../../../hooks/useMediaQuery";
-import { formatDateJP } from "../../../../../utils/CommonFunction";
+import { formatDateJP, formatNumberComma } from "../../../../../utils/CommonFunction";
 import { FavoriteVideoDetailDataType } from "../../../types/videodetail/FavoriteVideoDetailDataType";
 
 
@@ -89,7 +89,7 @@ export function FavoriteMetaInfo(props: propsType) {
                         【再生回数】
                     </TitleDiv>
                     <StatisticsDataDiv>
-                        {viewCount ? `${viewCount} 回` : ``}
+                        {viewCount ? `${formatNumberComma(viewCount)} 回` : ``}
                     </StatisticsDataDiv>
                 </StatisticsDiv>
                 <StatisticsDiv>
@@ -97,7 +97,7 @@ export function FavoriteMetaInfo(props: propsType) {
                         【高評価数】
                     </TitleDiv>
                     <StatisticsDataDiv>
-                        {likeCount}
+                        {formatNumberComma(likeCount)}
                     </StatisticsDataDiv>
                 </StatisticsDiv>
             </StatisticsAreaDiv>

@@ -42,6 +42,29 @@ export function formatDateJP(strDate: string) {
     return publishedDate;
 }
 
+// 数値フォーマットのロケール
+const NUMBER_FORMAT_LOCALE = "ja-JP";
+
+/**
+ * 数値を3桁区切りカンマ表記にフォーマット
+ * @param value
+ * @returns
+ */
+export function formatNumberComma(value: string | number | undefined | null) {
+
+    if (value === undefined || value === null || value === "") {
+        return ``;
+    }
+
+    const num = Number(value);
+
+    if (Number.isNaN(num)) {
+        return String(value);
+    }
+
+    return num.toLocaleString(NUMBER_FORMAT_LOCALE);
+}
+
 /**
  * 前画面のパスを取得
  */

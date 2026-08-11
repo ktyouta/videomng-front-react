@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { IconComponent } from "../../../../../components/IconComponent";
 import { FlexSpaceDiv } from "../../../../../styles/styledcomponent/FlexSpaceDiv";
 import { sanitizeAndParseHtml } from "../../../../../utils/sanitizeAndParseHtml";
+import { formatNumberComma } from "../../../../../utils/CommonFunction";
 import { HomeVideoCommentThreadItemType } from "../../../types/videodetail/videocomment/HomeVideoCommentThreadItemType";
 import { HomeReplyCommentList } from "./HomeReplyCommentList";
 import { MEDIA } from "../../../../../consts/MediaConst";
@@ -146,7 +147,7 @@ export function HomeCommentContent(props: propsType) {
                         icon={IoIosThumbsUp}
                     />
                     <LikeCountSpan>
-                        {likeCount}
+                        {formatNumberComma(likeCount)}
                     </LikeCountSpan>
                 </LikeCountAraeDiv>
                 <FlexSpaceDiv />
