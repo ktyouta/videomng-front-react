@@ -33,7 +33,7 @@ export function useFavoriteVideoFolderArea() {
     const dragSensors = useDragSensors();
 
     // 動画一覧を取得
-    const { data, isLoading, isError, isFetching } = getFolderVideo({
+    const { data, isLoading, isError, isFetching, refetch } = getFolderVideo({
         folderId,
         searchConditionObj,
         select: (res: FavoriteVideoListResponseType) => {
@@ -158,5 +158,6 @@ export function useFavoriteVideoFolderArea() {
         handleDragEnd,
         dragSensors,
         selectedFavoriteVideoMode: searchConditionObj.selectedFavoriteVideoMode,
+        refetch,
     }
 }

@@ -30,7 +30,7 @@ export function useFavoriteVideoArea() {
     const dragSensors = useDragSensors();
 
     // 動画一覧を取得
-    const { data, isLoading, isError, isFetching } = getFavoriteVideoList({
+    const { data, isLoading, isError, isFetching, refetch } = getFavoriteVideoList({
         searchConditionObj,
         select: (res: FavoriteVideoListResponseType) => {
             return res.data;
@@ -40,6 +40,18 @@ export function useFavoriteVideoArea() {
             setDisplayFolderList(res.folder ?? []);
         },
     });
+
+    // サーバー検索条件が適用されているか
+    const hasSearchCondition =
+        !!searchConditionObj.selectedFavoriteVideoCategory ||
+        !!searchConditionObj.selectedFavoriteVideoViewStatus ||
+        !!searchConditionObj.selectedFavoriteVideoTag ||
+        !!searchConditionObj.selectedFavoriteVideoFavoriteLevel ||
+        !!searchConditionObj.selectedFavoriteVideoFolder;
+
+    // お気に入りが未登録か（絞り込み結果0件と区別する）
+    // キーワード絞り込みはクライアント側のため、サーバー総件数(total)が0であることも条件にする
+    const isUnregistered = !hasSearchCondition && !data?.total;
 
     /**
      * 動画をフォルダに登録
@@ -154,5 +166,7 @@ export function useFavoriteVideoArea() {
         handleDragEnd,
         dragSensors,
         selectedFavoriteVideoMode: searchConditionObj.selectedFavoriteVideoMode,
+        isUnregistered,
+        refetch,
     }
 }

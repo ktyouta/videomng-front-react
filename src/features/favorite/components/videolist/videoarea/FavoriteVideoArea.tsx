@@ -11,6 +11,8 @@ import { FolderType } from "../../../types/videolist/FolderType";
 import { FavoriteVideoFolderContent } from "../../FavoriteVideoFolderContent";
 import { FavoriteVideoAreaFooter } from "./FavoriteVideoAreaFooter";
 import { FavoriteVideoContent } from "./FavoriteVideoContent";
+import { FavoriteVideoEmpty } from "./FavoriteVideoEmpty";
+import { FavoriteVideoError } from "../../FavoriteVideoError";
 
 const Parent = styled.div`
   width: 100%;
@@ -58,28 +60,6 @@ const VideoUl = styled.ul`
   }
 `;
 
-const MessageDiv = styled.div`
-  color:white;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  margin-top: 5%;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 15px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 17px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 17px;
-  }
-`;
-
 export function FavoriteVideoArea() {
 
   console.log("FavoriteVideoArea render");
@@ -93,7 +73,9 @@ export function FavoriteVideoArea() {
     displayFolderList,
     handleDragEnd,
     dragSensors,
-    selectedFavoriteVideoMode, } = useFavoriteVideoArea();
+    selectedFavoriteVideoMode,
+    isUnregistered,
+    refetch, } = useFavoriteVideoArea();
 
   if (isLoading || isFetching) {
     return (
@@ -105,17 +87,17 @@ export function FavoriteVideoArea() {
 
   if (isError) {
     return (
-      <MessageDiv>
-        お気に入り動画の取得に失敗しました
-      </MessageDiv>
+      <FavoriteVideoError
+        onReload={refetch}
+      />
     );
   }
 
   if ((!displayVideoList || displayVideoList.length === 0) && (!displayFolderList || displayFolderList.length === 0)) {
     return (
-      <MessageDiv>
-        動画が存在しません。
-      </MessageDiv>
+      <FavoriteVideoEmpty
+        isUnregistered={isUnregistered}
+      />
     );
   }
 

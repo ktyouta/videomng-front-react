@@ -1,4 +1,5 @@
 import React from "react";
+import { FaVideoSlash } from "react-icons/fa";
 import styled from "styled-components";
 import Loading from "../../../../components/Loading";
 import { MEDIA } from "../../../../consts/MediaConst";
@@ -6,6 +7,7 @@ import { VideoListDataType } from "../../../../types/videolist/VideoListDataType
 import { VideoListItemType } from "../../../../types/videolist/VideoListItemType";
 import { useHomeChannelVideoArea } from "../../hooks/videochannel/useHomeChannelVideoArea";
 import { HomeChannelVideoContent } from "./HomeChannelVideoContent";
+import { HomeVideoStatus } from "./HomeVideoStatus";
 
 const Parent = styled.div`
   width: 100%;
@@ -33,13 +35,6 @@ const VideoUl = styled.ul`
   @media (min-width: ${MEDIA.PC}) {
     grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
   }
-`;
-
-const MessageDiv = styled.div`
-  color:white;
-  position: absolute;
-  top: 32%;
-  left: 42%;
 `;
 
 const NextGetBtnAreaDiv = styled.div`
@@ -88,9 +83,11 @@ export function HomeChannelVideoArea(props: propsType) {
 
   if (videoListItems.length === 0) {
     return (
-      <MessageDiv>
-        動画が存在しません。
-      </MessageDiv>
+      <HomeVideoStatus
+        icon={<FaVideoSlash />}
+        title="動画がありません"
+        description="表示できる動画が見つかりませんでした。"
+      />
     );
   }
 

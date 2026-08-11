@@ -1,5 +1,6 @@
 import { DndContext } from "@dnd-kit/core";
 import React from "react";
+import { FaRegFolderOpen } from "react-icons/fa";
 import styled from "styled-components";
 import Loading from "../../../../../components/Loading";
 import { MEDIA } from "../../../../../consts/MediaConst";
@@ -8,7 +9,9 @@ import { FAVORITE_LIST_MODE } from "../../../const/FavoriteConst";
 import { useFavoriteVideoFolderArea } from "../../../hooks/videofolder/videoarea/useFavoriteVideoFolderArea";
 import { FavoriteVideoListMergedType } from "../../../types/FavoriteVideoListMergedType";
 import { FolderType } from "../../../types/videolist/FolderType";
+import { FavoriteVideoError } from "../../FavoriteVideoError";
 import { FavoriteVideoFolderContent } from "../../FavoriteVideoFolderContent";
+import { FavoriteVideoStatus } from "../../FavoriteVideoStatus";
 import { FavoriteVideoFolderAreaFooter } from "./FavoriteVideoFolderAreaFooter";
 import { FavoriteVideoFolderVideoContent } from "./FavoriteVideoFolderVideoContent";
 
@@ -58,28 +61,6 @@ const VideoUl = styled.ul`
   }
 `;
 
-const MessageDiv = styled.div`
-  color:white;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  margin-top: 5%;
-  font-size: 12px;
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    font-size: 15px;
-  }
-
-  @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    font-size: 17px;
-  }
-
-  @media (min-width: ${MEDIA.PC}) {
-    font-size: 17px;
-  }
-`;
-
 export function FavoriteVideoFolderVideoArea() {
 
   console.log("FavoriteVideoFolderVideoArea render");
@@ -93,7 +74,8 @@ export function FavoriteVideoFolderVideoArea() {
     displayFolderList,
     handleDragEnd,
     dragSensors,
-    selectedFavoriteVideoMode, } = useFavoriteVideoFolderArea();
+    selectedFavoriteVideoMode,
+    refetch, } = useFavoriteVideoFolderArea();
 
   if (isLoading || isFetching) {
     return (
@@ -105,17 +87,19 @@ export function FavoriteVideoFolderVideoArea() {
 
   if (isError) {
     return (
-      <MessageDiv>
-        お気に入り動画の取得に失敗しました。
-      </MessageDiv>
+      <FavoriteVideoError
+        onReload={refetch}
+      />
     );
   }
 
   if ((!displayVideoList || displayVideoList.length === 0) && (!displayFolderList || displayFolderList.length === 0)) {
     return (
-      <MessageDiv>
-        動画が存在しません。
-      </MessageDiv>
+      <FavoriteVideoStatus
+        icon={<FaRegFolderOpen />}
+        title="このフォルダに動画がありません"
+        description="動画を追加すると、ここに表示されます。"
+      />
     );
   }
 
