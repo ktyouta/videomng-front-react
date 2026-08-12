@@ -169,7 +169,6 @@ export function HomeVideoDetailInfo(props: propsType) {
         moveLogin,
         isOpenTagSelectModal,
         closeTagSelectModal,
-        isMobile,
         clickRegister,
     } = useHomeVideoDetailInfo();
 

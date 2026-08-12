@@ -229,8 +229,6 @@ export function TagFolderSelectPanel({
                                 height={isMobile ? "30px" : isTablet ? "32px" : "39px"}
                                 indicatorPadding={isMobile ? "2px" : isTablet ? "6px" : undefined}
                                 fontSize={isMobile ? "12px" : "15px"}
-                                backgroundColor="rgb(24, 26, 30)"
-                                color="white"
                                 isSearchable={!isMobile}
                             />
                         </FolderAreaDiv>
