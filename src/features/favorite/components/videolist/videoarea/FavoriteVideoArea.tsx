@@ -32,6 +32,10 @@ const ResultNumDiv = styled.div`
   padding-right: 6%;
   color: rgb(158, 158, 158);
   margin-top: 13px;
+
+  @media (min-width: ${MEDIA.PC}) {
+    padding-right: 5%;
+  }
 `;
 
 const ResultNumSpan = styled.span`

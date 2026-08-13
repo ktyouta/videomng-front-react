@@ -28,7 +28,7 @@ const Parent = styled.div`
   display:flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 0 6%;
+  padding: 0 5%;
 `;
 
 const BreadcrumbPanelDiv = styled.div`

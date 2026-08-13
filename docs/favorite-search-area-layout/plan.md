@@ -13,3 +13,4 @@
 - [x] spec-review 実施
 - [x] 並べ替えラベル削除に伴うスマホ表示の余白調整（`FavoriteSearchSortArea` / `FavoriteSearchText` / `FavoriteVideoFolderSearchSortArea`）
 - [x] PC操作行の間隔をgapに統一し、共通ボタン`FavoriteSearchActionButton`からmargin-rightを撤廃（影響を受けた全箇所にgapを追加）
+- [x] PCで検索条件エリア・件数表示の左右余白を動画一覧グリッド（5%）に揃える（videolist・videofolder、スマホは6%維持）
