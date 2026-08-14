@@ -1,4 +1,4 @@
-import { FAVORITE_KEYWORD, FAVORITE_KEYWORD_MAX, REACENT_KEYWORD, REACENT_KEYWORD_MAX } from "../../../../const/HomeConst";
+import { FAVORITE_KEYWORD, FAVORITE_KEYWORD_MAX } from "../../../../const/HomeConst";
 
 export function useFavoriteKeyword() {
 

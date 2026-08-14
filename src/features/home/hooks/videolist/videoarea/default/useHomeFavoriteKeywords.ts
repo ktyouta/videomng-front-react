@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { IsLoginContext } from "../../../../../../app/components/QueryApp";
 import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
 import ENV from "../../../../../../env.json";
-import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { errResType } from "../../../../../../hooks/useMutationWrapperBase";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { api } from "../../../../../../lib/apiClient";
 import { getFavoriteSearchKeyWord } from "../../../../api/getFavoriteSearchKeyWord";
@@ -58,14 +58,6 @@ export function useHomeFavoriteKeywords() {
         onSettled: () => {
             // お気に入りワードを再取得
             queryClient.invalidateQueries(videoKeys.favoriteSearchKeyWordLists());
-        },
-        onSuccess: (res: unknown) => {
-            // レスポンスの型チェック
-            const resParsed = resSchema().safeParse(res);
-            if (!resParsed.success) {
-                toast.error(`お気に入りワードの削除に失敗しました。時間をおいて再度お試しください。`);
-                return;
-            }
         },
         onError: (res: errResType) => {
             const message = res.response.data.message;
@@ -123,12 +115,12 @@ export function useHomeFavoriteKeywords() {
         saveFrequentKeyword(keyword);
     }
 
-
     /**
      * キーワード削除イベント
      */
     function deleteKeyWord(keyword: SearchWordType) {
 
+        // ログイン中は削除APIをコール
         if (isLogin) {
             deleteKeyWordMutation.mutate(keyword.id);
             return;

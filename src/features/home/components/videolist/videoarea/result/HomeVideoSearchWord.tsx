@@ -93,62 +93,62 @@ const FavoriteButtonDiv = styled.div`
 `;
 
 type propsType = {
-    searchKeyword: string,
+  searchKeyword: string,
 }
 
 export function HomeVideoSearchWord(props: propsType) {
 
-    const {
-        favoriteWordList,
-        addFavoriteWord, } = useHomeVideoSearchWord();
+  const {
+    favoriteWordList,
+    addFavoriteWord, } = useHomeVideoSearchWord();
 
-    // 画面サイズ判定（PC未満はアイコンを一回り小さくする）
-    const isPcLess = useMediaQuery(mediaQuery.pcLess);
-    const iconSize = isPcLess ? "14px" : "17px";
+  // 画面サイズ判定（PC未満はアイコンを一回り小さくする）
+  const isPcLess = useMediaQuery(mediaQuery.pcLess);
+  const iconSize = isPcLess ? "14px" : "17px";
 
-    // お気に入りワード登録フラグ
-    const isRegisterdFavoriteKeyword = favoriteWordList.some((e) => {
-        return e === props.searchKeyword;
-    });
+  // お気に入りワード登録フラグ
+  const isRegisterdFavoriteKeyword = favoriteWordList.some((e) => {
+    return e.word === props.searchKeyword;
+  });
 
-    return (
-        <React.Fragment>
-            {
-                props.searchKeyword &&
-                <SearchKeywordAreaDiv>
-                    <SearchKeywordDiv>
-                        <SearchKeywordLabelSpan>
-                            キーワード：
-                        </SearchKeywordLabelSpan>
-                        {props.searchKeyword}
-                    </SearchKeywordDiv>
-                    {
-                        isRegisterdFavoriteKeyword
-                            ?
-                            <RegisterdFavoriteAreaDiv>
-                                <IconComponent
-                                    icon={FaCheck}
-                                    size={iconSize}
-                                    bgColor={REGISTERED_ICON_COLOR}
-                                />
-                                お気に入りワード登録済み
-                            </RegisterdFavoriteAreaDiv>
-                            :
-                            <FavoriteButtonDiv
-                                onClick={() => {
-                                    addFavoriteWord(props.searchKeyword);
-                                }}
-                            >
-                                <IconComponent
-                                    icon={FaBookmark}
-                                    size={iconSize}
-                                    bgColor={HOME_SEARCH_AREA_ACCENT_COLOR}
-                                />
-                                {`このワードをお気に入りに登録（最大${FAVORITE_KEYWORD_MAX}つ）`}
-                            </FavoriteButtonDiv>
-                    }
-                </SearchKeywordAreaDiv>
-            }
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      {
+        props.searchKeyword &&
+        <SearchKeywordAreaDiv>
+          <SearchKeywordDiv>
+            <SearchKeywordLabelSpan>
+              キーワード：
+            </SearchKeywordLabelSpan>
+            {props.searchKeyword}
+          </SearchKeywordDiv>
+          {
+            isRegisterdFavoriteKeyword
+              ?
+              <RegisterdFavoriteAreaDiv>
+                <IconComponent
+                  icon={FaCheck}
+                  size={iconSize}
+                  bgColor={REGISTERED_ICON_COLOR}
+                />
+                お気に入りワード登録済み
+              </RegisterdFavoriteAreaDiv>
+              :
+              <FavoriteButtonDiv
+                onClick={() => {
+                  addFavoriteWord(props.searchKeyword);
+                }}
+              >
+                <IconComponent
+                  icon={FaBookmark}
+                  size={iconSize}
+                  bgColor={HOME_SEARCH_AREA_ACCENT_COLOR}
+                />
+                {`このワードをお気に入りに登録（最大${FAVORITE_KEYWORD_MAX}つ）`}
+              </FavoriteButtonDiv>
+          }
+        </SearchKeywordAreaDiv>
+      }
+    </React.Fragment>
+  );
 }

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { IsLoginContext } from "../../../../../../app/components/QueryApp";
 import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
 import ENV from "../../../../../../env.json";
-import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
+import { errResType } from "../../../../../../hooks/useMutationWrapperBase";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { api } from "../../../../../../lib/apiClient";
 import { getSearchKeyWord } from "../../../../api/getSearchKeyWord";
@@ -58,14 +58,6 @@ export function useHomeFrequentKeywords() {
         onSettled: () => {
             // よく検索するワードを再取得
             queryClient.invalidateQueries(videoKeys.searchKeyWordLists());
-        },
-        onSuccess: (res: unknown) => {
-            // レスポンスの型チェック
-            const resParsed = resSchema().safeParse(res);
-            if (!resParsed.success) {
-                toast.error(`よく検索するワードの削除に失敗しました。時間をおいて再度お試しください。`);
-                return;
-            }
         },
         onError: (res: errResType) => {
             const message = res.response.data.message;
@@ -125,7 +117,6 @@ export function useHomeFrequentKeywords() {
 
         // ローカルストレージの検索ワード(あなたがよく検索するワード)を保存
         saveFrequentKeyword(keyword);
-
     }
 
     /**
