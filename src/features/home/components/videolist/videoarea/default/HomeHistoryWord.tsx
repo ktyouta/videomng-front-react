@@ -17,6 +17,7 @@ const WordDiv = styled.div`
   background-color: ${HOME_SEARCH_AREA_BUTTON_BG};
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: background-color 0.15s ease;
+  cursor:pointer;
 
   &:hover {
     background-color: ${HOME_SEARCH_AREA_BUTTON_HOVER_BG};
@@ -26,7 +27,6 @@ const WordDiv = styled.div`
 const WordSpan = styled.span`
     color: white;
     font-size: 15px;
-    cursor:pointer;
 
     @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
       font-size: 17px;
@@ -56,21 +56,25 @@ type propsType = {
 export function HomeHistoryWord(props: propsType) {
 
     return (
-        <WordDiv>
-            <WordSpan
-                onClick={() => {
-                    props.clickKeyword(props.keyword.word);
-                }}
-            >
+        <WordDiv
+            onClick={() => {
+                props.clickKeyword(props.keyword.word);
+            }}
+        >
+            <WordSpan>
                 {props.keyword.word}
             </WordSpan>
-            <IconDiv>
+            <IconDiv
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+            >
                 <IconComponent
                     icon={RxCross1}
                     size="60%"
                     bgColor="white"
                     onclick={() => {
-                        props.deleteKeyword(props.keyword)
+                        props.deleteKeyword(props.keyword);
                     }}
                 />
             </IconDiv>
