@@ -6,6 +6,7 @@ import {
     HOME_SEARCH_AREA_BUTTON_BG,
     HOME_SEARCH_AREA_BUTTON_HOVER_BG,
 } from "../../../../const/HomeConst";
+import { SearchWordType } from "../../../../types/videolist/SearchWordType";
 
 const WordDiv = styled.div`
   display:flex;
@@ -47,9 +48,9 @@ const IconDiv = styled.div`
 `;
 
 type propsType = {
-    keyword: string,
+    keyword: SearchWordType,
     clickKeyword: (keyword: string) => void,
-    deleteKeyword: (keyword: string) => void,
+    deleteKeyword: (keyword: SearchWordType) => void,
 }
 
 export function HomeHistoryWord(props: propsType) {
@@ -58,10 +59,10 @@ export function HomeHistoryWord(props: propsType) {
         <WordDiv>
             <WordSpan
                 onClick={() => {
-                    props.clickKeyword(props.keyword);
+                    props.clickKeyword(props.keyword.word);
                 }}
             >
-                {props.keyword}
+                {props.keyword.word}
             </WordSpan>
             <IconDiv>
                 <IconComponent

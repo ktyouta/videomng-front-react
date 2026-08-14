@@ -69,7 +69,7 @@ export function HomeFavoriteKeywords() {
                 keyword={e}
                 clickKeyword={clickKeyWord}
                 deleteKeyword={deleteKeyWord}
-                key={e}
+                key={`${e.id}-${e.word}`}
               />
             )
           })

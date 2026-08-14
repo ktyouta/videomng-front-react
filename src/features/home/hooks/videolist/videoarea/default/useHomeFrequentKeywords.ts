@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
+import { IsLoginContext } from "../../../../../../app/components/QueryApp";
+import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
+import ENV from "../../../../../../env.json";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
+import { api } from "../../../../../../lib/apiClient";
+import { getSearchKeyWord } from "../../../../api/getSearchKeyWord";
+import { videoKeys } from "../../../../api/queryKey";
 import { FREQUENT_KEYWORD } from "../../../../const/HomeConst";
 import { FrequentWordType } from "../../../../types/videolist/FrequentWordType";
+import { SearchWordType } from "../../../../types/videolist/SearchWordType";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
 import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
@@ -11,7 +21,7 @@ import { useRecentKeyword } from "./useRecentKeyword";
 export function useHomeFrequentKeywords() {
 
     // よく検索するワードリスト
-    const [frequentWordList, setFrequentWordList] = useState<FrequentWordType[]>([]);
+    const [frequentWordList, setFrequentWordList] = useState<SearchWordType[]>([]);
     // 最近の検索ワード保存用
     const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
@@ -26,20 +36,60 @@ export function useHomeFrequentKeywords() {
     const { create } = useCreateHomeVideoListQuery({ nowSearchCondition });
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
+    // 検索実績再取得用
+    const queryClient = useQueryClient();
+    // ログインフラグ
+    const isLogin = IsLoginContext.useCtx();
+    // よく検索するワード(API取得)
+    const { data } = getSearchKeyWord({
+        enabled: isLogin,
+        select: (data) => {
+            return data.data.frequent;
+        }
+    });
 
+    /**
+     * 検索実績削除
+     */
+    const deleteKeyWordMutation = useMutation({
+        mutationFn: async (id: number) => {
+            await api.delete(`${VIDEO_MNG_PATH}${ENV.SEARCH_WORD}/${id}`);
+        },
+        onSettled: () => {
+            // よく検索するワードを再取得
+            queryClient.invalidateQueries(videoKeys.searchKeyWordLists());
+        },
+        onSuccess: (res: unknown) => {
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+            if (!resParsed.success) {
+                toast.error(`よく検索するワードの削除に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+        },
+        onError: (res: errResType) => {
+            const message = res.response.data.message;
+            if (message) {
+                toast.error(message);
+            }
+        }
+    });
 
     useEffect(() => {
+        if (isLogin) {
+            return;
+        }
 
         // キーワードリストを取得
         const wordList = JSON.parse(localStorage.getItem(FREQUENT_KEYWORD) || "[]") as FrequentWordType[];
-
         // 検索回数でソート
         const sortedWordList = wordList.sort((a, b) => {
             return b.count - a.count;
         });
-
-        setFrequentWordList(sortedWordList);
-    }, []);
+        setFrequentWordList(sortedWordList.map((e) => {
+            return { id: 0, word: e.keyword };
+        }));
+    }, [isLogin]);
 
     /**
      * キーワードクリックイベント
@@ -81,20 +131,29 @@ export function useHomeFrequentKeywords() {
     /**
      * キーワード削除イベント
      */
-    function deleteKeyWord(keyword: string,) {
+    function deleteKeyWord(keyword: SearchWordType) {
 
+        // ログイン中は削除APIをコール
+        if (isLogin) {
+            deleteKeyWordMutation.mutate(keyword.id);
+            return;
+        }
+
+        const word = keyword.word;
         // ローカルストレージから検索ワードを取得
         const nowWordList = JSON.parse(localStorage.getItem(FREQUENT_KEYWORD) || "[]") as FrequentWordType[];
 
         // ローカルストレージに検索ワードを保存
-        const newWordList = [...nowWordList.filter((e: FrequentWordType) => e.keyword !== keyword.trim())];
+        const newWordList = [...nowWordList.filter((e: FrequentWordType) => e.keyword !== word.trim())];
         localStorage.setItem(FREQUENT_KEYWORD, JSON.stringify(newWordList));
 
-        setFrequentWordList(newWordList);
+        setFrequentWordList(newWordList.map((e) => {
+            return { id: 0, word: e.keyword };
+        }));
     }
 
     return {
-        frequentWordList,
+        frequentWordList: isLogin ? data : frequentWordList,
         clickKeyWord,
         deleteKeyWord,
     }

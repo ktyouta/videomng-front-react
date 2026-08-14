@@ -3,12 +3,12 @@ import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
 import { api } from "../../../lib/apiClient";
 import { FavoriteSearchWordResponseType } from "../types/videolist/FavoriteSearchWordResponseType";
-import { FavoriteSearchWordType } from "../types/videolist/FavoriteSearchWordType";
+import { SearchWordType } from "../types/videolist/SearchWordType";
 import { videoKeys } from "./queryKey";
 
 type PropsType = {
     enabled: boolean;
-    select: (data: FavoriteSearchWordResponseType) => FavoriteSearchWordType[]
+    select: (data: FavoriteSearchWordResponseType) => SearchWordType[]
 }
 
 export function getFavoriteSearchKeyWord(props: PropsType) {

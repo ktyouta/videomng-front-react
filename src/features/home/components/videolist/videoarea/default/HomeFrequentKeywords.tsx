@@ -64,10 +64,10 @@ export function HomeFrequentKeywords() {
           frequentWordList.map((e) => {
             return (
               <HomeHistoryWord
-                keyword={e.keyword}
+                keyword={e}
                 clickKeyword={clickKeyWord}
                 deleteKeyword={deleteKeyWord}
-                key={e.keyword}
+                key={`${e.id}-${e.word}`}
               />
             )
           })
