@@ -74,6 +74,5 @@ export function HomeHistoryWord(props: propsType) {
                 />
             </IconDiv>
         </WordDiv>
-
     );
 }

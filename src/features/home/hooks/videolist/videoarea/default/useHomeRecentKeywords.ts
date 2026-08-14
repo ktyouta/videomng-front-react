@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
+import { toast } from "react-toastify";
+import { IsLoginContext } from "../../../../../../app/components/QueryApp";
+import { VIDEO_MNG_PATH } from "../../../../../../consts/CommonConst";
+import ENV from "../../../../../../env.json";
+import useMutationWrapper from "../../../../../../hooks/useMutationWrapper";
+import { errResType, resSchema } from "../../../../../../hooks/useMutationWrapperBase";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
+import { getSearchKeyWord } from "../../../../api/getSearchKeyWord";
+import { videoKeys } from "../../../../api/queryKey";
 import { REACENT_KEYWORD } from "../../../../const/HomeConst";
+import { SearchWordType } from "../../../../types/videolist/SearchWordType";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
 import { useHomeVideoSearchConditionValue } from "../../useHomeVideoSearchConditionValue";
@@ -10,7 +20,7 @@ import { useRecentKeyword } from "./useRecentKeyword";
 export function useHomeRecentKeywords() {
 
     // 最近の検索リスト
-    const [recentWordList, setRecentWordList] = useState<string[]>([]);
+    const [recentWordList, setRecentWordList] = useState<SearchWordType[]>([]);
     // 最近の検索ワード保存用
     const { saveRecentKeyword } = useRecentKeyword();
     // あなたがよく検索するワード保存用
@@ -25,13 +35,52 @@ export function useHomeRecentKeywords() {
     const { create } = useCreateHomeVideoListQuery({ nowSearchCondition });
     // クエリパラメータ変更用
     const { replace } = useReplaceQuery();
+    // 検索実績再取得用
+    const queryClient = useQueryClient();
+    // ログインフラグ
+    const isLogin = IsLoginContext.useCtx();
+    // 最近の検索実績(API取得)
+    const { data } = getSearchKeyWord({
+        enabled: isLogin,
+        select: (data) => {
+            return data.data.recent;
+        }
+    });
 
+    /**
+     * 検索実績削除
+     */
+    const deleteKeyWordMutation = useMutationWrapper({
+        url: `${VIDEO_MNG_PATH}${ENV.SEARCH_WORD}`,
+        method: "DELETE",
+        // 正常終了後の処理
+        afSuccessFn: (res: unknown) => {
+            // レスポンスの型チェック
+            const resParsed = resSchema().safeParse(res);
+            if (!resParsed.success) {
+                toast.error(`最近の検索の削除に失敗しました。時間をおいて再度お試しください。`);
+                return;
+            }
+            queryClient.invalidateQueries(videoKeys.searchKeyWordLists());
+        },
+        // 失敗後の処理
+        afErrorFn: (res: errResType) => {
+            const message = res.response.data.message;
+            if (message) {
+                toast.error(message);
+            }
+        },
+    });
 
     // ローカルストレージから最近の検索リストを取得
     useEffect(() => {
-        const wordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
-        setRecentWordList(wordList);
-    }, []);
+        if (!isLogin) {
+            const wordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
+            setRecentWordList(wordList.map((e) => {
+                return { id: 0, word: e };
+            }));
+        }
+    }, [isLogin]);
 
     /**
      * キーワードクリックイベント
@@ -75,6 +124,12 @@ export function useHomeRecentKeywords() {
      */
     function deleteKeyWord(keyword: string,) {
 
+        // ログイン中は削除APIをコール
+        if (isLogin) {
+            deleteKeyWordMutation.mutate();
+            return;
+        }
+
         // ローカルストレージから検索ワードを取得
         const nowWordList = JSON.parse(localStorage.getItem(REACENT_KEYWORD) || "[]") as string[];
 
@@ -82,11 +137,13 @@ export function useHomeRecentKeywords() {
         const newWordList = [...nowWordList.filter((e) => e !== keyword.trim())];
         localStorage.setItem(REACENT_KEYWORD, JSON.stringify(newWordList));
 
-        setRecentWordList(newWordList);
+        setRecentWordList(newWordList.map((e) => {
+            return { id: 0, word: e };
+        }));
     }
 
     return {
-        recentWordList,
+        recentWordList: isLogin ? data : recentWordList,
         clickKeyWord,
         deleteKeyWord,
     }

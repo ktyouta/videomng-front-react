@@ -64,10 +64,10 @@ export function HomeRecentKeywords() {
           recentWordList.map((e) => {
             return (
               <HomeHistoryWord
-                keyword={e}
+                keyword={e.word}
                 clickKeyword={clickKeyWord}
                 deleteKeyword={deleteKeyWord}
-                key={e}
+                key={`${e.id}-${e.word}`}
               />
             )
           })
