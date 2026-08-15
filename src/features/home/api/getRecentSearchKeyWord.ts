@@ -2,21 +2,21 @@ import { useQuery } from "react-query";
 import { VIDEO_MNG_PATH } from "../../../consts/CommonConst";
 import ENV from "../../../env.json";
 import { api } from "../../../lib/apiClient";
-import { SearchWordResponseType } from "../types/videolist/SearchWordResponseType";
+import { RecentSearchWordResponseType } from "../types/videolist/RecentSearchWordResponseType";
 import { SearchWordType } from "../types/videolist/SearchWordType";
 import { videoKeys } from "./queryKey";
 
 type PropsType = {
     enabled: boolean;
-    select: (data: SearchWordResponseType) => SearchWordType[]
+    select: (data: RecentSearchWordResponseType) => SearchWordType[]
 }
 
-export function getSearchKeyWord(props: PropsType) {
+export function getRecentSearchKeyWord(props: PropsType) {
 
     return useQuery({
-        queryKey: videoKeys.searchKeyWordLists(),
+        queryKey: videoKeys.searchRecentKeyWordLists(),
         queryFn: async () => {
-            const { data } = await api.get(`${VIDEO_MNG_PATH}${ENV.SEARCH_WORD}`);
+            const { data } = await api.get(`${VIDEO_MNG_PATH}${ENV.RECENT_SEARCH_WORD}`);
             return data;
         },
         select: props.select,

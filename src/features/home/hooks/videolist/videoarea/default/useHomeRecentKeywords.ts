@@ -7,7 +7,7 @@ import ENV from "../../../../../../env.json";
 import { errResType } from "../../../../../../hooks/useMutationWrapperBase";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { api } from "../../../../../../lib/apiClient";
-import { getSearchKeyWord } from "../../../../api/getSearchKeyWord";
+import { getRecentSearchKeyWord } from "../../../../api/getRecentSearchKeyWord";
 import { videoKeys } from "../../../../api/queryKey";
 import { REACENT_KEYWORD } from "../../../../const/HomeConst";
 import { SearchWordType } from "../../../../types/videolist/SearchWordType";
@@ -40,10 +40,10 @@ export function useHomeRecentKeywords() {
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
     // 最近の検索実績(API取得)
-    const { data } = getSearchKeyWord({
+    const { data } = getRecentSearchKeyWord({
         enabled: isLogin,
         select: (data) => {
-            return data.data.recent;
+            return data.data;
         }
     });
 
@@ -52,11 +52,11 @@ export function useHomeRecentKeywords() {
      */
     const deleteKeyWordMutation = useMutation({
         mutationFn: async (id: number) => {
-            await api.delete(`${VIDEO_MNG_PATH}${ENV.SEARCH_WORD}/${id}`);
+            await api.delete(`${VIDEO_MNG_PATH}${ENV.RECENT_SEARCH_WORD}/${id}`);
         },
         onSettled: () => {
             // 最近の検索リストを再取得
-            queryClient.invalidateQueries(videoKeys.searchKeyWordLists());
+            queryClient.invalidateQueries(videoKeys.searchRecentKeyWordLists());
         },
         onError: (res: errResType) => {
             const message = res.response.data.message;

@@ -22,6 +22,7 @@ export const videoKeys = {
     tagMasters: () => [...videoKeys.all, `tagMaster`] as const,
     folderLists: () => [...videoKeys.all, `folderList`] as const,
     folderList: (props: FolderListType) => [...videoKeys.folderLists(), props] as const,
-    searchKeyWordLists: () => [...videoKeys.all, `searchKeyWordList`] as const,
+    searchRecentKeyWordLists: () => [...videoKeys.all, `searchRecentKeyWordList`] as const,
+    searchFrequentKeyWordLists: () => [...videoKeys.all, `searchFrequentKeyWordList`] as const,
     favoriteSearchKeyWordLists: () => [...videoKeys.all, `favoriteSearchKeyWordList`] as const,
 };

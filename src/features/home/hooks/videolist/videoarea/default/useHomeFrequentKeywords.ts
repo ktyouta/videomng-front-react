@@ -7,7 +7,7 @@ import ENV from "../../../../../../env.json";
 import { errResType } from "../../../../../../hooks/useMutationWrapperBase";
 import { useReplaceQuery } from "../../../../../../hooks/useReplaceQuery";
 import { api } from "../../../../../../lib/apiClient";
-import { getSearchKeyWord } from "../../../../api/getSearchKeyWord";
+import { getFrequentSearchKeyWord } from "../../../../api/getFrequentSearchKeyWord";
 import { videoKeys } from "../../../../api/queryKey";
 import { FREQUENT_KEYWORD } from "../../../../const/HomeConst";
 import { FrequentWordType } from "../../../../types/videolist/FrequentWordType";
@@ -41,10 +41,10 @@ export function useHomeFrequentKeywords() {
     // ログインフラグ
     const isLogin = IsLoginContext.useCtx();
     // よく検索するワード(API取得)
-    const { data } = getSearchKeyWord({
+    const { data } = getFrequentSearchKeyWord({
         enabled: isLogin,
         select: (data) => {
-            return data.data.frequent;
+            return data.data;
         }
     });
 
@@ -53,11 +53,11 @@ export function useHomeFrequentKeywords() {
      */
     const deleteKeyWordMutation = useMutation({
         mutationFn: async (id: number) => {
-            await api.delete(`${VIDEO_MNG_PATH}${ENV.SEARCH_WORD}/${id}`);
+            await api.delete(`${VIDEO_MNG_PATH}${ENV.FREQUENT_SEARCH_WORD}/${id}`);
         },
         onSettled: () => {
             // よく検索するワードを再取得
-            queryClient.invalidateQueries(videoKeys.searchKeyWordLists());
+            queryClient.invalidateQueries(videoKeys.searchFrequentKeyWordLists());
         },
         onError: (res: errResType) => {
             const message = res.response.data.message;
