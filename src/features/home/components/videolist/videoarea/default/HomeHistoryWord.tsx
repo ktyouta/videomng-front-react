@@ -67,15 +67,13 @@ export function HomeHistoryWord(props: propsType) {
             <IconDiv
                 onClick={(e) => {
                     e.stopPropagation();
+                    props.deleteKeyword(props.keyword);
                 }}
             >
                 <IconComponent
                     icon={RxCross1}
                     size="60%"
                     bgColor="white"
-                    onclick={() => {
-                        props.deleteKeyword(props.keyword);
-                    }}
                 />
             </IconDiv>
         </WordDiv>

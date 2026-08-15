@@ -9,18 +9,18 @@ import { HomeVideoSearchWord } from "./HomeVideoSearchWord";
 const Parent = styled.div`
   width: 100%;
   height: 90%;
-  padding-top: 4%;
+  margin-top: 35px;
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: portrait) {
-    padding-top: 3%;
+    margin-top: 75px;
   }
 
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
-    padding-top: 3%;
+    margin-top: 75px;
   }
 
   @media (min-width: ${MEDIA.PC}) {
-    padding-top: 3%;
+    margin-top: 75px;
   }
 `;
 

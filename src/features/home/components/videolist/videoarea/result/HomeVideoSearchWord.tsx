@@ -19,7 +19,8 @@ const REGISTERED_ICON_COLOR = "#43A047";
 
 const SearchKeywordAreaDiv = styled.div`
   display:flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 12px;
   color: white;
@@ -34,11 +35,17 @@ const SearchKeywordAreaDiv = styled.div`
   @media (min-width: ${MEDIA.TABLET}) and (orientation: landscape) {
     padding: 0 13%;
     font-size: 17px;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
   }
 
   @media (min-width: ${MEDIA.PC}) {
     padding: 0 13%;
     font-size: 17px;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
   }
 `;
 
