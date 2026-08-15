@@ -166,7 +166,7 @@ export function useHomeRecentKeywords() {
     }
 
     return {
-        recentWordList: isLogin ? data : recentWordList,
+        recentWordList: isLogin ? data ?? [] : recentWordList,
         clickKeyWord,
         deleteKeyWord,
     }

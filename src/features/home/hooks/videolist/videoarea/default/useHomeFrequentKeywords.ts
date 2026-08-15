@@ -171,7 +171,7 @@ export function useHomeFrequentKeywords() {
     }
 
     return {
-        frequentWordList: isLogin ? data : frequentWordList,
+        frequentWordList: isLogin ? data ?? [] : frequentWordList,
         clickKeyWord,
         deleteKeyWord,
     }

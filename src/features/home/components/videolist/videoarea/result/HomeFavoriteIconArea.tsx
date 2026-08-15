@@ -1,9 +1,8 @@
 import React from "react";
-import { IconComponent } from "../../../../../../components/IconComponent";
-import { FaRegStar } from "react-icons/fa";
-import styled from "styled-components";
-import { useHomeVideoContentFavoriteIconArea } from "../../../../hooks/videolist/videoarea/result/useHomeVideoContentFavoriteIconArea";
 import { FaStar } from "react-icons/fa";
+import styled from "styled-components";
+import { IconComponent } from "../../../../../../components/IconComponent";
+import { useHomeVideoContentFavoriteIconArea } from "../../../../hooks/videolist/videoarea/result/useHomeVideoContentFavoriteIconArea";
 
 
 const NavDiv = styled.div<{ isDisplay: boolean }>`

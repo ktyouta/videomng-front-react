@@ -167,7 +167,7 @@ export function useHomeFavoriteKeywords() {
     }
 
     return {
-        favoriteWordList: isLogin ? data : favoriteWordList,
+        favoriteWordList: isLogin ? data ?? [] : favoriteWordList,
         clickKeyWord,
         deleteKeyWord,
     }
