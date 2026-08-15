@@ -10,6 +10,7 @@ import { api } from "../../../../../../lib/apiClient";
 import { getRecentSearchKeyWord } from "../../../../api/getRecentSearchKeyWord";
 import { videoKeys } from "../../../../api/queryKey";
 import { REACENT_KEYWORD } from "../../../../const/HomeConst";
+import { RecentSearchWordResponseType } from "../../../../types/videolist/RecentSearchWordResponseType";
 import { SearchWordType } from "../../../../types/videolist/SearchWordType";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
@@ -54,16 +55,42 @@ export function useHomeRecentKeywords() {
         mutationFn: async (id: number) => {
             await api.delete(`${VIDEO_MNG_PATH}${ENV.RECENT_SEARCH_WORD}/${id}`);
         },
-        onSettled: () => {
-            // 最近の検索リストを再取得
-            queryClient.invalidateQueries(videoKeys.searchRecentKeyWordLists());
+        onMutate: async (id: number) => {
+            // 直後の即時反映が進行中の取得結果で上書きされないようにキャンセル
+            await queryClient.cancelQueries(videoKeys.searchRecentKeyWordLists());
+
+            // ロールバック用に現在のキャッシュを退避
+            const previousData = queryClient.getQueryData<RecentSearchWordResponseType>(videoKeys.searchRecentKeyWordLists());
+
+            // 対象キーワードを除いたリストを即時反映
+            queryClient.setQueryData<RecentSearchWordResponseType | undefined>(videoKeys.searchRecentKeyWordLists(), (old) => {
+                if (!old) {
+                    return old;
+                }
+
+                return {
+                    ...old,
+                    data: old.data.filter((e) => e.id !== id),
+                };
+            });
+
+            return { previousData };
         },
-        onError: (res: errResType) => {
+        onError: (res: errResType, _id, context) => {
+            // 退避しておいたキャッシュにロールバック
+            if (context?.previousData) {
+                queryClient.setQueryData(videoKeys.searchRecentKeyWordLists(), context.previousData);
+            }
+
             const message = res.response.data.message;
             if (message) {
                 toast.error(message);
             }
-        }
+        },
+        onSettled: () => {
+            // 最近の検索リストを再取得
+            queryClient.invalidateQueries(videoKeys.searchRecentKeyWordLists());
+        },
     });
 
     // ローカルストレージから最近の検索リストを取得

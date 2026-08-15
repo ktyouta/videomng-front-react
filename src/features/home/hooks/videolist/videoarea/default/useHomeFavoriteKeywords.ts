@@ -11,6 +11,7 @@ import { getFavoriteSearchKeyWord } from "../../../../api/getFavoriteSearchKeyWo
 import { videoKeys } from "../../../../api/queryKey";
 import { nowSearchConditionType } from "../../../../components/HomeVideoNowSearchConditionValueProvider";
 import { FAVORITE_KEYWORD } from "../../../../const/HomeConst";
+import { FavoriteSearchWordResponseType } from "../../../../types/videolist/FavoriteSearchWordResponseType";
 import { SearchWordType } from "../../../../types/videolist/SearchWordType";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
 import { useCreateHomeVideoListQuery } from "../../useCreateHomeVideoListQuery";
@@ -55,16 +56,42 @@ export function useHomeFavoriteKeywords() {
         mutationFn: async (id: number) => {
             await api.delete(`${VIDEO_MNG_PATH}${ENV.FAVORITE_SEARCH_WORD}/${id}`);
         },
-        onSettled: () => {
-            // お気に入りワードを再取得
-            queryClient.invalidateQueries(videoKeys.favoriteSearchKeyWordLists());
+        onMutate: async (id: number) => {
+            // 直後の即時反映が進行中の取得結果で上書きされないようにキャンセル
+            await queryClient.cancelQueries(videoKeys.favoriteSearchKeyWordLists());
+
+            // ロールバック用に現在のキャッシュを退避
+            const previousData = queryClient.getQueryData<FavoriteSearchWordResponseType>(videoKeys.favoriteSearchKeyWordLists());
+
+            // 対象キーワードを除いたリストを即時反映
+            queryClient.setQueryData<FavoriteSearchWordResponseType | undefined>(videoKeys.favoriteSearchKeyWordLists(), (old) => {
+                if (!old) {
+                    return old;
+                }
+
+                return {
+                    ...old,
+                    data: old.data.filter((e) => e.id !== id),
+                };
+            });
+
+            return { previousData };
         },
-        onError: (res: errResType) => {
+        onError: (res: errResType, _id, context) => {
+            // 退避しておいたキャッシュにロールバック
+            if (context?.previousData) {
+                queryClient.setQueryData(videoKeys.favoriteSearchKeyWordLists(), context.previousData);
+            }
+
             const message = res.response.data.message;
             if (message) {
                 toast.error(message);
             }
-        }
+        },
+        onSettled: () => {
+            // お気に入りワードを再取得
+            queryClient.invalidateQueries(videoKeys.favoriteSearchKeyWordLists());
+        },
     });
 
     // ローカルストレージからお気に入りワードを取得

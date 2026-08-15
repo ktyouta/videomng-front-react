@@ -10,6 +10,7 @@ import { api } from "../../../../../../lib/apiClient";
 import { getFrequentSearchKeyWord } from "../../../../api/getFrequentSearchKeyWord";
 import { videoKeys } from "../../../../api/queryKey";
 import { FREQUENT_KEYWORD } from "../../../../const/HomeConst";
+import { FrequentSearchWordResponseType } from "../../../../types/videolist/FrequentSearchWordResponseType";
 import { FrequentWordType } from "../../../../types/videolist/FrequentWordType";
 import { SearchWordType } from "../../../../types/videolist/SearchWordType";
 import { useHomeVideoNowSearchConditionValue } from "../../../useHomeVideoNowSearchConditionValue";
@@ -55,16 +56,42 @@ export function useHomeFrequentKeywords() {
         mutationFn: async (id: number) => {
             await api.delete(`${VIDEO_MNG_PATH}${ENV.FREQUENT_SEARCH_WORD}/${id}`);
         },
-        onSettled: () => {
-            // よく検索するワードを再取得
-            queryClient.invalidateQueries(videoKeys.searchFrequentKeyWordLists());
+        onMutate: async (id: number) => {
+            // 直後の即時反映が進行中の取得結果で上書きされないようにキャンセル
+            await queryClient.cancelQueries(videoKeys.searchFrequentKeyWordLists());
+
+            // ロールバック用に現在のキャッシュを退避
+            const previousData = queryClient.getQueryData<FrequentSearchWordResponseType>(videoKeys.searchFrequentKeyWordLists());
+
+            // 対象キーワードを除いたリストを即時反映
+            queryClient.setQueryData<FrequentSearchWordResponseType | undefined>(videoKeys.searchFrequentKeyWordLists(), (old) => {
+                if (!old) {
+                    return old;
+                }
+
+                return {
+                    ...old,
+                    data: old.data.filter((e) => e.id !== id),
+                };
+            });
+
+            return { previousData };
         },
-        onError: (res: errResType) => {
+        onError: (res: errResType, _id, context) => {
+            // 退避しておいたキャッシュにロールバック
+            if (context?.previousData) {
+                queryClient.setQueryData(videoKeys.searchFrequentKeyWordLists(), context.previousData);
+            }
+
             const message = res.response.data.message;
             if (message) {
                 toast.error(message);
             }
-        }
+        },
+        onSettled: () => {
+            // よく検索するワードを再取得
+            queryClient.invalidateQueries(videoKeys.searchFrequentKeyWordLists());
+        },
     });
 
     useEffect(() => {
