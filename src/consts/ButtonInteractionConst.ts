@@ -15,5 +15,11 @@ export const THUMBNAIL_ICON_CIRCLE_BG_COLOR = ICON_CIRCLE_BG_COLOR;
 // アイコンの円形背景の直径（継承したfont-sizeを1として、アイコンの周りに余白を持たせる倍率）
 export const ICON_CIRCLE_DIAMETER_EM = "1.8em";
 
+// サムネイル右上に重ねて表示するアイコンバッジの円の直径
+export const THUMBNAIL_ICON_BADGE_DIAMETER = "40px";
+
+// サムネイル右上に重ねて表示するアイコンバッジ内のアイコンサイズ
+export const THUMBNAIL_ICON_BADGE_ICON_SIZE = "18px";
+
 // 削除等の危険操作を示す色（ボタン・警告文言で共通使用）
 export const DANGER_COLOR = "#eb3941";

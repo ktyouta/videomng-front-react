@@ -18,3 +18,14 @@
 
 ## 実装中に発覚した追加対応
 - `FavoriteMemoCancelIconArea.tsx`/`FavoriteMemoUpdateIconArea.tsx`にサイズ確定用の`IconSizeDiv`を新設（既存はサイズ確定用のラッパーdivを持たず、円背景の追加で%指定サイズの解決基準が不定になる問題を修正するため）
+
+## 追加対応: バッジサイズ拡大（可読性向上）
+- [x] 円直径・アイコンサイズを`ButtonInteractionConst.ts`に定数化
+- [x] 3画面（Home/videochannel/Favorite）のIconBadgeButton/IconComponent/IconBtnAreaDivに定数を適用
+- [x] frontend-review / architecture-review / comments-review / performance-check 実施
+- [x] spec-review 実施
+
+## 追加対応: バッジ位置調整（right: -3px → 0px）
+- [x] 3画面のIconBtnAreaDivのrightを0pxに変更
+- [x] frontend-review / architecture-review / comments-review / performance-check 実施
+- [x] spec-review 実施

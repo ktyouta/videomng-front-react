@@ -3,7 +3,7 @@ import { MdPlayArrow } from 'react-icons/md';
 import styled from "styled-components";
 import { IconComponent } from "../../../../components/IconComponent";
 import { ModalPortalConfirm } from "../../../../components/ModalPortalConfirm";
-import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR, THUMBNAIL_ICON_CIRCLE_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
+import { BUTTON_HOVER_ACCENT_COLOR, BUTTON_HOVER_BG_COLOR, THUMBNAIL_ICON_BADGE_DIAMETER, THUMBNAIL_ICON_BADGE_ICON_SIZE, THUMBNAIL_ICON_CIRCLE_BG_COLOR } from "../../../../consts/ButtonInteractionConst";
 import { MEDIA } from "../../../../consts/MediaConst";
 import { mediaQuery, useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { useFavoriteVideoDetailInfo } from "../../hooks/videodetail/useFavoriteVideoDetailInfo";
@@ -44,7 +44,7 @@ const VideoImg = styled.img`
 const IconBtnAreaDiv = styled.div`
     position: absolute;
     top: 4px;
-    right: -3px;
+    right: 0px;
     display: flex;
     gap: 6px;
 `;
@@ -53,8 +53,8 @@ const IconBadgeButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: ${THUMBNAIL_ICON_BADGE_DIAMETER};
+    height: ${THUMBNAIL_ICON_BADGE_DIAMETER};
     box-sizing: border-box;
     border: none;
     border-radius: 50%;
@@ -194,7 +194,7 @@ export function FavoriteVideoDetailInfo(props: propsType) {
                         >
                             <IconComponent
                                 icon={FaRegTrashAlt}
-                                size="16px"
+                                size={THUMBNAIL_ICON_BADGE_ICON_SIZE}
                                 style={{ color: "white" }}
                             />
                         </IconBadgeButton>

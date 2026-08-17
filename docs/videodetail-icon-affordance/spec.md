@@ -25,3 +25,8 @@ CSSの`cursor:pointer`と、PCのマウスホバー時だけ表示される吹�
 - [ ] スマホ時のサムネイル右上アイコン（`IconBadgeButton`、3画面分）に半透明の円形背景（サムネイル画像の上でも視認できる色）を付与する
 - [ ] 円形背景を付けた場合、クリック・ホバーイベントは円の背景側（アイコンの周囲の余白部分）にも反応する（タップ領域が広がる）
 - [ ] `hasCircleBackground`を指定しない既存の呼び出し箇所（動画詳細画面以外で使われている`IconComponent`）の見た目・挙動は変更しない
+
+## 追加仕様: サムネイル右上バッジの拡大（可読性向上）
+- [ ] `IconBadgeButton`の円直径・内部アイコンサイズを、`ButtonInteractionConst.ts`の名前付き定数（`THUMBNAIL_ICON_BADGE_DIAMETER`・`THUMBNAIL_ICON_BADGE_ICON_SIZE`）として定義し、3画面（Home/videochannel/Favorite）で共有する
+- [ ] 円直径を30px→37px、内部アイコンサイズを16px→18pxに拡大する
+- [ ] バッジの`top`/`gap`は変更しない。`right`は拡大後の見た目確認を踏まえ`-3px`→`0px`に変更する。サムネイル画像への被りが増えることは許容する
